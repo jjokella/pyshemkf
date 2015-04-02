@@ -1,0 +1,26 @@
+import sys                      # System variables (PYTHONPATH as list sys.path)
+import subprocess  		# To execute shell command (subprocess.Popen)
+import os			# Operating system (os.chdir, os.path)
+import exceptions  		# Raising exception (raise exceptions.RuntimeError)
+
+import time       		# Timing the execution (time.time(), time.clock())
+import shlex      		# Structure system commands(shlex.split) 
+import random     		# Random integer (random.randint())
+import string     		# Load alphabet (string.alphabet())
+import atexit     		# Executing command at exit of execution
+import vtk	  		# Adapt vtk to NumPy (vtk.util.numpy_support.vtk_to_numpy)
+import math	  		# Mathematical Functions (math.pi, math.sqrt())
+import re	  		# Regular expressions support
+
+import matplotlib as mpl           	# Matplotlib
+from matplotlib import pyplot as plt	# Plot commands (plt.show(), plt.close())
+from matplotlib import cm		# Colormap commands (cm.get_cmap())
+from matplotlib import mlab		#
+from matplotlib import ticker		#
+from matplotlib import colors	        # Normalize colors (colors.Normalize())
+import mpl_toolkits			#  axes (mpl_toolkits.axes_grid.make_axes_locatable)
+import pylab				# Axes (pylab.axis())
+
+import numpy as np     		# Numerical Python 
+from numpy import random as rnd # Numerical Pythons random number generator
+import scipy as sp		# Scientific Python (sp.mean(), sp.cov())
