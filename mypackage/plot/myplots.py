@@ -22,13 +22,16 @@ from mypackage.plot import plotfunctions as pltfct
 from mypackage.plot import myplt
 from mypackage.data import dataroutines as dr
 
+import datetime                 # Date and time functions
+
 # # Reload changed module
 # pltfct = reload(pltfct)
 
 mymodel_name = 'wave'
 
 # Current default plotting date
-mydate = '2015_04_01'
+this_day = datetime.date.today()
+mydate = str(this_day.year) + '_' + str(this_day.month).zfill(2) + '_' + str(this_day.day).zfill(2)
 
 # Current default letter
 myletter = 'b'
@@ -87,7 +90,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            stddev_dir,assim_variables_name,model_name,m_first,m_cbar_kz_low,m_cbar_kz_high,
            m_cbar_kz_res_low, m_cbar_kz_res_high,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
-           m_is_masked, m_is_subarray,
+           m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            m_cmaps,fig_m = 0 ):
 
 
@@ -158,7 +161,9 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
     if not fig_m:
         fig_m = plt.figure(1, figsize=(figure_size_x,figure_size_y)) #Generate the figure
         fig_m.set_facecolor((0.50, 0.50, 0.50)) # Set figure background color
-        plt.suptitle(m_fig_title, y = 0.97, fontsize=m_fig_title_font)    #Insert figure title
+        plt.suptitle(infile_stems[0]
+                     if m_fig_title == None else
+                     m_fig_title, y = 0.97, fontsize=m_fig_title_font)    #Insert figure title
 
     ax_grid = myplt.myaxgrid(fig_m, # List of axes, ordered row before column
                              n_rows = m_n_rows,
@@ -245,7 +250,18 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
 ########################################################################################
 ########################################################################################
 ##########################################################################################
-def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_variables_dir,f_plot_x_min,stddev_name,letter_true,f_plot_y_min,f_ax_legend_loc,f_line_colors,assimstp_name,assimstp_dir,mons_file_name,f_plot_y_max,f_y_vars_mean,diff_obs,f_y_variables_ens,f_res_std,f_ax_y_labels,f_ax_legend_handle_length,run_output_dirs,assim_variables_dirs,corr_name,assimstp_dirs,model_name_big,resid_name,figure_size_y,f_markersize,f_ax_pos,f_x_variable,run_output_dir,f_ax_legend_cols,mons_file_dir,corr_dir,stddev_dir,true_output_dir,resid_dir,num_mons,corr_dirs,f_plot_x_max,figure_size_x,mons_inds,f_ax_x_label,model_name,f_ax_legend_labels,assim_variables_name,f_fig_title,f_fig_title_font,fig_f = 0):
+def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_variables_dir,
+           f_plot_x_min,stddev_name,letter_true,f_plot_y_min,f_ax_legend_loc,
+           f_line_colors,assimstp_name,assimstp_dir,mons_file_name,f_plot_y_max,
+           f_y_vars_mean,diff_obs,f_y_variables_ens,f_res_std,f_ax_y_labels,
+           f_ax_legend_handle_length,run_output_dirs,assim_variables_dirs,corr_name,
+           assimstp_dirs,model_name_big,resid_name,figure_size_y,f_markersize,
+           f_ax_pos,f_x_variable,run_output_dir,f_ax_legend_cols,mons_file_dir,corr_dir,
+           stddev_dir,true_output_dir,resid_dir,num_mons,corr_dirs,f_plot_x_max,
+           figure_size_x,mons_inds,f_ax_x_label,model_name,f_ax_legend_labels,
+           assim_variables_name,f_fig_title,f_fig_title_font,
+           model_output_dir, date_output_dir,
+           fig_f = 0):
 
 
     if not fig_f:
@@ -399,6 +415,7 @@ def f2_plot(f2_y_variables,
             assim_variables_dir,mons_file_dir,run_output_dir,assim_variables_name,
             letters,model_name_big,letter_true,figure_size_x,figure_size_y,model_name,
             f2_fig_title,f2_fig_title_font,f2_axis_title,f2_color_arr,
+            model_output_dir, date_output_dir,
             fig_f2 = 0):
 
 
@@ -898,6 +915,7 @@ def f3_plot(num_timesteps,nrobs_int,f3_num_arrays,mons_inds,f3_ax_legend_bbox,
             f3_x_variable,resid_name,f3_is_enforce_axis_input,model_name_big,f3_befaft,
             assim_variables_dir,run_output_dir,mons_file_dir,corr_dir,f3_ax_x_label,
             stddev_dir,true_output_dir,resid_dir,num_mons,f3_markersize,figure_size_x,
+            model_output_dir, date_output_dir,
             f3_plot_x_min,model_name,assim_variables_name,fig_f3 = 0):
 
 
@@ -1038,6 +1056,7 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
            assim_variables_dirs,corr_name,assimstp_dirs,t_source_file_name,model_name_big,
            resid_name,t_ax_title,figure_size_y,assim_variables_dir,t_ax_num_cbar,
            mons_file_dir,t_mons_size,t_ax_xlabel,corr_dir,stddev_dir,t_ax_cbar_pos,
+           model_output_dir, date_output_dir,
            resid_dir,num_mons,letters,figure_size_x,model_name,assim_variables_name,
            t_is_scatter_inds,t_scatter_inds_x,t_scatter_inds_y,fig_t = None):
 
@@ -1126,6 +1145,7 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
            h_cmap, h_cmap_kz, h_cmap_conc,
            h_n_cols,h_n_rows,
            h_im_left,h_im_up, h_grid_factor,
+           model_output_dir, date_output_dir,
            figure_size_x, figure_size_y, fig_h = None):
 
     if not fig_h:
@@ -1229,6 +1249,7 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
            s_width_factors,s_is_text,s_num_bins,
            s_colors, s_linewidths, s_size,
            s_y_ticks, s_y_ticklabels, s_x_ticks, s_x_ticklabels,
+           model_output_dir, date_output_dir,
            figure_size_x, figure_size_y, fig_s = None):
 
     if not fig_s:
@@ -1323,19 +1344,22 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
 ########################################################################################
 ########################################################################################## 
 def set_paths(output_files_dir, model_name, model_name_big, date, letters, letter_true, n_l):
-    run_output_dir=output_files_dir\
-        + model_name +"_output/"\
-        + date + "/" \
-        + date + "_" + letters[0] + "/"
-    run_output_dirs=[output_files_dir
-                         + model_name +"_output/"
-                         + date + "/" 
-                         + date + "_" + letters[i] + "/"
-                         for i in range(n_l)]
-    true_output_dir= output_files_dir\
-        + model_name +"_output/"\
-        + date + "/" \
-        + date + "_" + letter_true + "/"
+
+    # Output path for the model
+    model_output_dir = output_files_dir + model_name + "_output/"
+
+    # Output path for model and date
+    date_output_dir = model_output_dir + date + "/"
+
+    # Output path for mode, date and run (specified by letter)
+    run_output_dir = date_output_dir + date + "_" + letters[0] + "/"
+    run_output_dirs = [date_output_dir 
+                       + date + "_" + letters[i] + "/"
+                       for i in range(n_l)]
+
+    # Output path for model, date and true run (specified be letter for true)
+    true_output_dir = date_output_dir + date + "_" + letter_true + "/"
+    
     #Assim variables file/path
     assim_variables_dir= run_output_dir + 'enkf_output'
     assim_variables_dirs= [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
@@ -1363,7 +1387,9 @@ def set_paths(output_files_dir, model_name, model_name_big, date, letters, lette
     assimstp_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
     assimstp_name = 'assimstp_E1_1'
 
-    dir_in={'run_output_dir':run_output_dir,
+    dir_in={'model_output_dir':model_output_dir,
+            'date_output_dir': date_output_dir,
+            'run_output_dir':run_output_dir,
             'run_output_dirs':run_output_dirs,
             'true_output_dir':true_output_dir,
             'assim_variables_dir':assim_variables_dir,
