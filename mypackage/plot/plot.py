@@ -69,9 +69,10 @@ m_num_cbar = 15, # Geometry of Cbar
 m_is_show_mons = 0,
 m_mons_size = 10, # Monitoring points in plots/size
 m_is_text = 0,   # Show text
-m_fig_title = 'assim_variables',
+m_fig_title = None,             # Stem of the file name if not explicitly set
 m_fig_title_font = 30,
-m_pic_name = 'plot_m.png',
+m_pic_name = 'plot_m',
+m_pic_ending = '.png',
 m_cmaps = myplots.cmaps,
 # 
 # 
@@ -95,7 +96,8 @@ f_ax_legend_bbox = [(1.0,1.0),(1.0,0.85)],
 f_ax_legend_handle_length = [3,5], # Legend geometry
 f_fig_title = 'Residuals and Standard Deviation',
 f_fig_title_font = 30,
-f_pic_name = 'plot_f.png',
+f_pic_name = 'plot_f',
+f_pic_ending = '.png',
 #
 # 
 f2_num_arrays = 0,     # Num of arrs from asssim_variables (depends on n_l# )
@@ -184,7 +186,8 @@ f2_is_show_arrows = 1, # Show the arrows
 f2_fig_title = 'Update Tracking',
 f2_fig_title_font = 30,
 f2_axis_title = 'Axis Title',
-f2_pic_name = 'plot_f2.png',
+f2_pic_name = 'plot_f2',
+f2_pic_ending = '.png',
 #
 # 
 f3_source_file_name = 'assim_variables_E1_', #'residual' 'stddev'
@@ -206,7 +209,8 @@ f3_plot_x_min = 0,
 f3_plot_x_max = 10.5,
 f3_plot_y_min = -11,
 f3_plot_y_max = -9, # Axis Ranges
-f3_pic_name = 'plot_f3.png',
+f3_pic_name = 'plot_f3',
+f3_pic_ending = '.png',
 #
 # 
 t_source_file_name = None,
@@ -224,7 +228,8 @@ t_mons_size= 50,
 t_is_scatter_inds = 1,  # Show scatterplot of selfdefined points(mons must be off)
 t_scatter_inds_x = [5,27,10,22,5,27],
 t_scatter_inds_y = [5,5,16,16,27,27],
-t_pic_name = 'plot_t.png',
+t_pic_name = 'plot_t',
+t_pic_ending = '.png',
 #
 #
 # h_source_file_name = 'assim_variables_E1_aft_0009.vtk',
@@ -237,7 +242,8 @@ h_ax_pos = [0.1,0.1,0.8,0.8],
 h_ax_title = 'Histogram',
 h_ax_xlabel = 'x',
 h_ax_ylabel = 'y',
-h_pic_name = 'plot_h.png',
+h_pic_name = 'plot_h',
+h_pic_ending = '.png',
 h_width_factors = [1,1],             # left, right
 h_num_bins = 20,
 h_hist_color = 'black',
@@ -260,7 +266,8 @@ s_ax_pos = [0.1,0.1,0.8,0.8],
 s_ax_title = 'Scatter',
 s_ax_xlabel = 'x',
 s_ax_ylabel = 'y',
-s_pic_name = 'plot_s.png',
+s_pic_name = 'plot_s',
+s_pic_ending = '.png',
 s_width_factors = [1,1,1,1],     # x_left, x_right, y_down, y_up
 s_num_bins = 30,
 s_is_text = 0,
@@ -309,7 +316,7 @@ s_x_ticklabels = None,
 
     # Directories
     dir_in = myplots.set_paths(output_files_dir, gen_in['model_name'], gen_in['model_name_big'],date, gen_in['letters'], gen_in['letter_true'], n_l)
-    pics_dir = dir_in['run_output_dir'] + 'pics'
+    pics_dir = dir_in['date_output_dir'] + 'pics'
         
     
     # Variables
@@ -582,53 +589,60 @@ s_x_ticklabels = None,
             # Plot figure
             fig = myplots.m_plot(**in_dict)
             # Save figure
+            m_pic_name_arr = [m_pic_name + '_' + letter + m_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[m_pic_name],[fig])
+                myplots.saving_fig(pics_dir,m_pic_name_arr,[fig])
 
         if is_f or num == 2:
             in_dict = dict(f_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             # in_dict['fig_f'] = fig
             fig = myplots.f_plot(**in_dict)
+            f_pic_name_arr = [f_pic_name + '_' + letter + f_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[f_pic_name],[fig])
+                myplots.saving_fig(pics_dir,f_pic_name_arr,[fig])
 
         if is_f2 or num == 3:
             in_dict = dict(f2_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             # in_dict['fig_f2'] = fig
             fig = myplots.f2_plot(**in_dict)
+            f2_pic_name_arr = [f2_pic_name + '_' + letter + f2_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[f2_pic_name],[fig])
+                myplots.saving_fig(pics_dir,f2_pic_name_arr,[fig])
 
         if is_f3 or num == 4:
             in_dict = dict(f3_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             # in_dict['fig_f3'] = fig
             fig = myplots.f3_plot(**in_dict)
+            f3_pic_name_arr = [f3_pic_name + '_' + letter + f3_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[f3_pic_name],[fig])
+                myplots.saving_fig(pics_dir,f3_pic_name_arr,[fig])
 
         if is_t or num == 5:
             in_dict = dict(t_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_t'] = fig
             fig = myplots.t_plot(**in_dict)
+            t_pic_name_arr = [t_pic_name + '_' + letter + t_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[t_pic_name],[fig])
+                myplots.saving_fig(pics_dir,t_pic_name_arr,[fig])
 
         if is_h or num == 6:
             in_dict = dict(h_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_h'] = fig
             fig = myplots.h_plot(**in_dict)
+            h_pic_name_arr = [h_pic_name + '_' + letter + h_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[h_pic_name],[fig])
+                myplots.saving_fig(pics_dir,h_pic_name_arr,[fig])
 
         if is_s or num == 7:
             in_dict = dict(s_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_s'] = fig
             fig = myplots.s_plot(**in_dict)
+            s_pic_name_arr = [s_pic_name + '_' + letter + s_pic_ending]
             if is_save:
-                myplots.saving_fig(pics_dir,[s_pic_name],[fig])
+                myplots.saving_fig(pics_dir,s_pic_name_arr,[fig])
 
         #Showing the figure with matplotlib
         if is_show or is_show_local:
