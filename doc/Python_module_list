@@ -24,3 +24,5 @@ import pylab				# Axes (pylab.axis())
 import numpy as np     		# Numerical Python 
 from numpy import random as rnd # Numerical Pythons random number generator
 import scipy as sp		# Scientific Python (sp.mean(), sp.cov())
+
+import datetime                 # Date and time functions

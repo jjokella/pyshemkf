@@ -1,0 +1,120 @@
+* Python Modules
+** General Modules (sys, os ...)
+*** Commands
+    import sys                  # System variables (PYTHONPATH as list sys.path)
+    import os			# Operating system (os.chdir, os.path)
+    import subprocess  		# To execute shell command (subprocess.Popen)
+    import exceptions  		# Raising exception (raise exceptions.RuntimeError)
+    import atexit     		# Executing command at exit of execution
+*** Documentation
+    |------------+-------------------------------------------------------------------|
+    | NAME       | DOCUMENTATION                                                     |
+    |------------+-------------------------------------------------------------------|
+    |------------+-------------------------------------------------------------------|
+    | sys        | Used for system variables. sys.exit() finishes the executiont.    |
+    |            | sys.path gives PYTHONPATH as list of paths (in PYTHONPATH, python |
+    |            | will look for modules)                                            |
+    |------------+-------------------------------------------------------------------|
+    | os         | Operating system commands like os.chdir('path'), os.path,         |
+    |            | os.mkdir('path'), os.getcwd()                                     |
+    |------------+-------------------------------------------------------------------|
+    | subprocess |                                                                   |
+    |------------+-------------------------------------------------------------------|
+    | exceptions |                                                                   |
+    |------------+-------------------------------------------------------------------|
+    | atexit     |                                                                   |
+    |------------+-------------------------------------------------------------------|
+    
+** String modules
+*** Commands  
+    import string     		# Load alphabet (string.alphabet())
+    import re	  		# Regular expressions support
+    import shlex      		# Structure system commands(shlex.split) 
+*** Documentation
+    |--------+---------------|
+    | NAME   | DOCUMENTATION |
+    |--------+---------------|
+    |--------+---------------|
+    | re     |               |
+    |--------+---------------|
+    | string |               |
+    |--------+---------------|
+    | shlex  |               |
+    |--------+---------------|
+
+** Time modules
+*** Commands
+    import time       		# Timing the execution (time.time(), time.clock())
+    import datetime                 # Date and time functions
+*** Documentation
+    |----------+---------------|
+    | NAME     | DOCUMENTATION |
+    |----------+---------------|
+    |----------+---------------|
+    | time     |               |
+    |----------+---------------|
+    | datetime |               |
+    |----------+---------------|
+ 
+** Drawing (Matplotlib,Pylab,vtk,...)
+*** Commands
+    import matplotlib as mpl           	# Matplotlib
+    from matplotlib import pyplot as plt	# Plot commands (plt.show(), plt.close())
+    from matplotlib import cm		# Colormap commands (cm.get_cmap())
+    from matplotlib import mlab		#
+    from matplotlib import ticker		#
+    from matplotlib import colors	        # Normalize colors (colors.Normalize())
+    import mpl_toolkits			#  axes (mpl_toolkits.axes_grid.make_axes_locatable)
+    import pylab				# Axes (pylab.axis())
+    import vtk	  		# Adapt vtk to NumPy (vtk.util.numpy_support.vtk_to_numpy)
+*** Documentation    
+    |--------------+---------------|
+    | NAME         | DOCUMENTATION |
+    |--------------+---------------|
+    |--------------+---------------|
+    | matplotlib   |               |
+    |--------------+---------------|
+    | pyplot       |               |
+    |--------------+---------------|
+    | cm           |               |
+    |--------------+---------------|
+    | mlab         |               |
+    |--------------+---------------|
+    | ticker       |               |
+    |--------------+---------------|
+    | colors       |               |
+    |--------------+---------------|
+    | mpl_toolkits |               |
+    |--------------+---------------|
+    | pylab        |               |
+    |--------------+---------------|
+    | vtk          |               |
+    |--------------+---------------|
+
+** Calculations (Math, NumPy, SciPy, ...)
+*** Commands
+    import math	  		# Mathematical Functions (math.pi, math.sqrt())
+    import random     		# Random integer (random.randint())
+    import numpy as np     		# Numerical Python 
+    from numpy import random as rnd # Numerical Pythons random number generator
+    import scipy as sp		# Scientific Python (sp.mean(), sp.cov())
+    import vtk	  		# Adapt vtk to NumPy (vtk.util.numpy_support.vtk_to_numpy)
+*** Documentation
+    |-----------+---------------|
+    | NAME      | DOCUMENTATION |
+    |-----------+---------------|
+    |-----------+---------------|
+    | math      |               |
+    |-----------+---------------|
+    | random    |               |
+    |-----------+---------------|
+    | numpy/np  |               |
+    |-----------+---------------|
+    | np.random |               |
+    |-----------+---------------|
+    | scipy/sp  |               |
+    |-----------+---------------|
+    | vtk       |               |
+    |-----------+---------------|
+    
+
