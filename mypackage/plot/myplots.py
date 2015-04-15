@@ -1129,7 +1129,9 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
 
     return fig_t
 
-
+##########################################################################################
+########################################################################################
+########################################################################################
 def h_plot(num_timesteps,nrobs_int,mons_inds,
            start_obs,stddev_name,letter_true,
            true_output_dir,assimstp_name,corr_dirs,mons_file_name,run_output_dir,
@@ -1138,6 +1140,7 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
            resid_name,assim_variables_dir,
            mons_file_dir,corr_dir,stddev_dir,
            resid_dir,num_mons,letters,model_name,assim_variables_name,
+           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            h_ax_pos,h_ax_title,h_ax_xlabel,h_ax_ylabel,
            h_file_type, h_sc_cell_vars, h_befaft,
            h_obstimes, h_variable_name,
@@ -1146,7 +1149,6 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
            h_cmap, h_cmap_kz, h_cmap_conc,
            h_n_cols,h_n_rows,
            h_im_left,h_im_up, h_grid_factor,
-           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            figure_size_x, figure_size_y, fig_h = None):
 
     if not fig_h:
@@ -1237,6 +1239,9 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
         
     return fig_h
 
+##########################################################################################
+########################################################################################
+########################################################################################
 def s_plot(num_timesteps,nrobs_int,mons_inds,
            start_obs,stddev_name,letter_true,
            true_output_dir,assimstp_name,corr_dirs,mons_file_name,run_output_dir,
@@ -1245,12 +1250,12 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
            resid_name,assim_variables_dir,
            mons_file_dir,corr_dir,stddev_dir,
            resid_dir,num_mons,letters,model_name,assim_variables_name,
+           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            s_ax_pos,s_ax_title,s_ax_xlabel,s_ax_ylabel,
            s_source_file_names, s_variable_names, s_num_input_data,
            s_width_factors,s_is_text,s_num_bins,
            s_colors, s_linewidths, s_size,
            s_y_ticks, s_y_ticklabels, s_x_ticks, s_x_ticklabels,
-           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            figure_size_x, figure_size_y, fig_s = None):
 
     if not fig_s:
@@ -1339,6 +1344,141 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
 
         
     return fig_s
+
+##########################################################################################
+########################################################################################
+########################################################################################
+def pc_plot(num_timesteps,nrobs_int,mons_inds,
+            start_obs,stddev_name,letter_true,
+            true_output_dir,assimstp_name,corr_dirs,mons_file_name,run_output_dir,
+            diff_obs,assimstp_dir,run_output_dirs,
+            assim_variables_dirs,corr_name,assimstp_dirs,model_name_big,
+            resid_name,assim_variables_dir,
+            mons_file_dir,corr_dir,stddev_dir,
+            resid_dir,num_mons,letters,model_name,assim_variables_name,
+            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
+            n_l,date,
+            pc_output,pc_is_show_ens,pc_num_ens,pc_title_text,pc_x_min,pc_x_max,
+            pc_y_min,pc_y_max,pc_legend_loc,pc_legend_bbox_anchor,pc_colored,
+            pc_n_per_color,pc_marker_colors,pc_line_colors,
+            figure_size_x, figure_size_y, fig_pc = None):
+
+    
+    if not fig_pc:
+        # Generate the figure
+        fig_pc = plt.figure(5, figsize=(figure_size_x,figure_size_y))
+        fig_pc.set_facecolor((0.50, 0.50, 0.50))
+        # Insert figure title
+        plt.suptitle('Compare plot', y = 0.97, fontsize=20)
+
+
+    n_l_f = float(n_l)
+    getting_darker = [(float(i)/n_l_f , float(i)/n_l_f , float(i)/n_l_f)  for i in range(n_l)]
+    getting_darker.reverse()
+    
+    changing_black_white = [(0,0,0) if i%2 else (0.5,0.5,0.5) for i in range(n_l)]
+    
+    if pc_colored is None:
+        pc_colored = [1 for i in range(n_l)] # False: Grey instead of color, Default: all true
+    if pc_marker_colors is None:
+        pc_marker_colors = getting_darker # Marker colors
+    if pc_line_colors is None:
+        pc_line_colors = [color_arr[i/pc_n_per_color] if pc_colored[i] else 'grey'
+                       for i in range(n_l)] # Line colors
+
+
+    if pc_output == 'res':         # Title, filename, variable depending on 'res'/'std'
+        if pc_title_text is None:
+            pc_title_text = 'Residual ' + date
+        var_name = 'rms_kz_aft'
+        input_file_name = 'residual_E1.vtk'
+    elif pc_output  == 'std':
+        if pc_title_text is None:
+            pc_title_text = 'Stddevs ' + date
+        var_name = 'std_kz_aft'
+        input_file_name = 'stddev_E1.vtk'
+    else:
+        raise exceptions.RuntimeError, 'Wrong input_file_name.  ' + input_file_name
+
+    #############################################################################
+    #Checks
+    for resid_dir in resid_dirs: # Does file exist? Is variables in file?
+        if not pltfct.is_scalar_var_in_file(var_name, input_file_name, resid_dir):
+            raise exceptions.RuntimeError, 'var_name ' + var_name \
+                + 'not in input_file_name ' + input_file_name \
+                + 'in resid_dir' + resid_dir
+
+
+    ############################################################################
+
+    ax = fig_pc.add_subplot(1,1,1) # Axis
+    # ax.set_position([0.55,0.55,
+    #                  0.35,0.35])
+    ax.set_title(pc_title_text,
+                 fontsize = 25)
+    ax.set_xlabel('obstime')
+    ax.set_ylabel('Residuals')
+
+
+    data_x=[]             # 
+    data_y=[]
+    plots=[]
+    plot_labels=[]
+
+    for i,letter in enumerate(letters): # Loop over letters
+        
+        data_x = pltfct.my_vtk_to_numpy(resid_dirs[i], # x-data
+                                               input_file_name,
+                                               'obstime')
+        data_y = pltfct.my_vtk_to_numpy(resid_dirs[i], # y-data
+                                               input_file_name,
+                                               var_name)
+        
+
+        plots.append(ax.plot(data_x, # Main plot
+                             data_y,
+                             color=pc_line_colors[i],
+                             linestyle='-',
+                             linewidth=2.5,
+                             marker='o',
+                             markerfacecolor=pc_marker_colors[i],
+                             markeredgecolor=pc_marker_colors[i],
+                             markersize=6))
+                               #label='Mean')
+        plot_labels.append('Residuals ' + letter)
+
+
+        if pc_is_show_ens:         # Ensemble of residuals
+            for i_arr in range(pc_num_ens): 
+                data_ens = pltfct.my_vtk_to_numpy(resid_dirs[i],
+                                                  input_file_name,
+                                                  'rm_kz_aft_' + str(i_arr+1))
+                plot_ens = ax.plot(data_x,
+                                   data_ens,
+                                   color=pc_line_colors[i],
+                                   linestyle='-',
+                                   marker='',
+                                   markerfacecolor='grey',
+                                   markeredgecolor='grey',
+                                   markersize=6)
+
+
+    refined_legend=plt.legend(plots, # Legend
+                              plot_labels,
+                              title = 'Legend',
+                              loc=pc_legend_loc,
+                              bbox_to_anchor=pc_legend_bbox_anchor,
+                              handlelength=2,
+                              numpoints=2,
+                              handletextpad=0.5,
+                              ncol=6,
+                              prop={'size':16})
+
+
+    plt.axis([pc_x_min,pc_x_max,pc_y_min,pc_y_max]) # R
+        
+
+    return fig_pc
 
 
 ########################################################################################

@@ -32,6 +32,7 @@ is_f3 = 0,                # Clone of f2
 is_t = 0,                 # True grid
 is_h = 0,                 # Histogram grid
 is_s = 0,                 # Scatter plot
+is_pc = 0,                # Compare letters plot
 is_show = 1,
 is_save = 1,
 figure_size_x = 20.0,
@@ -279,6 +280,24 @@ s_y_ticks = None,
 s_y_ticklabels = None,
 s_x_ticks = None,
 s_x_ticklabels = None,
+#
+#
+pc_output = 'res',                  # 'res' 'std'
+pc_is_show_ens = 0,
+pc_num_ens = 20,
+pc_title_text = None,
+pc_x_min = 0,
+pc_x_max = 10,
+pc_y_min = 0.30,
+pc_y_max = 0.66,
+pc_legend_loc = 'upper right',
+pc_legend_bbox_anchor = (1.0,1.0),
+pc_colored = None,
+pc_n_per_color = 1,
+pc_marker_colors = None,
+pc_line_colors = None,
+pc_pic_name = 'plot_compare',
+pc_pic_ending = '.png'
 ):                 
     """
     
@@ -579,9 +598,25 @@ s_x_ticklabels = None,
           's_x_ticks':s_x_ticks,
           's_x_ticklabels':s_x_ticklabels,
           }
+    pc_in={'pc_output': pc_output,
+           'pc_is_show_ens': pc_is_show_ens,
+           'pc_num_ens': pc_num_ens,
+           'pc_title_text':pc_title_text,
+           'pc_x_min':pc_x_min,
+           'pc_x_max':pc_x_max,
+           'pc_y_min':pc_y_min,
+           'pc_y_max':pc_y_max,
+           'pc_legend_loc':pc_legend_loc,
+           'pc_legend_bbox_anchor':pc_legend_bbox_anchor,
+           'pc_colored':pc_colored,
+           'pc_n_per_color':pc_n_per_color,
+           'pc_marker_colors':pc_marker_colors,
+           'pc_line_colors':pc_line_colors,
+           }
+
     ######################################################################################
     ######################################################################################
-    def all_plot( num = 0, is_m = 0, is_f = 0, is_f2= 0, is_f3 = 0, is_t = 0, is_h = 0, is_s = 0, is_show_local = 0):
+    def all_plot( num = 0, is_m = 0, is_f = 0, is_f2= 0, is_f3 = 0, is_t = 0, is_h = 0, is_s = 0, is_pc = 0, is_show_local = 0):
         if is_m or num == 1:
             # Gather Input
             in_dict = dict(m_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
@@ -644,6 +679,15 @@ s_x_ticklabels = None,
             if is_save:
                 myplots.saving_fig(pics_dir,s_pic_name_arr,[fig])
 
+        if is_pc or num == 8:
+            in_dict = dict(pc_in.items() + gen_in.items() + dir_in.items() + fun_in.items() + [('n_l',n_l),('date',date)])
+            if is_m or is_f or is_f2 or is_f3:
+                in_dict['fig_pc'] = fig
+            fig = myplots.pc_plot(**in_dict)
+            pc_pic_name_arr = [pc_pic_name + '_' + letter + '_' + str(n_l).zfill(2) +  pc_pic_ending]
+            if is_save:
+                myplots.saving_fig(pics_dir,pc_pic_name_arr,[fig])
+                
         #Showing the figure with matplotlib
         if is_show or is_show_local:
             plt.show()
@@ -652,7 +696,7 @@ s_x_ticklabels = None,
         os.chdir(python_dir)
 
     ############################################################################################
-    all_plot(is_m = is_m, is_f = is_f, is_f2 = is_f2, is_f3 = is_f3, is_t = is_t, is_h = is_h, is_s = is_s)
+    all_plot(is_m = is_m, is_f = is_f, is_f2 = is_f2, is_f3 = is_f3, is_t = is_t, is_h = is_h, is_s = is_s, is_pc = is_pc)
     ############################################################################################
 
     print('\nDone with plot.py')
