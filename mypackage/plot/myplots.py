@@ -91,6 +91,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            m_cbar_kz_res_low, m_cbar_kz_res_high,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
+           resid_dirs, stddev_dirs,
            m_cmaps,fig_m = 0 ):
 
 
@@ -260,7 +261,7 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
            stddev_dir,true_output_dir,resid_dir,num_mons,corr_dirs,f_plot_x_max,
            figure_size_x,mons_inds,f_ax_x_label,model_name,f_ax_legend_labels,
            assim_variables_name,f_fig_title,f_fig_title_font,
-           model_output_dir, date_output_dir,
+           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            fig_f = 0):
 
 
@@ -415,7 +416,7 @@ def f2_plot(f2_y_variables,
             assim_variables_dir,mons_file_dir,run_output_dir,assim_variables_name,
             letters,model_name_big,letter_true,figure_size_x,figure_size_y,model_name,
             f2_fig_title,f2_fig_title_font,f2_axis_title,f2_color_arr,
-            model_output_dir, date_output_dir,
+            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
             fig_f2 = 0):
 
 
@@ -915,7 +916,7 @@ def f3_plot(num_timesteps,nrobs_int,f3_num_arrays,mons_inds,f3_ax_legend_bbox,
             f3_x_variable,resid_name,f3_is_enforce_axis_input,model_name_big,f3_befaft,
             assim_variables_dir,run_output_dir,mons_file_dir,corr_dir,f3_ax_x_label,
             stddev_dir,true_output_dir,resid_dir,num_mons,f3_markersize,figure_size_x,
-            model_output_dir, date_output_dir,
+            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
             f3_plot_x_min,model_name,assim_variables_name,fig_f3 = 0):
 
 
@@ -1056,7 +1057,7 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
            assim_variables_dirs,corr_name,assimstp_dirs,t_source_file_name,model_name_big,
            resid_name,t_ax_title,figure_size_y,assim_variables_dir,t_ax_num_cbar,
            mons_file_dir,t_mons_size,t_ax_xlabel,corr_dir,stddev_dir,t_ax_cbar_pos,
-           model_output_dir, date_output_dir,
+           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            resid_dir,num_mons,letters,figure_size_x,model_name,assim_variables_name,
            t_is_scatter_inds,t_scatter_inds_x,t_scatter_inds_y,fig_t = None):
 
@@ -1145,7 +1146,7 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
            h_cmap, h_cmap_kz, h_cmap_conc,
            h_n_cols,h_n_rows,
            h_im_left,h_im_up, h_grid_factor,
-           model_output_dir, date_output_dir,
+           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            figure_size_x, figure_size_y, fig_h = None):
 
     if not fig_h:
@@ -1249,7 +1250,7 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
            s_width_factors,s_is_text,s_num_bins,
            s_colors, s_linewidths, s_size,
            s_y_ticks, s_y_ticklabels, s_x_ticks, s_x_ticklabels,
-           model_output_dir, date_output_dir,
+           model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            figure_size_x, figure_size_y, fig_s = None):
 
     if not fig_s:
@@ -1372,10 +1373,12 @@ def set_paths(output_files_dir, model_name, model_name_big, date, letters, lette
 
     #Residuals file/path
     resid_dir= run_output_dir + 'enkf_output'
+    resid_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
     resid_name='residual_E1.vtk'
 
     #Stddev file/path
     stddev_dir= run_output_dir + 'enkf_output'
+    stddev_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
     stddev_name='stddev_E1.vtk'
 
     #Monitor file/path
@@ -1399,8 +1402,10 @@ def set_paths(output_files_dir, model_name, model_name_big, date, letters, lette
             'corr_dirs':corr_dirs,
             'corr_name':corr_name,
             'resid_dir':resid_dir,
+            'resid_dirs':resid_dirs,
             'resid_name':resid_name,
             'stddev_dir':stddev_dir,
+            'stddev_dirs':stddev_dirs,
             'stddev_name':stddev_name,
             'mons_file_dir':mons_file_dir,
             'mons_file_name':mons_file_name,
