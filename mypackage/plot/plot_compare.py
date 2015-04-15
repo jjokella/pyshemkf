@@ -28,8 +28,9 @@ model_name = myplots.mymodel_name,
 date = myplots.mydate,
 is_save_fig = 1,
 is_show_fig = 1,
-# 
-suffix_start=rm.get_num_let(myplots.myletter),
+#
+letter = myplots.myletter,
+letter_true = myplots.myletter_true,
 n_l=1,
 step_l = 1,
 output = 'res',                  # 'res' 'std'
@@ -62,20 +63,30 @@ png_file_name = 'plot_compare'
     
     #############################################################################
     #Immediate variables
-    suffix_end = suffix_start + (n_l)*step_l
-    model_name_big = model_name.upper()
-    alphabet=string.lowercase
+    model_name_big = model_name.upper() # Model name in big letters
+
+    suffix_start=rm.get_num_let(letter) # Starting letter as integer 
+    suffix_end = suffix_start + n_l*step_l # Ending letter as integer
+    alphabet=string.lowercase              # Alphabet
     letters = [(alphabet[i/26-1]+alphabet[i%26] if i>25 else alphabet[i]) 
-               for i in range(suffix_start,suffix_end,step_l)]
+               for i in range(suffix_start,suffix_end,step_l)] # All letters to plot
     
     letters_iterative = [(alphabet[i/26-1]+alphabet[i%26] if i>25 else alphabet[i]) 
                          for i in range(rm.get_num_let('el'),rm.get_num_let('fe')+1,1)]
+
     
+    dir_in = myplots.set_paths(output_files_dir,model_name,model_name_big,
+                               date,letters,letter_true,n_l) # Directories
+
+    pics_dir = dir_in['date_output_dir'] + 'pics' # Output directory
     png_file_name= png_file_name + '_' + letters[0] + '_' + str(n_l) + '.png'
     save_fig_dir = output_files_dir + model_name +"_output/" + date + "/" \
-        + date + "_" + save_letter + "/pics"
-    
+        + date + "_" + save_letter + "/pics" # Output file name
 
+    residuals_dirs = dir_in['resid_dirs'] # Directories for residual files
+
+
+    # Color themes
     getting_darker = [(float(i)/float(n_l),float(i)/float(n_l),float(i)/float(n_l)) for i in range(n_l)]
     getting_darker.reverse()
     
@@ -104,11 +115,6 @@ png_file_name = 'plot_compare'
 
 
 
-    residuals_dirs = [output_files_dir 
-                      + model_name +"_output/" 
-                      + date + "/" 
-                      + date + "_" + letter + "/" 
-                      + 'enkf_output' for letter in letters]
 
     #############################################################################
     #############################################################################
@@ -122,51 +128,55 @@ png_file_name = 'plot_compare'
 
 
     ############################################################################
-    #Generate the figure
-    fig = plt.figure(1, figsize=(figure_size_x,figure_size_y))
+    fig = plt.figure(1, figsize=(figure_size_x,figure_size_y)) # Figure
     fig.set_facecolor((0.50, 0.50, 0.50))
-    #Generate the axis
-    ax = fig.add_subplot(1,1,1)
-    #ax.set_position([0.55,0.55,
-    #                          0.35,0.35])
+
+    ax = fig.add_subplot(1,1,1) # Axis
+    # ax.set_position([0.55,0.55,
+    #                  0.35,0.35])
     ax.set_title(title_text,
                  fontsize = 25)
     ax.set_xlabel('obstime')
     ax.set_ylabel('Residuals')
 
 
-
-
-
-    cell_numpy_x=[]
+    cell_numpy_x=[]             # 
     cell_numpy_y=[]
     plot_letter=[]
     plot_label=[]
 
-    for i,letter in enumerate(letters):
+    for i,letter in enumerate(letters): # Loop over letters
+        
+        data_x = pltfct.my_vtk_to_numpy(residuals_dirs[i],
+                                        input_file_name,
+                                        'obstime')
+        data_y = pltfct.my_vtk_to_numpy(residuals_dirs[i],
+                                        input_file_name,
+                                        var_name)
+        
         os.chdir(residuals_dirs[i])
         reader=vtk.vtkRectilinearGridReader()
-    #reader.ReadFromInputStringOn()
-    #reader.SetInputString(in_str)
         reader.SetFileName(input_file_name)
         if letter in letters_iterative:
             reader.SetFileName('residual_E2.vtk')
-        reader.SetScalarsName('obstime')
+        reader.SetScalarsName('obstime') # x Variable
         reader.Update()
         cell_vtk_x = reader.GetOutput().GetCellData().GetArray(0)
-        reader.SetScalarsName(var_name)
-
+        reader.SetScalarsName(var_name) # y variable
         reader.Update()
         cell_vtk_y = reader.GetOutput().GetCellData().GetArray(0)
-    #num_cells = reader.GetOutput().GetNumberOfCells()
-    #whole_extent = reader.GetOutput().GetExtent()
-    #grid_bounds = reader.GetOutput().GetBounds()
-    #grid_dims = reader.GetOutput().GetDimensions()
-        cell_numpy_x.append(vtk.util.numpy_support.vtk_to_numpy(cell_vtk_x))
-        cell_numpy_y.append(vtk.util.numpy_support.vtk_to_numpy(cell_vtk_y))
+        # num_cells = reader.GetOutput().GetNumberOfCells()
+        # whole_extent = reader.GetOutput().GetExtent()
+        # grid_bounds = reader.GetOutput().GetBounds()
+        # grid_dims = reader.GetOutput().GetDimensions()
+        # cell_numpy_x.append(vtk.util.numpy_support.vtk_to_numpy(cell_vtk_x))
+        cell_numpy_x.append(data_x)
+        # cell_numpy_y.append(vtk.util.numpy_support.vtk_to_numpy(cell_vtk_y))
+        cell_numpy_y.append(data_y)
         len_arrays = len(cell_numpy_x[i])
         num_arrays = 20
 
+        
 
     #Generate the plot
         plot_letter.append(ax.plot(cell_numpy_x[i],
