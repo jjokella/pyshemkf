@@ -8,7 +8,6 @@ output_files_dir    = '/home/jk125262/shematOutputDir_Cluster/'
 import os                            # Operating system (os.chdir, os.path)
 import sys                           # System variables (PYTHONPATH as list sys.path)
 import time                          # Timing the execution (time.time(), time.clock())
-import string                        # Load alphabet (string.alphabet())
 from matplotlib import pyplot as plt # Plotting commands (plt.show())
 
 sys.path[0] = python_dir             # Add path to sys.path to load mypackage
@@ -316,11 +315,9 @@ pc_pic_ending = '.png'
     #General inputs
     model_name_big = model_name.upper()
 
-    suffix_start=rm.get_num_let(letter) # Letter array from start, number and step
-    suffix_end = suffix_start + n_l*step 
-    alphabet = string.lowercase          
-    letters = [(alphabet[i/26-1]+alphabet[i%26] if i>25 else alphabet[i]) 
-               for i in range(suffix_start,suffix_end,step)] 
+    suffix_start=rm.get_num_let(letter) # Convert to numbers
+    suffix_end = suffix_start + n_l*step # Find the final step
+    letters = [ rm.get_let_num(i) for i in range(suffix_start,suffix_end,step)] # Convert back
 
     
     gen_in = {'model_name':model_name, # Input dictionary 

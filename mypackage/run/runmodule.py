@@ -36,7 +36,9 @@ def replace_string(file_name_input, old_str, new_str):
         
     return
 
-
+#############################################################
+#          MAKE TEMP COPY OF INPUTFILE
+#############################################################
 def make_tmp(file_name_input):
     "Make a tmp file by adding .tmp at the end of the filename (input)."
     file_input = open(file_name_input,'r')
@@ -46,6 +48,9 @@ def make_tmp(file_name_input):
     file_input.close()
     file_tmp.close()
 
+#############################################################
+#    RETURN THE INPUTFILE TO THE STATE OF THE TEMP COPY
+#############################################################
 def get_tmp(file_name_input):
     "Copy the tmp file to the real one and then remove the tmp file."
     file_input = open(file_name_input,'w')
@@ -57,6 +62,9 @@ def get_tmp(file_name_input):
     os.remove(file_name_input + '.tmp')
 
 
+#############################################################
+#        GET INTEGER CORRESPONDING TO ALPHABET LETTER
+#############################################################
 def get_num_let(let):
     """
     Returns the integer corresponding to the input letter
@@ -69,6 +77,41 @@ def get_num_let(let):
         return 26*(alphabet.index(let[0])+1) + alphabet.index(let[1])
     else:
         raise exceptions.RuntimeError, 'letter does not contain 1 or 2 letters'
+
+
+
+#############################################################
+#     GET ALPHABET LETTER CORRESPONDING TO INTEGER
+#############################################################
+def get_let_num(num):
+    """
+    Returns the letter of the alphabet corresponding to the input integer.
+    """
+    alphabet = string.lowercase
+    return ( alphabet[num/26-1] # First letter: multiple of 26 (alphabet starts at 0)
+             + alphabet[num%26] # Second letter: modulo 26
+             if num>25 else
+             alphabet[num] )    # Only one letter: Just take it from the alphabet
+
+
+def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
+    os.chdir(path)
+    if not outfile:
+        proc = subprocess.Popen(name,stdin=subprocess.PIPE)
+    else:
+        proc = subprocess.Popen(name,stdin=subprocess.PIPE, stdout=outfile)
+    
+    if instr:
+        subprocess.Popen.communicate(proc,input = instr)
+
+    if wait:
+        subprocess.Popen.wait(proc)
+
+    if errout:
+        if(proc.returncode):
+            raise exceptions.RuntimeError, "Problems in " + name
+    
+
 
 
 #############################################################
