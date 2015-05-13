@@ -1,15 +1,11 @@
-import matplotlib.pyplot as plt
+p(is_m = 1, m_diff = 10, letter = 'b', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'c', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'd', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'e', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'f', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'g', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'h', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'i', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'j', is_show = 0)
+p(is_m = 1, m_diff = 10, letter = 'k', is_show = 0)
 
-
-
-
-data = [1,2,3]
-
-
-fig = plt.figure()
-ax = fig.add_subplot(1,1,1)
-
-ax.plot(data)
-
-
-plt.show()

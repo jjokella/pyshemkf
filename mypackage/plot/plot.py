@@ -21,8 +21,8 @@ def p(
 model_name = myplots.mymodel_name,
 date = myplots.mydate,
 letter = myplots.myletter,             # Letter inputs
-n_l = 1,
-step = 1,
+nl = 1,
+stepl = 1,
 letter_true = myplots.myletter_true,
 is_m = 0,                 # Grid of Grids
 is_f = 0,                 # Plot residuals/stddevs
@@ -35,7 +35,7 @@ is_pc = 0,                # Compare letters plot
 is_show = 1,
 is_save = 1,
 figure_size_x = 20.0,
-figure_size_y = 11.85,
+figure_size_y = 10.85,
 # 
 #
 m_infiles = ['av','av','av'],    # 'cor', 'init', 'end'
@@ -71,36 +71,38 @@ m_mons_size = 10, # Monitoring points in plots/size
 m_is_text = 0,   # Show text
 m_fig_title = None,             # Stem of the file name if not explicitly set
 m_fig_title_font = 30,
+m_single_fig_title = None,
 m_pic_name = 'plot_m',
 m_pic_ending = '.png',
 m_cmaps = myplots.cmaps,
 # 
 # 
-f_res_std = [1,1], #Show Residual/show Std
+f_res_std = [1,1,1,1], #Show Residual/show Std/meanresid/full_stats_measure
 f_x_variable ='obstime',              # x-variable
-f_y_vars_mean = ['rms_kz_aft','std_kz_aft'], #Mean variable names
-f_y_variables_ens = None, # Ens var names
+f_y_vars_mean = ['rms_kz_aft','std_kz_aft','rm_kz_aft_em',''], #Mean variable names, no name for last
+f_y_variables_ens = [[],[],[],[]], #Ens var names, ['rm_kz_aft_'+str(i) for i in range(1,51)]
 f_ax_pos =[0.10,0.10,0.80,0.80],  # Axis position [Left,Low,Width,Height]
+f_force_y_range = 1,
 f_plot_x_min = 0,
 f_plot_x_max = 10,
-f_plot_y_min = [0.2,0.2],
-f_plot_y_max = [1.0,1.0], # Axis Ranges
+f_plot_y_min = [0.2,0.2,0.2,0.2],
+f_plot_y_max = [1.0,1.0,1.0,1.0], # Axis Ranges
 f_markersize = 8,       # Marker size
 f_ax_x_label = 'obstime',
-f_ax_y_labels = ['Residuals', 'Standard Deviation'],# Axis labels
-f_line_colors = ['black','red'],        # Line colors
-f_ax_legend_labels =[['EnsembleMembers' if i else 'Mean' for i in range(1+1)],['Stddev']], # Legend labels
-f_ax_legend_cols = [1,1],
-f_ax_legend_loc = ['upper right','upper right'],
-f_ax_legend_bbox = [(1.0,1.0),(1.0,0.85)],
-f_ax_legend_handle_length = [3,5], # Legend geometry
+f_ax_y_labels = ['Residuals', 'Standard Deviation','Mean Residuals','Stats Resid'],# Axis labels
+f_line_colors = ['black','red','green','blue'],        # Line colors
+f_ax_legend_labels =[['EnsembleMembers' if i else 'Mean' for i in range(1)],['Stddev'],['Mean of Resids'],['Stats Measure']], # Legend labels
+f_ax_legend_cols = [1,1,1,1],
+f_ax_legend_loc = ['upper right','upper right','upper right','upper right'],
+f_ax_legend_bbox = [(1.0,1.0),(1.0,0.9),(1.0,0.8),(1.0,0.7)],
+f_ax_legend_handle_length = [3,5,5,5], # Legend geometry
 f_fig_title = 'Residuals and Standard Deviation',
 f_fig_title_font = 30,
 f_pic_name = 'plot_f',
 f_pic_ending = '.png',
 #
 # 
-f2_num_arrays = 0,     # Num of arrs from asssim_variables (depends on n_l# )
+f2_num_arrays = 0,     # Num of arrs from asssim_variables (depends on nl# )
 f2_av_letters = None,  # [0,0,...] len = f2_num_arrays
 f2_x_variable = 'obstime',
 f2_y_variables = None,          # ['kz_mean','kz_mean',...] len = f2_num_arrays
@@ -244,6 +246,8 @@ h_ax_xlabel = 'x',
 h_ax_ylabel = 'y',
 h_pic_name = 'plot_h',
 h_pic_ending = '.png',
+h_data_bins = [],
+h_y_max = None,
 h_width_factors = [1,1],             # left, right
 h_num_bins = 20,
 h_hist_color = 'black',
@@ -281,21 +285,25 @@ s_x_ticks = None,
 s_x_ticklabels = None,
 #
 #
+# Use nl = Number letters, stepl = step between letters from above
 pc_output = 'res',                  # 'res' 'std'
-pc_is_show_ens = 0,
+pc_nl = 0,
+pc_dates = None,
+pc_letters = None,
+pc_is_show_ens = 0,                 
 pc_num_ens = 20,
 pc_title_text = None,
 pc_x_min = 0,
-pc_x_max = 10,
-pc_y_min = 0.30,
-pc_y_max = 0.66,
+pc_x_max = 20,
+pc_y_min = 0.0,
+pc_y_max = 1.0,
 pc_legend_loc = 'upper right',
 pc_legend_bbox_anchor = (1.0,1.0),
 pc_colored = None,
 pc_n_per_color = 1,
 pc_marker_colors = None,
 pc_line_colors = None,
-pc_pic_name = 'plot_compare',
+pc_pic_name = 'plot_pc',
 pc_pic_ending = '.png'
 ):                 
     """
@@ -305,8 +313,8 @@ pc_pic_ending = '.png'
     model_name                  # Name of the model
     date                        # Date of the model output
     letter                      # Starting letter (main letter)
-    n_l                         # Number of letters (mostly one)
-    step                        # Letter stepsize (mostly one)
+    nl                         # Number of letters (mostly one)
+    stepl                        # Letter stepsize (mostly one)
     """
     ######################################################################################
 
@@ -316,8 +324,8 @@ pc_pic_ending = '.png'
     model_name_big = model_name.upper()
 
     suffix_start=rm.get_num_let(letter) # Convert to numbers
-    suffix_end = suffix_start + n_l*step # Find the final step
-    letters = [ rm.get_let_num(i) for i in range(suffix_start,suffix_end,step)] # Convert back
+    suffix_end = suffix_start + nl*stepl # Find the final step
+    letters = [ rm.get_let_num(i) for i in range(suffix_start,suffix_end,stepl)] # Convert back
 
     
     gen_in = {'model_name':model_name, # Input dictionary 
@@ -331,7 +339,7 @@ pc_pic_ending = '.png'
     ######################################################################################
 
     # Directories
-    dir_in = myplots.set_paths(output_files_dir, gen_in['model_name'], gen_in['model_name_big'],date, gen_in['letters'], gen_in['letter_true'], n_l)
+    dir_in = myplots.set_paths(output_files_dir, gen_in['model_name'], gen_in['model_name_big'],date, gen_in['letters'], gen_in['letter_true'], nl)
     pics_dir = dir_in['date_output_dir'] + 'pics'
         
     
@@ -363,6 +371,7 @@ pc_pic_ending = '.png'
           'm_is_text' : m_is_text,  
           'm_fig_title': m_fig_title,
           'm_fig_title_font': m_fig_title_font,
+          'm_single_fig_title':m_single_fig_title,
           'm_cmaps' : m_cmaps,
           'm_cbar_kz_high' : m_cbar_kz_high,
           'm_cbar_kz_low'  : m_cbar_kz_low,
@@ -381,7 +390,8 @@ pc_pic_ending = '.png'
           'f_y_variables_ens' :f_y_variables_ens,
           'figure_size_x':figure_size_x,
           'figure_size_y':figure_size_y,
-          'f_ax_pos' :f_ax_pos, 
+          'f_ax_pos' :f_ax_pos,
+          'f_force_y_range':f_force_y_range,
           'f_plot_x_min' : f_plot_x_min,
           'f_plot_x_max' : f_plot_x_max,
           'f_plot_y_min' : f_plot_y_min,
@@ -563,6 +573,8 @@ pc_pic_ending = '.png'
           'h_ax_pos': h_ax_pos,
           'h_ax_xlabel':h_ax_xlabel,
           'h_ax_ylabel':h_ax_ylabel,
+          'h_data_bins':h_data_bins,
+          'h_y_max':h_y_max,
           'h_width_factors':h_width_factors,
           'h_num_bins':h_num_bins,
           'h_hist_color':h_hist_color,
@@ -596,6 +608,9 @@ pc_pic_ending = '.png'
           's_x_ticklabels':s_x_ticklabels,
           }
     pc_in={'pc_output': pc_output,
+           'pc_nl':pc_nl,
+           'pc_dates':pc_dates,
+           'pc_letters':pc_letters,
            'pc_is_show_ens': pc_is_show_ens,
            'pc_num_ens': pc_num_ens,
            'pc_title_text':pc_title_text,
@@ -621,7 +636,16 @@ pc_pic_ending = '.png'
             # Plot figure
             fig = myplots.m_plot(**in_dict)
             # Save figure
-            m_pic_name_arr = [m_pic_name + '_' + letter + m_pic_ending]
+            m_pic_name_arr = [m_pic_name + '_' # Different names depending on input vars
+                              + letter + '_'
+                              + str(m_first).zfill(2) + '_'
+                              + str(m_diff).zfill(2) + '_cor' +  m_pic_ending
+                              if 'cor' in m_infiles else
+                              m_pic_name + '_'
+                              + letter + '_'
+                              + str(m_first).zfill(2) + '_'
+                              + str(m_diff).zfill(2) + m_pic_ending]
+            
             if is_save:
                 myplots.saving_fig(pics_dir,m_pic_name_arr,[fig])
 
@@ -663,7 +687,8 @@ pc_pic_ending = '.png'
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_h'] = fig
             fig = myplots.h_plot(**in_dict)
-            h_pic_name_arr = [h_pic_name + '_' + letter + h_pic_ending]
+            h_pic_name_arr = [h_pic_name + '_' + letter +
+                              '_' +  str(h_obstimes[0]).zfill(2) + h_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,h_pic_name_arr,[fig])
 
@@ -677,11 +702,11 @@ pc_pic_ending = '.png'
                 myplots.saving_fig(pics_dir,s_pic_name_arr,[fig])
 
         if is_pc or num == 8:
-            in_dict = dict(pc_in.items() + gen_in.items() + dir_in.items() + fun_in.items() + [('n_l',n_l),('date',date)])
+            in_dict = dict(pc_in.items() + gen_in.items() + dir_in.items() + fun_in.items() + [('nl',nl),('date',date)])
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_pc'] = fig
             fig = myplots.pc_plot(**in_dict)
-            pc_pic_name_arr = [pc_pic_name + '_' + letter + '_' + str(n_l).zfill(2) +  pc_pic_ending]
+            pc_pic_name_arr = [pc_pic_name + '_' + letter + '_' + str(nl).zfill(2) +  pc_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,pc_pic_name_arr,[fig])
                 

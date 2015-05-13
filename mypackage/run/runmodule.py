@@ -6,7 +6,7 @@ import os			# Operating system (os.chdir, os.path)
 import exceptions  		# Raising exception (raise exceptions.RuntimeError)
 import shlex      		# Structure system commands(shlex.split) 
 import string     		# Load alphabet (string.alphabet())
-
+import time       		# Timing the execution (time.time(), time.clock())
 
 #############################################################
 #                  REPLACE STRING
@@ -109,7 +109,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
 
     if errout:
         if(proc.returncode):
-            raise exceptions.RuntimeError, "Problems in " + name
+            raise exceptions.RuntimeError, "Problems in " + str(name)
     
 
 
@@ -195,9 +195,10 @@ def compilequick( vtk_var = 1, omp_var = 1):
 #############################################################
 #               MATLAB CALL
 #############################################################
-def matlab_call( mfile_name ):
+def matlab_call( mfile_name , matlab_dir):
     "This function invokes Matlab to execute mfile_name"
     # Should be called in Matlab_Directory!
+    os.chdir(matlab_dir)
     if os.path.isfile(mfile_name):
         args = shlex.split('matlab -nodisplay -nojvm < ' + mfile_name)
         process_matlab = subprocess.Popen(args)
@@ -301,4 +302,5 @@ def make_file_dir_names(model_name):
 
     
 
-print('\n\nFinished runmodule.\n')
+print('\n Done with module : runmodule.py.')
+print(time.asctime( time.localtime( time.time())))

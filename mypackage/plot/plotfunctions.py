@@ -1,4 +1,8 @@
 #!/usr/bin/python
+
+# Paths
+python_dir = '/home/jk125262/PythonDir_Cluster'
+
 # Operating system commands
 import os
 from os import path
@@ -38,6 +42,8 @@ def my_vtk_to_numpy(fdir,fname,varname):
     reader.Update()
     grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
     grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
+    # Check if scalar variable is in vtk-file
+    is_scalar_var_in_file(varname,fname,fdir)
     #Reshape array to grid geometry
     if grid_bounds[0] == 0.0:   # CELLS
         vtk_array = reader.GetOutput().GetCellData().GetArray(0) # 0: Scalar 
@@ -282,24 +288,25 @@ def get_num_timesteps(fname, path, num_mons):
     n = len(arr)/num_mons -1
     return n
 
-def is_scalar_var_in_file(var, fname, path, raise_io_error = 1):
+def is_scalar_var_in_file(var, fname, path, raise_io_error = 1, raise_var_error = 1):
     """
-    Checks the existence of the file
-    and whether var is a variable
-    inside the file.
+    Checks the existence of the file and whether var is a variable
+    inside the file. Output: 1 if it is inside, 0 if it is not.
     """
     os.chdir(path)
 
+    # Check existence of file.
     try:
         f = open(fname,'r')
     except IOError:
         if raise_io_error:
+            os.chdir(python_dir)
             print('\n' + path + '\n')
             raise
         else:
             return 0
         
-
+    # Check if variable is in file.
     for line in f:
         if line.find('SCALARS ' + var) > -1:
             return 1
@@ -309,7 +316,12 @@ def is_scalar_var_in_file(var, fname, path, raise_io_error = 1):
             return 1
         elif line.find('SCALARS    ' + var) > -1:
             return 1
-    return 0
+    if raise_var_error:
+        os.chdir(python_dir)
+        raise exceptions.RuntimeError, var + ' not in ' + fname \
+            + '\n Dir: ' + path
+    else:
+        return 0
 
 
 def get_cbar_high(var,m_kz_std_high,m_cbar_kz_high,m_cbar_kz_res_high,m_cbar_cor_high):
@@ -351,7 +363,7 @@ def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low
     
     return low
 
-def m_input_check(n_f,m_variables_names, input_file_names,
+def m_input_check(n_f, input_file_names,
                   assim_variables_dir,
                   samples_out_dir, varnames, m_first, m_n_rows, m_n_cols,
                   m_diff, nrobs_int, m_upper_space):

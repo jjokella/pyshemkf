@@ -90,6 +90,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            stddev_dir,assim_variables_name,model_name,m_first,m_cbar_kz_low,m_cbar_kz_high,
            m_cbar_kz_res_low, m_cbar_kz_res_high,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
+           m_single_fig_title,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            resid_dirs, stddev_dirs,
            m_cmaps,fig_m = 0 ):
@@ -116,7 +117,6 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                     for i in range(n_fnames)]
     
     param_inserts =  pltfct.m_input_check(n_fnames, # Input check
-                                       varnames,
                                        infile_stems,
                                        assim_variables_dir,
                                        run_output_dir + 'samples_output',
@@ -234,7 +234,9 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                                     origin='lower',
                                     extent=[low_x,high_x,low_y,high_y])
 
-        ax_grid[i_subplt].set_title('Observation ' + str(i_obs).zfill(2)) #Add plot title
+        if not m_single_fig_title: # Set default for m_single_fig_title
+            m_single_fig_title = 'Observation '
+        ax_grid[i_subplt].set_title(m_single_fig_title + str(i_obs).zfill(2)) #Add plot title
         
         if i_subplt in range(n_fnames): # Add Colorbar for every variable
             cb_ax = fig_m.add_subplot(1,25,i_subplt)
@@ -260,6 +262,7 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
            f_ax_pos,f_x_variable,run_output_dir,f_ax_legend_cols,mons_file_dir,corr_dir,
            stddev_dir,true_output_dir,resid_dir,num_mons,corr_dirs,f_plot_x_max,
            figure_size_x,mons_inds,f_ax_x_label,model_name,f_ax_legend_labels,
+           f_force_y_range,
            assim_variables_name,f_fig_title,f_fig_title_font,
            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            fig_f = 0):
@@ -272,21 +275,31 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
         # Insert figure title
         plt.suptitle(f_fig_title, y = 0.97, fontsize=f_fig_title_font)
 
-    f_dirs = [resid_dir,stddev_dir]
-    f_fnames = [resid_name,stddev_name]
+    f_dirs = [resid_dir,stddev_dir,resid_dir,resid_dir]
+    f_fnames = [resid_name,stddev_name,resid_name,resid_name]
     is_ax_exists = 0
+    ax_f = [0 for i in range(4)]
 
-    for i in range(2):
+    for i in range(4):
         if f_res_std[i]:
 
             # Data input
             data_x = pltfct.my_vtk_to_numpy(f_dirs[i],
-                                         f_fnames[i],
-                                         f_x_variable)
-            data_y = pltfct.my_vtk_to_numpy(f_dirs[i],
-                                         f_fnames[i],
-                                         f_y_vars_mean[i])
-            
+                                            f_fnames[i],
+                                            f_x_variable)
+            if i in range(3):
+                data_y = pltfct.my_vtk_to_numpy(f_dirs[i],
+                                                f_fnames[i],
+                                                f_y_vars_mean[i])
+            else:
+                resids = pltfct.my_vtk_to_numpy(f_dirs[0],
+                                                f_fnames[0],
+                                                f_y_vars_mean[0])
+                stddevs = pltfct.my_vtk_to_numpy(f_dirs[1],
+                                                 f_fnames[1],
+                                                 f_y_vars_mean[1])
+                data_y = np.sqrt(resids**2 + stddevs**2)
+
             #Properties of read arrays
             len_arrays =len(data_x)
             min_value_x=min(data_x)[0] # 1-element array to float
@@ -295,57 +308,67 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
             max_value_y=max(data_y)[0]
 
             #Generate axis
-            if is_ax_exists:
-                ax_f = ax_f.twinx()
+            if is_ax_exists == 1:
+                ax_f[i] = ax_f[0].twinx()
+            elif is_ax_exists == 2:
+                ax_f[i] = ax_f[0].twinx()
+                ax_f[i].spines['left'].set_position(('axes',-0.04)) # No label overlap
+                ax_f[i].set_frame_on(True)
+                ax_f[i].patch.set_visible(False)
+                ax_f[i].yaxis.set_label_position('left')
+            elif is_ax_exists == 3:
+                ax_f[i] = ax_f[0].twinx()
+                ax_f[i].spines['left'].set_position(('axes',-0.08)) # No label overlap
+                ax_f[i].set_frame_on(True)
+                ax_f[i].patch.set_visible(False)
+                ax_f[i].yaxis.set_label_position('left')
             else:
-                ax_f = fig_f.add_subplot(1,2,i)
-            is_ax_exists = 1
-            ax_f.set_position(f_ax_pos)
-            ax_f.set_title('')
-            ax_f.set_xlabel(f_ax_x_label)
-            ax_f.set_ylabel(f_ax_y_labels[i])
-            ax_f.set_xlim(min(f_plot_x_min,min_value_x),
-                          max(f_plot_x_max,max_value_x))
-            ax_f.set_ylim(min(f_plot_y_min[i],min_value_y),
-                          max(f_plot_y_max[i],max_value_y))
-            
+                ax_f[0] = fig_f.add_subplot(1,2,i)
+            is_ax_exists = is_ax_exists + 1
+            ax_f[i].set_position(f_ax_pos)
+            ax_f[i].set_title('')
+            ax_f[i].set_xlabel(f_ax_x_label)
+            ax_f[i].set_ylabel(f_ax_y_labels[i])
+
             #Generate plot
-            ax_f.plot(data_x,
-                      data_y,
-                      color=f_line_colors[i],
-                      linestyle='-',
-                      linewidth=2.0,
-                      marker='o',
-                      markerfacecolor='black',
-                      markeredgecolor='black',
-                      markersize=f_markersize)
+            ax_f[i].plot(data_x,
+                         data_y,
+                         color=f_line_colors[i],
+                         linestyle='-',
+                         linewidth=2.0,
+                         marker='o',
+                         markerfacecolor='black',
+                         markeredgecolor='black',
+                         markersize=f_markersize)
                                        #label='Mean')
+
+            ax_f[i].set_xlim(min(f_plot_x_min,min_value_x),
+                             max(f_plot_x_max,max_value_x))
+            ax_f[i].set_ylim(f_plot_y_min[i] if f_force_y_range else\
+                                 min(f_plot_y_min[i],min_value_y),
+                             f_plot_y_max[i] if f_force_y_range else\
+                                 max(f_plot_y_max[i],max_value_y))
+            # Do zero again, because of twin, probably
+            ax_f[0].set_ylim(f_plot_y_min[0] if f_force_y_range else\
+                                 min(f_plot_y_min[0],min_value_y),
+                             f_plot_y_max[0] if f_force_y_range else\
+                                 max(f_plot_y_max[0],max_value_y))
+
             for f_y_var_ens in f_y_variables_ens[i]:
                 data_y = pltfct.my_vtk_to_numpy(f_dirs[i],
-                                                   f_fnames[i],
-                                                   f_y_var_ens)
+                                                f_fnames[i],
+                                                f_y_var_ens)
                 #Generate plot
-                ax_f.plot(data_x,
-                          data_y,
-                          color='grey',
-                          linestyle='-',
-                          linewidth=1.3,
-                          marker='',
-                          markerfacecolor='grey',
-                          markeredgecolor='grey',
-                          markersize=f_markersize)
+                ax_f[i].plot(data_x,
+                             data_y,
+                             color='grey',
+                             linestyle='-',
+                             linewidth=1.3,
+                             marker='',
+                             markerfacecolor='grey',
+                             markeredgecolor='grey',
+                             markersize=f_markersize)
                                                           #label='Ensemble')
-            #Set axis ranges
-            # plt.axis([min(f_plot_x_min,min_value_x),
-            #           max(f_plot_x_max,max_value_x),
-            #           min(f_plot_y_min[i],min_value_y),
-            #           max(f_plot_y_max[i],max_value_y)])
-
-            # for tick in ax_f.xaxis.get_major_ticks():
-            #     tick.label.set_fontsize(15)
-            # for tick in ax_f.yaxis.get_major_ticks():
-            #     tick.label.set_fontsize(15)
-
             #Set axis legend
             plt.legend(f_ax_legend_labels[i],
                        loc=f_ax_legend_loc[i],
@@ -1148,6 +1171,7 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
            h_hist_color, h_hist_normed, h_hist_type,
            h_cmap, h_cmap_kz, h_cmap_conc,
            h_n_cols,h_n_rows,
+           h_data_bins,h_y_max,
            h_im_left,h_im_up, h_grid_factor,
            figure_size_x, figure_size_y, fig_h = None):
 
@@ -1212,10 +1236,15 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
             data_var = sp.cov(data)
             
             data_dist = np.max(np.fabs(data-data_mean))
-            
-            data_bins = np.linspace(data_mean-h_width_factors[0]*data_dist,
-                                    data_mean+h_width_factors[1]*data_dist,
-                                    h_num_bins)
+
+            if len(h_data_bins): # Data bins by hand
+                data_bins = np.linspace(h_data_bins[0],
+                                        h_data_bins[1],
+                                        h_num_bins)
+            else:               # Data bins from data mean
+                data_bins = np.linspace(data_mean-h_width_factors[0]*data_dist,
+                                        data_mean+h_width_factors[1]*data_dist,
+                                        h_num_bins)
 
         ax_h_grid[i_subplt].set_title(h_ax_title + ' ' + str(h_obstimes[i_subplt]))
         hist_vals,hist_bins,hist_patches = ax_h_grid[i_subplt].hist(data, # Histogram
@@ -1223,6 +1252,13 @@ def h_plot(num_timesteps,nrobs_int,mons_inds,
                                                                     normed = h_hist_normed,
                                                                     histtype = h_hist_type,
                                                                     rwidth = 0.95)
+
+        # Constrain y-values
+        if h_y_max:
+            ax_h_grid[i_subplt].axis([data_bins[0],
+                                      data_bins[-1],
+                                      0,
+                                      h_y_max])
         
         hist_cmap = cm.get_cmap(h_cmap) # Load cmap instance (name is input)
         h_norm = colors.normalize(h_cmap_kz[0]
@@ -1357,8 +1393,9 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
             mons_file_dir,corr_dir,stddev_dir,
             resid_dir,num_mons,letters,model_name,assim_variables_name,
             model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
-            n_l,date,
+            nl,date,
             pc_output,pc_is_show_ens,pc_num_ens,pc_title_text,pc_x_min,pc_x_max,
+            pc_nl,pc_dates,pc_letters,
             pc_y_min,pc_y_max,pc_legend_loc,pc_legend_bbox_anchor,pc_colored,
             pc_n_per_color,pc_marker_colors,pc_line_colors,
             figure_size_x, figure_size_y, fig_pc = None):
@@ -1371,20 +1408,32 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
         # Insert figure title
         plt.suptitle('Compare plot', y = 0.97, fontsize=20)
 
+    if pc_nl:
+        nl = pc_nl
+    if pc_dates and pc_letters:
+        if len(pc_dates) == len(pc_letters) and len(pc_dates) == pc_nl:
+            resid_dirs = [model_output_dir + pc_dates[i] + "/"
+                          + pc_dates[i] + "_" + pc_letters[i] + "/"
+                          + "enkf_output" for i in range(len(pc_dates))]
+            letters = pc_letters
+        else:
+            os.chdir(python_dir)
+            raise exceptions.RuntimeError, "pc_dates, pc_letters or pc_nl not as wanted"
+        
 
-    n_l_f = float(n_l)
-    getting_darker = [(float(i)/n_l_f , float(i)/n_l_f , float(i)/n_l_f)  for i in range(n_l)]
+    nl_f = float(nl)            # Color themes
+    getting_darker = [(float(i)/nl_f , float(i)/nl_f , float(i)/nl_f)  for i in range(nl)]
     getting_darker.reverse()
     
-    changing_black_white = [(0,0,0) if i%2 else (0.5,0.5,0.5) for i in range(n_l)]
+    changing_black_white = [(0,0,0) if i%2 else (0.5,0.5,0.5) for i in range(nl)]
     
     if pc_colored is None:
-        pc_colored = [1 for i in range(n_l)] # False: Grey instead of color, Default: all true
+        pc_colored = [1 for i in range(nl)] # False: Grey instead of color, Default: all true
     if pc_marker_colors is None:
         pc_marker_colors = getting_darker # Marker colors
     if pc_line_colors is None:
         pc_line_colors = [color_arr[i/pc_n_per_color] if pc_colored[i] else 'grey'
-                       for i in range(n_l)] # Line colors
+                       for i in range(nl)] # Line colors
 
 
     if pc_output == 'res':         # Title, filename, variable depending on 'res'/'std'
@@ -1420,7 +1469,7 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
     ax.set_ylabel('Residuals')
 
 
-    data_x=[]             # 
+    data_x=[]         
     data_y=[]
     plots=[]
     plot_labels=[]
@@ -1445,7 +1494,9 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
                              markeredgecolor=pc_marker_colors[i],
                              markersize=6))
                                #label='Mean')
-        plot_labels.append('Residuals ' + letter)
+        plot_labels.append('Residuals ' + letter
+                           if not pc_nl else
+                           'Res ' + pc_dates[i] + '_' + letter )
 
 
         if pc_is_show_ens:         # Ensemble of residuals
@@ -1471,7 +1522,7 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
                               handlelength=2,
                               numpoints=2,
                               handletextpad=0.5,
-                              ncol=6,
+                              ncol=3,
                               prop={'size':16})
 
 
@@ -1484,7 +1535,7 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
 ########################################################################################
 ########################################################################################
 ########################################################################################## 
-def set_paths(output_files_dir, model_name, model_name_big, date, letters, letter_true, n_l):
+def set_paths(output_files_dir, model_name, model_name_big, date, letters, letter_true, nl):
 
     # Output path for the model
     model_output_dir = output_files_dir + model_name + "_output/"
@@ -1496,29 +1547,29 @@ def set_paths(output_files_dir, model_name, model_name_big, date, letters, lette
     run_output_dir = date_output_dir + date + "_" + letters[0] + "/"
     run_output_dirs = [date_output_dir 
                        + date + "_" + letters[i] + "/"
-                       for i in range(n_l)]
+                       for i in range(nl)]
 
     # Output path for model, date and true run (specified be letter for true)
     true_output_dir = date_output_dir + date + "_" + letter_true + "/"
     
     #Assim variables file/path
     assim_variables_dir= run_output_dir + 'enkf_output'
-    assim_variables_dirs= [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
+    assim_variables_dirs= [run_output_dirs[i] + 'enkf_output' for i in range(nl)]
     assim_variables_name='assim_variables_E1_' #'residual' 'stddev'
 
     #Assim variables file/path
     corr_dir= run_output_dir + 'enkf_output'
-    corr_dirs= [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
+    corr_dirs= [run_output_dirs[i] + 'enkf_output' for i in range(nl)]
     corr_name='correlation_' #'residual' 'stddev'
 
     #Residuals file/path
     resid_dir= run_output_dir + 'enkf_output'
-    resid_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
+    resid_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(nl)]
     resid_name='residual_E1.vtk'
 
     #Stddev file/path
     stddev_dir= run_output_dir + 'enkf_output'
-    stddev_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
+    stddev_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(nl)]
     stddev_name='stddev_E1.vtk'
 
     #Monitor file/path
@@ -1527,7 +1578,7 @@ def set_paths(output_files_dir, model_name, model_name_big, date, letters, lette
 
     #Assimstp file/path
     assimstp_dir = run_output_dir + 'enkf_output'
-    assimstp_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(n_l)]
+    assimstp_dirs = [run_output_dirs[i] + 'enkf_output' for i in range(nl)]
     assimstp_name = 'assimstp_E1_1'
 
     dir_in={'model_output_dir':model_output_dir,
@@ -1593,6 +1644,7 @@ def saving_fig(save_pics_dir,save_pics_names,figs):
             figs[i].savefig(save_pics_names[i],
                         facecolor=figs[i].get_facecolor(), # Keep background color in png
                         edgecolor='none')
+            print('\nSaved ' + save_pics_names[i] + ' in ' + save_pics_dir)
     else:
         raise exceptions.RuntimeError, 'save_pics_names and figs must be of equal length.'
 

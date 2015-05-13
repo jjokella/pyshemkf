@@ -114,7 +114,6 @@ is_show_text = 0
         save_png_dir = "/home/jk125262/shematOutputDir_Cluster/"\
             + model_name +"_output/"\
             + date + "/" \
-            + date + "_" + letter_true + "/" \
             + "pics"            # Default saving directory
 
     image_width=0.12*grid_factor # image size according to factor
