@@ -90,7 +90,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            stddev_dir,assim_variables_name,model_name,m_first,m_cbar_kz_low,m_cbar_kz_high,
            m_cbar_kz_res_low, m_cbar_kz_res_high,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
-           m_single_fig_title,
+           m_single_fig_title,m_cbar_width,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            resid_dirs, stddev_dirs,
            m_cmaps,fig_m = 0 ):
@@ -243,7 +243,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
             cbar_pad = m_cbar_left_pad + i_subplt*m_cbar_space
             cb_ax.set_position([im_left+m_n_cols*(0.12*m_grid_factor)+(m_n_cols-1)*(0.01*m_grid_factor)+cbar_pad,
                                 1.0-im_up-m_n_rows*(0.24*m_grid_factor)-(m_n_rows-1)*(0.04*m_grid_factor),
-                                0.01,
+                                m_cbar_width,
                                 m_n_rows*(0.24*m_grid_factor) + (m_n_rows-1.0)*(0.04*m_grid_factor)])
             cb_ax.set_title(m_cbar_titles[i_subplt])
             mpl.colorbar.Colorbar(cb_ax, im)
@@ -262,7 +262,7 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
            f_ax_pos,f_x_variable,run_output_dir,f_ax_legend_cols,mons_file_dir,corr_dir,
            stddev_dir,true_output_dir,resid_dir,num_mons,corr_dirs,f_plot_x_max,
            figure_size_x,mons_inds,f_ax_x_label,model_name,f_ax_legend_labels,
-           f_force_y_range,
+           f_force_y_range,f_ens_alpha,
            assim_variables_name,f_fig_title,f_fig_title_font,
            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            fig_f = 0):
@@ -365,6 +365,7 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
                              linestyle='-',
                              linewidth=1.3,
                              marker='',
+                             alpha = f_ens_alpha,
                              markerfacecolor='grey',
                              markeredgecolor='grey',
                              markersize=f_markersize)
@@ -427,7 +428,7 @@ def f2_plot(f2_y_variables,
             f2_assimstp_marker_size,f2_corr_y_variables,f2_array_marker_size,
             f2_corr_ref_cells,f2_assimstp_letters,f2_num_arrays,f2_y_variables_mon,
             f2_befaft,f2_is_show_arrows,f2_num_show_mons,f2_ax_kz_legend_or,
-            f2_show_assimstp,
+            f2_show_assimstp, f2_kz_marker_size,
             f2_i_want,f2_av_letters,f2_show_mons,f2_x_variable,f2_ax_kz_legend_cols,
             f2_mon_num_assimstp,f2_j_want,f2_num_variables_mon,f2_ax_legend_or,
             f2_corr_letters,f2_corr_ref_var,f2_ax_x_label,f2_plot_y_min,f2_assimstp_var,
@@ -658,16 +659,10 @@ def f2_plot(f2_y_variables,
             ax_f_1 = pltfct.make_arrows(ax_f_1,f2_num_arrays,f2_befaft,nrobs_int,arr_xvars,arr_yvars,f2_color_arr)
 
         #Set axis ranges
-        if f2_is_enforce_axis_input:
-            plt.axis([f2_plot_x_min,
-                      f2_plot_x_max,
-                      f2_plot_y_min,
-                      f2_plot_y_max])
-        else:
-            plt.axis([min(f2_plot_x_min,min_value_x),
-                      max(f2_plot_x_max,max_value_x),
-                      min(f2_plot_y_min,min(min_value_y)),
-                      max(f2_plot_y_max,max(max_value_y))])
+        plt.axis([min(f2_plot_x_min,min_value_x),
+                  max(f2_plot_x_max,max_value_x),
+                  min(f2_plot_y_min,min(min_value_y)),
+                  max(f2_plot_y_max,max(max_value_y))])
 
         #Conc legend
         conc_legend_labels = [f2_ax_legend_labels[i] for i in f2_conc_inds]
@@ -777,7 +772,7 @@ def f2_plot(f2_y_variables,
                         marker=f2_markerstyle_array[i],
                         markerfacecolor=f2_color_arr[i],
                         markeredgecolor=f2_color_arr[i],
-                        markersize=9)
+                        markersize=f2_kz_marker_size)
         #kz legend
         kz_legend_labels = [f2_ax_legend_labels[i] for i in f2_kz_inds]
         #Set y-axis ranges for twinx-axis
@@ -924,6 +919,9 @@ def f2_plot(f2_y_variables,
         if f2_is_show_arrows:
             ax_f_9 = pltfct.make_arrows(ax_f_9,f2_num_arrays,f2_befaft,nrobs_int,
                                      arr_xvars,arr_yvars,f2_color_arr)
+
+    if f2_is_enforce_axis_input: # X axis
+        plt.xlim([f2_plot_x_min,f2_plot_x_max])
         
     return fig_f2
 
@@ -1288,8 +1286,10 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
            resid_dir,num_mons,letters,model_name,assim_variables_name,
            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            s_ax_pos,s_ax_title,s_ax_xlabel,s_ax_ylabel,
-           s_source_file_names, s_variable_names, s_num_input_data,
+           s_variable_names, s_num_input_data,
            s_width_factors,s_is_text,s_num_bins,
+           s_ax_enforce, s_ax_minmax, s_file_types, s_sc_cell_vars,
+           s_befaft,s_obstime,
            s_colors, s_linewidths, s_size,
            s_y_ticks, s_y_ticklabels, s_x_ticks, s_x_ticklabels,
            figure_size_x, figure_size_y, fig_s = None):
@@ -1308,6 +1308,33 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
     ax_s.set_xlabel(s_ax_xlabel)
     ax_s.set_ylabel(s_ax_ylabel)
 
+    # Source file names
+    s_source_file_names = ['single_cell_E1_'
+                           + str(s_sc_cell_vars[0][0]).zfill(4) + '_'
+                           + str(s_sc_cell_vars[0][1]).zfill(4) + '_'
+                           + str(s_sc_cell_vars[0][2]).zfill(4) + '_'
+                           + str(s_sc_cell_vars[0][3]).zfill(4) + '_'
+                           + s_befaft[0] + '_'
+                           + str(s_obstime[0]).zfill(4) + '.plt'
+                           if s_file_types[0] == 'sc' else
+                           'assim_variables_E1_'
+                           + s_befaft[0] + '_'
+                           + str(s_obstime[0]).zfill(4)
+                           + '.vtk'
+                           ,
+                           'single_cell_E1_'
+                           + str(s_sc_cell_vars[1][0]).zfill(4) + '_'
+                           + str(s_sc_cell_vars[1][1]).zfill(4) + '_'
+                           + str(s_sc_cell_vars[1][2]).zfill(4) + '_'
+                           + str(s_sc_cell_vars[1][3]).zfill(4) + '_'
+                           + s_befaft[1] + '_'
+                           + str(s_obstime[1]).zfill(4) + '.plt'
+                           if s_file_types[1] == 'sc' else
+                           'assim_variables_E1_'
+                           + s_befaft[1] + '_'
+                           + str(s_obstime[1]).zfill(4)
+                           + '.vtk',
+                           ]
 
     # Get data
     data = [None,None]
@@ -1378,7 +1405,10 @@ def s_plot(num_timesteps,nrobs_int,mons_inds,
     # ax_s.xaxis.set_ticks(s_x_ticks)
     # ax_s.xaxis.set_ticklabels(s_x_ticklabels)
 
-        
+    if s_ax_enforce:
+        ax_s.set_xlim(s_ax_minmax[0],s_ax_minmax[1])
+        ax_s.set_ylim(s_ax_minmax[2],s_ax_minmax[3])
+    
     return fig_s
 
 ##########################################################################################

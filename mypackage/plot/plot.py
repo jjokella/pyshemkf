@@ -64,6 +64,7 @@ m_im_left =0.045,
 m_im_up =0.10, # Geometry of plots
 m_cbar_left_pad = 0.01,
 m_cbar_space = 0.06,
+m_cbar_width = 0.01,
 m_cbar_titles = ['Mean','Std','Res'],
 m_num_cbar = 15, # Geometry of Cbar
 m_is_show_mons = 0,
@@ -88,6 +89,7 @@ f_plot_x_max = 10,
 f_plot_y_min = [0.2,0.2,0.2,0.2],
 f_plot_y_max = [1.0,1.0,1.0,1.0], # Axis Ranges
 f_markersize = 8,       # Marker size
+f_ens_alpha = 0.5,
 f_ax_x_label = 'obstime',
 f_ax_y_labels = ['Residuals', 'Standard Deviation','Mean Residuals','Stats Resid'],# Axis labels
 f_line_colors = ['black','red','green','blue'],        # Line colors
@@ -110,6 +112,7 @@ f2_i = None,               # [10,10,22,22,10,10,22,22,...] len = f2_num_arrays
 f2_j = None,               # [16,16,...] len = f2_num_arrays
 f2_befaft = None,               # ['bef','aft','bef','aft',...] len = f2_num_arrays
 f2_array_marker_size = 9,
+f2_kz_marker_size = 9,
 f2_color_arr = myplots.color_arr,
 #
 f2_corr_num_arrays  = 0,
@@ -246,8 +249,8 @@ h_ax_xlabel = 'x',
 h_ax_ylabel = 'y',
 h_pic_name = 'plot_h',
 h_pic_ending = '.png',
-h_data_bins = [],
-h_y_max = None,
+h_data_bins = [],               # f.e. [-11,-9], min and max xvalue
+h_y_max = None,                 # max yvalue for all plots
 h_width_factors = [1,1],             # left, right
 h_num_bins = 20,
 h_hist_color = 'black',
@@ -263,7 +266,10 @@ h_im_left = 0.045,
 h_im_up = 0.13,
 #
 #
-s_source_file_names = ['assim_variables_E1_aft_0009.vtk','assim_variables_E1_aft_0009.vtk'],
+s_file_types = ['av','av'],     # 'av', 'sc', 'log'
+s_sc_cell_vars = [[22,16,1,4],[22,16,1,4]],
+s_befaft = ['aft','aft'],
+s_obstime = [1,1],
 s_variable_names = ['kz_mean','kz_mean'],
 s_num_input_data = 500,
 s_ax_pos = [0.1,0.1,0.8,0.8],
@@ -273,6 +279,8 @@ s_ax_ylabel = 'y',
 s_pic_name = 'plot_s',
 s_pic_ending = '.png',
 s_width_factors = [1,1,1,1],     # x_left, x_right, y_down, y_up
+s_ax_enforce = 0,
+s_ax_minmax = [0,1,0,1],          # x_left, x_right, y_down, y_up
 s_num_bins = 30,
 s_is_text = 0,
 s_colors = ['black'], # [[(i/31)/40.0,(i/31)/40.0,(i/31)/40.0] for i in range(31*31)]
@@ -364,6 +372,7 @@ pc_pic_ending = '.png'
           'im_up' :m_im_up,
           'm_cbar_left_pad' : m_cbar_left_pad,
           'm_cbar_space' : m_cbar_space,
+          'm_cbar_width':m_cbar_width,
           'm_num_cbar' : m_num_cbar,
           'm_cbar_titles': m_cbar_titles,
           'm_is_show_mons' : m_is_show_mons,
@@ -396,7 +405,8 @@ pc_pic_ending = '.png'
           'f_plot_x_max' : f_plot_x_max,
           'f_plot_y_min' : f_plot_y_min,
           'f_plot_y_max' : f_plot_y_max,
-          'f_markersize' : f_markersize, 
+          'f_markersize' : f_markersize,
+          'f_ens_alpha' : f_ens_alpha,
           'f_ax_x_label' : f_ax_x_label,
           'f_ax_y_labels' : f_ax_y_labels,
           'f_line_colors' : f_line_colors, 
@@ -439,7 +449,8 @@ pc_pic_ending = '.png'
            'f2_i_want' : f2_i,      
            'f2_j_want' : f2_j,      
            'f2_befaft' : f2_befaft, 
-           'f2_array_marker_size' : f2_array_marker_size, 
+           'f2_array_marker_size' : f2_array_marker_size,
+           'f2_kz_marker_size' : f2_kz_marker_size,
            'f2_color_arr' : f2_color_arr,
            'f2_corr_num_arrays' : f2_corr_num_arrays, 
            'f2_corr_letters' : f2_corr_letters, 
@@ -589,7 +600,10 @@ pc_pic_ending = '.png'
           'h_im_left':h_im_left,
           'h_grid_factor':h_grid_factor,
           }
-    s_in={'s_source_file_names': s_source_file_names,
+    s_in={'s_file_types':s_file_types,
+          's_sc_cell_vars':s_sc_cell_vars,
+          's_befaft':s_befaft,
+          's_obstime': s_obstime,
           's_variable_names': s_variable_names,
           's_num_input_data':s_num_input_data,
           's_ax_title': s_ax_title,
@@ -597,6 +611,8 @@ pc_pic_ending = '.png'
           's_ax_xlabel':s_ax_xlabel,
           's_ax_ylabel':s_ax_ylabel,
           's_width_factors':s_width_factors,
+          's_ax_enforce':s_ax_enforce,
+          's_ax_minmax':s_ax_minmax,
           's_num_bins':s_num_bins,
           's_is_text':s_is_text,
           's_colors':s_colors,
@@ -641,11 +657,21 @@ pc_pic_ending = '.png'
                               + str(m_first).zfill(2) + '_'
                               + str(m_diff).zfill(2) + '_cor' +  m_pic_ending
                               if 'cor' in m_infiles else
-                              m_pic_name + '_'
+                              (m_pic_name + '_' # Different names depending on input vars
                               + letter + '_'
                               + str(m_first).zfill(2) + '_'
-                              + str(m_diff).zfill(2) + m_pic_ending]
-            
+                              + str(m_diff).zfill(2) + '_init' +  m_pic_ending
+                               if 'init' in m_infiles else
+                               (m_pic_name + '_' # Different names depending on input vars
+                                + letter + '_'
+                                + str(m_first).zfill(2) + '_'
+                                + str(m_diff).zfill(2) + '_end' +  m_pic_ending
+                                if 'end' in m_infiles else
+                                m_pic_name + '_'
+                                + letter + '_'
+                                + str(m_first).zfill(2) + '_'
+                                + str(m_diff).zfill(2) + '_av' + m_pic_ending))]
+                              
             if is_save:
                 myplots.saving_fig(pics_dir,m_pic_name_arr,[fig])
 
@@ -653,7 +679,20 @@ pc_pic_ending = '.png'
             in_dict = dict(f_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             # in_dict['fig_f'] = fig
             fig = myplots.f_plot(**in_dict)
-            f_pic_name_arr = [f_pic_name + '_' + letter + f_pic_ending]
+            f_pic_name_arr = [f_pic_name + '_' + letter + '_'
+                              + str(f_res_std[0]) + '_'
+                              + str(f_res_std[1]) + '_'
+                              + str(f_res_std[2]) + '_'
+                              + str(f_res_std[3]) + '_'
+                              + 'ens'
+                              + f_pic_ending
+                              if len(f_y_variables_ens[0]) else
+                              f_pic_name + '_' + letter + '_'
+                              + str(f_res_std[0]) + '_'
+                              + str(f_res_std[1]) + '_'
+                              + str(f_res_std[2]) + '_'
+                              + str(f_res_std[3])
+                              + f_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,f_pic_name_arr,[fig])
 
@@ -661,7 +700,12 @@ pc_pic_ending = '.png'
             in_dict = dict(f2_in.items() + gen_in.items() + dir_in.items() + fun_in.items())
             # in_dict['fig_f2'] = fig
             fig = myplots.f2_plot(**in_dict)
-            f2_pic_name_arr = [f2_pic_name + '_' + letter + f2_pic_ending]
+            f2_pic_name_arr = [f2_pic_name + '_' + letter + '_'
+                               + str(f2_num_arrays) + '_'
+                               + str(f2_corr_num_arrays) + '_'
+                               + str(f2_mons_num_mons) + '_'
+                               + str(f2_assimstp_num_show) + '_'
+                               + f2_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,f2_pic_name_arr,[fig])
 
@@ -687,8 +731,18 @@ pc_pic_ending = '.png'
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_h'] = fig
             fig = myplots.h_plot(**in_dict)
-            h_pic_name_arr = [h_pic_name + '_' + letter +
-                              '_' +  str(h_obstimes[0]).zfill(2) + h_pic_ending]
+            h_pic_name_arr = [h_pic_name + '_' + letter
+                              + '_' + str(h_obstimes[0]).zfill(2)
+                              + '_' + str(h_obstimes[1]-h_obstimes[0])
+                              + '_' + h_file_type
+                              + '_' + str(h_sc_cell_vars[3])
+                              + h_pic_ending
+                              if len(h_obstimes) > 1 else
+                              h_pic_name + '_' + letter
+                              + '_' + str(h_obstimes[0]).zfill(2)
+                              + '_' + h_file_type
+                              + '_' + str(h_sc_cell_vars[3])
+                              + h_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,h_pic_name_arr,[fig])
 
