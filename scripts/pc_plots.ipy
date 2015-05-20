@@ -1,0 +1,12 @@
+dat = '2015_05_12'
+let = 'l'
+show = 0
+pc_lets =  ['l','m','n','o','p','q','r','s','t','u'] #['b','c','d','e','f','g','h','i','j','k']
+#
+# Residuals
+#
+p(is_pc = 1, letter = let, date = dat, pc_output = 'res', pc_nl = 10, pc_dates = [dat for i in range(10)], pc_letters = pc_lets, is_show = show)
+#
+# Standard Deviations
+#
+p(is_pc = 1, letter = let, date = dat, pc_output = 'std', pc_nl = 10, pc_dates = [dat for i in range(10)], pc_letters = pc_lets, is_show = show)

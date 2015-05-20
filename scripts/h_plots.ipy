@@ -1,0 +1,36 @@
+dat = '2015_05_12'
+let = 'l'
+show = 0
+sc_point = [22,16,1,4]
+#
+# Many plots av
+# 
+p(is_h = 1, letter = let, date = dat, h_obstimes = range(1,100,10), h_data_bins  = [-11,-9], h_num_bins = 100, h_cmap_kz = [-11,-9], h_cmap = 'jet', h_y_max = 5.0, is_show = show)                             
+#
+# Many plots sc
+# 
+p(is_h = 1, letter = let, date = dat, h_file_type = 'sc', h_sc_cell_vars = sc_point, h_obstimes = range(1,100,10), h_data_bins  = [-11,-8], h_num_bins = 100, h_cmap_kz = [-11,-9], h_cmap = 'jet', h_y_max = 2.0, is_show = show)
+#
+# Single plots av
+#
+for i in range(1,51,1):
+    p(is_h = 1, letter = let, date = dat, h_obstimes = range(i,100,100), h_n_cols = 1, h_n_rows = 1, h_data_bins  = [-11,-9], h_num_bins = 100, h_cmap_kz = [-11,-9], h_cmap = 'jet', h_y_max = 5.0, h_grid_factor = 4.5, h_im_up = 0.15, is_show = show)
+#
+# Single plots sc
+#
+for i in range(1,51,1):
+    p(is_h = 1, letter = let, date = dat, h_file_type = 'sc', h_sc_cell_vars = sc_point, h_obstimes = range(i,100,100), h_n_cols = 1, h_n_rows = 1, h_data_bins  = [-11,-8], h_num_bins = 100, h_cmap_kz = [-11,-9], h_cmap = 'jet', h_y_max = 2.0, h_grid_factor = 4.5, h_im_up = 0.15, is_show = show)
+# 
+#
+#
+#
+#
+# 
+# Many plots conc sc
+# 
+p(is_h = 1, letter = let, date = dat, h_file_type = 'sc', h_sc_cell_vars = [sc_point[0],sc_point[1],sc_point[2],3], h_variable_name = 'conc', h_obstimes = range(1,100,10), h_data_bins  = [0.0055,0.0083], h_num_bins = 200, h_cmap = 'jet', h_y_max = 10000.0, is_show = show)
+#
+# Single plots conc sc
+#
+for i in range(1,51,1):
+    p(is_h = 1, letter = let, date = dat, h_file_type = 'sc', h_sc_cell_vars = [sc_point[0],sc_point[1],sc_point[2],3], h_variable_name = 'conc', h_n_cols = 1, h_n_rows = 1, h_obstimes = range(i,100,100), h_data_bins  = [0.0055,0.0083], h_num_bins = 200, h_cmap_kz = [-11,-9], h_cmap = 'jet', h_grid_factor = 4.5, h_im_up = 0.15, h_y_max = 10000.0, is_show = show)
