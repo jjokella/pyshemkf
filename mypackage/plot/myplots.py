@@ -1438,8 +1438,8 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
         # Insert figure title
         plt.suptitle('Compare plot', y = 0.97, fontsize=20)
 
-    if pc_nl:
-        nl = pc_nl
+    if pc_nl:                   # Use pc_nl only for different dates
+        nl = pc_nl            
     if pc_dates and pc_letters:
         if len(pc_dates) == len(pc_letters) and len(pc_dates) == pc_nl:
             resid_dirs = [model_output_dir + pc_dates[i] + "/"

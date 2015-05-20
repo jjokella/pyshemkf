@@ -295,9 +295,9 @@ s_x_ticklabels = None,
 #
 # Use nl = Number letters, stepl = step between letters from above
 pc_output = 'res',                  # 'res' 'std'
-pc_nl = 0,
-pc_dates = None,
-pc_letters = None,
+pc_nl = 0,                          # ONLY FOR DIVERSE DATES
+pc_dates = None,                    # ONLY FOR DIVERSE DATES
+pc_letters = None,                  # ONLY FOR DIVERSE DATES
 pc_is_show_ens = 0,                 
 pc_num_ens = 20,
 pc_title_text = None,
@@ -733,7 +733,7 @@ pc_pic_ending = '.png'
             fig = myplots.h_plot(**in_dict)
             h_pic_name_arr = [h_pic_name + '_' + letter
                               + '_' + str(h_obstimes[0]).zfill(2)
-                              + '_' + str(h_obstimes[1]-h_obstimes[0])
+                              + '_' + str(h_obstimes[1]-h_obstimes[0]).zfill(2)
                               + '_' + h_file_type
                               + '_' + str(h_sc_cell_vars[3])
                               + h_pic_ending
@@ -751,7 +751,13 @@ pc_pic_ending = '.png'
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_s'] = fig
             fig = myplots.s_plot(**in_dict)
-            s_pic_name_arr = [s_pic_name + '_' + letter + s_pic_ending]
+            s_pic_name_arr = [s_pic_name + '_' + letter + '_'
+                              + str(s_obstime[0]).zfill(2) + '_'
+                              + s_file_types[0] + '_'
+                              + s_file_types[1] + '_'
+                              + str(s_sc_cell_vars[0][3]).zfill(2) + '_'
+                              + str(s_sc_cell_vars[1][3]).zfill(2)
+                              + s_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,s_pic_name_arr,[fig])
 
@@ -760,7 +766,15 @@ pc_pic_ending = '.png'
             if is_m or is_f or is_f2 or is_f3:
                 in_dict['fig_pc'] = fig
             fig = myplots.pc_plot(**in_dict)
-            pc_pic_name_arr = [pc_pic_name + '_' + letter + '_' + str(nl).zfill(2) +  pc_pic_ending]
+            pc_pic_name_arr = [pc_pic_name + '_' + letter + '_'
+                               + str(nl).zfill(2) + '_'
+                               + pc_output
+                               + pc_pic_ending
+                               if not pc_nl else
+                               pc_pic_name + '_' + pc_letters[0] + '_'
+                               + str(pc_nl).zfill(2) + '_'
+                               + pc_output 
+                               + pc_pic_ending]
             if is_save:
                 myplots.saving_fig(pics_dir,pc_pic_name_arr,[fig])
                 
