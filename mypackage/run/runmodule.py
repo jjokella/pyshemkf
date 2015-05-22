@@ -94,6 +94,9 @@ def get_let_num(num):
              alphabet[num] )    # Only one letter: Just take it from the alphabet
 
 
+#############################################################
+#     Run a script
+#############################################################
 def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
     os.chdir(path)
     if not outfile:

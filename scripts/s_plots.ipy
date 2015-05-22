@@ -1,5 +1,5 @@
-dat = '2015_05_12'
-let = 'l'
+dat = '2015_05_19'
+let = 'b'
 show = 0
 sc_points = [[22,16,1,4],[22,16,1,3]]
 #
@@ -7,4 +7,4 @@ sc_points = [[22,16,1,4],[22,16,1,3]]
 #
 for i in range(1,51,1):
     p(is_s = 1, letter = let, date = dat, s_file_types = ['sc','sc'], s_sc_cell_vars = sc_points, s_befaft = ['aft','aft'], s_obstime = [i,i], s_variable_names = ['kz','conc'], s_ax_enforce = 1, s_ax_minmax = [-11,-8,0.0045,0.0085], is_show = show)
-
+movie(input_name_test = 'plot_s_'+let+'_01_sc_sc_' + str(sc_points[0][3]).zfill(2)+ '_' + str(sc_points[1][3]).zfill(2)+'.png', input_names = 'plot_s_'+let+'_%02d_sc_sc_' + str(sc_points[0][3]).zfill(2)+ '_' + str(sc_points[1][3]).zfill(2)+'.png', output_name = 'plot_s_'+let+'_sc_sc_' + str(sc_points[0][3]).zfill(2)+ '_' + str(sc_points[1][3]).zfill(2)+'.mp4', model_name = mod_name, date = dat)    
