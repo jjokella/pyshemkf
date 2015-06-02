@@ -20,15 +20,19 @@ import gobject
 from mypackage.pp import calc
 
 
-def make_plot(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys,zs_rand,xy,privar,Qbb,zs_prior,estvar_prior,zs,zs_post,estvar_post,varss,ips,time_time,is_animate):
+def make_plot(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys,zs_rand,xy,privar,Qbb,Gss_prior,Gyy_prior,Gys_prior,zs_prior,estvar_prior,zs,zs_post,estvar_post,varss,ips,time_time,is_animate,is_kalman):
     #Calculate the matrices for all pilot points
-    # get_zsp_kalman(ip_last)
-    # jp,zsp,estvar,estvarp,xp,zp,zsp_post_j,Gss_post_j = calc.get_zsp_kalman(ip_last,dp,xs,ns,Gss_prior,zs_prior,Hy,R,zy,Gyy_prior,Gys_prior,Gssy)
-    jp, zsp, Gsspy, estvar, estvarp, xp, zp, zsp_johannes, Gsspy_johannes, zp_johannes = calc.get_zsp(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys)
-    # get_zsp(ip_last)
+
+    if is_kalman:
+        jp,zsp,estvar,estvarp,xp,zp,zsp_post_j,Gss_post_j = calc.get_zsp_kalman(ip_last,dp,xs,ns,Gss_prior,zs_prior,Hy,R,zy,Gyy_prior,Gys_prior,Gssy)
+        figtitle = 'Kalman'
+    else:
+        jp, zsp, Gsspy, estvar, estvarp, xp, zp, zsp_johannes, Gsspy_johannes, zp_johannes = calc.get_zsp(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys)
+        figtitle = 'Kriging'
 
     # Initializing figure and axes
     fig = plt.figure(figsize = [18,18])
+    plt.suptitle(figtitle)
     ax = fig.add_subplot(2,1,1)     # (2,1,1)
     ax_k = fig.add_subplot(2,1,2)
     # ax_a = fig.add_subplot(4,2,5)
@@ -53,9 +57,9 @@ def make_plot(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys,zs_ra
     line7, = ax.plot(xs,zs+2.5*np.sqrt(estvar), ':b')
     line8, = ax.plot(xs,zs-2.5*np.sqrt(estvar), ':b')
     # plot Kalman estimate
-    line6k, = ax_k.plot(xs,zs_post, '-',color=[1,0,1])
-    line7k, = ax_k.plot(xs,zs_post+2.5*np.sqrt(estvar_post), ':',color=[1,0,1])
-    line8k, = ax_k.plot(xs,zs_post-2.5*np.sqrt(estvar_post), ':',color=[1,0,1])
+    line6k, = ax_k.plot(xs,zs_post, '-',color='b')
+    line7k, = ax_k.plot(xs,zs_post+2.5*np.sqrt(estvar_post), ':',color='b')
+    line8k, = ax_k.plot(xs,zs_post-2.5*np.sqrt(estvar_post), ':',color='b')
     # plot kriging pilot point estimate
     line9,  = ax.plot(xp,zp, 'or')
     line10, = ax.plot(xs,zsp, 'r')
@@ -81,12 +85,12 @@ def make_plot(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys,zs_ra
     # line2_c, = ax_c.plot(range(0,ip_last,dp),cestvarp_record[range(0,ip_last,dp)],'r')
 
     # Set axis titles, limits
-    ax.set_title('best estimate and 95% CI')
+    ax.set_title('Kriging: best estimate and 95% CI')
     ax.set_xlabel('x')
     ax.set_label('s')
     ax.set_ylim(beta_pri + 3*(np.sqrt(varss+Qbb+R[0,0]))*np.array([-1,1]))
 
-    ax_k.set_title('best estimate and 95% CI')
+    ax_k.set_title('Kalman: best estimate and 95% CI')
     ax_k.set_xlabel('x')
     ax_k.set_label('s')
     ax_k.set_ylim(beta_pri + 3*(np.sqrt(varss+Qbb+R[0,0]))*np.array([-1,1]))
