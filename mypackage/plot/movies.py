@@ -17,7 +17,7 @@ def movie(input_name_test = 'plot_m_b_01_100_av.png', input_names = 'plot_m_b_%0
     os.chdir(pics_dir)
     if not os.path.isfile(input_name_test):
         os.chdir(python_dir)
-        raise exceptions.RuntimeError, 'File' + input_name_test +  ' not found in ' + pics_dir + '!!!'
+        raise exceptions.RuntimeError('File' + input_name_test +  ' not found in ' + pics_dir + '!!!')
     # Output deletion if exists
     os.chdir(pics_dir)
     if os.path.isfile(output_name):

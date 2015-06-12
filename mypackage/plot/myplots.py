@@ -989,7 +989,7 @@ def f3_plot(num_timesteps,nrobs_int,f3_num_arrays,mons_inds,f3_ax_legend_bbox,
     elif f3_y_variable_mean =='kz_mean':
         f3_variable_num = 18
     else:
-        raise exceptions.RuntimeError, 'No supported variable name for true from mon_file'
+        raise exceptions.RuntimeError('No supported variable name for true from mon_file')
     cell_numpy_temp_y = np.genfromtxt(mons_file_name,
                                       dtype='f8',
                                       comments='%',
@@ -1425,8 +1425,9 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
             model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
             nl,date,
             pc_output,pc_is_show_ens,pc_num_ens,pc_title_text,pc_x_min,pc_x_max,
-            pc_nl,pc_dates,pc_letters,
+            pc_nl,pc_dates,pc_letters,pc_alpha,pc_linewidth,
             pc_y_min,pc_y_max,pc_legend_loc,pc_legend_bbox_anchor,pc_colored,
+            pc_legend_num_cols,pc_is_legend,pc_is_markers,
             pc_n_per_color,pc_marker_colors,pc_line_colors,
             figure_size_x, figure_size_y, fig_pc = None):
 
@@ -1448,7 +1449,7 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
             letters = pc_letters
         else:
             os.chdir(python_dir)
-            raise exceptions.RuntimeError, "pc_dates, pc_letters or pc_nl not as wanted"
+            raise exceptions.RuntimeError("pc_dates, pc_letters or pc_nl not as wanted")
         
 
     nl_f = float(nl)            # Color themes
@@ -1462,8 +1463,12 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
     if pc_marker_colors is None:
         pc_marker_colors = getting_darker # Marker colors
     if pc_line_colors is None:
-        pc_line_colors = [color_arr[i/pc_n_per_color] if pc_colored[i] else 'grey'
-                       for i in range(nl)] # Line colors
+        if nl < 62:
+            pc_line_colors = [color_arr[i/pc_n_per_color] if pc_colored[i] else 'grey'
+                              for i in range(nl)] # Line colors
+        else:
+            pc_line_colors = ['grey' for i in range(nl)]
+                                  
 
 
     if pc_output == 'res':         # Title, filename, variable depending on 'res'/'std'
@@ -1477,15 +1482,15 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
         var_name = 'std_kz_aft'
         input_file_name = 'stddev_E1.vtk'
     else:
-        raise exceptions.RuntimeError, 'Wrong input_file_name.  ' + input_file_name
+        raise exceptions.RuntimeError('Wrong input_file_name.  ' + input_file_name)
 
     #############################################################################
     #Checks
     for resid_dir in resid_dirs: # Does file exist? Is variables in file?
         if not pltfct.is_scalar_var_in_file(var_name, input_file_name, resid_dir):
-            raise exceptions.RuntimeError, 'var_name ' + var_name \
+            raise exceptions.RuntimeError('var_name ' + var_name \
                 + 'not in input_file_name ' + input_file_name \
-                + 'in resid_dir' + resid_dir
+                + 'in resid_dir' + resid_dir)
 
 
     ############################################################################
@@ -1507,19 +1512,20 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
     for i,letter in enumerate(letters): # Loop over letters
         
         data_x = pltfct.my_vtk_to_numpy(resid_dirs[i], # x-data
-                                               input_file_name,
-                                               'obstime')
+                                        input_file_name,
+                                        'obstime')
         data_y = pltfct.my_vtk_to_numpy(resid_dirs[i], # y-data
-                                               input_file_name,
-                                               var_name)
-        
+                                        input_file_name,
+                                        var_name)
+
 
         plots.append(ax.plot(data_x, # Main plot
                              data_y,
                              color=pc_line_colors[i],
+                             alpha = pc_alpha,
                              linestyle='-',
-                             linewidth=2.5,
-                             marker='o',
+                             linewidth=pc_linewidth,
+                             marker='o' if pc_is_markers else '',
                              markerfacecolor=pc_marker_colors[i],
                              markeredgecolor=pc_marker_colors[i],
                              markersize=6))
@@ -1543,17 +1549,17 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
                                    markeredgecolor='grey',
                                    markersize=6)
 
-
-    refined_legend=plt.legend(plots, # Legend
-                              plot_labels,
-                              title = 'Legend',
-                              loc=pc_legend_loc,
-                              bbox_to_anchor=pc_legend_bbox_anchor,
-                              handlelength=2,
-                              numpoints=2,
-                              handletextpad=0.5,
-                              ncol=3,
-                              prop={'size':16})
+    if pc_is_legend:
+        plt.legend(plots, # Legend
+                   plot_labels,
+                   title = 'Legend',
+                   loc=pc_legend_loc,
+                   bbox_to_anchor=pc_legend_bbox_anchor,
+                   handlelength=2,
+                   numpoints=2,
+                   handletextpad=0.5,
+                   ncol=pc_legend_num_cols,
+                   prop={'size':16})
 
 
     plt.axis([pc_x_min,pc_x_max,pc_y_min,pc_y_max]) # R
@@ -1676,7 +1682,7 @@ def saving_fig(save_pics_dir,save_pics_names,figs):
                         edgecolor='none')
             print('\nSaved ' + save_pics_names[i] + ' in ' + save_pics_dir)
     else:
-        raise exceptions.RuntimeError, 'save_pics_names and figs must be of equal length.'
+        raise exceptions.RuntimeError('save_pics_names and figs must be of equal length.')
 
 print('\n Done with module : myplots.py.')
 print(time.asctime( time.localtime( time.time())))

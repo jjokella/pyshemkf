@@ -198,8 +198,8 @@ def get_nrobs_int(fname,path):
             n = int(f.readline())
             break
     if(n == 0):
-        raise exceptions.RuntimeError, '# nrobs_int not found in first 20 lines of: \n'\
-            + model_name_big + '.enkf'
+        raise exceptions.RuntimeError('# nrobs_int not found in first 20 lines of: \n'\
+            + model_name_big + '.enkf')
     f.close()
     return n
 
@@ -318,8 +318,8 @@ def is_scalar_var_in_file(var, fname, path, raise_io_error = 1, raise_var_error 
             return 1
     if raise_var_error:
         os.chdir(python_dir)
-        raise exceptions.RuntimeError, var + ' not in ' + fname \
-            + '\n Dir: ' + path
+        raise exceptions.RuntimeError(var + ' not in ' + fname \
+            + '\n Dir: ' + path)
     else:
         return 0
 
@@ -339,8 +339,8 @@ def get_cbar_high(var,m_kz_std_high,m_cbar_kz_high,m_cbar_kz_res_high,m_cbar_cor
     elif var in ['correlations000' + str(i) for i in range(1,7)]:
         high = m_cbar_cor_high
     else:
-        raise exceptions.RuntimeError, 'Wrong variable ' + var \
-            + ' use kz_mean or correlations000i'
+        raise exceptions.RuntimeError('Wrong variable ' + var \
+            + ' use kz_mean or correlations000i')
     return high
 
 def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low):
@@ -358,8 +358,8 @@ def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low
     elif var in ['correlations000' + str(i) for i in range(1,7)]:
         low = m_cbar_cor_low
     else:
-        raise exceptions.RuntimeError, 'Wrong variable ' + var \
-            + ' use kz_mean or correlations000i'
+        raise exceptions.RuntimeError('Wrong variable ' + var \
+            + ' use kz_mean or correlations000i')
     
     return low
 
@@ -382,18 +382,18 @@ def m_input_check(n_f, input_file_names,
             if not is_scalar_var_in_file(varnames[i],
                                          input_file_names[i] + 'param_' + str(1).zfill(4) + '.vtk',
                                          assim_variables_dir):
-                raise exceptions.RuntimeError, 'Variable  ' \
+                raise exceptions.RuntimeError('Variable  ' \
                     + varnames[i] + '  not in:\n' \
                     + assim_variables_dir + '/' \
-                    + input_file_names[i] + str(1).zfill(4) + '.vtk'
+                    + input_file_names[i] + str(1).zfill(4) + '.vtk')
             else:
                 return_value[i] = 1
 
     # Check that files exist
     npics_int = m_first + ((m_n_rows*m_n_cols-1)/n_f)*m_diff
     if( npics_int > nrobs_int ):
-        raise exceptions.RuntimeError, 'Too high number of observations called. Check '\
-            + 'm_first, m_diff'
+        raise exceptions.RuntimeError('Too high number of observations called. Check '\
+            + 'm_first, m_diff')
     
 
     return return_value
@@ -519,7 +519,7 @@ def ts_from_mon(path,fname,in_vars):
         elif(var == 'kz' or var == 'kz_mean'):
             n=18
         if(n==-1):
-            raise exceptions.RuntimeError, 'Variable not found.'
+            raise exceptions.RuntimeError('Variable not found.')
 
 
         arr.append( np.genfromtxt(fname,
@@ -559,7 +559,7 @@ def ts_from_as(path,fname,nrobs_int,var,mon_num):
                     arr_tmp=map(float,arr_tmp)
                     break
             if(arr_tmp == []):
-                raise exceptions.RuntimeError, var + 'not found in \n' + fname
+                raise exceptions.RuntimeError(var + 'not found in \n' + fname)
             arr.append(arr_tmp)
         arr = np.array(arr)
         arr = arr[:,mon_num]
@@ -569,7 +569,7 @@ def ts_from_as(path,fname,nrobs_int,var,mon_num):
         innov = ts_from_as(path,fname,nrobs_int,'innov',mon_num)
         arr = meanS + innov
     else:
-        raise exceptions.RuntimeError, 'Wrong variable specification: ' + var 
+        raise exceptions.RuntimeError('Wrong variable specification: ' + var )
     return arr
 
 
@@ -602,7 +602,7 @@ def ts_from_sc(path,point_1,vbl_1,befaft_1,point_2,vbl_2,befaft_2,nrobs_int):
         len_1 = len(data[0])
         len_2 = len(data[1])
         if len_1 != len_2:
-            raise exceptions.RuntimeError, 'Non compatible single cell arrays.'
+            raise exceptions.RuntimeError('Non compatible single cell arrays.')
         
         mean_1 = 0.0
         for k in range(len_1):
@@ -645,39 +645,39 @@ def f2_plot_input_checks(f2_num_arrays,f2_i_want,f2_j_want,f2_befaft,f2_y_variab
 
     if len(filter(lambda x: len(x)<f2_num_arrays,
                   [f2_i_want,f2_j_want,f2_befaft,f2_y_variables])):
-        raise exceptions.RuntimeError, 'The arrays f2_i_want, f2_j_want, f2_befaft and'\
-            + 'f2_y_variables are too short (at least one of them)'
+        raise exceptions.RuntimeError('The arrays f2_i_want, f2_j_want, f2_befaft and'\
+            + 'f2_y_variables are too short (at least one of them)')
         
     if len(filter(lambda x: not x in ['bef','aft'], f2_befaft)):
-        raise exceptions.RuntimeError, 'Wrong f2_befaft (use bef,aft!)'
+        raise exceptions.RuntimeError('Wrong f2_befaft (use bef,aft!)')
 
     # if len(filter(lambda x: not x in ['conc_mean','kz_mean'], f2_y_variables)):
     #     raise exceptions.RuntimeError, 'Wrong f2_y_variables (use conc_mean,kz_mean!)'
 
     if any([len(f2_show_mons)<f2_num_show_mons,
             len(f2_y_variables_mon)<f2_num_variables_mon]):
-        raise exceptions.RuntimeError, 'f2_num_show_mons/f2_num_variables_mon is too short'
+        raise exceptions.RuntimeError('f2_num_show_mons/f2_num_variables_mon is too short')
 
     if len(filter(lambda x: x>=num_mons or x<0,f2_show_mons[0:f2_num_show_mons])):
-        raise exceptions.RuntimeError, 'Wrong monitoring point specification. Has to be'\
-            + ' (including boundaries) between 0 and ' + str(num_mons-1) 
+        raise exceptions.RuntimeError('Wrong monitoring point specification. Has to be'\
+            + ' (including boundaries) between 0 and ' + str(num_mons-1) )
 
     if len(filter(lambda x: not x in ['kz_mean','conc_mean'], 
                   f2_y_variables_mon[0:f2_num_variables_mon])):
-        raise exceptions.RuntimeError, 'Wrong f2_show_assimstp (choose from 1,2,3!)'
+        raise exceptions.RuntimeError('Wrong f2_show_assimstp (choose from 1,2,3!)')
         
     if len(filter(lambda x: not x in [1,2,3], f2_show_assimstp[0:f2_num_show_assimstp])):
-        raise exceptions.RuntimeError, 'Wrong f2_show_assimstp (choose from 1,2,3!)'
+        raise exceptions.RuntimeError('Wrong f2_show_assimstp (choose from 1,2,3!)')
 
     if (len(f2_show_assimstp)<f2_num_show_assimstp 
         or len(f2_mon_num_assimstp)<f2_num_show_assimstp):
-        raise exceptions.RuntimeError, 'f2_show_assimstp and f2_mon_num_assimstp should'\
-            + ' be longer than f2_num_show_assimstp'
+        raise exceptions.RuntimeError('f2_show_assimstp and f2_mon_num_assimstp should'\
+            + ' be longer than f2_num_show_assimstp')
     if any([len(f2_corr_letters)<f2_corr_num_arrays,
             len(f2_corr_i_want)<f2_corr_num_arrays,
             len(f2_corr_j_want)<f2_corr_num_arrays,
             len(f2_corr_befaft)<f2_corr_num_arrays,
             len(f2_corr_y_variables)<f2_corr_num_arrays]):
-        raise exceptions.RuntimeError, 'One corr array is shorter than f2_corr_num_arrays'
+        raise exceptions.RuntimeError('One corr array is shorter than f2_corr_num_arrays')
 
     

@@ -79,7 +79,7 @@ is_save = 1,
         os.mkdir(save_pics_dir)
         
     if(num_figs > len(obstimes[0])):
-        raise exceptions.RuntimeError, 'Specified number of figures (num_figs) too large.'
+        raise exceptions.RuntimeError('Specified number of figures (num_figs) too large.')
 
     model_name_big = model_name.upper()
 
@@ -145,7 +145,7 @@ is_save = 1,
             data[1] = [value for sublist in data[1] for value in sublist]
 
         if num_input_data > len(data[0]) or num_input_data > len(data[1]):
-            raise exceptions.RuntimeError, 'num_input_data too big'
+            raise exceptions.RuntimeError('num_input_data too big')
         
         x = data[0][0:num_input_data]
         y = data[1][0:num_input_data] #+ rnd.randn(num_input_data)*1.0

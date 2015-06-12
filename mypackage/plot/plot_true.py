@@ -148,7 +148,7 @@ is_show_text = 0
         print(n_rows*image_height+(n_rows-1)*image_pad_vert+upper_space)
         print('>')
         print(1.0-upper_space)
-        raise exceptions.RuntimeError, 'Too much vertical space used.'
+        raise exceptions.RuntimeError('Too much vertical space used.')
 
     ######################################################################################
     ############################# MAIN PLOT ##############################################
@@ -195,7 +195,7 @@ is_show_text = 0
         cell_numpy_array = cell_numpy_array.reshape(grid_dims[0],grid_dims[1])
 
     else:
-        raise exceptions.RuntimeError, 'Wrong variable: grid_loc (c or p allowed)'
+        raise exceptions.RuntimeError('Wrong variable: grid_loc (c or p allowed)')
 
     #Properties of the grid
     step_x = (grid_bounds[1]-grid_bounds[0])/(grid_dims[0]-1)
@@ -444,7 +444,7 @@ is_show_text = 0
         cell_numpy_array = vtk.util.numpy_support.vtk_to_numpy(cell_vtk_array)
         cell_numpy_array = cell_numpy_array.reshape(grid_dims[0],grid_dims[1])
     else:
-        raise exceptions.RuntimeError, 'Wrong variable: grid_loc (c or p allowed)'
+        raise exceptions.RuntimeError('Wrong variable: grid_loc (c or p allowed)')
 
 
     #Generate image

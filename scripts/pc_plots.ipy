@@ -1,12 +1,14 @@
-dat = '2015_05_19'
+dat = '2015_06_11'
 let = 'b'
-show = 0
-pc_lets =  ['l','m','n','o','p','q','r','s','t','u'] #['b','c','d','e','f','g','h','i','j','k']
+show = 1
+title = 'Residuals 250 members'           #None: Standard title
+pc_lets = ['cx', 'cy', 'cz', 'da', 'db', 'dc', 'dd', 'de', 'df', 'dg', 'dh', 'di', 'dj', 'dk', 'dl', 'dm', 'dn', 'do', 'dp', 'dq', 'dr', 'ds', 'dt', 'du', 'dv', 'dw', 'dx', 'dy', 'dz', 'ea', 'eb', 'ec', 'ed', 'ee', 'ef', 'eg', 'eh', 'ei', 'ej', 'ek', 'el', 'em', 'en', 'eo', 'ep', 'eq', 'er', 'es', 'et', 'eu', 'ev', 'ew', 'ex', 'ey', 'ez', 'fa', 'fb', 'fc', 'fd', 'fe', 'ff', 'fg', 'fh', 'fi', 'fj', 'fk', 'fl', 'fm', 'fn', 'fo', 'fp', 'fq', 'fr', 'fs', 'ft', 'fu', 'fv', 'fw', 'fx', 'fy', 'fz', 'ga', 'gb', 'gc', 'gd', 'ge', 'gf', 'gg', 'gh', 'gi', 'gj', 'gk', 'gl', 'gm', 'gn', 'go', 'gp', 'gq', 'gr', 'gs']#['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','aa','ab','ac','ad','ae','af','ag','ah','ai','aj','ak','al','am','an','ao','ap','aq','ar','as','at','au','av','aw','ax','ay','az','ba','bb','bc','bd','be','bf','bg','bh','bi','bj','bk','bl','bm','bn','bo','bp','bq','br','bs','bt','bu','bv','bw','bx','by','bz','ca','cb','cc','cd','ce','cf','cg','ch','ci','cj','ck','cl','cm','cn','co','cp','cq','cr','cs','ct','cu','cv','cw']#['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','aa','ab','ac','ad','ae','af','ag','ah','ai','aj','ak','al','am','an','ao']#['b','c','d','e','f','g','h','i','j','k']#['l','m','n','o','p','q','r','s','t','u']#['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u']#['bj','bk','bl','bm','bn','bo','bp','bq','br','bs','bt','bu','bv','bw','bx','by','bz','ca','cb','cc','cd','ce','cf','cg','ch','ci','cj','ck','cl','cm','cn','co','cp','cq','cr','cs','ct','cu','cv','cw']#['v','w','x','y','z','aa','ab','ac','ad','ae','af','ag','ah','ai','aj','ak','al','am','an','ao','ap','aq','ar','as','at','au','av','aw','ax','ay','az','ba','bb','bc','bd','be','bf','bg','bh','bi']#['v','w','x','y','z','aa','ab','ac','ad','ae','af','ag','ah','ai','aj','ak','al','am','an','ao','ap','aq','ar','as','at','au','av','aw','ax','ay','az','ba','bb','bc','bd','be','bf','bg','bh','bi']#
 #
 # Residuals
 #
-p(is_pc = 1, letter = let, date = dat, pc_output = 'res', pc_nl = 10, pc_dates = [dat for i in range(10)], pc_letters = pc_lets, is_show = show)
+p(is_pc = 1, letter = let, date = dat, pc_output = 'res', pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_title_text = title, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)
+print('hello')
 #
 # Standard Deviations
 #
-p(is_pc = 1, letter = let, date = dat, pc_output = 'std', pc_nl = 10, pc_dates = [dat for i in range(10)], pc_letters = pc_lets, is_show = show)
+p(is_pc = 1, letter = let, date = dat, pc_output = 'std', pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)

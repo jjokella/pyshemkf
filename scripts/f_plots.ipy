@@ -1,5 +1,5 @@
-dat = '2015_06_02'
-lets = ['b','c','d','e','f','g','h','i','j','k']
+dat = '2015_06_08'
+lets = ['l','m','n','o','p','q','r','s','t','u'] #['b','c','d','e','f','g','h','i','j','k']#
 show = 0
 #
 # All possible functions in one plot

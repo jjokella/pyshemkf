@@ -59,10 +59,9 @@ def get_zsp_kalman(ip,dp,xs,ns,Gss_prior,zs_prior,Hy,R,zy,Gyy_prior,Gys_prior,Gs
     Gsp_post = Gps_post.T.copy()
     Grp_post = Gsp_post[jp_com,:].copy()
     Gpr_post = Gps_post[:,jp_com].copy()
-
     zsp_post = np.dot( Gsp_prior, np.dot( la.inv(Gpp_prior), zp_post))
 
-
+    # Johannes Kalman
     zsp_post_j = zs_prior + np.dot(Ps,np.dot(Gss_prior,np.dot(Ps.T,np.dot(Hy_prior.T,np.dot(la.inv(Gyy_prior + R),zy_prior - np.dot(Hy_prior,zs_prior))))))
     Gss_post_j = Gss_prior - np.dot(Ps,np.dot(Gss_prior,np.dot(Ps.T,np.dot(Hy_prior.T,np.dot(la.inv(Gyy_prior + R),np.dot(Hy_prior,np.dot(Ps,np.dot(Gss_prior,Ps.T))))))))
 
@@ -70,10 +69,10 @@ def get_zsp_kalman(ip,dp,xs,ns,Gss_prior,zs_prior,Hy,R,zy,Gyy_prior,Gys_prior,Gs
     zp = zp_post
     zsp = zsp_post              # Output for plots
     
-    estvar    = np.diag(Gssy).reshape(ns,1)   # estimation variance of s
-    estvarp   = np.diag(Gss_post_j).reshape(ns,1)  # estimation variance of s plus error term
+    estvar_j    = np.diag(Gssy).reshape(ns,1)   # Not meaningful here!!!
+    estvarp_j   = np.diag(Gss_post_j).reshape(ns,1)  # estimation variance of s plus error term
 
-    return jp, zsp, estvar, estvarp, xp, zp, zsp_post_j, Gss_post_j
+    return jp, zsp_post, estvar_j, estvarp_j, xp, zp_post, zsp_post_j, Gss_post_j
     # global zp_post, zsp_post, Gpp_prior, Gsp_prior, Gyy_prior, R_prior, Hy_prior,zy_prior
     # global step1_prior, step2_prior, step3_prior, Gps_prior, jp_com, K
 
@@ -114,6 +113,8 @@ def get_zsp(ip,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys):
     Ps   = np.dot( np.dot(Gsp,la.inv(Gpp)) , Hp )
     N   = Is-Ps
 
+    #######################################################
+    # Update from original codes
     zp = beta_pri*Xp + np.dot( Gps, np.dot( Hy.T, np.dot( la.inv(Gyy+R), zy-beta_pri*Xy)))
     zsp = beta_pri*Xs + np.dot( Gsp, np.dot( la.inv(Gpp), zp-beta_pri*Xp))
     #
@@ -121,15 +122,20 @@ def get_zsp(ip,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys):
     # ATTENTION!!! THIS one would be WRONG:
     Gsspy2 = Gss - np.dot( Ps, np.dot( Gsy, np.dot( la.inv(Gyy + R), np.dot( Gys, Ps.T))))
 
+    estvar    = np.diag(Gssy).reshape(ns,1)   # estimation variance of s
+    estvarp   = np.diag(Gsspy).reshape(ns,1)  # estimation variance of s plus error term
+    
+    #######################################################
     # Johannes updates
     zsp_johannes = beta_pri*Xs +np.dot(Ps, np.dot(Gss, np.dot(Ps.T, np.dot(Hy.T, np.dot(la.inv(Gyy + R), zy-beta_pri*Xy)))))
     zp_johannes = np.dot(Hp,zsp_johannes)
+    # 
     Gsspy_johannes = Gss - np.dot( Ps , np.dot( Gss , np.dot(Ps.T, np.dot(Hy.T, np.dot( la.inv(Gyy + R), np.dot(Hy, np.dot(Ps, np.dot(Gss,Ps.T))))))))
 
-    estvar    = np.diag(Gssy).reshape(ns,1)   # estimation variance of s
-    estvarp   = np.diag(Gsspy).reshape(ns,1)  # estimation variance of s plus error term
+    estvar_johannes    = np.diag(Gssy).reshape(ns,1)   # estimation variance of s
+    estvarp_johannes   = np.diag(Gsspy_johannes).reshape(ns,1)  # estimation variance of s plus error term
 
-    return jp, zsp, Gsspy, estvar, estvarp, xp, zp, zsp_johannes, Gsspy_johannes, zp_johannes
+    return jp, zsp, Gsspy, estvar, estvarp, xp, zp, zsp_johannes, Gsspy_johannes, estvar_johannes, estvarp_johannes, zp_johannes
     # return zsp, Gsspy, estvar, estvarp
 
 

@@ -76,7 +76,7 @@ def get_num_let(let):
     if len(let) == 2:
         return 26*(alphabet.index(let[0])+1) + alphabet.index(let[1])
     else:
-        raise exceptions.RuntimeError, 'letter does not contain 1 or 2 letters'
+        raise exceptions.RuntimeError('letter does not contain 1 or 2 letters')
 
 
 
@@ -112,7 +112,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
 
     if errout:
         if(proc.returncode):
-            raise exceptions.RuntimeError, "Problems in " + str(name)
+            raise exceptions.RuntimeError("Problems in " + str(name))
     
 
 
@@ -148,7 +148,7 @@ def change_hashtag_input(file_name, hashtag_line, new_input):
         print(file_name)
         print('\ntimes found = ')
         print(1-hashstr_not_exist)
-        raise exceptions.RuntimeError, "Hashtag-catchphrase not found."
+        raise exceptions.RuntimeError("Hashtag-catchphrase not found.")
         
     return
 
@@ -189,7 +189,7 @@ def compilequick( vtk_var = 1, omp_var = 1):
         print(compilation_exec)
         print('did not exist in')
         print(os.getcwd())
-        raise exceptions.RuntimeError, "Fitting Compilequick not found."
+        raise exceptions.RuntimeError("Fitting Compilequick not found.")
 
     return
 
@@ -207,8 +207,8 @@ def matlab_call( mfile_name , matlab_dir):
         process_matlab = subprocess.Popen(args)
         subprocess.Popen.wait(process_matlab)
         if process_matlab.returncode:
-            raise exceptions.RuntimeError, "Problems in Matlab Execution of   "\
-                + mfile_name
+            raise exceptions.RuntimeError("Problems in Matlab Execution of   "\
+                + mfile_name)
         else:
             print("\n\n")
     else:
@@ -216,7 +216,7 @@ def matlab_call( mfile_name , matlab_dir):
         print(mfile_name)
         print('did not exist in')
         print(os.getcwd())
-        raise exceptions.RuntimeError, "Matlab file not found."
+        raise exceptions.RuntimeError("Matlab file not found.")
 
     return
 

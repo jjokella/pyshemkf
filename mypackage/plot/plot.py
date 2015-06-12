@@ -142,32 +142,40 @@ f2_ax_pos = [0.15,0.10,0.78,0.80], # Axis position [left,low,width,height]
 f2_ax_x_label = 'f2_x_variable',
 f2_ax_y_label = 'conc_mean',
 f2_ax_legend_cols = 3 ,
-f2_ax_offset_corr = -0.04,
-f2_ax_offset_kz = -0.04,
-f2_ax_offset_kz_res = -0.04,
-f2_ax_offset_kz_std = -0.04,
-f2_ax_offset_conc_res = -0.04,
-f2_ax_offset_conc_std = -0.04,
-f2_ax_legend_or = 'lower left',
-f2_ax_legend_bbox = [0.0,0.0], # Legend geometry
-f2_ax_legend_corr_cols = 2,
-f2_ax_legend_corr_or = 'upper left',
-f2_ax_legend_corr_bbox = [0.0,1.0], # Correlation legend geometry
-f2_ax_legend_kz_cols = 3,
-f2_ax_legend_kz_or = 'lower right',
-f2_ax_legend_kz_bbox = (1.0,0.0), # Perm legend geometry
-f2_ax_legend_kz_res_cols = 3,
-f2_ax_legend_kz_res_or = 'lower right',
-f2_ax_legend_kz_res_bbox = (1.0,0.0), # Perm legend geometry
-f2_ax_legend_kz_std_cols = 3,
-f2_ax_legend_kz_std_or = 'lower right',
-f2_ax_legend_kz_std_bbox = (1.0,0.0), # Perm legend geometry
-f2_ax_legend_conc_res_cols = 3,
-f2_ax_legend_conc_res_or = 'lower right',
-f2_ax_legend_conc_res_bbox = (1.0,0.0), # Perm legend geometry
-f2_ax_legend_conc_std_cols = 3,
-f2_ax_legend_conc_std_or = 'lower right',
-f2_ax_legend_conc_std_bbox = (1.0,0.0), # Perm legend geometry
+f2_ax_offset = {'f2_ax_offset_corr': -0.04,
+                'f2_ax_offset_kz': -0.04,
+                'f2_ax_offset_kz_res': -0.04,
+                'f2_ax_offset_kz_std': -0.04,
+                'f2_ax_offset_conc_res': -0.04,
+                'f2_ax_offset_conc_std': -0.04,
+                },
+# f2_ax_offset_corr = -0.04,
+# f2_ax_offset_kz = -0.04,
+# f2_ax_offset_kz_res = -0.04,
+# f2_ax_offset_kz_std = -0.04,
+# f2_ax_offset_conc_res = -0.04,
+# f2_ax_offset_conc_std = -0.04,
+f2_ax_legend = {'f2_ax_legend_or':'lower left',
+                'f2_ax_legend_bbox':[0.0,0.0],
+                'f2_ax_legend_corr_cols': 2,
+                'f2_ax_legend_corr_or': 'upper left',
+                'f2_ax_legend_corr_bbox': [0.0,1.0],
+                'f2_ax_legend_kz_cols': 3,
+                'f2_ax_legend_kz_or': 'lower right',
+                'f2_ax_legend_kz_bbox': (1.0,0.0),
+                'f2_ax_legend_kz_res_cols': 3,
+                'f2_ax_legend_kz_res_or': 'lower right',
+                'f2_ax_legend_kz_res_bbox': (1.0,0.0),
+                'f2_ax_legend_kz_std_cols': 3,
+                'f2_ax_legend_kz_std_or': 'lower right',
+                'f2_ax_legend_kz_std_bbox': (1.0,0.0), # Perm legend geometry
+                'f2_ax_legend_conc_res_cols': 3,
+                'f2_ax_legend_conc_res_or': 'lower right',
+                'f2_ax_legend_conc_res_bbox': (1.0,0.0), # Perm legend geometry
+                'f2_ax_legend_conc_std_cols': 3,
+                'f2_ax_legend_conc_std_or': 'lower right',
+                'f2_ax_legend_conc_std_bbox': (1.0,0.0), # Perm legend geometry
+                },
 f2_is_enforce_axis_input = 1,
 f2_ax_x_min = 0,
 f2_ax_x_max = 10.5, # x-axis Range
@@ -305,11 +313,16 @@ pc_x_min = 0,
 pc_x_max = 20,
 pc_y_min = 0.0,
 pc_y_max = 1.0,
+pc_is_legend = 1,
 pc_legend_loc = 'upper right',
 pc_legend_bbox_anchor = (1.0,1.0),
+pc_legend_num_cols = 3,
 pc_colored = None,
+pc_alpha = 1,
 pc_n_per_color = 1,
+pc_is_markers = 1,
 pc_marker_colors = None,
+pc_linewidth = 2.5,
 pc_line_colors = None,
 pc_pic_name = 'plot_pc',
 pc_pic_ending = '.png'
@@ -324,6 +337,46 @@ pc_pic_ending = '.png'
     nl                         # Number of letters (mostly one)
     stepl                        # Letter stepsize (mostly one)
     """
+
+    # Defaults for dictionary inputs
+
+    if not 'f2_ax_legend_or' in f2_ax_legend:
+        f2_ax_legend_or = 'lower left',
+    if not 'f2_ax_legend_bbox' in f2_ax_legend:        
+        f2_ax_legend_bbox = [0.0,0.0], # Legend geometry
+    if not 'f2_ax_legend_corr_cols' in f2_ax_legend:
+        f2_ax_legend_corr_cols = 2,
+    if not 'f2_ax_legend_corr_or' in f2_ax_legend:
+        f2_ax_legend_corr_or = 'upper left',
+    if not 'f2_ax_legend_corr_bbox' in f2_ax_legend:
+        f2_ax_legend_corr_bbox = [0.0,1.0], # Correlation legend geometry
+    if not 'f2_ax_legend_kz_cols' in f2_ax_legend:
+        f2_ax_legend_kz_cols = 3,
+    if not 'f2_ax_legend_kz_or' in f2_ax_legend:
+        f2_ax_legend_kz_or = 'lower right',
+    if not 'f2_ax_legend_kz_bbox' in f2_ax_legend:
+        f2_ax_legend_kz_bbox = (1.0,0.0), # Perm legend geometry
+    if not 'f2_ax_legend_kz_res_cols' in f2_ax_legend:
+        f2_ax_legend_kz_res_cols = 3,
+    if not 'f2_ax_legend_kz_res_or' in f2_ax_legend:
+        f2_ax_legend_kz_res_or = 'lower right',
+        
+    # f2_ax_legend_kz_res_bbox = (1.0,0.0), # Perm legend geometry
+    # f2_ax_legend_kz_std_cols = 3,
+    # f2_ax_legend_kz_std_or = 'lower right',
+    # f2_ax_legend_kz_std_bbox = (1.0,0.0), # Perm legend geometry
+    # f2_ax_legend_conc_res_cols = 3,
+    # f2_ax_legend_conc_res_or = 'lower right',
+    # f2_ax_legend_conc_res_bbox = (1.0,0.0), # Perm legend geometry
+    # f2_ax_legend_conc_std_cols = 3,
+    # f2_ax_legend_conc_std_or = 'lower right',
+    # f2_ax_legend_conc_std_bbox = (1.0,0.0), # Perm legend geometry
+
+
+    # AND SO ON, build here some defaults 
+    
+
+
     ######################################################################################
 
     plt.close('all')
@@ -478,26 +531,26 @@ pc_pic_ending = '.png'
            'f2_ax_x_label' : f2_ax_x_label,
            'f2_ax_1_y_label' : f2_ax_y_label,
            'f2_ax_legend_cols' : f2_ax_legend_cols,
-           'f2_ax_legend_or' : f2_ax_legend_or,
-           'f2_ax_legend_bbox' : f2_ax_legend_bbox, 
-           'f2_ax_corr_legend_cols' : f2_ax_legend_corr_cols,
-           'f2_ax_corr_legend_or' : f2_ax_legend_corr_or,
-           'f2_ax_corr_legend_bbox' : f2_ax_legend_corr_bbox, 
-           'f2_ax_kz_legend_cols' : f2_ax_legend_kz_cols,
-           'f2_ax_kz_legend_or' : f2_ax_legend_kz_or,
-           'f2_ax_kz_legend_bbox' : f2_ax_legend_kz_bbox,
-           'f2_ax_kz_res_legend_cols' : f2_ax_legend_kz_res_cols,
-           'f2_ax_kz_res_legend_or' : f2_ax_legend_kz_res_or,
-           'f2_ax_kz_res_legend_bbox' : f2_ax_legend_kz_res_bbox,
-           'f2_ax_kz_std_legend_cols' : f2_ax_legend_kz_std_cols,
-           'f2_ax_kz_std_legend_or' : f2_ax_legend_kz_std_or,
-           'f2_ax_kz_std_legend_bbox' : f2_ax_legend_kz_std_bbox,
-           'f2_ax_conc_res_legend_cols' : f2_ax_legend_conc_res_cols,
-           'f2_ax_conc_res_legend_or' : f2_ax_legend_conc_res_or,
-           'f2_ax_conc_res_legend_bbox' : f2_ax_legend_conc_res_bbox, 
-           'f2_ax_conc_std_legend_cols' : f2_ax_legend_conc_std_cols,
-           'f2_ax_conc_std_legend_or' : f2_ax_legend_conc_std_or,
-           'f2_ax_conc_std_legend_bbox' : f2_ax_legend_conc_std_bbox, 
+           'f2_ax_legend_or' : f2_ax_legend['f2_ax_legend_or'],
+           'f2_ax_legend_bbox' : f2_ax_legend['f2_ax_legend_bbox'], 
+           'f2_ax_corr_legend_cols' : f2_ax_legend['f2_ax_legend_corr_cols'],
+           'f2_ax_corr_legend_or' : f2_ax_legend['f2_ax_legend_corr_or'],
+           'f2_ax_corr_legend_bbox' : f2_ax_legend['f2_ax_legend_corr_bbox'],
+           'f2_ax_kz_legend_cols' : f2_ax_legend['f2_ax_legend_kz_cols'],
+           'f2_ax_kz_legend_or' : f2_ax_legend['f2_ax_legend_kz_or'],
+           'f2_ax_kz_legend_bbox' : f2_ax_legend['f2_ax_legend_kz_bbox'],
+           'f2_ax_kz_res_legend_cols' : f2_ax_legend['f2_ax_legend_kz_res_cols'],
+           'f2_ax_kz_res_legend_or' : f2_ax_legend['f2_ax_legend_kz_res_or'],
+           'f2_ax_kz_res_legend_bbox' : f2_ax_legend['f2_ax_legend_kz_res_bbox'],
+           'f2_ax_kz_std_legend_cols' : f2_ax_legend['f2_ax_legend_kz_std_cols'],
+           'f2_ax_kz_std_legend_or' : f2_ax_legend['f2_ax_legend_kz_std_or'],
+           'f2_ax_kz_std_legend_bbox' : f2_ax_legend['f2_ax_legend_kz_std_bbox'],
+           'f2_ax_conc_res_legend_cols' : f2_ax_legend['f2_ax_legend_conc_res_cols'],
+           'f2_ax_conc_res_legend_or' : f2_ax_legend['f2_ax_legend_conc_res_or'],
+           'f2_ax_conc_res_legend_bbox' : f2_ax_legend['f2_ax_legend_conc_res_bbox'],
+           'f2_ax_conc_std_legend_cols' : f2_ax_legend['f2_ax_legend_conc_std_cols'],
+           'f2_ax_conc_std_legend_or' : f2_ax_legend['f2_ax_legend_conc_std_or'],
+           'f2_ax_conc_std_legend_bbox' : f2_ax_legend['f2_ax_legend_conc_std_bbox'], 
            'f2_is_enforce_axis_input' : f2_is_enforce_axis_input, 
            'f2_plot_x_min' : f2_ax_x_min,
            'f2_plot_x_max' : f2_ax_x_max,
@@ -515,13 +568,13 @@ pc_pic_ending = '.png'
            'f2_ax_conc_res_y_max' : f2_ax_conc_res_y_max,
            'f2_ax_conc_std_y_min' : f2_ax_conc_std_y_min,
            'f2_ax_conc_std_y_max' : f2_ax_conc_std_y_max, 
-           'f2_ax_offset_corr' : f2_ax_offset_corr,
-           'f2_ax_offset_kz' : f2_ax_offset_kz,
-           'f2_ax_offset_kz_res' : f2_ax_offset_kz_res,
-           'f2_ax_offset_kz_std' : f2_ax_offset_kz_std,
-           'f2_ax_offset_conc_std' : f2_ax_offset_conc_std,
-           'f2_ax_offset_conc_res' : f2_ax_offset_conc_res,
-           'f2_ax_corr_show_line' : f2_ax_corr_show_line,
+           'f2_ax_offset_corr' : f2_ax_offset['f2_ax_offset_corr'],
+           'f2_ax_offset_kz' : f2_ax_offset['f2_ax_offset_kz'],
+           'f2_ax_offset_kz_res' : f2_ax_offset['f2_ax_offset_kz_res'],
+           'f2_ax_offset_kz_std' : f2_ax_offset['f2_ax_offset_kz_std'],
+           'f2_ax_offset_conc_std' : f2_ax_offset['f2_ax_offset_conc_std'],
+           'f2_ax_offset_conc_res' : f2_ax_offset['f2_ax_offset_conc_res'],
+           'f2_ax_corr_show_line' : f2_ax_offset['f2_ax_corr_show_line'],
            'f2_ax_corr_show_marker' : f2_ax_corr_show_marker,
            'f2_is_show_arrows' : f2_is_show_arrows,
            'f2_fig_title' : f2_fig_title,
@@ -634,11 +687,16 @@ pc_pic_ending = '.png'
            'pc_x_max':pc_x_max,
            'pc_y_min':pc_y_min,
            'pc_y_max':pc_y_max,
+           'pc_is_legend':pc_is_legend,
            'pc_legend_loc':pc_legend_loc,
            'pc_legend_bbox_anchor':pc_legend_bbox_anchor,
+           'pc_legend_num_cols':pc_legend_num_cols,
            'pc_colored':pc_colored,
+           'pc_alpha':pc_alpha,
            'pc_n_per_color':pc_n_per_color,
+           'pc_is_markers':pc_is_markers,
            'pc_marker_colors':pc_marker_colors,
+           'pc_linewidth':pc_linewidth,
            'pc_line_colors':pc_line_colors,
            }
 
