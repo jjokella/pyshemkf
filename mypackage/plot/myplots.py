@@ -85,168 +85,173 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            m_cbar_space,m_num_cbar,diff_obs,m_cbar_left_pad,m_is_show_mons,mons_file_dir,
            figure_size_y,m_diff,assim_variables_dirs,corr_name,
            assimstp_dirs,m_is_text,m_n_rows,resid_name,figure_size_x,model_name_big,
-           im_left,run_output_dir,m_grid_factor,corr_dir,m_mons_size,m_kz_std_low,
-           true_output_dir,resid_dir,num_mons,corr_dirs,m_kz_std_high,im_up,
+           run_output_dir,corr_dir,m_mons_size,m_kz_std_low,
+           true_output_dir,resid_dir,num_mons,corr_dirs,m_kz_std_high,
            stddev_dir,assim_variables_name,model_name,m_first,m_cbar_kz_low,m_cbar_kz_high,
            m_cbar_kz_res_low, m_cbar_kz_res_high,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
-           m_single_fig_title,m_cbar_width,
+           m_ax_title,m_cbar_width, m_ax_title_pos,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            resid_dirs, stddev_dirs,
            m_cmaps,fig_m = 0 ):
 
 
-    # PREPARATION
-    
-    n_fnames = len(m_infiles) # Number of different variables shown
-    if n_fnames > m_n_rows*m_n_cols:
-        n_fnames = m_n_rows*m_n_cols
+    with plt.style.context(('m_style_' + str(m_n_rows) + '_' + str(m_n_cols) )):
+        # PREPARATION
 
-    infile_stems = ['assim_variables_E1_' + m_befaft[i] + '_'
-                    if m_infiles[i] == 'av' else
-                    ('correlation_'
-                     + str(m_cor_cell_var[i][0]).zfill(4) + '_'
-                     + str(m_cor_cell_var[i][1]).zfill(4) + '_'
-                     + str(m_cor_cell_var[i][2]).zfill(4) + '_'
-                     + str(m_cor_cell_var[i][3]).zfill(4) + '_'
-                     + m_befaft[i] + '_'
-                     if m_infiles[i]=='cor' else
-                     (model_name_big + '_E0_init_'
-                      if m_infiles[i]=='init' else
-                      model_name_big + '_E1_'))
-                    for i in range(n_fnames)]
-    
-    param_inserts =  pltfct.m_input_check(n_fnames, # Input check
-                                       infile_stems,
-                                       assim_variables_dir,
-                                       run_output_dir + 'samples_output',
-                                       varnames,
-                                       m_first, m_n_rows, m_n_cols, m_diff,
-                                       nrobs_int,
-                                       im_up)
-    infile_stems = [infile_stems[i] + 'param_' 
-                        if param_inserts[i]
-                        else infile_stems[i]
+        n_fnames = len(m_infiles) # Number of different variables shown
+        if n_fnames > m_n_rows*m_n_cols:
+            n_fnames = m_n_rows*m_n_cols
+
+        infile_stems = ['assim_variables_E1_' + m_befaft[i] + '_'
+                        if m_infiles[i] == 'av' else
+                        ('correlation_'
+                         + str(m_cor_cell_var[i][0]).zfill(4) + '_'
+                         + str(m_cor_cell_var[i][1]).zfill(4) + '_'
+                         + str(m_cor_cell_var[i][2]).zfill(4) + '_'
+                         + str(m_cor_cell_var[i][3]).zfill(4) + '_'
+                         + m_befaft[i] + '_'
+                         if m_infiles[i]=='cor' else
+                         (model_name_big + '_E0_init_'
+                          if m_infiles[i]=='init' else
+                          model_name_big + '_E1_'))
                         for i in range(n_fnames)]
 
-    os.chdir(run_output_dir)    #Go to the general run output directory
-    if(not(os.path.exists('pics'))):    #Create pics directory if not already existing
-        os.mkdir('pics')
+        param_inserts =  pltfct.m_input_check(n_fnames, # Input check
+                                           infile_stems,
+                                           assim_variables_dir,
+                                           run_output_dir + 'samples_output',
+                                           varnames,
+                                           m_first, m_n_rows, m_n_cols, m_diff,
+                                           nrobs_int)
+        infile_stems = [infile_stems[i] + 'param_' 
+                            if param_inserts[i]
+                            else infile_stems[i]
+                            for i in range(n_fnames)]
+
+        os.chdir(run_output_dir)    #Go to the general run output directory
+        if(not(os.path.exists('pics'))):    #Create pics directory if not already existing
+            os.mkdir('pics')
 
 
- 
-    # DATA
 
-    data = pltfct.my_vtk_to_numpy(assim_variables_dir # Get NumPy Array
-                               if m_infiles[0] in ['av','cor'] else
-                               run_output_dir + 'samples_output',
-                               infile_stems[0] + str(1).zfill(4) + '.vtk'
-                               if m_infiles[0] in ['av','cor'] else
-                               infile_stems[0] + str(1) + '.vtk',
-                               varnames[0])
+        # DATA
 
-    step_x, step_y, \
-    npts_x, npts_y, \
-    low_m_x, high_m_x,\
-    low_m_y, high_m_y,\
-    low_x, high_x, \
-    low_y, high_y = pltfct.vtk_grid_props(assim_variables_dir   # Get Grid Properties
-                                       if m_infiles[0] in ['av','cor'] else
-                                       run_output_dir + 'samples_output',
-                                       infile_stems[0] + str(1).zfill(4) + '.vtk'
-                                       if m_infiles[0] in ['av','cor'] else
-                                       infile_stems[0] + str(1) + '.vtk',
-                                       varnames[0]) 
-    
-    # PLOT
-    if not fig_m:
-        fig_m = plt.figure(1, figsize=(figure_size_x,figure_size_y)) #Generate the figure
-        fig_m.set_facecolor((0.50, 0.50, 0.50)) # Set figure background color
-        plt.suptitle(infile_stems[0]
-                     if m_fig_title == None else
-                     m_fig_title, y = 0.97, fontsize=m_fig_title_font)    #Insert figure title
+        data = pltfct.my_vtk_to_numpy(assim_variables_dir # Get NumPy Array
+                                   if m_infiles[0] in ['av','cor'] else
+                                   run_output_dir + 'samples_output',
+                                   infile_stems[0] + str(1).zfill(4) + '.vtk'
+                                   if m_infiles[0] in ['av','cor'] else
+                                   infile_stems[0] + str(1) + '.vtk',
+                                   varnames[0])
 
-    ax_grid = myplt.myaxgrid(fig_m, # List of axes, ordered row before column
-                             n_rows = m_n_rows,
-                             n_cols = m_n_cols,
-                             grid_factor = m_grid_factor,
-                             left_pad = im_left,
-                             up_pad = im_up,
-                             x_ticks = [100.0,200.0,300.0,400.0,500.0],
-                             y_ticks = [100.0,200.0,300.0,400.0,500.0],
-                             x_ticklabels = [100,200,300,400,500],
-                             y_ticklabels = [100,200,300,400,500],)
-        
-    if m_is_show_mons:    # Plot Monitoring cells
-        ind_x = [mons_inds[i,0]*step_x-0.5*step_x for i in range(num_mons)]
-        ind_y = [mons_inds[i,1]*step_y-0.5*step_y for i in range(num_mons)]
+        step_x, step_y, \
+        npts_x, npts_y, \
+        low_m_x, high_m_x,\
+        low_m_y, high_m_y,\
+        low_x, high_x, \
+        low_y, high_y = pltfct.vtk_grid_props(assim_variables_dir   # Get Grid Properties
+                                           if m_infiles[0] in ['av','cor'] else
+                                           run_output_dir + 'samples_output',
+                                           infile_stems[0] + str(1).zfill(4) + '.vtk'
+                                           if m_infiles[0] in ['av','cor'] else
+                                           infile_stems[0] + str(1) + '.vtk',
+                                           varnames[0]) 
+
+        # PLOT
+        if not fig_m:
+            fig_m = plt.figure(1)# , figsize=(figure_size_x,figure_size_y)) #Generate the figure
+            fig_m.set_facecolor((0.50, 0.50, 0.50)) # Set figure background color
+            plt.suptitle(infile_stems[0]
+                         if m_fig_title == None else
+                         m_fig_title, y = 0.97, fontsize=m_fig_title_font)    #Insert figure title
+
+        ax_grid = myplt.myaxgrid(fig_m, # List of axes, ordered row before column
+                                 n_rows = m_n_rows,
+                                 n_cols = m_n_cols,
+                                 # grid_factor = m_grid_factor, # m_style.mplstyle
+                                 # left_pad = im_left,
+                                 # up_pad = im_up,
+                                 x_ticks = [100.0,200.0,300.0,400.0,500.0],
+                                 y_ticks = [100.0,200.0,300.0,400.0,500.0],
+                                 x_ticklabels = [100,200,300,400,500],
+                                 y_ticklabels = [100,200,300,400,500],)
+
+        if m_is_show_mons:    # Plot Monitoring cells
+            ind_x = [mons_inds[i,0]*step_x-0.5*step_x for i in range(num_mons)]
+            ind_y = [mons_inds[i,1]*step_y-0.5*step_y for i in range(num_mons)]
+
+            for i_subplt in range(m_n_rows*m_n_cols):
+                ax_grid[i_subplt].scatter(ind_x,
+                                           ind_y,
+                                           marker='o',
+                                           c='black',
+                                           s=m_mons_size)
+
+
+        m_low_cbars = [pltfct.get_cbar_low(varname,# Calculate appropriate min/max for cbar
+                                        m_kz_std_low,m_cbar_kz_low,
+                                        m_cbar_kz_res_low,m_cbar_cor_low)
+                       for varname in varnames]
+
+        m_high_cbars = [pltfct.get_cbar_high(varname,
+                                          m_kz_std_high, m_cbar_kz_high,
+                                          m_cbar_kz_res_high, m_cbar_cor_high)
+                        for varname in varnames]
+
 
         for i_subplt in range(m_n_rows*m_n_cols):
-            ax_grid[i_subplt].scatter(ind_x,
-                                       ind_y,
-                                       marker='o',
-                                       c='black',
-                                       s=m_mons_size)
+
+            i_obs = m_first + (i_subplt/n_fnames)*m_diff # Observation index
+            i_fnames = i_subplt%n_fnames                 # Different variable index
+
+            data=pltfct.my_vtk_to_numpy(assim_variables_dir        # Getting the NumPy Array
+                                     if m_infiles[0] in ['av','cor'] else
+                                     run_output_dir + 'samples_output',
+                                     infile_stems[i_fnames] + str(i_obs).zfill(4)+'.vtk'
+                                     if m_infiles[i] in ['av','cor'] else
+                                     infile_stems[i_fnames] + str(i_obs) + '.vtk', 
+                                     varnames[i_fnames])
+
+            if m_is_subarray:
+                data = dr.my_subarray(data, # Subarray selection
+                                      ind_x = np.arange(10,22,1),
+                                      ind_y = np.arange(10,22,1))
 
 
-    m_low_cbars = [pltfct.get_cbar_low(varname,# Calculate appropriate min/max for cbar
-                                    m_kz_std_low,m_cbar_kz_low,
-                                    m_cbar_kz_res_low,m_cbar_cor_low)
-                   for varname in varnames]
+            if m_is_masked:
+                data = dr.my_maskedarray(data, # Mask the array
+                                         ind_x = np.arange(16,32,1),
+                                         ind_y = np.arange(16,32,1))
 
-    m_high_cbars = [pltfct.get_cbar_high(varname,
-                                      m_kz_std_high, m_cbar_kz_high,
-                                      m_cbar_kz_res_high, m_cbar_cor_high)
-                    for varname in varnames]
+            im=ax_grid[i_subplt].imshow(data,        #Generate plot
+                                        interpolation='nearest',
+                                        cmap=cm.get_cmap(name=m_cmaps[i_fnames], 
+                                                         lut=m_num_cbar), 
+                                        norm = colors.Normalize(vmin=m_low_cbars[i_fnames],
+                                                                vmax=m_high_cbars[i_fnames],
+                                                                clip=False),
+                                        origin='lower',
+                                        extent=[low_x,high_x,low_y,high_y])
 
-    
-    for i_subplt in range(m_n_rows*m_n_cols):
-
-        i_obs = m_first + (i_subplt/n_fnames)*m_diff # Observation index
-        i_fnames = i_subplt%n_fnames                 # Different variable index
-
-        data=pltfct.my_vtk_to_numpy(assim_variables_dir        # Getting the NumPy Array
-                                 if m_infiles[0] in ['av','cor'] else
-                                 run_output_dir + 'samples_output',
-                                 infile_stems[i_fnames] + str(i_obs).zfill(4)+'.vtk'
-                                 if m_infiles[i] in ['av','cor'] else
-                                 infile_stems[i_fnames] + str(i_obs) + '.vtk', 
-                                 varnames[i_fnames])
-
-        if m_is_subarray:
-            data = dr.my_subarray(data, # Subarray selection
-                                  ind_x = np.arange(10,22,1),
-                                  ind_y = np.arange(10,22,1))
+            if not m_ax_title: # Set default for m_ax_title
+                m_ax_title = 'Observation ' + str(i_obs).zfill(2)
+            ax_grid[i_subplt].set_title(m_ax_title, y = m_ax_title_pos) #Add plot title
             
+            if i_subplt in range(n_fnames): # Add Colorbar for every variable
+                
+                cb_ax = fig_m.add_subplot(1,25,i_subplt+1)
+                
+                m_cbar_left = mpl.rcParams['figure.subplot.right'] + m_cbar_left_pad + (i_subplt)*m_cbar_space
+                m_cbar_bottom = mpl.rcParams['figure.subplot.bottom']
+                m_cbar_height = mpl.rcParams['figure.subplot.top']-mpl.rcParams['figure.subplot.bottom']
+                cb_ax.set_position([m_cbar_left,
+                                    m_cbar_bottom,
+                                    m_cbar_width,
+                                    m_cbar_height]) 
 
-        if m_is_masked:
-            data = dr.my_maskedarray(data, # Mask the array
-                                     ind_x = np.arange(16,32,1),
-                                     ind_y = np.arange(16,32,1))
-        
-        im=ax_grid[i_subplt].imshow(data,        #Generate plot
-                                    interpolation='nearest',
-                                    cmap=cm.get_cmap(name=m_cmaps[i_fnames], 
-                                                     lut=m_num_cbar), 
-                                    norm = colors.Normalize(vmin=m_low_cbars[i_fnames],
-                                                            vmax=m_high_cbars[i_fnames],
-                                                            clip=False),
-                                    origin='lower',
-                                    extent=[low_x,high_x,low_y,high_y])
-
-        if not m_single_fig_title: # Set default for m_single_fig_title
-            m_single_fig_title = 'Observation '
-        ax_grid[i_subplt].set_title(m_single_fig_title + str(i_obs).zfill(2)) #Add plot title
-        
-        if i_subplt in range(n_fnames): # Add Colorbar for every variable
-            cb_ax = fig_m.add_subplot(1,25,i_subplt)
-            cbar_pad = m_cbar_left_pad + i_subplt*m_cbar_space
-            cb_ax.set_position([im_left+m_n_cols*(0.12*m_grid_factor)+(m_n_cols-1)*(0.01*m_grid_factor)+cbar_pad,
-                                1.0-im_up-m_n_rows*(0.24*m_grid_factor)-(m_n_rows-1)*(0.04*m_grid_factor),
-                                m_cbar_width,
-                                m_n_rows*(0.24*m_grid_factor) + (m_n_rows-1.0)*(0.04*m_grid_factor)])
-            cb_ax.set_title(m_cbar_titles[i_subplt])
-            mpl.colorbar.Colorbar(cb_ax, im)
+                cb_ax.set_title(m_cbar_titles[i_subplt], y =1.02)
+                mpl.colorbar.Colorbar(cb_ax, im)
 
     return fig_m
 

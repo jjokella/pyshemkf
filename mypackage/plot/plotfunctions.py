@@ -366,7 +366,7 @@ def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low
 def m_input_check(n_f, input_file_names,
                   assim_variables_dir,
                   samples_out_dir, varnames, m_first, m_n_rows, m_n_cols,
-                  m_diff, nrobs_int, m_upper_space):
+                  m_diff, nrobs_int):
     #Check scalar variable in file
     return_value = [0 for i in range(n_f)]
     for i in range(n_f):
