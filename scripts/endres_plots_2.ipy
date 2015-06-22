@@ -1,0 +1,25 @@
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.run import runmodule as rm
+
+dat = ['2015_06_16','2015_06_16','2015_06_17']
+let = ['cx','gt','b']
+num = 100
+
+num_obs = 100                             #Should be almost constant
+endres = [[plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat[j] + '/' + dat[j] + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let[j]),rm.get_num_let(let[j])+num)] for j in range(3)]
+
+plt.figure()
+plt.hist(endres[0],np.linspace(0.2,1,50),color = 'red',label = '500')
+plt.hist(endres[1],np.linspace(0.2,1,50),color = 'orange',label = '1000')
+plt.hist(endres[2],np.linspace(0.2,1,50),color = 'green', label = '2000')
+plt.title('Residual Histogram',fontsize = 20)
+plt.xlabel(r'Residual [$log(\frac{1}{m^2})$]',fontsize = 12)
+plt.ylabel('Number of occurences',fontsize = 12)
+plt.legend(title = 'Ensemble')
+plt.savefig('/home/jk125262/allhist_ensemblehigh.png')
+plt.close()
+
+os.chdir('/home/jk125262/PythonDir_Cluster')

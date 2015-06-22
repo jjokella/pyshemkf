@@ -1,0 +1,11 @@
+# Three times 100 runs in one plot (their residuals)
+import os
+from mypackage.plot import plotfunctions
+from mypackage.run import runmodule as rm
+
+mydates = ['2015_06_16' for i in range(201,301)] + ['2015_06_16' for i in range(1,101)]+ ['2015_06_17' for i in range(1,101)]
+myletters = [rm.get_let_num(i) for i in range(101,201)] +[rm.get_let_num(i) for i in range(201,301)] +[rm.get_let_num(i) for i in range(1,101)]
+# mytitle = r'Damping $\alpha = 0.5$'
+mytitle = r'Higher Ensembles, normal EnKF'
+# 
+p(is_pc =1, date = mydates[0], letter = 'cx', nl = 100, pc_text = 1, pc_text_y = 0.1,pc_title_text = mytitle,pc_line_colors = ['red' if i<100 else ('orange' if i<200 else 'green') for i in range(300)], pc_letters = myletters, pc_dates = mydates, pc_nl = 300, is_show = 1, is_save = 0)
