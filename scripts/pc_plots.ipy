@@ -2,20 +2,31 @@ import os
 from mypackage.plot import plotfunctions
 from mypackage.run import runmodule as rm
 
-dat = '2015_06_16'
+dat = '2015_06_15'
 let = 'b'
 show = 1
-title = 'Residuals 250 members'           #None: Standard title
-pc_lets = [rm.get_let_num(i) for i in range(1,101)]
-# pc_lets = [rm.get_let_num(i) for i in range(101,201)]
-# pc_lets = [rm.get_let_num(i) for i in range(201,301)]
+var_name = 'conc'
+y_min = 0.000
+y_max = 0.0015
+title = 'Residuals: 50 members '           #None: Standard title
+if let == 'b':
+    pc_lets = [rm.get_let_num(i) for i in range(1,101)]
+elif let == 'cx':
+    pc_lets = [rm.get_let_num(i) for i in range(101,201)]
+elif let == 'gt':
+    pc_lets = [rm.get_let_num(i) for i in range(201,301)]
+else:
+    print('Johannes: wrong letter!!!')
 #
 # Residuals
 #
-p(is_pc = 1, letter = let, date = dat, pc_output = 'res', pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_title_text = title, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)
+p(is_pc = 1, letter = let, date = dat, pc_output = 'res', pc_var_name = var_name, pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_title_text = title, pc_y_min = y_min, pc_y_max = y_max, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)
 #
 # Standard Deviations
 #
-p(is_pc = 1, letter = let, date = dat, pc_output = 'std', pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)
+# p(is_pc = 1, letter = let, date = dat, pc_output = 'std', pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)
 #
 os.chdir('/home/jk125262/PythonDir_Cluster')
+# 
+# 
+
