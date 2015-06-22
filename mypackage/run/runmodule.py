@@ -7,6 +7,7 @@ import exceptions  		# Raising exception (raise exceptions.RuntimeError)
 import shlex      		# Structure system commands(shlex.split) 
 import string     		# Load alphabet (string.alphabet())
 import time       		# Timing the execution (time.time(), time.clock())
+import shutil
 
 #############################################################
 #                  REPLACE STRING
@@ -303,7 +304,60 @@ def make_file_dir_names(model_name):
         init_dist_file_one, init_dist_file_two, init_dist_file_three, observations_file,\
         true_file,true_chem_file
 
+
+def make_model_dir_tmp(model_name,letter,today):
+    os.chdir("/home/jk125262/shematModelsDir_Cluster")
+    # Copy everything to temporal directory
+    new_model_dir = "/home/jk125262/shematModelsDir_Cluster/" \
+      +model_name + '_model_' + today  + '_' + letter
+    shutil.copytree("/home/jk125262/shematModelsDir_Cluster/" + model_name + '_model',
+                    new_model_dir)
+    os.chdir(new_model_dir)
+    # Change the directory  inside clean_out, move_output
+    replace_string('clean_output.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('clean_output_py.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('compilequick.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('generateobs.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('generatetecmon.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('generatetrues.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('move_output.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('move_output_py.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('py_compilequick_gnu_plt.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('py_compilequick_gnu_plt_omp.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('py_compilequick_gnu_vtk.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('py_compilequick_gnu_vtk_omp.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
+    os.chmod('clean_output.sh',128+256+64)
+    os.chmod('clean_output_py.sh',128+256+64)
+    os.chmod('compilequick.sh',128+256+64)
+    os.chmod('generateobs.sh',128+256+64)
+    os.chmod('generatetrues.sh',128+256+64)
+    os.chmod('generatetecmon.sh',128+256+64)
+    os.chmod('move_output.sh',128+256+64)
+    os.chmod('move_output_py.sh',128+256+64)
+    os.chmod('py_compilequick_gnu_plt.sh',128+256+64)
+    os.chmod('py_compilequick_gnu_plt_omp.sh',128+256+64)
+    os.chmod('py_compilequick_gnu_vtk.sh',128+256+64)
+    os.chmod('py_compilequick_gnu_vtk_omp.sh',128+256+64)
+    os.chmod('veryclean.sh',128+256+64)
+
+    return new_model_dir
     
+def delete_model_dir_tmp(model_dir):
+    # Delete the temporal directory
+    shutil.rmtree(model_dir)
+
 
 print('\n Done with module : runmodule.py.')
 print(time.asctime( time.localtime( time.time())))
