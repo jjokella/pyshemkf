@@ -1430,144 +1430,155 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
             model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
             nl,date,
             pc_output,pc_is_show_ens,pc_num_ens,pc_title_text,pc_x_min,pc_x_max,
-            pc_nl,pc_dates,pc_letters,pc_alpha,pc_linewidth,
-            pc_y_min,pc_y_max,pc_legend_loc,pc_legend_bbox_anchor,pc_colored,
-            pc_legend_num_cols,pc_is_legend,pc_is_markers,
+            pc_nl,pc_dates,pc_letters,pc_alpha,pc_linewidth,pc_fig_title_text,
+            pc_y_min,pc_y_max,pc_legend_bbox_anchor,pc_colored,
+            pc_legend_num_cols,pc_is_legend,pc_is_markers,pc_text,
+            pc_text_x,pc_text_y,pc_var_name,
             pc_n_per_color,pc_marker_colors,pc_line_colors,
             figure_size_x, figure_size_y, fig_pc = None):
 
-    
-    if not fig_pc:
-        # Generate the figure
-        fig_pc = plt.figure(5, figsize=(figure_size_x,figure_size_y))
-        fig_pc.set_facecolor((0.50, 0.50, 0.50))
-        # Insert figure title
-        plt.suptitle('Compare plot', y = 0.97, fontsize=20)
+    with plt.style.context(('pc_style')):
+        if not fig_pc:
+            # Generate the figure
+            fig_pc = plt.figure(5, figsize=(figure_size_x,figure_size_y))
+            fig_pc.set_facecolor((0.50, 0.50, 0.50))
+            # Insert figure title
+            if not pc_fig_title_text == None:
+                plt.suptitle(pc_fig_title_text, y = 0.97, fontsize=20)                
 
-    if pc_nl:                   # Use pc_nl only for different dates
-        nl = pc_nl            
-    if pc_dates and pc_letters:
-        if len(pc_dates) == len(pc_letters) and len(pc_dates) == pc_nl:
-            resid_dirs = [model_output_dir + pc_dates[i] + "/"
-                          + pc_dates[i] + "_" + pc_letters[i] + "/"
-                          + "enkf_output" for i in range(len(pc_dates))]
-            letters = pc_letters
+        if pc_nl:                   # Use pc_nl only for different dates
+            nl = pc_nl            
+        if pc_dates and pc_letters:
+            if len(pc_dates) == len(pc_letters) and len(pc_dates) == pc_nl:
+                resid_dirs = [model_output_dir + pc_dates[i] + "/"
+                              + pc_dates[i] + "_" + pc_letters[i] + "/"
+                              + "enkf_output" for i in range(len(pc_dates))]
+                letters = pc_letters
+            else:
+                os.chdir(python_dir)
+                raise exceptions.RuntimeError("pc_dates, pc_letters or pc_nl not as wanted")
+
+
+        nl_f = float(nl)            # Color themes
+        getting_darker = [(float(i)/nl_f , float(i)/nl_f , float(i)/nl_f)  for i in range(nl)]
+        getting_darker.reverse()
+
+        changing_black_white = [(0,0,0) if i%2 else (0.5,0.5,0.5) for i in range(nl)]
+
+        if pc_colored is None:
+            pc_colored = [1 for i in range(nl)] # False: Grey instead of color, Default: all true
+        if pc_marker_colors is None:
+            pc_marker_colors = getting_darker # Marker colors
+        if pc_line_colors is None:
+            if nl < 62:
+                pc_line_colors = [color_arr[i/pc_n_per_color] if pc_colored[i] else 'grey'
+                                  for i in range(nl)] # Line colors
+            else:
+                pc_line_colors = ['grey' for i in range(nl)]
+
+
+
+        if pc_output == 'res':         # Title, filename, variable depending on 'res'/'std'
+            if pc_title_text is None:
+                pc_title_text = 'Residual ' + date
+            var_name = 'rms_'+pc_var_name+'_aft'
+            input_file_name = 'residual_E1.vtk'
+        elif pc_output  == 'std':
+            if pc_title_text is None:
+                pc_title_text = 'Stddevs ' + date
+            var_name = 'std_'+pc_var_name+'_aft'
+            input_file_name = 'stddev_E1.vtk'
         else:
-            os.chdir(python_dir)
-            raise exceptions.RuntimeError("pc_dates, pc_letters or pc_nl not as wanted")
-        
+            raise exceptions.RuntimeError('Wrong input_file_name.  ' + input_file_name)
 
-    nl_f = float(nl)            # Color themes
-    getting_darker = [(float(i)/nl_f , float(i)/nl_f , float(i)/nl_f)  for i in range(nl)]
-    getting_darker.reverse()
-    
-    changing_black_white = [(0,0,0) if i%2 else (0.5,0.5,0.5) for i in range(nl)]
-    
-    if pc_colored is None:
-        pc_colored = [1 for i in range(nl)] # False: Grey instead of color, Default: all true
-    if pc_marker_colors is None:
-        pc_marker_colors = getting_darker # Marker colors
-    if pc_line_colors is None:
-        if nl < 62:
-            pc_line_colors = [color_arr[i/pc_n_per_color] if pc_colored[i] else 'grey'
-                              for i in range(nl)] # Line colors
-        else:
-            pc_line_colors = ['grey' for i in range(nl)]
-                                  
+        #############################################################################
+        #Checks
+        for resid_dir in resid_dirs: # Does file exist? Is variables in file?
+            if not pltfct.is_scalar_var_in_file(var_name, input_file_name, resid_dir):
+                raise exceptions.RuntimeError('var_name ' + var_name \
+                    + 'not in input_file_name ' + input_file_name \
+                    + 'in resid_dir' + resid_dir)
 
 
-    if pc_output == 'res':         # Title, filename, variable depending on 'res'/'std'
-        if pc_title_text is None:
-            pc_title_text = 'Residual ' + date
-        var_name = 'rms_kz_aft'
-        input_file_name = 'residual_E1.vtk'
-    elif pc_output  == 'std':
-        if pc_title_text is None:
-            pc_title_text = 'Stddevs ' + date
-        var_name = 'std_kz_aft'
-        input_file_name = 'stddev_E1.vtk'
-    else:
-        raise exceptions.RuntimeError('Wrong input_file_name.  ' + input_file_name)
+        ############################################################################
 
-    #############################################################################
-    #Checks
-    for resid_dir in resid_dirs: # Does file exist? Is variables in file?
-        if not pltfct.is_scalar_var_in_file(var_name, input_file_name, resid_dir):
-            raise exceptions.RuntimeError('var_name ' + var_name \
-                + 'not in input_file_name ' + input_file_name \
-                + 'in resid_dir' + resid_dir)
+        ax = fig_pc.add_subplot(1,1,1) # Axis
+        # ax.set_position([0.55,0.55,
+        #                  0.35,0.35])
+        ax.set_title(pc_title_text,y = 1.02)
+        ax.set_xlabel(r'$t$ [days]',x =0.5,y=-0.1)
+        ax.set_ylabel(r'$R$ [$\log{\frac{1}{m^{2}}}$]',x=-0.1,y=0.5)
 
 
-    ############################################################################
+        data_x=[]         
+        data_y=[]
+        plots=[]
+        plot_labels=[]
 
-    ax = fig_pc.add_subplot(1,1,1) # Axis
-    # ax.set_position([0.55,0.55,
-    #                  0.35,0.35])
-    ax.set_title(pc_title_text,
-                 fontsize = 25)
-    ax.set_xlabel('obstime')
-    ax.set_ylabel('Residuals')
+        for i,letter in enumerate(letters): # Loop over letters
 
+            data_x = pltfct.my_vtk_to_numpy(resid_dirs[i], # x-data
+                                            input_file_name,
+                                            'obstime')
+            data_y = pltfct.my_vtk_to_numpy(resid_dirs[i], # y-data
+                                            input_file_name,
+                                            var_name)
 
-    data_x=[]         
-    data_y=[]
-    plots=[]
-    plot_labels=[]
-
-    for i,letter in enumerate(letters): # Loop over letters
-        
-        data_x = pltfct.my_vtk_to_numpy(resid_dirs[i], # x-data
-                                        input_file_name,
-                                        'obstime')
-        data_y = pltfct.my_vtk_to_numpy(resid_dirs[i], # y-data
-                                        input_file_name,
-                                        var_name)
+            plot_labels.append('Residuals ' + letter
+                               if not pc_nl else
+                               'Res ' + pc_dates[i] + '_' + letter )
 
 
-        plots.append(ax.plot(data_x, # Main plot
-                             data_y,
-                             color=pc_line_colors[i],
-                             alpha = pc_alpha,
-                             linestyle='-',
-                             linewidth=pc_linewidth,
-                             marker='o' if pc_is_markers else '',
-                             markerfacecolor=pc_marker_colors[i],
-                             markeredgecolor=pc_marker_colors[i],
-                             markersize=6))
-                               #label='Mean')
-        plot_labels.append('Residuals ' + letter
-                           if not pc_nl else
-                           'Res ' + pc_dates[i] + '_' + letter )
+            plots.append(ax.plot(data_x, # Main plot
+                                 data_y,
+                                 color=pc_line_colors[i],
+                                 alpha = pc_alpha,
+                                 label = plot_labels[i],
+                                 # linestyle='-',
+                                 # linewidth=pc_linewidth,
+                                 # marker='o' if pc_is_markers else '',
+                                 markerfacecolor=pc_marker_colors[i],
+                                 markeredgecolor=pc_marker_colors[i]))
+                                   #label='Mean')
 
 
-        if pc_is_show_ens:         # Ensemble of residuals
-            for i_arr in range(pc_num_ens): 
-                data_ens = pltfct.my_vtk_to_numpy(resid_dirs[i],
-                                                  input_file_name,
-                                                  'rm_kz_aft_' + str(i_arr+1))
-                plot_ens = ax.plot(data_x,
-                                   data_ens,
-                                   color=pc_line_colors[i],
-                                   linestyle='-',
-                                   marker='',
-                                   markerfacecolor='grey',
-                                   markeredgecolor='grey',
-                                   markersize=6)
+            if pc_is_show_ens:         # Ensemble of residuals
+                for i_arr in range(pc_num_ens): 
+                    data_ens = pltfct.my_vtk_to_numpy(resid_dirs[i],
+                                                      input_file_name,
+                                                      'rm_kz_aft_' + str(i_arr+1))
+                    plot_ens = ax.plot(data_x,
+                                       data_ens,
+                                       color=pc_line_colors[i],
+                                       linestyle='-',
+                                       marker='',
+                                       markerfacecolor='grey',
+                                       markeredgecolor='grey',
+                                       markersize=6)
 
-    if pc_is_legend:
-        plt.legend(plots, # Legend
-                   plot_labels,
-                   title = 'Legend',
-                   loc=pc_legend_loc,
-                   bbox_to_anchor=pc_legend_bbox_anchor,
-                   handlelength=2,
-                   numpoints=2,
-                   handletextpad=0.5,
-                   ncol=pc_legend_num_cols,
-                   prop={'size':16})
+        if pc_text:
+            plt.text(pc_text_x,
+                     pc_text_y,
+                     r'$R^{i} = \sqrt{\frac{1}{n_{loc}}\sum_{loc}{\ (\bar{x}^{i}_{loc}-t_{loc})^{2}}} \quad i = 1, \cdots ,n_{run}$',
+                     fontsize=40,
+                     bbox = dict(facecolor = 'grey',alpha = 0.5))
 
+        if pc_is_legend:
+            if len(letters) < 20:
+                plt.legend(title = 'Legend',
+                           bbox_to_anchor=pc_legend_bbox_anchor,
+                           ncol=pc_legend_num_cols,
+                           prop={'size':16})
+            else:
+                leggy = plt.legend([mpl.lines.Line2D([],[], linewidth = 5.0, color = 'red', marker = ''),
+                                    mpl.lines.Line2D([],[], linewidth = 5.0, color = 'orange', marker = ''),
+                                    mpl.lines.Line2D([],[], linewidth = 5.0, color = 'green', marker = '')],
+                                   ['500','1000','2000'])
+                leggy.set_title('Ensemble Size',
+                                prop = {'size':20})
+                
 
-    plt.axis([pc_x_min,pc_x_max,pc_y_min,pc_y_max]) # R
+        plt.axis([pc_x_min,pc_x_max,pc_y_min,pc_y_max]) # R
         
 
     return fig_pc
