@@ -1,4 +1,6 @@
-import os
+# Three different endres with different colors
+
+import os                                 
 import matplotlib as mpl
 import numpy as np
 from mypackage.plot import plotfunctions

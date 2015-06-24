@@ -1,0 +1,41 @@
+# Plot of Endres means
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+# dats = ['2015_06_10','2015_06_11','2015_06_11','2015_06_16','2015_06_16','2015_06_17']
+# dats = ['2015_06_11','2015_06_12','2015_06_12','2015_06_19','2015_06_19','2015_06_19']
+dats = ['2015_06_13','2015_06_14','2015_06_14','2015_06_22','2015_06_22','2015_06_22']
+# lets = ['b','b','cx','cx','gt','b']
+# lets = ['gt','b','cx','b','cx','gt']
+lets = ['b','b','cx','b','cx','gt']
+
+nums = [100,100,100,100,100,100]
+num_obss = [100 for i in range(6)]                             #Should be almost constant
+png_name_plot = 'Meanres_only_Damping.png'
+
+ensemble_sizes = [50,100,250,500,1000,2000]
+endres_mean = [0,0,0,0,0,0]
+endres_std = [0,0,0,0,0,0]
+for j in range(len(ensemble_sizes)):
+    dat = dats[j]
+    let = lets[j]
+    num = nums[j]
+    num_obs = num_obss[j]                             #Should be almost constant
+    endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+    endres_mean[j] = np.mean(endres)
+    endres_std[j] = np.std(endres)
+plt.figure()
+plt.errorbar(ensemble_sizes,endres_mean,yerr = endres_std,fmt = 'o')
+plt.title('Damping Residuals',fontsize = 20)
+plt.xlim([0,2050])
+plt.ylim([0.0,1.0])
+plt.xlabel('Ensemble Number',fontsize = 12)
+plt.ylabel(r'Residual Mean [$log(\frac{1}{m^2})$]',fontsize = 12)
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/endres/'+png_name_plot)
+plt.close()
+os.chdir('/home/jk125262/PythonDir_Cluster')
