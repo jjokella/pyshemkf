@@ -206,10 +206,14 @@ is_show_text = 0
     elif grid_loc =='p':
         npts_x = grid_dims[0]
         npts_y = grid_dims[1]
-    low_x = grid_bounds[0] + 0.5*step_x  #Middle of cells
-    high_x = grid_bounds[1] - 0.5*step_x  #Middle of cells
-    low_y = grid_bounds[2] + 0.5*step_y  #Middle of cells
-    high_y = grid_bounds[3] - 0.5*step_y  #Middle of cells
+    # low_x = grid_bounds[0] + 0.5*step_x  #Middle of cells
+    # high_x = grid_bounds[1] - 0.5*step_x  #Middle of cells
+    # low_y = grid_bounds[2] + 0.5*step_y  #Middle of cells
+    # high_y = grid_bounds[3] - 0.5*step_y  #Middle of cells
+    low_x = grid_bounds[0] #Middle of cells
+    high_x = grid_bounds[1] #Middle of cells
+    low_y = grid_bounds[2]  #Middle of cells
+    high_y = grid_bounds[3]  #Middle of cells
     # Grid array coordinates
     x = np.linspace(low_x, high_x, npts_x)
     y = np.linspace(low_x, high_x, npts_y)
@@ -249,7 +253,7 @@ is_show_text = 0
         text.set_bbox(dict(facecolor=(0.8,0.8,0.8), alpha=0.5))
 
     #Generate axes
-    ax_grid = [fig.add_subplot(n_rows,n_cols,i) for i in range(n_rows*n_cols)]
+    ax_grid = [fig.add_subplot(n_rows,n_cols,i) for i in range(1,n_rows*n_cols+1)]
     for i in range(n_rows):
         for j in range(n_cols):
             ax_grid[i*n_cols+j].set_position([left_space+j*(image_width+image_pad_hori), 
@@ -309,7 +313,8 @@ is_show_text = 0
 
         #Title for image
         ax_grid[i_subplt].set_title('Time output # ' + str(j_subplt) + '\nMonitoring time ' + str(obstimes_model[j_subplt-1]).zfill(2))
-
+        ax_grid[i_subplt].set_xlim(grid_bounds[0],grid_bounds[1])
+        ax_grid[i_subplt].set_ylim(grid_bounds[2],grid_bounds[3])
 
 
     # Add Colorbar
@@ -393,7 +398,7 @@ is_show_text = 0
                      + ' ' + str(int(cell_numpy_ind[i][2]))
                      for i in range(min(num_mons,19))]
     #Legend
-    plt.legend(plot_arr,
+    plt.legend(# plot_arr,
                label_arr,
                loc = 'upper left',
                bbox_to_anchor=([0.0,1.0]),
@@ -463,6 +468,9 @@ is_show_text = 0
                                 'v',
                                 ax_single) # quiver
 
+    ax_single.set_xlim(grid_bounds[0],grid_bounds[1])
+    ax_single.set_ylim(grid_bounds[2],grid_bounds[3])
+
     #Add Colorbar                      
     ax_cbar = fig.add_subplot(1,2,2)
     ax_cbar.set_position([ 0.55 + 0.32 ,  0.1, 
@@ -499,9 +507,9 @@ is_show_text = 0
         plt.show()
 
     #Save the figure as png
-    if is_save:
+    # if is_save:
         # print(save_png_dir)
-        myplots.saving_fig(save_png_dir,[save_png_fname],[fig])
+        # myplots.saving_fig(save_png_dir,[save_png_fname],[fig])
 
     os.chdir(python_dir)
     print('\nDone with plot_true.py')
