@@ -506,10 +506,10 @@ is_show_text = 0
     if is_show:
         plt.show()
 
-    #Save the figure as png
-    # if is_save:
-        # print(save_png_dir)
-        # myplots.saving_fig(save_png_dir,[save_png_fname],[fig])
+    # Save the figure as png
+    if is_save:
+        print(save_png_dir)
+        myplots.saving_fig(save_png_dir,[save_png_fname],[fig])
 
     os.chdir(python_dir)
     print('\nDone with plot_true.py')

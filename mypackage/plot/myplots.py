@@ -249,6 +249,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                                     m_cbar_bottom,
                                     m_cbar_width,
                                     m_cbar_height]) 
+                cb_ax.tick_params(labelsize = 20)
 
                 cb_ax.set_title(m_cbar_titles[i_subplt], y =1.02)
                 mpl.colorbar.Colorbar(cb_ax, im)
@@ -332,8 +333,9 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
             is_ax_exists = is_ax_exists + 1
             ax_f[i].set_position(f_ax_pos)
             ax_f[i].set_title('')
-            ax_f[i].set_xlabel(f_ax_x_label)
-            ax_f[i].set_ylabel(f_ax_y_labels[i])
+            ax_f[i].set_xlabel(f_ax_x_label, fontsize = 20)
+            ax_f[i].set_ylabel(f_ax_y_labels[i], fontsize = 20)
+            ax_f[i].tick_params(labelsize = 20)
 
             #Generate plot
             ax_f[i].plot(data_x,
@@ -1093,7 +1095,9 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
         fig_t = plt.figure(5, figsize=(figure_size_x,figure_size_y))
         fig_t.set_facecolor((0.50, 0.50, 0.50))
         # Insert figure title
-        plt.suptitle('True plot', y = 0.97, fontsize=20)
+        t_fig_title = 0
+        if t_fig_title:
+            plt.suptitle('True plot', y = 0.97, fontsize=20)
         
 
     # Vtk readout functions
@@ -1106,8 +1110,12 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
     ax_true = fig_t.add_subplot(1,3,3)
     ax_true.set_position(t_ax_pos)
     ax_true.set_title(t_ax_title)
-    ax_true.set_xlabel(t_ax_xlabel)
-    ax_true.set_ylabel(t_ax_ylabel)
+    plt.xlabel(t_ax_xlabel,fontsize = 30)
+    plt.ylabel(t_ax_ylabel,fontsize = 30)
+    plt.xticks(fontsize = 20)
+    plt.yticks(fontsize = 20)
+    # ax_true.set_xlabel(t_ax_xlabel)
+    # ax_true.set_ylabel(t_ax_ylabel, fontsize = 30)
 
     if t_is_show_mons:
         # Grid indices of observation locations
@@ -1151,6 +1159,7 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
     #Generate Colorbar
     ax_cbar = fig_t.add_subplot(1,4,4)
     ax_cbar.set_position(t_ax_cbar_pos)
+    ax_cbar.tick_params(labelsize = 20)
     mpl.colorbar.Colorbar(ax_cbar,im)
 
     return fig_t
