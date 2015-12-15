@@ -10,9 +10,9 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 
-dats = ['2015_06_17','2015_06_22']
-lets = ['b','gt']
-figtitles = ['Ensemble Normal: 2000','Ensemble damping: 2000']
+dats = ['2015_10_12','2015_10_12']
+lets = ['b','ol']
+figtitles = ['Ensemble hybrid: 1000','Ensemble normal: 1000']
 
 png_name_diff = 'diff_' + dats[0] + '_' + lets[0] + '_' + dats[1] + '_' + lets[1] + '.png'
 
@@ -76,7 +76,7 @@ for i in range(2):
     #          fontsize = 12)
     # plt.plot(x,gauss_dist,'-r',lw = 3.0)
     # plt.title(figtitle,fontsize = 20)
-    # plt.savefig('/home/jk125262/PythonDir_Cluster/output/endres/'+png_name_hist)
+    # plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/diff/'+png_name_hist)
     # plt.show()
 
 x_diff = np.linspace(-0.1,# endres_mins[0]-endres_maxs[1] -np.sum(endres_std), 
@@ -117,5 +117,5 @@ plt.text(0.975,0.8,
          fontsize = 20)
 plt.plot(x_diff,gauss_diff,'-k',lw=3.0)
 plt.plot([0,0],[0,sc.stats.norm.pdf(-mean_diff/std_diff)/std_diff],'--k',lw = 3.0)
-plt.savefig('/home/jk125262/PythonDir_Cluster/output/endres/'+png_name_diff)
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/diff/'+png_name_diff)
 plt.show()

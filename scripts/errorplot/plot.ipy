@@ -1,0 +1,149 @@
+# Plot of Means + Errors (for ensemble sizes)
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+
+is_show = 1
+which_enssize = [50] # [50,100,250,500,1000,2000]
+is_nooutlier = 0                          #1: no outliers taken into account
+
+# Y-Axis limits for the six plots
+ylims_all = [[0.32,0.86],[0.32,0.86],[0.32,0.86],
+             [0.32,0.86],[0.32,0.86],[0.32,0.86]]
+
+# Legend input (from endresmeans_allread.ipy)
+legend_input = np.load('output/errorplot/npy/legend_input.npy')
+
+
+# INPUT from endresmeans_allread.ipy
+if is_nooutlier:
+    png_name_start = 'ENDMEANS_NOOUTLIER'
+
+    # Load arrays (without outliers) (endresmeans_allread.ipy)
+    endres_mean = np.load('output/errorplot/npy/endres_mean_nooutliers.npy')   # A(methods, ensemble sizes)
+    num_methods = endres_mean.shape[0]
+    endres_std = np.load('output/errorplot/npy/endres_std_nooutliers.npy')
+    endres_median = np.load('output/errorplot/npy/endres_median.npy')
+    nums = np.load('output/errorplot/npy/nums.npy')[0:num_methods,:] -np.load('output/errorplot/npy/outliersbeg.npy')
+else:
+    png_name_start = 'ENDMEANS'
+
+    # Load arrays (endresmeans_allread.ipy)
+    endres_mean = np.load('output/errorplot/npy/endres_mean.npy')   # A(methods, ensemble sizes)
+    num_methods = endres_mean.shape[0]
+    endres_std = np.load('output/errorplot/npy/endres_std.npy')
+    endres_median = np.load('output/errorplot/npy/endres_median.npy')
+    nums = np.load('output/errorplot/npy/nums.npy')[0:num_methods,:]
+
+# Standard deviation of the mean
+endres_meanstd = endres_std/np.sqrt(nums)
+
+
+# Sort arrays
+legend_input = np.array(legend_input)[np.argsort(endres_mean[:,0])]
+for i in range(1,6):
+    endres_mean[:,i] = endres_mean[:,i][np.argsort(endres_mean[:,0])]
+    endres_std[:,i] = endres_std[:,i][np.argsort(endres_mean[:,0])]
+    endres_median[:,i] = endres_median[:,i][np.argsort(endres_mean[:,0])]
+    endres_meanstd[:,i] = endres_meanstd[:,i][np.argsort(endres_mean[:,0])]
+
+endres_std[:,0] = endres_std[:,0][np.argsort(endres_mean[:,0])]
+endres_median[:,0] = endres_median[:,0][np.argsort(endres_mean[:,0])]
+endres_meanstd[:,0] = endres_meanstd[:,0][np.argsort(endres_mean[:,0])]
+endres_mean[:,0] = np.sort(endres_mean[:,0])
+
+
+
+for ienssize,ensemble_size in enumerate(which_enssize):
+
+    ylims = ylims_all[ienssize]               #y-Axis limits
+    nextlims = ylims_all[ienssize+1] if ienssize < 5 else [0.0,0.0]   
+    #Next limits shown on right y-Axis
+
+    # Figure
+    plt.figure('Errorplot',[20,10])
+    plt.gca().set_color_cycle(['k'])
+    plt.gca().set_position([0.1,0.2,0.8,0.7])
+
+    # Length!!!
+    formats = ['o','v','s','o','v','s','o','v','s','o','v','s','o','v','s']
+    x = np.array([1,2,3,5,6,7,9,10,11,13,14,15,17,18,19])
+    endres_mean_plot = endres_mean[:,ienssize]
+    endres_meanstd_plot = endres_meanstd[:,ienssize]
+
+    plt.figure('Errorplot')
+    linos = []
+    num_legs = num_methods/3 + np.mod(num_methods,3)/np.mod(num_methods,3)
+    num_lastleg = np.mod(num_methods,3)
+    leginds = [2+i*3 if i<num_legs-1 else 2+(i-1)*3+num_lastleg 
+               for i in range(num_legs)] #last indices of a group of indices
+    legranges = [3 if i<num_legs-1 else num_lastleg 
+                 for i in range(num_legs)] 
+    for iplot in range(num_methods):
+        line, = plt.plot(x[iplot],endres_mean_plot[iplot], formats[iplot], lw = 2, ms = 12,
+                         label = legend_input[iplot])
+        linos.append(line)
+        plt.errorbar(x[iplot],endres_mean_plot[iplot],yerr = endres_meanstd_plot[iplot],
+                     fmt = formats[iplot], lw = 2, ms = 12, label = 'this')
+
+    for ileg in range(len(leginds)):
+        xleg = 0.1 + ileg*0.8/num_legs
+        first_legend = plt.legend(handles = [linos[i] for i in range(leginds[ileg]-legranges[ileg]+1,
+                                                                     leginds[ileg]+1)],
+                                  bbox_to_anchor = [xleg,
+                                                    0.00,
+                                                    0.8/num_legs,
+                                                    0.2],
+                                  bbox_transform=plt.gcf().transFigure,
+                                  # loc = [0.0,1.0],
+                                  mode = 'expand',
+                                  # labelspacing = 1.0,
+                                  ncol =1, numpoints = 1,
+                                  fontsize = 18,
+                                  framealpha = 1.0, markerscale = 1.0)
+        plt.gca().add_artist(first_legend)
+
+
+    plt.figure('Errorplot')
+
+    plt.vlines( 4,0.0,1.0, linestyles = 'dashed')
+    plt.vlines( 8,0.0,1.0, linestyles = 'dashed')
+    plt.vlines(12,0.0,1.0, linestyles = 'dashed')
+    plt.vlines(16,0.0,1.0, linestyles = 'dashed')
+    plt.hlines(0.4,0,20,linestyles = 'dashed')
+    plt.hlines(0.5,0,20,linestyles = 'dashed')
+    plt.hlines(0.6,0,20,linestyles = 'dashed')
+    plt.hlines(0.7,0,20,linestyles = 'dashed')
+    plt.hlines(0.8,0,20,linestyles = 'dashed')
+    plt.hlines(0.9,0,20,linestyles = 'dashed')
+    plt.hlines(1.0,0,20)
+    if not ensemble_size == 2000:
+        plt.vlines(20.0,nextlims[0],nextlims[1], lw = 5)
+
+    plt.title('N = '+str(ensemble_size), y = 1.03, fontsize = 30)
+    plt.xlim([0,num_legs*4.0])
+    plt.ylim(ylims)
+    plt.ylabel(r'Residual [$log(\frac{1}{m^2})$]',fontsize = 30, labelpad = 10)
+    plt.gca().tick_params(direction = 'in', length = 6,
+                   width = 1, labelsize = 16,
+                   top = 'off', right = 'off', bottom = 'off',
+                   pad = 8)
+    plt.gca().set_xticks([])
+    plt.gca().get_xaxis().set_visible('off')
+
+    # Save as png
+    png_name_plot = png_name_start + str(ensemble_size).zfill(4)+'.png'
+    plt.savefig('/home/jk125262/PythonDir_Cluster/output/errorplot/png/'+png_name_plot)
+    print('Saved as ' + '/home/jk125262/PythonDir_Cluster/output/errorplot/png/'+png_name_plot)
+
+    if is_show:
+        plt.show('Errorplot')
+    else:
+        plt.close()
+
+os.chdir('/home/jk125262/PythonDir_Cluster')

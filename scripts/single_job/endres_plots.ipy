@@ -8,17 +8,20 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 
-dat = '2015_06_22'
-let = 'b'
-figtitle = 'Ensemble: 500'
+dat = '2015_12_05'
+let = 'gjj'                                 # 'b', 'cx', 'gt', 'kp', 'ol','sh'
+# 'b', 'aln', 'bxz', 'dkl', 'ewx', 'gjj'
+figtitle = 'EnKF, Ensemble: 50'
 
-num = 100
+num = 872
 num_obs = 100                             #Should be almost constant
 png_name_hist = 'hist_' + dat + '_' + let + '.png' 
 png_name_plot = 'plot_' + dat + '_' + let + '.png'
 
 # The array with the final residuals
-endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+# endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+
+endres = np.load('output/dists/endres_'+dat+'_'+let+'.npy')
 
 # The number of final residuals bigger than 0.6
 higher_array = [1 if endres[i]>0.6 else 0 for i in range(num)]
@@ -27,6 +30,9 @@ num_higher = sum(higher_array)
 # Mean and standard deviation
 endres_mean = np.mean(endres)
 endres_std = np.std(endres)
+
+os.chdir('/home/jk125262/PythonDir_Cluster')
+
 endres_min = np.percentile(endres,0)
 endres_quart =  np.percentile(endres,25)
 endres_median = np.percentile(endres,50)
@@ -45,8 +51,8 @@ plt.ylabel(r'Residual [$log(\frac{1}{m^2})$]',fontsize = 12)
 plt.hlines(0.6,0,100)
 plt.text(30,3,'Higher than intial: '+str(num_higher),fontsize = 20)
 plt.title(figtitle,fontsize = 20)
-plt.savefig('/home/jk125262/PythonDir_Cluster/output/endres/'+png_name_plot)
-plt.close()
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/plots/'+png_name_plot)
+plt.show()
 
 fig = plt.figure(2)
 # plt.axis([0.2,1.0,0.0,50])
@@ -69,5 +75,5 @@ plt.title(figtitle,fontsize = 20)
 a = plt.axes([0.75,0.15,0.1,0.7], axisbg = 'w',frameon = True)
 df.boxplot(grid = False)
 a.set_ylim([0.28,0.38])
-plt.savefig('/home/jk125262/PythonDir_Cluster/output/endres/'+png_name_hist)
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/plots/'+png_name_hist)
 plt.show()

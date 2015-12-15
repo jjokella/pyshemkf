@@ -1,0 +1,18 @@
+dat = '2015_11_27'
+lets =  ['c'] # ['b','c','d','e','f']# ['l','m','n','o','p','q','r','s','t','u'] #
+show = 1
+#
+# All possible functions in one plot
+# 
+# for let in lets:
+#     p(is_f = 1, date = dat, letter = let, f_res_std = [1,1,1,1], f_y_variables_ens = [['rm_kz_aft_'+str(i) for i in range(1,51)],[],[],[]], f_ens_alpha = 0.4, f_ax_pos = [0.12,0.10,0.80,0.80], f_plot_x_min = 0, f_plot_x_max = 20, f_plot_y_min  = [0.2,0.2,0.2,0.2], f_plot_y_max = [1.0,1.0,1.0,1.0], f_ax_legend_bbox = [(0.75,1.0),(0.75,0.9),(1.0,1.0),(1.0,0.9)], is_show = show)
+#
+# Resids, Ensemble Resids, Mean of Ensemble Resids
+#
+for let in lets:
+    p(is_f = 1, date = dat, letter = let, model_name = 'wave', f_res_std = [1,0,0,0], f_x_variable = 'obstime', f_y_variables_ens = [['rm_kz_aft_'+str(i) for i in range(1,20)],[],[],[]], f_ens_alpha = 0.4, f_fig_title = 'Residuals', f_ax_pos = [0.12,0.10,0.80,0.80], f_plot_x_min = 0, f_plot_x_max = 20, f_plot_y_min  = [0.2,0.2,0.2,0.2], f_plot_y_max = [1.0,1.0,1.0,1.0], f_ax_legend_bbox = [(1.0,1.0),(1.0,0.9),(1.0,0.9),(1.0,0.7)], is_show = show)
+#
+# Stddev, Resid, Stats Measure
+#
+# for let in lets:
+#     p(is_f = 1, date = dat, letter = let, f_res_std = [1,1,0,1], f_y_variables_ens = [[],[],[],[]], f_ens_alpha = 0.4, f_fig_title = 'Standard Deviation and Residuals', f_ax_pos = [0.12,0.10,0.80,0.80], f_plot_x_min = 0, f_plot_x_max = 20, f_plot_y_min  = [0.2,0.2,0.2,0.2], f_plot_y_max = [1.0,1.0,1.0,1.0], f_ax_legend_bbox = [(1.0,1.0),(1.0,0.9),(1.0,0.8),(1.0,0.8)], is_show = show)

@@ -1,0 +1,157 @@
+# Numerical comparison for different methods
+
+import os
+import matplotlib as mpl
+import numpy as np
+import exceptions
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+import scipy as sp
+from scipy import special
+from scipy import stats
+
+
+is_1000 = True
+
+# Input from mypackage.plot.plotarrays.py
+num_methods = pa.num_jobs1000 if is_1000 else pa.num_jobs                #Number of single methods
+dates = pa.dates1000 if is_1000 else pa.dates                          #Dates
+letters = pa.letters1000 if is_1000 else pa.letters                      #Letters
+sizes = pa.sizes1000 if is_1000 else pa.sizes                          #Number of runs
+
+# Array containting all final residuals
+res = np.zeros([num_methods,1000]) if is_1000 else np.zeros([num_methods,100])
+for i in range(num_methods):
+    res[i,0:sizes[i]] = np.load('output/dists/endres_'+dates[i]+'_'+letters[i]+'.npy')   #sameseed: normal
+
+
+# Methods used in the comparison
+which_methods = [0,1,2,3] if is_1000 else [0,6,8,4,3,9,14]
+names_methods = [pa.names_methods[which_methods[i]] for i in range(len(which_methods))]
+# Ensemble sizes to produce
+which_ensembles = [50,100,250] if is_1000 else [50,100,250]   #[50,100,250,500,1000,2000]
+# Number of runs for numerical comparison and number of matchups
+ncr = 10
+ncs = 1000
+# Use TTest? (Only for N >1)
+is_ttest = False
+# Confidence Level (Gaussian difference)
+cl = 0.90
+# pvalue (Ttest)
+pval = 0.1
+
+# Output Directory
+if ncr == 1:
+    outdir = 'output/numcomp/npy/single/'
+elif is_ttest:
+    outdir = 'output/numcomp/npy/ttest/'
+else:
+    outdir = 'output/numcomp/npy/gaussian/'
+
+# Iterate over ensemble sizes
+for enssize in which_ensembles:
+    
+    print enssize
+
+    # Flat indices for the ensemble size/methods
+    if is_1000:
+        flatinds = [(0+i*3 if enssize==50 else 
+                     (1+i*3 if enssize==100 else
+                      (2+i*3 if enssize==250 else -1)))
+                    for i in which_methods]# range(num_methods)
+    else:
+        flatinds = [(0+i*6 if enssize==50 else 
+                     (1+i*6 if enssize==100 else
+                      (2+i*6 if enssize==250 else
+                       (3+i*6 if enssize==500 else 
+                        (4+i*6 if enssize==1000 else
+                         (5+i*6 if enssize==2000 else -1)))))) 
+                    for i in which_methods]# range(num_methods)
+           
+    probs = np.zeros([len(flatinds),len(flatinds),3]) 
+    # probs[i,j,0] : Probability that method i is better
+    # probs[i,j,1] : Probability that methods are equal
+    # probs[i,j,2] : Probability that method j is better
+
+    for ii,ri in enumerate(flatinds):
+        for ij,rj in enumerate(flatinds):
+            if rj < ri:                      #Every pair only once
+                continue    
+            # Residual arrays for each method
+            res1 = res[ri,0:sizes[ri]]
+            res2 = res[rj,0:sizes[rj]]
+
+            if ncr in [sizes[ri],sizes[rj]]:
+                ncs = 1                   #Only one comparison if ncr is equal
+                                          #to on of the sizes
+            
+            n1 = 0                        #...First better
+            n2 = 0                        #...Equal
+            n3 = 0                        #... Last better
+            for i in range(ncs):              #How many 10er
+                ints1 = np.random.permutation(np.arange(sizes[ri]))[0:ncr]
+                ints2 = np.random.permutation(np.arange(sizes[rj]))[0:ncr]
+                ressm1 = res1[ints1]
+                ressm2 = res2[ints2]
+                # Only one run
+                if ncr == 1:
+                    if ressm1[0] < ressm2[0]:    
+                        n1 = n1 + 1
+                    elif ressm1[0] > ressm2[0]:  
+                        n3 = n3 + 1
+                    else:    #It acutally happens...
+                        n2 = n2 + 1
+
+                # T-Test
+                elif(is_ttest):
+                    tv,pv = sp.stats.ttest_ind(ressm1,ressm2,equal_var = False)
+                    if pv < pval:
+                        if tv < 0:
+                            n1 = n1+1
+                        else:
+                            n3 = n3+1
+                    else:
+                        n2 = n2+1
+                # Gaussian difference
+                else:
+                    m1 = np.mean(ressm1)
+                    m2 = np.mean(ressm2)
+                    s1 = np.std(ressm1)/np.sqrt(10)
+                    s2 = np.std(ressm2)/np.sqrt(10)
+                    m = m2-m1
+                    s = np.sqrt(s1*s1 + s2*s2)
+                    # Calculate probability for gaussian difference bigger than zero (thus 1 better)
+                    pcl = 0.5 + 0.5*sp.special.erf(m/(s*np.sqrt(2)))
+                    if pcl > cl:     #1 better than 2 (better = smaller residual)
+                        n1 = n1 + 1
+                    elif pcl < 1-cl:   #2 better than 1
+                        n3 = n3 + 1
+                    else:    # No clear winner
+                        n2 = n2+1
+            # Output probabilities
+            p1 = float(n1)/float(n1+n2+n3)       #Prob for 1 better
+            p2 = float(n2)/float(n1+n2+n3)       #Equal
+            p3 = float(n3)/float(n1+n2+n3)       #Prob for 2 better
+            probs[ii,ij,0] = p1
+            probs[ii,ij,1] = p2
+            probs[ii,ij,2] = p3
+
+            probs[ij,ii,0] = p3
+            probs[ij,ii,1] = p2
+            probs[ij,ii,2] = p1
+    
+    if is_1000:
+        np.save(outdir+'probs1000_'+str(ncr).zfill(4)+'_'+str(enssize).zfill(4),probs)
+        np.save(outdir+'flatinds1000_'+str(ncr).zfill(4)+'_'+str(enssize).zfill(4),flatinds)
+    else:
+        np.save(outdir+'probs_'+str(ncr).zfill(4)+'_'+str(enssize).zfill(4),probs)
+        np.save(outdir+'flatinds_'+str(ncr).zfill(4)+'_'+str(enssize).zfill(4),flatinds)
+
+if is_1000:
+    np.save(outdir+'which_methods1000_'+str(ncr).zfill(4),which_methods)
+    np.save(outdir+'names_methods1000_'+str(ncr).zfill(4),names_methods)
+else:
+    np.save(outdir+'which_methods_'+str(ncr).zfill(4),which_methods)
+    np.save(outdir+'names_methods_'+str(ncr).zfill(4),names_methods)

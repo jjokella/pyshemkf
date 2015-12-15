@@ -1,0 +1,97 @@
+# Plot Number of outliers for each method
+
+import os
+import matplotlib as mpl
+import matplotlib.patches as mpatches
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+
+png_name_plot = 'outliers.png'
+
+outliersbeg = np.load('output/outliersbeg.npy')
+
+legend_input = ['EnKF','NS-EnKF','Damping 0.5','LEnKF','Dual EnKF',
+                'Damping 0.1','Damping 0.3','NS-EnKF2','NS-EnKF3','Hybrid-EnKF',
+                'Damping 0.2','IEnKF,1 ','IEnKF,2','NIEnKF1','NIEnKF2']
+
+# Sort legend entries and outlier entries
+legend_input = np.array(legend_input)[np.argsort(outliersbeg[:,0])]
+for i in range(1,6):
+    outliersbeg[:,i] = outliersbeg[:,i][np.argsort(outliersbeg[:,0])]
+outliersbeg[:,0] = np.sort(outliersbeg[:,0])
+
+inds = np.array([1.0,
+                 3.3,
+                 5.6,
+                 10.0,
+                 13.0,
+                 16.0])
+width = 0.1
+dist = np.array([0,0,0,0,0,width,width,width,width,width,2*width,2*width,2*width,2*width,2*width])*2
+
+plt.figure(1,[20,15])
+plt.gca().set_position([0.1,0.2,0.8,0.7])
+legend_patches = []
+for i in range(15):
+    plt.bar(inds + i*width + dist[i],
+            outliersbeg[i,:],
+            width,
+            color = [[float(np.mod(i,5))/float(5),float(np.mod(i,5))/float(5),float(np.mod(i,5))/float(5)]])
+    legend_patches.append(mpatches.Patch(color = [float(np.mod(i,5))/float(5),float(np.mod(i,5))/float(5),float(np.mod(i,5))/float(5)],
+                                         label = legend_input[i]))
+
+plt.xlim(0.8,7.7)
+plt.vlines(1.6,0,100.0,linestyles = 'dashed')
+plt.vlines(2.3,0,100.0,linestyles = 'dashed')
+plt.vlines(3.1,0,100.0)
+plt.vlines(3.9,0,100.0,linestyles = 'dashed')
+plt.vlines(4.6,0,100.0,linestyles = 'dashed')
+plt.vlines(5.4,0,100.0)
+plt.vlines(6.2,0,100.0,linestyles = 'dashed')
+plt.vlines(6.9,0,100.0,linestyles = 'dashed')
+
+
+plt.xlabel('Ensemble Size', fontsize = 40, labelpad = 10)
+plt.ylabel('# Outlier', fontsize = 40, labelpad = 10)
+plt.gca().xaxis.set_ticks([1.95,4.25,6.55])
+plt.gca().set_xticklabels([50,100,250])
+plt.gca().tick_params(axis = 'x',
+                      direction = 'out', length = 8,
+                      width = 2, labelsize = 20,
+                      top = 'off', right = 'off',# bottom = 'off',
+                      pad = 10)
+plt.gca().tick_params(axis = 'y',
+                      direction = 'in', length = 10,
+                      width = 2, labelsize = 20,
+                      top = 'off', right = 'off',# bottom = 'off',
+                      pad = 10)
+
+linos = []
+leginds = [4,9,14]
+legranges = [5,5,5]
+for ileg in range(len(leginds)):
+    xleg = 0.1 + ileg*0.266666
+    first_legend = plt.legend(handles = [legend_patches[i] for i in range(leginds[ileg]-legranges[ileg]+1,
+                                                                          leginds[ileg]+1)],
+                              bbox_to_anchor = [xleg,
+                                                0.75,
+                                                0.266666,
+                                                0.15],
+                              bbox_transform=plt.gcf().transFigure,
+                              # loc = [0.0,1.0],
+                              mode = 'expand',
+                              # labelspacing = 1.0,
+                              ncol =1, numpoints = 1,
+                              fontsize = 20,
+                              framealpha = 1.0, markerscale = 1.0)
+    plt.gca().add_artist(first_legend)
+
+
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/outliers/'+png_name_plot)
+print('Saved as ' + '/home/jk125262/PythonDir_Cluster/output/single_job/outliers/'+png_name_plot)
+
+plt.gca().get_xaxis().set_visible('False')
+plt.show()

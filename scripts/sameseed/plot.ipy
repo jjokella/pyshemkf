@@ -1,0 +1,139 @@
+# Comparison of Methods with the SAME SEED
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.run import runmodule as rm
+import pandas as pd
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
+from mpl_toolkits.axes_grid1.inset_locator import mark_inset
+
+date = '2015_10_12'
+
+a = np.load('output/dists/endres_'+date+'_b.npy')
+b = np.load('output/dists/endres_'+date+'_cx.npy')
+c = np.load('output/dists/endres_'+date+'_gt.npy')
+d = np.load('output/dists/endres_'+date+'_kp.npy')
+e = np.load('output/dists/endres_'+date+'_ol.npy')
+ensembles = [a,b,c,d,e]
+
+names = ['Hybrid EnKF','Damping 0.5','Damping 0.3','Damping 0.1','EnKF']
+
+x = np.arange(100)
+
+fig, ax = plt.subplots(figsize = [20,10])
+plt.suptitle('Ensemble: N = 1000', fontsize = 30)
+ax.set_position([0.1,0.1,0.5,0.8])
+ax.plot(x[1:11],a[1:11],'ok',ms = 10)
+ax.plot(x[1:11],b[1:11],'vk',ms = 10)
+ax.plot(x[1:11],c[1:11],'^k',ms = 10)
+ax.plot(x[1:11],d[1:11],'sk',ms = 10)
+ax.plot(x[1:11],e[1:11],'*k',ms = 10)
+ax.set_xlim([0,10.5])
+ax.set_ylim([0.29,0.37])
+ax.xaxis.set_ticks([1,2,3,4,5,6,7,8,9,10])
+ax.set_xticklabels(['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10'])
+ax.tick_params(direction = 'inout', length = 10,
+               width = 1, labelsize = 16,
+               top = 'off', right = 'off',
+               pad = 8)
+ax.set_xlabel('Random Seed', fontsize = 20,
+              labelpad = 10)
+ax.set_ylabel(r'Residuals [$log(\frac{1}{m^2})$]', fontsize = 20, labelpad = 10)
+ax.legend(names, fontsize = 20, markerscale = 2, loc = 'upper left',numpoints = 1)
+
+ax2 = plt.axes([0.33,0.70,0.02,0.2])
+ax2.set_xlim(4.9,5.1)
+ax2.set_xticks([5.0])
+ax2.set_yticks([0.383,0.385,0.387])
+ax2.set_ylim(0.381,0.389)
+ax2.plot(x[5],a[5],'ok', ms = 12)
+ax2.plot(x[5],b[5],'vk', ms = 12)
+ax2.plot(x[5],c[5],'^k', ms = 12)
+ax2.plot(x[5],d[5],'sk', ms = 12)
+ax2.plot(x[5],e[5],'*k', ms = 12)
+
+ax3 = plt.axes([0.138,0.18,0.02,0.2])
+ax3.set_xlim(0.9,1.1)
+ax3.set_xticks([1.0])
+ax3.set_yticks([0.301,0.302,0.303])
+ax3.set_ylim(0.301,0.303)
+ax3.plot(x[1],a[1],'ok', ms = 12)
+ax3.plot(x[1],b[1],'vk', ms = 12)
+ax3.plot(x[1],c[1],'^k', ms = 12)
+ax3.plot(x[1],d[1],'sk', ms = 12)
+ax3.plot(x[1],e[1],'*k', ms = 12)
+
+ax4 = plt.axes([0.567,0.35,0.02,0.2])
+ax4.set_xlim(9.9,10.1)
+ax4.set_xticks([10.0])
+ax4.set_yticks([0.331,0.332])
+ax4.set_ylim(0.331,0.332)
+ax4.plot(x[10],a[10],'ok', ms = 12)
+ax4.plot(x[10],b[10],'vk', ms = 12)
+ax4.plot(x[10],c[10],'^k', ms = 12)
+ax4.plot(x[10],d[10],'sk', ms = 12)
+ax4.plot(x[10],e[10],'*k', ms = 12)
+
+
+ax5 = plt.axes([0.61,0.1,0.34,0.8])
+ax5.get_yaxis().set_visible(False)
+ax5.get_xaxis().set_visible(False)
+
+# Text
+vl = 0.64
+vh = 0.80
+hpad1 = 0.081+ 0.025
+hpad2 = 0.085+ 0.025
+hpad3 = 0.185+ 0.05
+hpad4 = 0.205+ 0.05
+hpad5 = 0.215+ 0.05
+vpads = 0.04
+vpadl = 4*vpads
+plt.figtext(vl-0.01,vh + 0.05,'Direct Comparison: 100 runs', fontsize = 30)
+
+for iens1,ens1 in enumerate(ensembles):
+    for iens2,ens2 in enumerate(ensembles[iens1+1:]):
+        iens2 = iens2 + iens1 + 1
+        gr = np.less(ens1,ens2)        # Which one is greater
+        n = 0
+        m = 0
+        for l in gr:
+            if l:
+                n = n+1
+            else:
+                m = m+1
+
+        if n > m:
+            plt.figtext(vl        ,vh-iens2*vpads-iens1*vpadl, names[iens1].ljust(14),
+                        fontsize = 20, fontweight = 'bold')
+            plt.figtext(vl + hpad1,vh-iens2*vpads-iens1*vpadl,'-', fontsize = 20)
+            plt.figtext(vl + hpad2,vh-iens2*vpads-iens1*vpadl,names[iens2].rjust(14) + ':', 
+                        fontsize = 20)      
+            plt.figtext(vl + hpad3,vh-iens2*vpads-iens1*vpadl, str(n), fontsize = 20, fontweight = 'bold')
+            plt.figtext(vl + hpad4,vh-iens2*vpads-iens1*vpadl,  ':'  , fontsize = 20) 
+            plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20)
+        elif n == m:
+            plt.figtext(vl        ,vh-iens2*vpads-iens1*vpadl, names[iens1].ljust(14), fontsize = 20)
+            plt.figtext(vl + hpad1,vh-iens2*vpads-iens1*vpadl,'-', fontsize = 20)
+            plt.figtext(vl + hpad2,vh-iens2*vpads-iens1*vpadl,names[iens2].rjust(14) + ':',
+                        fontsize = 20)      
+            plt.figtext(vl + hpad3,vh-iens2*vpads-iens1*vpadl, str(n), fontsize = 20)
+            plt.figtext(vl + hpad4,vh-iens2*vpads-iens1*vpadl,  ':'  , fontsize = 20) 
+            plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20)
+        elif n < m:
+            plt.figtext(vl        ,vh-iens2*vpads-iens1*vpadl, names[iens1].ljust(14), fontsize = 20)
+            plt.figtext(vl + hpad1,vh-iens2*vpads-iens1*vpadl,'-', fontsize = 20)
+            plt.figtext(vl + hpad2,vh-iens2*vpads-iens1*vpadl,names[iens2].rjust(14) + ':',
+                        fontsize = 20, fontweight = 'bold')      
+            plt.figtext(vl + hpad3,vh-iens2*vpads-iens1*vpadl, str(n), fontsize = 20)
+            plt.figtext(vl + hpad4,vh-iens2*vpads-iens1*vpadl,  ':'  , fontsize = 20) 
+            plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20, fontweight = 'bold')
+    # print 
+        
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/sameseed/sameseed.png')            
+print('Saved as ' + '/home/jk125262/PythonDir_Cluster/output/sameseed/sameseed.png')
+
+plt.show()
+
