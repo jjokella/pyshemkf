@@ -1,0 +1,171 @@
+# Plot of Endres means for different Ensemble sizes
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+normal_dats = ['2015_06_10','2015_06_11','2015_06_11','2015_06_16','2015_06_16','2015_06_17']
+normalscore_dats = ['2015_06_11','2015_06_12','2015_06_12','2015_06_19','2015_06_19','2015_06_19']
+damping_dats = ['2015_06_13','2015_06_14','2015_06_14','2015_06_22','2015_06_22','2015_06_22']
+localisation_dats = ['2015_06_23','2015_06_23','2015_06_23','2015_06_24','2015_06_24','2015_06_24']
+dual_dats = ['2015_07_15','2015_07_15','2015_07_15','2015_07_15','2015_07_15','2015_07_15']
+damping03_dats = ['2015_07_16','2015_07_16','2015_07_16','2015_07_17','2015_07_17','2015_07_17']
+damping01_dats = ['2015_07_16','2015_07_16','2015_07_16','2015_07_17','2015_07_17','2015_07_17']
+obs_10_normal_dats = ['2015_07_20','2015_07_20','2015_07_20','2015_07_20','2015_07_20','2015_07_20']
+obs_200_normal_dats = ['2015_07_22','2015_07_22','2015_07_22','2015_07_22','2015_07_22','2015_07_22']
+lowobsvar_dats = ['2015_07_21','2015_07_27','2015_07_27','2015_07_26','2015_07_26','2015_07_26']
+
+normal_lets = ['b','b','cx','cx','gt','b']
+normalscore_lets = ['gt','b','cx','b','cx','gt']
+damping_lets = ['b','b','cx','b','cx','gt']
+localisation_lets = ['b','cx','gt','b','cx','gt']
+dual_lets = ['b','cx','gt','kp','ol','sh']
+damping03_lets = ['b','cx','gt','b','cx','gt']
+damping01_lets = ['kp','ol','sh','kp','ol','sh']
+obs_10_normal_lets = ['b','cx','gt','kp','ol','sh']
+obs_200_normal_lets = ['b','cx','gt','kp','ol','sh']
+lowobsvar_lets = ['b','cx','gt','kp','ol','sh']
+
+normal_nums = [100,100,100,100,100,100]
+normalscore_nums = [100,100,100,70,48,28]
+damping_nums = [100,100,100,100,100,100]
+localisation_nums = [100,100,100,100,100,100]
+dual_nums = [100,100,100,100,100,100]
+damping03_nums = [100,100,100,100,100,100]
+damping01_nums = [100,100,100,100,100,100]
+obs_10_normal_nums = [100,100,100,100,100,100]
+obs_200_normal_nums = [100,100,100,100,100,100]
+lowobsvar_nums = [100,100,100,100,100,100]
+
+dats = [normal_dats, damping_dats,damping03_dats,damping01_dats, localisation_dats,
+        obs_10_normal_dats, obs_200_normal_dats]
+lets = [normal_lets, damping_lets, damping03_lets,damping01_lets, localisation_lets, 
+        obs_10_normal_lets, obs_200_normal_lets]
+nums = [normal_nums, damping_nums,damping03_nums,damping01_nums, localisation_nums, 
+        obs_10_normal_nums, obs_200_normal_nums]
+
+legend_input = ['EnKF',r'$\alpha = 0.5$',r'$\alpha = 0.3$',r'$\alpha = 0.1$','Lokal: $d = 150m$',
+                r'$N_{obs} = 10$',r'$N_{obs} = 200$']
+
+num_obss = [[100 for i in range(6)],[100 for i in range(6)],
+            [100 for i in range(6)],[100 for i in range(6)],[100 for i in range(6)],[10 for i in range(6)],
+            [200 for i in range(6)],[100 for i in range(6)]]                             #Should be almost constant
+png_name_plot = 'gabriele_MEANS.png'
+png_name_plot_2 = 'garbiele_STDDEVS.png'
+
+
+
+
+
+
+
+
+color_arr = [(0.00,0.00,0.00),
+             (1.00,0.00,0.00),(0.00,1.00,0.00),(0.00,0.00,1.00),
+             (1.00,1.00,0.00),(1.00,0.00,1.00),(0.00,1.00,1.00),
+             (0.50,0.00,0.00),(0.00,0.50,0.00),(0.00,0.00,0.50),
+             (0.50,0.50,0.00),(0.50,0.00,0.50),(0.00,0.50,0.50),
+             (1.00,0.50,0.00),(1.00,0.00,0.50),(0.00,1.00,0.50),
+             (0.50,1.00,0.00),(0.50,0.00,1.00),(0.00,0.50,1.00),
+             (0.25,0.00,0.00),(0.00,0.25,0.00),(0.00,0.00,0.25),
+             (0.25,0.25,0.00),(0.25,0.00,0.25),(0.00,0.25,0.25),
+             (1.00,0.25,0.00),(1.00,0.00,0.25),(0.00,1.00,0.25),
+             (0.25,0.50,0.00),(0.25,0.00,0.50),(0.00,0.25,0.50),
+             (0.50,0.25,0.00),(0.50,0.00,0.25),(0.00,0.50,0.25),
+             (0.25,0.50,0.00),(0.25,0.00,0.50),(0.00,0.25,0.50),
+             (0.75,0.00,0.00),(0.00,0.75,0.00),(0.00,0.00,0.75),
+             (0.75,0.75,0.00),(0.75,0.00,0.75),(0.00,0.75,0.75),
+             (1.00,0.75,0.00),(1.00,0.00,0.75),(0.00,1.00,0.75),
+             (0.75,0.50,0.00),(0.75,0.00,0.50),(0.00,0.75,0.50),
+             (0.50,0.75,0.00),(0.50,0.00,0.75),(0.00,0.50,0.75),
+             (0.75,0.50,0.00),(0.75,0.00,0.50),(0.00,0.75,0.50),
+             (0.25,0.75,0.00),(0.25,0.00,0.75),(0.00,0.25,0.75),
+             (0.75,0.25,0.00),(0.75,0.00,0.25),(0.00,0.75,0.25)]
+
+
+
+
+plt.figure('Means',[10,15])
+# plt.gca().set_color_cycle([np.array([228,26,28])/256.0,
+#                            np.array([55,126,184])/256.0,
+#                            np.array([0,104,55])/256.0,
+#                            np.array([152,78,163])/256.0,
+#                            np.array([255,127,0])/256.0,
+#                            np.array([49,163,84])/256.0,
+#                            np.array([120,198,121])/256.0])
+# plt.gca().set_color_cycle([np.array([166,206,227])/256.0,
+#                            np.array([31,120,180])/256.0,
+#                            np.array([178,223,138])/256.0,
+#                            np.array([51,160,44])/256.0,
+#                            np.array([251,154,153])/256.0,
+#                            np.array([227,26,28])/256.0,
+#                            np.array([253,191,111])/256.0,
+#                            np.array([255,127,0])/256.0,
+#                            np.array([202,178,214])/256.0,
+#                            np.array([106,61,154])/256.0])
+plt.gca().set_color_cycle(color_arr)
+plt.figure('Stddevs',[15,10])    
+# plt.gca().set_color_cycle([np.array([228,26,28])/256.0,
+#                            np.array([55,126,184])/256.0,
+#                            np.array([0,104,55])/256.0,
+#                            np.array([152,78,163])/256.0,
+#                            np.array([255,127,0])/256.0,
+#                            np.array([49,163,84])/256.0,
+#                            np.array([120,198,121])/256.0])
+plt.gca().set_color_cycle([np.array([166,206,227])/256.0,
+                           np.array([31,120,180])/256.0,
+                           np.array([178,223,138])/256.0,
+                           np.array([51,160,44])/256.0,
+                           np.array([251,154,153])/256.0,
+                           np.array([227,26,28])/256.0,
+                           np.array([253,191,111])/256.0,
+                           np.array([255,127,0])/256.0,
+                           np.array([202,178,214])/256.0,
+                           np.array([106,61,154])/256.0])
+
+for i_kind in range(len(dats)):
+    ensemble_sizes = [50,100,250,500,1000,2000]
+    endres_mean = [0,0,0,0,0,0]
+    endres_std = [0,0,0,0,0,0]
+    for j in range(len(ensemble_sizes)):
+        dat = dats[i_kind][j]
+        let = lets[i_kind][j]
+        num = nums[i_kind][j]
+        num_obs = num_obss[i_kind][j]                             #Should be almost constant
+        endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+        endres_mean[j] = np.mean(endres)
+        endres_std[j] = np.std(endres)
+    # plt.errorbar(ensemble_sizes,endres_mean,yerr = endres_std,fmt = 'o')
+    plt.figure('Means')
+    plt.plot(ensemble_sizes,endres_mean,'-o',lw = 2 if i_kind else 4, ms = 6)
+    plt.figure('Stddevs')
+    plt.plot(ensemble_sizes,endres_std,'-o', lw = 2, ms = 6)
+
+plt.figure('Means')
+# plt.title('Gemittelte Residuen',fontsize = 40)
+plt.xlim([0,2050])
+plt.ylim([0.3,0.5])
+plt.xlabel('Ensembleumfang',fontsize = 20)
+plt.ylabel(r'Residuum [$log(\frac{1}{m^2})$]',fontsize = 20)
+plt.xticks(fontsize = 20)
+plt.yticks(fontsize = 20)
+plt.legend(legend_input,fontsize = 20)
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/gabriele/'+png_name_plot)
+# plt.show()
+# plt.close()
+
+plt.figure('Stddevs')
+plt.title('All StdDev Final Residuals',fontsize = 30)
+plt.xlim([0,2050])
+plt.ylim([0.0,0.3])
+plt.xlabel('Ensembleumfang',fontsize = 20)
+plt.ylabel(r'Residuum [$log(\frac{1}{m^2})$]',fontsize = 20)
+plt.legend(legend_input)
+plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/gabriele/'+png_name_plot_2)
+plt.show()
+# plt.close()
+
+os.chdir('/home/jk125262/PythonDir_Cluster')

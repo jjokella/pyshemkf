@@ -1,0 +1,54 @@
+# Plot of Endres means for different Ensemble sizes
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+num_ensemble_sizes = 1
+two_iterations = False
+# method = 16
+
+dats = ['2016_01_14' for i in range(num_ensemble_sizes)]
+lets = ['b','aln','bxz','dkl','ewx','gjj']#['b','aln','bxz','dkl','ewx','gjj']
+nums = [1000,1000,1000]#[1000 for i in range(num_ensemble_sizes)]
+num_obss = [5050 for i in range(num_ensemble_sizes)]
+# dats = pa.dats[method]
+# lets = pa.lets[method]
+# nums = pa.nums[method]
+# num_obss = pa.num_obss[method]
+
+
+for j in range(num_ensemble_sizes):
+    # Read in specific date, letter, ensemble size and number of observations
+    dat = dats[j]
+    let = lets[j]
+    num = nums[j]
+    num_obs = num_obss[j]
+    
+    # Read in the begres-distribution
+    begres = [pf.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' 
+                                + dat + '/' + dat + '_'+rm.get_let_num(i)
+                                +'/enkf_output',
+                                'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
+                                'rms_kz_aft')[0][0]   #Beg
+              for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+    os.chdir('/home/jk125262/PythonDir_Cluster')
+    np.save('output/dists/begres_'+dat+'_'+let,begres)
+    begres = None
+
+    # Read in the endres-distribution
+    endres = [pf.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' 
+                                + dat + '/' + dat + '_'+rm.get_let_num(i)
+                                +'/enkf_output',
+                                'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
+                                'rms_kz_aft')[num_obs-1][0]   #End
+              for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+    os.chdir('/home/jk125262/PythonDir_Cluster')
+    np.save('output/dists/endres_'+dat+'_'+let,endres)
+    endres = None
+
+os.chdir('/home/jk125262/PythonDir_Cluster')

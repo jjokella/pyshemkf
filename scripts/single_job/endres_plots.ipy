@@ -1,0 +1,104 @@
+# Endres distribution and plot for diverging runs
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+
+is_1000 = True
+
+is_show = 0
+is_save = 1
+
+imethods = [0,1,2,3,4,5]                                #see plotarrays.py
+ienssizes = [0,1,2,3]                               #0: 50, 1:70, 2:100, 3: 250
+which_enssize = [50,70,100,250]
+
+dats = pa.dats1000 if is_1000 else pa.dats
+lets = pa.lets1000 if is_1000 else pa.lets
+names = pa.names_methods1000 if is_1000 else pa.names_methods
+
+
+num_obs = 100                             #Should be almost constant
+num = 1000 if is_1000 else 100
+
+
+xlims = [0.25,1.3]
+
+
+
+for imethod in imethods:
+    for ienssize in ienssizes:
+
+        dat = dats[imethod][ienssize]
+        let = lets[imethod][ienssize]
+
+        # The array with the final residuals
+        endres = np.load('output/dists/endres_'+dat+'_'+let+'.npy')
+
+        # The number of final residuals bigger than 0.6
+        higher_array = [1 if endres[i]>0.6 else 0 for i in range(num)]
+        num_higher = sum(higher_array)
+
+        # Mean and standard deviation
+        endres_mean = np.mean(endres)
+        endres_std = np.std(endres)
+
+        endres_min = np.percentile(endres,0)
+        endres_quart =  np.percentile(endres,25)
+        endres_median = np.percentile(endres,50)
+        endres_threequart =  np.percentile(endres,75)
+        endres_max =  np.percentile(endres,100)
+
+        # Data Frame (pandas-module)
+        df = pd.DataFrame(endres)
+
+        figtitle = names[imethod] + ', Ensemble: ' + str(which_enssize[ienssize])
+        png_name_hist = 'hist_' + str(imethod) + '_' + str(which_enssize[ienssize]).zfill(4) + '.png' 
+        png_name_plot = 'plot_' + str(imethod) + '_' + str(which_enssize[ienssize]).zfill(4) + '.png'
+
+        plt.figure(1,[18,5])
+        plt.axes([0.05,0.1,0.9,0.8])
+        plt.plot(endres,color='grey')
+        plt.ylim([0,4])
+        plt.xlabel('Run',fontsize = 12)
+        plt.ylabel(r'RMSE [$log(\frac{1}{m^2})$]',fontsize = 12)
+        plt.hlines(0.6,0,100)
+        plt.text(30,3,'Higher than intial: '+str(num_higher),fontsize = 20)
+        plt.title(figtitle,y=1.03,fontsize = 20)
+        os.chdir('/home/jk125262/PythonDir_Cluster')
+        if is_save:
+            plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/plots/'+png_name_plot)
+        if is_show:
+            plt.show()
+
+        plt.figure(2)
+        plt.hist(endres,np.linspace(0.25,1.3,100),color = 'grey')
+        plt.xlabel(r'RMSE [$log(\frac{1}{m^2})$]',fontsize = 12)
+        plt.ylabel('Number of occurences',fontsize = 12)
+        plt.text(0.7,0.8,
+                 'Mean,Std     : ' + str(endres_mean)[0:5] + ' +- ' + str(endres_std)[0:5] + '\n'
+                 + 'Min              : '  + str(endres_min)[0:5] + '\n'
+                 + '0.25 quartile: '  + str(endres_quart)[0:5] + '\n'
+                 + 'Median        : '  + str(endres_median)[0:5] + '\n'
+                 + '0.75 quartile: '  + str(endres_threequart)[0:5] + '\n'
+                 + 'Max             : '  + str(endres_max)[0:5] + '\n',
+                 transform = plt.gca().transAxes,
+                 horizontalalignment = 'right',
+                 verticalalignment = 'center',
+                 fontsize = 12)
+        plt.title(figtitle,y=1.03,fontsize = 20)
+        plt.xlim(xlims)
+        # Boxplot
+        plt.axes([0.75,0.15,0.1,0.7], axisbg = 'w',frameon = True)
+        df.plot(kind='box',grid = False,color='k',sym='k.',ax=plt.gca())
+        plt.ylim(xlims)
+        os.chdir('/home/jk125262/PythonDir_Cluster')
+        if is_save:
+            plt.savefig('/home/jk125262/PythonDir_Cluster/output/single_job/plots/'+png_name_hist)
+        if is_show:
+            plt.show()

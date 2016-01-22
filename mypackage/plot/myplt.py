@@ -31,8 +31,12 @@ def myaxgrid(fig,
              # pads = [0.01,0.04],     # horizontal pad, vertical pad
              x_ticks = None,
              y_ticks = None,
+             tickssize = 20,
+             # y_tickssize = 20,
              x_ticklabels = None,
+             x_ticklabelssize = 30,
              y_ticklabels = None,
+             y_ticklabelssize = 30,
              ):
 
     # width=plt_dims[0]*grid_factor
@@ -55,14 +59,15 @@ def myaxgrid(fig,
                 axgrid[i*n_cols+j].xaxis.set_ticks(x_ticks)
             if y_ticks:
                 axgrid[i*n_cols+j].yaxis.set_ticks(y_ticks)
+            axgrid[i*n_cols+j].tick_params(labelsize = tickssize)
 
             if x_ticklabels:    # Set ticklabels
-                axgrid[i*n_cols+j].xaxis.set_ticklabels(x_ticklabels if i==n_rows-1 else [])
+                axgrid[i*n_cols+j].xaxis.set_ticklabels(x_ticklabels if i==n_rows-1 else [], fontsize = x_ticklabelssize)
             elif i != n_rows-1:
-                axgrid[i*n_cols+j].xaxis.set_ticklabels([])
+                axgrid[i*n_cols+j].xaxis.set_ticklabels([],fontsize = x_ticklabelssize)
             if y_ticklabels:
-                axgrid[i*n_cols+j].yaxis.set_ticklabels(y_ticklabels if j==0 else [])
+                axgrid[i*n_cols+j].yaxis.set_ticklabels(y_ticklabels if j==0 else [],fontsize = y_ticklabelssize)
             elif j != 0:
-                axgrid[i*n_cols+j].yaxis.set_ticklabels([])
+                axgrid[i*n_cols+j].yaxis.set_ticklabels([],fontsize = y_ticklabelssize)
     
     return axgrid

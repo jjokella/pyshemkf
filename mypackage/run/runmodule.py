@@ -75,9 +75,11 @@ def get_num_let(let):
     if len(let) == 1:
         return alphabet.index(let)
     if len(let) == 2:
-        return 26*(alphabet.index(let[0])+1) + alphabet.index(let[1])
+        return 26*(alphabet.index(let[0])) + alphabet.index(let[1]) + 26 
+    if len(let) == 3:
+        return 26*26*(alphabet.index(let[0])) + 26*(alphabet.index(let[1])) + alphabet.index(let[2]) + 26*26 + 26
     else:
-        raise exceptions.RuntimeError('letter does not contain 1 or 2 letters')
+        raise exceptions.RuntimeError('letter does not contain 1,2 or 3 letters')
 
 
 
@@ -87,18 +89,35 @@ def get_num_let(let):
 def get_let_num(num):
     """
     Returns the letter of the alphabet corresponding to the input integer.
+
+    The form of the number is (ii are the indices of the letters in 
+    string.lowercase, 0<= ii <=25):
+
+    Length1: i0
+    Length2: 26*i0 + i1 + 26 
+    Length3: 26^2*i0 + 26*i1 + i2 + 26^2 + 26
     """
     alphabet = string.lowercase
-    return ( alphabet[num/26-1] # First letter: multiple of 26 (alphabet starts at 0)
-             + alphabet[num%26] # Second letter: modulo 26
-             if num>25 else
-             alphabet[num] )    # Only one letter: Just take it from the alphabet
 
+    if num < 26:
+        return alphabet[num]
+    elif num < 702:
+        num = num-26
+        return alphabet[num/26] + get_let_num(num%26)
+    elif num < 18278:
+        num = num-26*26-26
+        return alphabet[num/676] + get_let_num((num%676)+26)
+    else:
+        raise exceptions.RuntimeError('Number too high: Should be < 18278')
 
 #############################################################
 #     Run a script
 #############################################################
 def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
+    """
+    Runs Scripts with optinal output, input, waiting for it to end
+    and Error if execution went wrong.
+    """
     os.chdir(path)
     if not outfile:
         proc = subprocess.Popen(name,stdin=subprocess.PIPE)
@@ -113,6 +132,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
 
     if errout:
         if(proc.returncode):
+            os.chdir('/home/jk125262/PythonDir_Cluster')
             raise exceptions.RuntimeError("Problems in " + str(name))
     
 
@@ -308,8 +328,22 @@ def make_file_dir_names(model_name):
 def make_model_dir_tmp(model_name,letter,today):
     os.chdir("/home/jk125262/shematModelsDir_Cluster")
     # Copy everything to temporal directory
-    new_model_dir = "/home/jk125262/shematModelsDir_Cluster/" \
-      +model_name + '_model_' + today  + '_' + letter
+    model_dir_name = model_name + '_model_' + today  + '_' + letter
+    new_model_dir = "/home/jk125262/shematModelsDir_Cluster/" + model_dir_name
+    trash_model_dir = "/home/jk125262/.Trash/"+ model_dir_name
+    trash_model_dir_2 = "/home/jk125262/.Trash/"+ model_dir_name + '_2'
+    # Check if new_model_dir already exists
+    if os.path.isdir(new_model_dir):
+        os.chdir('/home/jk125262/PythonDir_Cluster')
+        # _2 dir in .Trash exists: Kill it (should be killable by now)
+        if os.path.isdir(trash_model_dir_2):
+            shutil.rmtree(trash_model_dir_2)
+        # dir in .Trash exists: Rename it to _2 dir in .Trash
+        if os.path.isdir(trash_model_dir):
+            os.rename(trash_model_dir,trash_model_dir_2)
+        # Move old new_model_dir to .Trash
+        shutil.move(new_model_dir,"/home/jk125262/.Trash")
+        # raise exceptions.RuntimeError("New model dir already exists: " + new_model_dir)
     shutil.copytree("/home/jk125262/shematModelsDir_Cluster/" + model_name + '_model',
                     new_model_dir)
     os.chdir(new_model_dir)

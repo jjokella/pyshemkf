@@ -1,4 +1,4 @@
-# Three different endres with different colors
+# Three different endres with different colors in one plot
 
 import os                                 
 import matplotlib as mpl

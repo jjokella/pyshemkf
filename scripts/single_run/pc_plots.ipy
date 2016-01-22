@@ -2,12 +2,12 @@ import os
 from mypackage.plot import plotfunctions
 from mypackage.run import runmodule as rm
 
-dat = '2015_06_15'
+dat = '2015_07_15'
 let = 'b'
 show = 1
-var_name = 'conc'
+var_name = 'kz'
 y_min = 0.000
-y_max = 0.0015
+y_max = 1.000
 title = 'Residuals: 50 members '           #None: Standard title
 if let == 'b':
     pc_lets = [rm.get_let_num(i) for i in range(1,101)]
@@ -17,6 +17,7 @@ elif let == 'gt':
     pc_lets = [rm.get_let_num(i) for i in range(201,301)]
 else:
     print('Johannes: wrong letter!!!')
+pc_lets = ['b','c','d']
 #
 # Residuals
 #

@@ -1,0 +1,138 @@
+# Plot Number of outliers for each method
+
+import os
+import matplotlib as mpl
+import matplotlib.patches as mpatches
+import numpy as np
+from mypackage.plot import plotfunctions
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+import exceptions
+
+num_methods = 6
+ensemble_sizes = [50,70,100,250]          # Used only as names
+num_ensemble_sizes = len(ensemble_sizes)
+
+# Legend 
+legranges = [3,3]
+if sum(legranges) != num_methods:         #Check common error
+    raise exceptions.RuntimeError('sum(legranges) must equal num_methods.')
+
+pic_save_dir = '/home/jk125262/PythonDir_Cluster/output/single_job/outliers/'
+pic_name_plot = 'outliers.svg'
+
+# Some geometric variables
+xmin = 0.8
+xmax = 5.6                              #xmin + nbundles*wbundle*width
+ymin = 0.0
+ymax = 35.0
+
+nbundles = num_ensemble_sizes
+nparcels = 2                                       #parcels per bundle
+nparmethods = 3                                    #methods per parcel
+
+wparcel = nparmethods + 2
+wbundle = nparcels*wparcel + 2      #one at the outside of each bundle
+
+width = 0.1
+
+bundlestarts = np.array([i*wbundle for i in range(num_ensemble_sizes)])
+
+parcelcorrection = np.array([2*(i/nparmethods) for i in range(num_methods)])
+
+# Read
+outliersbeg = np.load('output/errorplot/npy/outliersbeg1000.npy')
+legend_input = np.load('output/errorplot/npy/legend_input1000.npy')
+
+# Sort read input 
+sort_array = np.load('output/errorplot/npy/endres_mean1000.npy')[:,0]
+indsort = np.argsort(sort_array)
+
+legend_input = np.array(legend_input)[indsort]
+for i in range(num_ensemble_sizes):
+    outliersbeg[:,i] = outliersbeg[:,i][indsort]
+
+# Normalize
+outliersbeg = (outliersbeg/1000.0)*100
+
+# Figure
+plt.figure(1,[20,15])
+# Axis
+axxmin = 0.1
+axymin = 0.2
+axxsize = 0.8
+axysize = 0.7
+plt.gca().set_position([axxmin,axymin,axxsize,axysize])
+
+# Plot and Legend
+legend_patches = []
+for i in range(num_methods):
+    plt.bar( (bundlestarts + 2 + i + parcelcorrection[i])*width + xmin,     #Position of bar i
+            outliersbeg[i,:],
+            width,
+            color = [[float(np.mod(i,num_methods))/float(num_methods),
+                      float(np.mod(i,num_methods))/float(num_methods),
+                      float(np.mod(i,num_methods))/float(num_methods)]])
+    legend_patches.append(mpatches.Patch(color = [float(np.mod(i,num_methods))/float(num_methods),
+                                                  float(np.mod(i,num_methods))/float(num_methods),
+                                                  float(np.mod(i,num_methods))/float(num_methods)],
+                                         label = legend_input[i]))
+
+# Axis limits
+plt.xlim(xmin,xmax)
+plt.ylim(ymin,ymax)
+
+# Vertical lines
+for i in range(nbundles):
+    plt.vlines(xmin + (i+1)*wbundle*width,ymin,ymax)
+    for j in range(nparcels-1):
+        plt.vlines(xmin+ (i*wbundle+1+(j+1)*wparcel)*width,ymin,ymax,linestyles = 'dashed')
+
+# Labels
+plt.xlabel('Ensemble Size', fontsize = 40, labelpad = 10)
+plt.ylabel('% Outlier', fontsize = 40, labelpad = 10)
+
+# Ticks
+plt.gca().xaxis.set_ticks([xmin+i*wbundle*width+wbundle/2.0*width for i in range(nbundles)])
+plt.gca().set_xticklabels(ensemble_sizes)
+plt.gca().tick_params(axis = 'x',
+                      direction = 'out', length = 8,
+                      width = 2, labelsize = 20,
+                      top = 'off', right = 'off',# bottom = 'off',
+                      pad = 10)
+plt.gca().tick_params(axis = 'y',
+                      direction = 'in', length = 10,
+                      width = 2, labelsize = 20,
+                      top = 'off', right = 'off',# bottom = 'off',
+                      pad = 10)
+
+# Legend
+numlegs = len(legranges)
+legxsize = axxsize/nbundles
+for ileg in range(numlegs):
+    xleg = axxmin + ileg*legxsize            #x-Position of legend ileg
+    first_legend = plt.legend(handles = [legend_patches[i] for i in range( sum(legranges[0:ileg]),
+                                                                           sum(legranges[0:ileg+1])
+                                                                           )
+                                         ],
+                              bbox_to_anchor = [xleg,
+                                                0.75,
+                                                legxsize,
+                                                0.15],
+                              bbox_transform=plt.gcf().transFigure,
+                              # loc = [0.0,1.0],
+                              mode = 'expand',
+                              # labelspacing = 1.0,
+                              ncol =1, numpoints = 1,
+                              fontsize = 20,
+                              framealpha = 1.0, markerscale = 1.0)
+    plt.gca().add_artist(first_legend)
+
+# Save
+plt.savefig(pic_save_dir+pic_name_plot)
+print('Saved as ' + pic_save_dir+pic_name_plot)
+
+# Show
+plt.gca().get_xaxis().set_visible('False')
+plt.show()
