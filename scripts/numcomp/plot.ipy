@@ -9,123 +9,171 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
+is_1000 = False
 
-names = pa.names_methods
-ncr = 10
-ncr_bold = 100                            #Size
-is_ttest = True
+ncrs = [1,10,100,200,500] if is_1000 else [1,10]
+ncr_bold = 1000 if is_1000 else 100                            #Size
+
+is_ttest = True                           #Ttest?
+
+which_enssize = [50,70,100,250]           #Ensemble sizes
 
 # Methods used in the comparison
-is_show = 1
-which_methods_left = [0,0,0,0,0,0]        #Space in which_methods
-which_methods_right = [1,2,3,4,5,6]       #Space in which_methods
+is_show = 0
+is_save = 1
+pic_name_end = 'png'                      #'png' or 'eps' or 'svg'
+pic_dir = '/home/jk125262/PythonDir_Cluster/output/numcomp/'+pic_name_end+'/'
+
+which_methods_left = [1,5,4,3,2]        #Space in which_methods
+which_methods_right = [5,4,3,2,0]       #Space in which_methods
 show_methods = [which_methods_left,
                 which_methods_right]
 
-which_enssize = [50]
-is_double = 1
+
+names = pa.names_methods1000 #if is_1000 else pa.names_methods
+#Taking the ones from 1000, because in read.ipy this should be settled.
 
 # which_methods = np.load('output/which_methods.npy')
 
-for ensemble_size in which_enssize:
-    fig_title = 'Ensemble: ' + str(ensemble_size)
-    png_name_plot = 'numerical_1er_' + str(ensemble_size) +  '.png'
+for ncr in ncrs:
+    for ensemble_size in which_enssize:
+        fig_title = 'Ensemble: ' + str(ensemble_size).zfill(4) + '  Runs: ' +str(ncr)+'/'+ str(ncr_bold)
 
-    # Load arrays
-    if ncr == 1:
-        probs = np.load('output/numcomp/npy/single/probs_'
-                        +str(ncr).zfill(4)+'_'
-                        +str(ensemble_size).zfill(4)+'.npy')
-    elif is_ttest:
-        probs = np.load('output/numcomp/npy/ttest/probs_'
-                        +str(ncr).zfill(4)+'_'
-                        +str(ensemble_size).zfill(4)+'.npy')
-    else:
-        probs = np.load('output/numcomp/npy/gaussian/probs_'
-                        +str(ncr).zfill(4)+'_'
-                        +str(ensemble_size).zfill(4)+'.npy')
-        
-            
-        
-    if is_ttest:
-        probs_bold =np.load('output/numcomp/npy/ttest/probs_'
-                            +str(ncr_bold).zfill(4)+'_'
-                            +str(ensemble_size).zfill(4)+'.npy')
-    else:
-        probs_bold =np.load('output/numcomp/npy/gaussian/probs_'
-                            +str(ncr_bold).zfill(4)+'_'
-                            +str(ensemble_size).zfill(4)+'.npy')
+        pic_name_plot='numcomp_'+str(ncr).zfill(4)\
+          +'_'+str(ncr_bold).zfill(4)\
+          +'_'+str(ensemble_size).zfill(4)+'.' + pic_name_end
+        if is_ttest:
+            pic_name_plot='numcomp_'+str(ncr).zfill(4)\
+              +'_'+str(ncr_bold).zfill(4)\
+              +'_'+str(ensemble_size).zfill(4)+'_ttest'+'.' + pic_name_end
 
-    num_comparisons = len(show_methods[0])
-
-
-    basic_colors = ['black','white','grey']
-
-    len_arrays = 3*num_comparisons
-    in_bottom = np.zeros(len_arrays)
-    in_height = np.zeros(len_arrays)
-    in_width = np.zeros(len_arrays)
-    in_left = np.zeros(len_arrays)
-    in_color = ['' for i in range(len_arrays)]
-    for i in range(len_arrays):
-        in_bottom[i] = num_comparisons-i/3
-        in_height[i] = 0.8
-        in_width[i] = probs[show_methods[0][i/3],
-                            show_methods[1][i/3]][np.mod(i,3)]
-        in_left[i] = np.sum(probs[show_methods[0][i/3],
-                                  show_methods[1][i/3]][0:np.mod(i,3)])
-        in_color[i] = basic_colors[np.mod(i,3)]
-
-    ytick1 = [names[show_methods[0][i]] for i in range(num_comparisons)]
-    ytick2 = [names[show_methods[1][i]] for i in range(num_comparisons)]
-
-    plt.figure(figsize = [10,num_comparisons/2.0])
-    plt.title(fig_title,fontsize=30, y = 1.02)
-    ax1 = plt.gca()
-    ax1.set_position([0.2,0.05,0.6,0.9])
-    plt.barh(bottom = in_bottom,
-             height = in_height,
-             width = in_width,
-             left = in_left,
-             color = in_color)
-
-    ax1.tick_params(direction = 'out', length = 6,
-                   width = 1, labelsize = 20,
-                   top = 'off', bottom = 'off',
-                   labelright = 'off',
-                   pad = 8)
-    ax1.set_ylim([1,num_comparisons+0.8])
-    ax1.set_xticks([])
-    ax1.set_yticks([num_comparisons-i +0.4 for i in range(num_comparisons)])
-    ax1.set_yticklabels(ytick1)
-
-    ax2 = ax1.twinx()
-    ax2.set_position([0.2,0.05,0.6,0.9])
-    ax2.tick_params(direction = 'out', length = 6,
-                   width = 1, labelsize = 20,
-                   top = 'off', bottom = 'off',
-                   labelleft = 'off',labelright = 'on',
-                   labelcolor = 'black',
-                   pad = 8)
-    ax2.set_ylim([1,num_comparisons+0.8])
-    ax2.set_xticks([])
-    ax2.set_yticks([num_comparisons-i +0.4 for i in range(num_comparisons)])
-    ax2.set_yticklabels(ytick2)
-
-
-    for i in range(num_comparisons):
-        if(probs_bold[show_methods[0][i],show_methods[1][i]][0] == 1):
-            ax1.yaxis.get_majorticklabels()[i].set_weight('bold')
-        elif(probs_bold[show_methods[0][i],show_methods[1][i]][2] == 1):
-            ax2.yaxis.get_majorticklabels()[i].set_weight('bold')
+        # Load arrays
+        if ncr == 1:
+            if is_1000:
+                probs = np.load('output/numcomp/npy/single/probs1000_'
+                                +str(ncr).zfill(4)+'_'
+                                +str(ensemble_size).zfill(4)+'.npy')
+            else:
+                probs = np.load('output/numcomp/npy/single/probs_'
+                                +str(ncr).zfill(4)+'_'
+                                +str(ensemble_size).zfill(4)+'.npy')
+        elif is_ttest:
+            if is_1000:
+                probs = np.load('output/numcomp/npy/ttest/probs1000_'
+                                +str(ncr).zfill(4)+'_'
+                                +str(ensemble_size).zfill(4)+'.npy')
+            else:
+                probs = np.load('output/numcomp/npy/ttest/probs_'
+                                +str(ncr).zfill(4)+'_'
+                                +str(ensemble_size).zfill(4)+'.npy')
         else:
-            ax1.yaxis.get_majorticklabels()[i].set_style('italic')
-            ax2.yaxis.get_majorticklabels()[i].set_style('italic')
+            if is_1000:
+                probs = np.load('output/numcomp/npy/gaussian/probs1000_'
+                                +str(ncr).zfill(4)+'_'
+                                +str(ensemble_size).zfill(4)+'.npy')
+            else:
+                probs = np.load('output/numcomp/npy/gaussian/probs_'
+                                +str(ncr).zfill(4)+'_'
+                                +str(ensemble_size).zfill(4)+'.npy')
 
-    plt.savefig('/home/jk125262/PythonDir_Cluster/output/numcomp/png/'+png_name_plot)
-    print('Saved as ' + '/home/jk125262/PythonDir_Cluster/output/numcomp/png/'+png_name_plot)
 
-    if is_show:
-        plt.show()
-    else:
-        plt.close()
+
+        if is_ttest:
+            if is_1000:
+                    probs_bold =np.load('output/numcomp/npy/ttest/probs1000_'
+                                        +str(ncr_bold).zfill(4)+'_'
+                                        +str(ensemble_size).zfill(4)+'.npy')
+            else:
+                    probs_bold =np.load('output/numcomp/npy/ttest/probs_'
+                                        +str(ncr_bold).zfill(4)+'_'
+                                        +str(ensemble_size).zfill(4)+'.npy')
+        else:
+            if is_1000:
+                probs_bold =np.load('output/numcomp/npy/gaussian/probs1000_'
+                                    +str(ncr_bold).zfill(4)+'_'
+                                    +str(ensemble_size).zfill(4)+'.npy')
+            else:
+                probs_bold =np.load('output/numcomp/npy/gaussian/probs_'
+                                    +str(ncr_bold).zfill(4)+'_'
+                                    +str(ensemble_size).zfill(4)+'.npy')
+
+        num_comparisons = len(show_methods[0])
+
+
+        basic_colors = ['black','white','grey']
+
+        len_arrays = 3*num_comparisons
+        in_bottom = np.zeros(len_arrays)
+        in_height = np.zeros(len_arrays)
+        in_width = np.zeros(len_arrays)
+        in_left = np.zeros(len_arrays)
+        in_color = ['' for i in range(len_arrays)]
+        for i in range(len_arrays):
+            in_bottom[i] = num_comparisons-i/3
+            in_height[i] = 0.8
+            in_width[i] = probs[show_methods[0][i/3],
+                                show_methods[1][i/3]][np.mod(i,3)]
+            in_left[i] = np.sum(probs[show_methods[0][i/3],
+                                      show_methods[1][i/3]][0:np.mod(i,3)])
+            in_color[i] = basic_colors[np.mod(i,3)]
+
+        ytick1 = [names[show_methods[0][i]] for i in range(num_comparisons)]
+        ytick2 = [names[show_methods[1][i]] for i in range(num_comparisons)]
+
+        plt.figure(figsize = [10,num_comparisons/1.0])
+        plt.title(fig_title,fontsize=30, y = 1.08)
+        ax1 = plt.gca()
+        ax1.set_position([0.2,0.05,0.6,0.75])
+        ax1.set_frame_on(False)
+
+        plt.barh(bottom = in_bottom,
+                 height = in_height,
+                 width = in_width,
+                 left = in_left,
+                 color = in_color,
+                 edgecolor = 'k')
+
+        ax1.tick_params(direction = 'out', length = 0,
+                       width = 1, labelsize = 20,
+                       top = 'off', bottom = 'off',
+                       labelright = 'off',
+                       pad = 8)
+        ax1.set_xlim([-0.01,1.01])
+        ax1.set_ylim([0.9,num_comparisons+0.8])
+        ax1.set_xticks([])
+        ax1.set_yticks([num_comparisons-i +0.4 for i in range(num_comparisons)])
+        ax1.set_yticklabels(ytick1)
+
+        ax2 = ax1.twinx()
+        ax2.set_position([0.2,0.05,0.6,0.75])
+        ax2.set_frame_on(False)
+        ax2.tick_params(direction = 'out', length = 0,
+                       width = 1, labelsize = 20,
+                       top = 'off', bottom = 'off',
+                       labelleft = 'off',labelright = 'on',
+                       labelcolor = 'black',
+                       pad = 8)
+        ax2.set_xlim([-0.01,1.01])
+        ax2.set_ylim([0.9,num_comparisons+0.8])
+        ax2.set_xticks([])
+        ax2.set_yticks([num_comparisons-i +0.4 for i in range(num_comparisons)])
+        ax2.set_yticklabels(ytick2)
+
+
+        for i in range(num_comparisons):
+            if(probs_bold[show_methods[0][i],show_methods[1][i]][0] == 1):
+                ax1.yaxis.get_majorticklabels()[i].set_weight('bold')
+            elif(probs_bold[show_methods[0][i],show_methods[1][i]][2] == 1):
+                ax2.yaxis.get_majorticklabels()[i].set_weight('bold')
+            else:
+                ax1.yaxis.get_majorticklabels()[i].set_style('italic')
+                ax2.yaxis.get_majorticklabels()[i].set_style('italic')
+
+        if is_save:
+            plt.savefig(pic_dir + pic_name_plot)
+            print('Saved as ' + pic_dir + pic_name_plot)
+
+        if is_show:
+            plt.show()
+        else:
+            plt.close()
