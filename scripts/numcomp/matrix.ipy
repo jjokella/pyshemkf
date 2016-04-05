@@ -1,0 +1,49 @@
+# Plotting uncertainties in matrices
+
+import os
+import matplotlib as mpl
+import numpy as np
+import exceptions
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+
+# Load probs
+probs = np.load('output/numcomp/npy/ttest/probs1000_0100_0050.npy')
+
+
+indsort = [1,5,4,3,2,0]
+
+probs = probs[indsort,:,:]
+probs = probs[:,indsort,:]
+
+
+plt.figure(1)
+plt.imshow(probs[:,:,1],interpolation='nearest',cmap='Greys')
+
+plt.savefig('matrix1.png')
+plt.close()
+
+plt.figure(2)
+plt.imshow(probs[:,:,0]-probs[:,:,2],interpolation='nearest',cmap='RdBu')
+
+plt.savefig('matrix2.png')
+plt.close()
+
+probs2 = np.load('output/numcomp/npy/ttest/probs1000_0100_0250.npy')
+probs2 = probs2[indsort,:,:]
+probs2 = probs2[:,indsort,:]
+
+plt.figure(3)
+plt.imshow(probs2[:,:,1],interpolation='nearest',cmap='Greys')
+
+plt.savefig('matrix3.png')
+plt.close()
+
+plt.figure(4)
+plt.imshow(probs2[:,:,0]-probs2[:,:,2],interpolation='nearest',cmap='RdBu')
+
+plt.savefig('matrix4.png')
+plt.close()
