@@ -1,0 +1,35 @@
+# Read routine for forward pictures
+
+import os
+import vtk
+import matplotlib as mpl
+import numpy as np
+import exceptions
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+
+
+fdir ='/home/jk125262/shematOutputDir_Cluster/alex_output/2016_03_14/2016_03_14_e/samples_output/'
+fname = 'ALEX_time_out_4.vtk'
+varname = 'temp'                            #'head','temp','kz'
+
+reader=vtk.vtkRectilinearGridReader() #Reader
+reader.SetFileName(fdir+fname)        #Filename
+reader.SetScalarsName(varname)        #Variable name
+reader.Update()                       #Refresh
+
+# Grid properties
+grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
+grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
+
+# Check if scalar variable is in vtk-file
+pf.is_scalar_var_in_file(fdir,fname,varname)
+
+vtk_array = reader.GetOutput().GetPointData().GetArray(0) # 0: Scalar
+
+print(vtk_array.GetValueRange())
+
+os.chdir('/home/jk125262/PythonDir_Cluster')
