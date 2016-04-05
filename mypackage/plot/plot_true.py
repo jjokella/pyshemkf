@@ -354,9 +354,9 @@ is_true = 1
                             1.0-upper_space-n_rows*image_height-(n_rows-1)*image_pad_vert,
                             0.03,
                             n_rows*image_height + (n_rows-1.0)*image_pad_vert])
-        # cb_ax.set_position([0.03,0.1,   
+        # cb_ax.set_position([0.03,0.1,
         #                     0.5,0.05])
-        mpl.colorbar.Colorbar(cb_ax, 
+        mpl.colorbar.Colorbar(cb_ax,
                               im,
                               orientation='vertical')
         cb_ax.set_ylabel(ax_main_legendtitle,
@@ -372,18 +372,18 @@ is_true = 1
         # cb_ax.yaxis.set_major_locator(locator)
 
 
-        #Scatter plot with observation locations    
+        #Scatter plot with observation locations
         ind_x = [cell_numpy_ind[i,0]*step_x-0.5*step_x for i in range(num_mons)]
         ind_y = [cell_numpy_ind[i,1]*step_y-0.5*step_y for i in range(num_mons)]
 
-        for i_subplt in range(n_rows*n_cols):            
+        for i_subplt in range(n_rows*n_cols):
             ax_grid[i_subplt].scatter(ind_x,
                                       ind_y,
                                       marker='o',
                                       c=['black','darkred'],
                                       s=200,
                                       linewidths=2)
-        #Delete arrays, variables    
+        #Delete arrays, variables
         del cb_ax, cell_vtk_array, cell_numpy_array, ind_x, ind_y
 
 
