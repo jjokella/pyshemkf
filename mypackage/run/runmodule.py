@@ -173,31 +173,71 @@ def change_hashtag_input(file_name, hashtag_line, new_input):
         
     return
 
+def read_hashtag_input(file_name,hashtag_line,nl):
+    """
+    Read a number of lines of a hashtag input
+    """
+    hashstr_not_exist = 1
+    file_input = open(file_name,'r')
+    l = 1
+    for line in file_input:
+        hashstr_exist_check = line.find(hashtag_line)
+        #print(hashstr_exist_check)
+        if (hashstr_exist_check > -1):
+            hashl = l
+            hashstr_not_exist = hashstr_not_exist - 1
+        l = l + 1
+    file_input.close()
+
+    if hashstr_not_exist:
+        print('\n\nThe catchphrase')
+        print(hashtag_line)
+        print('was not found (or more than once) in')
+        print(file_name)
+        print('\ntimes found = ')
+        print(1-hashstr_not_exist)
+        raise exceptions.RuntimeError("Hashtag-catchphrase not found.")
+
+
+    str_out = ""
+    file_input = open(file_name,'r')
+    for i in range(hashl):
+        file_input.readline()
+    for i in range(nl):
+        str_out+= file_input.readline()
+    file_input.close()
+    return str_out
+
 #############################################################
 #               COMPILEQUICK
 #############################################################
-def compilequick( vtk_var = 1, omp_var = 1):
+def compilequick( vtk_var = 1, omp_var = 1, fw_var = 0):
     "This function invokes the compilation via compilequick.sh"
     # Should be called in model_directory!
     # Default: vtk_omp compilation
-    if vtk_var:
-        if omp_var:
-            compilation_exec = 'py_compilequick_gnu_vtk_omp.sh'
-            output_file_str = 'compilation_vtk_omp.out'
-            output_file = open(output_file_str,"w")
-        else:
-            compilation_exec = 'py_compilequick_gnu_vtk.sh'
-            output_file_str = 'compilation_vtk.out'
-            output_file = open(output_file_str,"w")
+    if fw_var:
+        compilation_exec = 'py_compilequick_gnu_fw.sh'
+        output_file_str = 'compilation_fw.out'
+        output_file = open(output_file_str,"w")
     else:
-        if omp_var:
-            compilation_exec = 'py_compilequick_gnu_plt_omp.sh'
-            output_file_str = 'compilation_plt_omp.out'
-            output_file = open(output_file_str,"w")
+        if vtk_var:
+            if omp_var:
+                compilation_exec = 'py_compilequick_gnu_vtk_omp.sh'
+                output_file_str = 'compilation_vtk_omp.out'
+                output_file = open(output_file_str,"w")
+            else:
+                compilation_exec = 'py_compilequick_gnu_vtk.sh'
+                output_file_str = 'compilation_vtk.out'
+                output_file = open(output_file_str,"w")
         else:
-            compilation_exec = 'py_compilequick_gnu_plt.sh'
-            output_file_str = 'compilation_plt.out'
-            output_file = open(output_file_str,"w")
+            if omp_var:
+                compilation_exec = 'py_compilequick_gnu_plt_omp.sh'
+                output_file_str = 'compilation_plt_omp.out'
+                output_file = open(output_file_str,"w")
+            else:
+                compilation_exec = 'py_compilequick_gnu_plt.sh'
+                output_file_str = 'compilation_plt.out'
+                output_file = open(output_file_str,"w")
 
     if os.path.isfile(compilation_exec):
         args = shlex.split(compilation_exec)
