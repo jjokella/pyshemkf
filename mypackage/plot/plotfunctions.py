@@ -32,18 +32,23 @@ alphabet = string.lowercase
 
 
 def my_vtk_to_numpy(fdir,fname,varname):
-    #Go to directory
-    os.chdir(fdir)
-    #Open vtk-Reader
-    reader=vtk.vtkRectilinearGridReader()
-    reader.SetFileName(fname)
-    #Read NumPy array form vtk-file
-    reader.SetScalarsName(varname)
-    reader.Update()
+    """
+    Read array of variable varname from vtk-file fname 
+    in directory fdir and output as  numpy array.
+    """
+    # Prepare vtk-Reader 
+    os.chdir(fdir)                        #Directory
+    reader=vtk.vtkRectilinearGridReader() #Reader
+    reader.SetFileName(fname)             #Filename
+    reader.SetScalarsName(varname)        #Variable name
+    reader.Update()                       #Refresh
+
+    # Grid properties
     grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
     grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
+
     # Check if scalar variable is in vtk-file
-    is_scalar_var_in_file(varname,fname,fdir)
+    is_scalar_var_in_file(fdir,fname,varname)
     #Reshape array to grid geometry
     if grid_bounds[0] == 0.0:   # CELLS
         vtk_array = reader.GetOutput().GetCellData().GetArray(0) # 0: Scalar 
@@ -288,7 +293,7 @@ def get_num_timesteps(fname, path, num_mons):
     n = len(arr)/num_mons -1
     return n
 
-def is_scalar_var_in_file(var, fname, path, raise_io_error = 1, raise_var_error = 1):
+def is_scalar_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 1):
     """
     Checks the existence of the file and whether var is a variable
     inside the file. Output: 1 if it is inside, 0 if it is not.
@@ -370,18 +375,18 @@ def m_input_check(n_f, input_file_names,
     #Check scalar variable in file
     return_value = [0 for i in range(n_f)]
     for i in range(n_f):
-        if not (is_scalar_var_in_file(varnames[i],
+        if not (is_scalar_var_in_file(assim_variables_dir,
                                       input_file_names[i] + str(1).zfill(4) + '.vtk',
-                                      assim_variables_dir,
+                                      varnames[i],
                                       raise_io_error = 0)
                 or
-                is_scalar_var_in_file(varnames[i],
+                is_scalar_var_in_file(samples_out_dir,
                                       input_file_names[i] + str(1) + '.vtk',
-                                      samples_out_dir,
+                                      varnames[i],
                                       raise_io_error = 0)):
-            if not is_scalar_var_in_file(varnames[i],
+            if not is_scalar_var_in_file(assim_variables_dir,
                                          input_file_names[i] + 'param_' + str(1).zfill(4) + '.vtk',
-                                         assim_variables_dir):
+                                         varnames[i],):
                 raise exceptions.RuntimeError('Variable  ' \
                     + varnames[i] + '  not in:\n' \
                     + assim_variables_dir + '/' \
