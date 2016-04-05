@@ -51,6 +51,7 @@ m_n_rows = 3,
 m_n_cols = 6,               # Number of rows/columns
 m_is_subarray = False,
 m_is_masked = False,
+m_show_cbar = True,
 m_cbar_kz_low = -11,
 m_cbar_kz_high = -9,
 m_cbar_kz_res_low = -1.0,
@@ -70,6 +71,7 @@ m_num_cbar = 15, # Geometry of Cbar
 m_is_show_mons = 0,
 m_mons_size = 10, # Monitoring points in plots/size
 m_is_text = 0,   # Show text
+m_fig_facecolor = (1.0,1.0,1.0),
 m_fig_title = None,             # Stem of the file name if not explicitly set
 m_fig_title_font = 30,
 m_ax_title = None,
@@ -84,6 +86,7 @@ f_x_variable ='obstime',              # x-variable
 f_y_vars_mean = ['rms_kz_aft','std_kz_aft','rm_kz_aft_em',''], #Mean variable names, no name for last
 f_y_variables_ens = [[],[],[],[]], #Ens var names, ['rm_kz_aft_'+str(i) for i in range(1,51)]
 f_ax_pos =[0.10,0.10,0.80,0.80],  # Axis position [Left,Low,Width,Height]
+f_fig_facecolor = (1.0,1.0,1.0),
 f_force_y_range = 1,
 f_plot_x_min = 0,
 f_plot_x_max = 10,
@@ -93,12 +96,21 @@ f_markersize = 8,       # Marker size
 f_ens_alpha = 0.5,
 f_ax_x_label = 'obstime',
 f_ax_y_labels = ['Residuals', 'Standard Deviation','Mean Residuals','Stats Resid'],# Axis labels
+f_ax_labelsize = 30,
+f_ax_labelpad = 10,
+f_ax_ticksize = 20,
 f_line_colors = ['black','red','green','blue'],        # Line colors
+f_ax_legendsize = 30,
 f_ax_legend_labels =[['EnsembleMembers' if i else 'Mean' for i in range(1)],['Stddev'],['Mean of Resids'],['Stats Measure']], # Legend labels
 f_ax_legend_cols = [1,1,1,1],
 f_ax_legend_loc = ['upper right','upper right','upper right','upper right'],
 f_ax_legend_bbox = [(1.0,1.0),(1.0,0.9),(1.0,0.8),(1.0,0.7)],
 f_ax_legend_handle_length = [3,5,5,5], # Legend geometry
+f_is_circ = False,
+f_circ_pos=(20,0.53),
+f_circ_width=1.0,
+f_circ_height=0.09,
+f_circ_color='grey',
 f_fig_title = 'Residuals and Standard Deviation',
 f_fig_title_font = 30,
 f_pic_name = 'plot_f',
@@ -437,11 +449,13 @@ pc_pic_ending = '.png'
           'm_is_show_mons' : m_is_show_mons,
           'm_mons_size' : m_mons_size,
           'm_is_text' : m_is_text,  
+          'm_fig_facecolor' : m_fig_facecolor,
           'm_fig_title': m_fig_title,
           'm_fig_title_font': m_fig_title_font,
           'm_ax_title':m_ax_title,
           'm_ax_title_pos':m_ax_title_pos,
           'm_cmaps' : m_cmaps,
+          'm_show_cbar' : m_show_cbar,
           'm_cbar_kz_high' : m_cbar_kz_high,
           'm_cbar_kz_low'  : m_cbar_kz_low,
           'm_cbar_kz_res_high'  : m_cbar_kz_res_high,
@@ -460,6 +474,7 @@ pc_pic_ending = '.png'
           'figure_size_x':figure_size_x,
           'figure_size_y':figure_size_y,
           'f_ax_pos' :f_ax_pos,
+          'f_fig_facecolor': f_fig_facecolor,
           'f_force_y_range':f_force_y_range,
           'f_plot_x_min' : f_plot_x_min,
           'f_plot_x_max' : f_plot_x_max,
@@ -469,12 +484,21 @@ pc_pic_ending = '.png'
           'f_ens_alpha' : f_ens_alpha,
           'f_ax_x_label' : f_ax_x_label,
           'f_ax_y_labels' : f_ax_y_labels,
+          'f_ax_labelsize' : f_ax_labelsize,
+          'f_ax_labelpad' : f_ax_labelpad,
+          'f_ax_ticksize' : f_ax_ticksize,
           'f_line_colors' : f_line_colors, 
+          'f_ax_legendsize' : f_ax_legendsize,
           'f_ax_legend_labels' : f_ax_legend_labels,
           'f_ax_legend_cols' : f_ax_legend_cols,
           'f_ax_legend_loc' : f_ax_legend_loc,
           'f_ax_legend_bbox' : f_ax_legend_bbox,
           'f_ax_legend_handle_length' : f_ax_legend_handle_length,
+          'f_is_circ': f_is_circ,
+          'f_circ_pos': f_circ_pos,
+          'f_circ_width': f_circ_width,
+          'f_circ_height': f_circ_height,
+          'f_circ_color': f_circ_color,
           'f_fig_title': f_fig_title,
           'f_fig_title_font': f_fig_title_font,
           } 
