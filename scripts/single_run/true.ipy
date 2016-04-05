@@ -1,0 +1,59 @@
+# Plots of the Synthetic True, Source: mypackage/plot/plot_true.py
+mod_name = 'alex'
+dat = '2016_03_10'
+let = 'b'
+show = 1
+
+
+pt(                                     # True Permeability
+model_name = mod_name,
+letter_true = let,
+date=dat,
+is_true=1,
+is_main=0,
+is_func=0,
+ax_single_position=[0.05,0.15,0.8,0.8],
+ax_single_cbar_position=[0.8,0.15,0.03,0.8],
+save_png_fname = 'onlytrue_head.eps',
+ax_single_title = '',
+ax_single_scattersize = 1000,
+figure_backgroundcolor='white',
+figure_size_x = 18.0,
+is_show=show,
+ax_single_varname = 'head',            #kz,head,tracer1
+low_cbar_single = 10.0,
+high_cbar_single = 20.0,
+ax_single_labelsize = 50,
+ax_single_ticksize = 25,
+ax_single_labelpad = 20,
+ax_single_legendtitle = r'Hydraulic Head [$m$]'#r'Permeability [$\log(\frac{1}{m^{2}})$]'
+)
+
+
+# pt(                                     # Four concentration instances
+# left_space=0.1,
+# date=dat,
+# is_true=0,
+# is_main=1,
+# is_func=0,
+# save_png_fname = 'concs.eps',
+# figure_backgroundcolor='white',
+# figure_size_x = 14.0,
+# ax_main_ticksize=20,
+# ax_main_labelpad=10,
+# is_show=show,
+# )
+
+
+# pt(                                     # Concentration curves
+# date=dat,
+# is_true=0,
+# is_main=0,
+# is_func=1,
+# save_png_fname = 'monitor.eps',
+# figure_backgroundcolor='white',
+# figure_size_x = 18.0,
+# figure_size_y = 5.0,
+# ax_function_position=[0.15,0.2,0.8,0.6],
+# is_show=show,
+# )
