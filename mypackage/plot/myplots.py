@@ -20,6 +20,7 @@ import scipy as sp		# Scientific Python (sp.mean(), sp.cov())
 sys.path[0] = python_dir        # Set path to read mypackage
 from mypackage.plot import plotfunctions as pltfct
 from mypackage.plot import myplt
+from mypackage.plot import mycolors
 from mypackage.data import dataroutines as dr
 
 import datetime                 # Date and time functions
@@ -61,14 +62,14 @@ color_arr = [(0.00,0.00,0.00),
              (0.75,0.25,0.00),(0.75,0.00,0.25),(0.00,0.75,0.25)]
 
 # Array of color maps
-cmaps = ['jet','Greys','RdBu',  # 'Greys', 'Reds' are monotonous, 'RdBu' is divergent
-         'Greens','Reds',
-         'Blues','Reds',
-         'Greys','YlOrRd',
-         'RdBu','hot',
-         'binary','Blues','BuGn',
-         'jet','gray','YlOrRd',
-         'gnuplot','gnuplot2''spring','summer','autumn','winter','rgb','rainbow']
+cmaps = [cm.viridis,cm.Greys,cm.RdBu,#'viridis','Greys','RdBu',  # 'Greys', 'Reds' are monotonous, 'RdBu' is divergent
+         cm.Greens,cm.Reds]#'Greens','Reds',
+         # 'Blues','Reds',
+         # 'Greys','YlOrRd',
+         # 'RdBu','hot',
+         # 'binary','Blues','BuGn',
+         # 'jet','gray','YlOrRd',
+         # 'gnuplot','gnuplot2''spring','summer','autumn','winter','rgb','rainbow']
 
     
 ###########################################################################################
@@ -88,9 +89,10 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            run_output_dir,corr_dir,m_mons_size,m_kz_std_low,
            true_output_dir,resid_dir,num_mons,corr_dirs,m_kz_std_high,
            stddev_dir,assim_variables_name,model_name,m_first,m_cbar_kz_low,m_cbar_kz_high,
-           m_cbar_kz_res_low, m_cbar_kz_res_high,m_fig_title,m_fig_title_font,m_cbar_titles,
+           m_cbar_kz_res_low, m_cbar_kz_res_high,
+           m_fig_facecolor,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
-           m_ax_title,m_cbar_width, m_ax_title_pos,
+           m_ax_title,m_cbar_width, m_ax_title_pos,m_show_cbar,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            resid_dirs, stddev_dirs,
            m_cmaps,fig_m = 0 ):
@@ -160,8 +162,8 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
 
         # PLOT
         if not fig_m:
-            fig_m = plt.figure(1)# , figsize=(figure_size_x,figure_size_y)) #Generate the figure
-            fig_m.set_facecolor((0.50, 0.50, 0.50)) # Set figure background color
+            fig_m = plt.figure(1, figsize=(figure_size_x,figure_size_y)) #Generate the figure
+            fig_m.set_facecolor(m_fig_facecolor) # Set figure background color
             plt.suptitle(infile_stems[0]
                          if m_fig_title == None else
                          m_fig_title, y = 0.97, fontsize=m_fig_title_font)    #Insert figure title
@@ -172,10 +174,10 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                                  # grid_factor = m_grid_factor, # m_style.mplstyle
                                  # left_pad = im_left,
                                  # up_pad = im_up,
-                                 x_ticks = [100.0,200.0,300.0,400.0,500.0],
-                                 y_ticks = [100.0,200.0,300.0,400.0,500.0],
-                                 x_ticklabels = [100,200,300,400,500],
-                                 y_ticklabels = [100,200,300,400,500],)
+                                 x_ticks = [],#[100.0,200.0,300.0,400.0,500.0],
+                                 y_ticks = [],#[100.0,200.0,300.0,400.0,500.0],
+                                 x_ticklabels = [''],#[100,200,300,400,500],
+                                 y_ticklabels = [''])#[100,200,300,400,500],)
 
         if m_is_show_mons:    # Plot Monitoring cells
             ind_x = [mons_inds[i,0]*step_x-0.5*step_x for i in range(num_mons)]
@@ -226,8 +228,9 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
 
             im=ax_grid[i_subplt].imshow(data,        #Generate plot
                                         interpolation='nearest',
-                                        cmap=cm.get_cmap(name=m_cmaps[i_fnames], 
-                                                         lut=m_num_cbar), 
+                                        cmap=mycolors.cmap_discretize(cm.viridis,m_num_cbar),
+                                        # cm.get_cmap(name=m_cmaps[i_fnames],
+                                        #                  lut=m_num_cbar),
                                         norm = colors.Normalize(vmin=m_low_cbars[i_fnames],
                                                                 vmax=m_high_cbars[i_fnames],
                                                                 clip=False),
@@ -238,21 +241,22 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                 m_ax_title = 'Observation ' + str(i_obs).zfill(2)
             ax_grid[i_subplt].set_title(m_ax_title, y = m_ax_title_pos) #Add plot title
             
-            if i_subplt in range(n_fnames): # Add Colorbar for every variable
-                
-                cb_ax = fig_m.add_subplot(1,25,i_subplt+1)
-                
-                m_cbar_left = mpl.rcParams['figure.subplot.right'] + m_cbar_left_pad + (i_subplt)*m_cbar_space
-                m_cbar_bottom = mpl.rcParams['figure.subplot.bottom']
-                m_cbar_height = mpl.rcParams['figure.subplot.top']-mpl.rcParams['figure.subplot.bottom']
-                cb_ax.set_position([m_cbar_left,
-                                    m_cbar_bottom,
-                                    m_cbar_width,
-                                    m_cbar_height]) 
-                cb_ax.tick_params(labelsize = 20)
+            if m_show_cbar:
+                if i_subplt in range(n_fnames): # Add Colorbar for every variable
 
-                cb_ax.set_title(m_cbar_titles[i_subplt], y =1.02)
-                mpl.colorbar.Colorbar(cb_ax, im)
+                    cb_ax = fig_m.add_subplot(1,25,i_subplt+1)
+
+                    m_cbar_left = mpl.rcParams['figure.subplot.right'] + m_cbar_left_pad + (i_subplt)*m_cbar_space
+                    m_cbar_bottom = mpl.rcParams['figure.subplot.bottom']
+                    m_cbar_height = mpl.rcParams['figure.subplot.top']-mpl.rcParams['figure.subplot.bottom']
+                    cb_ax.set_position([m_cbar_left,
+                                        m_cbar_bottom,
+                                        m_cbar_width,
+                                        m_cbar_height])
+                    cb_ax.tick_params(labelsize = 20)
+
+                    cb_ax.set_title(m_cbar_titles[i_subplt], y =1.02)
+                    mpl.colorbar.Colorbar(cb_ax, im)
 
     return fig_m
 
@@ -263,12 +267,14 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
            f_plot_x_min,stddev_name,letter_true,f_plot_y_min,f_ax_legend_loc,
            f_line_colors,assimstp_name,assimstp_dir,mons_file_name,f_plot_y_max,
            f_y_vars_mean,diff_obs,f_y_variables_ens,f_res_std,f_ax_y_labels,
+           f_ax_labelsize,f_ax_labelpad,f_ax_ticksize,f_ax_legendsize,
            f_ax_legend_handle_length,run_output_dirs,assim_variables_dirs,corr_name,
            assimstp_dirs,model_name_big,resid_name,figure_size_y,f_markersize,
            f_ax_pos,f_x_variable,run_output_dir,f_ax_legend_cols,mons_file_dir,corr_dir,
            stddev_dir,true_output_dir,resid_dir,num_mons,corr_dirs,f_plot_x_max,
            figure_size_x,mons_inds,f_ax_x_label,model_name,f_ax_legend_labels,
-           f_force_y_range,f_ens_alpha,
+           f_force_y_range,f_ens_alpha,f_fig_facecolor,
+           f_is_circ,f_circ_pos,f_circ_width,f_circ_height,f_circ_color,
            assim_variables_name,f_fig_title,f_fig_title_font,
            model_output_dir, date_output_dir,resid_dirs, stddev_dirs,
            fig_f = 0):
@@ -277,7 +283,7 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
     if not fig_f:
         # Generate the figure
         fig_f = plt.figure(2, figsize=(figure_size_x,figure_size_y))
-        fig_f.set_facecolor((0.50, 0.50, 0.50))
+        fig_f.set_facecolor(f_fig_facecolor)
         # Insert figure title
         plt.suptitle(f_fig_title, y = 0.97, fontsize=f_fig_title_font)
 
@@ -329,13 +335,13 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
                 ax_f[i].patch.set_visible(False)
                 ax_f[i].yaxis.set_label_position('left')
             else:
-                ax_f[0] = fig_f.add_subplot(1,2,i)
+                ax_f[0] = fig_f.add_subplot(1,2,i+1)
             is_ax_exists = is_ax_exists + 1
             ax_f[i].set_position(f_ax_pos)
             ax_f[i].set_title('')
-            ax_f[i].set_xlabel(f_ax_x_label, fontsize = 20)
-            ax_f[i].set_ylabel(f_ax_y_labels[i], fontsize = 20)
-            ax_f[i].tick_params(labelsize = 20)
+            ax_f[i].set_xlabel(f_ax_x_label, fontsize = f_ax_labelsize, labelpad = f_ax_labelpad)
+            ax_f[i].set_ylabel(f_ax_y_labels[i], fontsize = f_ax_labelsize, labelpad = f_ax_labelpad)
+            ax_f[i].tick_params(labelsize = f_ax_ticksize)
 
             #Generate plot
             ax_f[i].plot(data_x,
@@ -385,7 +391,17 @@ def f_plot(f_ax_legend_bbox,num_timesteps,letters,nrobs_int,start_obs,assim_vari
                        numpoints=3,
                        handletextpad=0.5,
                        ncol=f_ax_legend_cols[i],
-                       prop={'size':18})
+                       prop={'size':f_ax_legendsize})
+
+            # Circle
+            if f_is_circ:
+                ellipse = mpl.patches.Ellipse(
+                    xy=f_circ_pos,#
+                    width=f_circ_width,#
+                    height=f_circ_height,#
+                    color=f_circ_color,#
+                    clip_on=False)
+                ax_f[0].add_artist(ellipse)
 
     return fig_f
 
@@ -1148,8 +1164,7 @@ def t_plot(num_timesteps,nrobs_int,t_ax_pos,t_variable_name,t_ax_high_cbar,mons_
     #Generate image
     im = ax_true.imshow(data,
                         interpolation='nearest',
-                        cmap=cm.get_cmap(name='jet',
-                                         lut=t_ax_num_cbar),# 'gray', 'rgb', 'rainbow'
+                        cmap=mycolors.cmap_discretize(cm.viridis,t_ax_num_cbar),
                         norm = colors.Normalize(vmin=t_ax_low_cbar,
                                                 vmax=t_ax_high_cbar,
                                                 clip=False),
@@ -1503,7 +1518,7 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
         #############################################################################
         #Checks
         for resid_dir in resid_dirs: # Does file exist? Is variables in file?
-            if not pltfct.is_scalar_var_in_file(var_name, input_file_name, resid_dir):
+            if not pltfct.is_scalar_var_in_file(resid_dir,input_file_name,var_name):
                 raise exceptions.RuntimeError('var_name ' + var_name \
                     + 'not in input_file_name ' + input_file_name \
                     + 'in resid_dir' + resid_dir)
