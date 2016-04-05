@@ -54,6 +54,8 @@ scatter_size = [10],
 scatter_x_ticks = np.arange(-15,15,0.2),         # [-11.5,-11,-10.5,-10,-9.5,-9], 
 scatter_normed_y_ticks = np.arange(-10,10,0.2),
 # 
+cmap_cbar = cm.viridis,
+#
 save_pics_dir = None,
 save_pics_name = 'plot_single_cell.png',
 #
@@ -250,7 +252,7 @@ is_save = 1,
                                                         facecolor='darkblue', 
                                                         normed=True,
                                                         histtype='bar')
-        hist_cmap = cm.get_cmap('jet')
+        hist_cmap = cmap_cbar
         hist_norm = colors.normalize(-11.0 if variable_names[0]==4 else
                                       (0.006 if variable_names[0]==3 else 0.0),
                                    -9.0 if variable_names[0]==4 else
@@ -267,7 +269,7 @@ is_save = 1,
                                                         histtype='bar',
                                                         orientation='horizontal')
             
-        # hist_cmap = cm.get_cmap('jet')
+        # hist_cmap = cmap_cbar
         # hist_norm = colors.normalize(-11.0 if variable_names[1]==4 else 0.006,
         #                            -9.0 if variable_names[1]==4 else 0.008)
         # for this_bin, this_patch in zip(hist_bins,hist_patches): 
