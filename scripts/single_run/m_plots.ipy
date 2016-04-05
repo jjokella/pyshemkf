@@ -1,6 +1,6 @@
-mod_name = 'trial'
-let = 'b'
-dat = '2015_10_02'
+mod_name = 'wavebc'
+let = 'd'
+dat = '2016_03_24'
 show = 1
 # 
 # Array of pics, av std res
@@ -15,8 +15,30 @@ show = 1
 #
 # Single pics for video, av std res
 #
-# for i in [10,20,30,40,50,60,70,80,90]:
+# for i in [1,90]:
 #     p(is_m = 1, model_name = mod_name, date = dat, letter = let, m_first = i, m_diff = 100, m_n_rows = 1, m_n_cols = 1, m_fig_title = 'Updated Permeability Field', m_cbar_width = 0.01, is_show = show, m_is_show_mons = 1,m_varnames = ['kz_mean','kz_std','kz_res'],m_cbar_kz_low = -11)
+# movie(input_name_test = 'plot_m_'+let+'_01_100_av.png', input_names = 'plot_m_'+let+'_%02d_100_av.png', output_name = 'plot_m_'+let+'_100_av.mp4', model_name = mod_name, date = dat)    
+for i in range(1,92,10):
+    p(is_m = 1,
+      model_name = mod_name, 
+      date = dat, 
+      letter = let, 
+      m_first = i, 
+      m_diff = 100, 
+      m_n_rows = 1, 
+      m_n_cols = 1, 
+      m_fig_title = '', 
+      figure_size_x = 15.0,
+      figure_size_y = 10.0,
+      m_cbar_width = 0.03, 
+      m_cbar_kz_low = -11,
+      m_cbar_kz_high = -9,
+      is_show = show, 
+      m_is_show_mons = 1,
+      m_varnames = ['kz_mean'],
+      m_pic_ending = ".eps",
+      m_cbar_left_pad = -0.1,
+      )
 # movie(input_name_test = 'plot_m_'+let+'_01_100_av.png', input_names = 'plot_m_'+let+'_%02d_100_av.png', output_name = 'plot_m_'+let+'_100_av.mp4', model_name = mod_name, date = dat)    
 #
 # Single pics for video, av cor cor
@@ -27,8 +49,41 @@ show = 1
 #
 # Fields at the beginning
 #
-p(is_m = 1, date = dat, letter = let, model_name = mod_name,  m_infiles = ['init'], m_varnames = ['kz'], m_fig_title = 'Initial Realisations', is_show = show) # m_single_fig_title = 'Field ',
+# for i in range(1,4):
+#     p(is_m = 1, 
+#       date = dat,
+#       letter = let,
+#       model_name = mod_name,
+#       figure_size_x = 10,
+#       figure_size_y = 10,
+#       m_infiles = ['init'],
+#       m_varnames = ['kz'],
+#       m_n_rows = 1,
+#       m_n_cols = 1,
+#       m_ax_title = ' ',
+#       m_fig_title = '',
+#       is_show = show,
+#       m_show_cbar = False,
+#       m_first = i,
+#       m_pic_ending = ".eps"
+#       ) # m_single_fig_title = 'Field ',
 #
 # Fields at the end
 # 
-# p(is_m = 1, date = dat, letter = let, m_infiles = ['end'], m_varnames = ['kz'], m_single_fig_title = 'Field ', m_fig_title = 'Final Realisations', is_show = show)
+# for i in range(1,4):
+#     p(is_m = 1,
+#       date = dat,
+#       letter = let,
+#       model_name = mod_name,
+#       figure_size_x = 10,
+#       figure_size_y = 10,
+#       m_n_rows = 1,
+#       m_n_cols = 1,
+#       m_infiles = ['end'],
+#       m_varnames = ['kz'],
+#       m_first = i,
+#       m_fig_title = '',
+#       m_ax_title = ' ',
+#       m_show_cbar = False,
+#       m_pic_ending = ".eps",
+#       is_show = show)

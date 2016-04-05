@@ -9,43 +9,46 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_1000 = False
+is_1000 = True
 
-ncrs = [1,10,100,200,500] if is_1000 else [1,10]
+ncrs = [1] if is_1000 else [1,10]
 ncr_bold = 1000 if is_1000 else 100                            #Size
 
 is_ttest = True                           #Ttest?
 
-which_enssize = [50,70,100,250]           #Ensemble sizes
+which_enssize = [250] if is_1000 else [50,70,100,250,500,1000,2000]           #Ensemble sizes
 
 # Methods used in the comparison
-is_show = 0
+is_show = 1
 is_save = 1
-pic_name_end = 'png'                      #'png' or 'eps' or 'svg'
-pic_dir = '/home/jk125262/PythonDir_Cluster/output/numcomp/'+pic_name_end+'/'
+pic_name_end = '.eps'                      #'png' or 'eps' or 'svg'
+pic_dir = '/home/jk125262/PythonDir_Cluster/output/numcomp/'+pic_name_end[-3:]+'/'
 
-which_methods_left = [1,5,4,3,2]        #Space in which_methods
-which_methods_right = [5,4,3,2,0]       #Space in which_methods
+# which_methods_left = [1,5,4,3,2]        #Space in which_methods
+# which_methods_right = [5,4,3,2,0]       #Space in which_methods
+which_methods_left = [1,4,0,3,2]        #Space in which_methods
+which_methods_right = [4,0,3,2,5]       #Space in which_methods
 show_methods = [which_methods_left,
                 which_methods_right]
 
 
-names = pa.names_methods1000 #if is_1000 else pa.names_methods
+names = pa.longnames_methods1000 #if is_1000 else pa.names_methods
 #Taking the ones from 1000, because in read.ipy this should be settled.
 
 # which_methods = np.load('output/which_methods.npy')
 
 for ncr in ncrs:
     for ensemble_size in which_enssize:
-        fig_title = 'Ensemble: ' + str(ensemble_size).zfill(4) + '  Runs: ' +str(ncr)+'/'+ str(ncr_bold)
+        # fig_title = 'Ensemble: ' + str(ensemble_size).zfill(4) + '  Runs: ' +str(ncr)+'/'+ str(ncr_bold)
+        fig_title = str(ncr)+' Synthetic Study'
 
         pic_name_plot='numcomp_'+str(ncr).zfill(4)\
           +'_'+str(ncr_bold).zfill(4)\
-          +'_'+str(ensemble_size).zfill(4)+'.' + pic_name_end
+          +'_'+str(ensemble_size).zfill(4)+ pic_name_end
         if is_ttest:
             pic_name_plot='numcomp_'+str(ncr).zfill(4)\
               +'_'+str(ncr_bold).zfill(4)\
-              +'_'+str(ensemble_size).zfill(4)+'_ttest'+'.' + pic_name_end
+              +'_'+str(ensemble_size).zfill(4)+'_ttest'+ pic_name_end
 
         # Load arrays
         if ncr == 1:
@@ -120,10 +123,10 @@ for ncr in ncrs:
         ytick1 = [names[show_methods[0][i]] for i in range(num_comparisons)]
         ytick2 = [names[show_methods[1][i]] for i in range(num_comparisons)]
 
-        plt.figure(figsize = [10,num_comparisons/1.0])
+        plt.figure(figsize = [12,num_comparisons/1.0])
         plt.title(fig_title,fontsize=30, y = 1.08)
         ax1 = plt.gca()
-        ax1.set_position([0.2,0.05,0.6,0.75])
+        ax1.set_position([0.3,0.05,0.4,0.75])
         ax1.set_frame_on(False)
 
         plt.barh(bottom = in_bottom,
@@ -133,6 +136,13 @@ for ncr in ncrs:
                  color = in_color,
                  edgecolor = 'k')
 
+        for i in range(1,num_comparisons+1):
+            if in_left[3*i-1]-in_left[3*i-2] > 0.1:
+                plt.text(in_left[3*i-2]   +0.5*(in_left[3*i-1]-in_left[3*i-2]),
+                         in_bottom[3*i-2] + 0.3,
+                         "$H_0$",
+                         fontsize = 20)
+            
         ax1.tick_params(direction = 'out', length = 0,
                        width = 1, labelsize = 20,
                        top = 'off', bottom = 'off',
@@ -145,7 +155,7 @@ for ncr in ncrs:
         ax1.set_yticklabels(ytick1)
 
         ax2 = ax1.twinx()
-        ax2.set_position([0.2,0.05,0.6,0.75])
+        ax2.set_position([0.3,0.05,0.4,0.75])
         ax2.set_frame_on(False)
         ax2.tick_params(direction = 'out', length = 0,
                        width = 1, labelsize = 20,

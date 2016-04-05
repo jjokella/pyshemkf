@@ -10,7 +10,7 @@ import pandas as pd
 
 is_1000 = True
 
-which_methods = [0,1,2,3,4,5]
+which_methods = [0,1,2,3,4,5,6]
 
 # which_methods = [0,2,3,4,8,9,16]
 num_methods = len(which_methods)                           # Bei 13 Problem, nicht eingeladen...
@@ -20,7 +20,7 @@ num_ensemble_sizes = 4
 dats = pa.dats1000 if is_1000 else pa.dats
 lets = pa.lets1000 if is_1000 else pa.lets
 nums = pa.nums1000 if is_1000 else pa.nums
-legend_input = pa.names_methods1000 if is_1000 else pa.names_methods
+legend_input = pa.longnames_methods1000 if is_1000 else pa.longnames_methods
 
 # Legend inputs
 legend_input = np.array([legend_input[i].ljust(18) for i in range(len(legend_input))])

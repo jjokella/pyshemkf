@@ -13,24 +13,25 @@ from scipy import special
 from scipy import stats
 
 
-is_1000 = False
+is_1000 = True
 
 # Methods used in the comparison
-which_methods = [0,1,2,3,4,5]
+which_methods = [0,1,2,3,4,5,6]
 names_methods = [pa.names_methods1000[which_methods[i]] if is_1000 
                  else pa.names_methods[which_methods[i]] 
                  for i in range(len(which_methods))]
 # Ensemble sizes to produce
-which_ensembles = [50,70,100,250] if is_1000 else [50,70,100,250]   #[50,100,250,500,1000,2000]
+which_ensembles = [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000]   #[50,70,100,250,500,1000,2000]
 # Number of runs for numerical comparison and number of matchups
-ncrs = [1000] if is_1000 else [100]
-ncs = 10000
+ncrs = [1,10,100,500] if is_1000 else [1,10] # Plotting the Numerical comparison for different methods
+ncs = 1000
 # Use TTest? (Only for N >1)
 is_ttest = True
+
 # Confidence Level (Gaussian difference)
 # cl = 0.95
 cl = 0.5 + 0.5*sp.special.erf( 1.5/np.sqrt(2) )
-# pvalue (Ttest)
+# P-value (Ttest)
 pval = 0.1
 
 for ncr in ncrs:
