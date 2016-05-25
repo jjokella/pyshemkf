@@ -1,7 +1,7 @@
 # Plots of the Synthetic True, Source: mypackage/plot/plot_true.py
-mod_name = 'alex'
-dat = '2016_03_10'
-let = 'b'
+mod_name = 'wavebc'
+dat = '2016_03_24'
+let = 'a'
 show = 1
 
 

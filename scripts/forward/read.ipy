@@ -32,4 +32,4 @@ vtk_array = reader.GetOutput().GetPointData().GetArray(0) # 0: Scalar
 
 print(vtk_array.GetValueRange())
 
-os.chdir('/home/jk125262/PythonDir_Cluster')
+os.chdir('/home/jk125262/PythonDir')

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #Paths
-python_dir = '/home/jk125262/PythonDir_Cluster/'
+python_dir = '/home/jk125262/PythonDir/'
 output_files_dir    = '/home/jk125262/shematOutputDir_Cluster/'
 
 # Operating system commands

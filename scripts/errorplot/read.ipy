@@ -54,9 +54,9 @@ for i_kind, j_kind in enumerate(which_methods):
         num = nums[j_kind][j]
 
         # Load the final distributions that were read in in singleread
-        begres = np.load('/home/jk125262/PythonDir_Cluster/output/dists/begres_'
+        begres = np.load('/home/jk125262/PythonDir/output/dists/begres_'
                          +dat+'_'+let+'.npy')
-        endres = np.load('/home/jk125262/PythonDir_Cluster/output/dists/endres_'
+        endres = np.load('/home/jk125262/PythonDir/output/dists/endres_'
                          +dat+'_'+let+'.npy')
 
         # Calculate different statistics
@@ -79,7 +79,7 @@ for i_kind, j_kind in enumerate(which_methods):
         endres_q3[i_kind,j] = np.percentile(endres,75)
 
 # Saving arrays containing the residuals and their standard deviations
-os.chdir('/home/jk125262/PythonDir_Cluster')
+os.chdir('/home/jk125262/PythonDir')
 
 if is_1000:
     np.save('output/errorplot/npy/outliers061000',outliers06)
@@ -125,4 +125,4 @@ else:
     np.save('output/errorplot/npy/legend_input',legend_input)
 
 
-os.chdir('/home/jk125262/PythonDir_Cluster')
+os.chdir('/home/jk125262/PythonDir')

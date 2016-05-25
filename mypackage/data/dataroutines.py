@@ -39,7 +39,7 @@ def my_subarray(arr, ind_x = None, ind_y = None):
 
 
 
-os.chdir('/home/jk125262/PythonDir_Cluster')
+os.chdir('/home/jk125262/PythonDir')
 
 
 

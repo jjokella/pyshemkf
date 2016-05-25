@@ -2,7 +2,7 @@
 
 # Paths
 output_files_dir    = '/home/jk125262/shematOutputDir_Cluster/'
-python_dir = '/home/jk125262/PythonDir_Cluster'
+python_dir = '/home/jk125262/PythonDir'
 
 # Modules
 import sys                      # System variables (PYTHONPATH as list sys.path)

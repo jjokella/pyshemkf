@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Paths
-python_dir = '/home/jk125262/PythonDir_Cluster'
+python_dir = '/home/jk125262/PythonDir'
 
 # Operating system commands
 import os

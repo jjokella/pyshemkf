@@ -24,4 +24,4 @@ plt.legend(title = 'Ensemble')
 plt.savefig('/home/jk125262/allhist_ensemblehigh.png')
 plt.close()
 
-os.chdir('/home/jk125262/PythonDir_Cluster')
+os.chdir('/home/jk125262/PythonDir')

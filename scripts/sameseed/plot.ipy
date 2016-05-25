@@ -140,8 +140,8 @@ if is_text:
                 plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20, fontweight = 'bold')
         # print 
         
-plt.savefig('/home/jk125262/PythonDir_Cluster/output/sameseed/sameseed.eps')            
-print('Saved as ' + '/home/jk125262/PythonDir_Cluster/output/sameseed/sameseed.eps')
+plt.savefig('/home/jk125262/PythonDir/output/sameseed/sameseed.eps')            
+print('Saved as ' + '/home/jk125262/PythonDir/output/sameseed/sameseed.eps')
 
 plt.show()
 

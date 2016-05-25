@@ -132,7 +132,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
 
     if errout:
         if(proc.returncode):
-            os.chdir('/home/jk125262/PythonDir_Cluster')
+            os.chdir('/home/jk125262/PythonDir')
             raise exceptions.RuntimeError("Problems in " + str(name))
     
 
@@ -374,7 +374,7 @@ def make_model_dir_tmp(model_name,letter,today):
     trash_model_dir_2 = "/home/jk125262/.Trash/"+ model_dir_name + '_2'
     # Check if new_model_dir already exists
     if os.path.isdir(new_model_dir):
-        os.chdir('/home/jk125262/PythonDir_Cluster')
+        os.chdir('/home/jk125262/PythonDir')
         # _2 dir in .Trash exists: Kill it (should be killable by now)
         if os.path.isdir(trash_model_dir_2):
             shutil.rmtree(trash_model_dir_2)

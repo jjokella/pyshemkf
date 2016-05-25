@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 # Paths
-python_dir = '/home/jk125262/PythonDir_Cluster'
-input_file_dir = '/home/jk125262/PythonDir_Cluster/exec/pp'
+python_dir = '/home/jk125262/PythonDir'
+input_file_dir = '/home/jk125262/PythonDir/exec/pp'
 
 # Modules
 import numpy as np
