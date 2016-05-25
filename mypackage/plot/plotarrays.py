@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Paths
-python_dir = '/home/jk125262/PythonDir_Cluster'
+python_dir = '/home/jk125262/PythonDir'
 
 import numpy as np
 
@@ -128,6 +128,7 @@ localisation1000_dats = ['2015_12_18','2015_12_17','2015_12_18','2015_12_18']
 iterative1000_dats = ['2016_01_07','2016_01_14','2016_01_21','2016_01_28']
 
 normal1000_wavebc_dats = ['2016_03_24','2016_03_24','2016_03_24','2016_03_24']
+damping1000_wavebc_dats = ['2016_04_01','2016_04_01','2016_04_01','2016_04_01']
 
 normal1000_lets = ['b','mhf','aln','bxz']
 damping1000_lets = ['b','ntr','aln','bxz']
@@ -138,6 +139,7 @@ localisation1000_lets = ['b','trn','aln','bxz']
 iterative1000_lets = ['b','b','b','b']
 
 normal1000_wavebc_lets = ['b','aln','bxz','dkl']
+damping1000_wavebc_lets = ['b','aln','bxz','dkl']
 
 normal1000_nums = [1000,1000,1000,1000]
 damping1000_nums = [1000,1000,1000,1000]
@@ -148,6 +150,7 @@ localisation1000_nums = [1000,1000,1000,1000]
 iterative1000_nums = [1000,1000,1000,1000]
 
 normal1000_wavebc_nums = [1000,1000,1000,1000]
+damping1000_wavebc_nums = [1000,1000,1000,1000]
 
 
 dats1000 = [normal1000_dats,damping1000_dats,normalscore1000_dats,dual1000_dats,hybrid1000_dats,
