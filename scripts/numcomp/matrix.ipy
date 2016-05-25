@@ -8,42 +8,106 @@ from mypackage.plot import plotfunctions as pf
 from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
+from matplotlib import colors	        # Normalize colors (colors.Normalize())
 
+# Show or save pictures
+is_show = 1
+is_save = 1
 
-# Load probs
-probs = np.load('output/numcomp/npy/ttest/probs1000_0100_0050.npy')
+# Ensemble sizes to output
+enssizes = [50,70,100,250]
+num_inputs = len(enssizes)
 
+# Indices/Sorting/Number of methods
+indsorts = {50:[1,5,4,3,2,0],
+            70:[1,4,5,3,0,2],
+            100:[1,4,3,0,2,5],
+            250:[1,4,0,3,2,5]}
+num_methods = len(indsorts[50])
 
-indsort = [1,5,4,3,2,0]
+# Input
+num_comparisons = 100                       #1, 10, 1000
+probs_names = {n_ens :
+               'output/numcomp/npy/ttest/probs1000_'
+               +str(num_comparisons).zfill(4)+'_'
+               +str(n_ens).zfill(4)+'.npy'
+               for n_ens in enssizes}
 
-probs = probs[indsort,:,:]
-probs = probs[:,indsort,:]
+# Output 
+pic_name_end = ['eps','png']
+pic_dirs = {pic_end :
+            '/home/jk125262/PythonDir/output/numcomp/matrix/'+pic_end[-3:]+'/'
+            for pic_end in pic_name_end}
+pic_names = {n_ens: 'matrix'+probs_names[n_ens][-18:-4]
+             for n_ens in enssizes}
 
+# Ticks (names)
+names = np.array(pa.longnames_methods1000) #if is_1000 else pa.names_methods
+yticks = {n_ens : names[indsorts[n_ens]] for n_ens in enssizes}
+ticksize = 10
+    
+for n_ens in enssizes:
 
-plt.figure(1)
-plt.imshow(probs[:,:,1],interpolation='nearest',cmap='Greys')
+    # Load probs
+    probs = np.load(probs_names[n_ens])
 
-plt.savefig('matrix1.png')
-plt.close()
+    # Sort probs
+    probs = probs[indsorts[n_ens],:,:]
+    probs = probs[:,indsorts[n_ens],:]
 
-plt.figure(2)
-plt.imshow(probs[:,:,0]-probs[:,:,2],interpolation='nearest',cmap='RdBu')
+    # Figure
+    plt.figure(1,figsize=[12,6])
+    plt.suptitle("N = "+ str(n_ens)+"  Comparisons: "+str(num_comparisons) , fontsize = 30)
 
-plt.savefig('matrix2.png')
-plt.close()
+    # Axis1: Undecided
+    
+    # Axis position/ticks
+    ax1 = plt.gca()
+    im1 = ax1.imshow(probs[:,:,1],interpolation='nearest',
+                     cmap='Greys',
+                     norm = colors.Normalize(vmin=0,vmax=1,clip=False))
+    plt.title("Fraction: Undecided Comparisons")
+    ax1.set_position([0.13,0.2,0.3,0.6])
+    plt.xticks(rotation=90)
+    ax1.set_xticks([i for i in range(num_methods)])
+    ax1.set_xticklabels(yticks[n_ens], fontsize=ticksize)
+    ax1.set_yticks([i for i in range(num_methods)])
+    ax1.set_yticklabels(yticks[n_ens], fontsize=ticksize)
 
-probs2 = np.load('output/numcomp/npy/ttest/probs1000_0100_0250.npy')
-probs2 = probs2[indsort,:,:]
-probs2 = probs2[:,indsort,:]
+    # Colorbar
+    cb_ax1 = plt.gcf().add_subplot(223)
+    cb_ax1.set_position([0.44,0.2,0.01,0.6])
+    mpl.colorbar.Colorbar(cb_ax1, im1)
+    
+    #------------------------------------------------------------------
+        
+    # Axis2: Mean difference
+    
+    # Axis position/ticks
+    ax2 = plt.subplot(122)
+    im2 = ax2.imshow(probs[:,:,0]-probs[:,:,2],interpolation='nearest',cmap='RdBu',
+                     norm = colors.Normalize(vmin=-1,vmax=1,clip=False))
+    plt.title("Fraction Bottom-Fraction Left")
+    ax2.set_position([0.62,0.2,0.3,0.6])
+    plt.xticks(rotation=90)
+    ax2.set_xticks([i for i in range(num_methods)])
+    ax2.set_xticklabels(yticks[n_ens], fontsize=ticksize)
+    ax2.set_yticks([i for i in range(num_methods)])
+    ax2.set_yticklabels(yticks[n_ens], fontsize=ticksize)
 
-plt.figure(3)
-plt.imshow(probs2[:,:,1],interpolation='nearest',cmap='Greys')
+    # Colorbar
+    cb_ax2 = plt.gcf().add_subplot(224)
+    cb_ax2.set_position([0.93,0.2,0.01,0.6])
+    mpl.colorbar.Colorbar(cb_ax2, im2)
 
-plt.savefig('matrix3.png')
-plt.close()
+    # Save/Show
+    if is_save:
+        for pic_end in pic_name_end:
+            plt.savefig(pic_dirs[pic_end] + pic_names[n_ens]+'.'+pic_end)
+            print('Saved as ' + pic_dirs[pic_end] + pic_names[n_ens]+'.'+pic_end)
 
-plt.figure(4)
-plt.imshow(probs2[:,:,0]-probs2[:,:,2],interpolation='nearest',cmap='RdBu')
+    if is_show:
+        plt.show()
+    else:
+        plt.close()
 
-plt.savefig('matrix4.png')
-plt.close()
