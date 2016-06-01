@@ -31,7 +31,7 @@ for i in range(2):
     png_name_hist = 'test_2_' + dat + '_' + let + '.png'
 
     # The array with the final residuals
-    endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(j)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for j in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+    endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(j)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for j in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
 
     # The number of final residuals bigger than 0.6
     higher_array = [1 if endres[j]>0.6 else 0 for j in range(num)]

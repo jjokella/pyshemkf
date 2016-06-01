@@ -12,7 +12,7 @@ import pandas as pd
 
 
 
-fdir ='/home/jk125262/shematOutputDir_Cluster/alex_output/2016_03_14/2016_03_14_e/samples_output/'
+fdir ='/home/jk125262/shematOutputDir/alex_output/2016_03_14/2016_03_14_e/samples_output/'
 fname = 'ALEX_time_out_4.vtk'
 varname = 'temp'                            #'head','temp','kz'
 

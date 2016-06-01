@@ -11,7 +11,7 @@ let = ['cx','gt','b']
 num = 100
 
 num_obs = 100                             #Should be almost constant
-endres = [[plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat[j] + '/' + dat[j] + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let[j]),rm.get_num_let(let[j])+num)] for j in range(3)]
+endres = [[plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir/wave_output/' + dat[j] + '/' + dat[j] + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let[j]),rm.get_num_let(let[j])+num)] for j in range(3)]
 
 plt.figure()
 plt.hist(endres[0],np.linspace(0.2,1,50),color = 'red',label = '500')

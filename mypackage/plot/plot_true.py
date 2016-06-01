@@ -135,7 +135,7 @@ is_true = 1
         save_png_fname = input_file_name + 'pic.png' # Default function name for png
 
     if save_png_dir is None:
-        save_png_dir = "/home/jk125262/shematOutputDir_Cluster/"\
+        save_png_dir = "/home/jk125262/shematOutputDir/"\
             + model_name +"_output/"\
             + date + "/" \
             + "pics"            # Default saving directory
@@ -149,12 +149,12 @@ is_true = 1
     ######################################################################################
 
     num_mons = pltfct.get_num_mons('observations_' + model_name_big + '.dat',
-                                "/home/jk125262/shematOutputDir_Cluster/"
+                                "/home/jk125262/shematOutputDir/"
                                 + model_name +"_output/" + date + "/" 
                                 + date + "_" + letter_true) # Number of monitoring points
     
     cell_numpy_ind = pltfct.get_mons_inds(model_name_big + '_TRUE_E0_monitor_1.dat',
-                                       "/home/jk125262/shematOutputDir_Cluster/"
+                                       "/home/jk125262/shematOutputDir/"
                                        + model_name +"_output/" + date + "/"
                                        + date + "_" + letter_true + "/" + output_dir,
                                        num_mons) # Monitoring point indices
@@ -184,7 +184,7 @@ is_true = 1
     ######################################################################################
 
     #Go to the general output directory
-    os.chdir("/home/jk125262/shematOutputDir_Cluster/" + model_name +"_output/" + date + "/" \
+    os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
              + date + "_" + letter_true + "/")
     #Create pics directory if not already existing
     if(not(os.path.exists('pics'))):
@@ -301,7 +301,7 @@ is_true = 1
 
         for i_subplt in range(n_rows*n_cols):
 
-            os.chdir("/home/jk125262/shematOutputDir_Cluster/" \
+            os.chdir("/home/jk125262/shematOutputDir/" \
                          + model_name +"_output/" \
                          + date + "/" \
                          + date + "_" + letter_true + "/" \
@@ -393,7 +393,7 @@ is_true = 1
 
 
     if is_func:
-        os.chdir("/home/jk125262/shematOutputDir_Cluster/" + model_name +"_output/" + date + "/" \
+        os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
                              + date + "_" + letter_true + "/" + output_dir)
 
         cell_numpy_x = np.genfromtxt(model_name_big + '_TRUE_E0_monitor_1.dat',
@@ -517,7 +517,7 @@ is_true = 1
                               origin='lower',
                               extent=grid_bounds[0:4])
 
-        ax_single = pltfct.make_quiver("/home/jk125262/shematOutputDir_Cluster/" + model_name +"_output/" + date + "/" + date + "_" + letter_true + "/" + output_dir,
+        ax_single = pltfct.make_quiver("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" + date + "_" + letter_true + "/" + output_dir,
                                     model_name_big + '_TRUE_E0_1.vtk',
                                     'v',
                                     ax_single) # quiver

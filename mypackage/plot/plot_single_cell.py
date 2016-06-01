@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Paths
-output_files_dir    = '/home/jk125262/shematOutputDir_Cluster/'
+output_files_dir    = '/home/jk125262/shematOutputDir/'
 python_dir = '/home/jk125262/PythonDir'
 
 # Modules
@@ -74,7 +74,7 @@ is_save = 1,
         fig_titles = ['Figure Title' for i in range(num_figs)]
     
     if save_pics_dir is None:
-        save_pics_dir = "/home/jk125262/shematOutputDir_Cluster/"\
+        save_pics_dir = "/home/jk125262/shematOutputDir/"\
             + model_name +"_output/" + date + "/"\
             + date + "_" + letter + "/pics"
     if not os.path.exists(save_pics_dir):

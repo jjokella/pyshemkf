@@ -32,7 +32,7 @@ for j in range(num_ensemble_sizes):
     num_obs = num_obss[j]
     
     # Read in the begres-distribution
-    begres = [pf.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/'+model_name+'_output/' 
+    begres = [pf.my_vtk_to_numpy('/home/jk125262/shematOutputDir/'+model_name+'_output/' 
                                 + dat + '/' + dat + '_'+rm.get_let_num(i)
                                 +'/enkf_output',
                                 'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
@@ -43,7 +43,7 @@ for j in range(num_ensemble_sizes):
     begres = None
 
     # Read in the endres-distribution
-    endres = [pf.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/'+model_name+'_output/' 
+    endres = [pf.my_vtk_to_numpy('/home/jk125262/shematOutputDir/'+model_name+'_output/' 
                                 + dat + '/' + dat + '_'+rm.get_let_num(i)
                                 +'/enkf_output',
                                 'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',

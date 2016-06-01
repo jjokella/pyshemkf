@@ -343,7 +343,7 @@ def change_matlab( mfile_name,
 
 def make_file_dir_names(model_name):
     model_name_big = model_name.upper()
-    model_dir = "/home/jk125262/shematModelsDir_Cluster/" + model_name + "_model"
+    model_dir = "/home/jk125262/shematModelsDir/" + model_name + "_model"
     input_file = model_name_big
     enkf_input_file = model_name_big + ".enkf"
     true_input_file = model_name_big + "_TRUE"
@@ -366,10 +366,10 @@ def make_file_dir_names(model_name):
 
 
 def make_model_dir_tmp(model_name,letter,today):
-    os.chdir("/home/jk125262/shematModelsDir_Cluster")
+    os.chdir("/home/jk125262/shematModelsDir")
     # Copy everything to temporal directory
     model_dir_name = model_name + '_model_' + today  + '_' + letter
-    new_model_dir = "/home/jk125262/shematModelsDir_Cluster/" + model_dir_name
+    new_model_dir = "/home/jk125262/shematModelsDir/" + model_dir_name
     trash_model_dir = "/home/jk125262/.Trash/"+ model_dir_name
     trash_model_dir_2 = "/home/jk125262/.Trash/"+ model_dir_name + '_2'
     # Check if new_model_dir already exists
@@ -384,7 +384,7 @@ def make_model_dir_tmp(model_name,letter,today):
         # Move old new_model_dir to .Trash
         shutil.move(new_model_dir,"/home/jk125262/.Trash")
         # raise exceptions.RuntimeError("New model dir already exists: " + new_model_dir)
-    shutil.copytree("/home/jk125262/shematModelsDir_Cluster/" + model_name + '_model',
+    shutil.copytree("/home/jk125262/shematModelsDir/" + model_name + '_model',
                     new_model_dir)
     os.chdir(new_model_dir)
     # Change the directory  inside clean_out, move_output

@@ -135,7 +135,7 @@ for i_kind in range(len(dats)):
         let = lets[i_kind][j]
         num = nums[i_kind][j]
         num_obs = num_obss[i_kind][j]                             #Should be almost constant
-        endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir_Cluster/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+        endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
         endres_mean[j] = np.mean(endres)
         endres_std[j] = np.std(endres)
     # plt.errorbar(ensemble_sizes,endres_mean,yerr = endres_std,fmt = 'o')

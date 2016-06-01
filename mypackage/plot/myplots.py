@@ -1021,7 +1021,7 @@ def f3_plot(num_timesteps,nrobs_int,f3_num_arrays,mons_inds,f3_ax_legend_bbox,
         cell_numpy_temp_y = map(math.log10,cell_numpy_temp_y)
         cell_numpy_temp_y = np.array(cell_numpy_temp_y)
 #    mons_indsices = get_mons_inds(mons_file_name,
-#                                       "/home/jk125262/shematOutputDir_Cluster/" \
+#                                       "/home/jk125262/shematOutputDir/" \
 #                                           + model_name +"_output/" + date + "/" \
 #                                           + date + "_" + letter_true\
 #                                           + "/samples_output",

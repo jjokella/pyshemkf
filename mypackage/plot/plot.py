@@ -2,7 +2,7 @@
 
 #Paths
 python_dir = '/home/jk125262/PythonDir/'
-output_files_dir    = '/home/jk125262/shematOutputDir_Cluster/'
+output_files_dir    = '/home/jk125262/shematOutputDir/'
 
 # Operating system commands
 import os                            # Operating system (os.chdir, os.path)
