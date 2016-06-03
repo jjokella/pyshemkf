@@ -67,10 +67,18 @@ ax_single_titlefont=30,
 ax_single_labelsize = 30,
 ax_single_labelpad = 30,
 ax_single_ticksize = 20,
+ax_func_title = 'Default title',
+ax_func_xlabel = r'Default xlabel [$d$]',
+ax_func_ylabel = r'Default ylabel [[$\frac{mol}{L}$]]',
 ax_func_titlefont = 30,
 ax_func_labelfont = 25,
 ax_func_labelpad = 10,
 ax_func_ticksize = 20,
+ax_func_varnum = 13,
+ax_func_auto_xrange = 1,
+ax_func_xrange = [0,10],
+ax_func_auto_yrange = 1,
+ax_func_yrange = [-10,10],
 ax_single_position = [0.550,0.100,0.400,0.350], # left, bottom, width, height
 ax_function_position = [0.575,0.550,0.400,0.350], # left, bottom, width , height
 ax_single_cbar_position = [0.550+0.32,0.100,0.010,0.350],
@@ -183,71 +191,73 @@ is_true = 1
     ############################# MAIN PLOT ##############################################
     ######################################################################################
 
-    #Go to the general output directory
-    os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
-             + date + "_" + letter_true + "/")
-    #Create pics directory if not already existing
-    if(not(os.path.exists('pics'))):
-        os.mkdir('pics')
-    #Go to the specific output directory
-    os.chdir("./" + output_dir)
-    #print(os.getcwd())
+    if is_main:
 
-    #Open vtk-Reader
-    reader = vtk.vtkRectilinearGridReader()
-    reader.SetFileName(input_file_name + str(1).zfill(4) + '.vtk')
-    #Read NumPy array from vtk-file
-    reader.SetScalarsName(variable_name)
-    reader.Update()
+        #Go to the general output directory
+        os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
+                 + date + "_" + letter_true + "/")
+        #Create pics directory if not already existing
+        if(not(os.path.exists('pics'))):
+            os.mkdir('pics')
+        #Go to the specific output directory
+        os.chdir("./" + output_dir)
+        #print(os.getcwd())
 
-    if grid_loc == 'c':
-        #Read cell data and data propertires
-        cell_vtk_array = reader.GetOutput().GetCellData().GetArray(0)
-        num_cells = reader.GetOutput().GetNumberOfCells()
-        whole_extent = reader.GetOutput().GetExtent()
-        grid_bounds = reader.GetOutput().GetBounds()
-        grid_dims = reader.GetOutput().GetDimensions()
-        #Convert to NumPy array
-        cell_numpy_array = vtk.util.numpy_support.vtk_to_numpy(cell_vtk_array)
-        #Array is given grid dimensions
-        cell_numpy_array = cell_numpy_array.reshape(grid_dims[0]-1,grid_dims[1]-1)
-    elif grid_loc == 'p':
-        #Read point data and data properties
-        cell_vtk_array = reader.GetOutput().GetPointData().GetArray(0)
-        num_cells = reader.GetOutput().GetNumberOfCells()
-        whole_extent = reader.GetOutput().GetExtent()
-        grid_bounds = reader.GetOutput().GetBounds()
-        grid_dims = reader.GetOutput().GetDimensions()
-        #vtk-array converted to NumPy
-        cell_numpy_array = vtk.util.numpy_support.vtk_to_numpy(cell_vtk_array)
-        #Array given grid dimensions
-        cell_numpy_array = cell_numpy_array.reshape(grid_dims[0],grid_dims[1])
+        #Open vtk-Reader
+        reader = vtk.vtkRectilinearGridReader()
+        reader.SetFileName(input_file_name + str(1).zfill(4) + '.vtk')
+        #Read NumPy array from vtk-file
+        reader.SetScalarsName(variable_name)
+        reader.Update()
 
-    else:
-        raise exceptions.RuntimeError('Wrong variable: grid_loc (c or p allowed)')
+        if grid_loc == 'c':
+            #Read cell data and data propertires
+            cell_vtk_array = reader.GetOutput().GetCellData().GetArray(0)
+            num_cells = reader.GetOutput().GetNumberOfCells()
+            whole_extent = reader.GetOutput().GetExtent()
+            grid_bounds = reader.GetOutput().GetBounds()
+            grid_dims = reader.GetOutput().GetDimensions()
+            #Convert to NumPy array
+            cell_numpy_array = vtk.util.numpy_support.vtk_to_numpy(cell_vtk_array)
+            #Array is given grid dimensions
+            cell_numpy_array = cell_numpy_array.reshape(grid_dims[0]-1,grid_dims[1]-1)
+        elif grid_loc == 'p':
+            #Read point data and data properties
+            cell_vtk_array = reader.GetOutput().GetPointData().GetArray(0)
+            num_cells = reader.GetOutput().GetNumberOfCells()
+            whole_extent = reader.GetOutput().GetExtent()
+            grid_bounds = reader.GetOutput().GetBounds()
+            grid_dims = reader.GetOutput().GetDimensions()
+            #vtk-array converted to NumPy
+            cell_numpy_array = vtk.util.numpy_support.vtk_to_numpy(cell_vtk_array)
+            #Array given grid dimensions
+            cell_numpy_array = cell_numpy_array.reshape(grid_dims[0],grid_dims[1])
 
-    #Properties of the grid
-    step_x = (grid_bounds[1]-grid_bounds[0])/(grid_dims[0]-1)
-    step_y = (grid_bounds[3]-grid_bounds[2])/(grid_dims[1]-1)
-    if grid_loc == 'c':
-        npts_x = grid_dims[0]-1
-        npts_y = grid_dims[1]-1
-    elif grid_loc =='p':
-        npts_x = grid_dims[0]
-        npts_y = grid_dims[1]
-        # low_x = grid_bounds[0] + 0.5*step_x  #Middle of cells
-        # high_x = grid_bounds[1] - 0.5*step_x  #Middle of cells
-        # low_y = grid_bounds[2] + 0.5*step_y  #Middle of cells
-        # high_y = grid_bounds[3] - 0.5*step_y  #Middle of cells
-        low_x = grid_bounds[0] #Middle of cells
-        high_x = grid_bounds[1] #Middle of cells
-        low_y = grid_bounds[2]  #Middle of cells
-        high_y = grid_bounds[3]  #Middle of cells
-    # Grid array coordinates
-    x = np.linspace(low_x, high_x, npts_x)
-    y = np.linspace(low_x, high_x, npts_y)
-    #Coordinate matrices from coordinate vectors
-    X, Y = np.meshgrid(x, y)
+        else:
+            raise exceptions.RuntimeError('Wrong variable: grid_loc (c or p allowed)')
+
+        #Properties of the grid
+        step_x = (grid_bounds[1]-grid_bounds[0])/(grid_dims[0]-1)
+        step_y = (grid_bounds[3]-grid_bounds[2])/(grid_dims[1]-1)
+        if grid_loc == 'c':
+            npts_x = grid_dims[0]-1
+            npts_y = grid_dims[1]-1
+        elif grid_loc =='p':
+            npts_x = grid_dims[0]
+            npts_y = grid_dims[1]
+            # low_x = grid_bounds[0] + 0.5*step_x  #Middle of cells
+            # high_x = grid_bounds[1] - 0.5*step_x  #Middle of cells
+            # low_y = grid_bounds[2] + 0.5*step_y  #Middle of cells
+            # high_y = grid_bounds[3] - 0.5*step_y  #Middle of cells
+            low_x = grid_bounds[0] #Middle of cells
+            high_x = grid_bounds[1] #Middle of cells
+            low_y = grid_bounds[2]  #Middle of cells
+            high_y = grid_bounds[3]  #Middle of cells
+        # Grid array coordinates
+        x = np.linspace(low_x, high_x, npts_x)
+        y = np.linspace(low_x, high_x, npts_y)
+        #Coordinate matrices from coordinate vectors
+        X, Y = np.meshgrid(x, y)
 
     if is_main:
 
@@ -393,9 +403,11 @@ is_true = 1
 
 
     if is_func:
+        # Directory
         os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
-                             + date + "_" + letter_true + "/" + output_dir)
+                     + date + "_" + letter_true + "/" + output_dir)
 
+        # Read
         cell_numpy_x = np.genfromtxt(model_name_big + '_TRUE_E0_monitor_1.dat',
                                      dtype='f8',
                                      comments='%',
@@ -403,20 +415,17 @@ is_true = 1
         cell_numpy_y = np.genfromtxt(model_name_big + '_TRUE_E0_monitor_1.dat',
                                      dtype='f8',
                                      comments='%',
-                                     usecols=(13)) # concentration
+                                     usecols=(ax_func_varnum))     #variable
+        # Reshape
         cell_numpy_x = cell_numpy_x.reshape(len(cell_numpy_x)/num_mons, num_mons)
         cell_numpy_y = cell_numpy_y.reshape(len(cell_numpy_y)/num_mons, num_mons)
-        num_arrays = 20
 
         #Generate axis
         ax_function = fig.add_subplot(1,3,2)
         ax_function.set_position(ax_function_position)
-        # ax_function.set_title(model_name_big + '_TRUE_E0_monitor_1.vtk')
-        ax_function.set_title('Tracer at observation points', fontsize=ax_func_titlefont, y=1.02)
-        ax_function.set_xlabel('Time [$d$]', fontsize=ax_func_labelfont, labelpad = ax_func_labelpad)
-        ax_function.set_ylabel('Concentration [$mol/L$]', fontsize=ax_func_labelfont, labelpad = ax_func_labelpad)
-
-
+        ax_function.set_title(ax_func_title, fontsize=ax_func_titlefont, y=1.02)
+        ax_function.set_xlabel(ax_func_xlabel, fontsize=ax_func_labelfont, labelpad = ax_func_labelpad)
+        ax_function.set_ylabel(ax_func_ylabel, fontsize=ax_func_labelfont, labelpad = ax_func_labelpad)
 
         #Array containing plots
         plot_arr=[ax_function.plot(cell_numpy_x[:,i],
@@ -429,19 +438,31 @@ is_true = 1
                                              markersize=3)
                   for i in range(min(num_mons,19))]
 
-        formatter = mpl.ticker.ScalarFormatter()
-        formatter.set_powerlimits((-2,2))
-        locator = mpl.ticker.MultipleLocator(base = 0.0005)
-        ax_function.yaxis.set_major_formatter(formatter)
-        ax_function.yaxis.set_major_locator(locator)
+        # Label Formatter options (for conc)
+        if ax_func_varnum == 13:
+            formatter = mpl.ticker.ScalarFormatter()
+            formatter.set_powerlimits((-2,2))
+            locator = mpl.ticker.MultipleLocator(base = 0.0005)
+            ax_function.yaxis.set_major_formatter(formatter)
+            ax_function.yaxis.set_major_locator(locator)
 
         ax_function.tick_params(labelsize=ax_func_ticksize)
 
-        #Ranges of the plot
-        plt.axis([np.amin(cell_numpy_x)-0.5,
-                  np.amax(cell_numpy_x)+0.5,
-                  np.amin(cell_numpy_y)-0.00005,
-                  np.amax(cell_numpy_y)+0.00005])
+        #Axisranges
+        ax_func_axisranges = np.array([0,0,0,0])
+        if ax_func_auto_xrange:
+            ax_func_axisranges[0:2]=np.array([np.amin(cell_numpy_x)-0.5,
+                                              np.amax(cell_numpy_x)+0.5])
+        else:
+            ax_func_axisranges[0:2]=np.array(ax_func_xrange)
+            
+        if ax_func_auto_yrange:
+            ax_func_axisranges[2:4]=np.array([np.amin(cell_numpy_y)-0.00005,
+                                              np.amax(cell_numpy_y)+0.00005])
+        else:
+            ax_func_axisranges[2:4]=np.array(ax_func_yrange)
+
+        plt.axis(ax_func_axisranges)
 
         #Legend lables
         # label_arr = ['Conc ' + str(int(cell_numpy_ind[i][0]))
@@ -449,6 +470,7 @@ is_true = 1
         #                  + ' ' + str(int(cell_numpy_ind[i][2]))
         #                  for i in range(min(num_mons,19))]
         label_arr = ['Right','Left']
+        
         #Legend
         plt.legend(# plot_arr,
                    label_arr,
@@ -460,7 +482,7 @@ is_true = 1
                    ncol=1,
                    prop={'size':12})
 
-        del plot_arr, label_arr, ax_function, num_arrays, cell_numpy_x, cell_numpy_y
+        del plot_arr, label_arr, ax_function, cell_numpy_x, cell_numpy_y
 
     ############################################################################################
     ############################ TRUE PLOT #####################################################
