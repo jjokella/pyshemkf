@@ -1,33 +1,33 @@
 # Plots of the Synthetic True, Source: mypackage/plot/plot_true.py
-mod_name = 'wavebc'
-dat = '2016_03_24'
+mod_name = 'alexsim'
+dat = '2016_05_30'
 let = 'a'
 show = 1
 
 
-pt(                                     # True Permeability
-model_name = mod_name,
-letter_true = let,
-date=dat,
-is_true=1,
-is_main=0,
-is_func=0,
-ax_single_position=[0.05,0.15,0.8,0.8],
-ax_single_cbar_position=[0.8,0.15,0.03,0.8],
-save_png_fname = 'onlytrue_head.eps',
-ax_single_title = '',
-ax_single_scattersize = 1000,
-figure_backgroundcolor='white',
-figure_size_x = 18.0,
-is_show=show,
-ax_single_varname = 'head',            #kz,head,tracer1
-low_cbar_single = 10.0,
-high_cbar_single = 20.0,
-ax_single_labelsize = 50,
-ax_single_ticksize = 25,
-ax_single_labelpad = 20,
-ax_single_legendtitle = r'Hydraulic Head [$m$]'#r'Permeability [$\log(\frac{1}{m^{2}})$]'
-)
+# pt(                                     # True Permeability
+# model_name = mod_name,
+# letter_true = let,
+# date=dat,
+# is_true=1,
+# is_main=0,
+# is_func=0,
+# ax_single_position=[0.05,0.15,0.8,0.8],
+# ax_single_cbar_position=[0.8,0.15,0.03,0.8],
+# save_png_fname = 'onlytrue_head.eps',
+# ax_single_title = '',
+# ax_single_scattersize = 1000,
+# figure_backgroundcolor='white',
+# figure_size_x = 18.0,
+# is_show=show,
+# ax_single_varname = 'head',            #kz,head,tracer1
+# low_cbar_single = 10.0,
+# high_cbar_single = 20.0,
+# ax_single_labelsize = 50,
+# ax_single_ticksize = 25,
+# ax_single_labelpad = 20,
+# ax_single_legendtitle = r'Hydraulic Head [$m$]'#r'Permeability [$\log(\frac{1}{m^{2}})$]'
+# )
 
 
 # pt(                                     # Four concentration instances
@@ -45,15 +45,23 @@ ax_single_legendtitle = r'Hydraulic Head [$m$]'#r'Permeability [$\log(\frac{1}{m
 # )
 
 
-# pt(                                     # Concentration curves
-# date=dat,
-# is_true=0,
-# is_main=0,
-# is_func=1,
-# save_png_fname = 'monitor.eps',
-# figure_backgroundcolor='white',
-# figure_size_x = 18.0,
-# figure_size_y = 5.0,
-# ax_function_position=[0.15,0.2,0.8,0.6],
-# is_show=show,
-# )
+# Using: MODEL_TRUE_E0_monitor.dat
+pt(                                     # Concentration curves
+model_name = mod_name,
+letter_true = let,
+date=dat,
+is_true=0,
+is_main=0,
+is_func=1,
+ax_func_varnum = 9,                       #8:head, 9:temp, 13:conc
+ax_func_auto_xrange = 0,
+ax_func_xrange = [0,10000],
+ax_func_auto_yrange = 0,
+ax_func_yrange = [7,11.5],
+save_png_fname = 'monitor.eps',
+figure_backgroundcolor='white',
+figure_size_x = 18.0,
+figure_size_y = 5.0,
+ax_function_position=[0.15,0.2,0.8,0.6],
+is_show=show,
+)
