@@ -8,15 +8,15 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'wavebc'
+model_name = 'wave'
 
-num_ensemble_sizes = 4
+num_ensemble_sizes = 7
 two_iterations = False                    # True: residual_E2.vtk
 # method = 16
 
-dats = ['2016_04_01' for i in range(num_ensemble_sizes)]
-lets = ['b','aln','bxz','dkl','aln','bxz','dkl','ewx','gjj']#['b','aln','bxz','dkl','ewx','gjj']
-nums = [1000,1000,1000,1000]#[1000 for i in range(num_ensemble_sizes)]
+dats = ['2016_06_08' for i in range(num_ensemble_sizes)]
+lets = ['a','k','u','ae','ao','ay','bi','dkl','ewx','gjj']#['b','aln','bxz','dkl','ewx','gjj']
+nums = [10,10,10,10,10,10,10]#[1000 for i in range(num_ensemble_sizes)]
 num_obss = [100 for i in range(num_ensemble_sizes)]
 # dats = pa.dats[method]
 # lets = pa.lets[method]
