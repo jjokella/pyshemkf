@@ -9,31 +9,39 @@ import pandas as pd
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
-date = '2015_10_12'
-is_text = False
+is_save = 1
+is_show = 1
 
-a = np.load('output/dists/endres_'+date+'_b.npy')
-b = np.load('output/dists/endres_'+date+'_cx.npy')
-c = np.load('output/dists/endres_'+date+'_gt.npy')
-d = np.load('output/dists/endres_'+date+'_kp.npy')
-e = np.load('output/dists/endres_'+date+'_ol.npy')
-ensembles = [a,d,e,b,c]
+date = '2016_06_06'
+lets = ['a','k','u','ae','ao','ay','bi']
+names = ['EnKF','Damped EnKF','Localisation','Hybrid','Dual','Normal Score','Iterative']
+lets = ['k','bi','u','ae','ao','ay','a']
+names = ['Damped EnKF','Iterative EnKF','Local EnKF','Hybrid EnKF','Dual EnKF','Normal Score EnKF','EnKF']
+# markerstyles = [(5,3,0),(4,0,45),(3,0,0),(5,1,0),(5,3,0),(4,0,45),(3,0,0)]
+formatsos = ['o','v','s','p','o','v','s']
+coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+           (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0)]
 
-names = ['Damped EnKF','EnKF','Hybrid EnKF','Damping 0.5','Damping 0.3']
 
-x = np.arange(100)
+# First on for DAMPING is WRONG. This is the last one for enkf,
+# because I messed up the 10 difference
+endres = np.zeros([7,10])
+for ilet,let in enumerate(lets):
+    endres[ilet,:] = np.load('output/dists/endres_'+date+'_'+let+'.npy')
 
-fig, ax = plt.subplots(figsize = [18,10])
-# plt.suptitle('Ensemble: N = 1000', fontsize = 30)
+x = np.arange(10)
+fig, ax = plt.subplots(figsize = [18,20])
 ax.set_position([0.15,0.15,0.8,0.8])
-# ax.plot(x[1:11],a[1:11],marker = (5,3,0),color='k',ls='None',ms = 20)
-ax.plot(x[1:11],d[41:51],marker = (3,3,0),color='k',ls='None',ms = 30)
-ax.plot(x[1:11],e[41:51],marker = (4,0,45),mfc='w',mew=3, ls='--',ms = 30)
-# ax.plot(x[1:11],b[1:11],marker = (5,0,0),color='k',ls='None',ms = 20)
-# ax.plot(x[1:11],c[1:11],marker = (5,1,0),color='k',ls='None',ms = 20)
-ax.set_xlim([0,10.5])
-ax.set_ylim([0.28,0.4])
-ax.xaxis.set_ticks([1,2,3,4,5,6,7,8,9,10])
+for iplt, markerstyle in enumerate(formatsos):
+    ax.plot(x,endres[iplt,:],
+                marker = markerstyle,mfc=coleros[iplt],
+                color='k',
+                ls='None',
+                ms = 10,
+                mew=2)
+ax.set_xlim([-0.5,9.5])
+ax.set_ylim([0.29,0.75])
+ax.xaxis.set_ticks([0,1,2,3,4,5,6,7,8,9])
 ax.set_xticklabels(['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10'])
 ax.tick_params(direction = 'inout', length = 10,
                width = 1, labelsize = 25,
@@ -42,106 +50,20 @@ ax.tick_params(direction = 'inout', length = 10,
 ax.set_xlabel('Synthetic Study', fontsize = 40,
               labelpad = 20)
 ax.set_ylabel(r'RMSE [$log(\frac{1}{m^2})$]', fontsize = 40, labelpad = 20)
-ax.legend(names, fontsize = 30, markerscale = 1, loc = 'upper left',numpoints = 1)
+ax.legend(names, fontsize = 20, ncol = 2, markerscale = 1,
+              bbox_to_anchor = (1,1),loc = 'upper right',numpoints = 1)
 
-# ax2 = plt.axes([0.15+5.0*0.8/10.5-0.01,0.75,0.02,0.2])
-# ax2.set_xlim(4.9,5.1)
-# ax2.set_xticks([5.0])
-# ax2.set_yticks([0.383,0.387])
-# ax2.set_ylim(0.381,0.389)
-# ax2.tick_params(labelsize = 15)
-# # ax2.plot(x[5],a[5],marker = (5,3,0),color='k',ls='None',ms = 20)
-# # ax2.plot(x[5],b[5],'vk', ms = 12)
-# # ax2.plot(x[5],c[5],'^k', ms = 12)
-# ax2.plot(x[5],d[5],marker = (3,0,0),color='k',ls='None',ms = 20)
-# ax2.plot(x[5],e[5],marker = (4,0,0),color='k',ls='None',ms = 20)
-
-# ax3 = plt.axes([0.15+1.0*0.8/10.5-0.01,0.23,0.02,0.2])
-# ax3.set_xlim(0.9,1.1)
-# ax3.set_xticks([1.0])
-# ax3.set_yticks([0.301,0.302,0.303])
-# ax3.set_ylim(0.301,0.303)
-# ax3.tick_params(labelsize = 15)
-# ax3.plot(x[1],a[1],'ok', ms = 12)
-# # ax3.plot(x[1],b[1],'vk', ms = 12)
-# # ax3.plot(x[1],c[1],'^k', ms = 12)
-# ax3.plot(x[1],d[1],'sk', ms = 12)
-# ax3.plot(x[1],e[1],'*k', ms = 12)
+# Lines
+for yline in [0.3,0.4,0.5,0.6,0.7]:
+    plt.hlines(yline,-20,20,linestyles = 'dotted')
+    
+plt.hlines(0.62,-20,20,linestyles = 'dashed')
 
 
+if is_save:
+    plt.savefig('/home/jk125262/PythonDir/output/sameseed/sameseed.eps')            
+    print('Saved as ' + '/home/jk125262/PythonDir/output/sameseed/sameseed.eps')
 
-# ax4 = plt.axes([0.15+10.0*0.8/10.5-0.01,0.4,0.02,0.2])
-# ax4.set_xlim(9.9,10.1)
-# ax4.set_xticks([10.0])
-# ax4.set_yticks([0.331,0.332])
-# ax4.set_ylim(0.331,0.332)
-# ax4.tick_params(labelsize = 15)
-# # ax4.plot(x[10],a[10],marker = (5,3,0),color='k',ls='None',ms = 20)
-# # ax4.plot(x[10],b[10],'vk', ms = 12)
-# # ax4.plot(x[10],c[10],'^k', ms = 12)
-# ax4.plot(x[10],d[10],marker = (3,0,0),color='k',ls='None',ms = 20)
-# ax4.plot(x[10],e[10],marker = (4,0,0),color='k',ls='None',ms = 20)
-
-
-if is_text:
-    ax5 = plt.axes([0.61,0.1,0.34,0.8])
-    ax5.get_yaxis().set_visible(False)
-    ax5.get_xaxis().set_visible(False)
-
-# Text
-if is_text:
-    vl = 0.64
-    vh = 0.80
-    hpad1 = 0.081+ 0.025
-    hpad2 = 0.085+ 0.025
-    hpad3 = 0.185+ 0.05
-    hpad4 = 0.205+ 0.05
-    hpad5 = 0.215+ 0.05
-    vpads = 0.04
-    vpadl = 4*vpads
-    plt.figtext(vl-0.01,vh + 0.05,'Direct Comparison: 100 runs', fontsize = 30)
-
-    for iens1,ens1 in enumerate(ensembles):
-        for iens2,ens2 in enumerate(ensembles[iens1+1:]):
-            iens2 = iens2 + iens1 + 1
-            gr = np.less(ens1,ens2)        # Which one is greater
-            n = 0
-            m = 0
-            for l in gr:
-                if l:
-                    n = n+1
-                else:
-                    m = m+1
-
-            if n > m:
-                plt.figtext(vl        ,vh-iens2*vpads-iens1*vpadl, names[iens1].ljust(14),
-                            fontsize = 20, fontweight = 'bold')
-                plt.figtext(vl + hpad1,vh-iens2*vpads-iens1*vpadl,'-', fontsize = 20)
-                plt.figtext(vl + hpad2,vh-iens2*vpads-iens1*vpadl,names[iens2].rjust(14) + ':', 
-                            fontsize = 20)      
-                plt.figtext(vl + hpad3,vh-iens2*vpads-iens1*vpadl, str(n), fontsize = 20, fontweight = 'bold')
-                plt.figtext(vl + hpad4,vh-iens2*vpads-iens1*vpadl,  ':'  , fontsize = 20) 
-                plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20)
-            elif n == m:
-                plt.figtext(vl        ,vh-iens2*vpads-iens1*vpadl, names[iens1].ljust(14), fontsize = 20)
-                plt.figtext(vl + hpad1,vh-iens2*vpads-iens1*vpadl,'-', fontsize = 20)
-                plt.figtext(vl + hpad2,vh-iens2*vpads-iens1*vpadl,names[iens2].rjust(14) + ':',
-                            fontsize = 20)      
-                plt.figtext(vl + hpad3,vh-iens2*vpads-iens1*vpadl, str(n), fontsize = 20)
-                plt.figtext(vl + hpad4,vh-iens2*vpads-iens1*vpadl,  ':'  , fontsize = 20) 
-                plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20)
-            elif n < m:
-                plt.figtext(vl        ,vh-iens2*vpads-iens1*vpadl, names[iens1].ljust(14), fontsize = 20)
-                plt.figtext(vl + hpad1,vh-iens2*vpads-iens1*vpadl,'-', fontsize = 20)
-                plt.figtext(vl + hpad2,vh-iens2*vpads-iens1*vpadl,names[iens2].rjust(14) + ':',
-                            fontsize = 20, fontweight = 'bold')      
-                plt.figtext(vl + hpad3,vh-iens2*vpads-iens1*vpadl, str(n), fontsize = 20)
-                plt.figtext(vl + hpad4,vh-iens2*vpads-iens1*vpadl,  ':'  , fontsize = 20) 
-                plt.figtext(vl + hpad5,vh-iens2*vpads-iens1*vpadl, str(m), fontsize = 20, fontweight = 'bold')
-        # print 
-        
-plt.savefig('/home/jk125262/PythonDir/output/sameseed/sameseed.eps')            
-print('Saved as ' + '/home/jk125262/PythonDir/output/sameseed/sameseed.eps')
-
-plt.show()
+if is_show:    
+    plt.show()
 
