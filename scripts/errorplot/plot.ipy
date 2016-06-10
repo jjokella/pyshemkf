@@ -18,9 +18,10 @@ which_enssize =  [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000] #
 ## Only changes filename, input order always the same
 
 # Figure
-is_std = 0                                   # Show std?
+is_std = 1                                   # Show std?
 is_show = 1                                  # Print figure on screen?
 is_save = 1                                  # Save figure to file?
+pic_name_start = 'ENDMEANS'
 pic_name_end = '.eps'                         #'png' or 'eps' or 'svg'
 pic_dir = '/home/jk125262/PythonDir/output/errorplot/'+pic_name_end[-3:]+'/'
 
@@ -33,6 +34,13 @@ yticks = [0.4,0.5,0.6,0.7]
 # Number of methods in pack
 num_pack = 4
 
+# Format
+formatsos = ['o','v','s','p','o','v','s']
+coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+               (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0)]
+markersize = 10
+markeredgesize = 1.5
+
 # Fonts
 fontleg = 30                              #18
 fonttit = 40
@@ -43,85 +51,86 @@ fonttic = 30
 figsize = [18,10]                         #xsize, ysize
 figpos = [0.15,0.3,0.8,0.6]               #xbeg, ybeg, xrange, yrange
 
-# -------------------------------- LOADED INPUT ------------------------------
+
+# Picture name
 if is_1000:
-    # Legend input (from endresmeans_allread.ipy)
-    legend_input = np.load('output/errorplot/npy/legend_input1000.npy')
-
-    # INPUT from endresmeans_allread.ipy
     if is_nooutlier:
-        pic_name_start = 'ENDMEANS_NOOUTLIER1000_'
-
-        # Load arrays (without outliers) (endresmeans_allread.ipy)
-        endres_mean = np.load('output/errorplot/npy/endres_mean_nooutliers1000.npy')   # A(mtds, enssizes)
-        num_methods = endres_mean.shape[0]
-        endres_std = np.load('output/errorplot/npy/endres_std_nooutliers1000.npy')
-        endres_median = np.load('output/errorplot/npy/endres_median1000.npy')
-        endres_q1 = np.load('output/errorplot/npy/endres_q11000.npy')
-        endres_q3 = np.load('output/errorplot/npy/endres_q31000.npy')
-        nums = np.load('output/errorplot/npy/nums1000.npy')[0:num_methods,:] \
-          -np.load('output/errorplot/npy/outliersbeg1000.npy')
+        pic_name_start = pic_name_start + '_NOOUTLIER1000_'
     else:
-        pic_name_start = 'ENDMEANS1000_'
-
-        # Load arrays (endresmeans_allread.ipy)
-        endres_mean = np.load('output/errorplot/npy/endres_mean1000.npy')   # A(methods, ensemble sizes)
-        num_methods = endres_mean.shape[0]
-        endres_std = np.load('output/errorplot/npy/endres_std1000.npy')
-        endres_median = np.load('output/errorplot/npy/endres_median1000.npy')
-        endres_q1 = np.load('output/errorplot/npy/endres_q11000.npy')
-        endres_q3 = np.load('output/errorplot/npy/endres_q31000.npy')
-        nums = np.load('output/errorplot/npy/nums1000.npy')[0:num_methods,:]
-
+        pic_name_start = pic_name_start + '1000_'
 else:
-    # Legend input (from endresmeans_allread.ipy)
-    legend_input = np.load('output/errorplot/npy/legend_input1000.npy') # 1000 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    # INPUT from endresmeans_allread.ipy
     if is_nooutlier:
-        pic_name_start = 'ENDMEANS_NOOUTLIER_'
-
-        # Load arrays (without outliers) (endresmeans_allread.ipy)
-        endres_mean = np.load('output/errorplot/npy/endres_mean_nooutliers.npy')   # A(methods, enssizes)
-        num_methods = endres_mean.shape[0]
-        endres_std = np.load('output/errorplot/npy/endres_std_nooutliers.npy')
-        endres_median = np.load('output/errorplot/npy/endres_median.npy')
-        endres_q1 = np.load('output/errorplot/npy/endres_q1.npy')
-        endres_q3 = np.load('output/errorplot/npy/endres_q3.npy')
-        nums = np.load('output/errorplot/npy/nums.npy')[0:num_methods,:] \
-          -np.load('output/errorplot/npy/outliersbeg.npy')
+        pic_name_start = pic_name_start + '_NOOUTLIER_'
     else:
-        pic_name_start = 'ENDMEANS_'
-
-        # Load arrays (endresmeans_allread.ipy)
-        endres_mean = np.load('output/errorplot/npy/endres_mean.npy')   # A(methods, ensemble sizes)
-        num_methods = endres_mean.shape[0]
-        endres_std = np.load('output/errorplot/npy/endres_std.npy')
-        endres_median = np.load('output/errorplot/npy/endres_median.npy')
-        endres_q1 = np.load('output/errorplot/npy/endres_q1.npy')
-        endres_q3 = np.load('output/errorplot/npy/endres_q3.npy')
-        nums = np.load('output/errorplot/npy/nums.npy')[0:num_methods,:]
-
-# Standard deviation of the mean
-endres_meanstd = endres_std/np.sqrt(nums)
+        pic_name_start = pic_name_start + '_'
 
 if is_median:
     pic_name_start = pic_name_start + 'MEDIAN_'
+        
+# -------------------------------- LOAD ---------------------------------
+load_dir = 'output/errorplot/npy/'
 
-# Sort array
-sort_array = np.load('output/errorplot/npy/endres_mean1000.npy')[:,0]
+if is_1000:
+    # Legend input (from endresmeans_allread.ipy)
+    legend_input = np.load(load_dir+'legend_input1000.npy')
+
+    # INPUT from read.ipy
+    if is_nooutlier:
+        endres_mean = np.load(load_dir+'endres_mean_nooutliers1000.npy') # A(mtds, enssizes)
+        endres_std = np.load(load_dir+'endres_std_nooutliers1000.npy')
+        nums = np.load(load_dir+'nums1000.npy')[0:num_methods,:] \
+          -np.load(load_dir+'outliersbeg1000.npy')
+    else:
+        endres_mean = np.load(load_dir+'endres_mean1000.npy')   # A(methods, ensemble sizes)
+        endres_std = np.load(load_dir+'endres_std1000.npy')
+        nums = np.load(load_dir+'nums1000.npy')[0:num_methods,:]
+        
+    if is_median:
+        endres_median = np.load(load_dir+'endres_median1000.npy')
+        endres_q1 = np.load(load_dir+'endres_q11000.npy')
+        endres_q3 = np.load(load_dir+'endres_q31000.npy')
+
+else:
+    # Legend input (from endresmeans_allread.ipy)
+    legend_input = np.load(load_dir+'legend_input1000.npy') # 1000 !!!!!!!!!!!!!!!!
+
+    # INPUT from endresmeans_allread.ipy
+    if is_nooutlier:
+        endres_mean = np.load(load_dir+'endres_mean_nooutliers.npy') # A(methods, enssizes)
+        endres_std = np.load(load_dir+'endres_std_nooutliers.npy')
+        nums = np.load(load_dir+'nums.npy')[0:num_methods,:] \
+          -np.load(load_dir+'outliersbeg.npy')
+    else:
+        # Load arrays (endresmeans_allread.ipy)
+        endres_mean = np.load(load_dir+'endres_mean.npy')   # A(methods, ensemble sizes)
+        endres_std = np.load(load_dir+'endres_std.npy')
+        nums = np.load(load_dir+'nums.npy')[0:num_methods,:]
+
+    if is_median:
+        endres_median = np.load(load_dir+'endres_median.npy')
+        endres_q1 = np.load(load_dir+'endres_q1.npy')
+        endres_q3 = np.load(load_dir+'endres_q3.npy')
+
+# Number of Methods in endres_mean
+num_methods = endres_mean.shape[0]
+    
+# Standard deviation of the mean
+endres_meanstd = endres_std/np.sqrt(nums)
+
+
+# -------------------------- SORT ---------------------------------------
+sort_array = np.load(load_dir+'endres_mean1000.npy')[:,0]
 indsort = np.argsort(sort_array)
 
 legend_input = np.array(legend_input)[indsort]
 for i in range(endres_mean.shape[1]):
     endres_mean[:,i] = endres_mean[:,i][indsort]
     endres_std[:,i] = endres_std[:,i][indsort]
-    endres_median[:,i] = endres_median[:,i][indsort]
-    endres_q1[:,i] = endres_q1[:,i][indsort]
-    endres_q3[:,i] = endres_q3[:,i][indsort]
     endres_meanstd[:,i] = endres_meanstd[:,i][indsort]
-
-
+    if is_median:
+        endres_median[:,i] = endres_median[:,i][indsort]
+        endres_q1[:,i] = endres_q1[:,i][indsort]
+        endres_q3[:,i] = endres_q3[:,i][indsort]
 
 
 # -------------------------------- PLOT --------------------------------
@@ -133,12 +142,7 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     plt.gca().set_prop_cycle("color",['k'])
     plt.gca().set_position(figpos)
 
-    # Format and x positions, up to 15 methods
-    formatsos = ['o','v','s','p','o','v','s']
-    # formatsos = ['o','p','v','s','o','v','s']
-    coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0)]
-    # coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(0.0,0.0,0.0)]
-    formats = [formatsos[i] for i in range(0,7)]
+    # x positions, up to 15 methods
     x = np.delete(np.arange(0,16),                               
                   np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
     ylims = ylims_all[ienssize]                             #y: Limits
@@ -156,20 +160,20 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     # Plot
     puntos = []                            #Contains plotted points
     for iplot in range(num_methods):
-        punto, = plt.plot(x[iplot],endres_plot[iplot], formats[iplot], lw = 2, ms = 20,
-                         label = legend_input[iplot], c = coleros[iplot],mew =3)
+        punto, = plt.plot(x[iplot],endres_plot[iplot], formatsos[iplot], lw = 2, ms = markersize,
+                         label = legend_input[iplot], c = coleros[iplot],mew =markeredgesize)
         puntos.append(punto)
         if is_std:
             if is_median:
                 plt.errorbar(x[iplot],endres_plot[iplot],yerr = [[endres_std_plot[iplot,0]],
                                                                  [endres_std_plot[iplot,1]]],
-                             fmt = formats[iplot], lw = 2, ms = 20, label = 'this',
-                             mfc = coleros[iplot],mec=coleros[iplot], mew = 0)
+                             fmt = formatsos[iplot], lw = 2, ms = markersize, label = 'this',
+                             mfc = coleros[iplot],mec=coleros[iplot], mew = markeredgesize)
             else:
                 plt.errorbar(x[iplot],endres_plot[iplot],yerr = endres_std_plot[iplot],
-                             fmt = formats[iplot], lw = 2, ms = 20, label = 'this',
+                             fmt = formatsos[iplot], lw = 2, ms = markersize, label = 'this',
                              mfc = coleros[iplot],
-                             mew = 3,
+                             mew = markeredgesize,
                              mec = 'black')
 
     # Legend
@@ -213,8 +217,7 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     # Style
     plt.title('N = '+str(ensemble_size), y = 1.03, fontsize = fonttit)
     plt.xlim([0,num_legs*(num_pack+1)])
-    plt.ylim(ylims)
-    plt.ylabel(r'RMSE [$log(\frac{1}{m^2})$]',fontsize = fontlab, labelpad = 10)
+    plt.ylabel(r'RMSE [$\log(\frac{1}{m^2})$]',fontsize = fontlab, labelpad = 10)
     plt.gca().tick_params(direction = 'in', length = 6,
                    width = 1, labelsize = fonttic,
                    top = 'off', right = 'off', bottom = 'off',
@@ -222,6 +225,7 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     plt.gca().set_xticks([])
     plt.gca().set_yticks(yticks)
     plt.gca().get_xaxis().set_visible('off')
+    plt.ylim(ylims)
 
     # Save pic
     if is_save:
