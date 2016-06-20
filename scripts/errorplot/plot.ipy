@@ -68,6 +68,10 @@ if is_median:
     pic_name_start = pic_name_start + 'MEDIAN_'
         
 # -------------------------------- LOAD ---------------------------------
+
+# Number of Methods in endres_mean
+num_methods = endres_mean.shape[0]
+
 load_dir = 'output/errorplot/npy/'
 
 if is_1000:
@@ -111,8 +115,6 @@ else:
         endres_q1 = np.load(load_dir+'endres_q1.npy')
         endres_q3 = np.load(load_dir+'endres_q3.npy')
 
-# Number of Methods in endres_mean
-num_methods = endres_mean.shape[0]
     
 # Standard deviation of the mean
 endres_meanstd = endres_std/np.sqrt(nums)
