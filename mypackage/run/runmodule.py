@@ -211,46 +211,49 @@ def read_hashtag_input(file_name,hashtag_line,nl):
 #############################################################
 #               COMPILEQUICK
 #############################################################
-def compilequick( vtk_var = 1, omp_var = 1, fw_var = 0):
-    "This function invokes the compilation via compilequick.sh"
-    # Should be called in model_directory!
-    # Default: vtk_omp compilation
-    if fw_var:
-        compilation_exec = 'py_compilequick_gnu_fw.sh'
-        output_file_name = 'compilation_fw.out'
-        output_file = open(output_file_name,"w")
-    else:
-        if vtk_var:
-            if omp_var:
-                compilation_exec = 'py_compilequick_gnu_vtk_omp.sh'
-                output_file_name = 'compilation_vtk_omp.out'
-                output_file = open(output_file_name,"w")
-            else:
-                compilation_exec = 'py_compilequick_gnu_vtk.sh'
-                output_file_name = 'compilation_vtk.out'
-                output_file = open(output_file_name,"w")
-        else:
-            if omp_var:
-                compilation_exec = 'py_compilequick_gnu_plt_omp.sh'
-                output_file_name = 'compilation_plt_omp.out'
-                output_file = open(output_file_name,"w")
-            else:
-                compilation_exec = 'py_compilequick_gnu_plt.sh'
-                output_file_name = 'compilation_plt.out'
-                output_file = open(output_file_name,"w")
+def compilequick(model_dir, vtk_var = 1, omp_var = 1, fw_var = 0):
+    """
+    This function is a wrapper organizing different inputs 
+    given to py_compilequick.sh, which is called via
+    the function rm.run_script.
+    """
 
-    if os.path.isfile(compilation_exec):
-        args = shlex.split(compilation_exec)
-        print('\n\n Now compiling to output-file ' + output_file_name + '\n\n')
-        process_compile = subprocess.Popen(args, stdout=output_file, stderr=subprocess.STDOUT)
-        subprocess.Popen.wait(process_compile)
-        output_file.close()
+    # Forward or Simulate 
+    if fw_var:
+        shem_type = "fw"
+        shem_type_name = "fw"
     else:
-        print('\n\nThe executable')
-        print(compilation_exec)
-        print('did not exist in')
-        print(os.getcwd())
-        raise exceptions.RuntimeError("Fitting Compilequick not found.")
+        shem_type = "sm"
+        shem_type_name = "sm_sgsim"
+
+    # Flags
+    flags = "nohdf -j16"
+    flags_name = ""
+
+    if vtk_var:
+        flags += " vtk noplt"
+        flags_name += "vtk"
+    else:
+        flags += " novtk plt"
+        flags_name += "plt"
+
+    if omp_var:
+        flags += " omp"
+        flags_name += "_omp"
+    else:
+        flags += " noomp"
+        flags_name += ""
+
+    compilequick_input = shem_type + "\n" \
+      + shem_type_name + "\n" \
+      + flags + "\n" \
+      + flags_name + "\n"
+
+    # run_script
+    compilation_outfile = open('compilation_'+flags_name+'.out',"w")
+    run_script(model_dir,'py_compilequick.sh',outfile=compilation_outfile,
+                   instr=compilequick_input, wait=True, errout=True)
+    compilation_outfile.close()
 
     return
 
