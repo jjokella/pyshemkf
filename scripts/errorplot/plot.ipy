@@ -223,7 +223,7 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     plt.hlines(0.62,0,20,linestyles = 'dashed')
 
     # Style
-    plt.title('N = '+str(ensemble_size), y = 1.03, fontsize = fonttit)
+    plt.title('Ensemble size = '+str(ensemble_size), y = 1.03, fontsize = fonttit)
     plt.xlim([0,num_legs*(num_pack+1)])
     plt.ylabel(r'RMSE [$\log(\frac{1}{m^2})$]',fontsize = fontlab, labelpad = 10)
     plt.gca().tick_params(direction = 'in', length = 6,
