@@ -124,6 +124,12 @@ endres_meanstd = endres_std/np.sqrt(nums)
 sort_array = np.load(load_dir+'endres_mean1000.npy')[:,0]
 indsort = np.argsort(sort_array)
 
+# # 250er order
+# indsort = np.array([1, 4, 6, 0, 3, 2, 5])
+# indsortos = np.array([0,3,1,6,4,5,2])
+# formatsos = np.array(formatsos)[indsortos]
+# coleros = np.array(coleros)[indsortos]
+
 legend_input = np.array(legend_input)[indsort]
 for i in range(endres_mean.shape[1]):
     endres_mean[:,i] = endres_mean[:,i][indsort]
