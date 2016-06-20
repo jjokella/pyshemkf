@@ -217,31 +217,31 @@ def compilequick( vtk_var = 1, omp_var = 1, fw_var = 0):
     # Default: vtk_omp compilation
     if fw_var:
         compilation_exec = 'py_compilequick_gnu_fw.sh'
-        output_file_str = 'compilation_fw.out'
-        output_file = open(output_file_str,"w")
+        output_file_name = 'compilation_fw.out'
+        output_file = open(output_file_name,"w")
     else:
         if vtk_var:
             if omp_var:
                 compilation_exec = 'py_compilequick_gnu_vtk_omp.sh'
-                output_file_str = 'compilation_vtk_omp.out'
-                output_file = open(output_file_str,"w")
+                output_file_name = 'compilation_vtk_omp.out'
+                output_file = open(output_file_name,"w")
             else:
                 compilation_exec = 'py_compilequick_gnu_vtk.sh'
-                output_file_str = 'compilation_vtk.out'
-                output_file = open(output_file_str,"w")
+                output_file_name = 'compilation_vtk.out'
+                output_file = open(output_file_name,"w")
         else:
             if omp_var:
                 compilation_exec = 'py_compilequick_gnu_plt_omp.sh'
-                output_file_str = 'compilation_plt_omp.out'
-                output_file = open(output_file_str,"w")
+                output_file_name = 'compilation_plt_omp.out'
+                output_file = open(output_file_name,"w")
             else:
                 compilation_exec = 'py_compilequick_gnu_plt.sh'
-                output_file_str = 'compilation_plt.out'
-                output_file = open(output_file_str,"w")
+                output_file_name = 'compilation_plt.out'
+                output_file = open(output_file_name,"w")
 
     if os.path.isfile(compilation_exec):
         args = shlex.split(compilation_exec)
-        print('\n\n Now compiling to output-file ' + output_file_str + '\n\n')
+        print('\n\n Now compiling to output-file ' + output_file_name + '\n\n')
         process_compile = subprocess.Popen(args, stdout=output_file, stderr=subprocess.STDOUT)
         subprocess.Popen.wait(process_compile)
         output_file.close()
