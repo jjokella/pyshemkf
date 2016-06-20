@@ -407,13 +407,7 @@ def make_model_dir_tmp(model_name,letter,today):
                    '/'+model_name+'_model_' + today  + '_' + letter)
     replace_string('move_output_py.sh','/'+model_name+'_model',
                    '/'+model_name+'_model_' + today  + '_' + letter)
-    replace_string('py_compilequick_gnu_plt.sh','/'+model_name+'_model',
-                   '/'+model_name+'_model_' + today  + '_' + letter)
-    replace_string('py_compilequick_gnu_plt_omp.sh','/'+model_name+'_model',
-                   '/'+model_name+'_model_' + today  + '_' + letter)
-    replace_string('py_compilequick_gnu_vtk.sh','/'+model_name+'_model',
-                   '/'+model_name+'_model_' + today  + '_' + letter)
-    replace_string('py_compilequick_gnu_vtk_omp.sh','/'+model_name+'_model',
+    replace_string('py_compilequick.sh','/'+model_name+'_model',
                    '/'+model_name+'_model_' + today  + '_' + letter)
     os.chmod('clean_output.sh',128+256+64)
     os.chmod('clean_output_py.sh',128+256+64)
@@ -423,10 +417,7 @@ def make_model_dir_tmp(model_name,letter,today):
     os.chmod('generatetecmon.sh',128+256+64)
     os.chmod('move_output.sh',128+256+64)
     os.chmod('move_output_py.sh',128+256+64)
-    os.chmod('py_compilequick_gnu_plt.sh',128+256+64)
-    os.chmod('py_compilequick_gnu_plt_omp.sh',128+256+64)
-    os.chmod('py_compilequick_gnu_vtk.sh',128+256+64)
-    os.chmod('py_compilequick_gnu_vtk_omp.sh',128+256+64)
+    os.chmod('py_compilequick.sh',128+256+64)
     os.chmod('veryclean.sh',128+256+64)
 
     return new_model_dir
