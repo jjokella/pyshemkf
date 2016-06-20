@@ -22,17 +22,17 @@ names_methods = [pa.names_methods1000[which_methods[i]] if is_1000
                  for i in range(len(which_methods))]
 
 # Ensemble sizes to produce
-which_enssizes = [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000]
+which_enssizes = [250] if is_1000 else [50,70,100,250,500,1000,2000]
 #Possible [50,70,100,250,500,1000,2000]
 
 # Numbers of synthetic studies
-ns_syn_studies = [1,10,100] if is_1000 else [1,10]
+ns_syn_studies = [1] if is_1000 else [1,10]
 
 # Number of comparisons
-n_comparisons = 1000
+n_comparisons = 10000
 
 # Comparison Switch (Only for n_syn >1) "ttest", "gauss"
-method = "gauss"
+method = "ttest"
 
 # Confidence Level (Gaussian difference)
 cl = 0.95
