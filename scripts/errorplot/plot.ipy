@@ -11,14 +11,14 @@ import pandas as pd
 
 # ------------------------ MANUAL INPUT ---------------------------------------
 # Content
-is_1000 = False                      # 1000er or 100er job
+is_1000 = True                      # 1000er or 100er job
 is_median = 0                       # 1: Median, 0: Mean
 is_nooutlier = 0                    # 1: Outliers disregarded
 which_enssize =  [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000] # [50,100,250,500,1000,2000] 
 ## Only changes filename, input order always the same
 
 # Figure
-is_std = 1                                   # Show std?
+is_std = 0                                   # Show std?
 is_show = 1                                  # Print figure on screen?
 is_save = 1                                  # Save figure to file?
 pic_name_start = 'ENDMEANS'
@@ -44,7 +44,7 @@ markeredgesize = 1.5
 # Fonts
 fontleg = 30                              #18
 fonttit = 40
-fontlab = 40
+dfontlab = 40
 fonttic = 30
 
 # Figure size/position
