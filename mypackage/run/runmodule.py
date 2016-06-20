@@ -214,7 +214,7 @@ def read_hashtag_input(file_name,hashtag_line,nl):
 def compilequick(model_dir, vtk_var = 1, omp_var = 1, fw_var = 0):
     """
     This function is a wrapper organizing different inputs 
-    given to py_compilequick.sh, which is called via
+    given to compilequick_py.sh, which is called via
     the function rm.run_script.
     """
 
@@ -251,7 +251,7 @@ def compilequick(model_dir, vtk_var = 1, omp_var = 1, fw_var = 0):
 
     # run_script
     compilation_outfile = open('compilation_'+flags_name+'.out',"w")
-    run_script(model_dir,'py_compilequick.sh',outfile=compilation_outfile,
+    run_script(model_dir,'compilequick_py.sh',outfile=compilation_outfile,
                    instr=compilequick_input, wait=True, errout=True)
     compilation_outfile.close()
 
@@ -407,7 +407,7 @@ def make_model_dir_tmp(model_name,letter,today):
                    '/'+model_name+'_model_' + today  + '_' + letter)
     replace_string('move_output_py.sh','/'+model_name+'_model',
                    '/'+model_name+'_model_' + today  + '_' + letter)
-    replace_string('py_compilequick.sh','/'+model_name+'_model',
+    replace_string('compilequick_py.sh','/'+model_name+'_model',
                    '/'+model_name+'_model_' + today  + '_' + letter)
     os.chmod('clean_output.sh',128+256+64)
     os.chmod('clean_output_py.sh',128+256+64)
@@ -417,7 +417,7 @@ def make_model_dir_tmp(model_name,letter,today):
     os.chmod('generatetecmon.sh',128+256+64)
     os.chmod('move_output.sh',128+256+64)
     os.chmod('move_output_py.sh',128+256+64)
-    os.chmod('py_compilequick.sh',128+256+64)
+    os.chmod('compilequick_py.sh',128+256+64)
     os.chmod('veryclean.sh',128+256+64)
 
     return new_model_dir
