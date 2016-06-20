@@ -191,7 +191,9 @@ for n_syn in ns_syn_studies:
 
         # Output: Probabilities/Flat indices
         np.save(outdir+probsout+'_'+str(n_syn).zfill(4)+'_'+str(enssize).zfill(4),probs)
+        print('Saved as '+outdir+probsout+'_'+str(n_syn).zfill(4)+'_'+str(enssize).zfill(4)+'.npy')
         np.save(outdir+setupindsout+'_'+str(n_syn).zfill(4)+'_'+str(enssize).zfill(4),setupinds)
+        print('Saved as '+outdir+setupindsout+'_'+str(n_syn).zfill(4)+'_'+str(enssize).zfill(4)+'.npy')
 
     # Output: Which methods were used: Integers and names
     np.save(outdir+which_methodsout+'_'+str(n_syn).zfill(4),which_methods)    
