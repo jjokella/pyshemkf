@@ -15,7 +15,8 @@ two_iterations = False                    # True: residual_E2.vtk
 # method = 16
 
 dats = ['2016_06_15' for i in range(num_ensemble_sizes)]
-lets = ['aln','bxz','bxz','ae','ao','ay','bi','dkl','ewx','gjj']#['b','aln','bxz','dkl','ewx','gjj']
+lets = ['b','dkl','bxz','ae','ao','ay','bi','dkl','ewx','gjj']
+#      ['b','aln','bxz','dkl','ewx','gjj']
 nums = [1000,1000,1000,10,10,10,10]#[1000 for i in range(num_ensemble_sizes)]
 num_obss = [100 for i in range(num_ensemble_sizes)]
 # dats = pa.dats[method]
