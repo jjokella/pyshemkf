@@ -329,7 +329,7 @@ def is_scalar_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 
         return 0
 
 
-def get_cbar_high(var,m_kz_std_high,m_cbar_kz_high,m_cbar_kz_res_high,m_cbar_cor_high):
+def get_cbar_high(var,m_kz_std_high,m_cbar_kz_high,m_cbar_kz_res_high,m_cbar_cor_high,m_cbar_lz_high):
     """
     Returns high and low values for certain variables.
     """
@@ -343,12 +343,14 @@ def get_cbar_high(var,m_kz_std_high,m_cbar_kz_high,m_cbar_kz_res_high,m_cbar_cor
         high = m_cbar_kz_res_high
     elif var in ['correlations000' + str(i) for i in range(1,7)]:
         high = m_cbar_cor_high
+    elif var == 'lz_mean':
+        high = m_cbar_lz_high
     else:
         raise exceptions.RuntimeError('Wrong variable ' + var \
             + ' use kz_mean or correlations000i')
     return high
 
-def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low):
+def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low,m_cbar_lz_low):
     """
     Returns high and low values for certain variables.
     """
@@ -362,6 +364,8 @@ def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low
         low = m_cbar_kz_res_low
     elif var in ['correlations000' + str(i) for i in range(1,7)]:
         low = m_cbar_cor_low
+    elif var == 'lz_mean':
+        low = m_cbar_lz_low
     else:
         raise exceptions.RuntimeError('Wrong variable ' + var \
             + ' use kz_mean or correlations000i')

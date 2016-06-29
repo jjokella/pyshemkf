@@ -92,6 +92,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            m_cbar_kz_res_low, m_cbar_kz_res_high,
            m_fig_facecolor,m_fig_title,m_fig_title_font,m_cbar_titles,
            m_cor_cell_var,m_befaft,m_cbar_cor_low,m_cbar_cor_high,
+           m_cbar_lz_low, m_cbar_lz_high,
            m_ax_title,m_cbar_width, m_ax_title_pos,m_show_cbar,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            resid_dirs, stddev_dirs,
@@ -193,12 +194,12 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
 
         m_low_cbars = [pltfct.get_cbar_low(varname,# Calculate appropriate min/max for cbar
                                         m_kz_std_low,m_cbar_kz_low,
-                                        m_cbar_kz_res_low,m_cbar_cor_low)
+                                        m_cbar_kz_res_low,m_cbar_cor_low,m_cbar_lz_low)
                        for varname in varnames]
 
         m_high_cbars = [pltfct.get_cbar_high(varname,
                                           m_kz_std_high, m_cbar_kz_high,
-                                          m_cbar_kz_res_high, m_cbar_cor_high)
+                                          m_cbar_kz_res_high, m_cbar_cor_high,m_cbar_lz_high)
                         for varname in varnames]
 
 

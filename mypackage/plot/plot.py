@@ -60,6 +60,8 @@ m_cbar_cor_low = -0.3,
 m_cbar_cor_high = 0.3,
 m_kz_std_low = 0.0,
 m_kz_std_high = 1.0,  # Colorbar low/high, var: kz_std
+m_cbar_lz_low = 4.0,
+m_cbar_lz_high = 8.0,
 # m_grid_factor =1.0,
 # m_im_left =0.045,
 # m_im_up =0.10, # Geometry of plots
@@ -462,6 +464,8 @@ pc_pic_ending = '.png'
           'm_cbar_kz_res_low' : m_cbar_kz_res_low,
           'm_cbar_cor_low': m_cbar_cor_low,
           'm_cbar_cor_high': m_cbar_cor_high,
+          'm_cbar_lz_low': m_cbar_lz_low,
+          'm_cbar_lz_high': m_cbar_lz_high,
           }
 
     if f_y_variables_ens is None:
