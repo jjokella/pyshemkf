@@ -157,7 +157,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
 
 
 
-        # DATA
+        # DATA--------------------------------------------------------------
         data = pltfct.my_vtk_to_numpy(assim_variables_dir # Get NumPy Array
                                    if m_infiles[0] in ['av','cor'] else
                                    run_output_dir + 'samples_output',
@@ -179,7 +179,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                                            infile_stems[0] + str(1) + '.vtk',
                                            varnames[0]) 
 
-        # PLOT
+        # PLOT----------------------------------------------------------------
         if not fig_m:
             fig_m = plt.figure(1, figsize=(figure_size_x,figure_size_y)) #Generate the figure
             fig_m.set_facecolor(m_fig_facecolor) # Set figure background color
