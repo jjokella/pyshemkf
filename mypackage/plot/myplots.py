@@ -212,7 +212,7 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
                                      if m_infiles[0] in ['av','cor'] else
                                      run_output_dir + 'samples_output',
                                      infile_stems[i_fnames] + str(i_obs).zfill(4)+'.vtk'
-                                     if m_infiles[i] in ['av','cor'] else
+                                     if m_infiles[0] in ['av','cor'] else
                                      infile_stems[i_fnames] + str(i_obs) + '.vtk', 
                                      varnames[i_fnames])
 
