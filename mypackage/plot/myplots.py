@@ -143,9 +143,9 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
         data = pltfct.my_vtk_to_numpy(assim_variables_dir # Get NumPy Array
                                    if m_infiles[0] in ['av','cor'] else
                                    run_output_dir + 'samples_output',
-                                   infile_stems[0] + str(1).zfill(4) + '.vtk'
+                                   infile_stems[0] + str(m_first).zfill(4) + '.vtk'
                                    if m_infiles[0] in ['av','cor'] else
-                                   infile_stems[0] + str(1) + '.vtk',
+                                   infile_stems[0] + str(m_first) + '.vtk',
                                    varnames[0])
 
         step_x, step_y, \
