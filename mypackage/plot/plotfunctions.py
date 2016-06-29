@@ -372,35 +372,37 @@ def get_cbar_low(var,m_kz_std_low,m_cbar_kz_low,m_cbar_kz_res_low,m_cbar_cor_low
     
     return low
 
-def m_input_check(n_f, input_file_names,
+def m_input_check(nfiles,
+                  input_file_name_stems,
                   assim_variables_dir,
-                  samples_out_dir, varnames, m_first, m_n_rows, m_n_cols,
+                  samples_out_dir,
+                  varnames, m_first, m_n_rows, m_n_cols,
                   m_diff, nrobs_int):
     #Check scalar variable in file
-    return_value = [0 for i in range(n_f)]
-    for i in range(n_f):
+    return_value = [0 for i in range(nfiles)]
+    for i in range(nfiles):
         if not (is_scalar_var_in_file(assim_variables_dir,
-                                      input_file_names[i] + str(1).zfill(4) + '.vtk',
+                                      input_file_name_stems[i] + str(m_first).zfill(4) + '.vtk',
                                       varnames[i],
                                       raise_io_error = 0)
                 or
                 is_scalar_var_in_file(samples_out_dir,
-                                      input_file_names[i] + str(1) + '.vtk',
+                                      input_file_name_stems[i] + str(m_first) + '.vtk',
                                       varnames[i],
                                       raise_io_error = 0)):
             if not is_scalar_var_in_file(assim_variables_dir,
-                                         input_file_names[i] + 'param_' + str(1).zfill(4) + '.vtk',
+                                         input_file_name_stems[i] + 'param_' + str(m_first).zfill(4) + '.vtk',
                                          varnames[i],):
                 raise exceptions.RuntimeError('Variable  ' \
                     + varnames[i] + '  not in:\n' \
                     + assim_variables_dir + '/' \
-                    + input_file_names[i] + str(1).zfill(4) + '.vtk')
+                    + input_file_name_stems[i] + str(1).zfill(4) + '.vtk')
             else:
                 return_value[i] = 1
 
-    # Check that files exist
-    npics_int = m_first + ((m_n_rows*m_n_cols-1)/n_f)*m_diff
-    if( npics_int > nrobs_int ):
+    # Check npics
+    npics = m_first + ((m_n_rows*m_n_cols-1)/nfiles)*m_diff
+    if( npics > nrobs_int ):
         raise exceptions.RuntimeError('Too high number of observations called. Check '\
             + 'm_first, m_diff')
     
