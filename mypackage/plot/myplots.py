@@ -97,16 +97,35 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
            m_is_masked, m_is_subarray, model_output_dir, date_output_dir,
            resid_dirs, stddev_dirs,
            m_cmaps,fig_m = 0 ):
+    """
+    ---
+    Plot data fields from vtk files.
+    ---
 
+    ---
+    Input variables:
+    ---
+    m_infiles: Array of input file choices.
+               ('av' assim_variables, 'cor' correlations, 'init' initial)
+    
+    ---
+    Defined variables:
+    ---
+    n_fnames: Number of file names
+    infile_stems: Beginning of file names.
+    """
 
     with plt.style.context(('m_style_' + str(m_n_rows) + '_' + str(m_n_cols) )):
-        # PREPARATION
 
-        n_fnames = len(m_infiles) # Number of different variables shown
+        # PREPARATION----------------------------------------------------
+
+        # Number of filenames
+        n_fnames = len(m_infiles)
         if n_fnames > m_n_rows*m_n_cols:
             n_fnames = m_n_rows*m_n_cols
 
-        infile_stems = ['assim_variables_E1_' + m_befaft[i] + '_'
+        # Beginning of file names
+        infile_stems = ['assim_variables_E1_' + m_befaft[i] + '_'  
                         if m_infiles[i] == 'av' else
                         ('correlation_'
                          + str(m_cor_cell_var[i][0]).zfill(4) + '_'
@@ -139,7 +158,6 @@ def m_plot(num_timesteps,nrobs_int,letters,mons_inds,m_infiles,start_obs,
 
 
         # DATA
-
         data = pltfct.my_vtk_to_numpy(assim_variables_dir # Get NumPy Array
                                    if m_infiles[0] in ['av','cor'] else
                                    run_output_dir + 'samples_output',
