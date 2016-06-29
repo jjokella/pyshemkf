@@ -1,6 +1,6 @@
-mod_name = 'wavebc'
-let = 'd'
-dat = '2016_03_24'
+mod_name = 'heat'
+let = 'b'
+dat = '2016_06_27'
 show = 1
 # 
 # Array of pics, av std res
@@ -18,7 +18,7 @@ show = 1
 # for i in [1,90]:
 #     p(is_m = 1, model_name = mod_name, date = dat, letter = let, m_first = i, m_diff = 100, m_n_rows = 1, m_n_cols = 1, m_fig_title = 'Updated Permeability Field', m_cbar_width = 0.01, is_show = show, m_is_show_mons = 1,m_varnames = ['kz_mean','kz_std','kz_res'],m_cbar_kz_low = -11)
 # movie(input_name_test = 'plot_m_'+let+'_01_100_av.png', input_names = 'plot_m_'+let+'_%02d_100_av.png', output_name = 'plot_m_'+let+'_100_av.mp4', model_name = mod_name, date = dat)    
-for i in range(1,92,10):
+for i in range(10,22,10):
     p(is_m = 1,
       model_name = mod_name, 
       date = dat, 
@@ -35,7 +35,7 @@ for i in range(1,92,10):
       m_cbar_kz_high = -9,
       is_show = show, 
       m_is_show_mons = 1,
-      m_varnames = ['kz_mean'],
+      m_varnames = ['lz_mean'],
       m_pic_ending = ".eps",
       m_cbar_left_pad = -0.1,
       )
