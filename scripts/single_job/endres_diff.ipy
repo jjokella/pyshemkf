@@ -31,7 +31,7 @@ for i in range(2):
     png_name_hist = 'test_2_' + dat + '_' + let + '.png'
 
     # The array with the final residuals
-    endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(j)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for j in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+    endres = [plotfunctions.my_vtk_to_numpy(os.environ['HOME']+'/shematOutputDir/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(j)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for j in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
 
     # The number of final residuals bigger than 0.6
     higher_array = [1 if endres[j]>0.6 else 0 for j in range(num)]
@@ -55,7 +55,7 @@ for i in range(2):
     x = np.linspace(endres_min-endres_std,endres_max+endres_std,200)
     gauss_dist = sc.stats.norm.pdf((x-endres_mean)/endres_std)/endres_std
 
-    os.chdir('/home/jk125262/PythonDir')
+    os.chdir(os.environ['HOME']+'/PythonDir')
 
     # fig = plt.figure(i+1)
     # # plt.axis([0.2,1.0,0.0,50])
@@ -76,7 +76,7 @@ for i in range(2):
     #          fontsize = 12)
     # plt.plot(x,gauss_dist,'-r',lw = 3.0)
     # plt.title(figtitle,fontsize = 20)
-    # plt.savefig('/home/jk125262/PythonDir/output/single_job/diff/'+png_name_hist)
+    # plt.savefig(os.environ['HOME']+'/PythonDir/output/single_job/diff/'+png_name_hist)
     # plt.show()
 
 x_diff = np.linspace(-0.1,# endres_mins[0]-endres_maxs[1] -np.sum(endres_std), 
@@ -117,5 +117,5 @@ plt.text(0.975,0.8,
          fontsize = 20)
 plt.plot(x_diff,gauss_diff,'-k',lw=3.0)
 plt.plot([0,0],[0,sc.stats.norm.pdf(-mean_diff/std_diff)/std_diff],'--k',lw = 3.0)
-plt.savefig('/home/jk125262/PythonDir/output/single_job/diff/'+png_name_diff)
+plt.savefig(os.environ['HOME']+'/PythonDir/output/single_job/diff/'+png_name_diff)
 plt.show()

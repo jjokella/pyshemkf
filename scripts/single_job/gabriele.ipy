@@ -135,7 +135,7 @@ for i_kind in range(len(dats)):
         let = lets[i_kind][j]
         num = nums[i_kind][j]
         num_obs = num_obss[i_kind][j]                             #Should be almost constant
-        endres = [plotfunctions.my_vtk_to_numpy('/home/jk125262/shematOutputDir/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
+        endres = [plotfunctions.my_vtk_to_numpy(os.environ['HOME']+'/shematOutputDir/wave_output/' + dat + '/' + dat + '_'+rm.get_let_num(i)+'/enkf_output','residual_E1.vtk','rms_kz_aft')[num_obs-1][0] for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
         endres_mean[j] = np.mean(endres)
         endres_std[j] = np.std(endres)
     # plt.errorbar(ensemble_sizes,endres_mean,yerr = endres_std,fmt = 'o')
@@ -153,7 +153,7 @@ plt.ylabel(r'Residuum [$log(\frac{1}{m^2})$]',fontsize = 20)
 plt.xticks(fontsize = 20)
 plt.yticks(fontsize = 20)
 plt.legend(legend_input,fontsize = 20)
-plt.savefig('/home/jk125262/PythonDir/output/single_job/gabriele/'+png_name_plot)
+plt.savefig(os.environ['HOME']+'/PythonDir/output/single_job/gabriele/'+png_name_plot)
 # plt.show()
 # plt.close()
 
@@ -164,8 +164,8 @@ plt.ylim([0.0,0.3])
 plt.xlabel('Ensembleumfang',fontsize = 20)
 plt.ylabel(r'Residuum [$log(\frac{1}{m^2})$]',fontsize = 20)
 plt.legend(legend_input)
-plt.savefig('/home/jk125262/PythonDir/output/single_job/gabriele/'+png_name_plot_2)
+plt.savefig(os.environ['HOME']+'/PythonDir/output/single_job/gabriele/'+png_name_plot_2)
 plt.show()
 # plt.close()
 
-os.chdir('/home/jk125262/PythonDir')
+os.chdir(os.environ['HOME']+'/PythonDir')

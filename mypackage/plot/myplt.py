@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir'
-
 # Modules
 import sys                      # System variables (PYTHONPATH as list sys.path)
 import os			# Operating system (os.chdir, os.path)
@@ -16,6 +13,9 @@ from matplotlib import colors	        # Normalize colors (colors.Normalize())
 import vtk
 import math	  		# Mathematical Functions (math.pi, math.sqrt())
 import scipy as sp		# Scientific Python (sp.mean(), sp.cov())
+
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir'
 
 sys.path[0] = python_dir        # Set path to read mypackage
 from mypackage.plot import plotfunctions as pltfct

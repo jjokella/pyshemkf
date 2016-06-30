@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
-#Paths
-python_dir = '/home/jk125262/PythonDir/'
-output_files_dir    = '/home/jk125262/shematOutputDir/'
-
 # Operating system commands
 import os                            # Operating system (os.chdir, os.path)
 import sys                           # System variables (PYTHONPATH as list sys.path)
 import time                          # Timing the execution (time.time(), time.clock())
 from matplotlib import pyplot as plt # Plotting commands (plt.show())
+
+#Paths
+python_dir = os.environ['HOME']+'/PythonDir/'
+output_files_dir    = os.environ['HOME']+'/shematOutputDir/'
 
 sys.path[0] = python_dir             # Add path to sys.path to load mypackage
 from mypackage.plot import myplots

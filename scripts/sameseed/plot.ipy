@@ -61,8 +61,8 @@ plt.hlines(0.62,-20,20,linestyles = 'dashed')
 
 
 if is_save:
-    plt.savefig('/home/jk125262/PythonDir/output/sameseed/sameseed.eps')            
-    print('Saved as ' + '/home/jk125262/PythonDir/output/sameseed/sameseed.eps')
+    plt.savefig(os.environ['HOME']+'/PythonDir/output/sameseed/sameseed.eps')            
+    print('Saved as ' + os.environ['HOME']+'/PythonDir/output/sameseed/sameseed.eps')
 
 if is_show:    
     plt.show()

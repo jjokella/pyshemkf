@@ -1,9 +1,5 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir'
-input_file_dir = '/home/jk125262/PythonDir/exec/pp'
-
 # Modules
 import os
 import numpy as np
@@ -18,6 +14,10 @@ import gtk
 import gobject
 
 from mypackage.pp import calc
+
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir'
+input_file_dir = os.environ['HOME']+'/PythonDir/exec/pp'
 
 
 def make_plot(ip_last,dp,xs,ns,Gss,beta_pri,Hy,Gyy,R,zy,Xy,Xs,Gssy,Gsy,Gys,zs_rand,xy,privar,Qbb,Gss_prior,Gyy_prior,Gys_prior,zs_prior,estvar_prior,zs,zs_post,estvar_post,varss,ips,time_time,is_animate,is_kalman):

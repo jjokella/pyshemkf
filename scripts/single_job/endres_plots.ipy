@@ -70,9 +70,9 @@ for imethod in imethods:
         # plt.hlines(0.6,0,100)
         # plt.text(30,3,'Higher than intial: '+str(num_higher),fontsize = 20)
         # plt.title(figtitle,y=1.03,fontsize = 20)
-        # os.chdir('/home/jk125262/PythonDir')
+        # os.chdir(os.environ['HOME']+'/PythonDir')
         # if is_save:
-        #     plt.savefig('/home/jk125262/PythonDir/output/single_job/plots/'+png_name_plot)
+        #     plt.savefig(os.environ['HOME']+'/PythonDir/output/single_job/plots/'+png_name_plot)
         # if is_show:
         #     plt.show()
 
@@ -99,9 +99,9 @@ for imethod in imethods:
         df.plot(kind='box',grid = False,color='k',sym='k.',ax=plt.gca())
         plt.gca().tick_params(labelsize = 30)
         plt.ylim(xlims)
-        os.chdir('/home/jk125262/PythonDir')
+        os.chdir(os.environ['HOME']+'/PythonDir')
         if is_save:
-            plt.savefig('/home/jk125262/PythonDir/output/single_job/plots/'+png_name_hist)
+            plt.savefig(os.environ['HOME']+'/PythonDir/output/single_job/plots/'+png_name_hist)
         if is_show:
             plt.show()
         else:

@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir'
-
+import os
 import numpy as np
+
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir'
 
 num_methods = 7
 num_jobs = num_methods*7

@@ -132,7 +132,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
 
     if errout:
         if(proc.returncode):
-            os.chdir('/home/jk125262/PythonDir')
+            os.chdir(os.environ['HOME']+'/PythonDir')
             raise exceptions.RuntimeError("Problems in " + str(name))
     
 
@@ -346,7 +346,7 @@ def change_matlab( mfile_name,
 
 def make_file_dir_names(model_name):
     model_name_big = model_name.upper()
-    model_dir = "/home/jk125262/shematModelsDir/" + model_name + "_model"
+    model_dir = os.environ['HOME']+"/shematModelsDir/" + model_name + "_model"
     input_file = model_name_big
     enkf_input_file = model_name_big + ".enkf"
     true_input_file = model_name_big + "_TRUE"
@@ -369,15 +369,15 @@ def make_file_dir_names(model_name):
 
 
 def make_model_dir_tmp(model_name,letter,today):
-    os.chdir("/home/jk125262/shematModelsDir")
+    os.chdir(os.environ['HOME']+"/shematModelsDir")
     # Copy everything to temporal directory
     model_dir_name = model_name + '_model_' + today  + '_' + letter
-    new_model_dir = "/home/jk125262/shematModelsDir/" + model_dir_name
-    trash_model_dir = "/home/jk125262/.Trash/"+ model_dir_name
-    trash_model_dir_2 = "/home/jk125262/.Trash/"+ model_dir_name + '_2'
+    new_model_dir = os.environ['HOME']+"/shematModelsDir/" + model_dir_name
+    trash_model_dir = os.environ['HOME']+"/.Trash/"+ model_dir_name
+    trash_model_dir_2 = os.environ['HOME']+"/.Trash/"+ model_dir_name + '_2'
     # Check if new_model_dir already exists
     if os.path.isdir(new_model_dir):
-        os.chdir('/home/jk125262/PythonDir')
+        os.chdir(os.environ['HOME']+'/PythonDir')
         # _2 dir in .Trash exists: Kill it (should be killable by now)
         if os.path.isdir(trash_model_dir_2):
             shutil.rmtree(trash_model_dir_2)
@@ -385,9 +385,9 @@ def make_model_dir_tmp(model_name,letter,today):
         if os.path.isdir(trash_model_dir):
             os.rename(trash_model_dir,trash_model_dir_2)
         # Move old new_model_dir to .Trash
-        shutil.move(new_model_dir,"/home/jk125262/.Trash")
+        shutil.move(new_model_dir,os.environ['HOME']+"/.Trash")
         # raise exceptions.RuntimeError("New model dir already exists: " + new_model_dir)
-    shutil.copytree("/home/jk125262/shematModelsDir/" + model_name + '_model',
+    shutil.copytree(os.environ['HOME']+"/shematModelsDir/" + model_name + '_model',
                     new_model_dir)
     os.chdir(new_model_dir)
     # Change the directory  inside clean_out, move_output

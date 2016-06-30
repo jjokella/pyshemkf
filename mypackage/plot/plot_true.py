@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir' 
-
 # Modules
 import os                            # Operating system (os.chdir, os.path)
 import sys                      # System variables (PYTHONPATH as list sys.path)
@@ -15,6 +12,9 @@ from matplotlib import colors        # Normalize colors (colors.Normalize())
 import vtk                           # Adapt vtk to np (vtk.util.numpy_support.vtk_to_numpy)
 from datetime import date            # Getting todays date
 import time         # Timing the execution (time.time(), time.clock())
+
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir' 
 
 sys.path[0] = python_dir        # Set path to read mypackage
 from mypackage.plot import plotfunctions as pltfct
@@ -143,7 +143,7 @@ is_true = 1
         save_png_fname = input_file_name + 'pic.png' # Default function name for png
 
     if save_png_dir is None:
-        save_png_dir = "/home/jk125262/shematOutputDir/"\
+        save_png_dir = os.environ['HOME']+"/shematOutputDir/"\
             + model_name +"_output/"\
             + date + "/" \
             + "pics"            # Default saving directory
@@ -157,12 +157,12 @@ is_true = 1
     ######################################################################################
 
     num_mons = pltfct.get_num_mons('observations_' + model_name_big + '.dat',
-                                "/home/jk125262/shematOutputDir/"
+                                os.environ['HOME']+"/shematOutputDir/"
                                 + model_name +"_output/" + date + "/" 
                                 + date + "_" + letter_true) # Number of monitoring points
     
     cell_numpy_ind = pltfct.get_mons_inds(model_name_big + '_TRUE_E0_monitor_1.dat',
-                                       "/home/jk125262/shematOutputDir/"
+                                       os.environ['HOME']+"/shematOutputDir/"
                                        + model_name +"_output/" + date + "/"
                                        + date + "_" + letter_true + "/" + output_dir,
                                        num_mons) # Monitoring point indices
@@ -194,7 +194,7 @@ is_true = 1
     if is_main:
 
         #Go to the general output directory
-        os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
+        os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + date + "/" \
                  + date + "_" + letter_true + "/")
         #Create pics directory if not already existing
         if(not(os.path.exists('pics'))):
@@ -311,7 +311,7 @@ is_true = 1
 
         for i_subplt in range(n_rows*n_cols):
 
-            os.chdir("/home/jk125262/shematOutputDir/" \
+            os.chdir(os.environ['HOME']+"/shematOutputDir/" \
                          + model_name +"_output/" \
                          + date + "/" \
                          + date + "_" + letter_true + "/" \
@@ -404,7 +404,7 @@ is_true = 1
 
     if is_func:
         # Directory
-        os.chdir("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" \
+        os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + date + "/" \
                      + date + "_" + letter_true + "/" + output_dir)
 
         # Read
@@ -539,7 +539,7 @@ is_true = 1
                               origin='lower',
                               extent=grid_bounds[0:4])
 
-        ax_single = pltfct.make_quiver("/home/jk125262/shematOutputDir/" + model_name +"_output/" + date + "/" + date + "_" + letter_true + "/" + output_dir,
+        ax_single = pltfct.make_quiver(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + date + "/" + date + "_" + letter_true + "/" + output_dir,
                                     model_name_big + '_TRUE_E0_1.vtk',
                                     'v',
                                     ax_single) # quiver

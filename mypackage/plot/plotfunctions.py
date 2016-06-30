@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir'
-
 # Operating system commands
 import os
 from os import path
@@ -28,6 +25,10 @@ from vtk.util.numpy_support import vtk_to_numpy
 
 import re
 import string
+
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir'
+
 alphabet = string.lowercase
 
 

@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir'
-input_file_dir = '/home/jk125262/PythonDir/exec/pp'
 
 # Modules
+import os
 import numpy as np
 from numpy import linalg as la
 from scipy import stats
 
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir'
+input_file_dir = os.environ['HOME']+'/PythonDir/exec/pp'
 
 
 def get_zsp_kalman(ip,dp,xs,ns,Gss_prior,zs_prior,Hy,R,zy,Gyy_prior,Gys_prior,Gssy):

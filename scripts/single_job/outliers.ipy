@@ -19,7 +19,7 @@ legranges = [3,3]
 if sum(legranges) != num_methods:         #Check common error
     raise exceptions.RuntimeError('sum(legranges) must equal num_methods.')
 
-pic_save_dir = '/home/jk125262/PythonDir/output/single_job/outliers/'
+pic_save_dir = os.environ['HOME']+'/PythonDir/output/single_job/outliers/'
 pic_name_plot = 'outliers.svg'
 
 # Some geometric variables

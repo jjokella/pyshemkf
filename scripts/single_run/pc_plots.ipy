@@ -27,7 +27,7 @@ p(is_pc = 1, letter = let, date = dat, pc_output = 'res', pc_var_name = var_name
 #
 # p(is_pc = 1, letter = let, date = dat, pc_output = 'std', pc_nl = len(pc_lets), pc_dates = [dat for i in range(len(pc_lets))], pc_letters = pc_lets, pc_is_legend = 0, pc_is_markers = 0, pc_alpha = 1.0, pc_linewidth = 1.0, is_show = show)
 #
-os.chdir('/home/jk125262/PythonDir')
+os.chdir(os.environ['HOME']+'/PythonDir')
 # 
 # 
 

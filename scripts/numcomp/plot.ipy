@@ -26,8 +26,8 @@ which_enssize = [250] if is_1000 else [50,70,100,250,500,1000,2000]           #E
 is_show = 1
 is_save = 1
 pic_name_end = ['eps','png']                      #'png' or 'eps' or 'svg'
-pic_dir = ['/home/jk125262/PythonDir/output/numcomp/'+pic_name_end[0][-3:]+'/',
-           '/home/jk125262/PythonDir/output/numcomp/'+pic_name_end[1][-3:]+'/']
+pic_dir = [os.environ['HOME']+'/PythonDir/output/numcomp/'+pic_name_end[0][-3:]+'/',
+           os.environ['HOME']+'/PythonDir/output/numcomp/'+pic_name_end[1][-3:]+'/']
 
 # which_methods_left = [1,6,5,4,3,2,6,6]        #Space in which_methods (50er)
 # which_methods_right = [6,5,4,3,2,0,4,3]       #Space in which_methods

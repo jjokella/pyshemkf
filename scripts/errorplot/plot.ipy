@@ -23,7 +23,7 @@ is_show = 1                                  # Print figure on screen?
 is_save = 1                                  # Save figure to file?
 pic_name_start = 'ENDMEANS'
 pic_name_end = '.eps'                         #'png' or 'eps' or 'svg'
-pic_dir = '/home/jk125262/PythonDir/output/errorplot/'+pic_name_end[-3:]+'/'
+pic_dir = os.environ['HOME']+'/PythonDir/output/errorplot/'+pic_name_end[-3:]+'/'
 
 # Y-Axis limits for the six plots
 ylims_all = [[0.32,0.73],[0.32,0.73],[0.32,0.73],
@@ -247,4 +247,4 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     else:
         plt.close()
 
-os.chdir('/home/jk125262/PythonDir')
+os.chdir(os.environ['HOME']+'/PythonDir')

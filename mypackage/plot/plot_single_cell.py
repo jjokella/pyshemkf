@@ -1,9 +1,5 @@
 #!/usr/bin/python
 
-# Paths
-output_files_dir    = '/home/jk125262/shematOutputDir/'
-python_dir = '/home/jk125262/PythonDir'
-
 # Modules
 import sys                      # System variables (PYTHONPATH as list sys.path)
 import os			# Operating system (os.chdir, os.path)
@@ -22,6 +18,10 @@ import time         # Timing the execution (time.time(), time.clock())
 
 from mypackage.plot import myplots
 from mypackage.plot import plotfunctions as pltfct
+
+# Paths
+output_files_dir    = os.environ['HOME']+'/shematOutputDir/'
+python_dir = os.environ['HOME']+'/PythonDir'
 
 def psc(
 model_name = myplots.mymodel_name,
@@ -74,7 +74,7 @@ is_save = 1,
         fig_titles = ['Figure Title' for i in range(num_figs)]
     
     if save_pics_dir is None:
-        save_pics_dir = "/home/jk125262/shematOutputDir/"\
+        save_pics_dir = os.environ['HOME']+"/shematOutputDir/"\
             + model_name +"_output/" + date + "/"\
             + date + "_" + letter + "/pics"
     if not os.path.exists(save_pics_dir):

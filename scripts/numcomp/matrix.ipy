@@ -40,7 +40,7 @@ probs_names = {n_ens :
 # Output 
 pic_name_end = ['eps','png']
 pic_dirs = {pic_end :
-            '/home/jk125262/PythonDir/output/numcomp/matrix/'+pic_end[-3:]+'/'
+            os.environ['HOME']+'/PythonDir/output/numcomp/matrix/'+pic_end[-3:]+'/'
             for pic_end in pic_name_end}
 pic_names = {n_ens: 'matrix_single'+probs_names[n_ens][-18:-4]
              for n_ens in enssizes}

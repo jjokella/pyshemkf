@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-# Paths
-python_dir = '/home/jk125262/PythonDir'
-
 # Modules
 import sys                      # System variables (PYTHONPATH as list sys.path)
 import os			# Operating system (os.chdir, os.path)
@@ -17,13 +14,16 @@ import vtk
 import math	  		# Mathematical Functions (math.pi, math.sqrt())
 import scipy as sp		# Scientific Python (sp.mean(), sp.cov())
 
+import datetime                 # Date and time functions
+
+# Paths
+python_dir = os.environ['HOME']+'/PythonDir'
+
 sys.path[0] = python_dir        # Set path to read mypackage
 from mypackage.plot import plotfunctions as pltfct
 from mypackage.plot import myplt
 from mypackage.plot import mycolors
 from mypackage.data import dataroutines as dr
-
-import datetime                 # Date and time functions
 
 # # Reload changed module
 # pltfct = reload(pltfct)
@@ -1040,7 +1040,7 @@ def f3_plot(num_timesteps,nrobs_int,f3_num_arrays,mons_inds,f3_ax_legend_bbox,
         cell_numpy_temp_y = map(math.log10,cell_numpy_temp_y)
         cell_numpy_temp_y = np.array(cell_numpy_temp_y)
 #    mons_indsices = get_mons_inds(mons_file_name,
-#                                       "/home/jk125262/shematOutputDir/" \
+#                                       os.environ['HOME']+"/shematOutputDir/" \
 #                                           + model_name +"_output/" + date + "/" \
 #                                           + date + "_" + letter_true\
 #                                           + "/samples_output",
