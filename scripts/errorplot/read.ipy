@@ -8,25 +8,29 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_1000 = True
+# Main inputs
+is_1000 = True                 
+is_wavebc = False 
 
-which_methods = [0,1,2,3,4,5,6]
 
-# which_methods = [0,2,3,4,8,9,16]
+which_methods = [0,1,2,3,4,5] if is_wavebc else [0,1,2,3,4,5]
 num_methods = len(which_methods)                           # Bei 13 Problem, nicht eingeladen...
 
 num_ensemble_sizes = 4
 
-dats = pa.dats1000 if is_1000 else pa.dats
-lets = pa.lets1000 if is_1000 else pa.lets
-nums = pa.nums1000 if is_1000 else pa.nums
+dats = pa.dats1000_wavebc if is_wavebc else (pa.dats1000 if is_1000 else pa.dats)
+lets = pa.lets1000_wavebc if is_wavebc else (pa.lets1000 if is_1000 else pa.lets)
+nums = pa.nums1000_wavebc if is_wavebc else (pa.nums1000 if is_1000 else pa.nums)
 legend_input = pa.longnames_methods1000 if is_1000 else pa.longnames_methods
 
 # Legend inputs
 legend_input = np.array([legend_input[i].ljust(18) for i in range(len(legend_input))])
 legend_input = legend_input[which_methods]
 
-# Loading in the residuals from the output directories
+# WAVEBC ending
+wavebc = '_wavebc' if is_wavebc else ''
+
+# Initialize zero-arrays
 endres_mean = np.zeros([num_methods,num_ensemble_sizes])
 endres_mean_nooutliers = np.zeros([num_methods,num_ensemble_sizes])
 endres_std = np.zeros([num_methods,num_ensemble_sizes])
@@ -46,6 +50,8 @@ begres_median = np.zeros([num_methods,num_ensemble_sizes])
 begres_q1 = np.zeros([num_methods,num_ensemble_sizes])
 begres_q3 = np.zeros([num_methods,num_ensemble_sizes])
 
+# i_kind: counter
+# j_kind: method-index
 for i_kind, j_kind in enumerate(which_methods):
 
     for j in range(num_ensemble_sizes):
@@ -53,12 +59,12 @@ for i_kind, j_kind in enumerate(which_methods):
         let = lets[j_kind][j]
         num = nums[j_kind][j]
 
-        # Load the final distributions that were read in in singleread
+        # Load the residual arrays produced in endresread.ipy
         begres = np.load(os.environ['HOME']+'/PythonDir/output/dists/begres_'
                          +dat+'_'+let+'.npy')
         endres = np.load(os.environ['HOME']+'/PythonDir/output/dists/endres_'
                          +dat+'_'+let+'.npy')
-
+ 
         # Calculate different statistics
         outliers06[i_kind,j] = np.where(np.array(endres)>0.6)[0].size
         outliersbeg[i_kind,j] = np.where(np.array(endres)>np.array(begres))[0].size
@@ -82,26 +88,26 @@ for i_kind, j_kind in enumerate(which_methods):
 os.chdir(os.environ['HOME']+'/PythonDir')
 
 if is_1000:
-    np.save('output/errorplot/npy/outliers061000',outliers06)
-    np.save('output/errorplot/npy/outliersbeg1000',outliersbeg)
-    np.save('output/errorplot/npy/whereoutliers1000',whereoutliers)
-    np.save('output/errorplot/npy/endres_mean1000',endres_mean)
-    np.save('output/errorplot/npy/endres_mean_nooutliers1000',endres_mean_nooutliers)
-    np.save('output/errorplot/npy/endres_std1000',endres_std)
-    np.save('output/errorplot/npy/endres_std_nooutliers1000',endres_std_nooutliers)
-    np.save('output/errorplot/npy/endres_median1000',endres_median)
-    np.save('output/errorplot/npy/endres_q11000',endres_q1)
-    np.save('output/errorplot/npy/endres_q31000',endres_q3)
-    np.save('output/errorplot/npy/begres_mean1000',begres_mean)
-    np.save('output/errorplot/npy/begres_std1000',begres_std)
-    np.save('output/errorplot/npy/begres_median1000',begres_median)
-    np.save('output/errorplot/npy/begres_q11000',begres_q1)
-    np.save('output/errorplot/npy/begres_q31000',begres_q3)
-    np.save('output/errorplot/npy/dats1000',np.array(dats))
-    np.save('output/errorplot/npy/lets1000',np.array(lets))
-    np.save('output/errorplot/npy/nums1000',np.array(nums)[which_methods,0:num_ensemble_sizes])
+    np.save('output/errorplot/npy/outliers061000'+wavebc,outliers06)
+    np.save('output/errorplot/npy/outliersbeg1000'+wavebc,outliersbeg)
+    np.save('output/errorplot/npy/whereoutliers1000'+wavebc,whereoutliers)
+    np.save('output/errorplot/npy/endres_mean1000'+wavebc,endres_mean)
+    np.save('output/errorplot/npy/endres_mean_nooutliers1000'+wavebc,endres_mean_nooutliers)
+    np.save('output/errorplot/npy/endres_std1000'+wavebc,endres_std)
+    np.save('output/errorplot/npy/endres_std_nooutliers1000'+wavebc,endres_std_nooutliers)
+    np.save('output/errorplot/npy/endres_median1000'+wavebc,endres_median)
+    np.save('output/errorplot/npy/endres_q11000'+wavebc,endres_q1)
+    np.save('output/errorplot/npy/endres_q31000'+wavebc,endres_q3)
+    np.save('output/errorplot/npy/begres_mean1000'+wavebc,begres_mean)
+    np.save('output/errorplot/npy/begres_std1000'+wavebc,begres_std)
+    np.save('output/errorplot/npy/begres_median1000'+wavebc,begres_median)
+    np.save('output/errorplot/npy/begres_q11000'+wavebc,begres_q1)
+    np.save('output/errorplot/npy/begres_q31000'+wavebc,begres_q3)
+    np.save('output/errorplot/npy/dats1000'+wavebc,np.array(dats))
+    np.save('output/errorplot/npy/lets1000'+wavebc,np.array(lets))
+    np.save('output/errorplot/npy/nums1000'+wavebc,np.array(nums)[which_methods,0:num_ensemble_sizes])
 
-    np.save('output/errorplot/npy/legend_input1000',legend_input)
+    np.save('output/errorplot/npy/legend_input1000'+wavebc,legend_input)
 else:
     np.save('output/errorplot/npy/outliers06',outliers06)
     np.save('output/errorplot/npy/outliersbeg',outliersbeg)
