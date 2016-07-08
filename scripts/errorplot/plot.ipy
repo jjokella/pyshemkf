@@ -10,11 +10,9 @@ import pandas as pd
 
 
 # ------------------------ MANUAL INPUT ---------------------------------------
-# WAVEBC
-wavebc = '' #'_wavebc'
-
 # Content
 is_1000 = True                      # 1000er or 100er job
+is_wavebc = False
 is_median = 0                       # 1: Median, 0: Mean
 is_nooutlier = 0                    # 1: Outliers disregarded
 which_enssize =  [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000] # [50,100,250,500,1000,2000] 
@@ -29,10 +27,10 @@ pic_name_end = '.png'                         #'png' or 'eps' or 'svg'
 pic_dir = os.environ['HOME']+'/PythonDir/output/errorplot/'+pic_name_end[-3:]+'/'
 
 # Y-Axis limits for the six plots
-ylims_all = [[0.28,0.78],[0.28,0.78],[0.28,0.78],
-             [0.28,0.78],[0.28,0.78],[0.28,0.78],
-             [0.28,0.78]]
-yticks = [0.4,0.5,0.6,0.7]
+ylims_all = [[0.28,0.82],[0.28,0.82],[0.28,0.82],
+             [0.28,0.82],[0.28,0.82],[0.28,0.82],
+             [0.28,0.82]]
+yticks = [0.3,0.4,0.5,0.6,0.7,0.8]
 
 # Number of methods in pack
 num_pack = 4
@@ -54,6 +52,8 @@ fonttic = 30
 figsize = [18,10]                         #xsize, ysize
 figpos = [0.15,0.3,0.8,0.6]               #xbeg, ybeg, xrange, yrange
 
+# WAVEBC
+wavebc = '_wavebc' if is_wavebc else ''
 
 # Picture name
 if is_1000:
