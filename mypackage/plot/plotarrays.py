@@ -173,6 +173,14 @@ lets1000 = [normal1000_lets,damping1000_lets,normalscore1000_lets,dual1000_lets,
 nums1000 = [normal1000_nums,damping1000_nums,normalscore1000_nums,dual1000_nums,hybrid1000_nums,
             localisation1000_nums, iterative1000_nums]
 
+dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,normalscore1000_wavebc_dats,dual1000_wavebc_dats,hybrid1000_wavebc_dats,
+            localisation1000_wavebc_dats]#, iterative1000_wavebc_dats]
+lets1000_wavebc = [normal1000_wavebc_lets,damping1000_wavebc_lets,normalscore1000_wavebc_lets,dual1000_wavebc_lets,hybrid1000_wavebc_lets,
+            localisation1000_wavebc_lets]#, iterative1000_wavebc_lets]
+nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,normalscore1000_wavebc_nums,dual1000_wavebc_nums,hybrid1000_wavebc_nums,
+            localisation1000_wavebc_nums]#, iterative1000_wavebc_nums]
+
+
 num_obss1000 = [[100 for i in range(6)],[100 for i in range(6)],[100 for i in range(6)],
                 [100 for i in range(6)],[100 for i in range(6)],[100 for i in range(6)],
                 [5050 for i in range(6)]]
