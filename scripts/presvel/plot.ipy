@@ -1,0 +1,77 @@
+# Plot prescribed velocities
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+is_show = True
+is_save = True
+
+model_name = 'alexpres'
+nrens = 30
+dat = '2016_07_21'
+let = 'i'
+nrobs = 150
+
+true_vs = [2.7*10**-7,0.0]
+
+num_pres_vel = 2                          #1 or 2
+
+pic_format = 'eps'                         #'eps' and 'png'
+pic_names = ['mvs_'+ model_name,'pol_'+ model_name]
+
+# Load means
+mvxs = np.load('output/presvel/npy/mvxs_'+dat+'_'+let+'.npy')
+mvys = np.load('output/presvel/npy/mvys_'+dat+'_'+let+'.npy')
+
+# Plot means
+plt.figure(1,[20,10], facecolor = 'white')
+plt.title('Velocity x/y components', size = 30)
+plt.plot(mvxs, 'o', color = 'black', markersize = 5)
+plt.plot(mvys, 'o', color = 'grey', markersize = 5)
+plt.hlines(true_vs[0],0,150,color = 'black', linestyle = '--', lw = 3)
+plt.hlines(true_vs[1],0,150,color = 'grey', linestyle = '--', lw = 3)
+
+if is_save:
+    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+                    +pic_names[0]+'.'+pic_format)
+if is_show:
+    plt.show()
+else:
+    plt.close()
+
+
+
+# Load radius and angle
+rad = np.load('output/presvel/npy/rad_'+dat+'_'+let+'.npy')
+ang = np.load('output/presvel/npy/ang_'+dat+'_'+let+'.npy')
+
+# Plot radius and angle
+plt.figure(2,[10,10], facecolor = 'white')
+ax = plt.subplot(111, projection = 'polar')
+# ax.plot(ang,rad,'o', color = 'black')
+color_factors = np.linspace(0,1,150)
+colors = np.zeros([150,3])
+for ic in range(len(color_factors)):
+    colors[ic,0] = color_factors[ic]
+    colors[ic,1] = color_factors[ic]
+    colors[ic,2] = color_factors[ic]
+ax.scatter(ang*np.pi/180,rad,c=colors)
+ax.set_rmax(2.8*10**-7)
+ax.set_rmin(0.0*10**-7)
+
+ax.grid(True)
+ax.set_title('Polar plot of velocities', size = 20)
+
+if is_save:
+    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+                    +pic_names[1]+'.'+pic_format)
+if is_show:
+    plt.show()
+else:
+    plt.close()
+
