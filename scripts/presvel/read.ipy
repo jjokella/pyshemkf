@@ -1,0 +1,45 @@
+# Read prescribed velocities
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+model_name = 'alexpres'
+nrens = 30
+dat = '2016_07_21'
+let = 'h'
+nrobs = 150
+
+num_pres_vel = 2                          #1 or 2
+
+# Load velocities
+vs = np.loadtxt(os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' 
+                    + dat + '/' + dat + '_'+ let
+                    +'/enkf_output/'
+                    +'prescribed_velocity_aft.txt',
+                skiprows = 1)
+
+# Split into x and y component
+for ipv in range(num_pres_vel):
+    if ipv == 0:
+        vxs = vs[:,0:nrens]
+    if ipv == 1:
+        vys = vs[:,nrens:2*nrens]
+np.save('output/presvel/npy/vxs_'+dat+'_'+let,vxs)
+np.save('output/presvel/npy/vys_'+dat+'_'+let,vys)
+
+# Ensemble mean of x and y component
+mvxs = np.mean(vxs,axis=1)                
+mvys = np.mean(vys,axis=1)
+np.save('output/presvel/npy/mvxs_'+dat+'_'+let,mvxs)
+np.save('output/presvel/npy/mvys_'+dat+'_'+let,mvys)
+
+# Absolute value and angle
+rad = np.sqrt(mvxs*mvxs + mvys*mvys)
+ang = np.arctan(mvys/mvxs)/np.pi*180
+np.save('output/presvel/npy/rad_'+dat+'_'+let,rad)
+np.save('output/presvel/npy/ang_'+dat+'_'+let,ang)
