@@ -28,6 +28,7 @@ localisation_dats = ['2015_06_23','2015_12_17','2015_06_23',
 newiterative4_dats = ['2015_12_11','2016_02_09','2015_12_11',
                       '2015_12_11','2015_12_11','2015_12_11','2015_12_11']
 
+
 normalscore_dats = ['2015_06_11','2015_06_12','2015_06_12','2015_06_19','2015_06_19','2015_06_19']
 damping_dats = ['2015_06_13','2015_06_14','2015_06_14','2015_06_22','2015_06_22','2015_06_22']
 damping03_dats = ['2015_07_16','2015_07_16','2015_07_16','2015_07_17','2015_07_17','2015_07_17']
@@ -135,6 +136,10 @@ dual1000_wavebc_dats = ['2016_07_06','2016_07_06','2016_07_06','2016_07_06']
 hybrid1000_wavebc_dats = ['2016_07_06','2016_07_06','2016_07_06','2016_07_06']
 localisation1000_wavebc_dats = ['2016_07_07','2016_07_07','2016_07_07','2016_07_07']
 
+dual_wavebc_dats = ['2016_07_21','2016_07_21','2016_07_21','2016_07_21']
+hybrid_wavebc_dats = ['2016_07_21','2016_07_21','2016_07_21','2016_07_21']
+localisation_wavebc_dats = ['2016_07_21','2016_07_21','2016_07_21','2016_07_21']
+
 normal1000_lets = ['b','mhf','aln','bxz']
 damping1000_lets = ['b','ntr','aln','bxz']
 normalscore1000_lets = ['b','pgd','aln','bxz']
@@ -142,6 +147,10 @@ dual1000_lets = ['dkl','qsp','ewx','gjj']
 hybrid1000_lets = ['b','sfb','aln','bxz']
 localisation1000_lets = ['b','trn','aln','bxz']
 iterative1000_lets = ['b','b','b','b']
+
+dual_wavebc_lets = ['b','aln','bxz']
+hybrid_wavebc_lets = ['ewx','gjj','hvv']
+localisation_wavebc_lets = ['kut','mhf','ntr']
 
 normal1000_wavebc_lets = ['b','aln','bxz','dkl']
 damping1000_wavebc_lets = ['b','aln','bxz','dkl']
@@ -158,6 +167,11 @@ hybrid1000_nums = [1000,1000,1000,1000]
 localisation1000_nums = [1000,1000,1000,1000]
 iterative1000_nums = [1000,1000,1000,1000]
 
+dual_wavebc_nums = [100,100,100]
+hybrid_wavebc_nums = [100,100,100]
+localisation_wavebc_nums = [100,100,100]
+
+
 normal1000_wavebc_nums = [1000,1000,1000,1000]
 damping1000_wavebc_nums = [1000,1000,1000,1000]
 normalscore1000_wavebc_nums = [1000,1000,1000,1000]
@@ -173,12 +187,15 @@ lets1000 = [normal1000_lets,damping1000_lets,normalscore1000_lets,dual1000_lets,
 nums1000 = [normal1000_nums,damping1000_nums,normalscore1000_nums,dual1000_nums,hybrid1000_nums,
             localisation1000_nums, iterative1000_nums]
 
-dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,normalscore1000_wavebc_dats,dual1000_wavebc_dats,hybrid1000_wavebc_dats,
-            localisation1000_wavebc_dats]#, iterative1000_wavebc_dats]
-lets1000_wavebc = [normal1000_wavebc_lets,damping1000_wavebc_lets,normalscore1000_wavebc_lets,dual1000_wavebc_lets,hybrid1000_wavebc_lets,
-            localisation1000_wavebc_lets]#, iterative1000_wavebc_lets]
-nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,normalscore1000_wavebc_nums,dual1000_wavebc_nums,hybrid1000_wavebc_nums,
-            localisation1000_wavebc_nums]#, iterative1000_wavebc_nums]
+dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,
+                       normalscore1000_wavebc_dats,dual1000_wavebc_dats,
+                       hybrid1000_wavebc_dats,localisation1000_wavebc_dats]#, iterative1000_wavebc_dats]
+lets1000_wavebc = [normal1000_wavebc_lets,damping1000_wavebc_lets,
+                       normalscore1000_wavebc_lets,dual1000_wavebc_lets,
+                       hybrid1000_wavebc_lets,localisation1000_wavebc_lets]#, iterative1000_wavebc_lets]
+nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,
+                       normalscore1000_wavebc_nums,dual1000_wavebc_nums,
+                       hybrid1000_wavebc_nums,localisation1000_wavebc_nums]#, iterative1000_wavebc_nums]
 
 
 num_obss1000 = [[100 for i in range(6)],[100 for i in range(6)],[100 for i in range(6)],
