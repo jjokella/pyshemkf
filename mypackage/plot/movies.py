@@ -7,11 +7,13 @@ import time
 python_dir = os.environ['HOME']+'/PythonDir'
 
 def movie(input_name_test = 'plot_m_b_01_100_av.png', input_names = 'plot_m_b_%02d_100_av.png',
-          output_name = 'plot_m_b_100_av.mp4', model_name = 'wave', date = '2015_05_19'):
+          output_name = 'plot_m_b_100_av.mp4', pics_dir = 'None', model_name = 'wave',
+          date = '2015_05_19'):
 
     # Directory
-    pics_dir = os.environ['HOME']+'/shematOutputDir/' + model_name \
-        + '_output/' + date + '/pics/'
+    if pics_dir == 'None':
+        pics_dir = os.environ['HOME']+'/shematOutputDir/' + model_name \
+          + '_output/' + date + '/pics/'
     
     # Input test
     os.chdir(pics_dir)
