@@ -10,10 +10,13 @@ import pandas as pd
 
 model_name = 'alexpres'
 nrens = 100
-dat = '2016_07_25'
-lets = ['r','s','t','u','v','w','x','y']#['j','k','l','m','n','o','p','q']
+dat = '2016_07_26'
+lets = ['r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
-nrobs = 150
+#['j','k','l','m','n','o','p','q']
+#['r','s','t','u','v','w','x','y']
+
+nrobs = 230
 
 num_pres_vel = 2                          #1 or 2
 
