@@ -44,5 +44,12 @@ for let in lets:
     # Absolute value and angle
     rad = np.sqrt(mvxs*mvxs + mvys*mvys)
     ang = np.arctan(mvys/mvxs)/np.pi*180
+    # Second and third quadrant
+    for i in range(len(mvxs)):
+        if mvxs[i] < 0.0:
+            if mvys[i] > 0.0:
+                ang[i] = ang[i] + 180
+            else:
+                ang[i] = ang[i] - 180
     np.save('output/presvel/npy/rad_'+dat+'_'+let,rad)
     np.save('output/presvel/npy/ang_'+dat+'_'+let,ang)
