@@ -18,6 +18,9 @@ dat = '2016_07_25'
 lets = ['r','s','t','u','v','w','x','y']#['r','s','t','u','v','w','x','y']
 #['j','k','l','m','n','o','p','q']#['b','c','d','e','f','g','h','i']
 nrobs = 150
+rad_min = 0.0
+rad_max = 3.0*10**-7
+
 
 # True velocity
 true_vs = [2.7*10**-7,0.0]
@@ -60,15 +63,15 @@ for let in lets:
     plt.figure(2,[10,10], facecolor = 'white')
     ax = plt.subplot(111, projection = 'polar')
     # ax.plot(ang,rad,'o', color = 'black')
-    color_factors = np.linspace(0,1,150)
-    colors = np.zeros([150,3])
+    color_factors = np.linspace(0,1,nrobs)
+    colors = np.zeros([nrobs,3])
     for ic in range(len(color_factors)):
         colors[ic,0] = color_factors[ic]
         colors[ic,1] = color_factors[ic]
         colors[ic,2] = color_factors[ic]
     ax.scatter(ang*np.pi/180,rad,c=colors)
-    ax.set_rmax(3.0*10**-6)
-    ax.set_rmin(0.0*10**-7)
+    ax.set_rmax(rad_max)
+    ax.set_rmin(rad_min)
 
     ax.grid(True)
     ax.set_title('Polar plot of velocities', size = 20)
