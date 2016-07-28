@@ -1,6 +1,13 @@
 *.pyc
 bin/
 input/
-output/
+output/errorplot/
+output/now/
+output/numcomp/
+output/presvel/eps/
+output/presvel/png/
+output/sameseed/
+output/single_job/
+output/txt/
 lib/
 notebook/
