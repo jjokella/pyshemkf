@@ -14,19 +14,19 @@ is_save = True
 # General input
 model_name = 'alexpres'
 nrens = 100
-dat = '2016_07_26'
-lets =['r','s','t','u','v','w','x','y']
+dat = '2016_07_27'
+lets = ['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
 
 rad_min = 0.0
-rad_max = 3.0*10**-7
+rad_max = 3.0*10**-6
 
 nrobs = 230
 
 # True velocity
-true_vs = [2.7*10**-7,0.0]
+true_vs = [-2.7*10**-7,0.0]
 
 num_pres_vel = 2                          #1 or 2
 

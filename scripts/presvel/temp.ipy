@@ -11,18 +11,18 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = False
+is_show = True
 is_save = True
 
 # Input file specification
 model_name = 'alexpres'
-dat = '2016_07_25'
-let = 'f'
-assim_nums = [10,20,30,40,50,60,70,80,90,100,110,120,130,140]
+dat = '2016_07_27'
+let = 'f'                                 #'b', 'f'
+assim_nums = [110,120,130,140]
 
 
 m_num_cbar = 15
-ax_low_cbar = 9.0
+ax_low_cbar = 5.9
 ax_high_cbar = 10.0
 
 pic_format = 'eps'
