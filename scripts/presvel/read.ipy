@@ -33,26 +33,28 @@ for let in lets:
     for ipv in range(num_pres_vel):
         if ipv == 0:
             vxs = vs[:,0:nrens]
+            np.save('output/presvel/npy/vxs_'+dat+'_'+let,vxs)
         if ipv == 1:
             vys = vs[:,nrens:2*nrens]
-    np.save('output/presvel/npy/vxs_'+dat+'_'+let,vxs)
-    np.save('output/presvel/npy/vys_'+dat+'_'+let,vys)
+            np.save('output/presvel/npy/vys_'+dat+'_'+let,vys)
 
     # Ensemble mean of x and y component
-    mvxs = np.mean(vxs,axis=1)                
-    mvys = np.mean(vys,axis=1)
+    mvxs = np.mean(vxs,axis=1)
     np.save('output/presvel/npy/mvxs_'+dat+'_'+let,mvxs)
-    np.save('output/presvel/npy/mvys_'+dat+'_'+let,mvys)
+    if num_pres_vel == 2:
+        mvys = np.mean(vys,axis=1)
+        np.save('output/presvel/npy/mvys_'+dat+'_'+let,mvys)
 
     # Absolute value and angle
-    rad = np.sqrt(mvxs*mvxs + mvys*mvys)
-    ang = np.arctan(mvys/mvxs)/np.pi*180
-    # Second and third quadrant
-    for i in range(len(mvxs)):
-        if mvxs[i] < 0.0:
-            if mvys[i] > 0.0:
-                ang[i] = ang[i] + 180
-            else:
-                ang[i] = ang[i] - 180
-    np.save('output/presvel/npy/rad_'+dat+'_'+let,rad)
-    np.save('output/presvel/npy/ang_'+dat+'_'+let,ang)
+    if num_pres_vel == 2:
+        rad = np.sqrt(mvxs*mvxs + mvys*mvys)
+        ang = np.arctan(mvys/mvxs)/np.pi*180
+        # Second and third quadrant
+        for i in range(len(mvxs)):
+            if mvxs[i] < 0.0:
+                if mvys[i] > 0.0:
+                    ang[i] = ang[i] + 180
+                else:
+                    ang[i] = ang[i] - 180
+        np.save('output/presvel/npy/rad_'+dat+'_'+let,rad)
+        np.save('output/presvel/npy/ang_'+dat+'_'+let,ang)
