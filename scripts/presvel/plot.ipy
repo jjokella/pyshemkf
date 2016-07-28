@@ -45,8 +45,8 @@ for let in lets:
     plt.title('Velocity x/y components', size = 30)
     plt.plot(mvxs, 'o', color = 'black', markersize = 5)
     plt.plot(mvys, 'o', color = 'grey', markersize = 5)
-    plt.hlines(true_vs[0],0,150,color = 'black', linestyle = '--', lw = 3)
-    plt.hlines(true_vs[1],0,150,color = 'grey', linestyle = '--', lw = 3)
+    plt.hlines(true_vs[0],0,nrobs,color = 'black', linestyle = '--', lw = 3)
+    plt.hlines(true_vs[1],0,nrobs,color = 'grey', linestyle = '--', lw = 3)
 
     if is_save:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
