@@ -135,7 +135,7 @@ normalscore1000_wavebc_dats = ['2016_06_15','2016_06_15','2016_06_15','2016_06_1
 dual1000_wavebc_dats = ['2016_07_06','2016_07_06','2016_07_06','2016_07_06']
 hybrid1000_wavebc_dats = ['2016_07_06','2016_07_06','2016_07_06','2016_07_06']
 localisation1000_wavebc_dats = ['2016_07_07','2016_07_07','2016_07_07','2016_07_07']
-iterative1000_wavebc_dats = ['2016_07_27','2016_07_27','','']
+iterative1000_wavebc_dats = ['2016_07_27','2016_07_27','2016_07_28','']
 
 normal_wavebc_dats = ['2016_07_22','2016_07_22','2016_07_22']
 damping_wavebc_dats = ['2016_07_22','2016_07_22','2016_07_22']
@@ -165,7 +165,7 @@ normalscore1000_wavebc_lets = ['b','aln','bxz','dkl']
 dual1000_wavebc_lets = ['b','aln','bxz','dkl']
 hybrid1000_wavebc_lets = ['ewx','gjj','hvv','jih']
 localisation1000_wavebc_lets = ['kut','mhf','ntr','pgd']
-iterative1000_wavebc_lets = ['b','aln','','']
+iterative1000_wavebc_lets = ['b','aln','b','']
 
 normal1000_nums = [1000,1000,1000,1000]
 damping1000_nums = [1000,1000,1000,1000]
@@ -189,7 +189,7 @@ normalscore1000_wavebc_nums = [1000,1000,1000,1000]
 dual1000_wavebc_nums = [1000,1000,1000,1000]
 hybrid1000_wavebc_nums = [1000,1000,1000,1000]
 localisation1000_wavebc_nums = [1000,1000,1000,1000]
-localisation1000_wavebc_nums = [1000,1000,0,0]   #num_obs 5050
+iterative1000_wavebc_nums = [1000,1000,1000,0]   #num_obs 5050
 
 
 dats1000 = [normal1000_dats,damping1000_dats,normalscore1000_dats,dual1000_dats,hybrid1000_dats,
