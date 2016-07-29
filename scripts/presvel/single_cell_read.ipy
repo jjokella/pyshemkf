@@ -1,0 +1,52 @@
+# Read single cell output
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from matplotlib import cm		# Colormap commands (cm.get_cmap())
+from matplotlib import colors	        # Normalize colors (colors.Normalize())
+from mypackage.plot import mycolors
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+is_show = True
+is_save = True
+
+# Input file specification
+model_name = 'alexdiff'
+dat = '2016_07_29'
+let = 'b'                                 #'b', 'f'
+locs = [[125,147,1],[108,140,1],[101,123,1],[108,106,1],
+            [125, 99,1],[142,106,1],[149,123,1],[142,140,1],
+            [125,137,1],[115,133,1],[111,123,1],[115,113,1],
+            [125,108,1],[135,113,1],[139,123,1],[135,133,1]]               
+variable = 2                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
+assim_nums = range(1,230,1)
+num_locs = len(locs)
+num_assim = len(assim_nums)
+nrens = 30
+
+
+# Temperature array dimensions
+temp = np.zeros([num_assim,nrens,num_locs])
+
+# Read temperature array from single_cell output
+for iloc,loc in enumerate(locs):
+    for iassim,assim_num in enumerate(assim_nums):
+        # Read temp array
+        temp[iassim,:,iloc] = np.loadtxt(os.environ['HOME']+'/shematOutputDir/'
+                                        +model_name+'_output/'
+                                        +dat+'/'+dat+'_'+let
+                                        +'/single_cell_output/'
+                                        +'single_cell_E1_'
+                                        +str(loc[0]).zfill(4)+'_'
+                                        +str(loc[1]).zfill(4)+'_'
+                                        +str(loc[2]).zfill(4)+'_'
+                                        +str(variable).zfill(4)+'_aft_'
+                                        +str(assim_num).zfill(4)+'.plt',
+                                        skiprows=5)
+os.chdir(os.environ['HOME']+'/PythonDir')
+
+np.save('output/presvel/npy/temp_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy',temp)
