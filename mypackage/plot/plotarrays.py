@@ -189,7 +189,7 @@ normalscore1000_wavebc_nums = [1000,1000,1000,1000]
 dual1000_wavebc_nums = [1000,1000,1000,1000]
 hybrid1000_wavebc_nums = [1000,1000,1000,1000]
 localisation1000_wavebc_nums = [1000,1000,1000,1000]
-localisation1000_wavebc_nums = [1000,1000,,]   #num_obs 5050
+localisation1000_wavebc_nums = [1000,1000,0,0]   #num_obs 5050
 
 
 dats1000 = [normal1000_dats,damping1000_dats,normalscore1000_dats,dual1000_dats,hybrid1000_dats,
