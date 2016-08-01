@@ -1,0 +1,45 @@
+# Reated single cell output
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from matplotlib import cm		# Colormap commands (cm.get_cmap())
+from matplotlib import colors	        # Normalize colors (colors.Normalize())
+from mypackage.plot import mycolors
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+model_name = 'alexdiff'
+dat = '2016_07_27'
+let_true = 'a'
+output_dir = 'samples_output'
+
+obs_num = 9 # Column Number in observations file
+
+num_mons = 16
+
+os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + dat + "/" \
+             + dat + "_" + let_true + "/" + output_dir)
+
+# Read
+t = np.genfromtxt(model_name.upper() + '_TRUE_E0_monitor_1.dat',
+                      dtype='f8',
+                      comments='%',
+                      usecols=(0)) # obstime
+temp = np.genfromtxt(model_name.upper() + '_TRUE_E0_monitor_1.dat',
+                         dtype='f8',
+                         comments='%',
+                         usecols=(obs_num))     #variable
+# Reshape
+t = t.reshape(len(t)/num_mons, num_mons)
+temp = temp.reshape(len(temp)/num_mons, num_mons)
+
+os.chdir(os.environ['HOME']+'/PythonDir/')
+
+np.save('output/presvel/npy/truet_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy',t)
+np.save('output/presvel/npy/truetemp_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy',temp)
+
+
+
