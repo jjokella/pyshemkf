@@ -1,6 +1,6 @@
 # Plots of the Synthetic True, Source: mypackage/plot/plot_true.py
-mod_name = 'alexsim'
-dat = '2016_05_30'
+mod_name = 'alexdiff'
+dat = '2016_07_27'
 let = 'a'
 show = 1
 
