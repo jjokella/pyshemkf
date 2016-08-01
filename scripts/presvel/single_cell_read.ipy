@@ -11,9 +11,6 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = True
-is_save = True
-
 # Input file specification
 model_name = 'alexdiff'
 dat = '2016_07_29'
@@ -23,7 +20,9 @@ locs = [[125,147,1],[108,140,1],[101,123,1],[108,106,1],
             [125,137,1],[115,133,1],[111,123,1],[115,113,1],
             [125,108,1],[135,113,1],[139,123,1],[135,133,1]]               
 variable = 2                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
-assim_nums = range(1,230,1)
+assim_nums = range(1,231,1)
+
+# Different numbers
 num_locs = len(locs)
 num_assim = len(assim_nums)
 nrens = 30
@@ -32,7 +31,7 @@ nrens = 30
 # Temperature array dimensions
 temp = np.zeros([num_assim,nrens,num_locs])
 
-# Read temperature array from single_cell output
+# Read temperature array from single_cell outputs
 for iloc,loc in enumerate(locs):
     for iassim,assim_num in enumerate(assim_nums):
         # Read temp array

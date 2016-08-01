@@ -1,0 +1,80 @@
+# Read single cell output
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from matplotlib import cm		# Colormap commands (cm.get_cmap())
+from matplotlib import colors	        # Normalize colors (colors.Normalize())
+from mypackage.plot import mycolors
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+is_show = True
+is_save = True
+
+# Input array specification
+model_name = 'alexdiff'
+dat = '2016_07_29'
+let = 'b'                                 #'b', 'f'
+num_locs = 16
+
+pic_format = 'eps'
+pic_names = ['single_cell_mean_'+dat+'_'+let,'single_cell_diff_'+dat+'_'+let]
+
+# Load temperature array
+temp = np.load('output/presvel/npy/'
+                   +'temp_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy')
+
+# Time array
+t = np.hstack([np.linspace(5,100,20),
+                   np.linspace(120,500,20),
+                   np.linspace(600,2500,20),
+                   np.linspace(2900,10500,20),
+                   np.linspace(12250,45500,20),
+                   np.linspace(70950,300000,10),
+                   np.linspace(360000,900000,10),
+                   np.linspace(1060000,2500000,10),
+                   np.linspace(2750000,5000000,10),
+                   np.linspace(5300000,8000000,10),
+                   np.linspace(8200000,12000000,20),
+                   np.linspace(12200000,16000000,20),
+                   np.linspace(16200000,20000000,20),
+                   np.linspace(20200000,24000000,20)])
+
+# temp(iassim,irens,iloc) measurement times, ensemble member,
+# observation location
+
+# Plot mean values over all 16 measurement locations
+plt.figure(1,[20,10], facecolor = 'white')
+plt.title('Mean temperatures at observation points', size = 20)
+[plt.semilogx(t,np.mean(temp,axis=1)[:,i], 'o', markersize = 5, label = i+1) for i in [0,4]]
+plt.legend()
+
+# Save, show, close
+if is_save:
+    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+                    +pic_names[0]+'.'+pic_format)
+if is_show:
+    plt.show()
+else:
+    plt.close()
+
+
+# Plot mean values over all 16 measurement locations
+plt.figure(1,[20,10], facecolor = 'white')
+plt.title('Difference of temperatures at certain observation points', size = 20)
+[plt.semilogx(t,np.mean(temp,axis=1)[:,pair[0]]-np.mean(temp,axis=1)[:,pair[1]],
+              'o', markersize = 5, label = [pair[0]+1,pair[1]+1])
+    for pair in [[0,4],[1,5],[2,6],[3,7]]] #[[8,12],[9,13],[10,14],[11,15]]
+plt.legend()
+# Save, show, close
+if is_save:
+    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+                    +pic_names[0]+'.'+pic_format)
+if is_show:
+    plt.show()
+else:
+    plt.close()
+    
