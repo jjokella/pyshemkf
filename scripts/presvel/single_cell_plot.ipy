@@ -18,7 +18,7 @@ is_save = True
 model_name = 'alexdiff'
 dat = '2016_07_29'
 let = 'b'                                 #'b', 'f'
-truedat = '2016_07_27'
+truedat = '2016_08_01'
 truelet = 'a'
 num_locs = 16
 
@@ -59,7 +59,8 @@ t = np.hstack([np.linspace(5,100,20),
 # Plot mean values over all 16 measurement locations
 plt.figure(1,[20,10], facecolor = 'white')
 plt.title('Mean temperatures at observation points', size = 20)
-[plt.semilogx(t,np.mean(temp,axis=1)[:,i], 'o', markersize = 5, label = i+1) for i in [0,4]]
+# [plt.semilogx(t,np.mean(temp,axis=1)[:,i], 'o', markersize = 5, label = i+1) for i in [0,4]]
+[plt.semilogx(t,truetemp[1:,i], 'o', markersize = 5, label = i+1) for i in [8,9,10,11,12,13,14,15]]
 plt.legend()
 
 # Save, show, close
