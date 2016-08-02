@@ -18,7 +18,7 @@ is_save = True
 model_name = 'alexdiff'
 dat = '2016_08_01'
 let = 'f'                                 #'b', 'f'
-truedat = '2016_08_01'
+truedat = '2016_08_02'
 truelet = 'a'
 num_locs = 16
 
@@ -32,8 +32,8 @@ pairs = [[0,4],[1,5],[2,6],[3,7]]#[[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[
 #[[8,12],[9,13],[10,14],[11,15]]
 
 # Load temperature array
-temp = np.load('output/presvel/npy/'
-                   +'temp_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy')
+# temp = np.load('output/presvel/npy/'
+#                    +'temp_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy')
 
 truetemp = np.load('output/presvel/npy/'
                     +'truetemp_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
@@ -83,10 +83,10 @@ else:
 # Plot mean differences over all 16 measurement locations
 plt.figure(1,[20,10], facecolor = 'white')
 plt.title('Difference of temperatures at certain observation points', size = 20)
-[plt.semilogx(t[1:,0],np.mean(temp,axis=1)[:,pair[0]]-np.mean(temp,axis=1)[:,pair[1]],
-              'o', markersize = 5, label = [pair[0]+1,pair[1]+1],
-                  c = coleros[i])
-    for i,pair in enumerate(pairs)]
+# [plt.semilogx(t[1:,0],np.mean(temp,axis=1)[:,pair[0]]-np.mean(temp,axis=1)[:,pair[1]],
+#               'o', markersize = 5, label = [pair[0]+1,pair[1]+1],
+#                   c = coleros[i])
+#     for i,pair in enumerate(pairs)]
 [plt.semilogx(t[:,0],truetemp[:,pair[0]]-truetemp[:,pair[1]],
               '--', markersize = 5, label = 'True: ' + str([pair[0]+1,pair[1]+1]),
                   c = coleros[i])
