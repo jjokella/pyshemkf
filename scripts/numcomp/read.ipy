@@ -17,9 +17,8 @@ is_1000 = True
 
 # Methods used in the comparison
 which_methods = [0,1,2,3,4,5,6]
-names_methods = [pa.names_methods1000[which_methods[i]] if is_1000 
-                 else pa.names_methods[which_methods[i]] 
-                 for i in range(len(which_methods))]
+names_methods = [pa.names_methods[which_methods[i]] 
+                     for i in range(len(which_methods))]
 
 # Ensemble sizes to produce
 which_enssizes = [250] if is_1000 else [50,70,100,250,500,1000,2000]
@@ -44,7 +43,7 @@ pval = 0.05
 probsout = "probs1000" if is_1000 else "probs"
 setupindsout = "setupinds1000" if is_1000 else "setupinds"
 which_methodsout = "which_methods1000" if is_1000 else "which_methods"
-names_methodsout = "names_methods1000" if is_1000 else "names_methods"
+names_methodsout = "names_methods"
 
 # n_syn: number of synthetic studies
 for n_syn in ns_syn_studies:

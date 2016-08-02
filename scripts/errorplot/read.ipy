@@ -21,7 +21,7 @@ num_ensemble_sizes = 4
 dats = pa.dats1000_wavebc if is_wavebc else (pa.dats1000 if is_1000 else pa.dats)
 lets = pa.lets1000_wavebc if is_wavebc else (pa.lets1000 if is_1000 else pa.lets)
 nums = pa.nums1000_wavebc if is_wavebc else (pa.nums1000 if is_1000 else pa.nums)
-legend_input = pa.longnames_methods1000 if is_1000 else pa.longnames_methods
+legend_input = pa.longnames_methods
 
 # Legend inputs
 legend_input = np.array([legend_input[i].ljust(18) for i in range(len(legend_input))])

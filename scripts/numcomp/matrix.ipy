@@ -46,7 +46,7 @@ pic_names = {n_ens: 'matrix_single'+probs_names[n_ens][-18:-4]
              for n_ens in enssizes}
 
 # Ticks (names)
-names = np.array(pa.names_methods1000) #if is_1000 else pa.names_methods
+names = np.array(pa.names_methods) #if is_1000 else pa.names_methods
 yticks = {n_ens : names[indsorts[n_ens]] for n_ens in enssizes}
 ticksize = 20
     

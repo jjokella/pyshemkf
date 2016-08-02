@@ -42,7 +42,7 @@ num_comparisons = len(show_methods[0])
 num_patches = 3*num_comparisons
 
 # Ticks (names)
-names = pa.longnames_methods1000 #if is_1000 else pa.names_methods
+names = pa.longnames_methods
 ytick1 = [names[show_methods[0][i]] for i in range(num_comparisons)]
 ytick2 = [names[show_methods[1][i]] for i in range(num_comparisons)]
 

@@ -20,7 +20,7 @@ which_enssize = [50,70,100,250]
 
 dats = pa.dats1000 if is_1000 else pa.dats
 lets = pa.lets1000 if is_1000 else pa.lets
-names = pa.names_methods1000 if is_1000 else pa.names_methods
+names = pa.names_methods
 
 
 num_obs = 100                             #Should be almost constant
