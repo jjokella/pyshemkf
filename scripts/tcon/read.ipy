@@ -1,0 +1,26 @@
+# Read prescribed velocities
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+model_name = 'alexdiff'
+nrens = 30
+dat = '2016_08_04'
+lets = ['b']
+
+nrobs = 230
+
+for let in lets:
+    # Load velocities
+    tcons = np.loadtxt(os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' 
+                           + dat + '/' + dat + '_'+ let
+                           +'/enkf_output/'
+                           +'tcon_aft.txt',
+                        skiprows = 1)
+
+    np.save('output/tcon/npy/tcons_'+dat+'_'+let,tcons)
