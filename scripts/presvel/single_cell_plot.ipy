@@ -16,7 +16,7 @@ is_save = True
 
 # Input array specification
 model_name = 'alexdiff'
-dat = '2016_08_01'
+dat = '2016_08_02'
 let = 'f'                                 #'b', 'f'
 truedat = '2016_08_02'
 truelet = 'a'

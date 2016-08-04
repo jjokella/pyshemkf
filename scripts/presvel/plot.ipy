@@ -14,15 +14,15 @@ is_save = True
 # General input
 model_name = 'alexdiff'
 nrens = 100
-dat = '2016_08_01'
-lets =['b']
+dat = '2016_08_02'
+lets =['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
 
 rad_min = 0.0
-rad_max = 8.0*10**-7
+rad_max = 1.0*10**-6
 
 nrobs = 100
 
@@ -92,7 +92,10 @@ for let in lets:
         colors[ic,2] = color_factors[ic]
     ax.scatter(ang[:nrobs]*np.pi/180,rad[:nrobs],c=colors)
     ax.scatter(true_ang*np.pi/180,true_rad, marker = 'x', s = 1000 ,c = 'red',lw = 2)
-    ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'x', s = 1000 ,c = 'black',lw = 2)
+    ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'o', s = 300 ,c = 'black',lw = 2)
+    ax.plot([ang[i]*np.pi/180 for i in range(1,nrobs,10)],[rad[i] for i in range(1,nrobs,10)],
+                c = 'grey')
+    ax.scatter(ang[nrobs]*np.pi/180,rad[nrobs], marker = 'x', s = 1000 ,c = 'black',lw = 2)
     ax.set_rmax(rad_max)
     ax.set_rmin(rad_min)
 
