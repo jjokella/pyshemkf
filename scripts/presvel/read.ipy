@@ -10,13 +10,11 @@ import pandas as pd
 
 model_name = 'alexdiff'
 nrens = 100
-dat = '2016_08_02'
-lets = ['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_08_05'
+lets = ['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-
-nrobs = 230
 
 num_pres_vel = 2                          #1 or 2
 
@@ -33,17 +31,17 @@ for let in lets:
     for ipv in range(num_pres_vel):
         if ipv == 0:
             vxs = vs[:,0:nrens]
-            np.save('output/presvel/npy/vxs_'+dat+'_'+let,vxs)
+            np.save('output/presvel/npy/vxs_'+model_name+'_'+dat+'_'+let,vxs)
         if ipv == 1:
             vys = vs[:,nrens:2*nrens]
-            np.save('output/presvel/npy/vys_'+dat+'_'+let,vys)
+            np.save('output/presvel/npy/vys_'+model_name+'_'+dat+'_'+let,vys)
 
     # Ensemble mean of x and y component
     mvxs = np.mean(vxs,axis=1)
-    np.save('output/presvel/npy/mvxs_'+dat+'_'+let,mvxs)
+    np.save('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let,mvxs)
     if num_pres_vel == 2:
         mvys = np.mean(vys,axis=1)
-        np.save('output/presvel/npy/mvys_'+dat+'_'+let,mvys)
+        np.save('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let,mvys)
 
     # Absolute value and angle
     if num_pres_vel == 2:
@@ -56,5 +54,5 @@ for let in lets:
                     ang[i] = ang[i] + 180
                 else:
                     ang[i] = ang[i] - 180
-        np.save('output/presvel/npy/rad_'+dat+'_'+let,rad)
-        np.save('output/presvel/npy/ang_'+dat+'_'+let,ang)
+        np.save('output/presvel/npy/rad_'+model_name+'_'+dat+'_'+let,rad)
+        np.save('output/presvel/npy/ang_'+model_name+'_'+dat+'_'+let,ang)

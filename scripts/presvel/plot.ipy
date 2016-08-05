@@ -14,17 +14,20 @@ is_save = True
 # General input
 model_name = 'alexdiff'
 nrens = 100
-dat = '2016_08_02'
-lets =['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_08_05'
+lets =['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
+truedat = '2016_08_05'
+truelet = 'a'
+num_locs = 16
 
 rad_min = 0.0
 rad_max = 1.0*10**-6
 
-nrobs = 100
+nrobs = 300
 
 true_vs = [-2.7*10**-7,0.0]
 true_ang = 180
@@ -35,28 +38,16 @@ num_pres_vel = 2                          #1 or 2
 pic_format = 'eps'                         #'eps' and 'png'
 
 # Time array
-t = np.hstack([np.linspace(5,100,20),
-                   np.linspace(120,500,20),
-                   np.linspace(600,2500,20),
-                   np.linspace(2900,10500,20),
-                   np.linspace(12250,45500,20),
-                   np.linspace(70950,300000,10),
-                   np.linspace(360000,900000,10),
-                   np.linspace(1060000,2500000,10),
-                   np.linspace(2750000,5000000,10),
-                   np.linspace(5300000,8000000,10),
-                   np.linspace(8200000,12000000,20),
-                   np.linspace(12200000,16000000,20),
-                   np.linspace(16200000,20000000,20),
-                   np.linspace(20200000,24000000,20)])
+t = np.load('output/presvel/npy/'
+                    +'truet_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
 
 for let in lets: 
     pic_names = ['mvs_'+ model_name + '_' + dat + '_' + let,
                      'pol_'+ model_name + '_' + dat + '_' + let]
 
     # Load means
-    mvxs = np.load('output/presvel/npy/mvxs_'+dat+'_'+let+'.npy')
-    mvys = np.load('output/presvel/npy/mvys_'+dat+'_'+let+'.npy')
+    mvxs = np.load('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let+'.npy')
+    mvys = np.load('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let+'.npy')
 
     # Plot means
     plt.figure(1,[20,10], facecolor = 'white')
@@ -77,8 +68,8 @@ for let in lets:
 
 
     # Load radius and angle
-    rad = np.load('output/presvel/npy/rad_'+dat+'_'+let+'.npy')
-    ang = np.load('output/presvel/npy/ang_'+dat+'_'+let+'.npy')
+    rad = np.load('output/presvel/npy/rad_'+model_name+'_'+dat+'_'+let+'.npy')
+    ang = np.load('output/presvel/npy/ang_'+model_name+'_'+dat+'_'+let+'.npy')
 
     # Plot radius and angle
     plt.figure(2,[10,10], facecolor = 'white')
@@ -95,7 +86,7 @@ for let in lets:
     ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'o', s = 300 ,c = 'black',lw = 2)
     ax.plot([ang[i]*np.pi/180 for i in range(1,nrobs,10)],[rad[i] for i in range(1,nrobs,10)],
                 c = 'grey')
-    ax.scatter(ang[nrobs]*np.pi/180,rad[nrobs], marker = 'x', s = 1000 ,c = 'black',lw = 2)
+    ax.scatter(ang[nrobs-1]*np.pi/180,rad[nrobs-1], marker = 'x', s = 1000 ,c = 'black',lw = 2)
     ax.set_rmax(rad_max)
     ax.set_rmin(rad_min)
 
