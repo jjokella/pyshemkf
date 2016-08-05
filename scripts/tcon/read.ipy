@@ -8,12 +8,11 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'tcon'
-nrens = 100
+model_name = 'alexdiff'
 dat = '2016_08_04'
-lets = ['d']
+lets = ['f']
 
-nrobs = 100
+nrobs = 230
 
 for let in lets:
     # Load velocities
