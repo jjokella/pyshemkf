@@ -10,8 +10,8 @@ import pandas as pd
 
 model_name = 'alexdiff'
 nrens = 100
-dat = '2016_08_05'
-lets = ['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_08_08'
+lets = ['b','c','d']#,'e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
