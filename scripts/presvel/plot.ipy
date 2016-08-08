@@ -56,7 +56,11 @@ for let in lets:
     plt.semilogx(t[:nrobs],mvys[:nrobs], 'o', color = 'grey', markersize = 5)
     plt.semilogx(t[:nrobs],[true_vs[0] for i in range(nrobs)],color = 'black', linestyle = '--', lw = 3)
     plt.semilogx(t[:nrobs],[true_vs[1] for i in range(nrobs)],color = 'grey', linestyle = '--', lw = 3)
-
+    plt.xlabel(r'Time',fontsize = 20)
+    plt.ylabel(r'Velocity [$\frac{m}{s}$]',fontsize = 20)
+    plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
+    plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+    
     if is_save:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
                         +pic_names[0]+'.'+pic_format)
