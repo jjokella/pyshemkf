@@ -15,7 +15,7 @@ is_save = True
 model_name = 'alexdiff'
 nrens = 100
 dat = '2016_08_08'
-lets =['b','c','d']#,'e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+lets =['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
@@ -35,7 +35,7 @@ true_rad = 2.7*10**-7
 
 num_pres_vel = 2                          #1 or 2
 
-pic_format = 'eps'                         #'eps' and 'png'
+pic_format = 'png'                         #'eps' and 'png'
 
 # Time array
 t = np.load('output/presvel/npy/'
@@ -43,12 +43,18 @@ t = np.load('output/presvel/npy/'
 
 for let in lets: 
     pic_names = ['mvs_'+ model_name + '_' + dat + '_' + let,
+                     'mvs_std_'+ model_name + '_' + dat + '_' + let,
                      'pol_'+ model_name + '_' + dat + '_' + let]
 
     # Load means
     mvxs = np.load('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let+'.npy')
     mvys = np.load('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let+'.npy')
+    vxs = np.load('output/presvel/npy/vxs_'+model_name+'_'+dat+'_'+let+'.npy')
+    vys = np.load('output/presvel/npy/vys_'+model_name+'_'+dat+'_'+let+'.npy')
+    svxs = np.std(vxs,axis=1)
+    svys = np.std(vys,axis=1)
 
+    
     # Plot means
     plt.figure(1,[20,10], facecolor = 'white')
     plt.title('Velocity x/y components', size = 30)
@@ -64,6 +70,26 @@ for let in lets:
     if is_save:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
                         +pic_names[0]+'.'+pic_format)
+    if is_show:
+        plt.show()
+    else:
+        plt.close()
+
+    # Plot stddev
+    plt.figure(1,[20,10], facecolor = 'white')
+    plt.title('Velocity x/y stddevs', size = 30)
+    plt.semilogx(t[:nrobs],svxs[:nrobs], 'o', color = 'black', markersize = 5)
+    plt.semilogx(t[:nrobs],svys[:nrobs], 'o', color = 'grey', markersize = 5)
+    # plt.semilogx(t[:nrobs],[true_vs[0] for i in range(nrobs)],color = 'black', linestyle = '--', lw = 3)
+    # plt.semilogx(t[:nrobs],[true_vs[1] for i in range(nrobs)],color = 'grey', linestyle = '--', lw = 3)
+    plt.xlabel(r'Time',fontsize = 20)
+    plt.ylabel(r'$\sigma$ Velocity [$\frac{m}{s}$]',fontsize = 20)
+    plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
+    plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+    
+    if is_save:
+        plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+                        +pic_names[1]+'.'+pic_format)
     if is_show:
         plt.show()
     else:
@@ -99,7 +125,7 @@ for let in lets:
 
     if is_save:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
-                        +pic_names[1]+'.'+pic_format)
+                        +pic_names[2]+'.'+pic_format)
     if is_show:
         plt.show()
     else:
