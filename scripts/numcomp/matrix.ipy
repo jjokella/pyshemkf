@@ -30,9 +30,10 @@ indsorts = {50:[1,6,5,4,3,2,0],
 num_methods = len(indsorts[50])
 
 # Input
-num_comparisons = 1                      #1, 10, 1000
+statmethod = 'ttest'                       #ttest, gaussian, single
+num_comparisons = 100                      #1(single), 10(ttest/gaussian), 1000(ttest/gaussian)
 probs_names = {n_ens :
-               'output/numcomp/npy/single/probs1000_'   #ttest, gaussian, single
+               'output/numcomp/npy/'+statmethod+'/probs1000_'  
                +str(num_comparisons).zfill(4)+'_'
                +str(n_ens).zfill(4)+'.npy'
                for n_ens in enssizes}
@@ -42,7 +43,7 @@ pic_name_end = ['eps','png']
 pic_dirs = {pic_end :
             os.environ['HOME']+'/PythonDir/output/numcomp/matrix/'+pic_end[-3:]+'/'
             for pic_end in pic_name_end}
-pic_names = {n_ens: 'matrix_single'+probs_names[n_ens][-18:-4]
+pic_names = {n_ens: 'matrix_'+statmethod+probs_names[n_ens][-18:-4]
              for n_ens in enssizes}
 
 # Ticks (names)
