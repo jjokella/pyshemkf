@@ -225,9 +225,9 @@ dates = np.concatenate(dats)
 letters = np.concatenate(lets)  
 sizes = np.concatenate(nums)    
 
-dates1000 = np.concatenate(dats1000)
-letters1000 = np.concatenate(lets1000)
-sizes1000 = np.concatenate(nums1000)
+dates1000 = np.concatenate(dats1000_wavebc)
+letters1000 = np.concatenate(lets1000_wavebc)
+sizes1000 = np.concatenate(nums1000_wavebc)
 
 
 
