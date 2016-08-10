@@ -212,13 +212,13 @@ num_obss1000 = [normal1000_obss,damping1000_obss,normalscore1000_obss,dual1000_o
 
 dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,
                        normalscore1000_wavebc_dats,dual1000_wavebc_dats,
-                       hybrid1000_wavebc_dats,localisation1000_wavebc_dats]#, iterative1000_wavebc_dats]
+                       hybrid1000_wavebc_dats,localisation1000_wavebc_dats, iterative1000_wavebc_dats]
 lets1000_wavebc = [normal1000_wavebc_lets,damping1000_wavebc_lets,
                        normalscore1000_wavebc_lets,dual1000_wavebc_lets,
-                       hybrid1000_wavebc_lets,localisation1000_wavebc_lets]#, iterative1000_wavebc_lets]
+                       hybrid1000_wavebc_lets,localisation1000_wavebc_lets, iterative1000_wavebc_lets]
 nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,
                        normalscore1000_wavebc_nums,dual1000_wavebc_nums,
-                       hybrid1000_wavebc_nums,localisation1000_wavebc_nums]#, iterative1000_wavebc_nums]
+                       hybrid1000_wavebc_nums,localisation1000_wavebc_nums, iterative1000_wavebc_nums]
 
 # Flat arrays
 dates = np.concatenate(dats)    
