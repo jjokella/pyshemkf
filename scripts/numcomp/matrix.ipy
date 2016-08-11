@@ -14,18 +14,13 @@ from matplotlib import colors	        # Normalize colors (colors.Normalize())
 is_show = 1
 is_save = 1
 
-# Axis switches
-is_axis1 = 0
-is_axis2 = 1
-
 # Ensemble sizes to output
 enssizes = [50,250]
-num_inputs = len(enssizes)
 
 # Indices/Sorting/Number of methods
 indsorts = {50:[1,6,5,4,3,2,0],
-            70:[1,4,5,3,0,2],
-            100:[1,4,3,0,2,5],
+            70:[1,4,6,5,3,0,2],
+            100:[1,4,6,0,3,5,2],
             250:[1,4,6,0,3,2,5]}
 num_methods = len(indsorts[50])
 
@@ -55,80 +50,89 @@ for n_ens in enssizes:
 
     # Load probs
     probs = np.load(probs_names[n_ens])
-
     # Sort probs
     probs = probs[indsorts[n_ens],:,:]
     probs = probs[:,indsorts[n_ens],:]
-
-    # Figure
+    
+    # Plot: Figure size and title
     plt.figure(1,figsize=[10,10])
-    # plt.suptitle("N = "+ str(n_ens)+"  Comparisons: "+str(num_comparisons) , fontsize = 30)
+    plt.suptitle("N = "+ str(n_ens)+"  Comparisons: "+str(num_comparisons),
+                     fontsize = 30)
+    # Plot: Axis position and ticks
+    ax = plt.subplot(111)
+    ax.set_position([0.32,0.2,0.6,0.8])
 
-    # Axis1: Undecided
-    
-    # Axis position/ticks
-    if is_axis1:
-        ax1 = plt.gca()
-        im1 = ax1.imshow(probs[:,:,1],interpolation='nearest',
-                         cmap='Greys',
-                         norm = colors.Normalize(vmin=0,vmax=1,clip=False))
-        plt.title("Fraction: Undecided Comparisons")
-        ax1.set_position([0.13,0.2,0.3,0.6])
-        plt.xticks(rotation=90)
-        ax1.set_xticks([i for i in range(num_methods)])
-        ax1.set_xticklabels(yticks[n_ens], fontsize=ticksize)
-        ax1.set_yticks([i for i in range(num_methods)])
-        ax1.set_yticklabels(yticks[n_ens], fontsize=ticksize)
 
-        # Colorbar
-        cb_ax1 = plt.gcf().add_subplot(223)
-        cb_ax1.set_position([0.44,0.2,0.01,0.6])
-        mpl.colorbar.Colorbar(cb_ax1, im1)
-    
-    #------------------------------------------------------------------
-        
-    # Axis2: Mean difference
-    
-    # Axis position/ticks
-    if is_axis2:
-        ax2 = plt.subplot(122)
+    # Rectangles: Fraction of Undecided
+    undecided = probs[:,:,1]
+    # Rectangles: Remove lower triangle of matrix
+    for ipm in range(num_methods):
+        for jpm in range(num_methods):
+            if ipm > jpm:
+                undecided[ipm,jpm] = None
+            if ipm == jpm:
+                undecided[ipm,jpm] = 1.0
 
-        plotmatrix = probs[:,:,0]
-        for ipm in range(7):
-            for jpm in range(7):
-                if ipm < jpm:
-                    plotmatrix[ipm,jpm] = None
-                if ipm == jpm:
-                    plotmatrix[ipm,jpm] = 1.0
-    
-        im2 = ax2.imshow(plotmatrix,interpolation='nearest',cmap='Greys',
-                         norm = colors.Normalize(vmin=0,vmax=1,clip=False))
-        
-        # plt.title("Fraction Bottom-Fraction Left")
-        ax2.set_position([0.32,0.2,0.6,0.8])
-        plt.xticks(rotation=90)
-        ax2.set_xticks([i for i in range(num_methods)])
-        ax2.set_xticklabels(yticks[n_ens], fontsize=ticksize)
-        ax2.set_yticks([i for i in range(num_methods)])
-        ax2.set_yticklabels(yticks[n_ens], fontsize=ticksize)
-        # mpl.axis.YTick(ax2,[4.5,4.5],yticks[50])
-        ax2.tick_params(length=0)
-        ax2.set_frame_on(False)
+    im2 = ax.imshow(undecided,interpolation='nearest',cmap='Greys',
+                     norm = colors.Normalize(vmin=0,vmax=1,clip=False))
 
-        # Text
-        textprobs = 100*probs
+    # Triangles: Grid
+    X,Y = np.meshgrid(np.arange(8),np.arange(8))
+    X = X.flatten()-0.5
+    Y = Y.flatten()-0.5
+
+    # Triangles: Indices
+    triangles = np.array([[i*8,1+i*8,8+i*8] for i in range(1,num_methods)]
+                             +[[1+j*8, 2+j*8, 9+j*8] for j in range(2,num_methods)] 
+                             +[[2+j*8, 3+j*8,10+j*8] for j in range(3,num_methods)]
+                             +[[3+j*8, 4+j*8,11+j*8] for j in range(4,num_methods)]
+                             +[[4+j*8, 5+j*8,12+j*8] for j in range(5,num_methods)]
+                             +[[5+j*8, 6+j*8,13+j*8] for j in range(6,num_methods)]
+                             +[[1+j*8, 8+j*8, 9+j*8] for j in range(1,num_methods)]
+                             +[[2+j*8, 9+j*8,10+j*8] for j in range(2,num_methods)] 
+                             +[[3+j*8,10+j*8,11+j*8] for j in range(3,num_methods)]
+                             +[[4+j*8,11+j*8,12+j*8] for j in range(4,num_methods)]
+                             +[[5+j*8,12+j*8,13+j*8] for j in range(5,num_methods)]
+                             +[[6+j*8,13+j*8,14+j*8] for j in range(6,num_methods)])
+
+    # Triangles: Triangulation instance
+    tria = mpl.tri.Triangulation(X,Y,triangles)
+
+    # Triangles: Colors
+    coleros = np.array([[probs[i,j,0] for i in range(j+1,num_methods)] for j in range(6)]
+                           +[[probs[i,j,2] for i in range(j+1,num_methods)] for j in range(6)])
+    coleros = np.hstack(coleros)
+
+    # Triangles: Plot with facecolor
+    plt.tripcolor(tria,facecolors=coleros,
+                    cmap=mpl.cm.Greys,
+                    norm = colors.Normalize(vmin=0,vmax=1,clip=False),
+                    edgecolor='k')
+
+    # Plot: Mostly ticks
+    plt.title("Significant results")
+    plt.xticks(rotation=90)
+    ax.set_xticks([i for i in range(num_methods)])
+    ax.set_xticklabels(yticks[n_ens], fontsize=ticksize)
+    ax.set_yticks([i for i in range(num_methods)])
+    ax.set_yticklabels(yticks[n_ens], fontsize=ticksize)
+    ax.tick_params(length=0)
+    ax.set_frame_on(False)
+
+    # Text: Upper triangles
+    for i in range(3):
         for itext in range(num_methods):
             for jtext in range(num_methods):
                 if itext<jtext:
-                    plt.text(itext-0.35,jtext+0.15,str(100-textprobs[jtext,itext,0])[0:4],
-                                color = ('white' if textprobs[itext,jtext,0]<50 else 'black'),
-                                fontsize = 20)
-    
-        # # Colorbar
-        # cb_ax2 = plt.gcf().add_subplot(224)
-        # cb_ax2.set_position([0.7,0.2,0.01,0.7])
-        # mpl.colorbar.Colorbar(cb_ax2, im2)
+                    ntext = 100*probs[jtext,itext,i] if i!=1 else 100*probs[itext,jtext,i]
+                    ttext = str(ntext)[0:4] if ntext<100 else str(ntext)[0:3]
+                    px = itext-0.35 if i==0 else (jtext-0.125 if i==1 else itext-0.05)
+                    py = jtext-0.15 if i==0 else (itext+0.05  if i==1 else jtext+0.3 )
+                    colero = 'white' if ntext>50 else 'black'
+                    
+                    plt.text(px,py,ttext,color = colero,fontsize = 10)
 
+                
     # Save/Show
     if is_save:
         for pic_end in pic_name_end:
