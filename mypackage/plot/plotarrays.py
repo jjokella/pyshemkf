@@ -210,6 +210,16 @@ nums1000 = [normal1000_nums,damping1000_nums,normalscore1000_nums,dual1000_nums,
 num_obss1000 = [normal1000_obss,damping1000_obss,normalscore1000_obss,dual1000_obss,hybrid1000_obss,
                     localisation1000_obss,iterative1000_obss]
 
+dats_wavebc = [normal_wavebc_dats,damping_wavebc_dats,
+                       normalscore_wavebc_dats,dual_wavebc_dats,
+                       hybrid_wavebc_dats,localisation_wavebc_dats]#, iterative_wavebc_dats]
+lets_wavebc = [normal_wavebc_lets,damping_wavebc_lets,
+                       normalscore_wavebc_lets,dual_wavebc_lets,
+                       hybrid_wavebc_lets,localisation_wavebc_lets]#, iterative_wavebc_lets]
+nums_wavebc = [normal_wavebc_nums,damping_wavebc_nums,
+                       normalscore_wavebc_nums,dual_wavebc_nums,
+                       hybrid_wavebc_nums,localisation_wavebc_nums]#, iterative_wavebc_nums]
+
 dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,
                        normalscore1000_wavebc_dats,dual1000_wavebc_dats,
                        hybrid1000_wavebc_dats,localisation1000_wavebc_dats, iterative1000_wavebc_dats]
@@ -225,9 +235,17 @@ dates = np.concatenate(dats)
 letters = np.concatenate(lets)  
 sizes = np.concatenate(nums)    
 
-dates1000 = np.concatenate(dats1000_wavebc)
-letters1000 = np.concatenate(lets1000_wavebc)
-sizes1000 = np.concatenate(nums1000_wavebc)
+dates_wavebc = np.concatenate(dats_wavebc)    
+letters_wavebc = np.concatenate(lets_wavebc)  
+sizes_wavebc = np.concatenate(nums_wavebc)    
+
+dates1000 = np.concatenate(dats1000)
+letters1000 = np.concatenate(lets1000)
+sizes1000 = np.concatenate(nums1000)
+
+dates1000_wavebc = np.concatenate(dats1000_wavebc)
+letters1000_wavebc = np.concatenate(lets1000_wavebc)
+sizes1000_wavebc = np.concatenate(nums1000_wavebc)
 
 
 
