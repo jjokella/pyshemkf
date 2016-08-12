@@ -10,12 +10,15 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 from matplotlib import colors	        # Normalize colors (colors.Normalize())
 
+is_wavebc = True
+wavebc = 'wavebc_' if is_wavebc else ''
+
 # Show or save pictures
 is_show = 1
 is_save = 1
 
 # Ensemble sizes to output
-enssizes = [50,250]
+enssizes = [50,70,100,250]
 
 # Indices/Sorting/Number of methods
 indsorts = {50:[1,6,5,4,3,2,0],
@@ -26,9 +29,10 @@ num_methods = len(indsorts[50])
 
 # Input
 statmethod = 'ttest'                       #ttest, gaussian, single
-num_comparisons = 100                      #1(single), 10(ttest/gaussian), 1000(ttest/gaussian)
+num_comparisons = 1 if statmethod=='single' else 500  #1(single), 10/100(ttest/gaussian)
 probs_names = {n_ens :
-               'output/numcomp/npy/'+statmethod+'/probs1000_'  
+               'output/numcomp/npy/'+statmethod+'/probs1000_'
+               +wavebc
                +str(num_comparisons).zfill(4)+'_'
                +str(n_ens).zfill(4)+'.npy'
                for n_ens in enssizes}
@@ -56,7 +60,7 @@ for n_ens in enssizes:
     
     # Plot: Figure size and title
     plt.figure(1,figsize=[10,10])
-    plt.suptitle("N = "+ str(n_ens)+"  Comparisons: "+str(num_comparisons),
+    plt.suptitle("N = "+ str(n_ens)+"  Distribution: "+str(num_comparisons),
                      fontsize = 30)
     # Plot: Axis position and ticks
     ax = plt.subplot(111)
@@ -72,10 +76,13 @@ for n_ens in enssizes:
                 undecided[ipm,jpm] = None
             if ipm == jpm:
                 undecided[ipm,jpm] = 1.0
-
+            if ipm < jpm:
+                if statmethod == 'single':
+                    undecided[ipm,jpm] = None
+                    
     im2 = ax.imshow(undecided,interpolation='nearest',cmap='Greys',
-                     norm = colors.Normalize(vmin=0,vmax=1,clip=False))
-
+                            norm = colors.Normalize(vmin=0,vmax=1,clip=False))
+        
     # Triangles: Grid
     X,Y = np.meshgrid(np.arange(8),np.arange(8))
     X = X.flatten()-0.5
@@ -110,7 +117,7 @@ for n_ens in enssizes:
                     edgecolor='k')
 
     # Plot: Mostly ticks
-    plt.title("Significant results")
+    # plt.title("Significant results")
     plt.xticks(rotation=90)
     ax.set_xticks([i for i in range(num_methods)])
     ax.set_xticklabels(yticks[n_ens], fontsize=ticksize)
@@ -129,8 +136,9 @@ for n_ens in enssizes:
                     px = itext-0.35 if i==0 else (jtext-0.125 if i==1 else itext-0.05)
                     py = jtext-0.15 if i==0 else (itext+0.05  if i==1 else jtext+0.3 )
                     colero = 'white' if ntext>50 else 'black'
-                    
-                    plt.text(px,py,ttext,color = colero,fontsize = 10)
+
+                    if i!=1 or statmethod!='single':
+                        plt.text(px,py,ttext,color = colero,fontsize = 10)
 
                 
     # Save/Show
