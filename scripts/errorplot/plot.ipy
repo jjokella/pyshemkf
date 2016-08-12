@@ -15,7 +15,8 @@ is_1000 = True                      # 1000er or 100er job
 is_wavebc = False
 is_median = 0                       # 1: Median, 0: Mean
 is_nooutlier = 0                    # 1: Outliers disregarded
-which_enssize =  [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000] # [50,100,250,500,1000,2000] 
+which_enssize =  ([50,70,100,250] if is_1000 else
+                      ([500,1000,2000] if is_wavebc else [50,70,100,250,500,1000,2000]))
 ## Only changes filename, input order always the same
 
 # Figure
@@ -58,17 +59,17 @@ wavebc = '_wavebc' if is_wavebc else ''
 # Picture name
 if is_1000:
     if is_nooutlier:
-        pic_name_start = pic_name_start + '_NOOUTLIER1000_'
+        pic_name_start = pic_name_start + '_NOOUTLIER1000'
     else:
-        pic_name_start = pic_name_start + '1000_'
+        pic_name_start = pic_name_start + '1000'
 else:
     if is_nooutlier:
-        pic_name_start = pic_name_start + '_NOOUTLIER_'
+        pic_name_start = pic_name_start + '_NOOUTLIER'
     else:
-        pic_name_start = pic_name_start + '_'
+        pic_name_start = pic_name_start 
 
 if is_median:
-    pic_name_start = pic_name_start + 'MEDIAN_'
+    pic_name_start = pic_name_start + 'MEDIAN'
         
 # -------------------------------- LOAD ---------------------------------
 
@@ -106,26 +107,26 @@ else:
 
     # INPUT from endresmeans_allread.ipy
     if is_nooutlier:
-        endres_mean = np.load(load_dir+'endres_mean_nooutliers.npy') # A(methods, enssizes)
+        endres_mean = np.load(load_dir+'endres_mean_nooutliers'+wavebc+'.npy') # A(methods, enssizes)
         # Number of Methods in endres_mean
         num_methods = endres_mean.shape[0]
-        endres_std = np.load(load_dir+'endres_std_nooutliers.npy')
-        nums = np.load(load_dir+'nums.npy')[0:num_methods,:] \
-          -np.load(load_dir+'outliersbeg.npy')
+        endres_std = np.load(load_dir+'endres_std_nooutliers'+wavebc+'.npy')
+        nums = np.load(load_dir+'nums'+wavebc+'.npy')[0:num_methods,:] \
+          -np.load(load_dir+'outliersbeg'+wavebc+'.npy')
     else:
         # Load arrays (endresmeans_allread.ipy)
-        endres_mean = np.load(load_dir+'endres_mean.npy')   # A(methods, ensemble sizes)
+        endres_mean = np.load(load_dir+'endres_mean'+wavebc+'.npy')   # A(methods, ensemble sizes)
         # Number of Methods in endres_mean
         num_methods = endres_mean.shape[0]
-        endres_std = np.load(load_dir+'endres_std.npy')
-        nums = np.load(load_dir+'nums.npy')[0:num_methods,:]
+        endres_std = np.load(load_dir+'endres_std'+wavebc+'.npy')
+        nums = np.load(load_dir+'nums'+wavebc+'.npy')[0:num_methods,:]
 
     if is_median:
-        endres_median = np.load(load_dir+'endres_median.npy')
+        endres_median = np.load(load_dir+'endres_median'+wavebc+'.npy')
         # Number of Methods in endres_mean
         num_methods = endres_median.shape[0]
-        endres_q1 = np.load(load_dir+'endres_q1.npy')
-        endres_q3 = np.load(load_dir+'endres_q3.npy')
+        endres_q1 = np.load(load_dir+'endres_q1'+wavebc+'.npy')
+        endres_q3 = np.load(load_dir+'endres_q3'+wavebc+'.npy')
 
     
 # Standard deviation of the mean
@@ -134,7 +135,7 @@ endres_meanstd = endres_std/np.sqrt(nums)
 
 # -------------------------- SORT ---------------------------------------
 sort_array = np.load(load_dir+'endres_mean1000'+wavebc+'.npy')[:,0]
-indsort = np.argsort(sort_array)
+indsort = np.argsort(sort_array)       #:6 if iterative not yet inside
 
 # # 250er order
 # indsort = np.array([1, 4, 6, 0, 3, 2, 5])
@@ -152,15 +153,15 @@ for i in range(endres_mean.shape[1]):
         endres_q1[:,i] = endres_q1[:,i][indsort]
         endres_q3[:,i] = endres_q3[:,i][indsort]
 
+# Figure
+plt.figure('Errorplot',figsize)
+plt.gca().set_prop_cycle("color",['k'])
+plt.gca().set_position(figpos)
 
 # -------------------------------- PLOT --------------------------------
 for ienssize,ensemble_size in enumerate(which_enssize):
 
 
-    # Figure
-    plt.figure('Errorplot',figsize)
-    plt.gca().set_prop_cycle("color",['k'])
-    plt.gca().set_position(figpos)
 
     # x positions, up to 15 methods
     x = np.delete(np.arange(0,16),                               
@@ -179,10 +180,18 @@ for ienssize,ensemble_size in enumerate(which_enssize):
 
     # Plot
     puntos = []                            #Contains plotted points
+    plt.plot(x[:len(endres_plot)],endres_plot,'k-',label=3)
     for iplot in range(num_methods):
         punto, = plt.plot(x[iplot],endres_plot[iplot], formatsos[iplot], lw = 2, ms = markersize,
-                         label = legend_input[iplot], c = coleros[iplot],mew =markeredgesize)
+                         label = legend_input[iplot],
+                         c = coleros[iplot],mew =markeredgesize)
         puntos.append(punto)
+        # Text
+        if iplot == range(num_methods)[-1]:
+            plt.text(x[iplot]+0.5,endres_plot[iplot],'N = '+str(ensemble_size),
+                         verticalalignment='center',
+                         horizontalalignment='left',
+                         size = 20)
         if is_std:
             if is_median:
                 plt.errorbar(x[iplot],endres_plot[iplot],yerr = [[endres_std_plot[iplot,0]],
@@ -234,29 +243,30 @@ for ienssize,ensemble_size in enumerate(which_enssize):
 
     plt.hlines(0.62,0,20,linestyles = 'dashed')
 
-    # Style
-    plt.title('Ensemble size = '+str(ensemble_size), y = 1.03, fontsize = fonttit)
-    plt.xlim([0,num_legs*(num_pack+1)])
-    plt.ylabel(r'RMSE [$\log(\frac{1}{m^2})$]',fontsize = fontlab, labelpad = 10)
-    plt.gca().tick_params(direction = 'in', length = 6,
-                   width = 1, labelsize = fonttic,
-                   top = 'off', right = 'off', bottom = 'off',
-                   pad = 8)
-    plt.gca().set_xticks([])
-    plt.gca().set_yticks(yticks)
-    plt.gca().get_xaxis().set_visible('off')
-    plt.ylim(ylims)
+# Style
+# plt.title('Ensemble size = '+str(ensemble_size), y = 1.03, fontsize = fonttit)
+plt.xlim([0,num_legs*(num_pack+1)])
+plt.ylabel(r'RMSE [$\log(\frac{1}{m^2})$]',fontsize = fontlab, labelpad = 10)
+plt.gca().tick_params(direction = 'in', length = 6,
+               width = 1, labelsize = fonttic,
+               top = 'off', right = 'off', bottom = 'off',
+               pad = 8)
+plt.gca().set_xticks([])
+plt.gca().set_yticks(yticks)
+plt.gca().get_xaxis().set_visible('off')
+plt.ylim(ylims)
 
-    # Save pic
-    if is_save:
-        pic_name_full = pic_name_start + str(ensemble_size).zfill(4) + wavebc +  pic_name_end
-        plt.savefig(pic_dir + pic_name_full)
-        print('Saved as ' + pic_dir + pic_name_full)
+
+# Save pic
+if is_save:
+    pic_name_full = pic_name_start + wavebc +  pic_name_end
+    plt.savefig(pic_dir + pic_name_full)
+    print('Saved as ' + pic_dir + pic_name_full)
         
             
-    if is_show:
-        plt.show('Errorplot')
-    else:
-        plt.close()
+if is_show:
+    plt.show('Errorplot')
+else:
+    plt.close()
 
 os.chdir(os.environ['HOME']+'/PythonDir')
