@@ -14,10 +14,10 @@ num_ensemble_sizes = 1
 two_iterations = False                    # True: residual_E2.vtk
 # method = 16
 
-dats = ['2016_07_29' for i in range(num_ensemble_sizes)]
+dats = ['2016_08_12' for i in range(num_ensemble_sizes)]
 lets = ['b','aln','hvv','pgd','ao','ay','bi','dkl','ewx','gjj']
 #      ['b','aln','bxz','dkl','ewx','gjj','hvv','jih','kut','mhf','ntr','pgd']
-nums = [1000,1000,100,1000,10,10,10]#[1000 for i in range(num_ensemble_sizes)]
+nums = [100,1000,100,1000,10,10,10]#[1000 for i in range(num_ensemble_sizes)]
 num_obss = [5050 for i in range(num_ensemble_sizes)]
 # dats = pa.dats[method]
 # lets = pa.lets[method]
