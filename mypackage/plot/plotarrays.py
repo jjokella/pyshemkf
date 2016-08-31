@@ -183,7 +183,6 @@ iterative1000_lets = ['b','b','b','b']
 iterative1000_nums = [1000,1000,1000,1000]
 iterative1000_obss = [5050 for i in range(4)]
 
-# WAVEBC: Missing 1000er, 2000er
 iterative_wavebc_dats = ['2016_08_12','2016_08_15','2016_08_15']
 iterative_wavebc_lets = ['b','b','cx']
 iterative_wavebc_nums = [100,100,100]
