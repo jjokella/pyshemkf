@@ -12,7 +12,7 @@ import pandas as pd
 # ------------------------ MANUAL INPUT ---------------------------------------
 # Content
 is_1000 = True                      # 1000er or 100er job
-is_wavebc = False
+is_wavebc = True
 is_median = 0                       # 1: Median, 0: Mean
 is_nooutlier = 0                    # 1: Outliers disregarded
 which_enssize =  ([50,70,100,250] if is_1000 else
@@ -28,10 +28,8 @@ pic_name_end = '.png'                         #'png' or 'eps' or 'svg'
 pic_dir = os.environ['HOME']+'/PythonDir/output/errorplot/'+pic_name_end[-3:]+'/'
 
 # Y-Axis limits for the six plots
-ylims_all = [[0.28,0.82],[0.28,0.82],[0.28,0.82],
-             [0.28,0.82],[0.28,0.82],[0.28,0.82],
-             [0.28,0.82]]
-yticks = [0.3,0.4,0.5,0.6,0.7,0.8]
+ylims = [0.28,0.82] if is_1000 else [0.29,0.43]
+yticks = [0.3,0.4,0.5,0.6,0.7,0.8] if is_1000 else [0.30,0.32,0.34,0.36,0.38,0.40,0.42]
 
 # Number of methods in pack
 num_pack = 4
@@ -166,7 +164,6 @@ for ienssize,ensemble_size in enumerate(which_enssize):
     # x positions, up to 15 methods
     x = np.delete(np.arange(0,16),                               
                   np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
-    ylims = ylims_all[ienssize]                             #y: Limits
 
     # Values/errors to plot
     if is_median:
@@ -188,7 +185,9 @@ for ienssize,ensemble_size in enumerate(which_enssize):
         puntos.append(punto)
         # Text
         if iplot == range(num_methods)[-1]:
-            plt.text(x[iplot]+0.5,endres_plot[iplot],'N = '+str(ensemble_size),
+            plt.text(x[iplot]+0.5,
+                         endres_plot[iplot]-0.005 if ensemble_size == 2000 else endres_plot[iplot],
+                         'N = '+str(ensemble_size),
                          verticalalignment='center',
                          horizontalalignment='left',
                          size = 20)
