@@ -9,11 +9,11 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 # Main inputs
-is_1000 = True                 
-is_wavebc = False 
+is_1000 = False
+is_wavebc = True 
 
 
-which_methods = [0,1,2,3,4,5] if is_wavebc else [0,1,2,3,4,5,6]
+which_methods = [0,1,2,3,4,5,6] if is_wavebc else [0,1,2,3,4,5,6]
 num_methods = len(which_methods)                           # Bei 13 Problem, nicht eingeladen...
 
 num_ensemble_sizes = ((4 if is_1000 else 3) if is_wavebc else (4 if is_1000 else 7))
