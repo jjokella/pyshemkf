@@ -18,7 +18,7 @@ is_show = 1
 is_save = 1
 
 # Ensemble sizes to output
-enssizes = [50,70,100,250]
+enssizes = [50,250]
 
 # Indices/Sorting/Number of methods
 indsorts = {50:[1,6,5,4,3,2,0],
@@ -29,7 +29,7 @@ num_methods = len(indsorts[50])
 
 # Input
 statmethod = 'ttest'                       #ttest, gaussian, single
-num_comparisons = 1 if statmethod=='single' else 500  #1(single), 10/100(ttest/gaussian)
+num_comparisons = 1 if statmethod=='single' else 10  #1(single), 10/100(ttest/gaussian)
 probs_names = {n_ens :
                'output/numcomp/npy/'+statmethod+'/probs1000_'
                +wavebc
