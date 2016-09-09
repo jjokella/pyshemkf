@@ -191,7 +191,7 @@ is_true = 1
     ############################# MAIN PLOT ##############################################
     ######################################################################################
 
-    if is_main:
+    if is_main or is_true:
 
         #Go to the general output directory
         os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + date + "/" \
@@ -494,7 +494,7 @@ is_true = 1
         #Generate axis
         ax_single = fig.add_subplot(1,3,3)
         ax_single.set_position(ax_single_position) 
-        ax_single.set_title(ax_single_title,fontsize = ax_single_titlefont)
+        ax_single.set_title(ax_single_title,fontsize = ax_single_titlefont,y=1.04)
         ax_single.set_xlabel('x [$m$]',fontsize = ax_single_labelsize, labelpad=ax_single_labelpad)
         ax_single.set_ylabel('y [$m$]',fontsize = ax_single_labelsize, labelpad=ax_single_labelpad)
         ax_single.tick_params(labelsize=ax_single_ticksize)
@@ -569,7 +569,7 @@ is_true = 1
         ax_single.scatter(ind_x,
                           ind_y,
                           marker='o',
-                          c=['black','darkred'],
+                          c=['black','black'],
                           s=ax_single_scattersize,
                           linewidths=2)
 
