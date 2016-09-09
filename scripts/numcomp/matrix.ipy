@@ -18,20 +18,28 @@ is_show = 1
 is_save = 1
 
 # Ensemble sizes to output
-enssizes = [50,250]
+enssizes = [50,70,100,250]
 
 # Indices/Sorting/Number of methods
-indsorts = {50:[1,6,5,4,3,2,0],
-            70:[1,4,6,5,3,0,2],
-            100:[1,4,6,0,3,5,2],
-            250:[1,4,6,0,3,2,5]}
+indsorts = {50:  [1,6,5,4,3,2,0],
+            70:  [1,4,6,5,3,0,2],
+            100: [1,4,6,0,3,5,2],
+            250: [1,4,6,0,3,2,5],
+            500: [1,4,6,0,3,2,5],
+            1000:[1,4,6,0,3,2,5],
+            2000:[1,4,6,0,3,2,5]}
 num_methods = len(indsorts[50])
 
 # Input
 statmethod = 'ttest'                       #ttest, gaussian, single
-num_comparisons = 1 if statmethod=='single' else 10  #1(single), 10/100(ttest/gaussian)
+num_comparisons = 1 if statmethod=='single' else 1000  #1(single), 10/100/1000(ttest/gaussian)
 probs_names = {n_ens :
                'output/numcomp/npy/'+statmethod+'/probs1000_'
+               +wavebc
+               +str(num_comparisons).zfill(4)+'_'
+               +str(n_ens).zfill(4)+'.npy'
+               if n_ens<500 else
+               'output/numcomp/npy/'+statmethod+'/probs_'
                +wavebc
                +str(num_comparisons).zfill(4)+'_'
                +str(n_ens).zfill(4)+'.npy'
@@ -79,9 +87,12 @@ for n_ens in enssizes:
             if ipm < jpm:
                 if statmethod == 'single':
                     undecided[ipm,jpm] = None
+                if num_comparisons == 1000:
+                    undecided[ipm,jpm] = None
+
                     
     im2 = ax.imshow(undecided,interpolation='nearest',cmap='Greys',
-                            norm = colors.Normalize(vmin=0,vmax=1,clip=False))
+                        norm = colors.Normalize(vmin=0,vmax=1,clip=False))
         
     # Triangles: Grid
     X,Y = np.meshgrid(np.arange(8),np.arange(8))
@@ -137,7 +148,7 @@ for n_ens in enssizes:
                     py = jtext-0.15 if i==0 else (itext+0.05  if i==1 else jtext+0.3 )
                     colero = 'white' if ntext>50 else 'black'
 
-                    if i!=1 or statmethod!='single':
+                    if i!=1 or (statmethod!='single' and num_comparisons!=1000):
                         plt.text(px,py,ttext,color = colero,fontsize = 10)
 
                 
