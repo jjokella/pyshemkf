@@ -20,7 +20,7 @@ n_syn_bold = 1000 if is_1000 else 100
 # Method of comparison
 method = "ttest"                          #"ttest" "gauss"
 
-which_enssize = [250] if is_1000 else [50,70,100,250,500,1000,2000]           #Ensemble sizes
+which_enssize = [250] if is_1000 else [500,1000,2000]           #Ensemble sizes
 
 # Methods used in the comparison
 is_show = 1

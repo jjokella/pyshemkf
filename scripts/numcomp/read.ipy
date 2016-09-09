@@ -22,11 +22,11 @@ names_methods = [pa.names_methods[which_methods[i]]
                      for i in range(len(which_methods))]
 
 # Ensemble sizes to produce
-which_enssizes = [50,70,100,250] if is_1000 else [50,70,100,250,500,1000,2000]
+which_enssizes = [50,70,100,250] if is_1000 else [500,1000,2000]
 #Possible [50,70,100,250,500,1000,2000]
 
 # Numbers of synthetic studies
-ns_syn_studies = [1,10,100,500] if is_1000 else [1,10]
+ns_syn_studies = [1,10,100,500,1000] if is_1000 else [1,10,100]
 
 # Number of comparisons
 n_comparisons = 10000
@@ -93,13 +93,9 @@ for n_syn in ns_syn_studies:
                            (3+i*4 if enssize==250 else -1))))
                         for i in which_methods]
         else:
-            setupinds = [(0+i*7 if enssize==50 else 
-                         (1+i*7 if enssize==70 else
-                          (2+i*7 if enssize==100 else
-                           (3+i*7 if enssize==250 else 
-                            (4+i*7 if enssize==500 else
-                             (5+i*7 if enssize==1000 else
-                              (6+i*7 if enssize==2000 else -1))))))) 
+            setupinds = [(0+i*3 if enssize==500 else 
+                         (1+i*3 if enssize==1000 else
+                          (2+i*3 if enssize==2000 else -1)))
                         for i in which_methods]
 
         probs = np.zeros([len(setupinds),len(setupinds),3])
