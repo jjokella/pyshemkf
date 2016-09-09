@@ -7,7 +7,7 @@ import numpy as np
 python_dir = os.environ['HOME']+'/PythonDir'
 
 num_methods = 7
-num_jobs = num_methods*7
+num_jobs = num_methods*3
 
 num_methods1000 = 7
 num_jobs1000 = num_methods1000*4
@@ -51,11 +51,13 @@ normal1000_lets = ['b','mhf','aln','bxz']
 normal1000_nums = [1000,1000,1000,1000]
 normal1000_obss = [100 for i in range(4)]
 
+# 500, 1000, 2000
 normal_wavebc_dats = ['2016_07_22','2016_07_22','2016_07_22']
 normal_wavebc_lets = ['b','aln','bxz']
 normal_wavebc_nums = [100,100,100]
 normal_wavebc_obss = [100 for i in range(3)]
 
+# 50, 70, 100, 250
 normal1000_wavebc_dats = ['2016_03_24','2016_03_24','2016_03_24','2016_03_24']
 normal1000_wavebc_lets = ['b','aln','bxz','dkl']
 normal1000_wavebc_nums = [1000,1000,1000,1000]
