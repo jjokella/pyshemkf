@@ -20,7 +20,7 @@ which_enssize =  ([50,70,100,250] if is_1000 else
 ## Only changes filename, input order always the same
 
 # Figure
-is_std = 0                                   # Show std?
+is_std = 1                                   # Show std?
 is_show = 1                                  # Print figure on screen?
 is_save = 1                                  # Save figure to file?
 pic_name_start = 'ENDMEANS'
