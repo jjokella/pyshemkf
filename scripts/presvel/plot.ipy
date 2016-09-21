@@ -12,22 +12,22 @@ is_show = True
 is_save = True
 
 # General input
-model_name = 'alexdiff'
+model_name = 'cube'
 nrens = 100
-dat = '2016_08_08'
-lets =['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_09_20'
+lets =['b']#['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_08_08'
+truedat = '2016_09_20'
 truelet = 'a'
 num_locs = 16
 
 rad_min = 0.0
 rad_max = 1.0*10**-6
 
-nrobs = 300
+nrobs = 230
 
 true_vs = [-2.7*10**-7,0.0]
 true_ang = 180
