@@ -41,21 +41,24 @@ pic_format = 'png'                         #'eps' and 'png'
 t = np.load('output/presvel/npy/'
                     +'truet_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
 
-for let in lets: 
-    pic_names = ['mvs_'+ model_name + '_' + dat + '_' + let,
-                     'mvs_std_'+ model_name + '_' + dat + '_' + let,
-                     'pol_'+ model_name + '_' + dat + '_' + let]
+for let in lets:
 
-    # Load means
+    # Names for the pictures------------------------------------------------------------
+    pic_names = ['mvs_'        + model_name + '_' + dat + '_' + let,
+                     'mvs_std_'+ model_name + '_' + dat + '_' + let,
+                     'pol_'    + model_name + '_' + dat + '_' + let]
+
+    # Load means------------------------------------------------------------------------
     mvxs = np.load('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let+'.npy')
     mvys = np.load('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let+'.npy')
-    vxs = np.load('output/presvel/npy/vxs_'+model_name+'_'+dat+'_'+let+'.npy')
-    vys = np.load('output/presvel/npy/vys_'+model_name+'_'+dat+'_'+let+'.npy')
+    # Load standard deviations
     svxs = np.std(vxs,axis=1)
     svys = np.std(vys,axis=1)
+    # Load radius and angle
+    rad = np.load('output/presvel/npy/rad_'+model_name+'_'+dat+'_'+let+'.npy')
+    ang = np.load('output/presvel/npy/ang_'+model_name+'_'+dat+'_'+let+'.npy')
 
-    
-    # Plot means
+    # Plot means------------------------------------------------------------------------
     plt.figure(1,[20,10], facecolor = 'white')
     plt.title('Velocity x/y components', size = 30)
     plt.semilogx(t[:nrobs],mvxs[:nrobs], 'o', color = 'black', markersize = 5)
@@ -75,13 +78,11 @@ for let in lets:
     else:
         plt.close()
 
-    # Plot stddev
+    # Plot stddev-----------------------------------------------------------------------
     plt.figure(1,[20,10], facecolor = 'white')
     plt.title('Velocity x/y stddevs', size = 30)
     plt.semilogx(t[:nrobs],svxs[:nrobs], 'o', color = 'black', markersize = 5)
     plt.semilogx(t[:nrobs],svys[:nrobs], 'o', color = 'grey', markersize = 5)
-    # plt.semilogx(t[:nrobs],[true_vs[0] for i in range(nrobs)],color = 'black', linestyle = '--', lw = 3)
-    # plt.semilogx(t[:nrobs],[true_vs[1] for i in range(nrobs)],color = 'grey', linestyle = '--', lw = 3)
     plt.xlabel(r'Time',fontsize = 20)
     plt.ylabel(r'$\sigma$ Velocity [$\frac{m}{s}$]',fontsize = 20)
     plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
@@ -95,31 +96,32 @@ for let in lets:
     else:
         plt.close()
 
-
-
-    # Load radius and angle
-    rad = np.load('output/presvel/npy/rad_'+model_name+'_'+dat+'_'+let+'.npy')
-    ang = np.load('output/presvel/npy/ang_'+model_name+'_'+dat+'_'+let+'.npy')
-
-    # Plot radius and angle
+    # Polar Plot radius and angle-------------------------------------------------------
     plt.figure(2,[10,10], facecolor = 'white')
     ax = plt.subplot(111, projection = 'polar')
-    # ax.plot(ang,rad,'o', color = 'black')
+
+    # Colors from black to white
     color_factors = np.linspace(0,1,nrobs)
     colors = np.zeros([nrobs,3])
     for ic in range(len(color_factors)):
         colors[ic,0] = color_factors[ic]
         colors[ic,1] = color_factors[ic]
         colors[ic,2] = color_factors[ic]
+
+    # Scatter: All points
     ax.scatter(ang[:nrobs]*np.pi/180,rad[:nrobs],c=colors)
+    # Marker: True
     ax.scatter(true_ang*np.pi/180,true_rad, marker = 'x', s = 1000 ,c = 'red',lw = 2)
+    # Marker: First point
     ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'o', s = 300 ,c = 'black',lw = 2)
+    # Marker Last point
+    ax.scatter(ang[nrobs-1]*np.pi/180,rad[nrobs-1], marker = 'x', s = 1000 ,c = 'black',lw = 2)
+    # Plot: Interpolation, every tenth point
     ax.plot([ang[i]*np.pi/180 for i in range(1,nrobs,10)],[rad[i] for i in range(1,nrobs,10)],
                 c = 'grey')
-    ax.scatter(ang[nrobs-1]*np.pi/180,rad[nrobs-1], marker = 'x', s = 1000 ,c = 'black',lw = 2)
+
     ax.set_rmax(rad_max)
     ax.set_rmin(rad_min)
-
     ax.grid(True)
     ax.set_title('Polar plot of velocities', size = 20)
 

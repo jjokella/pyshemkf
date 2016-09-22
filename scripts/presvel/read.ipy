@@ -1,4 +1,4 @@
-# Read prescribed velocities
+# Read prescribed velocities in "prescribed_velocity_aft.txt"
 
 import os
 import matplotlib as mpl
