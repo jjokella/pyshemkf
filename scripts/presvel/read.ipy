@@ -9,9 +9,9 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'cube'
-nrens = 50
-dat = '2016_09_20'
-lets = ['b']#['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+nrens = 100
+dat = '2016_09_21'
+lets = ['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
