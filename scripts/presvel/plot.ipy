@@ -12,15 +12,15 @@ is_show = True
 is_save = True
 
 # General input
-model_name = 'cube'
-nrens = 100
-dat = '2016_09_21'
+model_name = 'alexdiff'
+nrens = 300
+dat = '2016_08_08'
 lets = ['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_09_20'
+truedat = '2016_08_08'
 truelet = 'a'
 num_locs = 16
 
@@ -51,6 +51,8 @@ for let in lets:
     # Load means------------------------------------------------------------------------
     mvxs = np.load('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let+'.npy')
     mvys = np.load('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let+'.npy')
+    vxs = np.load('output/presvel/npy/vxs_'+model_name+'_'+dat+'_'+let+'.npy')
+    vys = np.load('output/presvel/npy/vys_'+model_name+'_'+dat+'_'+let+'.npy')
     # Load standard deviations
     svxs = np.std(vxs,axis=1)
     svys = np.std(vys,axis=1)
