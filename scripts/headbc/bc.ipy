@@ -17,12 +17,12 @@ g   = 9.81                                  # Gravity [m/s2]
 mu  = 1.308*10**-3                          # Fluid Viscosity [kg/m*s]
 
 # Velocity
-v = np.array([1*10**-7,1*10**-7])          # Darcy velocity [m/s =m3/m2*s]
+v = np.array([-1*10**-5,1*10**-5])          # Darcy velocity [m/s =m3/m2*s]
 
 # Cell numbers and distances
-nx = 247
+nx = 20
 delx = [1 for i in range(nx)]             # [m]
-ny = 247
+ny = 10
 dely = [1 for i in range(ny)]             # [m]
 
 # Head in front, left corner
@@ -68,11 +68,11 @@ if hright[-1] != hback[-1]:
 # Output file
 f = open('/home/jk125262/PythonDir/scripts/headbc/headbc.txt','w')
 for i in range(1,nx+1):
-    f.write(str(i)+' 1 1 '+str(hfront[i-1])[:7]+'d0 0'+'\n')
+    f.write(str(i)+' 1 1 '+str(hfront[i-1])[:]+'d0 0'+'\n')
 for i in range(2,ny+1):
-    f.write('1 '+str(i)+' 1 '+str(hleft[i-1])[:7]+'d0 0'+'\n')
+    f.write('1 '+str(i)+' 1 '+str(hleft[i-1])[:]+'d0 0'+'\n')
 for i in range(2,nx+1):
-    f.write(str(i)+' '+str(ny)+' 1 '+str(hback[i-1])[:7]+'d0 0'+'\n')
+    f.write(str(i)+' '+str(ny)+' 1 '+str(hback[i-1])[:]+'d0 0'+'\n')
 for i in range(2,ny):
-    f.write(str(nx)+' '+str(i)+' 1 '+str(hright[i-1])[:7]+'d0 0'+'\n')
+    f.write(str(nx)+' '+str(i)+' 1 '+str(hright[i-1])[:]+'d0 0'+'\n')
 f.close()
