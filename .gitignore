@@ -9,5 +9,6 @@ output/presvel/png/
 output/sameseed/
 output/single_job/
 output/txt/
+output/forward/
 lib/
 notebook/
