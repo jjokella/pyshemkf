@@ -12,9 +12,9 @@ import pandas as pd
 
 
 
-fdir =os.environ['HOME']+'/shematOutputDir/alex_output/2016_03_14/2016_03_14_e/samples_output/'
-fname = 'ALEX_time_out_4.vtk'
-varname = 'temp'                            #'head','temp','kz'
+fdir =os.environ['HOME']+'/shematOutputDir/headbctest_output/2016_09_30/2016_09_30_e/samples_output/'
+fname = 'HEADBCTEST_TRUE_E0_time_out_4.vtk'
+varname = 'v'                            #'head','temp','kz'
 
 reader=vtk.vtkRectilinearGridReader() #Reader
 reader.SetFileName(fdir+fname)        #Filename
@@ -26,10 +26,29 @@ grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
 grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
 
 # Check if scalar variable is in vtk-file
-pf.is_scalar_var_in_file(fdir,fname,varname)
+if varname != 'v':
+    pf.is_scalar_var_in_file(fdir,fname,varname)
 
-vtk_array = reader.GetOutput().GetPointData().GetArray(0) # 0: Scalar
+vtk_array = reader.GetOutput().GetPointData().GetArray(0)
+grid_dims = reader.GetOutput().GetDimensions()
 
-print(vtk_array.GetValueRange())
+if varname == 'v':
+    print(vtk_array.GetValueRange(0))
+    print(vtk_array.GetValueRange(1))
+    print(vtk_array.GetValueRange(2))
+else:
+    print(vtk_array.GetValueRange())
+    
+#Convert to NumPy array
+numpy_array = vtk.util.numpy_support.vtk_to_numpy(vtk_array)
+
+#Array is given grid dimensions
+if varname == 'v':
+    numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0],3)
+else:
+    numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0])
 
 os.chdir(os.environ['HOME']+'/PythonDir')
+
+np.save('output/forward/npy/'+varname+'.npy',numpy_array)
+    

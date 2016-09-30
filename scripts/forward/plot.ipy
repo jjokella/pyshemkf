@@ -2,12 +2,31 @@
 
 import os
 import matplotlib as mpl
+from matplotlib import cm            # Colormap commands (cm.get_cmap())
 import numpy as np
 import exceptions
 from mypackage.plot import plotfunctions as pf
 from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
+from mypackage.plot import mycolors
 import pandas as pd
 
 
+# v = np.load('output/forward/npy/v.npy')
 
+# plt.imshow(np.transpose(v[::-1,:,0]),
+#                cmap=mycolors.cmap_discretize(cm.viridis,30),)
+#                # norm = colors.Normalize(vmin=0.9*10**-8,
+#                #                             vmax=1.1*10**-6,
+#                #                             clip=False),)
+
+h = np.load('output/forward/npy/head.npy')
+
+plt.imshow(h[::-1,::],
+               cmap=mycolors.cmap_discretize(cm.viridis,30),
+               interpolation='nearest')
+               # norm = colors.Normalize(vmin=0.9*10**-8,
+               #                             vmax=1.1*10**-6,
+               #                             clip=False),)
+
+plt.show()
