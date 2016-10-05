@@ -12,9 +12,9 @@ import pandas as pd
 
 
 
-fdir =os.environ['HOME']+'/shematOutputDir/headbctest_output/2016_09_30/2016_09_30_e/samples_output/'
+fdir =os.environ['HOME']+'/shematOutputDir/headbctest_output/2016_10_04/2016_10_04_c/samples_output/'
 fname = 'HEADBCTEST_TRUE_E0_time_out_4.vtk'
-varname = 'v'                            #'head','temp','kz'
+varname = 'v'                            #'head','temp','kz', 'v'
 
 reader=vtk.vtkRectilinearGridReader() #Reader
 reader.SetFileName(fdir+fname)        #Filename
@@ -45,6 +45,7 @@ numpy_array = vtk.util.numpy_support.vtk_to_numpy(vtk_array)
 #Array is given grid dimensions
 if varname == 'v':
     numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0],3)
+    numpy_array[:,:,2] = np.sqrt(numpy_array[:,:,0]**2+numpy_array[:,:,1]**2)
 else:
     numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0])
 
