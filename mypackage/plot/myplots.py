@@ -1537,7 +1537,7 @@ def pc_plot(num_timesteps,nrobs_int,mons_inds,
         #############################################################################
         #Checks
         for resid_dir in resid_dirs: # Does file exist? Is variables in file?
-            if not pltfct.is_scalar_var_in_file(resid_dir,input_file_name,var_name):
+            if not pltfct.is_var_in_file(resid_dir,input_file_name,var_name, only_scalar = 1):
                 raise exceptions.RuntimeError('var_name ' + var_name \
                     + 'not in input_file_name ' + input_file_name \
                     + 'in resid_dir' + resid_dir)

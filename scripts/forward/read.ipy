@@ -15,6 +15,8 @@ import pandas as pd
 fdir =os.environ['HOME']+'/shematOutputDir/headbctest_output/2016_10_04/2016_10_04_c/samples_output/'
 fname = 'HEADBCTEST_TRUE_E0_time_out_4.vtk'
 varname = 'v'                            #'head','temp','kz', 'v'
+# Check if scalar variable is in vtk-file
+pf.is_var_in_file(fdir,fname,varname)
 
 reader=vtk.vtkRectilinearGridReader() #Reader
 reader.SetFileName(fdir+fname)        #Filename
@@ -24,10 +26,6 @@ reader.Update()                       #Refresh
 # Grid properties
 grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
 grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
-
-# Check if scalar variable is in vtk-file
-if varname != 'v':
-    pf.is_scalar_var_in_file(fdir,fname,varname)
 
 vtk_array = reader.GetOutput().GetPointData().GetArray(0)
 grid_dims = reader.GetOutput().GetDimensions()

@@ -49,7 +49,7 @@ def my_vtk_to_numpy(fdir,fname,varname):
     grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
 
     # Check if scalar variable is in vtk-file
-    is_scalar_var_in_file(fdir,fname,varname)
+    is_var_in_file(fdir,fname,varname)
     #Reshape array to grid geometry
     if grid_bounds[0] == 0.0:   # CELLS
         vtk_array = reader.GetOutput().GetCellData().GetArray(0) # 0: Scalar 
@@ -294,10 +294,13 @@ def get_num_timesteps(fname, path, num_mons):
     n = len(arr)/num_mons -1
     return n
 
-def is_scalar_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 1):
+def is_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 1,
+                              only_scalar = 0, only_vector = 0):
     """
     Checks the existence of the file and whether var is a variable
     inside the file. Output: 1 if it is inside, 0 if it is not.
+    By default, exceptions are raised if the variable is not inside
+    the file.
     """
     os.chdir(path)
 
@@ -312,16 +315,37 @@ def is_scalar_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 
         else:
             return 0
         
-    # Check if variable is in file.
-    for line in f:
-        if line.find('SCALARS ' + var) > -1:
-            return 1
-        elif line.find('SCALARS  ' + var) > -1:
-            return 1
-        elif line.find('SCALARS   ' + var) > -1:
-            return 1
-        elif line.find('SCALARS    ' + var) > -1:
-            return 1
+    # Check if variable is SCALAR and in file.
+    if not only_vector:
+        for line in f:
+            if line.find('SCALARS ' + var) > -1:
+                f.close()
+                return 1
+            elif line.find('SCALARS  ' + var) > -1:
+                f.close()
+                return 1
+            elif line.find('SCALARS   ' + var) > -1:
+                f.close()
+                return 1
+            elif line.find('SCALARS    ' + var) > -1:
+                f.close()
+                return 1
+    f.seek(0)
+    # Check if variable is VECTOR and in file.
+    if not only_scalar:
+        for line in f:
+            if line.find('VECTORS ' + var) > -1:
+                f.close()
+                return 1
+            elif line.find('VECTORS  ' + var) > -1:
+                f.close()
+                return 1
+            elif line.find('VECTORS   ' + var) > -1:
+                f.close()
+                return 1
+            elif line.find('VECTORS    ' + var) > -1:
+                f.close()
+                return 1
     if raise_var_error:
         os.chdir(python_dir)
         raise exceptions.RuntimeError(var + ' not in ' + fname \
@@ -382,16 +406,16 @@ def m_input_check(nfiles,
     #Check scalar variable in file
     return_value = [0 for i in range(nfiles)]
     for i in range(nfiles):
-        if not (is_scalar_var_in_file(assim_variables_dir,
+        if not (is_var_in_file(assim_variables_dir,
                                       input_file_name_stems[i] + str(m_first).zfill(4) + '.vtk',
                                       varnames[i],
                                       raise_io_error = 0)
                 or
-                is_scalar_var_in_file(samples_out_dir,
+                is_var_in_file(samples_out_dir,
                                       input_file_name_stems[i] + str(m_first) + '.vtk',
                                       varnames[i],
                                       raise_io_error = 0)):
-            if not is_scalar_var_in_file(assim_variables_dir,
+            if not is_var_in_file(assim_variables_dir,
                                          input_file_name_stems[i] + 'param_' + str(m_first).zfill(4) + '.vtk',
                                          varnames[i],):
                 raise exceptions.RuntimeError('Variable  ' \
