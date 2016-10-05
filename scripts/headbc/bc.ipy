@@ -6,6 +6,7 @@ import numpy as np
 import exceptions
 from mypackage.plot import plotfunctions as pf
 from mypackage.plot import plotarrays as pa
+from mypackage.plot import grids 
 from mypackage.run import runmodule as rm
 import pandas as pd
 from matplotlib import colors	        # Normalize colors (colors.Normalize())
@@ -17,13 +18,13 @@ g   = 9.81                                  # Gravity [m/s2]
 mu  = 1.308*10**-3                          # Fluid Viscosity [kg/m*s]
 
 # Velocity
-v = np.array([-1*10**-5,1*10**-5])          # Darcy velocity [m/s =m3/m2*s]
+v = np.array([1*10**-5,1*10**-5])          # Darcy velocity [m/s =m3/m2*s]
 
 # Cell numbers and distances
-nx = 20
-delx = [1 for i in range(nx)]             # [m]
-ny = 10
-dely = [1 for i in range(ny)]             # [m]
+nx = 247
+delx = grids.delx('headbctest')
+ny = 247
+dely = grids.delx('headbctest')
 
 # Head in front, left corner
 h0 = 10                                   # [m]
@@ -76,3 +77,5 @@ for i in range(2,nx+1):
 for i in range(2,ny):
     f.write(str(nx)+' '+str(i)+' 1 '+str(hright[i-1])[:]+'d0 0'+'\n')
 f.close()
+
+
