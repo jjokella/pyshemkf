@@ -22,10 +22,10 @@ varname = 'v'                             #'head','v'
 v_component = 2                           #0,1,2
 pic_format = 'png'
 
-num_cbar = 15
+num_cbar = 5
 low_cbar = 1.414*10**-5
 high_cbar = 1.4144*10**-5
-auto_cbar = False
+auto_cbar = True
 
 # Read grid arrays from mypackage/plot/grids.py
 x = grids.x(model_name)
@@ -44,8 +44,9 @@ if auto_cbar:
     high_cbar = var.max()
 
 # Figure
-fig = plt.figure(1,figsize=[11,11])
+fig = plt.figure(1,figsize=[15,10])
 ax = fig.add_subplot(111)
+ax.set_position([0.1,0.05,0.6,0.9])
 im = mpl.image.NonUniformImage(ax,interpolation='nearest',
                                    cmap=mycolors.cmap_discretize(cm.viridis,num_cbar),
                                    norm = colors.Normalize(vmin=low_cbar,
@@ -72,8 +73,12 @@ ax.grid()
 ax.set_xlim(0.0,17.0)
 ax.set_ylim(0.0,17.0)
 
-# Legend
-ax.legend()
+# Colorbar
+cb_ax = fig.add_subplot(1,25,1)
+cb_ax.set_position([0.8,0.1,0.03,0.8])
+cb_ax.tick_params(labelsize = 20)
+cb_ax.set_title(varname, y =1.02)
+mpl.colorbar.Colorbar(cb_ax, im)
 
 # Save
 if is_save:

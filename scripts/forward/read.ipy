@@ -11,10 +11,14 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 
+model_name = 'headbctest'
+dat = '2016_10_05'
+let = 'b'
 
-fdir =os.environ['HOME']+'/shematOutputDir/headbctest_output/2016_10_04/2016_10_04_c/samples_output/'
-fname = 'HEADBCTEST_TRUE_E0_time_out_4.vtk'
-varname = 'v'                            #'head','temp','kz', 'v'
+fdir =os.environ['HOME']+'/shematOutputDir/'+\
+  model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
+fname = model_name.upper()+'_TRUE_E0_time_out_4.vtk'
+varname = 'head'                            #'head','temp','kz', 'v'
 # Check if scalar variable is in vtk-file
 pf.is_var_in_file(fdir,fname,varname)
 
