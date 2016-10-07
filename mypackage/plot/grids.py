@@ -70,6 +70,8 @@ def x(model_name):
                   11.58,12.08,12.58,13.08,         #0.5
                   13.83,14.83,15.83,16.83])        #1.0
 
+    elif model_name == 'prescribedhead':
+        arr = np.array([0.5+i*1.0 for i in range(31)])
     else:
         raise exceptions.RuntimeError('Model name not valid: '+model_name) 
     return arr
@@ -118,6 +120,8 @@ def y(model_name):
                   10.43,10.63,10.83,11.03,11.23,
                   11.58,12.08,12.58,13.08,
                   13.83,14.83,15.83,16.83])
+    elif model_name == 'prescribedhead':
+        arr = np.array([0.5+i*1.0 for i in range(31)])
     else:
         raise exceptions.RuntimeError('Model name not valid: '+model_name) 
     return arr
@@ -164,6 +168,8 @@ def xticks(model_name):
                   10.53,10.73,10.93,11.13, 11.33,
                   11.83,12.33,12.83,13.33,       
                   14.33,15.33,16.33,17.33])      
+    elif model_name == 'prescribedhead':
+        arr = np.array([0.0+i*1.0 for i in range(31)])
     else:
         raise exceptions.RuntimeError('Model name not valid: '+model_name)
     return arr
@@ -211,6 +217,8 @@ def yticks(model_name):
                   10.53,10.73,10.93,11.13, 11.33,
                   11.83,12.33,12.83,13.33,       
                   14.33,15.33,16.33,17.33])      
+    elif model_name == 'prescribedhead':
+        arr = np.array([0.0+i*1.0 for i in range(31)])
     else:
         raise exceptions.RuntimeError('Model name not valid: '+model_name)
     return arr
@@ -250,6 +258,8 @@ def delx(model_name):
                      0.5,0.5,0.5,0.5,
                      1.0,1.0,1.0,1.0])             # [m]
 
+    elif model_name == 'prescribedhead':
+        arr = np.array([1.0 for i in range(31)])
     else:
         raise exceptions.RuntimeError('Model name not valid: '+model_name) 
     return arr
@@ -289,6 +299,8 @@ def dely(model_name):
                      0.5,0.5,0.5,0.5,
                      1.0,1.0,1.0,1.0])             # [m]
 
+    elif model_name == 'prescribedhead':
+        arr = np.array([1.0 for i in range(31)])
     else:
         raise exceptions.RuntimeError('Model name not valid: '+model_name) 
     return arr
