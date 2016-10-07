@@ -13,12 +13,12 @@ import pandas as pd
 
 model_name = 'prescribedhead'
 dat = '2016_10_07'
-let = 'c'
+let = 'a'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
-fname = model_name.upper()+'_TRUE_E0_time_out_4.vtk'
-varname = 'head'                            #'head','temp','kz', 'v'
+fname = model_name.upper()+'_TRUE_E0_1.vtk'
+varname = 'temp'                            #'head','temp','kz', 'v'
 # Check if scalar variable is in vtk-file
 pf.is_var_in_file(fdir,fname,varname)
 

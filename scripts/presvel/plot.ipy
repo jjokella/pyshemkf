@@ -12,17 +12,17 @@ is_show = True
 is_save = True
 
 # General input
-model_name = 'alexdiff'
-nrens = 300
-dat = '2016_08_08'
-lets = ['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+model_name = 'prescribedhead'
+nrens = 50
+dat = '2016_10_07'
+lets = ['b']#,'c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_08_08'
+truedat = '2016_10_07'
 truelet = 'a'
-num_locs = 16
+num_locs = 4
 
 rad_min = 0.0
 rad_max = 1.0*10**-6
@@ -33,7 +33,7 @@ true_vs = [-2.7*10**-7,0.0]
 true_ang = 180
 true_rad = 2.7*10**-7
 
-num_pres_vel = 2                          #1 or 2
+num_pres_vel = 1                          #1 or 2
 
 pic_format = 'png'                         #'eps' and 'png'
 

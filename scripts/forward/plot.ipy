@@ -18,7 +18,7 @@ is_show = True
 is_save = True
 
 model_name = 'prescribedhead'
-varname = 'head'                             #'head','v'
+varname = 'temp'                             #'head','v'
 v_component = 2                           #0,1,2
 pic_format = 'png'
 
