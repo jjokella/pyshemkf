@@ -17,14 +17,14 @@ import pandas as pd
 is_show = True
 is_save = True
 
-model_name = 'headbctest'
-varname = 'v'                             #'head','v'
+model_name = 'prescribedhead'
+varname = 'head'                             #'head','v'
 v_component = 2                           #0,1,2
 pic_format = 'png'
 
-num_cbar = 5
-low_cbar = 1.414*10**-5
-high_cbar = 1.4144*10**-5
+num_cbar = 200
+low_cbar = 1.41*10**-7
+high_cbar = 1.42*10**-7
 auto_cbar = True
 
 xlims = [0.0,31.0]

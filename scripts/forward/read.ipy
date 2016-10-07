@@ -11,9 +11,9 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 
-model_name = 'headbctest'
-dat = '2016_10_05'
-let = 'b'
+model_name = 'prescribedhead'
+dat = '2016_10_07'
+let = 'c'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
