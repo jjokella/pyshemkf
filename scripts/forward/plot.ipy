@@ -27,6 +27,9 @@ low_cbar = 1.414*10**-5
 high_cbar = 1.4144*10**-5
 auto_cbar = True
 
+xlims = [0.0,31.0]
+ylims = [0.0,31.0]
+
 # Read grid arrays from mypackage/plot/grids.py
 x = grids.x(model_name)
 y = grids.y(model_name)
@@ -56,10 +59,6 @@ im.set_data(x,y,var)
 ax.images.append(im)
 
 # Ticks
-xticks = np.append(np.linspace(0,9,10),np.linspace(8.1,8.1,0))
-xticks = np.append(xticks,np.linspace(10,17,8))
-yticks = np.append(np.linspace(0,9,10),np.linspace(8.1,8.1,0))
-yticks = np.append(yticks,np.linspace(10,17,8))
 ax.xaxis.set_ticks(xticks)
 ax.yaxis.set_ticks(yticks)
 
@@ -70,8 +69,8 @@ ax.grid()
 # ax.set_title('Temperature field')
 
 # Axis Limits
-ax.set_xlim(0.0,17.0)
-ax.set_ylim(0.0,17.0)
+ax.set_xlim(xlims[0],xlims[1])
+ax.set_ylim(ylims[0],ylims[1])
 
 # Colorbar
 cb_ax = fig.add_subplot(1,25,1)
