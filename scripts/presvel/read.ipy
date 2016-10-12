@@ -10,13 +10,13 @@ import pandas as pd
 
 model_name = 'prescribedhead'
 nrens = 50
-dat = '2016_10_07'
-lets = ['b']#,'c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_10_12'
+lets = ['c']#,'c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
 
-num_pres_vel = 1                          #1 or 2
+num_pres_vel = 2                          #1 or 2
 
 
 for let in lets:
