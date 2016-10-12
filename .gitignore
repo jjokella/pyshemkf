@@ -6,6 +6,7 @@ output/now/
 output/numcomp/
 output/presvel/eps/
 output/presvel/png/
+output/presvel/npy/
 output/sameseed/
 output/single_job/
 output/txt/
