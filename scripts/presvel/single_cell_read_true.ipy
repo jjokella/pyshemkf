@@ -11,14 +11,14 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'prescribedhead'
+model_name = 'alexdiff'
 dat = '2016_10_12'
 let_true = 'a'
 output_dir = 'samples_output'
 
 obs_num = 9 # Column Number in observations file
 
-num_mons = 4
+num_mons = 16
 
 os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + dat + "/" \
              + dat + "_" + let_true + "/" + output_dir)
