@@ -11,14 +11,14 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 
-model_name = 'prescribedhead'
+model_name = 'alexdiff'
 dat = '2016_10_13'
 let = 'a'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
-fname = model_name.upper()+'_TRUE_E0_time_out_1.vtk'
-varnames = ['temp','head','v']                             #'head','temp','kz', 'v'
+fname = model_name.upper()+'_TRUE_E0_time_out_0018.vtk'
+varnames = ['temp','head']                             #'head','temp','kz', 'v'
 
 for varname in varnames:
 
