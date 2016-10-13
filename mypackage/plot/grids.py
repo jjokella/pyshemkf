@@ -31,7 +31,7 @@ def x(model_name):
     Read model name and return the corresponding
     array of x-coordinates of cell centers.
     """
-    if model_name == 'headbctest':
+    if model_name == 'headbctest' or model_name == 'alexdiff':
         arr = np.array([0.5,1.5,2.5,3.5,            #1.0
                   4.25,4.75,5.25,5.75,    #0.5
                   6.1,6.3,6.5,6.7,6.9,    #0.2
@@ -82,7 +82,7 @@ def y(model_name):
     Read model name and return the corresponding
     array of y-coordinates of cell centers.
     """
-    if model_name == 'headbctest':
+    if model_name == 'headbctest' or model_name == 'alexdiff':
         arr = np.array([0.5,1.5,2.5,3.5,
                   4.25,4.75,5.25,5.75,
                   6.1,6.3,6.5,6.7,6.9,
@@ -131,7 +131,7 @@ def xticks(model_name):
     Read model name and return the corresponding
     array of x-coordinates of left side of cells.
     """
-    if model_name == 'headbctest':
+    if model_name == 'headbctest' or model_name == 'alexdiff':
         arr = np.array([0.0,1.0,2.0,3.0,4.0,        
                   4.5,5.0,5.5,6.0,   
                   6.2,6.4,6.6,6.8,7.0,   
@@ -180,7 +180,7 @@ def yticks(model_name):
     array of y-coordinates of front side of cells.
     """
 
-    if model_name == 'headbctest':
+    if model_name == 'headbctest' or model_name == 'alexdiff':
         arr = np.array([0.0,1.0,2.0,3.0,4.0,        
                   4.5,5.0,5.5,6.0,   
                   6.2,6.4,6.6,6.8,7.0,   
@@ -228,7 +228,7 @@ def delx(model_name):
     Read model name and return the corresponding
     array of cell lengths in x-direction.
     """
-    if model_name == 'headbctest':
+    if model_name == 'headbctest' or model_name == 'alexdiff':
         arr = np.array([1.0,1.0,1.0,1.0,
                      0.5,0.5,0.5,0.5,
                      0.2,0.2,0.2,0.2,0.2,
@@ -269,7 +269,7 @@ def dely(model_name):
     Read model name and return the corresponding
     array of cell lengths in y-direction.
     """
-    if model_name == 'headbctest':
+    if model_name == 'headbctest' or model_name == 'alexdiff':
         arr = np.array([1.0,1.0,1.0,1.0,
                      0.5,0.5,0.5,0.5,
                      0.2,0.2,0.2,0.2,0.2,
