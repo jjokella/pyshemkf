@@ -18,8 +18,8 @@ is_show = True
 is_save = True
 
 model_name = 'prescribedhead'
-varname = 'temp'                             #'head','v'
-v_component = 2                           #0,1,2
+varname = 'head'                             #'head','v','temp','kz'
+v_component = 1                           #0,1,2
 pic_format = 'png'
 
 num_cbar = 200
@@ -29,6 +29,8 @@ auto_cbar = True
 
 xlims = [0.0,31.0]
 ylims = [0.0,31.0]
+
+is_grid = False
 
 # Read grid arrays from mypackage/plot/grids.py
 x = grids.x(model_name)
@@ -59,11 +61,12 @@ im.set_data(x,y,var)
 ax.images.append(im)
 
 # Ticks
-ax.xaxis.set_ticks(xticks)
-ax.yaxis.set_ticks(yticks)
+ax.xaxis.set_ticks(xticks[1::10])
+ax.yaxis.set_ticks(yticks[1::10])
 
 # Grid
-ax.grid()
+if is_grid:
+    ax.grid()
 
 # Title
 # ax.set_title('Temperature field')

@@ -12,46 +12,49 @@ import pandas as pd
 
 
 model_name = 'prescribedhead'
-dat = '2016_10_07'
+dat = '2016_10_13'
 let = 'a'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
-fname = model_name.upper()+'_TRUE_E0_1.vtk'
-varname = 'temp'                            #'head','temp','kz', 'v'
-# Check if scalar variable is in vtk-file
-pf.is_var_in_file(fdir,fname,varname)
+fname = model_name.upper()+'_TRUE_E0_time_out_1.vtk'
+varnames = ['temp','head','v']                             #'head','temp','kz', 'v'
 
-reader=vtk.vtkRectilinearGridReader() #Reader
-reader.SetFileName(fdir+fname)        #Filename
-reader.SetScalarsName(varname)        #Variable name
-reader.Update()                       #Refresh
+for varname in varnames:
 
-# Grid properties
-grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
-grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
-
-vtk_array = reader.GetOutput().GetPointData().GetArray(0)
-grid_dims = reader.GetOutput().GetDimensions()
-
-if varname == 'v':
-    print(vtk_array.GetValueRange(0))
-    print(vtk_array.GetValueRange(1))
-    print(vtk_array.GetValueRange(2))
-else:
-    print(vtk_array.GetValueRange())
+    # Check if scalar variable is in vtk-file
+    pf.is_var_in_file(fdir,fname,varname)
     
-#Convert to NumPy array
-numpy_array = vtk.util.numpy_support.vtk_to_numpy(vtk_array)
+    reader=vtk.vtkRectilinearGridReader() #Reader
+    reader.SetFileName(fdir+fname)        #Filename
+    reader.SetScalarsName(varname)        #Variable name
+    reader.Update()                       #Refresh
 
-#Array is given grid dimensions
-if varname == 'v':
-    numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0],3)
-    numpy_array[:,:,2] = np.sqrt(numpy_array[:,:,0]**2+numpy_array[:,:,1]**2)
-else:
-    numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0])
+    # Grid properties
+    grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
+    grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
 
-os.chdir(os.environ['HOME']+'/PythonDir')
+    vtk_array = reader.GetOutput().GetPointData().GetArray(0)
+    grid_dims = reader.GetOutput().GetDimensions()
 
-np.save('output/forward/npy/'+varname+'.npy',numpy_array)
-    
+    if varname == 'v':
+        print(vtk_array.GetValueRange(0))
+        print(vtk_array.GetValueRange(1))
+        print(vtk_array.GetValueRange(2))
+    else:
+        print(vtk_array.GetValueRange())
+
+    #Convert to NumPy array
+    numpy_array = vtk.util.numpy_support.vtk_to_numpy(vtk_array)
+
+    #Array is given grid dimensions
+    if varname == 'v':
+        numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0],3)
+        numpy_array[:,:,2] = np.sqrt(numpy_array[:,:,0]**2+numpy_array[:,:,1]**2)
+    else:
+        numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0])
+
+    os.chdir(os.environ['HOME']+'/PythonDir')
+
+    np.save('output/forward/npy/'+varname+'.npy',numpy_array)
+
