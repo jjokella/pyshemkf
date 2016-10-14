@@ -18,19 +18,19 @@ is_show = True
 is_save = True
 
 model_name = 'alexdiff'
-varname = 'temp'                             #'head','v','temp','kz'
+varname = 'head'                             #'head','v','temp','kz'
 v_component = 1                           #0,1,2
 pic_format = 'png'
 
-num_cbar = 200
-low_cbar = 1.41*10**-7
-high_cbar = 1.42*10**-7
+num_cbar = 500
+low_cbar =  10.00285
+high_cbar = 10.00305
 auto_cbar = True
 
-xlims = [0.0,17.0]
-ylims = [0.0,17.0]
+xlims = [0.0,17.5]
+ylims = [0.0,17.5]
 
-is_grid = False
+is_grid = True
 
 # Read grid arrays from mypackage/plot/grids.py
 x = grids.x(model_name)
@@ -61,8 +61,8 @@ im.set_data(x,y,var)
 ax.images.append(im)
 
 # Ticks
-ax.xaxis.set_ticks(xticks[1::10])
-ax.yaxis.set_ticks(yticks[1::10])
+ax.xaxis.set_ticks(xticks[1::1])
+ax.yaxis.set_ticks(yticks[1::1])
 
 # Grid
 if is_grid:

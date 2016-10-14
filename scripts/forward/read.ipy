@@ -17,7 +17,7 @@ let = 'a'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
-fname = model_name.upper()+'_TRUE_E0_time_out_0018.vtk'
+fname = model_name.upper()+'_TRUE_E0_time_out_0001.vtk'
 varnames = ['temp','head']                             #'head','temp','kz', 'v'
 
 for varname in varnames:
