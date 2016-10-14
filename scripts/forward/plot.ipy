@@ -22,15 +22,15 @@ varname = 'head'                             #'head','v','temp','kz'
 v_component = 1                           #0,1,2
 pic_format = 'png'
 
-num_cbar = 500
-low_cbar =  10.00285
-high_cbar = 10.00305
-auto_cbar = True
+num_cbar = 20
+low_cbar =  10.0285
+high_cbar = 10.0304
+auto_cbar = False
 
 xlims = [0.0,17.5]
 ylims = [0.0,17.5]
 
-is_grid = True
+is_grid = False
 
 # Read grid arrays from mypackage/plot/grids.py
 x = grids.x(model_name)
@@ -61,8 +61,8 @@ im.set_data(x,y,var)
 ax.images.append(im)
 
 # Ticks
-ax.xaxis.set_ticks(xticks[1::1])
-ax.yaxis.set_ticks(yticks[1::1])
+ax.xaxis.set_ticks(xticks[1::10])
+ax.yaxis.set_ticks(yticks[1::10])
 
 # Grid
 if is_grid:
