@@ -12,19 +12,19 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 # Input file specification
-model_name = 'prescribedhead'
+model_name = 'alexdiff'
 dat = '2016_10_14'
-let = 'a'                                 #'b', 'f'
-locs = [[10,16,1]]#[[125,147,1],[108,140,1],[101,123,1],[108,106,1],
-            # [125, 99,1],[142,106,1],[149,123,1],[142,140,1],
-            # [125,137,1],[115,133,1],[111,123,1],[115,113,1],
-            # [125,108,1],[135,113,1],[139,123,1],[135,133,1]]               
+let = 'b'                                 #'b', 'f'
+locs = [[125,147,1],[108,140,1],[101,123,1],[108,106,1],
+            [125, 99,1],[142,106,1],[149,123,1],[142,140,1],
+            [125,137,1],[115,133,1],[111,123,1],[115,113,1],
+            [125,108,1],[135,113,1],[139,123,1],[135,133,1]]               
 variable = 2                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
 
 # Different numbers
-num_assim = 34
+num_assim = 300
 num_locs = len(locs)
-nrens = 30
+nrens = 100
 
 
 # Temperature array dimensions

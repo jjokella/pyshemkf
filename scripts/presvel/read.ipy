@@ -10,7 +10,7 @@ import pandas as pd
 
 model_name = 'alexdiff'
 nrens = 100
-dat = '2016_10_13'
+dat = '2016_10_14'
 lets = ['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']

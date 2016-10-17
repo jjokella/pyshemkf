@@ -16,9 +16,9 @@ is_save = True
 
 # Input array specification
 model_name = 'alexdiff'
-dat = '2016_08_08'
-let = 'c'                                 #'b', 'f'
-truedat = '2016_08_08'
+dat = '2016_10_14'
+let = 'b'                                 #'b', 'f'
+truedat = '2016_10_14'
 truelet = 'a'
 num_locs = 16
 

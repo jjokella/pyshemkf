@@ -14,13 +14,13 @@ is_save = True
 # General input
 model_name = 'alexdiff'
 nrens = 100
-dat = '2016_10_13'
-lets = ['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_10_14'
+lets = ['e']#,'c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_10_13'
+truedat = '2016_10_14'
 truelet = 'a'
 num_locs = 16
 
