@@ -15,10 +15,10 @@ is_show = True
 is_save = True
 
 # Input array specification
-model_name = 'alexdiff'
-dat = '2016_10_14'
+model_name = 'alexdiffbig'
+dat = '2016_10_17'
 let = 'b'                                 #'b', 'f'
-truedat = '2016_10_14'
+truedat = '2016_10_17'
 truelet = 'a'
 num_locs = 16
 
