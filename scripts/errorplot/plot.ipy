@@ -187,7 +187,7 @@ for ienssize,ensemble_size in enumerate(which_enssize):
         if iplot == range(num_methods)[-1]:
             plt.text(x[iplot]+0.5,
                          endres_plot[iplot]-0.005 if ensemble_size == 2000 else endres_plot[iplot],
-                         'N = '+str(ensemble_size),
+                         r'$n_{e}$ = '+str(ensemble_size),
                          verticalalignment='center',
                          horizontalalignment='left',
                          size = 20)
