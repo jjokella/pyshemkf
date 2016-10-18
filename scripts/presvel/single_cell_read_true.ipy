@@ -11,8 +11,8 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'alexdiff'
-dat = '2016_10_14'
+model_name = 'alexdifflate'
+dat = '2016_10_17'
 let_true = 'a'
 output_dir = 'samples_output'
 
