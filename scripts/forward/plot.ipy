@@ -17,15 +17,15 @@ import pandas as pd
 is_show = True
 is_save = True
 
-model_name = 'alexdiff'
-varname = 'head'                             #'head','v','temp','kz'
+model_name = 'alexdiffbig'
+varname = 'temp'                             #'head','v','temp','kz'
 v_component = 1                           #0,1,2
 pic_format = 'png'
 
 num_cbar = 20
 low_cbar =  10.0285
 high_cbar = 10.0304
-auto_cbar = False
+auto_cbar = True
 
 xlims = [0.0,17.5]
 ylims = [0.0,17.5]

@@ -14,20 +14,20 @@ is_save = True
 # General input
 model_name = 'alexdiffbig'
 nrens = 250
-dat = '2016_10_17'
-lets = ['b','c','d']#,'e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_10_18'
+lets = ['h']#['b','c','d','e','f','g','h','i','j']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_10_17'
+truedat = '2016_10_18'
 truelet = 'a'
 num_locs = 16
 
 rad_min = 0.0
 rad_max = 1.0*10**-6
 
-nrobs = 300
+nrobs = 100
 
 true_vs = [-2.7*10**-7,0.0*10**-7]
 true_ang = 180

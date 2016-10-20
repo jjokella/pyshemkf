@@ -13,8 +13,8 @@ import pandas as pd
 
 # Input file specification
 model_name = 'alexdiffbig'
-dat = '2016_10_17'
-let = 'b'                                 #'b', 'f'
+dat = '2016_10_18'
+let = 'h'                                 #'b', 'f'
 locs = [[125,147,1],[108,140,1],[101,123,1],[108,106,1],
             [125, 99,1],[142,106,1],[149,123,1],[142,140,1],
             [125,137,1],[115,133,1],[111,123,1],[115,113,1],
@@ -22,7 +22,7 @@ locs = [[125,147,1],[108,140,1],[101,123,1],[108,106,1],
 variable = 2                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
 
 # Different numbers
-num_assim = 300
+num_assim = 100
 num_locs = len(locs)
 nrens = 250
 

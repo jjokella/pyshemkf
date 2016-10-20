@@ -16,18 +16,19 @@ is_save = True
 
 # Input array specification
 model_name = 'alexdiffbig'
-dat = '2016_10_17'
-let = 'b'                                 #'b', 'f'
-truedat = '2016_10_17'
+dat = '2016_10_18'
+let = 'h'                                 #'b', 'f'
+truedat = '2016_10_18'
 truelet = 'a'
 num_locs = 16
+nm = 5 # Every nmth time step is a measurement
 
 pic_format = 'png'
 pic_names = ['single_cell_mean_'+dat+'_'+let,'single_cell_diff_'+dat+'_'+let]
 
 # Observation points and pairs of observations points for differences
 points = [0,1,2,3,4,5,6,7,8]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
-pairs = [[0,4],[1,5],[2,6],[3,7]]#[[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[2,6],[3,7]]
+pairs = [[0,4],[1,5],[2,6],[3,7]]#,[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[2,6],[3,7]]
 #[[0,4],[1,5],[2,6],[3,7]]
 #[[8,12],[9,13],[10,14],[11,15]]
 
@@ -51,7 +52,7 @@ t = np.load('output/presvel/npy/'
 # Plot mean values over all 16 measurement locations
 plt.figure(1,[20,10], facecolor = 'white')
 plt.title('Mean temperatures at observation points', size = 20)
-[plt.semilogx(t[1:,0],np.mean(temp,axis=1)[:,i], 'o', markersize = 5, label = i+1,c=coleros[ip])
+[plt.semilogx(t[1::nm,0],np.mean(temp,axis=1)[:,i], 'o', markersize = 5, label = i+1,c=coleros[ip])
      for ip,i in enumerate(points)]
 [plt.semilogx(t[:,0],truetemp[:,i], '--', markersize = 5, label = i+1,c=coleros[ip])
      for ip,i in enumerate(points)]
@@ -75,7 +76,7 @@ else:
 # Plot mean differences over all 16 measurement locations
 plt.figure(1,[20,10], facecolor = 'white')
 plt.title('Difference of temperatures at certain observation points', size = 20)
-[plt.semilogx(t[1:,0],np.mean(temp,axis=1)[:,pair[0]]-np.mean(temp,axis=1)[:,pair[1]],
+[plt.semilogx(t[1::nm,0],np.mean(temp,axis=1)[:,pair[0]]-np.mean(temp,axis=1)[:,pair[1]],
               'o', markersize = 5, label = [pair[0]+1,pair[1]+1],
                   c = coleros[i])
     for i,pair in enumerate(pairs)]
