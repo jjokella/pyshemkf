@@ -1,0 +1,51 @@
+# Plot the true curves
+
+
+import os
+import matplotlib as mpl
+import numpy as np
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from matplotlib import cm		# Colormap commands (cm.get_cmap())
+from matplotlib import colors	        # Normalize colors (colors.Normalize())
+from mypackage.plot import mycolors
+from mypackage.run import runmodule as rm
+import pandas as pd
+
+model_name = 'alexdiffshift'
+dat = '2016_10_20'
+let_true = 'a'
+num_mons = 16
+
+t = np.load('output/presvel/npy/truet_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy')
+temp = np.load('output/presvel/npy/truetemp_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy')
+
+labels = {0:'onn',
+              1:'onw',
+              2:'oww',
+              3:'osw',
+              4:'oss',
+              5:'ose',
+              6:'oee',
+              7:'one',
+              8:'inn',
+              9:'inw',
+              10:'iww',
+              11:'isw',
+              12:'iss',
+              13:'ise',
+              14:'iee',
+              15:'ine'}
+
+plt.semilogx(t[:,0],temp[:,0]-temp[:,2],label = labels[0])
+plt.semilogx(t[:,0],temp[:,1]-temp[:,2],label = labels[1])
+plt.semilogx(t[:,0],temp[:,2]-temp[:,2],label = labels[2])
+plt.semilogx(t[:,0],temp[:,3]-temp[:,2],label = labels[3])
+plt.semilogx(t[:,0],temp[:,4]-temp[:,2],label = labels[4])
+plt.semilogx(t[:,0],temp[:,5]-temp[:,2],label = labels[5])
+plt.semilogx(t[:,0],temp[:,6]-temp[:,2],label = labels[6])
+plt.semilogx(t[:,0],temp[:,7]-temp[:,2],label = labels[7])
+
+plt.legend()
+
+plt.show()
