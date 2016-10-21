@@ -27,10 +27,10 @@ low_cbar =  10.0285
 high_cbar = 10.0304
 auto_cbar = True
 
-xlims = [0.0,17.5]
-ylims = [0.0,17.5]
+xlims = [8.0,9.0]
+ylims = [8.0,9.0]
 
-is_grid = False
+is_grid = True
 
 # Read grid arrays from mypackage/plot/grids.py
 x = grids.x(model_name)
@@ -61,8 +61,8 @@ im.set_data(x,y,var)
 ax.images.append(im)
 
 # Ticks
-ax.xaxis.set_ticks(xticks[1::10])
-ax.yaxis.set_ticks(yticks[1::10])
+ax.xaxis.set_ticks(xticks[1::])
+ax.yaxis.set_ticks(yticks[1::])
 
 # Grid
 if is_grid:
