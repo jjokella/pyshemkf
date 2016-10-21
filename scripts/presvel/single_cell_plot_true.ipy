@@ -37,14 +37,12 @@ labels = {0:'onn',
               14:'iee',
               15:'ine'}
 
-plt.semilogx(t[:,0],temp[:,0]-temp[:,2],label = labels[0])
-plt.semilogx(t[:,0],temp[:,1]-temp[:,2],label = labels[1])
-plt.semilogx(t[:,0],temp[:,2]-temp[:,2],label = labels[2])
-plt.semilogx(t[:,0],temp[:,3]-temp[:,2],label = labels[3])
-plt.semilogx(t[:,0],temp[:,4]-temp[:,2],label = labels[4])
-plt.semilogx(t[:,0],temp[:,5]-temp[:,2],label = labels[5])
-plt.semilogx(t[:,0],temp[:,6]-temp[:,2],label = labels[6])
-plt.semilogx(t[:,0],temp[:,7]-temp[:,2],label = labels[7])
+mons_to_show = range(0,8,1)
+
+
+for i in mons_to_show:
+    # plt.plot(t[:,0],temp[:,i],label = labels[i])
+    plt.semilogx(t[:,0],temp[:,i]-temp[:,2],label = labels[i])
 
 plt.legend()
 
