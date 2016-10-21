@@ -12,9 +12,9 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'alexdiffshift'
+model_name = 'cubey'
 dat = '2016_10_21'
-let_true = 'a'
+let_true = 'd'
 num_mons = 16
 
 t = np.load('output/presvel/npy/truet_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy')
@@ -41,7 +41,7 @@ mons_to_show = range(0,8,1)
 
 
 for i in mons_to_show:
-    # plt.plot(t[:,0],temp[:,i],label = labels[i])
+    # plt.semilogx(t[:,0],temp[:,i],label = labels[i])
     plt.semilogx(t[:,0],temp[:,i]-temp[:,2],label = labels[i])
 
 plt.legend()

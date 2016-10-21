@@ -11,9 +11,9 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'alexdiffshift'
+model_name = 'cubey'
 dat = '2016_10_21'
-let_true = 'a'
+let_true = 'd'
 output_dir = 'samples_output'
 
 obs_num = 9 # Column Number in observations file
