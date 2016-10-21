@@ -12,7 +12,7 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'alexdiffshift'
-dat = '2016_10_20'
+dat = '2016_10_21'
 let_true = 'a'
 output_dir = 'samples_output'
 
