@@ -15,13 +15,14 @@ is_show = True
 is_save = True
 
 # Input array specification
-model_name = 'alexdiffbig'
-dat = '2016_10_18'
-let = 'h'                                 #'b', 'f'
-truedat = '2016_10_18'
+model_name = 'alexdiffshift'
+dat = '2016_10_21'
+let = 'b'                                 #'b', 'f'
+truedat = '2016_10_21'
 truelet = 'a'
 num_locs = 16
-nm = 5 # Every nmth time step is a measurement
+nrobs_int = 150
+nm = 3 # Every nmth time step is a measurement
 
 pic_format = 'png'
 pic_names = ['single_cell_mean_'+dat+'_'+let,'single_cell_diff_'+dat+'_'+let]
