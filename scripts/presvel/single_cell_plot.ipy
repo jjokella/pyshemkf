@@ -16,9 +16,9 @@ is_save = True
 
 # Input array specification
 model_name = 'alexdiffshift'
-dat = '2016_10_21'
-let = 'b'                                 #'b', 'f'
-truedat = '2016_10_21'
+dat = '2016_10_27'
+let = 'f'                                 #'b', 'f'
+truedat = '2016_10_27'
 truelet = 'a'
 num_locs = 16
 nrobs_int = 150

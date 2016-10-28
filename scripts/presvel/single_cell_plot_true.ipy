@@ -13,7 +13,7 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'alexdiffshift'
-dat = '2016_10_21'
+dat = '2016_10_27'
 let_true = 'a'
 num_mons = 16
 
@@ -42,7 +42,7 @@ mons_to_show = range(0,4,1)
 
 for i in mons_to_show:
     # plt.semilogx(t[:,0],temp[:,i],label = labels[i])
-    plt.semilogx(t[:,0],temp[:,i+4]-temp[:,i],label = labels[i])
+    plt.semilogx(t[:,0],-temp[:,i+4]+temp[:,i],label = labels[i])
 
 plt.legend()
 
