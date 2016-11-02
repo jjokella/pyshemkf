@@ -13,7 +13,7 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'alexdiffshift'
-dat = '2016_10_27'
+dat = '2016_10_31'
 let_true = 'a'
 num_mons = 16
 
