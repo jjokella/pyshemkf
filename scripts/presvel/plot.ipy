@@ -14,20 +14,20 @@ is_save = True
 # General input
 model_name = 'alexdiffshift'
 nrens = 250
-dat = '2016_10_27'
-lets = ['f']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_11_03'
+lets = ['ab','ac','ad','ae','af','ag','ah','ai']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_10_27'
+truedat = '2016_10_31'
 truelet = 'a'
 num_locs = 16
 
 rad_min = 0.0
 rad_max = 2.0*10**-6
 
-nrobs = 150
+nrobs = 700
 
 true_vs = [-1.0*10**-6,0.0*10**-7]
 true_ang = 180
@@ -36,6 +36,8 @@ true_rad = 1.0*10**-6
 num_pres_vel = 2                          #1 or 2
 
 pic_format = 'png'                         #'eps' and 'png'
+
+nm = 1
 
 # Time array
 t = np.load('output/presvel/npy/'

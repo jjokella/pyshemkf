@@ -9,9 +9,9 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'alexdiffshift'
-nrens = 500
-dat = '2016_10_31'
-lets = ['b','d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+nrens = 250
+dat = '2016_11_03'
+lets = ['ab','ac','ad','ae','af','ag','ah','ai']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
