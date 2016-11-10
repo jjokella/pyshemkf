@@ -18,11 +18,11 @@ is_show = True
 is_save = True
 
 model_name = 'cubey'
-varname = 'temp'                             #'head','v','temp','kz'
+varname = 'head'                             #'head','v','temp','kz'
 v_component = 1                           #0,1,2
 pic_format = 'png'
 
-num_cbar = 100
+num_cbar = 10
 low_cbar =  10.0285
 high_cbar = 10.0304
 auto_cbar = True

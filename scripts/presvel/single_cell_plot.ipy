@@ -15,13 +15,13 @@ is_show = True
 is_save = True
 
 # Input array specification
-model_name = 'alexdiffshift'
-dat = '2016_11_03'
-let = 'h'                                 #'b', 'f'
-truedat = '2016_10_31'
+model_name = 'cubey'
+dat = '2016_11_10'
+let = 'b'                                 #'b', 'f'
+truedat = '2016_11_10'
 truelet = 'a'
 num_locs = 16
-nrobs_int = 700
+nrobs_int = 190
 nm = 1 # Every nmth time step is a measurement
 
 pic_format = 'png'

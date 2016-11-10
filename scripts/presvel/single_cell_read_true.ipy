@@ -12,8 +12,8 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'cubey'
-dat = '2016_11_04'
-let_true = 'b'
+dat = '2016_11_10'
+let_true = 'a'
 output_dir = 'samples_output'
 
 obs_num = 9 # Column Number in observations file

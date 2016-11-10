@@ -13,8 +13,8 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'cubey'
-dat = '2016_11_04'
-let_true = 'b'
+dat = '2016_11_09'
+let_true = 'a'
 num_mons = 16
 
 t = np.load('output/presvel/npy/truet_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy')
@@ -37,13 +37,17 @@ labels = {0:'onn',
               14:'iee',
               15:'ine'}
 
-mons_to_show = [0,2,4,6,8,10,12,14]#range(0,16,1)
+mons_to_show = [0,1,2,3]#range(0,16,1)
 
 
-for i in mons_to_show:
-    plt.semilogx(t[:,0],temp[:,i],'o',label = labels[i])
-    # plt.semilogx(t[:,0],-temp[:,i+4]+temp[:,i],label = labels[i])
-
+# for i in mons_to_show:
+    # plt.semilogx(t[:,0],temp[:,i],'o',label = labels[i])
+    # plt.semilogx(t[:,0],-temp[:,i+4]+temp[:,i],'o',label = labels[i])
+plt.semilogx(t[:,0],-temp[:,1+4]+temp[:,1],'o',label = labels[1])
+plt.semilogx(t[:,0],-temp[:,2+4]+temp[:,2],'o',label = labels[2])
+plt.semilogx(t[:,0],-temp[:,3+4]+temp[:,3],'o',label = labels[3])
+plt.semilogx(t[:,0],-temp[:,4-4]+temp[:,4],'o',label = labels[4])
+    
 plt.legend()
 
 plt.show()

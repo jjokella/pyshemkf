@@ -12,19 +12,19 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 # Input file specification
-model_name = 'alexdiffshift'
-dat = '2016_11_03'
-let = 'h'                                 #'b', 'f'
-locs = [[124,148,1],[107,141,1],[100,124,1],[107,107,1],
-            [124,100,1],[141,107,1],[148,124,1],[141,141,1],
-            [124,138,1],[114,134,1],[110,124,1],[114,114,1],
-            [124,110,1],[134,114,1],[138,124,1],[134,134,1]]               
-variable = 2                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
+model_name = 'cubey'
+dat = '2016_11_10'
+let = 'b'                                 #'b', 'f'
+locs = [[38,62,1],[21,55,1],[14,38,1],[21,21,1],
+            [38,14,1],[55,21,1],[62,38,1],[55,55,1],
+            [38,52,1],[28,48,1],[24,38,1],[28,28,1],
+            [38,24,1],[48,28,1],[52,38,1],[48,48,1]]               
+variable = 12                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
 
 # Different numbers
-num_assim = 700
+num_assim = 190
 num_locs = len(locs)
-nrens = 250
+nrens = 50
 
 
 # Temperature array dimensions
