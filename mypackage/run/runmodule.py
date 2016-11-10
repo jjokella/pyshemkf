@@ -115,7 +115,7 @@ def get_let_num(num):
 #############################################################
 def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
     """
-    Runs Scripts with optinal output, input, waiting for it to end
+    Runs Scripts with optional output, input, waiting for it to end
     and Error if execution went wrong.
     """
     os.chdir(path)
