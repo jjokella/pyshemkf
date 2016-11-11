@@ -12,8 +12,8 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'cubey'
-dat = '2016_11_09'
+model_name = 'alexdiffshift'
+dat = '2016_11_10'
 let_true = 'a'
 num_mons = 16
 
@@ -40,13 +40,13 @@ labels = {0:'onn',
 mons_to_show = [0,1,2,3]#range(0,16,1)
 
 
-# for i in mons_to_show:
+for i in mons_to_show:
     # plt.semilogx(t[:,0],temp[:,i],'o',label = labels[i])
-    # plt.semilogx(t[:,0],-temp[:,i+4]+temp[:,i],'o',label = labels[i])
-plt.semilogx(t[:,0],-temp[:,1+4]+temp[:,1],'o',label = labels[1])
-plt.semilogx(t[:,0],-temp[:,2+4]+temp[:,2],'o',label = labels[2])
-plt.semilogx(t[:,0],-temp[:,3+4]+temp[:,3],'o',label = labels[3])
-plt.semilogx(t[:,0],-temp[:,4-4]+temp[:,4],'o',label = labels[4])
+    plt.semilogx(t[:,0],-temp[:,i+4]+temp[:,i],'o',label = labels[i])
+# plt.semilogx(t[:,0],-temp[:,1+4]+temp[:,1],'o',label = labels[1])
+# plt.semilogx(t[:,0],-temp[:,2+4]+temp[:,2],'o',label = labels[2])
+# plt.semilogx(t[:,0],-temp[:,3+4]+temp[:,3],'o',label = labels[3])
+# plt.semilogx(t[:,0],-temp[:,4-4]+temp[:,4],'o',label = labels[4])
     
 plt.legend()
 

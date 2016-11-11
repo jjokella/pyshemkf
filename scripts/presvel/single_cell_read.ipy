@@ -45,4 +45,4 @@ for iloc,loc in enumerate(locs):
                                     skiprows=5)
 os.chdir(os.environ['HOME']+'/PythonDir')
 
-np.save('output/presvel/npy/temp_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy',temp)
+np.save('output/presvel/npy/temp_'+model_name+'_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy',temp)
