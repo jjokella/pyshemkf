@@ -38,6 +38,23 @@ pairs = [[0,4],[1,5],[2,6],[3,7]]#,[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[
 # Colors (4 blue-ish, 4 red-ish)
 coleros = ['b','g','lightblue','cyan','r','chocolate','magenta','orange','b','g','lightblue','cyan','r','chocolate','magenta','orange']
 
+labels = {0:'onn',
+              1:'onw',
+              2:'oww',
+              3:'osw',
+              4:'oss',
+              5:'ose',
+              6:'oee',
+              7:'one',
+              8:'inn',
+              9:'inw',
+              10:'iww',
+              11:'isw',
+              12:'iss',
+              13:'ise',
+              14:'iee',
+              15:'ine'}
+
 # --------------------------------------------------------------------------------
 
 # Load temperature arrays
@@ -54,9 +71,9 @@ t = np.load('output/presvel/npy/'
 # Plot mean values over all 16 measurement locations
 plt.figure(1,[8,4], dpi=1000, facecolor = 'white')
 plt.title('Mean temperatures at observation points', size = 8)
-[plt.semilogx(t[1::nm,0][:nrobs_int],np.mean(temp,axis=1)[:,i], 'o', markersize = 2, label = i+1,c=coleros[ip])
+[plt.semilogx(t[1::nm,0][:nrobs_int],np.mean(temp,axis=1)[:,i], 'o', markersize = 2, label = labels[i],c=coleros[ip])
      for ip,i in enumerate(points)]
-[plt.semilogx(t[:,0],truetemp[:,i], '--', markersize = 2, label = i+1,c=coleros[ip])
+[plt.semilogx(t[:,0],truetemp[:,i], '--', markersize = 2, label = labels[i],c=coleros[ip])
      for ip,i in enumerate(points)]
 plt.legend(prop={'size':8})
 plt.xlabel('Time',fontsize = 8)
@@ -76,15 +93,15 @@ else:
 
 
 # Plot mean values with respect to mean of the monitoring points in the true
-meantemp = np.mean(truetemp,axis=1)
+meantemp = np.mean(truetemp[:,:8],axis=1)
 
 plt.figure(1,[8,4], dpi=1000, facecolor = 'white')
 plt.title('Mean temperatures at observation points relative to their mean', size = 8)
-[plt.semilogx(t[1::nm,0][:nrobs_int],np.mean(temp,axis=1)[:,i]-meantemp[:nrobs_int], 'o', markersize = 2, label = i+1,c=coleros[ip])
+[plt.semilogx(t[1::nm,0][:nrobs_int],np.mean(temp,axis=1)[:,i]-meantemp[:nrobs_int], 'o', markersize = 2, label = labels[i],c=coleros[ip])
      for ip,i in enumerate(points)]
-[plt.semilogx(t[:,0],truetemp[:,i]-meantemp, '--', markersize = 2, label = i+1,c=coleros[ip])
+[plt.semilogx(t[:,0],truetemp[:,i]-meantemp, '--', markersize = 2, label = labels[i],c=coleros[ip])
      for ip,i in enumerate(points)]
-plt.legend(prop={'size':8})
+plt.legend(prop={'size':10},markerscale = 2.5)
 plt.xlabel('Time',fontsize = 8)
 plt.ylabel(r'T  [$^\circ C \,$]',fontsize = 8)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
@@ -105,11 +122,11 @@ else:
 plt.figure(1,[8,4], dpi=500, facecolor = 'white')
 plt.title('Difference of temperatures at certain observation points', size = 8)
 [plt.semilogx(t[1::nm,0][:nrobs_int],np.mean(temp,axis=1)[:,pair[0]]-np.mean(temp,axis=1)[:,pair[1]],
-              'o', markersize = 2, label = [pair[0]+1,pair[1]+1],
+              'o', markersize = 2, label = labels[pair[0]]+' '+labels[pair[1]],
                   c = coleros[i])
     for i,pair in enumerate(pairs)]
 [plt.semilogx(t[:,0],truetemp[:,pair[0]]-truetemp[:,pair[1]],
-              '--', markersize = 2, label = 'True: ' + str([pair[0]+1,pair[1]+1]),
+              '--', markersize = 2, label = 'True: ' + labels[pair[0]]+' '+labels[pair[1]],
                   c = coleros[i])
     for i,pair in enumerate(pairs)]
 plt.legend(prop={'size':8})
