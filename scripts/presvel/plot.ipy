@@ -12,10 +12,10 @@ is_show = True
 is_save = True
 
 # General input
-model_name = 'cubey'
-nrens = 50
+model_name = 'alexdiffshift'
+nrens = 100
 dat = '2016_11_10'
-lets = ['b']#,'c','d','e']#,'f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+lets = ['b','c','d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
@@ -27,11 +27,11 @@ num_locs = 16
 rad_min = 0.0
 rad_max = 4.0*10**-7
 
-nrobs = 190
+nrobs = 700
 
-true_vs = [-1.0*10**-7,-1.0*10**-7]
-true_ang = 225
-true_rad = 1.41*10**-7
+true_vs = [-1.0*10**-7,0.0*10**0]
+true_ang = 180
+true_rad = 1.0*10**-7
 
 # num_pres_vel = 1                          #1 or 2
 

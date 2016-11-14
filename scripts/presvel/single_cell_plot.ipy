@@ -11,7 +11,7 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = True
+is_show = False
 is_save = True
 
 # Input array specification
@@ -30,7 +30,7 @@ pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,
                  'single_cell_diff_'+model_name+'_'+dat+'_'+let]
 
 # Observation points and pairs of observations points for differences
-points = [0,1,2,3,4,5,6,7]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
+points = [0,4,1,5]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
 pairs = [[0,4],[1,5],[2,6],[3,7]]#,[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[2,6],[3,7]]
 #[[0,4],[1,5],[2,6],[3,7]]
 #[[8,12],[9,13],[10,14],[11,15]]
