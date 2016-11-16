@@ -43,7 +43,7 @@ xticks = grids.xticks(model_name)
 yticks = grids.yticks(model_name)
 
 # Load variable array
-var = np.load('output/forward/npy/'+varname+'.npy')
+var = np.load('output/forward/npy/'+varname+'_'+model_name+'.npy')
 
 if varname == 'v':
     var = var[:,:,v_component]

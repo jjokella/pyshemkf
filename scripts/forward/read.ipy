@@ -56,5 +56,5 @@ for varname in varnames:
 
     os.chdir(os.environ['HOME']+'/PythonDir')
 
-    np.save('output/forward/npy/'+varname+'.npy',numpy_array)
+    np.save('output/forward/npy/'+varname+'_'+model_name+'.npy',numpy_array)
 
