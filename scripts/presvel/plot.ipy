@@ -24,10 +24,13 @@ truedat = '2016_11_10'
 truelet = 'a'
 num_locs = 16
 
+nrobs_int = 501
+
+ns = 2-1                                     #Minus one for python
+nm = 2
+
 rad_min = 0.0
 rad_max = 4.0*10**-7
-
-nrobs = 700
 
 true_vs = [-1.0*10**-7,0.0*10**0]
 true_ang = 180
@@ -37,11 +40,12 @@ true_rad = 1.0*10**-7
 
 pic_format = 'png'                         #'eps' and 'png'
 
-nm = 1
 
 # Time array
 t = np.load('output/presvel/npy/'
                     +'truet_'+model_name+'_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
+# Update times
+tint = t[ns::nm]
 
 for let in lets:
 
@@ -65,63 +69,63 @@ for let in lets:
     # Plot means------------------------------------------------------------------------
     plt.figure(1,[8,4], dpi=200, facecolor = 'white')
     plt.title('Velocity x/y components', size = 12)
-    plt.semilogx(t[::nm][:nrobs],mvxs[:nrobs], 'o', color = 'black', markersize = 1.6)
-    plt.semilogx(t[::nm][:nrobs],mvys[:nrobs], 'o', color = 'grey', markersize = 1.6)
-    plt.semilogx(t[::nm][:nrobs],[true_vs[0] for i in range(nrobs)],color = 'black', linestyle = '--', lw = 1.2)
-    plt.semilogx(t[::nm][:nrobs],[true_vs[1] for i in range(nrobs)],color = 'grey', linestyle = '--', lw = 1.2)
-    plt.xlabel(r'Time',fontsize = 8)
-    plt.ylabel(r'Velocity [$\frac{m}{s}$]',fontsize = 8)
+    plt.semilogx(tint,mvxs, 'o', color = 'black', markersize = 1.6)
+    plt.semilogx(tint,mvys, 'o', color = 'grey', markersize = 1.6)
+    plt.semilogx(tint,[true_vs[0] for i in range(nrobs_int)],color = 'black', linestyle = '--', lw = 1.2)
+    plt.semilogx(tint,[true_vs[1] for i in range(nrobs_int)],color = 'grey', linestyle = '--', lw = 1.2)
+    plt.xlabel(r'Time',fontsize = 14, labelpad=0)
+    plt.ylabel(r'Velocity [$\frac{m}{s}$]',fontsize = 14)
     plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
     
-    if is_save:
+    if is_save[0]:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
                         +pic_names[0]+'.'+pic_format)
-    if is_show:
+    if is_show[0]:
         plt.show()
     else:
-        plt.close()
+        plt.clf()
 
     # Plot stddev-----------------------------------------------------------------------
     plt.figure(1,[8,4], dpi=200, facecolor = 'white')
     plt.title('Velocity x/y stddevs', size = 12)
-    plt.semilogx(t[::nm][:nrobs],svxs[:nrobs], 'o', color = 'black', markersize = 1.6)
-    plt.semilogx(t[::nm][:nrobs],svys[:nrobs], 'o', color = 'grey', markersize = 1.6)
-    plt.xlabel(r'Time',fontsize = 8)
-    plt.ylabel(r'$\sigma$ Velocity [$\frac{m}{s}$]',fontsize = 8)
+    plt.semilogx(tint,svxs, 'o', color = 'black', markersize = 1.6)
+    plt.semilogx(tint,svys, 'o', color = 'grey', markersize = 1.6)
+    plt.xlabel(r'Time',fontsize = 14, labelpad=0)
+    plt.ylabel(r'$\sigma$ Velocity [$\frac{m}{s}$]',fontsize = 14)
     plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
     
-    if is_save:
+    if is_save[1]:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
                         +pic_names[1]+'.'+pic_format)
-    if is_show:
-        plt.close()
+    if is_show[1]:
+        plt.show()
     else:
-        plt.close()
+        plt.clf()
 
     # Polar Plot radius and angle-------------------------------------------------------
-    plt.figure(2,[4,4], dpi=200, facecolor = 'white')
+    plt.figure(1,[4,4], dpi=200, facecolor = 'white')
     ax = plt.subplot(111, projection = 'polar')
 
     # Colors from black to white
-    color_factors = np.linspace(0,1,nrobs)
-    colors = np.zeros([nrobs,3])
+    color_factors = np.linspace(0,1,nrobs_int)
+    colors = np.zeros([nrobs_int,3])
     for ic in range(len(color_factors)):
         colors[ic,0] = color_factors[ic]
         colors[ic,1] = color_factors[ic]
         colors[ic,2] = color_factors[ic]
 
     # Scatter: All points
-    ax.scatter(ang[:nrobs]*np.pi/180,rad[:nrobs],c=colors,s = 10)
+    ax.scatter(ang[:nrobs_int]*np.pi/180,rad[:nrobs_int],c=colors,s = 10)
     # Marker: True
     ax.scatter(true_ang*np.pi/180,true_rad, marker = 'x', s = 120 ,c = 'red',lw = 2)
     # Marker: First point
     ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'o', s = 100 ,c = 'black',lw = 2)
     # Marker Last point
-    ax.scatter(ang[nrobs-1]*np.pi/180,rad[nrobs-1], marker = 'x', s = 100 ,c = 'black',lw = 2)
+    ax.scatter(ang[nrobs_int-1]*np.pi/180,rad[nrobs_int-1], marker = 'x', s = 100 ,c = 'black',lw = 2)
     # Plot: Interpolation, every tenth point
-    ax.plot([ang[i]*np.pi/180 for i in range(1,nrobs,10)],[rad[i] for i in range(1,nrobs,10)],
+    ax.plot([ang[i]*np.pi/180 for i in range(1,nrobs_int,10)],[rad[i] for i in range(1,nrobs_int,10)],
                 c = 'grey')
 
     ax.set_rmax(rad_max)
@@ -130,11 +134,11 @@ for let in lets:
     ax.set_title('Polar plot of velocities', size = 8)
     plt.tick_params(labelsize=6)
     
-    if is_save:
+    if is_save[2]:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
                         +pic_names[2]+'.'+pic_format)
-    if is_show:
+    if is_show[2]:
         plt.show()
     else:
-        plt.close()
+        plt.clf()
 
