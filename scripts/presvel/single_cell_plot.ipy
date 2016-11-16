@@ -11,18 +11,20 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = False
-is_save = True
+is_show = [True,True,True]
+is_save = [True,True,True]
 
 # Input array specification
 model_name = 'cubey'
-dat = '2016_11_10'
+dat = '2016_11_15'
 let = 'b'                                 #'b', 'f'
-truedat = '2016_11_10'
+truedat = '2016_11_15'
 truelet = 'a'
 num_locs = 16
-nrobs_int = 190
-nm = 1 # Every nmth time step is a measurement
+nrobs_int = 501
+
+ns = 2-1                       # Minus one for Python 
+nm = 2                        # Every nmth time step is a measurement
 
 pic_format = 'png'
 pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,
@@ -30,7 +32,7 @@ pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,
                  'single_cell_diff_'+model_name+'_'+dat+'_'+let]
 
 # Observation points and pairs of observations points for differences
-points = [0,4,1,5]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
+points = [0]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
 pairs = [[0,4],[1,5],[2,6],[3,7]]#,[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[2,6],[3,7]]
 #[[0,4],[1,5],[2,6],[3,7]]
 #[[8,12],[9,13],[10,14],[11,15]]

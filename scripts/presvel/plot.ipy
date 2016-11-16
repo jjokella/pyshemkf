@@ -8,19 +8,18 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = True
-is_save = True
+is_show = [True,True,True]
+is_save = [True,True,True]
 
 # General input
-model_name = 'alexdiffshift'
-nrens = 100
-dat = '2016_11_10'
-lets = ['b','c','d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+model_name = 'cubey'
+dat = '2016_11_15'
+lets = ['b']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_11_10'
+truedat = '2016_11_15'
 truelet = 'a'
 num_locs = 16
 
@@ -32,9 +31,9 @@ nm = 2
 rad_min = 0.0
 rad_max = 4.0*10**-7
 
-true_vs = [-1.0*10**-7,0.0*10**0]
-true_ang = 180
-true_rad = 1.0*10**-7
+true_vs = [-1.0*10**-7,-1.0*10**-7]
+true_ang = 225
+true_rad = 1.4*10**-7
 
 # num_pres_vel = 1                          #1 or 2
 

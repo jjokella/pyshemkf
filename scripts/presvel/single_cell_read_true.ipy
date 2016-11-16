@@ -11,8 +11,8 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'alexdiffshift'
-dat = '2016_11_10'
+model_name = 'cubey'
+dat = '2016_11_15'
 let_true = 'a'
 output_dir = 'samples_output'
 
@@ -33,7 +33,7 @@ temp = np.genfromtxt(model_name.upper() + '_TRUE_E0_monitor_1.dat',
                          comments='%',
                          usecols=(obs_num))     #variable
 # Reshape
-t = t.reshape(len(t)/num_mons, num_mons)
+t = t.reshape(len(t)/num_mons, num_mons)[:,0]
 temp = temp.reshape(len(temp)/num_mons, num_mons)
 
 os.chdir(os.environ['HOME']+'/PythonDir/')
