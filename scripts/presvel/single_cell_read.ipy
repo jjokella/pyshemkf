@@ -13,8 +13,8 @@ import pandas as pd
 
 # Input file specification
 model_name = 'cubey'
-dat = '2016_11_15'
-let = 'b'                                 #'b', 'f'
+dat = '2016_11_16'
+let = 'g'                                 #'b', 'f'
 # locs = [[124,148,1],[107,141,1],[100,124,1],[107,107,1],
 #             [124,100,1],[141,107,1],[148,124,1],[141,141,1],
 #             [124,138,1],[114,134,1],[110,124,1],[114,114,1],
@@ -26,7 +26,7 @@ locs = [[38,62,1],[21,55,1],[14,38,1],[21,21,1],
 variable = 12                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
 
 # Different numbers
-num_assim = 501
+num_assim = 251
 num_locs = len(locs)
 nrens = 50
 
