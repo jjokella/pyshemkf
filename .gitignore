@@ -10,6 +10,7 @@ output/sameseed/
 output/single_job/
 output/txt/
 output/tcon/
-output/forward/
+output/forward/eps
+output/forward/npy
 lib/
 notebook/
