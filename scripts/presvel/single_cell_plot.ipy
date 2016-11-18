@@ -11,20 +11,20 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = [True,True,True]
+is_show = [False,True,True]
 is_save = [True,True,True]
 
 # Input array specification
 model_name = 'cubey'
 dat = '2016_11_16'
-let = 'g'                                 #'b', 'f'
+let = 'i'                                 #'b', 'f'
 truedat = '2016_11_16'
-truelet = 'f'
+truelet = 'h'
 num_locs = 16
 nrobs_int = 251
 
 ns = 2-1                       # Minus one for Python 
-nm = 80                        # Every nmth time step is a measurement
+nm = 160                        # Every nmth time step is a measurement
 
 pic_format = 'png'
 pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,

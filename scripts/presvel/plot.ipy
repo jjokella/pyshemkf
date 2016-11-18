@@ -8,7 +8,7 @@ from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = [True,True,True]
+is_show = [True,False,False]
 is_save = [True,True,True]
 
 # General input
@@ -20,13 +20,13 @@ lets = ['g']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
 truedat = '2016_11_16'
-truelet = 'f'
+truelet = 'h'
 num_locs = 16
 
 nrobs_int = 251
 
 ns = 2-1                                     #Minus one for python
-nm = 80
+nm = 160
 
 rad_min = 0.0
 rad_max = 4.0*10**-7
