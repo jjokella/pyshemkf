@@ -11,13 +11,13 @@ from mypackage.plot import mycolors
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-is_show = [False,True,True]
+is_show = [True,True,True]
 is_save = [True,True,True]
 
 # Input array specification
 model_name = 'cubey'
-dat = '2016_11_16'
-let = 'i'                                 #'b', 'f'
+dat = '2016_11_21'
+let = 'c'                                 #'b', 'f'
 truedat = '2016_11_16'
 truelet = 'h'
 num_locs = 16
