@@ -12,13 +12,13 @@ import pandas as pd
 
 
 model_name = 'cubey'
-dat = '2016_11_16'
-let = 'h'
+dat = '2016_11_21'
+let = 'a'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
 fname = model_name.upper()+'_TRUE_E0_time_out_0015.vtk'   # 0017 or 17!?
-varnames = ['temp','head']                             #'head','temp','kz', 'v'
+varnames = ['uindex','temp','head']                             #'head','temp','kz', 'v'
 
 for varname in varnames:
 
