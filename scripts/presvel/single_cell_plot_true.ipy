@@ -13,7 +13,7 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 model_name = 'cubey'
-dat = '2016_11_21'
+dat = '2016_11_22'
 let_true = 'a'
 num_mons = 16
 
