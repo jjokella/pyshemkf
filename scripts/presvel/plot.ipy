@@ -13,20 +13,20 @@ is_save = [True,True,True]
 
 # General input
 model_name = 'cubey'
-dat = '2016_11_22'
-lets = ['d']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+dat = '2016_11_23'
+lets = ['b']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
-truedat = '2016_11_22'
-truelet = 'c'
+truedat = '2016_11_23'
+truelet = 'a'
 num_locs = 16
 
 nrobs_int = 251
 
 ns = 2-1                                     #Minus one for python
-nm = 16
+nm = 160
 
 rad_factor = 10**7
 rad_min = 0.0
