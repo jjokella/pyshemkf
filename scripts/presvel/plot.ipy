@@ -28,12 +28,13 @@ nrobs_int = 251
 ns = 2-1                                     #Minus one for python
 nm = 16
 
+rad_factor = 10**7
 rad_min = 0.0
-rad_max = 4.0*10**-7
+rad_max = 4.0*10**-7 * rad_factor
 
 true_vs = [-1.0*10**-7,-1.0*10**-7]
 true_ang = 225
-true_rad = 1.4*10**-7
+true_rad = 1.4*10**-7 * rad_factor
 
 # num_pres_vel = 1                          #1 or 2
 
@@ -62,7 +63,7 @@ for let in lets:
     svxs = np.std(vxs,axis=1)
     svys = np.std(vys,axis=1)
     # Load radius and angle
-    rad = np.load('output/presvel/npy/rad_'+model_name+'_'+dat+'_'+let+'.npy')
+    rad = np.load('output/presvel/npy/rad_'+model_name+'_'+dat+'_'+let+'.npy')*rad_factor
     ang = np.load('output/presvel/npy/ang_'+model_name+'_'+dat+'_'+let+'.npy')
 
     # Plot means------------------------------------------------------------------------
@@ -130,7 +131,7 @@ for let in lets:
     ax.set_rmax(rad_max)
     ax.set_rmin(rad_min)
     ax.grid(True)
-    ax.set_title('Polar plot of velocities', size = 8)
+    ax.set_title(r'Groundwater velocities $\cdot 10^{7}$ [m/s]', size = 14)
     plt.tick_params(labelsize=6)
     
     if is_save[2]:
