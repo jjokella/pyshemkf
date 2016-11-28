@@ -22,6 +22,10 @@ varname = 'temp'                             #'head','v','temp','kz'
 v_component = 1                           #0,1,2
 pic_format = 'png'
 
+varlabels = {'temp':'Temperature [deg]',
+             'head':'Hydraulich Head [m] - 10m',
+             'uindex':''}
+
 num_cbar = 50
 low_cbar =  10.0285
 high_cbar = 10.0304
@@ -47,6 +51,8 @@ var = np.load('output/forward/npy/'+varname+'_'+model_name+'.npy')
 
 if varname == 'v':
     var = var[:,:,v_component]
+if varname == 'head':
+    var = var-10.0
 
 if auto_cbar:
     low_cbar = var.min()
@@ -55,7 +61,7 @@ if auto_cbar:
 # Figure
 fig = plt.figure(1,figsize=[15,10])
 ax = fig.add_subplot(111)
-ax.set_position([0.1,0.05,0.6,0.9])
+ax.set_position([0.1,0.1,0.6,0.8])
 im = mpl.image.NonUniformImage(ax,interpolation='nearest',
                                    cmap=mycolors.cmap_discretize(cm.viridis,num_cbar),
                                    norm = colors.Normalize(vmin=low_cbar,
@@ -78,6 +84,9 @@ if is_grid:
 
 # Title
 # ax.set_title('Temperature field')
+ax.set_xlabel('[m]',fontsize=40)
+ax.set_ylabel('[m]',fontsize=40)
+ax.tick_params(labelsize = 20)
 
 # Axis Limits
 ax.set_xlim(xlims[0],xlims[1])
@@ -87,7 +96,7 @@ ax.set_ylim(ylims[0],ylims[1])
 cb_ax = fig.add_subplot(1,25,1)
 cb_ax.set_position([0.8,0.1,0.03,0.8])
 cb_ax.tick_params(labelsize = 20)
-cb_ax.set_title(varname, y =1.02)
+cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
 mpl.colorbar.Colorbar(cb_ax, im)
 
 # Save
@@ -95,7 +104,7 @@ if is_save:
         if varname == 'v':
             varname = varname+'_'+str(v_component)
         plt.savefig(os.environ['HOME']+'/PythonDir/output/forward/'+pic_format+'/'
-                            +model_name+'_'+varname+'.'+pic_format)
+                            +model_name+'_'+dat+'_'+let+'_'+varname+'.'+pic_format)
 # Show
 if is_show:
     plt.show()
