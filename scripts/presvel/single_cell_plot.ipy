@@ -16,9 +16,9 @@ is_save = [True,True,True]
 
 # Input array specification
 model_name = 'cubey'
-dat = '2016_11_23'
+dat = '2016_11_28'
 let = 'b'                                 #'b', 'f'
-truedat = '2016_11_23'
+truedat = '2016_11_28'
 truelet = 'a'
 num_locs = 16
 nrobs_int = 251
@@ -128,10 +128,10 @@ plt.title('Mean Temperatures Differences and True Temperature Differences', size
                   c = coleros[i])
     for i,pair in enumerate(pairs)]
 [plt.semilogx(t[:],truetemp[:,pair[0]]-truetemp[:,pair[1]],
-              '--', markersize = 2, #label = 'True: ' + labels[pair[0]]+' '+labels[pair[1]],
+              '--', markersize = 2,#label = 'True: ' + labels[pair[0]]+' '+labels[pair[1]],
                   c = coleros[i])
     for i,pair in enumerate(pairs)]
-plt.legend(loc=2,markerscale=2,prop={'size':10})
+plt.legend(loc=2,markerscale=2,numpoints=3,prop={'size':10})
 plt.xlabel('Time',fontsize = 14, labelpad=0)
 plt.ylabel(r'$\Delta$T  [$^\circ C \,$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,30*24*3600])

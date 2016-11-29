@@ -13,7 +13,7 @@ import pandas as pd
 
 # Input file specification
 model_name = 'cubey'
-dat = '2016_11_23'
+dat = '2016_11_28'
 let = 'b'                                 #'b', 'f'
 # locs = [[124,148,1],[107,141,1],[100,124,1],[107,107,1],
 #             [124,100,1],[141,107,1],[148,124,1],[141,141,1],
