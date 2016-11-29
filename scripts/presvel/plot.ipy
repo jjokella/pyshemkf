@@ -119,11 +119,11 @@ for let in lets:
     # Scatter: All points
     ax.scatter(ang[:nrobs_int]*np.pi/180,rad[:nrobs_int],c=colors,s = 10)
     # Marker: True
-    ax.scatter(true_ang*np.pi/180,true_rad, marker = 'x', s = 120 ,c = 'red',lw = 2)
+    ax.scatter(true_ang*np.pi/180,true_rad, marker = 'x', s = 120 ,c = 'red',lw = 2, label="True Velocity")
     # Marker: First point
-    ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'o', s = 100 ,c = 'black',lw = 2)
+    ax.scatter(ang[0]*np.pi/180,rad[0], marker = 'o', s = 100 ,c = 'black',lw = 2, label="Prior Estimate")
     # Marker Last point
-    ax.scatter(ang[nrobs_int-1]*np.pi/180,rad[nrobs_int-1], marker = 'x', s = 100 ,c = 'black',lw = 2)
+    ax.scatter(ang[nrobs_int-1]*np.pi/180,rad[nrobs_int-1], marker = 'x', s = 100 ,c = 'black',lw = 2,label="Posterior Estimate")
     # Plot: Interpolation, every tenth point
     ax.plot([ang[i]*np.pi/180 for i in range(1,nrobs_int,10)],[rad[i] for i in range(1,nrobs_int,10)],
                 c = 'grey')
@@ -133,6 +133,8 @@ for let in lets:
     ax.grid(True)
     ax.set_title(r'Groundwater velocities $\cdot 10^{7}$ [m/s]', size = 14)
     plt.tick_params(labelsize=6)
+
+    plt.legend(loc=2,scatterpoints=1,prop={'size':10})
     
     if is_save[2]:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'

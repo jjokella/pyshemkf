@@ -21,13 +21,13 @@ model_name = 'cubey'
 dat = '2016_11_16'
 let = 'h'
 
-varname = 'uindex'                             #'head','v','temp','kz'
+varname = 'temp'                             #'head','v','temp','kz'
 v_component = 1                           #0,1,2
-pic_format = 'png'
+pic_format = 'eps'
 
 varlabels = {'temp':'Temperature [deg]',
              'head':'Hydraulich Head [m] - 10m',
-             'uindex':''}
+             'uindex':'Model zones'}
 
 num_cbar = 50
 low_cbar =  10.0285
@@ -101,6 +101,15 @@ cb_ax.set_position([0.8,0.1,0.03,0.8])
 cb_ax.tick_params(labelsize = 20)
 cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
 mpl.colorbar.Colorbar(cb_ax, im)
+if varname == 'uindex':
+    cb_ax.yaxis.set_ticklabels(["Soil (subsurface)",
+                                "Soil (in tubes)",
+                                "Pipe",
+                                "Pipe",
+                                "Pipe",
+                                "Pipe",
+                                "Metal Tube"])
+    cb_ax.set_position([0.72,0.1,0.03,0.8])
 
 # Save
 if is_save:
