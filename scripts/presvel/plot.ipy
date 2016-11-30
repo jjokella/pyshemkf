@@ -12,21 +12,21 @@ is_show = [True,True,True]
 is_save = [True,True,True]
 
 # General input
-model_name = 'cubey'
+model_name = 'cubeya'
 dat = '2016_11_29'
-lets = ['d']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+lets = ['f']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
 truedat = '2016_11_29'
-truelet = 'c'
+truelet = 'e'
 num_locs = 16
 
 nrobs_int = 251
 
 ns = 2-1                                     #Minus one for python
-nm = 320
+nm = 640
 
 rad_factor = 10**7
 rad_min = 0.0

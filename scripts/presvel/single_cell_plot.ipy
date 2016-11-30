@@ -15,16 +15,16 @@ is_show = [True,True,True]
 is_save = [True,True,True]
 
 # Input array specification
-model_name = 'cubey'
+model_name = 'cubeya'
 dat = '2016_11_29'
-let = 'd'                                 #'b', 'f'
+let = 'f'                                 #'b', 'f'
 truedat = '2016_11_29'
-truelet = 'c'
+truelet = 'e'
 num_locs = 16
 nrobs_int = 251
 
 ns = 2-1                       # Minus one for Python 
-nm = 320                       # Every nmth time step is a measurement
+nm = 640                       # Every nmth time step is a measurement
 
 pic_format = 'png'
 pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,

@@ -12,9 +12,9 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 # Input file specification
-model_name = 'cubey'
+model_name = 'cubeya'
 dat = '2016_11_29'
-let = 'd'                                 #'b', 'f'
+let = 'f'                                 #'b', 'f'
 # locs = [[124,148,1],[107,141,1],[100,124,1],[107,107,1],
 #             [124,100,1],[141,107,1],[148,124,1],[141,141,1],
 #             [124,138,1],[114,134,1],[110,124,1],[114,114,1],
