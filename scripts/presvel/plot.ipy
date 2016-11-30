@@ -14,13 +14,13 @@ is_save = [True,True,True]
 # General input
 model_name = 'cubey'
 dat = '2016_11_29'
-lets = ['b']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+lets = ['d']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
 truedat = '2016_11_29'
-truelet = 'a'
+truelet = 'c'
 num_locs = 16
 
 nrobs_int = 251
@@ -38,7 +38,7 @@ true_rad = 1.4*10**-7 * rad_factor
 
 # num_pres_vel = 1                          #1 or 2
 
-pic_format = 'eps'                         #'eps' and 'png'
+pic_format = 'png'                         #'eps' and 'png'
 
 
 # Time array

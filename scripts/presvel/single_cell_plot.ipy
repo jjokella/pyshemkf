@@ -17,9 +17,9 @@ is_save = [True,True,True]
 # Input array specification
 model_name = 'cubey'
 dat = '2016_11_29'
-let = 'b'                                 #'b', 'f'
+let = 'd'                                 #'b', 'f'
 truedat = '2016_11_29'
-truelet = 'a'
+truelet = 'c'
 num_locs = 16
 nrobs_int = 251
 

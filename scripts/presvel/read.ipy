@@ -11,7 +11,7 @@ import pandas as pd
 model_name = 'cubey'
 nrens = 50
 dat = '2016_11_29'
-lets = ['b']#,'d','e','f','g','h','i']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+lets = ['d']#,'d','e','f','g','h','i']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
 #['b','c','d','e','f','g','h','i']
 #['j','k','l','m','n','o','p','q']
 #['r','s','t','u','v','w','x','y']
