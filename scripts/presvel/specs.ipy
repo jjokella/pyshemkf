@@ -1,15 +1,15 @@
 from mypackage.plot import specs as sc
 
 sc.model_name = 'cubey'
-sc.dat = '2016_11_16'
-sc.lets = ['i']
+sc.dat = '2016_12_03'
+sc.lets = ['b']
 
-sc.truedat = '2016_11_16'
-sc.truelet = 'h'
+sc.truedat = '2016_12_03'
+sc.truelet = 'a'
 
 # %run scripts/presvel/read.ipy
 # %run scripts/presvel/single_cell_read.ipy
 # %run scripts/presvel/single_cell_read_true.ipy
 %run scripts/presvel/plot.ipy
-# %run scripts/presvel/single_cell_plot.ipy
+%run scripts/presvel/single_cell_plot.ipy
 # %run scripts/presvel/single_cell_plot_true.ipy

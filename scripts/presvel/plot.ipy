@@ -23,7 +23,7 @@ true_vs = [-1.0*10**-7*rad_factor,-1.0*10**-7*rad_factor]
 true_ang = 225
 true_rad = 1.4*10**-7 * rad_factor
 
-pic_format = 'eps'                         #'eps' and 'png'
+pic_format = 'png'                         #'eps' and 'png'
 
 xlims = [60,30*24*3600]
 

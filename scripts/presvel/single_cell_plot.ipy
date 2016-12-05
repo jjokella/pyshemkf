@@ -15,7 +15,7 @@ let = sc.lets[0]                                 #'b', 'f'
 truedat = sc.truedat
 truelet = sc.truelet
 
-pic_format = 'eps'
+pic_format = 'png'
 pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,
                  'single_cell_mean_'+model_name+'_'+dat+'_'+let,
                  'single_cell_diff_'+model_name+'_'+dat+'_'+let]
