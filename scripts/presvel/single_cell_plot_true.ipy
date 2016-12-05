@@ -2,20 +2,13 @@
 
 
 import os
-import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
-from matplotlib import cm		# Colormap commands (cm.get_cmap())
-from matplotlib import colors	        # Normalize colors (colors.Normalize())
-from mypackage.plot import mycolors
-from mypackage.run import runmodule as rm
-import pandas as pd
+from mypackage.plot import specs as sc
 
-model_name = 'cubey'
-dat = '2016_11_16'
-let_true = 'h'
-num_mons = 16
+model_name = sc.model_name
+dat = sc.dat
+let_true = sc.truelet
+num_mons = sc.num_mons(model_name,dat,let_true)
 
 t = np.load('output/presvel/npy/truet_'+model_name+'_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy')
 temp = np.load('output/presvel/npy/truetemp_'+model_name+'_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy')
@@ -37,11 +30,14 @@ labels = {0:'onn',
               14:'iee',
               15:'ine'}
 
-mons_to_show = [3,7]#range(0,16,1)
+mons_to_show = [3]#range(0,16,1)
 
 
 for i in mons_to_show:
-    plt.semilogx(t[:],temp[:,i],'-',label = labels[i])
+    plt.semilogx(t[::500],temp[::500,i],'o',label = labels[i])
+    # plt.semilogx(t[101:201],temp[101:201,i],'o',label = labels[i])
+    # plt.semilogx(t[201:301],temp[201:301,i],'o',label = labels[i])
+    # plt.semilogx(t[301:401],temp[301:401,i],'o',label = labels[i])
     # plt.semilogx(t[:],-temp[:,i+4]+temp[:,i],'o',label = labels[i])
 # plt.semilogx(t[:],-temp[:,1+4]+temp[:,1],'o',label = labels[1])
 # plt.semilogx(t[:],-temp[:,2+4]+temp[:,2],'o',label = labels[2])

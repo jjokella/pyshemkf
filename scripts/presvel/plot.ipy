@@ -1,53 +1,45 @@
 # Plot prescribed velocities
 
 import os
-import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
-from mypackage.run import runmodule as rm
-import pandas as pd
+from mypackage.plot import specs as sc
 
 is_show = [True,True,True]
 is_save = [True,True,True]
 
 # General input
-model_name = 'cubeya'
-dat = '2016_11_29'
-lets = ['f']#,'d','e','f','g','h','i']#,'d','f','h']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
-#['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
-#['b','c','d','e','f','g','h','i']
-#['j','k','l','m','n','o','p','q']
-#['r','s','t','u','v','w','x','y']
-truedat = '2016_11_29'
-truelet = 'e'
-num_locs = 16
+model_name = sc.model_name
+dat = sc.dat
+lets = sc.lets
 
-nrobs_int = 251
-
-ns = 2-1                                     #Minus one for python
-nm = 640
+truedat = sc.truedat
+truelet = sc.truelet
 
 rad_factor = 10**7
 rad_min = 0.0
 rad_max = 4.0*10**-7 * rad_factor
 
-true_vs = [-1.0*10**-7,-1.0*10**-7]
+true_vs = [-1.0*10**-7*rad_factor,-1.0*10**-7*rad_factor]
 true_ang = 225
 true_rad = 1.4*10**-7 * rad_factor
 
-# num_pres_vel = 1                          #1 or 2
+pic_format = 'eps'                         #'eps' and 'png'
 
-pic_format = 'png'                         #'eps' and 'png'
-
-
-# Time array
-t = np.load('output/presvel/npy/'
-                    +'truet_'+model_name+'_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
-# Update times
-tint = t[ns::nm]
+xlims = [60,30*24*3600]
 
 for let in lets:
+
+    # Properties
+    num_locs = sc.num_mons(model_name,dat,let)
+    nrobs_int = sc.nrobs_int(model_name,dat,let)
+    ns = sc.ns(model_name,dat,let)
+    nm = sc.nm(model_name,dat,let)
+
+    # Time array
+    t = np.load('output/presvel/npy/'
+                +'truet_'+model_name+'_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
+    # Update times
+    tint = t[ns::nm][:nrobs_int]
 
     # Names for the pictures------------------------------------------------------------
     pic_names = ['mvs_'        + model_name + '_' + dat + '_' + let,
@@ -55,10 +47,10 @@ for let in lets:
                      'pol_'    + model_name + '_' + dat + '_' + let]
 
     # Load means------------------------------------------------------------------------
-    mvxs = np.load('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let+'.npy')
-    mvys = np.load('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let+'.npy')
-    vxs = np.load('output/presvel/npy/vxs_'+model_name+'_'+dat+'_'+let+'.npy')
-    vys = np.load('output/presvel/npy/vys_'+model_name+'_'+dat+'_'+let+'.npy')
+    mvxs = np.load('output/presvel/npy/mvxs_'+model_name+'_'+dat+'_'+let+'.npy')*rad_factor
+    mvys = np.load('output/presvel/npy/mvys_'+model_name+'_'+dat+'_'+let+'.npy')*rad_factor
+    vxs = np.load('output/presvel/npy/vxs_'+model_name+'_'+dat+'_'+let+'.npy')*rad_factor
+    vys = np.load('output/presvel/npy/vys_'+model_name+'_'+dat+'_'+let+'.npy')*rad_factor
     # Load standard deviations
     svxs = np.std(vxs,axis=1)
     svys = np.std(vys,axis=1)
@@ -74,9 +66,10 @@ for let in lets:
     plt.semilogx(tint,[true_vs[0] for i in range(nrobs_int)],color = 'black', linestyle = '--', lw = 1.2)
     plt.semilogx(tint,[true_vs[1] for i in range(nrobs_int)],color = 'grey', linestyle = '--', lw = 1.2)
     plt.xlabel(r'Time',fontsize = 14, labelpad=0)
-    plt.ylabel(r'Velocity [$\frac{m}{s}$]',fontsize = 14)
+    plt.ylabel(r'Velocity [$ 10^{-7} \cdot \frac{m}{s}$]',fontsize = 14)
     plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+    plt.xlim(xlims[0],xlims[1])
     
     if is_save[0]:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
@@ -88,13 +81,14 @@ for let in lets:
 
     # Plot stddev-----------------------------------------------------------------------
     plt.figure(1,[8,4], dpi=200, facecolor = 'white')
-    plt.title('Velocity x/y stddevs', size = 12)
+    plt.title('Velocity x/y standard deviations', size = 12)
     plt.semilogx(tint,svxs, 'o', color = 'black', markersize = 1.6)
     plt.semilogx(tint,svys, 'o', color = 'grey', markersize = 1.6)
     plt.xlabel(r'Time',fontsize = 14, labelpad=0)
-    plt.ylabel(r'$\sigma$ Velocity [$\frac{m}{s}$]',fontsize = 14)
+    plt.ylabel(r'$\sigma$ Velocity [$ 10^{-7} \cdot \frac{m}{s}$]',fontsize = 14)
     plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+    plt.xlim(xlims[0],xlims[1])
     
     if is_save[1]:
         plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'

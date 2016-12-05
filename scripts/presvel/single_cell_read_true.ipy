@@ -1,24 +1,17 @@
 # Reated single cell output
 
 import os
-import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
-from matplotlib import cm		# Colormap commands (cm.get_cmap())
-from matplotlib import colors	        # Normalize colors (colors.Normalize())
-from mypackage.plot import mycolors
-from mypackage.run import runmodule as rm
-import pandas as pd
+from mypackage.plot import specs as sc
 
-model_name = 'cubeya'
-dat = '2016_11_29'
-let_true = 'e'
+model_name = sc.model_name
+dat = sc.dat
+let_true = sc.truelet
 output_dir = 'samples_output'
 
 obs_num = 9 # Column Number in observations file
 
-num_mons = 16
+num_mons = sc.num_mons(model_name,dat,let_true)
 
 os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + dat + "/" \
              + dat + "_" + let_true + "/" + output_dir)

@@ -1,46 +1,22 @@
 # Read single cell output
 
 import os
-import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
-from matplotlib import cm		# Colormap commands (cm.get_cmap())
-from matplotlib import colors	        # Normalize colors (colors.Normalize())
-from mypackage.plot import mycolors
-from mypackage.run import runmodule as rm
-import pandas as pd
+from mypackage.plot import specs as sc
 
 # Input file specification
-model_name = 'cubeya'
-dat = '2016_11_29'
-let = 'f'                                 #'b', 'f'
-# locs = [[124,148,1],[107,141,1],[100,124,1],[107,107,1],
-#             [124,100,1],[141,107,1],[148,124,1],[141,141,1],
-#             [124,138,1],[114,134,1],[110,124,1],[114,114,1],
-#             [124,110,1],[134,114,1],[138,124,1],[134,134,1]]               
-locs = [[38,62,1],[21,55,1],[14,38,1],[21,21,1],
-            [38,14,1],[55,21,1],[62,38,1],[55,55,1],
-            [38,52,1],[28,48,1],[24,38,1],[28,28,1],
-            [38,24,1],[48,28,1],[52,38,1],[48,48,1]]               
-# locs = [[43,67,1],[26,60,1],[19,43,1],[26,26,1],
-#             [43,19,1],[60,26,1],[67,43,1],[60,60,1],
-#             [43,57,1],[33,53,1],[29,43,1],[33,33,1],
-#             [43,29,1],[53,33,1],[57,43,1],[53,53,1]]               
-# locs = [[53,77,1],[36,70,1],[29,53,1],[36,36,1],
-#             [53,29,1],[70,36,1],[77,53,1],[70,70,1],
-#             [53,67,1],[43,63,1],[39,53,1],[43,43,1],
-#             [53,39,1],[63,43,1],[67,53,1],[63,63,1]]               
-# locs = [[71,95,1],[54,88,1],[47,71,1],[54,54,1],
-#             [71,47,1],[88,54,1],[95,71,1],[88,88,1],
-#             [71,85,1],[61,81,1],[57,71,1],[61,61,1],
-#             [71,57,1],[81,61,1],[85,71,1],[81,81,1]]               
-variable = 12                              #1: head, 2:temp, 3:conc, 4:kz, 5:lz, 6:por
+model_name = sc.model_name
+dat = sc.dat
+let = sc.lets[0]                                 #'b', 'f'
+
+# Single cell
+locs = sc.locs(model_name,dat,let)
+variable = sc.variable(model_name,dat,let)            
 
 # Different numbers
-num_assim = 251
-num_locs = len(locs)
-nrens = 50
+num_assim = sc.nrobs_int(model_name,dat,let)
+num_locs = sc.num_mons(model_name,dat,let)
+nrens = sc.nrens(model_name,dat,let)
 
 
 # Temperature array dimensions

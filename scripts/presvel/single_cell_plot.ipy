@@ -1,41 +1,39 @@
 # Read single cell output
 
 import os
-import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
-from matplotlib import cm		# Colormap commands (cm.get_cmap())
-from matplotlib import colors	        # Normalize colors (colors.Normalize())
-from mypackage.plot import mycolors
-from mypackage.run import runmodule as rm
-import pandas as pd
+import matplotlib.pyplot as plt
+from mypackage.plot import specs as sc
 
 is_show = [True,True,True]
 is_save = [True,True,True]
 
 # Input array specification
-model_name = 'cubeya'
-dat = '2016_11_29'
-let = 'f'                                 #'b', 'f'
-truedat = '2016_11_29'
-truelet = 'e'
-num_locs = 16
-nrobs_int = 251
+model_name = sc.model_name
+dat = sc.dat
+let = sc.lets[0]                                 #'b', 'f'
+truedat = sc.truedat
+truelet = sc.truelet
 
-ns = 2-1                       # Minus one for Python 
-nm = 640                       # Every nmth time step is a measurement
-
-pic_format = 'png'
+pic_format = 'eps'
 pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,
                  'single_cell_mean_'+model_name+'_'+dat+'_'+let,
                  'single_cell_diff_'+model_name+'_'+dat+'_'+let]
+
+# Properties
+num_locs = sc.num_mons(model_name,dat,let)
+nrobs_int = sc.nrobs_int(model_name,dat,let)
+
+ns = sc.ns(model_name,dat,let)
+nm = sc.nm(model_name,dat,let)
 
 # Observation points and pairs of observations points for differences
 points = [0,2,4,6]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
 pairs = [[0,4],[1,5],[2,6],[3,7]]#,[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[2,6],[3,7]]
 #[[0,4],[1,5],[2,6],[3,7]]
 #[[8,12],[9,13],[10,14],[11,15]]
+
+xlims = [60,30*24*3600]
 
 # Colors (4 blue-ish, 4 red-ish)
 coleros = ['b','g','lightblue','cyan','r','chocolate','magenta','orange','b','g','lightblue','cyan','r','chocolate','magenta','orange']
@@ -77,11 +75,12 @@ plt.title('Mean temperatures at observation points', size = 8)
      for ip,i in enumerate(points)]
 [plt.semilogx(t,truetemp[:,i], '--', markersize = 2, label = labels[i],c=coleros[ip])
      for ip,i in enumerate(points)]
-plt.legend(prop={'size':8})
+plt.legend(prop={'size':10,},markerscale = 2.5)
 plt.xlabel('Time',fontsize = 14, labelpad=0)
 plt.ylabel(r'T  [$^\circ C \,$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,20*24*3600])
 plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','20d'])
+plt.xlim(xlims[0],xlims[1])
 
 
 # Save, show, close
@@ -98,16 +97,18 @@ else:
 meantemp = np.mean(truetemp[:,:8],axis=1)
 
 plt.figure(1,[8,4], dpi=200, facecolor = 'white')
-plt.title('Mean temperatures at observation points relative to their mean', size = 8)
+plt.title('Mean temperatures at observation points relative to the true', size = 8)
 [plt.semilogx(t[ns::nm][:nrobs_int],np.mean(temp,axis=1)[:nrobs_int,i]-truetemp[ns::nm,i][:nrobs_int], 'o', markersize = 2, label = labels[i],c=coleros[ip])
      for ip,i in enumerate(points)]
 # [plt.semilogx(t[:],truetemp[:,i]-meantemp, '--', markersize = 2, label = labels[i],c=coleros[ip])
 #      for ip,i in enumerate(points)]
+plt.plot(t[ns::nm][:nrobs_int],[0.0 for i in range(nrobs_int)],'k--')
 plt.legend(prop={'size':10},markerscale = 2.5)
 plt.xlabel('Time',fontsize = 14, labelpad=0)
 plt.ylabel(r'T  [$^\circ C \,$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,20*24*3600])
 plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','20d'])
+plt.xlim(xlims[0],xlims[1])
 
 
 # Save, show, close
@@ -136,7 +137,7 @@ plt.xlabel('Time',fontsize = 14, labelpad=0)
 plt.ylabel(r'$\Delta$T  [$^\circ C \,$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,30*24*3600])
 plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','30d'])
-plt.xlim(60,30*24*3600)
+plt.xlim(xlims[0],xlims[1])
 
 #Save, show, close
 if is_save[2]:

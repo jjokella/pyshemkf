@@ -1,25 +1,19 @@
 # Read prescribed velocities in "prescribed_velocity_aft.txt"
 
 import os
-import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
-from mypackage.run import runmodule as rm
-import pandas as pd
+from mypackage.plot import specs as sc
 
-model_name = 'cubeya'
-nrens = 50
-dat = '2016_11_29'
-lets = ['f']#,'d','e','f','g','h','i']#,'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
-#['b','c','d','e','f','g','h','i']
-#['j','k','l','m','n','o','p','q']
-#['r','s','t','u','v','w','x','y']
-
-num_pres_vel = 2                          #1 or 2
-
+model_name = sc.model_name
+dat = sc.dat
+lets = sc.lets
 
 for let in lets:
+    
+    # Properties
+    nrens = sc.nrens(model_name,dat,let)
+    num_pres_vel = sc.num_pres_vel(model_name,dat,let)
+
     # Load velocities
     vs = np.loadtxt(os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' 
                         + dat + '/' + dat + '_'+ let
