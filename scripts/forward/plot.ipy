@@ -19,14 +19,14 @@ is_save = True
 
 model_name = 'cubey'
 dat = '2016_11_16'
-let = 'h'
+let = 'i'
 
-varname = 'temp'                             #'head','v','temp','kz'
+varname = 'uindex'                             #'head','v','temp','kz', 'uindex'
 v_component = 1                           #0,1,2
 pic_format = 'eps'
 
 varlabels = {'temp':'Temperature [deg]',
-             'head':'Hydraulich Head [m] - 10m',
+             'head':'Hydraulic Head [m] - 10m',
              'uindex':'Model zones'}
 
 num_cbar = 50
