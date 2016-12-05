@@ -215,6 +215,61 @@ def read_hashtag_input(file_name,hashtag_line,nl):
     file_input.close()
     return str_out
 
+
+#############################################################
+#               READ RECORDS INPUT
+#############################################################
+def read_records_input(file_name,hashtag_line):
+    """
+    Read number of records of a hashtag input
+    """
+    hashstr_not_exist = 1
+    try:
+        file_input = open(file_name,'r')
+    except:
+        os.chdir(os.environ['HOME']+'/PythonDir')
+        raise
+    l = 1
+    for line in file_input:
+        hashstr_exist_check = line.find(hashtag_line)
+        #print(hashstr_exist_check)
+        if (hashstr_exist_check > -1):
+            hashl = l
+            hashstr_not_exist = hashstr_not_exist - 1
+        l = l + 1
+    file_input.close()
+
+    if hashstr_not_exist:
+        print('\n\nThe catchphrase')
+        print(hashtag_line)
+        print('was not found (or more than once) in')
+        print(file_name)
+        print('\ntimes found = ')
+        print(1-hashstr_not_exist)
+        raise exceptions.RuntimeError("Hashtag-catchphrase not found.")
+
+
+    str_out = ""
+    file_input = open(file_name,'r')
+    for i in range(hashl-1):
+        file_input.readline()
+    str_out+= file_input.readline()
+    file_input.close()
+
+    records_not_exist_check = 1
+    for string in str.split(str_out):
+        if string[:7] == 'records':
+            records_not_exist_check = 0
+            for i in range(len(string)):
+                if string[i-1]=='=':
+                    num_records = int(string[i:])
+
+    if records_not_exist_check == 1:
+        os.chdir(os.environ['HOME']+'/PythonDir')
+        raise exceptions.RuntimeError('No records in Hashtag-Input: '+hashtag_line)
+                
+    return num_records
+
 #############################################################
 #               COMPILEQUICK
 #############################################################
