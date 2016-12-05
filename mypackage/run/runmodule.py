@@ -173,12 +173,19 @@ def change_hashtag_input(file_name, hashtag_line, new_input):
         
     return
 
+#############################################################
+#               READ HASHTAG INPUT
+#############################################################
 def read_hashtag_input(file_name,hashtag_line,nl):
     """
     Read a number of lines of a hashtag input
     """
     hashstr_not_exist = 1
-    file_input = open(file_name,'r')
+    try:
+        file_input = open(file_name,'r')
+    except:
+        os.chdir(os.environ['HOME']+'/PythonDir')
+        raise
     l = 1
     for line in file_input:
         hashstr_exist_check = line.find(hashtag_line)
