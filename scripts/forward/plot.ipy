@@ -87,6 +87,14 @@ else:
 if is_grid:
     ax.grid()
 
+# Monitoring Points
+for i in range(len(locs)):
+    plt.scatter(x[locs[i][0]],
+                y[locs[i][1]],
+                marker='o',
+                c='black',
+                s=50)
+
 # Title
 # ax.set_title('Temperature field')
 ax.set_xlabel('[m]',fontsize=40)
