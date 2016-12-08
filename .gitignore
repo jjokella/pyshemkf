@@ -1,6 +1,6 @@
 *.pyc
 bin/
-input/
+input/debug/
 output/errorplot/
 output/now/
 output/numcomp/
