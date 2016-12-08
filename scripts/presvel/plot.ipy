@@ -17,13 +17,13 @@ truelet = sc.truelet
 
 rad_factor = 10**7
 rad_min = 0.0
-rad_max = 4.0*10**-7 * rad_factor
+rad_max = 2.0*10**-7 * rad_factor
 
-true_vs = [-1.0*10**-7*rad_factor,-1.0*10**-7*rad_factor]
-true_ang = 225
-true_rad = 1.4*10**-7 * rad_factor
+true_vs = [-1.0*10**-7*rad_factor,0.0*10**-7*rad_factor]
+true_ang = 180
+true_rad = 1.0*10**-7 * rad_factor
 
-pic_format = 'png'                         #'eps' and 'png'
+pic_format = 'eps'                         #'eps' and 'png'
 
 xlims = [60,30*24*3600]
 
