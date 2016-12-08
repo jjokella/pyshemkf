@@ -489,5 +489,5 @@ def delete_model_dir_tmp(model_dir):
     shutil.rmtree(model_dir)
 
 
-print('\n Done with module : runmodule.py.')
-print(time.asctime( time.localtime( time.time())))
+# print('\n Done with module : runmodule.py.')
+# print(time.asctime( time.localtime( time.time())))
