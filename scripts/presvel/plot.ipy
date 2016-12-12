@@ -4,10 +4,7 @@ import os
 import numpy as np
 from mypackage.plot import specs as sc
 
-is_show = [True,True,True]
-is_save = [True,True,True]
-
-# General input
+# Specs general input
 model_name = sc.model_name
 dat = sc.dat
 lets = sc.lets
@@ -15,17 +12,53 @@ lets = sc.lets
 truedat = sc.truedat
 truelet = sc.truelet
 
-rad_factor = 10**7
-rad_min = 0.0
-rad_max = 2.0*10**-7 * rad_factor
+# Show and Save
+try:
+    is_show
+except NameError:
+    is_show = [True,True,True]
 
-true_vs = [-1.0*10**-7*rad_factor,0.0*10**-7*rad_factor]
-true_ang = 180
-true_rad = 1.0*10**-7 * rad_factor
+try:
+    is_save
+except NameError:
+    is_save = [True,True,True]
 
-pic_format = 'eps'                         #'eps' and 'png'
+try:
+    pic_format
+except NameError:
+    pic_format = 'eps'                         #'eps' and 'png'
 
-xlims = [60,30*24*3600]
+# Plot switches
+try:
+    rad_factor
+except NameError:
+    rad_factor = 10**7
+try:
+    rad_min
+except NameError:
+    rad_min = 0.0 * rad_factor
+try:
+    rad_max
+except NameError:
+    rad_max = 2.0*10**-7 * rad_factor
+
+try:
+    true_vs
+except NameError:
+    true_vs = [-1.0*10**-7*rad_factor,0.0*10**-7*rad_factor]
+try:
+    true_ang
+except NameError:
+    true_ang = 180
+try:
+    true_rad
+except NameError:
+    true_rad = 1.0*10**-7 * rad_factor
+
+try:
+    xlims
+except NameError:
+    xlims = [60,30*24*3600]
 
 for let in lets:
 
