@@ -1,0 +1,45 @@
+###############################################################################
+#                        Read for sensitivity analysis                        #
+###############################################################################
+
+import os
+import numpy as np
+from mypackage.plot import specs as sc
+
+
+is_true = False
+
+model_name = sc.model_name
+dat = sc.dat
+lets = sc.lets
+
+
+for let in lets:
+
+    os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + dat + "/" \
+                 + dat + "_" + let + "/samples_output")
+
+    obs_num = 9 # Column Number in observations file
+
+    num_mons = sc.num_mons(model_name,dat,let)
+
+    # Read
+    if let==lets[0]:
+        t = np.genfromtxt(model_name.upper() + '_E0_monitor_1.dat',
+                              dtype='f8',
+                              comments='%',
+                              usecols=(0)) # obstime
+    temp = np.genfromtxt(model_name.upper() + '_E0_monitor_1.dat',
+                             dtype='f8',
+                             comments='%',
+                             usecols=(obs_num))     #variable
+
+    os.chdir(os.environ['HOME']+'/PythonDir/')
+
+    if let==lets[0]:
+        t = t.reshape(len(t)/num_mons, num_mons)[:,0]
+    temp = temp.reshape(len(temp)/num_mons, num_mons)
+    
+    np.save('output/sensitivity/npy/truet_'+model_name+'_'+dat+'_'+let+'.npy',t)
+    np.save('output/sensitivity/npy/truetemp_'+model_name+'_'+dat+'_'+let+'.npy',temp)
+

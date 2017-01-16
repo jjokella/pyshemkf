@@ -1,0 +1,22 @@
+###############################################################################
+#               Make the arrays needed for sensitivity analysis               #
+###############################################################################
+
+import os
+import numpy as np
+from mypackage.plot import specs as sc
+
+
+model_name = sc.model_name
+dat = sc.dat
+lets = sc.lets
+
+num_mons = sc.num_mons(model_name,dat,lets[0])
+sense = np.zeros([5,num_mons,len(lets)])
+
+for i,let in enumerate(lets):
+    temp = np.load('output/sensitivity/npy/truetemp_'+model_name+'_'+dat+'_'+let+'.npy')
+
+    sense[:,:,i] = temp[[100,200,300,400,510],:]
+
+np.save('output/sensitivity/npy/sense_'+sc.model_name+'_'+sc.dat+'_'+sc.lets[0]+'.npy',sense)
