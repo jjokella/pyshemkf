@@ -19,12 +19,12 @@ is_show = True
 is_save = True
 
 model_name = 'cubey'
-dat = '2016_11_16'
-let = 'i'
+dat = '2016_12_05'
+let = 'a'
 
 varname = 'uindex'                             #'head','v','temp','kz', 'uindex'
 v_component = 1                           #0,1,2
-pic_format = 'eps'
+pic_format = 'png'
 
 varlabels = {'temp':'Temperature [deg]',
              'head':'Hydraulic Head [m] - 10m',
