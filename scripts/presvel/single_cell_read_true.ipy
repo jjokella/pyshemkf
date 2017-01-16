@@ -4,35 +4,52 @@ import os
 import numpy as np
 from mypackage.plot import specs as sc
 
+is_true = False
+
 model_name = sc.model_name
 dat = sc.dat
-let_true = sc.truelet
+if is_true:
+    let = sc.truelet
+else:
+    let = sc.lets[0]
+    
 output_dir = 'samples_output'
 
 obs_num = 9 # Column Number in observations file
 
-num_mons = sc.num_mons(model_name,dat,let_true)
+num_mons = sc.num_mons(model_name,dat,let)
 
 os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + dat + "/" \
-             + dat + "_" + let_true + "/" + output_dir)
+             + dat + "_" + let + "/" + output_dir)
 
 # Read
-t = np.genfromtxt(model_name.upper() + '_TRUE_E0_monitor_1.dat',
-                      dtype='f8',
-                      comments='%',
-                      usecols=(0)) # obstime
-temp = np.genfromtxt(model_name.upper() + '_TRUE_E0_monitor_1.dat',
-                         dtype='f8',
-                         comments='%',
-                         usecols=(obs_num))     #variable
+if is_true:
+    t = np.genfromtxt(model_name.upper() + '_TRUE' + '_E0_monitor_1.dat',
+                          dtype='f8',
+                          comments='%',
+                          usecols=(0)) # obstime
+    temp = np.genfromtxt(model_name.upper() + '_TRUE' + '_E0_monitor_1.dat',
+                             dtype='f8',
+                             comments='%',
+                             usecols=(obs_num))     #variable
+else:
+    t = np.genfromtxt(model_name.upper() + '_E0_monitor_1.dat',
+                          dtype='f8',
+                          comments='%',
+                          usecols=(0)) # obstime
+    temp = np.genfromtxt(model_name.upper() + '_E0_monitor_1.dat',
+                             dtype='f8',
+                             comments='%',
+                             usecols=(obs_num))     #variable
+
 # Reshape
 t = t.reshape(len(t)/num_mons, num_mons)[:,0]
 temp = temp.reshape(len(temp)/num_mons, num_mons)
 
 os.chdir(os.environ['HOME']+'/PythonDir/')
 
-np.save('output/presvel/npy/truet_'+model_name+'_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy',t)
-np.save('output/presvel/npy/truetemp_'+model_name+'_'+dat+'_'+let_true+'_'+str(num_mons).zfill(4)+'.npy',temp)
+np.save('output/presvel/npy/truet_'+model_name+'_'+dat+'_'+let+'_'+str(num_mons).zfill(4)+'.npy',t)
+np.save('output/presvel/npy/truetemp_'+model_name+'_'+dat+'_'+let+'_'+str(num_mons).zfill(4)+'.npy',temp)
 
 
 
