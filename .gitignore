@@ -12,5 +12,6 @@ output/txt/
 output/tcon/
 output/forward/eps
 output/forward/npy
+output/sensitivity/npy
 lib/
 notebook/
