@@ -424,10 +424,22 @@ def make_file_dir_names(model_name):
     true_file = "True" + model_name_big + ".plt"
     true_chem_file = "True" + model_name_big + "_chem.plt"
 
-    return model_name_big, model_dir, input_file, enkf_input_file, true_input_file,\
-        true_sgsim_file, sgsim_file, true_log_file, log_file, shell_output_file,\
-        init_dist_file_one, init_dist_file_two, init_dist_file_three, observations_file,\
-        true_file,true_chem_file
+    return model_name_big, \    # 0
+        model_dir, \            # 1
+        input_file, \           # 2
+        enkf_input_file, \      # 3
+        true_input_file,\       # 4
+        true_sgsim_file, \      # 5
+        sgsim_file, \           # 6
+        true_log_file, \        # 7
+        log_file, \             # 8
+        shell_output_file, \    # 9
+        init_dist_file_one, \   # 10
+        init_dist_file_two, \   # 11
+        init_dist_file_three, \ # 12
+        observations_file, \    # 13
+        true_file, \            # 14
+        true_chem_file          # 15
 
 
 def make_model_dir_tmp(model_name,letter,today):
