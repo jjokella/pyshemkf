@@ -73,9 +73,14 @@ def delx(model_name,dat,let):
     """
     output_path = os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' \
                   + dat + '/' + dat + '_'+ let+ '/'
-    input_file = rm.make_file_dir_names(model_name)[2]
 
-    line = rm.read_hashtag_input(output_path+input_file,'# delx',1)
+    try:
+        input_file = rm.make_file_dir_names(model_name)[2]
+        line = rm.read_hashtag_input(output_path+input_file,'# delx',1)
+    except:
+        input_file = rm.make_file_dir_names(model_name)[4]
+        line = rm.read_hashtag_input(output_path+input_file,'# delx',1)
+
     num_entries = len(str.split(line))
     nums = [int(  str.split(str.split(line)[i],"*")[0]) for i in range(num_entries)]
     lens = [float(str.split(str.split(line)[i],"*")[1]) for i in range(num_entries)]
@@ -95,7 +100,13 @@ def dely(model_name,dat,let):
                   + dat + '/' + dat + '_'+ let+ '/'
     input_file = rm.make_file_dir_names(model_name)[2]
 
-    line = rm.read_hashtag_input(output_path+input_file,'# dely',1)
+    try:
+        input_file = rm.make_file_dir_names(model_name)[2]
+        line = rm.read_hashtag_input(output_path+input_file,'# dely',1)
+    except:
+        input_file = rm.make_file_dir_names(model_name)[4]
+        line = rm.read_hashtag_input(output_path+input_file,'# dely',1)
+
     num_entries = len(str.split(line))
     nums = [int(  str.split(str.split(line)[i],"*")[0]) for i in range(num_entries)]
     lens = [float(str.split(str.split(line)[i],"*")[1]) for i in range(num_entries)]
