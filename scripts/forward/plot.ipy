@@ -13,6 +13,7 @@ from mypackage.plot import mycolors
 from mypackage.plot import grids
 import pandas as pd
 
+from mypackage.plot import specs as sc
 
 is_show = True
 is_save = True
