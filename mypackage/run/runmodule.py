@@ -141,7 +141,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
 #############################################################
 #               CHANGE HASHTAG INPUT
 #############################################################
-def change_hashtag_input(file_name, hashtag_line, new_input):
+def change_hashtag_input(file_name, hashtag_line, new_input, delete_lines = None):
     "In file_name hashtag_line is found and new_input inserted as next line"
     hashstr_not_exist = 1
     file_name_tmp = 'filename.tmp'
@@ -152,9 +152,12 @@ def change_hashtag_input(file_name, hashtag_line, new_input):
         #print(hashstr_exist_check)
         if (hashstr_exist_check > -1):
             hashstr_not_exist = hashstr_not_exist - 1
-            file_tmp.write(hashtag_line + '\n')
+            file_tmp.write(line)
             file_tmp.write(new_input)
             file_tmp.write("\n\n\n")
+            if delete_lines:
+                for i in range(delete_lines):
+                    file_input.next()
         else:
             file_tmp.write(line)
     file_input.close()
