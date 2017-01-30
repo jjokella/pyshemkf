@@ -237,7 +237,7 @@ Delta T between 2-3 W/Km
 
 Delta T between 2-3 W/Km
 
-* Ring heat conductivity II
+* Tube heat conductivity
 ** Setting the specs paramters
 #+BEGIN_SRC ipython :session   :exports both
   sc.model_name = 'cubey'
@@ -281,7 +281,7 @@ Delta T between 2-3 W/Km
 #+BEGIN_SRC ipython :session :file /home/jk125262/PythonDir/output/tmp/py63d83ANv.png :exports both
 
   sense = np.load('output/sensitivity/npy/sense_'+sc.model_name+'_'+sc.dat+'_'+sc.lets[0]+'_'+str(num_mons).zfill(4)+'.npy')
-
+ 
   plt.figure(1,[10,4], dpi=200, facecolor = 'white')
   #plt.title('Velocity x/y components', size = 12)
   plt.xlabel(r'Thermal Conductivity [$\frac{W}{m\cdot K}$]',fontsize = 14, labelpad=10)
@@ -293,7 +293,7 @@ Delta T between 2-3 W/Km
   #plt.plot(l,sense[0,1,:])
   plt.plot(l,sense[1,0,:])
   plt.plot(l,sense[2,0,:])
- 
+   
 #+END_SRC
 
 #+RESULTS:
