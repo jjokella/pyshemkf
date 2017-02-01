@@ -13,5 +13,7 @@ output/tcon/
 output/forward/eps
 output/forward/npy
 output/sensitivity/npy
+output/sensitivity/png
+output/sensitivity/eps
 lib/
 notebook/
