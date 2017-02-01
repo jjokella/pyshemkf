@@ -166,13 +166,13 @@ def change_hashtag_input(file_name, hashtag_line, new_input, delete_lines = None
     os.rename(file_name_tmp,file_name)
 
     if hashstr_not_exist:
-        print('\n\nThe catchphrase')
-        print(hashtag_line)
-        print('was not found (or more than once) in')
-        print(file_name)
-        print('\ntimes found = ')
-        print(1-hashstr_not_exist)
-        raise exceptions.RuntimeError("Hashtag-catchphrase not found.")
+        raise exceptions.RuntimeError('Hashtag-catchphrase not found.'
+                                      + '\n\nThe catchphrase  '
+                                      + hashtag_line 
+                                      + '  was found '
+                                      + str(1-hashstr_not_exist)
+                                      + ' times in'
+                                      + file_name)
         
     return
 
@@ -200,14 +200,13 @@ def read_hashtag_input(file_name,hashtag_line,nl):
     file_input.close()
 
     if hashstr_not_exist:
-        print('\n\nThe catchphrase')
-        print(hashtag_line)
-        print('was not found (or more than once) in')
-        print(file_name)
-        print('\ntimes found = ')
-        print(1-hashstr_not_exist)
-        raise exceptions.RuntimeError("Hashtag-catchphrase not found.")
-
+        raise exceptions.RuntimeError('Hashtag-catchphrase not found.'
+                                      + '\n\nThe catchphrase  '
+                                      + hashtag_line 
+                                      + '  was found '
+                                      + str(1-hashstr_not_exist)
+                                      + ' times in'
+                                      + file_name)
 
     str_out = ""
     file_input = open(file_name,'r')
@@ -243,14 +242,13 @@ def read_records_input(file_name,hashtag_line):
     file_input.close()
 
     if hashstr_not_exist:
-        print('\n\nThe catchphrase')
-        print(hashtag_line)
-        print('was not found (or more than once) in')
-        print(file_name)
-        print('\ntimes found = ')
-        print(1-hashstr_not_exist)
-        raise exceptions.RuntimeError("Hashtag-catchphrase not found.")
-
+        raise exceptions.RuntimeError('Hashtag-catchphrase not found.'
+                                      + '\n\nThe catchphrase  '
+                                      + hashtag_line 
+                                      + '  was found '
+                                      + str(1-hashstr_not_exist)
+                                      + ' times in'
+                                      + file_name)
 
     str_out = ""
     file_input = open(file_name,'r')
