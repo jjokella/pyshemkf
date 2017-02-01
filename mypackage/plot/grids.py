@@ -28,6 +28,9 @@ from vtk.util.numpy_support import vtk_to_numpy
 import re
 import string
 
+###############################################################################
+#                                      x                                      #
+###############################################################################
 def x(model_name,dat,let):
     """
     Read model name and return the corresponding
@@ -37,7 +40,9 @@ def x(model_name,dat,let):
     arr = np.array([np.sum(delxarr[:i])+0.5*delxarr[i] for i in range(delxarr.size)])
     return arr
 
-
+###############################################################################
+#                                      y                                      #
+###############################################################################
 def y(model_name,dat,let):
     """
     Read model name and return the corresponding
@@ -47,6 +52,9 @@ def y(model_name,dat,let):
     arr = np.array([np.sum(delyarr[:i])+0.5*delyarr[i] for i in range(delyarr.size)])
     return arr
 
+###############################################################################
+#                                    xticks                                   #
+###############################################################################
 def xticks(model_name,dat,let):
     """
     Read model name and return the corresponding
@@ -56,6 +64,9 @@ def xticks(model_name,dat,let):
     arr = np.array([np.sum(delxarr[:i]) for i in range(delxarr.size+1)])
     return arr
 
+###############################################################################
+#                                    yticks                                   #
+###############################################################################
 def yticks(model_name,dat,let):
     """
     Read model name and return the corresponding
@@ -65,6 +76,9 @@ def yticks(model_name,dat,let):
     arr = np.array([np.sum(delyarr[:i]) for i in range(delyarr.size+1)])
     return arr
 
+###############################################################################
+#                                     delx                                    #
+###############################################################################
 def delx(model_name,dat,let):
     """
     Read model name, output date and letter and
@@ -90,6 +104,9 @@ def delx(model_name,dat,let):
     arr = np.array([num for elem in vec for num in elem])
     return arr
 
+###############################################################################
+#                                     dely                                    #
+###############################################################################
 def dely(model_name,dat,let):
     """
     Read model name, output date and letter and
