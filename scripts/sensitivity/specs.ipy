@@ -1,13 +1,41 @@
 from mypackage.plot import specs as sc
 from mypackage.run import runmodule as rm
 
+import sensitivityarrays as sa  
+# 'cubey_2017_01_15_a'
+# 'cubey_2017_01_31_a'
+# 'cubey_2017_01_31_aln'
+# 'cubey_2017_01_31_bxz'
+# 'cubey_2017_01_30_a'
+# 'cubey_2017_01_30_aln'
+# 'cubey_2017_01_30_bxz'
+# 'cubey_2017_01_30_dkl'
+
+# Single run ##################################################################
 sc.model_name = 'cubey'
 
-sc.truedat = '2017_01_16'
-sc.truelet = 'bxz'
+sc.truedat = '2017_01_15'
+sc.truelet = 'a'
 
-sc.dat = '2017_01_16'
+sc.dat = '2017_01_15'
 sc.lets = [rm.get_let_num(i) for i in range(1000)]
+# sc.lets = [rm.get_let_num(i) for i in range(1001,2000)]
 
-%run scripts/sensitivity/read.ipy
+# %run scripts/sensitivity/read.ipy
 # %run scripts/sensitivity/mix.ipy
+%run scripts/sensitivity/plot.ipy
+
+
+# Multiple runs ###############################################################
+# for i in range(len(sa.runs)):
+#     sc.model_name = sa.runs[i][0] #'cubey'
+
+#     sc.truedat = sa.runs[i][1] #'2017_01_15'
+#     sc.truelet = sa.runs[i][2] #'a'
+
+#     sc.dat = sa.runs[i][3] #'2017_01_15'
+#     sc.lets = [rm.get_let_num(i) for i in sa.runs[i][4]] # range(1000)
+
+#     # %run scripts/sensitivity/read.ipy
+#     # %run scripts/sensitivity/mix.ipy
+#     %run scripts/sensitivity/plot.ipy

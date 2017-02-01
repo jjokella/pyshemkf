@@ -12,11 +12,12 @@ dat = sc.dat
 lets = sc.lets
 
 num_mons = sc.num_mons(model_name,dat,lets[0])
-sense = np.zeros([5,num_mons,len(lets)])
+nt = sc.nt(model_name,dat,lets[0])
+sense = np.zeros([nt,num_mons,10])
 
-for i,let in enumerate(lets):
+for i,let in enumerate(lets[::100]):
     temp = np.load('output/sensitivity/npy/truetemp_'+model_name+'_'+dat+'_'+let+'.npy')
 
-    sense[:,:,i] = temp[[100,200,300,400,510],:]
+    sense[:,:,i] = temp[:,:]
 
 np.save('output/sensitivity/npy/sense_'+sc.model_name+'_'+sc.dat+'_'+sc.lets[0]+'.npy',sense)

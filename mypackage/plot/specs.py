@@ -15,6 +15,19 @@ truedat = '1988_11_10'
 truelet = 'a'
 
 ###############################################################################
+#                                     spec                                    #
+###############################################################################
+def spec():
+    """
+    Specifier-string consisting of
+    - model name
+    - date
+    - letter (usually the first of a list of letters)
+    - two '_' in between 
+    """
+    return model_name + '_' + dat + '_' + lets[0]
+
+###############################################################################
 #                                    nrens                                    #
 ###############################################################################
 def nrens(model_name,dat,let):
@@ -174,25 +187,53 @@ def units(model_name,dat,let,uindex,pindex):
     10 - Volumetric heat capacity
     """
 
-    # Define path and file ####################################################
+    # Define path and file
     output_path = os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' \
                   + dat + '/' + dat + '_'+ let+ '/'
     input_file = rm.make_file_dir_names(model_name)[2]
 
-    # Open file ###############################################################
-    file_input = open(output_path+input_file,'r')
+    # Read hashtag input
+    lines = rm.read_hashtag_input(output_path+input_file,'# units',uindex)
 
-    # Read hashtag input ######################################################
-    lines = rm.read_hashtag_input(output_path+enkf_input_file,'# units,',uindex)
-
-    # Split hashtag input by white space ######################################
+    # Split hashtag input by white space
     split_lines = str.split(lines)
 
-    # Find the number of parameters per line ##################################
+    # Find the number of parameters per line
     num_ps = len(split_lines)/uindex
-    # Calculate the index of the right parameter ############################## 
+    # Calculate the index of the right parameter
     right_index = (uindex-1)*num_ps + pindex
 
     right_entry = split_lines[right_index]
 
     return right_entry
+
+###############################################################################
+#                             Number of time steps                            #
+###############################################################################
+def nt(model_name,dat,let):
+    """
+    Read the number of time steps (used in observation file)
+    """
+
+    # Define path and file
+    output_path = os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' \
+                  + dat + '/' + dat + '_'+ let+ '/'
+    input_file = rm.make_file_dir_names(model_name)[2]
+
+    # Read records (number lines in time step input)
+    num_time_records = rm.read_records_input(output_path+input_file,'# time periods')
+
+    # Read hashtag input
+    lines = rm.read_hashtag_input(output_path+input_file,'# time periods',num_time_records)
+    
+    # Split hashtag input by white space
+    split_lines = str.split(lines)
+
+    # Read entry 3/4 in each line
+    right_entries = split_lines[2::4]
+
+    # Sum of the entries
+    # -> Adding one accounts for the first time step at time = 0
+    nt = sum([int(right_entries[i]) for i in range(len(right_entries))]) + 1
+
+    return nt
