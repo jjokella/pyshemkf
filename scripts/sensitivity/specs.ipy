@@ -14,15 +14,15 @@ import sensitivityarrays as sa
 # Single run ##################################################################
 sc.model_name = 'cubey'
 
-sc.truedat = '2017_01_15'
+sc.truedat = '2017_02_02'
 sc.truelet = 'a'
 
-sc.dat = '2017_01_15'
-sc.lets = [rm.get_let_num(i) for i in range(1000)]
+sc.dat = '2017_02_02'
+sc.lets = [rm.get_let_num(i) for i in range(71,81)]
 # sc.lets = [rm.get_let_num(i) for i in range(1001,2000)]
 
-# %run scripts/sensitivity/read.ipy
-# %run scripts/sensitivity/mix.ipy
+%run scripts/sensitivity/read.ipy
+%run scripts/sensitivity/mix.ipy
 %run scripts/sensitivity/plot.ipy
 
 

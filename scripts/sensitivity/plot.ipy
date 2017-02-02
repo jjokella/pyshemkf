@@ -22,13 +22,13 @@ import sensitivityarrays as sa
 #                                    Input                                    #
 ###############################################################################
 is_save = [True]
-is_show = [False]
+is_show = [True]
 
 model_name = sc.model_name
 dat = sc.dat
 let = sc.lets[0]
 
-iobs = 0
+iobs = 2
 
 pic_format = 'png'              # png, eps
 pic_names = ['sense_'+str(iobs).zfill(2)+'_'+sc.spec()]
@@ -68,6 +68,7 @@ plt.ylabel(r'Temperature [$ ^{\circ} C$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
 plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
 plt.xlim(xlims[0],xlims[1])
+plt.ylim(11,20)
 
 plt.text(0.95,0.95,
          "White->Black: "+sa.sensitivity_ranges[sc.spec()],

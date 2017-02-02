@@ -30,24 +30,42 @@ sensitivity_varnames = {'cubey_2016_12_13_a':'Thermal conductivity deprecated',
                         'cubey_2017_01_30_a':'Thermal conductivity',
                         'cubey_2017_01_30_aln':'Thermal conductivity',
                         'cubey_2017_01_30_bxz':'Thermal conductivity',
-                        'cubey_2017_01_30_dkl':'Thermal conductivity',}
+                        'cubey_2017_01_30_dkl':'Thermal conductivity',
+                        'cubey_2017_02_02_b':'Thermal conductivity v= 10**-7',
+                        'cubey_2017_02_02_l':'Thermal conductivity v= 10**-7',
+                        'cubey_2017_02_02_v':'Thermal conductivity v= 10**-7',
+                        'cubey_2017_02_02_af':'Thermal conductivity v= 10**-6',
+                        'cubey_2017_02_02_ap':'Thermal conductivity v= 10**-6',
+                        'cubey_2017_02_02_az':'Thermal conductivity v= 10**-6',
+                        'cubey_2017_02_02_bj':'Thermal conductivity v= 10**-5',
+                        'cubey_2017_02_02_bt':'Thermal conductivity v= 10**-5',
+                        'cubey_2017_02_02_cd':'Thermal conductivity v= 10**-5'}
 
 # Cubey: Unit numbers #########################################################
 unit_numbers = {'cubey_2016_12_13_a': 1,
-                        'cubey_2016_12_14_a':2,
-                        'cubey_2016_12_14_aln':7,
-                        'cubey_2016_12_14_bxz':3,
-                        'cubey_2017_01_15_a':1,
-                        'cubey_2017_01_16_a':2,
-                        'cubey_2017_01_16_aln':7,
-                        'cubey_2017_01_16_bxz':3,
-                        'cubey_2017_01_31_a':2,
-                        'cubey_2017_01_31_aln':7,
-                        'cubey_2017_01_31_bxz':3,
-                        'cubey_2017_01_30_a':1,
-                        'cubey_2017_01_30_aln':2,
-                        'cubey_2017_01_30_bxz':7,
-                        'cubey_2017_01_30_dkl':3,}
+                'cubey_2016_12_14_a':2,
+                'cubey_2016_12_14_aln':7,
+                'cubey_2016_12_14_bxz':3,
+                'cubey_2017_01_15_a':1,
+                'cubey_2017_01_16_a':2,
+                'cubey_2017_01_16_aln':7,
+                'cubey_2017_01_16_bxz':3,
+                'cubey_2017_01_31_a':2,
+                'cubey_2017_01_31_aln':7,
+                'cubey_2017_01_31_bxz':3,
+                'cubey_2017_01_30_a':1,
+                'cubey_2017_01_30_aln':2,
+                'cubey_2017_01_30_bxz':7,
+                'cubey_2017_01_30_dkl':3,
+                'cubey_2017_02_02_b':1,
+                'cubey_2017_02_02_l':2,
+                'cubey_2017_02_02_v':7,
+                'cubey_2017_02_02_af':1,
+                'cubey_2017_02_02_ap':2,
+                'cubey_2017_02_02_az':7,
+                'cubey_2017_02_02_bj':1,
+                'cubey_2017_02_02_bt':2,
+                'cubey_2017_02_02_cd':7,}
 
 # Cubey: Unit names ###########################################################
 unit_names =  {1:'Sand, outside',
@@ -70,7 +88,16 @@ sensitivity_ranges = {'cubey_2016_12_13_a':r'1.5-3.0 $\frac{W}{mK}$ deprecated',
                       'cubey_2017_01_30_a':r'0.1-3.1 $\frac{W}{mK}$',
                       'cubey_2017_01_30_aln':r'0.1-3.1 $\frac{W}{mK}$',
                       'cubey_2017_01_30_bxz':r'0.1-3.1 $\frac{W}{mK}$',
-                      'cubey_2017_01_30_dkl':r'0.1-3.1 $\frac{W}{mK}$',}
+                      'cubey_2017_01_30_dkl':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_b':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_l':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_v':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_af':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_ap':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_az':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_bj':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_bt':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_cd':r'0.1-3.1 $\frac{W}{mK}$',}
 
 
 # Sensitivity analysis: Default numbers #######################################
@@ -81,7 +108,16 @@ default_jobs = {'cubey_2017_01_15_a':101,
                 'cubey_2017_01_30_a':834,
                 'cubey_2017_01_30_aln':301,
                 'cubey_2017_01_30_bxz':634,
-                'cubey_2017_01_30_dkl':76,}
+                'cubey_2017_01_30_dkl':76,
+                'cubey_2017_02_02_b':8,
+                'cubey_2017_02_02_l':3,
+                'cubey_2017_02_02_v':6,
+                'cubey_2017_02_02_af':8,
+                'cubey_2017_02_02_ap':3,
+                'cubey_2017_02_02_az':6,
+                'cubey_2017_02_02_bj':8,
+                'cubey_2017_02_02_bt':3,
+                'cubey_2017_02_02_cd':6,}
 
 default_values = {'cubey_2017_01_15_a':r'0.8 $10^6 \frac{J}{Km^3}$',
                   'cubey_2017_01_31_a':r'0.8 $10^6 \frac{J}{Km^3}$',
@@ -90,7 +126,16 @@ default_values = {'cubey_2017_01_15_a':r'0.8 $10^6 \frac{J}{Km^3}$',
                   'cubey_2017_01_30_a':r'2.6 $\frac{W}{mK}$',
                   'cubey_2017_01_30_aln':r'1.0 $\frac{W}{mK}$',
                   'cubey_2017_01_30_bxz':r'2.0 $\frac{W}{mK}$',
-                  'cubey_2017_01_30_dkl':r'0.325 $\frac{W}{mK}$',}
+                  'cubey_2017_01_30_dkl':r'0.325 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_b':r'2.6 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_l':r'1.0 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_v':r'2.0 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_af':r'2.6 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_ap':r'1.0 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_az':r'2.0 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_bj':r'2.6 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_bt':r'1.0 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_cd':r'2.0 $\frac{W}{mK}$',}
 
 
 # CUBEY: Measurement points ###################################################
@@ -127,3 +172,12 @@ obs_shortlabels = {0:'NN',            # Outer ring
                    13:'se',
                    14:'ee',
                    15:'ne',}
+
+obs_difflabels = {0:'NN-SS',    # Outer ring
+                  1:'NW-SE',
+                  2:'WW-EE',
+                  3:'SW-NE',
+                  4:'nn-ss',    # Inner ring
+                  5:'nw-se',
+                  6:'ww-ee',
+                  7:'sw-ne'}
