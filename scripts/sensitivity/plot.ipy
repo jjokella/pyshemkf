@@ -16,7 +16,7 @@ from mypackage.plot import grids
 import pandas as pd
 
 from mypackage.plot import specs as sc
-from mypackage.plot import sensitivityarrays as sa
+import sensitivityarrays as sa
 
 ###############################################################################
 #                                    Input                                    #
