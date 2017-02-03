@@ -17,15 +17,31 @@ truelet = 'a'
 ###############################################################################
 #                                     spec                                    #
 ###############################################################################
-def spec():
+def spec(nl=0):
     """
     Specifier-string consisting of
     - model name
     - date
-    - letter (usually the first of a list of letters)
+    - letter (number nl in the list)
     - two '_' in between 
     """
-    return model_name + '_' + dat + '_' + lets[0]
+    return model_name + '_' + dat + '_' + lets[nl]
+
+###############################################################################
+#                                     specl                                   #
+###############################################################################
+def specl(let=None):
+    """
+    Specifier-string consisting of
+    - model name
+    - date
+    - letter (specified or first)
+    - two '_' in between 
+    """
+    if let:
+        return model_name + '_' + dat + '_' + let
+    else:
+        return model_name + '_' + dat + '_' + lets[0]
 
 ###############################################################################
 #                                    nrens                                    #
