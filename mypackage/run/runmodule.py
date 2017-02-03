@@ -451,6 +451,7 @@ def make_file_dir_names(model_name):
     13 - observations_file
     14 - true_file
     15 - true_chem_file
+    16 - monitor_file
     """
     model_name_big = model_name.upper()
     model_dir = os.environ['HOME']+"/shematModelsDir/" + model_name + "_model"
@@ -468,7 +469,8 @@ def make_file_dir_names(model_name):
     observations_file = "observations_" + model_name_big + ".dat"
     true_file = "True" + model_name_big + ".plt"
     true_chem_file = "True" + model_name_big + "_chem.plt"
-
+    monitor_file = model_name_big + '_E0_monitor_1.dat'
+    
     return model_name_big, \
         model_dir, \
         input_file, \
@@ -484,7 +486,8 @@ def make_file_dir_names(model_name):
         init_dist_file_three, \
         observations_file, \
         true_file, \
-        true_chem_file
+        true_chem_file,\
+        monitor_file
 
 
 def make_model_dir_tmp(model_name,letter,today):
