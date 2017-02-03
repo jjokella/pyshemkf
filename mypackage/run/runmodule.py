@@ -400,8 +400,30 @@ def change_matlab( mfile_name,
 
     return
 
+###############################################################################
+#                            MAKE OUTPUT DIRECTORY                            #
+###############################################################################
 
-
+def make_output_dirs(model_name,dat,let):
+    """
+    Generate output directories of the run corresponding to
+    - model_name
+    - dat
+    - let
+    """
+    output_dir = os.environ['HOME']+"/shematOutputDir/" \
+                 + model_name +"_output/" + dat + "/" \
+                 + dat + "_" + let
+    samples_output_dir = os.environ['HOME']+"/shematOutputDir/" \
+                         + model_name +"_output/" + dat + "/" \
+                         + dat + "_" + let + "/samples_output"
+    enkf_output_dir = os.environ['HOME']+"/shematOutputDir/" \
+                      + model_name +"_output/" + dat + "/" \
+                      + dat + "_" + let + "/enkf_output"
+    
+    return output_dir, \
+        samples_output_dir, \
+        enkf_output_dir
 
 #############################################################
 #               MAKE FILE/DIR NAMES
