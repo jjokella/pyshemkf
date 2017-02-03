@@ -4,40 +4,37 @@
 
 import os
 import numpy as np
+import sensitivityarrays as sa
 from mypackage.plot import specs as sc
+from mypackage.run import runmodule as rm
+from mypackage.run import pythonmodule as pm
 
+monitor_file = rm.make_file_dir_names(sc.model_name)[16]
 
-model_name = sc.model_name
-dat = sc.dat
-lets = sc.lets
+for let in sc.lets:
 
-
-for let in lets:
+    # cd to samples_output directory ##########################################
+    os.chdir(rm.make_output_dirs(sc.model_name,sc.dat,let)[1])
 
     # Read model properties ###################################################
-    obs_num = 9 # Column Number in obs_file: Temperature
-    num_mons = sc.num_mons(model_name,dat,let)
-
-    # Change to samples_output directory ######################################
-    os.chdir(os.environ['HOME']+"/shematOutputDir/"
-             + model_name +"_output/" + dat + "/" \
-             + dat + "_" + let + "/samples_output")
+    num_mons = sc.num_mons(sc.model_name,sc.dat,let)
 
     # Read time and temperature ###############################################
-    if let==lets[0]:
-        t = np.genfromtxt(model_name.upper() + '_E0_monitor_1.dat',
+    if let==sc.lets[0]:
+        t = np.genfromtxt(monitor_file,
                           dtype='f8', comments='%', usecols=(0)) # obstime
-    temp = np.genfromtxt(model_name.upper() + '_E0_monitor_1.dat',
-                         dtype='f8', comments='%', usecols=(obs_num)) # variable
+    temp = np.genfromtxt(monitor_file,
+                         dtype='f8', comments='%', usecols=(9)) # variable
+    # Col 0 in obs_file: obstime
+    # Col 9 in obs_file: Temperature
 
     # Reshape arrays ##########################################################
-    if let==lets[0]:
+    if let==sc.lets[0]:
         t = t.reshape(len(t)/num_mons, num_mons)[:,0]
     temp = temp.reshape(len(temp)/num_mons, num_mons)
 
     # Save arrays #############################################################
-    os.chdir(os.environ['HOME']+'/PythonDir/')
+    np.save(pm.py_output_filename("truet",sa.tag,"npy",let),t)
+    np.save(pm.py_output_filename('truetemp',sa.tag,'npy',let),temp)
 
-    np.save('output/sensitivity/npy/truet_'+model_name+'_'+dat+'_'+let+'.npy',t)
-    np.save('output/sensitivity/npy/truetemp_'+model_name+'_'+dat+'_'+let+'.npy',temp)
-
+os.chdir(pm.python_dir)

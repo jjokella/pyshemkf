@@ -4,6 +4,8 @@
 #                      Variables for Sensitivity Analysis                     #
 ###############################################################################
 
+tag = "sensitivity"
+
 # Different runs ##############################################################
 runs = [['cubey','2017_01_15','a','2017_01_15',range(1000)],
         ['cubey','2017_01_31','a','2017_01_31',range(1000)],
@@ -14,6 +16,8 @@ runs = [['cubey','2017_01_15','a','2017_01_15',range(1000)],
         ['cubey','2017_01_30','bxz','2017_01_30',range(2001,3000)],
         ['cubey','2017_01_30','dkl','2017_01_30',range(3001,4000)]]
         
+
+
 
 # Sensitivity analysis: Varied variables ######################################
 sensitivity_varnames = {'cubey_2016_12_13_a':'Thermal conductivity deprecated',
@@ -39,7 +43,10 @@ sensitivity_varnames = {'cubey_2016_12_13_a':'Thermal conductivity deprecated',
                         'cubey_2017_02_02_az':'Thermal conductivity v= 10**-6',
                         'cubey_2017_02_02_bj':'Thermal conductivity v= 10**-5',
                         'cubey_2017_02_02_bt':'Thermal conductivity v= 10**-5',
-                        'cubey_2017_02_02_cd':'Thermal conductivity v= 10**-5'}
+                        'cubey_2017_02_02_cd':'Thermal conductivity v= 10**-5',
+                        'cubey_2017_02_02_cx':'Velocity',
+                        'cubey_2017_02_02_dh':'Velocity',
+                        'cubey_2017_02_02_dr':'Velocity'}
 
 # Cubey: Unit numbers #########################################################
 unit_numbers = {'cubey_2016_12_13_a': 1,
@@ -65,10 +72,14 @@ unit_numbers = {'cubey_2016_12_13_a': 1,
                 'cubey_2017_02_02_az':7,
                 'cubey_2017_02_02_bj':1,
                 'cubey_2017_02_02_bt':2,
-                'cubey_2017_02_02_cd':7,}
+                'cubey_2017_02_02_cd':7,
+                'cubey_2017_02_02_cx':0,
+                'cubey_2017_02_02_dh':0,
+                'cubey_2017_02_02_dr':0}
 
 # Cubey: Unit names ###########################################################
-unit_names =  {1:'Sand, outside',
+unit_names =  {0:'Velocity, bc',
+               1:'Sand, outside',
                2:'Sand, inside',
                7:'Hull, large tube',
                3:'Inside, small tube'}
@@ -97,7 +108,10 @@ sensitivity_ranges = {'cubey_2016_12_13_a':r'1.5-3.0 $\frac{W}{mK}$ deprecated',
                       'cubey_2017_02_02_az':r'0.1-3.1 $\frac{W}{mK}$',
                       'cubey_2017_02_02_bj':r'0.1-3.1 $\frac{W}{mK}$',
                       'cubey_2017_02_02_bt':r'0.1-3.1 $\frac{W}{mK}$',
-                      'cubey_2017_02_02_cd':r'0.1-3.1 $\frac{W}{mK}$',}
+                      'cubey_2017_02_02_cd':r'0.1-3.1 $\frac{W}{mK}$',
+                      'cubey_2017_02_02_cx':r'0.0-1.0 $10^{-7} \frac{m}{s}$',
+                      'cubey_2017_02_02_dh':r'0.0-1.0 $10^{-6} \frac{m}{s}$',
+                      'cubey_2017_02_02_dr':r'0.0-1.0 $10^{-5} \frac{m}{s}$',}
 
 
 # Sensitivity analysis: Default numbers #######################################
@@ -117,7 +131,10 @@ default_jobs = {'cubey_2017_01_15_a':101,
                 'cubey_2017_02_02_az':6,
                 'cubey_2017_02_02_bj':8,
                 'cubey_2017_02_02_bt':3,
-                'cubey_2017_02_02_cd':6,}
+                'cubey_2017_02_02_cd':6,
+                'cubey_2017_02_02_cx':0,
+                'cubey_2017_02_02_dh':0,
+                'cubey_2017_02_02_dr':0,}
 
 default_values = {'cubey_2017_01_15_a':r'0.8 $10^6 \frac{J}{Km^3}$',
                   'cubey_2017_01_31_a':r'0.8 $10^6 \frac{J}{Km^3}$',
@@ -135,7 +152,10 @@ default_values = {'cubey_2017_01_15_a':r'0.8 $10^6 \frac{J}{Km^3}$',
                   'cubey_2017_02_02_az':r'2.0 $\frac{W}{mK}$',
                   'cubey_2017_02_02_bj':r'2.6 $\frac{W}{mK}$',
                   'cubey_2017_02_02_bt':r'1.0 $\frac{W}{mK}$',
-                  'cubey_2017_02_02_cd':r'2.0 $\frac{W}{mK}$',}
+                  'cubey_2017_02_02_cd':r'2.0 $\frac{W}{mK}$',
+                  'cubey_2017_02_02_cx':r'0.0 $\frac{m}{s}$',
+                  'cubey_2017_02_02_dh':r'0.0 $\frac{m}{s}$',
+                  'cubey_2017_02_02_dr':r'0.0 $\frac{m}{s}$',}
 
 
 # CUBEY: Measurement points ###################################################

@@ -16,6 +16,7 @@ from mypackage.plot import grids
 import pandas as pd
 
 from mypackage.plot import specs as sc
+from mypackage.run import pythonmodule as pm
 import sensitivityarrays as sa
 
 ###############################################################################
@@ -24,22 +25,19 @@ import sensitivityarrays as sa
 is_save = [True]
 is_show = [True]
 
-model_name = sc.model_name
-dat = sc.dat
-let = sc.lets[0]
-
 iobs = 2
 
 pic_format = 'png'              # png, eps
-pic_names = ['sense_'+str(iobs).zfill(2)+'_'+sc.spec()]
-sense = np.load('output/sensitivity/npy/sense_'+sc.spec()+'.npy')
-t = np.load('output/sensitivity/npy/truet_'+sc.spec()+'.npy')
+pic_names = ['sense_'+str(iobs).zfill(2)]
+sense = np.load(pm.py_output_filename("sense",sa.tag,"npy"))
+t = np.load(pm.py_output_filename("truet",sa.tag,"npy"))
 
 xlims = [10,30*24*3600]
+ylims = [12,20]
 
 # Default behavior
-deflet = rm.get_let_num(rm.get_num_let(let) + sa.default_jobs[sc.spec()])
-deftemp = np.load('output/sensitivity/npy/truetemp_'+model_name+'_'+dat+'_'+deflet+'.npy')
+deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + sa.default_jobs[sc.spec()])
+deftemp = np.load(pm.py_output_filename("truetemp",sa.tag,"npy",deflet))
 
 
 ###############################################################################
@@ -68,7 +66,7 @@ plt.ylabel(r'Temperature [$ ^{\circ} C$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
 plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
 plt.xlim(xlims[0],xlims[1])
-plt.ylim(11,20)
+plt.ylim(ylims[0],ylims[1])
 
 plt.text(0.95,0.95,
          "White->Black: "+sa.sensitivity_ranges[sc.spec()],
@@ -95,8 +93,7 @@ plt.text(0.95,0.75,
 #                                     Save                                    #
 ###############################################################################
 if is_save[0]:
-    plt.savefig(os.environ['HOME']+'/PythonDir/output/sensitivity/'+pic_format+'/'
-                    +pic_names[0]+'.'+pic_format)
+    plt.savefig(pm.py_output_filename(pic_names[0],sa.tag,pic_format))
 if is_show[0]:
     plt.show()
 else:
