@@ -10,6 +10,7 @@
 
 import os
 import numpy as np
+import sensitivityarrays as sa
 from mypackage.plot import specs as sc
 from mypackage.run import pythonmodule as pm
 
