@@ -20,9 +20,9 @@ truelet = 'a'
 def spec(nl=0):
     """
     Specifier-string consisting of
-    - model name
-    - date
-    - letter (number nl in the list)
+    - STANDARD model name sc.model_name
+    - STANDARD date sc.model_name
+    - letter (number nl in the list, default: First)
     - two '_' in between 
     """
     return model_name + '_' + dat + '_' + lets[nl]
@@ -33,15 +33,12 @@ def spec(nl=0):
 def specl(model_name,dat,let):
     """
     Specifier-string consisting of
-    - model name
-    - date
-    - letter (specified or first)
+    - INPUT model name
+    - INPUT date
+    - INPUT letter (specified as string, otherwi)
     - two '_' in between 
     """
-    if let:
-        return model_name + '_' + dat + '_' + let
-    else:
-        return model_name + '_' + dat + '_' + lets[0]
+    return model_name + '_' + dat + '_' + let
 
 ###############################################################################
 #                                    nrens                                    #
