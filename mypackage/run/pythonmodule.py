@@ -42,16 +42,37 @@ def py_output_dir(tag,ending):
 #                            python_output_filename                           #
 ###############################################################################
 
-def py_output_filename(filename,tag,ending,let=sc.lets[0]):
+def py_output_filename(filename,tag,ending,spec):
     """
-    Generate Python output filename according to
+    Generate Python output filename (with specifier)
+    according to
+    - filename: The filename WITHOUT ENDING
+    - tag: The name of the subdirectory of scripts or output
+    - ending: Mostly png,eps,npy
+    - spec: Output specifier
+    """
+
+    py_output_filename = py_output_dir(tag,ending) + "/" \
+                         + filename + "_" + spec + "." \
+                         + ending
+
+    return py_output_filename
+
+###############################################################################
+#                            python_output_filename                           #
+###############################################################################
+
+def py_simple_output_filename(filename,tag,ending):
+    """
+    Generate Python simple output filename (without specifier)
+    according to
     - filename: The filename WITHOUT ENDING
     - tag: The name of the subdirectory of scripts or output
     - ending: Mostly png,eps,npy
     """
 
-    py_output_filename = py_output_dir(tag,ending) + "/" \
-                         + filename + "_" + sc.specl(let) + "." \
+    py_simple_output_filename = py_output_dir(tag,ending) + "/" \
+                         + filename + "." \
                          + ending
 
-    return py_output_filename
+    return py_simple_output_filename
