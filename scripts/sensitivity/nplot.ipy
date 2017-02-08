@@ -1,0 +1,87 @@
+###############################################################################
+#               Plot temperature curves for different parameters              #
+###############################################################################
+
+import os
+import matplotlib as mpl
+from matplotlib import cm            # Colormap commands (cm.get_cmap())
+from matplotlib import colors
+import numpy as np
+import exceptions
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+from mypackage.plot import mycolors
+from mypackage.plot import grids
+import pandas as pd
+
+from mypackage.plot import specs as sc
+from mypackage.run import pythonmodule as pm
+import sensitivityarrays as sa
+
+###############################################################################
+#                                    Input                                    #
+###############################################################################
+is_save = [True]
+is_show = [True]
+
+imons = 0
+
+pic_format = 'png'              # png, eps
+pic_names = ['numsense_'+str(imons).zfill(2)]
+numsense = np.load(pm.py_simple_output_filename("numsense_"+str(imons).zfill(2),
+                                                sa.tag,
+                                                "npy"))
+numsense_labels = np.load(pm.py_simple_output_filename("numsense_labels_"+str(imons).zfill(2),
+                                                sa.tag,
+                                                "npy"))
+t = np.load(pm.py_output_filename("truet",
+                                  sa.tag,
+                                  "npy",
+                                  sc.specl(sc.model_name,sc.dat,sc.lets[0])))
+
+xlims = [100,30*24*3600]
+ylims = [-5,5]
+
+
+###############################################################################
+#                                    Figure                                   #
+###############################################################################
+plt.figure(1,[8,4], dpi=200, facecolor = 'white')
+plt.title('Sensitivity numbers',# +sa.sensitivity_varnames[sc.spec()]
+          # +' Unit: '+str(sa.unit_numbers[sc.spec()])
+          # +' ('+sa.unit_names[sa.unit_numbers[sc.s,pec()]]+')',
+          size = 20)
+
+# Plot ########################################################################
+for i in range(numsense.shape[1]):
+    plt.semilogx(t,numsense[:,i], 'o',
+                 color = [i*0.1,i*0.1,i*0.1], # White to black
+                     # color = 'black',
+                 linestyle = '--',
+                 label=numsense_labels[i],
+                 markersize = 0.0,
+                 markeredgewidth = 0.1)
+###############################################################################
+
+plt.xlabel(r'Time',fontsize = 14, labelpad=0)
+plt.ylabel(r'Temperature difference [$ ^{\circ} C$]',fontsize = 14)
+plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
+plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+plt.xlim(xlims[0],xlims[1])
+plt.ylim(ylims[0],ylims[1])
+
+plt.legend(markerscale=2.0,
+           loc = 'upper left',
+           fontsize=6,
+           ncol=3)
+
+###############################################################################
+#                                     Save                                    #
+###############################################################################
+if is_save[0]:
+    plt.savefig(pm.py_output_filename(pic_names[0],sa.tag,pic_format,sc.lets[0]))
+if is_show[0]:
+    plt.show()
+else:
+    plt.clf()
