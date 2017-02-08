@@ -20,15 +20,15 @@ nt = sc.nt(sc.model_name,sc.dat,sc.lets[0])
 sense = np.zeros([nt,num_mons,len(sc.lets)])
 sensedt = np.zeros([nt,num_mons/2,len(sc.lets)])
 
-for i,let in enumerate(sc.lets[:]):
-    temp = np.load(pm.py_output_filename("truetemp",sa.tag,"npy",let))
+for il,let in enumerate(sc.lets[:]):
+    temp = np.load(pm.py_output_filename("truetemp",sa.tag,"npy",sc.spec(il)))
 
-    sense[:,:,i] = temp[:,:]
+    sense[:,:,il] = temp[:,:]
 
     for j in range(num_mons/2):
-        sensedt[:,j,i] = temp[:,j] - temp[:,j+4]
+        sensedt[:,j,il] = temp[:,j] - temp[:,j+4]
 
-np.save(pm.py_output_filename("sense",sa.tag,"npy"),sense)
-np.save(pm.py_output_filename("sensedt",sa.tag,"npy"),sensedt)
+np.save(pm.py_output_filename("sense",sa.tag,"npy",sc.spec()),sense)
+np.save(pm.py_output_filename("sensedt",sa.tag,"npy",sc.spec()),sensedt)
 
 

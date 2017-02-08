@@ -11,7 +11,7 @@ from mypackage.run import pythonmodule as pm
 
 monitor_file = rm.make_file_dir_names(sc.model_name)[16]
 
-for let in sc.lets:
+for il, let in enumerate(sc.lets):
 
     # cd to samples_output directory ##########################################
     os.chdir(rm.make_output_dirs(sc.model_name,sc.dat,let)[1])
@@ -34,7 +34,7 @@ for let in sc.lets:
     temp = temp.reshape(len(temp)/num_mons, num_mons)
 
     # Save arrays #############################################################
-    np.save(pm.py_output_filename("truet",sa.tag,"npy",let),t)
-    np.save(pm.py_output_filename('truetemp',sa.tag,'npy',let),temp)
+    np.save(pm.py_output_filename("truet",sa.tag,"npy",sc.spec(il)),t)
+    np.save(pm.py_output_filename('truetemp',sa.tag,'npy',sc.spec(il)),temp)
 
 os.chdir(pm.python_dir)
