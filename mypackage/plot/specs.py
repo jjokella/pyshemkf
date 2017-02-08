@@ -30,7 +30,7 @@ def spec(nl=0):
 ###############################################################################
 #                                     specl                                   #
 ###############################################################################
-def specl(let=None):
+def specl(model_name,dat,let):
     """
     Specifier-string consisting of
     - model name
