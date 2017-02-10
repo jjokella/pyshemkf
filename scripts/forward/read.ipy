@@ -12,8 +12,8 @@ import pandas as pd
 
 
 model_name = 'cubey'
-dat = '2016_12_13'
-let = 'a'
+dat = '2017_02_08'
+let = 'aln'
 
 fdir =os.environ['HOME']+'/shematOutputDir/'+\
   model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'

@@ -19,8 +19,8 @@ is_show = True
 is_save = True
 
 model_name = 'cubey'
-dat = '2016_12_05'
-let = 'a'
+dat = '2017_02_08'
+let = 'aln'
 
 varname = 'uindex'                             #'head','v','temp','kz', 'uindex'
 v_component = 1                           #0,1,2
@@ -90,8 +90,8 @@ if is_grid:
 
 # Monitoring Points
 for i in range(len(locs)):
-    plt.scatter(x[locs[i][0]],
-                y[locs[i][1]],
+    plt.scatter(x[locs[i][0]-1],
+                y[locs[i][1]-1],
                 marker='o',
                 c='black',
                 s=50)
