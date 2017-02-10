@@ -253,9 +253,9 @@ obs_longlabels = {0:'North(out)',            # Outer ring
                   8:'North(in)',            # Inner ring
                   9:'Northwest(in)',
                   10:'West(in)',
-                  11:'Sinhwest(in)',
-                  12:'Sinh(in)',
-                  13:'Sinheast(in)',
+                  11:'Southwest(in)',
+                  12:'South(in)',
+                  13:'Southeast(in)',
                   14:'East(in)',
                   15:'Northeast(in)',
 }
