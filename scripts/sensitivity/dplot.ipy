@@ -1,0 +1,109 @@
+###############################################################################
+#         Plot temperature difference curves for different parameters         #
+###############################################################################
+
+import os
+import matplotlib as mpl
+from matplotlib import cm            # Colormap commands (cm.get_cmap())
+from matplotlib import colors
+import numpy as np
+import exceptions
+from mypackage.plot import plotfunctions as pf
+from mypackage.plot import plotarrays as pa
+from mypackage.run import runmodule as rm
+from mypackage.plot import mycolors
+from mypackage.plot import grids
+import pandas as pd
+
+from mypackage.plot import specs as sc
+from mypackage.run import pythonmodule as pm
+import sensitivityarrays as sa
+
+###############################################################################
+#                                    Input                                    #
+###############################################################################
+is_save = [True]
+is_show = [True]
+
+iobs = [3,11]
+
+pic_format = 'png'              # png, eps
+pic_name = 'sense_'+str(iobs[0]).zfill(2)+'_'+str(iobs[1]).zfill(2)
+sense = np.load(pm.py_output_filename("sense",sa.tag,"npy",sc.spec()))
+t = np.load(pm.py_output_filename("truet",sa.tag,"npy",sc.spec()))
+
+xlims = [10,30*24*3600]
+ylims = [0,6]
+
+# Default behavior
+deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + sa.default_jobs[sc.spec()])
+deftemp = np.load(pm.py_output_filename("truetemp",sa.tag,"npy",sc.specl(sc.model_name,sc.dat,deflet)))
+
+
+###############################################################################
+#                                    Figure                                   #
+###############################################################################
+plt.figure(1,[8,4], dpi=200, facecolor = 'white')
+plt.title('Sensitivity of Temperature-Difference at '+str(iobs[0]) +' minus '
+          + str(iobs[1]) +': '
+          +sa.sensitivity_varnames[sc.spec()]
+          +' Unit: '+str(sa.unit_numbers[sc.spec()])
+          +' ('+sa.unit_names[sa.unit_numbers[sc.spec()]]+')',
+          size = 12)
+
+# Plot ########################################################################
+for i in range(sense.shape[2]):
+    plt.semilogx(t,sense[:,iobs[0],i]-sense[:,iobs[1],i], 'o',
+                 color = [1.0-i/float(sense.shape[2]),
+                          1.0-i/float(sense.shape[2]),
+                          1.0-i/float(sense.shape[2])], # White to black
+                 markersize = 1.6,
+                 markeredgewidth = 0.1)
+plt.semilogx(t,deftemp[:,iobs[0]]-deftemp[:,iobs[1]], '-',
+             color = 'black')
+###############################################################################
+
+plt.xlabel(r'Time',fontsize = 14, labelpad=0)
+plt.ylabel(r'Temperature Difference [$ ^{\circ} C$]',fontsize = 14)
+plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
+plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+plt.xlim(xlims[0],xlims[1])
+plt.ylim(ylims[0],ylims[1])
+
+plt.text(0.95,0.95,
+         "White->Black: "+sa.sensitivity_ranges[sc.spec()],
+         fontsize=10,
+         verticalalignment='top',
+         horizontalalignment='right',
+         transform=plt.gca().transAxes)
+
+plt.text(0.95,0.85,
+         "Default: "+sa.default_values[sc.spec()],
+         fontsize=10,
+         verticalalignment='top',
+         horizontalalignment='right',
+         transform=plt.gca().transAxes)
+
+plt.text(0.95,0.75,
+         "Measurement 1: "+sa.obs_longlabels[iobs[0]],
+         fontsize=10,
+         verticalalignment='top',
+         horizontalalignment='right',
+         transform=plt.gca().transAxes)
+
+plt.text(0.95,0.65,
+         "Measurement 2: "+sa.obs_longlabels[iobs[1]],
+         fontsize=10,
+         verticalalignment='top',
+         horizontalalignment='right',
+         transform=plt.gca().transAxes)
+
+###############################################################################
+#                                     Save                                    #
+###############################################################################
+if is_save[0]:
+    plt.savefig(pm.py_output_filename(pic_name,sa.tag,pic_format,sc.spec()))
+if is_show[0]:
+    plt.show()
+else:
+    plt.clf()
