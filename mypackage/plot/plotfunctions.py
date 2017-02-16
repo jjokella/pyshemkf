@@ -194,6 +194,9 @@ def make_quiver(fdir,fname,varname,ax):
     return ax
 
 def get_nrobs_int(fname,path):
+    """
+    Deprecated: See specs.py
+    """
     #Number of observations
     os.chdir(path)
     f = open(fname)
@@ -213,6 +216,8 @@ def get_num_mons(fname,path):
     """
     Get the number of monitoring points
     from observations_MODEL.dat
+
+    Deprecated: See specs.py
     """
     #Number of monitoring points
     os.chdir(path)
