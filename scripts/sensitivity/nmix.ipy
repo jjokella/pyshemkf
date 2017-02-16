@@ -18,10 +18,10 @@ for irun in range(len(sa.runs)):
     lets = [rm.get_let_num(i) for i in sa.runs[irun][2]] # range(1000)
 
     # Load array ##############################################################
-    sense = np.load(pm.py_output_filename("sense",
-                                          sa.tag,
-                                          "npy",
-                                          sc.specl(model_name,dat,lets[0])))
+    sense = np.load(pm.py_output_filename(sa.tag,
+                                          "sense",
+                                          sc.specl(model_name,dat,lets[0]),
+                                          "npy"))
 
     # Initialize array ########################################################
     if irun == 0:

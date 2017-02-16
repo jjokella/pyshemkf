@@ -34,7 +34,7 @@ for il, let in enumerate(sc.lets):
     temp = temp.reshape(len(temp)/num_mons, num_mons)
 
     # Save arrays #############################################################
-    np.save(pm.py_output_filename("truet",sa.tag,"npy",sc.spec(il)),t)
-    np.save(pm.py_output_filename('truetemp',sa.tag,'npy',sc.spec(il)),temp)
+    np.save(pm.py_output_filename(sa.tag,"truet",sc.spec(il),"npy"),t)
+    np.save(pm.py_output_filename(sa.tag,'truetemp',sc.spec(il),'npy'),temp)
 
 os.chdir(pm.python_dir)

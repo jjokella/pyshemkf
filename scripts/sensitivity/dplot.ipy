@@ -29,15 +29,15 @@ iobs = [3,11]
 
 pic_format = 'png'              # png, eps
 pic_name = 'sense_'+str(iobs[0]).zfill(2)+'_'+str(iobs[1]).zfill(2)
-sense = np.load(pm.py_output_filename("sense",sa.tag,"npy",sc.spec()))
-t = np.load(pm.py_output_filename("truet",sa.tag,"npy",sc.spec()))
+sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy"))
+t = np.load(pm.py_output_filename(sa.tag,"truet",sc.spec(),"npy"))
 
 xlims = [10,30*24*3600]
 ylims = [0,6]
 
 # Default behavior
 deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + sa.default_jobs[sc.spec()])
-deftemp = np.load(pm.py_output_filename("truetemp",sa.tag,"npy",sc.specl(sc.model_name,sc.dat,deflet)))
+deftemp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(sc.model_name,sc.dat,deflet),"npy"))
 
 
 ###############################################################################
@@ -102,7 +102,7 @@ plt.text(0.95,0.65,
 #                                     Save                                    #
 ###############################################################################
 if is_save[0]:
-    plt.savefig(pm.py_output_filename(pic_name,sa.tag,pic_format,sc.spec()))
+    plt.savefig(pm.py_output_filename(sa.tag,pic_name,sc.spec(),pic_format))
 if is_show[0]:
     plt.show()
 else:

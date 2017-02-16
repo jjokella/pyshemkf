@@ -42,7 +42,7 @@ def py_output_dir(tag,ending):
 #                            python_output_filename                           #
 ###############################################################################
 
-def py_output_filename(filename,tag,ending,spec):
+def py_output_filename(tag,filename,spec,ending):
     """
     Generate Python output filename (with specifier)
     according to

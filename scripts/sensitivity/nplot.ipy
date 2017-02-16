@@ -35,10 +35,10 @@ numsense = np.load(pm.py_simple_output_filename("numsense_"+str(imons).zfill(2),
 numsense_labels = np.load(pm.py_simple_output_filename("numsense_labels_"+str(imons).zfill(2),
                                                 sa.tag,
                                                 "npy"))
-t = np.load(pm.py_output_filename("truet",
-                                  sa.tag,
-                                  "npy",
-                                  sc.specl(sc.model_name,sc.dat,sc.lets[0])))
+t = np.load(pm.py_output_filename(sa.tag,
+                                  "truet",
+                                  sc.specl(sc.model_name,sc.dat,sc.lets[0]),
+                                  "npy"))
 
 xlims = [100,30*24*3600]
 ylims = [-5,5]
@@ -80,7 +80,7 @@ plt.legend(markerscale=2.0,
 #                                     Save                                    #
 ###############################################################################
 if is_save[0]:
-    plt.savefig(pm.py_output_filename(pic_names[0],sa.tag,pic_format,sc.lets[0]))
+    plt.savefig(pm.py_output_filename(sa.tag,pic_names[0],sc.spec(),pic_format))
 if is_show[0]:
     plt.show()
 else:
