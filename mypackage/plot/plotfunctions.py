@@ -32,35 +32,34 @@ python_dir = os.environ['HOME']+'/PythonDir'
 alphabet = string.lowercase
 
 
-def my_vtk_to_numpy(fdir,fname,varname):
+def my_vtk_to_numpy(vtk_reader):
     """
-    Read array of variable varname from vtk-file fname 
-    in directory fdir and output as  numpy array.
+    Read array from vtk_reader and output as numpy array.
     """
-    # Prepare vtk-Reader 
-    os.chdir(fdir)                        #Directory
-    reader=vtk.vtkRectilinearGridReader() #Reader
-    reader.SetFileName(fname)             #Filename
-    reader.SetScalarsName(varname)        #Variable name
-    reader.Update()                       #Refresh
+
+    vtk_output = vtk_reader.GetOutput()
 
     # Grid properties
-    grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
-    grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
+    grid_dims      = vtk_output.GetDimensions() # Grid Dimensions
+    grid_bounds    = vtk_output.GetBounds() # Grid Bounds
 
-    # Check if scalar variable is in vtk-file
-    is_var_in_file(fdir,fname,varname)
     #Reshape array to grid geometry
     if grid_bounds[0] == 0.0:   # CELLS
-        vtk_array = reader.GetOutput().GetCellData().GetArray(0) # 0: Scalar 
+        vtk_array = vtk_output.GetCellData().GetArray(0)
         # vtk_to_numpy and reshape
-        numpy_array=vtk_to_numpy(vtk_array).reshape(grid_dims[0]-1,
-                                                    1 if grid_dims[1]== 1 else grid_dims[1]-1)
+        numpy_array=vtk_to_numpy(vtk_array)
+        numpy_array =  numpy_array.reshape(grid_dims[0]-1,
+                                           1 if grid_dims[1]== 1 else grid_dims[1]-1)
     else:                       # POINTS
-        vtk_array = reader.GetOutput().GetPointData().GetArray(0) # 0: Scalar
+        vtk_array = vtk_output.GetPointData().GetArray(0)
         # vtk_to_numpy and reshape
-        numpy_array = vtk_to_numpy(vtk_array).reshape(grid_dims[0],grid_dims[1])
-
+        numpy_array = vtk.util.numpy_support.vtk_to_numpy(vtk_array)
+        if vtk_reader.GetScalarsName() == 'v':
+            numpy_array = numpy_array.reshape(grid_dims[0],grid_dims[1],3)
+            numpy_array[:,:,2] = np.sqrt(numpy_array[:,:,0]**2+numpy_array[:,:,1]**2)
+        else:
+            numpy_array = numpy_array.reshape(grid_dims[0],grid_dims[1])
+        
     return numpy_array
 
 def my_vtk(fdir,fname,varname):
@@ -164,21 +163,17 @@ def make_arrows(ax,n_arrays,befaft,nrobs_int,arr_xvars,arr_yvars,color_arr):
     return ax
 
 
-def make_quiver(fdir,fname,varname,ax):
+def make_quiver(vtk_reader,ax):
     """
     Insert a field of arrows from vtk-file.
     """
     #Quiver
-    os.chdir(fdir)# Go to directory
-    reader=vtk.vtkRectilinearGridReader() # Open vtk-Reader
-    reader.SetFileName(fname) # Give filename 
-    reader.SetVectorsName(varname) # Give name of Vector quantity
-    reader.Update() # Update the reader (might have been used before)
+    vtk_output = vtk_reader.GetOutput()
 
-    num_points = reader.GetOutput().GetNumberOfPoints() # Get Number of Points
-    grid_bounds = reader.GetOutput().GetBounds()        # Get Bounds (middle of cell (points))
-    grid_dims = reader.GetOutput().GetDimensions()      # Get Dims (of middle of cells)
-    v_vtk = reader.GetOutput().GetPointData().GetArray(1) # 1:Get Vector quantitiy
+    num_points = vtk_output.GetNumberOfPoints() # Get Number of Points
+    grid_bounds = vtk_output.GetBounds()        # Get Bounds (middle of cell (points))
+    grid_dims = vtk_output.GetDimensions()      # Get Dims (of middle of cells)
+    v_vtk = vtk_output.GetPointData().GetArray(1) # 1:Get Vector quantitiy
 
     step_x = (grid_bounds[1]-grid_bounds[0])/(grid_dims[0]-1)
     step_y = (grid_bounds[3]-grid_bounds[2])/(grid_dims[1]-1)
