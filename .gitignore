@@ -12,6 +12,7 @@ output/txt/
 output/tcon/
 output/forward/eps
 output/forward/npy
+output/forward/png
 output/sensitivity/npy
 output/sensitivity/png
 output/sensitivity/eps
