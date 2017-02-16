@@ -410,6 +410,10 @@ def make_output_dirs(model_name,dat,let):
     - model_name
     - dat
     - let
+
+    0 - output_dir
+    1 - samples_output_dir
+    2 - enkf_output_dir
     """
     output_dir = os.environ['HOME']+"/shematOutputDir/" \
                  + model_name +"_output/" + dat + "/" \
