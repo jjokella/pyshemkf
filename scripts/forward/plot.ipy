@@ -9,20 +9,18 @@ import exceptions
 from mypackage.plot import plotfunctions as pf
 from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
+from mypackage.run import pythonmodule as pm
 from mypackage.plot import mycolors
 from mypackage.plot import grids
 import pandas as pd
 
 from mypackage.plot import specs as sc
+import forwardarrays as fa
 
 is_show = True
 is_save = True
 
-model_name = 'cubey'
-dat = '2017_02_08'
-let = 'aln'
-
-varname = 'uindex'                             #'head','v','temp','kz', 'uindex'
+varname = 'uindex'                        #'head','v','temp','kz', 'uindex'
 v_component = 1                           #0,1,2
 pic_format = 'png'
 
@@ -30,7 +28,7 @@ varlabels = {'temp':'Temperature [deg]',
              'head':'Hydraulic Head [m] - 10m',
              'uindex':'Model zones'}
 
-num_cbar = 50
+num_cbar = 7
 low_cbar =  10.0285
 high_cbar = 10.0304
 auto_cbar = True
@@ -38,7 +36,7 @@ auto_cbar = True
 xlims = [0.0,0.8032]
 ylims = [0.0,0.8032]
 
-locs = sc.locs(model_name,dat,let)
+locs = sc.locs(sc.model_name,sc.dat,sc.lets[0])
 
 is_grid = False
 
@@ -47,13 +45,13 @@ xownticks = [0.1+i*0.1 for i in range(9)]
 yownticks = [0.1+i*0.1 for i in range(9)]
 
 # Read grid arrays from mypackage/plot/grids.py
-x = grids.x(model_name,dat,let)
-y = grids.y(model_name,dat,let)
-xticks = grids.xticks(model_name,dat,let)
-yticks = grids.yticks(model_name,dat,let)
+x = grids.x(sc.model_name,sc.dat,sc.lets[0])
+y = grids.y(sc.model_name,sc.dat,sc.lets[0])
+xticks = grids.xticks(sc.model_name,sc.dat,sc.lets[0])
+yticks = grids.yticks(sc.model_name,sc.dat,sc.lets[0])
 
 # Load variable array
-var = np.load('output/forward/npy/'+varname+'_'+model_name+'.npy')
+var = np.load(pm.py_output_filename(fa.tag,varname,sc.spec(),"npy"))
 
 if varname == 'v':
     var = var[:,:,v_component]
@@ -126,8 +124,7 @@ if varname == 'uindex':
 if is_save:
         if varname == 'v':
             varname = varname+'_'+str(v_component)
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/forward/'+pic_format+'/'
-                            +model_name+'_'+dat+'_'+let+'_'+varname+'.'+pic_format)
+        plt.savefig(pm.py_output_filename(fa.tag,varname,sc.spec(),pic_format))
 # Show
 if is_show:
     plt.show()

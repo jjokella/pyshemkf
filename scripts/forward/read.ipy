@@ -1,60 +1,34 @@
 # Read routine for forward pictures
 
-import os
-import vtk
-import matplotlib as mpl
 import numpy as np
-import exceptions
+
 from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
-import pandas as pd
+from mypackage.run import pythonmodule as pm
+
+import forwardarrays as fa
 
 
-model_name = 'cubey'
-dat = '2017_02_08'
-let = 'aln'
+fdir = rm.make_output_dirs(sc.model_name,sc.dat,sc.lets[0])[1] # samples_output_dir
+fname = rm.make_file_dir_names(sc.model_name,1)[17] # time_out_file
 
-fdir =os.environ['HOME']+'/shematOutputDir/'+\
-  model_name+'_output/'+dat+'/'+dat+'_'+let+'/samples_output/'
-fname = model_name.upper()+'_E0_time_out_0001.vtk'   # 0017 or 17!?
 varnames = ['uindex','temp','head']                             #'head','temp','kz', 'v'
 
 for varname in varnames:
 
-    # Check if scalar variable is in vtk-file
-    pf.is_var_in_file(fdir,fname,varname)
+    # Get vtk_reader ##########################################################
+    vtk_reader = pf.my_vtk(fdir,fname,varname)
+
+    # Debug ###################################################################
+    if varname == 'v':
+        print(varname, vtk_reader.GetOutput().GetPointData().GetArray(0).GetValueRange(0))
+        print(varname, vtk_reader.GetOutput().GetPointData().GetArray(0).GetValueRange(1))
+        print(varname, vtk_reader.GetOutput().GetPointData().GetArray(0).GetValueRange(2))
+    else:
+        print(varname, vtk_reader.GetOutput().GetPointData().GetArray(0).GetValueRange())
+
+    # Numpy Array  ############################################################
+    numpy_array = pf.my_vtk_to_numpy(vtk_reader)
+
+    np.save(pm.py_output_filename(fa.tag,varname,sc.spec(),"npy"),numpy_array)
     
-    reader=vtk.vtkRectilinearGridReader() #Reader
-    reader.SetFileName(fdir+fname)        #Filename
-    reader.SetScalarsName(varname)        #Variable name
-    reader.Update()                       #Refresh
-
-    # Grid properties
-    grid_dims      = reader.GetOutput().GetDimensions() # Grid Dimensions
-    grid_bounds    = reader.GetOutput().GetBounds() # Grid Bounds
-
-    vtk_array = reader.GetOutput().GetPointData().GetArray(0)
-    grid_dims = reader.GetOutput().GetDimensions()
-
-    if varname == 'v':
-        print(vtk_array.GetValueRange(0))
-        print(vtk_array.GetValueRange(1))
-        print(vtk_array.GetValueRange(2))
-    else:
-        print(vtk_array.GetValueRange())
-
-    #Convert to NumPy array
-    numpy_array = vtk.util.numpy_support.vtk_to_numpy(vtk_array)
-
-    #Array is given grid dimensions
-    if varname == 'v':
-        numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0],3)
-        numpy_array[:,:,2] = np.sqrt(numpy_array[:,:,0]**2+numpy_array[:,:,1]**2)
-    else:
-        numpy_array = numpy_array.reshape(grid_dims[1],grid_dims[0])
-
-    os.chdir(os.environ['HOME']+'/PythonDir')
-
-    np.save('output/forward/npy/'+varname+'_'+model_name+'.npy',numpy_array)
-
