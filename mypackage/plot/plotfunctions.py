@@ -63,23 +63,32 @@ def my_vtk_to_numpy(fdir,fname,varname):
 
     return numpy_array
 
+def my_vtk(fdir,fname,varname):
+    """
+    Get vtk-reader from filename and varname
+    """
+    
+    # Check if scalar variable is in vtk-file
+    is_var_in_file(fdir,fname,varname)
 
-def vtk_grid_props(fdir,fname,varname):
-    #Go to directory
-    os.chdir(fdir)
-    #Open vtk-Reader
-    reader=vtk.vtkRectilinearGridReader()
-    reader.SetFileName(fname)
-    #Read NumPy array form vtk-file
-    reader.SetScalarsName(varname)
-    reader.Update()
+    # Prepare vtk-Reader 
+    vtk_reader=vtk.vtkRectilinearGridReader() #Reader
+    vtk_reader.SetFileName(fdir+'/'+fname)    #Filename
+    vtk_reader.SetScalarsName(varname)        #Variable name
+    vtk_reader.Update()                       #Refresh
 
+    return vtk_reader
+        
+def vtk_grid_props(vtk_reader):
+
+    vtk_output = vtk_reader.GetOutput()
+    
     #Read attributes of the vtk-Array
-    num_cells = reader.GetOutput().GetNumberOfCells()
-    num_points = reader.GetOutput().GetNumberOfPoints()
-    whole_extent = reader.GetOutput().GetExtent()
-    grid_bounds = reader.GetOutput().GetBounds()
-    grid_dims = reader.GetOutput().GetDimensions()
+    num_cells = vtk_output.GetNumberOfCells()
+    num_points = vtk_output.GetNumberOfPoints()
+    whole_extent = vtk_output.GetExtent()
+    grid_bounds = vtk_output.GetBounds()
+    grid_dims = vtk_output.GetDimensions()
 
     #Grid information
     step_x = (grid_bounds[1]-grid_bounds[0])/(grid_dims[0]-1)
@@ -111,7 +120,10 @@ def vtk_grid_props(fdir,fname,varname):
     # y = np.linspace(low_x, high_x, npts_y)
     # X, Y = np.meshgrid(x, y)
 
-    return step_x, step_y, npts_x, npts_y, low_m_x, high_m_x, low_m_y, high_m_y, low_x, high_x, low_y, high_y
+    return step_x, step_y, \
+        npts_x, npts_y, \
+        low_m_x, high_m_x, low_m_y, high_m_y, \
+        low_x, high_x, low_y, high_y
 
 
 def make_arrows(ax,n_arrays,befaft,nrobs_int,arr_xvars,arr_yvars,color_arr):
