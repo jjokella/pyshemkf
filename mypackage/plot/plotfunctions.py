@@ -302,14 +302,11 @@ def is_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 1,
     By default, exceptions are raised if the variable is not inside
     the file.
     """
-    os.chdir(path)
-
     # Check existence of file.
     try:
-        f = open(fname,'r')
+        f = open(path+'/'+fname,'r')
     except IOError:
         if raise_io_error:
-            os.chdir(python_dir)
             print('\n' + path + '\n')
             raise
         else:
@@ -347,7 +344,6 @@ def is_var_in_file(path,fname,var, raise_io_error = 1, raise_var_error = 1,
                 f.close()
                 return 1
     if raise_var_error:
-        os.chdir(python_dir)
         raise exceptions.RuntimeError(var + ' not in ' + fname \
             + '\n Dir: ' + path)
     else:
