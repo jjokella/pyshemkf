@@ -25,10 +25,10 @@ import sensitivityarrays as sa
 is_save = [True]
 is_show = [True]
 
-iobs = 0
+imons = 9
 
 pic_format = 'eps'              # png, eps
-pic_names = ['sense_'+str(iobs).zfill(2)]
+pic_names = ['sense_'+str(imons).zfill(2)]
 sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy"))
 t = np.load(pm.py_output_filename(sa.tag,"truet",sc.spec(),"npy"))
 
@@ -51,13 +51,13 @@ plt.title('Sensitivity: '+sa.sensitivity_varnames[sc.spec()]
 
 # Plot ########################################################################
 for i in range(sense.shape[2]):
-    plt.semilogx(t,sense[:,iobs,i], 'o',
+    plt.semilogx(t,sense[:,imons,i], 'o',
                  color = [1.0-i/float(sense.shape[2]),
                           1.0-i/float(sense.shape[2]),
                           1.0-i/float(sense.shape[2])], # White to black
                  markersize = 1.6,
                  markeredgewidth = 0.1)
-plt.semilogx(t,deftemp[:,iobs], '-',
+plt.semilogx(t,deftemp[:,imons], '-',
              color = 'black')
 ###############################################################################
 
@@ -83,7 +83,7 @@ plt.text(0.95,0.85,
          transform=plt.gca().transAxes)
 
 plt.text(0.95,0.75,
-         "Measurement: "+sa.obs_longlabels[iobs],
+         "Measurement: "+sa.obs_longlabels[imons],
          fontsize=10,
          verticalalignment='top',
          horizontalalignment='right',

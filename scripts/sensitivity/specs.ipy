@@ -14,11 +14,8 @@ import sensitivityarrays as sa
 # Single run ##################################################################
 sc.model_name = 'cubey'
 
-# sc.truedat = '2017_01_15'
-# sc.truelet = 'a'
-
-sc.dat = '2017_01_30'
-let = 'dkl'
+sc.dat = '2017_01_31'
+let = 'aln'
 nl = 1000
 ns = rm.get_num_let(let)
 nstep = 100
@@ -26,11 +23,11 @@ nstep = 100
 sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
 # %run scripts/sensitivity/read.ipy
-%run scripts/sensitivity/mix.ipy
-%run scripts/sensitivity/plot.ipy
+# %run scripts/sensitivity/mix.ipy
+# %run scripts/sensitivity/plot.ipy
 # %run scripts/sensitivity/dplot.ipy
-# %run scripts/sensitivity/nmix.ipy
-# %run scripts/sensitivity/nplot.ipy
+%run scripts/sensitivity/nmix.ipy
+%run scripts/sensitivity/nplot.ipy
 
 # Multiple runs ###############################################################
 # for i in range(len(sa.runs)):

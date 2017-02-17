@@ -25,15 +25,15 @@ import sensitivityarrays as sa
 is_save = [True]
 is_show = [True]
 
-iobs = [3,11]
+iobs = [1,9]
 
-pic_format = 'png'              # png, eps
+pic_format = 'eps'              # png, eps
 pic_name = 'sense_'+str(iobs[0]).zfill(2)+'_'+str(iobs[1]).zfill(2)
 sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy"))
 t = np.load(pm.py_output_filename(sa.tag,"truet",sc.spec(),"npy"))
 
 xlims = [10,30*24*3600]
-ylims = [0,6]
+ylims = [0,10]
 
 # Default behavior
 deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + sa.default_jobs[sc.spec()])

@@ -27,7 +27,7 @@ is_show = [True]
 
 imons = 0
 
-pic_format = 'png'              # png, eps
+pic_format = 'eps'              # png, eps
 pic_names = ['numsense_'+str(imons).zfill(2)]
 numsense = np.load(pm.py_simple_output_filename("numsense_"+str(imons).zfill(2),
                                                 sa.tag,
@@ -48,7 +48,7 @@ ylims = [-5,5]
 #                                    Figure                                   #
 ###############################################################################
 plt.figure(1,[8,4], dpi=200, facecolor = 'white')
-plt.title('Sensitivity numbers',# +sa.sensitivity_varnames[sc.spec()]
+plt.title('Sensitivity numbers at '+sa.obs_longlabels[imons],# +sa.sensitivity_varnames[sc.spec()]
           # +' Unit: '+str(sa.unit_numbers[sc.spec()])
           # +' ('+sa.unit_names[sa.unit_numbers[sc.s,pec()]]+')',
           size = 20)
