@@ -26,7 +26,7 @@ pic_format = 'png'
 
 varlabels = {'temp':'Temperature [deg]',
              'head':'Hydraulic Head [m] - 10m',
-             'uindex':'Model zones'}
+             'uindex':'Unit Index'}
 
 num_cbar = 7
 low_cbar =  10.0285
@@ -111,13 +111,13 @@ cb_ax.tick_params(labelsize = 20)
 cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
 mpl.colorbar.Colorbar(cb_ax, im)
 if varname == 'uindex':
-    cb_ax.yaxis.set_ticklabels(["Soil (subsurface)",
-                                "Soil (in tubes)",
-                                "Pipe",
-                                "Pipe",
-                                "Pipe",
-                                "Pipe",
-                                "Metal Tube"])
+    cb_ax.yaxis.set_ticklabels(["1: Sand",
+                                "2: Sand",
+                                "3: Water",
+                                "4: Water",
+                                "5: Water",
+                                "6: Water",
+                                "7: Cement"])
     cb_ax.set_position([0.72,0.1,0.03,0.8])
 
 # Save
