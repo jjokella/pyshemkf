@@ -9,7 +9,7 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 # Main inputs
-is_1000 = False
+is_1000 = True
 is_wavebc = True 
 
 

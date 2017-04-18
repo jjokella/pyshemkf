@@ -3,9 +3,6 @@
 import os
 import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions
-from mypackage.plot import plotarrays as pa
-from mypackage.run import runmodule as rm
 import pandas as pd
 
 
@@ -22,9 +19,9 @@ which_enssize =  ([50,70,100,250] if is_1000 else
 # Figure
 is_std = 0                                   # Show std?
 is_show = 1                                  # Print figure on screen?
-is_save = 0                                  # Save figure to file?
+is_save = 1                                  # Save figure to file?
 pic_name_start = 'ENDMEANS'
-pic_name_end = '.png'                         #'png' or 'eps' or 'svg'
+pic_name_end = '.pdf'                         #'png' or 'eps' or 'svg' or 'pdf'
 pic_dir = os.environ['HOME']+'/PythonDir/output/errorplot/'+pic_name_end[-3:]+'/'
 
 # Y-Axis limits for the six plots
