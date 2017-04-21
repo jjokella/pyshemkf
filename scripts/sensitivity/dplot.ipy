@@ -49,7 +49,7 @@ plt.title('Sensitivity of Temperature-Difference at '+str(iobs[0]) +' minus '
           +sa.sensitivity_varnames[sc.spec()]
           +' Unit: '+str(sa.unit_numbers[sc.spec()])
           +' ('+sa.unit_names[sa.unit_numbers[sc.spec()]]+')',
-          size = 12)
+          size = 8)
 
 # Plot ########################################################################
 for i in range(sense.shape[2]):

@@ -33,7 +33,7 @@ sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy"))
 t = np.load(pm.py_output_filename(sa.tag,"truet",sc.spec(),"npy"))
 
 xlims = [10,30*24*3600]
-ylims = [10,20]
+ylims = [11,20]
 
 # Default behavior
 deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + sa.default_jobs[sc.spec()])
