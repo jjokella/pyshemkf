@@ -18,13 +18,13 @@ from mypackage.run import pythonmodule as pm
 num_mons = sc.num_mons(sc.model_name,sc.dat,sc.lets[0])
 nt = sc.nt(sc.model_name,sc.dat,sc.lets[0])
 
-sense = np.zeros([nt,num_mons,len(sc.lets)])
-sensedt = np.zeros([nt,num_mons/2,len(sc.lets)])
 # Empty sensitivity arrays
+sense = np.zeros([nt,num_mons,len(sa.senselets)])
+sensedt = np.zeros([nt,num_mons/2,len(sa.senselets)])
 
-for il,let in enumerate(sc.lets[:]):
 
 # Loop for letters/parameter values ###########################################
+for il,let in enumerate(sa.senselets[:]):
 
     # Load temperature array
     temp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.spec(il),"npy"))
