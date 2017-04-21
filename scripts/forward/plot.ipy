@@ -22,7 +22,7 @@ is_save = True
 
 varname = 'uindex'                        #'head','v','temp','kz', 'uindex'
 v_component = 1                           #0,1,2
-pic_format = 'png'
+pic_format = 'pdf'                        # 'png','eps','pdf'
 
 varlabels = {'temp':'Temperature [deg]',
              'head':'Hydraulic Head [m] - 10m',
