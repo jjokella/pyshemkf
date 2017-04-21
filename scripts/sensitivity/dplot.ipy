@@ -78,7 +78,7 @@ plt.text(0.95,0.95,
          transform=plt.gca().transAxes)
 
 plt.text(0.95,0.85,
-         "Default: "+sa.default_values[sc.spec()],
+         "Default: "+sa.default_strings[sc.spec()],
          fontsize=10,
          verticalalignment='top',
          horizontalalignment='right',
