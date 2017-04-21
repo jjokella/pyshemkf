@@ -27,7 +27,7 @@ is_show = [True]
 
 imons = 9
 
-pic_format = 'eps'              # png, eps
+pic_format = 'pdf'              # png, eps, pdf
 pic_names = ['sense_'+str(imons).zfill(2)]
 sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy"))
 t = np.load(pm.py_output_filename(sa.tag,"truet",sc.spec(),"npy"))
@@ -94,6 +94,7 @@ plt.text(0.95,0.75,
 ###############################################################################
 if is_save[0]:
     plt.savefig(pm.py_output_filename(sa.tag,pic_names[0],sc.spec(),pic_format))
+    print('Saved as ' + pm.py_output_filename(sa.tag,pic_names[0],sc.spec(),pic_format))
 if is_show[0]:
     plt.show()
 else:
