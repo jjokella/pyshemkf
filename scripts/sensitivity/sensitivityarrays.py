@@ -51,6 +51,9 @@ varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
          }
 
 
+senselets = []
+
+
 # Sensitivity analysis: Varied variables ######################################
 sensitivity_varnames = {'cubey_2016_12_13_a':'Thermal conductivity deprecated',
                         'cubey_2016_12_14_a':'Thermal conductivity deprecated',

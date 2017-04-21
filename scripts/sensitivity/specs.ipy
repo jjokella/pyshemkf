@@ -21,6 +21,9 @@ ns = rm.get_num_let(let)
 nstep = 100
 
 sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+sa.senselets = [rm.get_let_num(int(i+rm.get_num_let(let))) for i in np.round(np.linspace(np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][0]),
+                                                                     np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][1])-1,
+                                                                     nstep))]
 
 # %run scripts/sensitivity/read.ipy
 # %run scripts/sensitivity/mix.ipy

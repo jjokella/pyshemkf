@@ -11,7 +11,7 @@ from mypackage.run import pythonmodule as pm
 
 monitor_file = rm.make_file_dir_names(sc.model_name)[16]
 
-for il, let in enumerate(sc.lets):
+for il, let in enumerate(sa.senselets):
 
     # cd to samples_output directory ##########################################
     os.chdir(rm.make_output_dirs(sc.model_name,sc.dat,let)[1])
@@ -20,16 +20,16 @@ for il, let in enumerate(sc.lets):
     num_mons = sc.num_mons(sc.model_name,sc.dat,let)
 
     # Read time and temperature ###############################################
-    if let==sc.lets[0]:
+    if let==sa.senselets[0]:
         t = np.genfromtxt(monitor_file,
-                          dtype='f8', comments='%', usecols=(0)) # obstime
+                          dtype='f8', comments='%', usecols=(0))
     temp = np.genfromtxt(monitor_file,
-                         dtype='f8', comments='%', usecols=(9)) # variable
+                         dtype='f8', comments='%', usecols=(9))
     # Col 0 in obs_file: obstime
     # Col 9 in obs_file: Temperature
 
     # Reshape arrays ##########################################################
-    if let==sc.lets[0]:
+    if let==sa.senselets[0]:
         t = t.reshape(len(t)/num_mons, num_mons)[:,0]
     temp = temp.reshape(len(temp)/num_mons, num_mons)
 
