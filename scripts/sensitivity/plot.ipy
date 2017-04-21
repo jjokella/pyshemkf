@@ -36,7 +36,8 @@ xlims = [10,30*24*3600]
 ylims = [11,20]
 
 # Default behavior
-deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + sa.default_jobs[sc.spec()])
+deflet = rm.get_let_num(rm.get_num_let(sc.lets[0]) + np.searchsorted(sa.varranges[sc.spec()],
+                                                                     sa.default_values[sc.spec()]))
 deftemp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(sc.model_name,sc.dat,deflet),"npy"))
 
 
