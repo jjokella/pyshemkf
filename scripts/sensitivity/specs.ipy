@@ -36,12 +36,7 @@ sa.senselets = [rm.get_let_num(int(i+rm.get_num_let(let))) for i in np.round(np.
 # for i in range(len(sa.runs)):
 #     sc.model_name = sa.runs[i][0] #'cubey'
 
-#     sc.truedat = sa.runs[i][1] #'2017_01_15'
-#     sc.truelet = sa.runs[i][2] #'a'
+#     sc.dat = sa.runs[i][1] #'2017_01_15'
+#     sc.lets = [rm.get_let_num(i) for i in sa.runs[i][2]] # range(1000)
 
-#     sc.dat = sa.runs[i][3] #'2017_01_15'
-#     sc.lets = [rm.get_let_num(i) for i in sa.runs[i][4]] # range(1000)
-
-#     # %run scripts/sensitivity/read.ipy
-#     # %run scripts/sensitivity/mix.ipy
 #     %run scripts/sensitivity/plot.ipy
