@@ -5,11 +5,9 @@ import sensitivityarrays as sa
 # 'cubey_2017_01_15_a'
 # 'cubey_2017_01_31_a'
 # 'cubey_2017_01_31_aln'
-# 'cubey_2017_01_31_bxz'
 # 'cubey_2017_01_30_a'
 # 'cubey_2017_01_30_aln'
 # 'cubey_2017_01_30_bxz'
-# 'cubey_2017_01_30_dkl'
 
 # Single run ##################################################################
 sc.model_name = 'cubey'
