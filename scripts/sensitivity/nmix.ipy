@@ -15,17 +15,17 @@ for irun in range(len(sa.runs)):
     # Output specifiers #######################################################
     model_name = sa.runs[irun][0] #'cubey'
     dat = sa.runs[irun][1] #'2017_01_15'
-    lets = [rm.get_let_num(i) for i in sa.runs[irun][2]] # range(1000)
+    let = rm.get_let_num(sa.runs[irun][2][0]) # range(1000)
 
     # Load array ##############################################################
     sense = np.load(pm.py_output_filename(sa.tag,
                                           "sense",
-                                          sc.specl(model_name,dat,lets[0]),
+                                          sc.specl(model_name,dat,let),
                                           "npy"))
 
     # Initialize array ########################################################
     if irun == 0:
-        numsense = np.zeros([sc.nt(model_name,dat,lets[0]),
+        numsense = np.zeros([sc.nt(model_name,dat,let),
                              len(sa.runs)])
         numsense_labels = ["" for i in range(len(sa.runs))]
 
@@ -34,8 +34,8 @@ for irun in range(len(sa.runs)):
     ###########################################################################
     # Difference of outermost points: Find the right variation interval #######
     numsense[:,irun] = sense[:,imons,-1] - sense[:,imons,0]
-    numsense_labels[irun] = sa.sensitivity_varnames[sc.specl(model_name,dat,lets[0])] \
-                            + ", Unit:"+ str(sa.unit_numbers[sc.specl(model_name,dat,lets[0])])
+    numsense_labels[irun] = sa.sensitivity_varnames[sc.specl(model_name,dat,let)] \
+                            + ", Unit:"+ str(sa.unit_numbers[sc.specl(model_name,dat,let)])
 
 # Save the array ##############################################################
 np.save(pm.py_simple_output_filename("numsense_"+str(imons).zfill(2),sa.tag,"npy"),
