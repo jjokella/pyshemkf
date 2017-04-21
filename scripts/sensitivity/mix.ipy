@@ -1,5 +1,5 @@
 ###############################################################################
-#               Make the arrays needed for sensitivity analysis               #
+#                            Make sensitivity array                           #
 ###############################################################################
 
 # sense(it,imons,ilet): Transient Temperature profiles (at locations,
@@ -14,20 +14,30 @@ import sensitivityarrays as sa
 from mypackage.plot import specs as sc
 from mypackage.run import pythonmodule as pm
 
+# Read model parameters #######################################################
 num_mons = sc.num_mons(sc.model_name,sc.dat,sc.lets[0])
 nt = sc.nt(sc.model_name,sc.dat,sc.lets[0])
 
 sense = np.zeros([nt,num_mons,len(sc.lets)])
 sensedt = np.zeros([nt,num_mons/2,len(sc.lets)])
+# Empty sensitivity arrays
 
 for il,let in enumerate(sc.lets[:]):
+
+# Loop for letters/parameter values ###########################################
+
+    # Load temperature array
     temp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.spec(il),"npy"))
 
+    # Fill sense with temperature data
     sense[:,:,il] = temp[:,:]
 
+    # Fill sensedt with temperature difference data
     for j in range(num_mons/2):
         sensedt[:,j,il] = temp[:,j] - temp[:,j+4]
 
+
+# Save sense and sensedt ######################################################
 np.save(pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy"),sense)
 np.save(pm.py_output_filename(sa.tag,"sensedt",sc.spec(),"npy"),sensedt)
 
