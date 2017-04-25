@@ -25,7 +25,7 @@ import sensitivityarrays as sa
 is_save = [True]
 is_show = [True]
 
-imons = 0
+imons = 9
 
 pic_format = 'pdf'              # png, eps, pdf
 pic_names = ['numsense_'+str(imons).zfill(2)]
@@ -41,8 +41,7 @@ t = np.load(pm.py_output_filename(sa.tag,
                                   "npy"))
 
 xlims = [100,30*24*3600]
-ylims = [-1.1,1.1]
-
+ylims = [-0.01,0.15]
 
 ###############################################################################
 #                                    Figure                                   #
@@ -56,7 +55,7 @@ plt.title('Sensitivity numbers at '+sa.obs_longlabels[imons],# +sa.sensitivity_v
 # Plot ########################################################################
 for i in range(numsense.shape[1]):
     plt.semilogx(t,numsense[:,i], 'o',
-                 color = [i*0.1,i*0.1,i*0.1], # White to black
+                 color = [i*0.3,i*0.3,i*0.3], # White to black
                      # color = 'black',
                  linestyle = '--',
                  label=numsense_labels[i],
@@ -64,6 +63,7 @@ for i in range(numsense.shape[1]):
                  markeredgewidth = 0.1)
 ###############################################################################
 
+plt.axhline(0,c='k',linestyle=':',linewidth=0.3)
 plt.xlabel(r'Time',fontsize = 14, labelpad=0)
 plt.ylabel(r'Temperature difference [$ ^{\circ} C$]',fontsize = 14)
 plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])

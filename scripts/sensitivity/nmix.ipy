@@ -8,7 +8,7 @@ from mypackage.plot import specs as sc
 from mypackage.run import pythonmodule as pm
 
 # Monitoring point ############################################################
-imons = 0
+imons = 9
 
 for irun in range(len(sa.runs)):
 
