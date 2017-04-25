@@ -39,6 +39,11 @@ ylims = [0.0,0.8032]
 locs = sc.locs(sc.model_name,sc.dat,sc.lets[0])
 
 is_grid = False
+is_cb = False
+is_mask = True
+is_labels= False
+
+maskvalue = 7
 
 is_ownticks = True
 xownticks = [0.1+i*0.1 for i in range(9)]
@@ -62,6 +67,10 @@ if auto_cbar:
     low_cbar = var.min()
     high_cbar = var.max()
 
+# Possible Mask
+if is_mask:
+    jo = np.ma.array(var,mask = np.logical_or(var<maskvalue-0.5,var>maskvalue+0.5)
+
 # Figure
 fig = plt.figure(1,figsize=[15,10])
 ax = fig.add_subplot(111)
@@ -71,7 +80,7 @@ im = mpl.image.NonUniformImage(ax,interpolation='nearest',
                                    norm = colors.Normalize(vmin=low_cbar,
                                                                vmax=high_cbar,
                                                                clip=False))
-im.set_data(x,y,var)
+im.set_data(x,y,jo)
 ax.images.append(im)
 
 # Ticks
@@ -96,35 +105,43 @@ for i in range(len(locs)):
 
 # Title
 # ax.set_title('Temperature field')
-ax.set_xlabel('[m]',fontsize=40)
-ax.set_ylabel('[m]',fontsize=40)
-ax.tick_params(labelsize = 20)
-
+if is_labels:
+    ax.set_xlabel('[m]',fontsize=40)
+    ax.set_ylabel('[m]',fontsize=40)
+    ax.tick_params(labelsize = 20)
+else:
+    plt.setp(ax.get_yticklabels(), visible=False)
+    plt.setp(ax.get_xticklabels(), visible=False)
+    
 # Axis Limits
 ax.set_xlim(xlims[0],xlims[1])
 ax.set_ylim(ylims[0],ylims[1])
 
 # Colorbar
-cb_ax = fig.add_subplot(1,25,1)
-cb_ax.set_position([0.8,0.1,0.03,0.8])
-cb_ax.tick_params(labelsize = 20)
-cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
-mpl.colorbar.Colorbar(cb_ax, im)
-if varname == 'uindex':
-    cb_ax.yaxis.set_ticklabels(["1: Sand",
-                                "2: Sand",
-                                "3: Water",
-                                "4: Water",
-                                "5: Water",
-                                "6: Water",
-                                "7: Cement"])
-    cb_ax.set_position([0.72,0.1,0.03,0.8])
+if is_cb:
+    cb_ax = fig.add_subplot(1,25,1)
+    cb_ax.set_position([0.8,0.1,0.03,0.8])
+    cb_ax.tick_params(labelsize = 20)
+    cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
+    mpl.colorbar.Colorbar(cb_ax, im)
+    if varname == 'uindex':
+        cb_ax.yaxis.set_ticklabels(["1: Sand",
+                                    "2: Sand",
+                                    "3: Water",
+                                    "4: Water",
+                                    "5: Water",
+                                    "6: Water",
+                                    "7: Cement"])
+        cb_ax.set_position([0.72,0.1,0.03,0.8])
 
 # Save
 if is_save:
         if varname == 'v':
             varname = varname+'_'+str(v_component)
+        if is_mask:
+            varname = varname+'_'+str(maskvalue).zfill(2)
         plt.savefig(pm.py_output_filename(fa.tag,varname,sc.spec(),pic_format))
+        print('Saved as ' + pm.py_output_filename(fa.tag,varname,sc.spec(),pic_format))
 # Show
 if is_show:
     plt.show()
