@@ -72,7 +72,7 @@ def py_simple_output_filename(filename,tag,ending):
     """
 
     py_simple_output_filename = py_output_dir(tag,ending) + "/" \
-                         + filename + "." \
-                         + ending
+                                + filename + "." \
+                                + ending
 
     return py_simple_output_filename
