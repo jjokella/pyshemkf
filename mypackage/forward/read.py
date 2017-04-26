@@ -8,16 +8,6 @@ from mypackage.run import runmodule as rm
 from mypackage.run import pythonmodule as pm
 from mypackage.forward import arrays as fa
 
-# Specs
-sc.model_name = 'cubey'
-sc.dat = '2017_02_08'
-let = 'aln'
-nl = 1
-ns = rm.get_num_let(let)
-nstep = 1
-sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
-
-
 def read(model_name,dat,let,
          varname = 'uindex',
 ):
