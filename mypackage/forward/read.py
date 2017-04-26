@@ -1,24 +1,35 @@
 # Read routine for forward pictures
 
 import numpy as np
+from mypackage.plot import specs as sc
 
 from mypackage.plot import plotfunctions as pf
 from mypackage.run import runmodule as rm
 from mypackage.run import pythonmodule as pm
+from mypackage.forward import arrays as fa
 
-import forwardarrays as fa
+# Specs
+sc.model_name = 'cubey'
+sc.dat = '2017_02_08'
+let = 'aln'
+nl = 1
+ns = rm.get_num_let(let)
+nstep = 1
+sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
 
-fdir = rm.make_output_dirs(sc.model_name,sc.dat,sc.lets[0])[1] # samples_output_dir
-fname = rm.make_file_dir_names(sc.model_name,1)[17] # time_out_file
+def read(model_name,dat,let,
+         varname = 'uindex',
+):
+         # varnames = ['uindex','temp','head'], #'head','temp','kz', 'v'
 
-varnames = ['uindex','temp','head']                             #'head','temp','kz', 'v'
-
-for varname in varnames:
+    # Dirs
+    fdir = rm.make_output_dirs(model_name,dat,let)[1] # samples_output_dir
+    fname = rm.make_file_dir_names(model_name,1)[17] # time_out_file
 
     # Get vtk_reader ##########################################################
     vtk_reader = pf.my_vtk(fdir,fname,varname)
-
+    
     # Debug ###################################################################
     if varname == 'v':
         print(varname, vtk_reader.GetOutput().GetPointData().GetArray(0).GetValueRange(0))
@@ -30,5 +41,9 @@ for varname in varnames:
     # Numpy Array  ############################################################
     numpy_array = pf.my_vtk_to_numpy(vtk_reader)
 
-    np.save(pm.py_output_filename(fa.tag,varname,sc.spec(),"npy"),numpy_array)
+    # Numpy Array Name ########################################################
+    numpy_array_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),"npy")
+    
+    return numpy_array, numpy_array_name
+    
     

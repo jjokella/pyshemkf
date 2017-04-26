@@ -1,0 +1,69 @@
+import shutil
+import matplotlib.pyplot as plt
+
+from mypackage.plot import specs as sc
+import mypackage.forward.arrays as fa
+import mypackage.forward.plot as fp
+import mypackage.forward.read as fr
+import mypackage.run.pythonmodule as pm
+
+# Switches
+is_read = 0
+is_plot = 0
+is_save = 0
+is_show = 0
+is_backup = 0
+
+# Specs
+sc.model_name = 'cubey'
+sc.dat = '2017_02_08'
+
+let = 'aln'
+nl = 1
+ns = rm.get_num_let(let)
+nstep = 1
+sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+
+# Read
+if is_read:
+    for varname in ['uindex','head','temp']:
+        numpy_array, numpy_array_name = fr.read(sc.model_name,
+                                                sc.dat,
+                                                sc.lets[0],
+                                                varname = varname)
+        np.save(numpy_array_name,numpy_array)
+        print('Saved as ' + numpy_array_name)
+
+
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure(1,figsize=[15,10])
+    ax = fig.add_subplot(111)
+    cb_ax = fig.add_subplot(1,25,1)
+    
+    # Run plot function
+    ax, pic_name = fp.plot(ax,
+                           cb_ax,
+                           sc.model_name,
+                           sc.dat,
+                           sc.lets[0],
+                           varname = 'uindex'
+                       )
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.close()
+
+# Backup
+if is_backup:
+    pm.py_script_backup(fa.tag,"runplot","ipy",sc.model_name,sc.dat,sc.lets[0])
