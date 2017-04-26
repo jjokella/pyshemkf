@@ -76,3 +76,37 @@ def py_simple_output_filename(filename,tag,ending):
                                 + ending
 
     return py_simple_output_filename
+
+###############################################################################
+#                            python_script_backup                             #
+###############################################################################
+
+def py_script_backup(tag,filename,ending,model_name,dat,let):
+    """
+    Copy a python script to backup directory and add specifier
+    """
+    # Script Name
+    py_script_file_name = python_scripts_dir + "/" \
+                          + tag + "/" \
+                          + filename + "." \
+                          + ending
+
+    # Possibly create backup directory
+    if not os.path.exists(python_scripts_dir+"/"+tag+"/backup"):
+        os.mkdir(python_scripts_dir+"/"+tag+"/backup")
+
+    # Backup Script Name
+    py_script_backup_file_name = python_scripts_dir + "/" \
+                                 + tag + "/" \
+                                 + "backup/" \
+                                 + filename + "_" + sc.specl(model_name,dat,let)+"." \
+                                 + ending
+
+
+    # Exception if file already exists
+    if os.path.isfile(py_script_backup_file_name):
+        raise exceptions.RuntimeError("Backup-File " + py_script_backup_file_name + " already exists!!")
+    else:
+        shutil.copyfile(py_script_file_name,py_script_backup_file_name)
+
+
