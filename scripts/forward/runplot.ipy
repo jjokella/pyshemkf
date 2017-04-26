@@ -62,7 +62,7 @@ if is_plot:
     if is_show:
         plt.show()
     else:
-        plt.close()
+        plt.clf()
 
 # Backup
 if is_backup:
