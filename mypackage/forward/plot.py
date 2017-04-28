@@ -17,20 +17,15 @@ from mypackage.plot import specs as sc
 import arrays as fa
 
 def plot(ax,
-         cb_ax,
          model_name,
          dat,
          let,
          is_grid = True,
-         is_cb = True,
          is_mask = False,
          is_labels= True,
          is_ownticks = True,
          varname = 'uindex',                        #'head','v','temp','kz', 'uindex'
          v_component = 1,                           #0,1,2
-         varlabels = {'temp':'Temperature [deg]',
-                      'head':'Hydraulic Head [m] - 10m',
-                      'uindex':'Unit Index'},
          xlims = [0.0,0.8032],
          ylims = [0.0,0.8032],
          maskvalue = 7,
@@ -135,23 +130,6 @@ def plot(ax,
     ax.set_xlim(xlims[0],xlims[1])
     ax.set_ylim(ylims[0],ylims[1])
 
-    # colorbar
-    if is_cb:
-        cb_ax.set_position([0.8,0.1,0.03,0.8])
-        cb_ax.tick_params(labelsize = 20)
-        cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
-        mpl.colorbar.Colorbar(cb_ax, im)
-        if varname == 'uindex':
-            cb_ax.yaxis.set_ticklabels(["1: sand",
-                                        "2: sand",
-                                        "3: water",
-                                        "4: water",
-                                        "5: water",
-                                        "6: water",
-                                        "7: cement"])
-            cb_ax.set_position([0.72,0.1,0.03,0.8])
-
-
     # Figure name
     if varname == 'v':
         varname = varname+'_'+str(v_component)
@@ -161,3 +139,33 @@ def plot(ax,
     pic_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),pic_format)
     
     return ax, pic_name
+
+
+def cb(cb_ax,
+       ax,
+       varname = "uindex",
+       varlabels = {'temp':'Temperature [deg]',
+                    'head':'Hydraulic Head [m] - 10m',
+                    'uindex':'Unit Index'},
+       cb_ax_position = [0.8,0.1,0.03,0.8],
+       labelsize = 20,
+):
+
+    im = ax.images[0]
+
+    # colorbar
+    cb_ax.set_position(cb_ax_position)
+    cb_ax.tick_params(labelsize = labelsize)
+    cb_ax.set_title(varlabels[varname], y =1.02, fontsize=40)
+    mpl.colorbar.Colorbar(cb_ax, im)
+    if varname == 'uindex':
+        cb_ax.yaxis.set_ticklabels(["1: sand",
+                                    "2: sand",
+                                    "3: water",
+                                    "4: water",
+                                    "5: water",
+                                    "6: water",
+                                    "7: cement"])
+        cb_ax.set_position([0.72,0.1,0.03,0.8])
+
+    return cb_ax
