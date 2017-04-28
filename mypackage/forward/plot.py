@@ -29,6 +29,7 @@ def plot(ax,
          xlims = [0.0,0.8032],
          ylims = [0.0,0.8032],
          maskvalue = 7,
+         loc_inds = range(16),
          xownticks = [0.1+i*0.1 for i in range(9)],
          yownticks = [0.1+i*0.1 for i in range(9)],
          num_cbar = 7,
@@ -57,9 +58,6 @@ def plot(ax,
     let : string
         String of letter of model run.
     """
-    # Read measurement locations
-    locs = sc.locs(model_name,dat,let)
-
     # Read grid arrays from mypackage/plot/grids.py
     x = grids.x(model_name,dat,let)
     y = grids.y(model_name,dat,let)
@@ -107,9 +105,14 @@ def plot(ax,
         ax.grid()
 
     # Monitoring Points
-    for i in range(len(locs)):
-        ax.scatter(x[locs[i][0]-1],
-                   y[locs[i][1]-1],
+
+    # Read
+    locs = sc.locs(model_name,dat,let)
+
+    # Scatterplot
+    for i in range(len(np.array(locs)[loc_inds])):
+        ax.scatter(x[locs[loc_inds[i]][0]-1],
+                   y[locs[loc_inds[i]][1]-1],
                    marker='o',
                    c='black',
                    s=50)
