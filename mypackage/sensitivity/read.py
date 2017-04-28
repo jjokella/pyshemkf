@@ -141,3 +141,44 @@ def mix(model_name,dat,lets,is_diff = False):
 
     return sense, sense_name
 
+###############################################################################
+#                              Sensitivity curves                             #
+###############################################################################
+
+def nmix(
+        nruns = [0,1,2],                 # range(len(sa.runs))
+        imons = 9
+):
+
+
+    for i, irun in enumerate(nruns):
+
+        # Output specifiers #######################################################
+        model_name = sa.runs[irun][0] #'cubey'
+        dat = sa.runs[irun][1] #'2017_01_15'
+        let = rm.get_let_num(sa.runs[irun][2][0]) # range(1000)
+
+        # Load array ##############################################################
+        sense = np.load(pm.py_output_filename(sa.tag,
+                                              "sense",
+                                              sc.specl(model_name,dat,let),
+                                              "npy"))
+
+        # Initialize array ########################################################
+        if i == 0:
+            numsense = np.zeros([sc.nt(model_name,dat,let),
+                                 len(nruns)])
+            numsense_labels = ["" for j in range(len(nruns))]
+
+        ###########################################################################
+        #                               Calculation                               #
+        ###########################################################################
+        # Difference of outermost points: Find the right variation interval #######
+        numsense[:,i] = sense[:,imons,-1] - sense[:,imons,0]
+        numsense_labels[i] = sa.sensitivity_varnames[sc.specl(model_name,dat,let)] \
+                                + ", Unit:"+ str(sa.unit_numbers[sc.specl(model_name,dat,let)])
+
+        numsense_name = pm.py_simple_output_filename("numsense_"+str(imons).zfill(2),sa.tag,"npy")
+        numsense_labels_name = pm.py_simple_output_filename("numsense_labels_"+str(imons).zfill(2),sa.tag,"npy")
+
+        return numsense, numsense_name, numsense_labels, numsense_labels_name
