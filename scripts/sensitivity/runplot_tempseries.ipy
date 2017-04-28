@@ -10,10 +10,10 @@ import mypackage.run.pythonmodule as pm
 
 
 # Switches
-is_plot = 1
-is_save = 1
+is_plot = 0
+is_save = 0
 is_show = 0
-is_backup = 1
+is_backup = 0
 
 for imons in [0,8,9]:         # [0,1,8,9]
     for ispec in [
