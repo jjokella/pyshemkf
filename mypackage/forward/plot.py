@@ -48,13 +48,13 @@ def plot(ax,
     cb_ax : Axes
         The axes for the colorbar.
 
-    model_name : String
+    model_name : string
         String of model name.
 
-    dat : String
+    dat : string
         String with date of model run.
 
-    let : String
+    let : string
         String of letter of model run.
     """
     # Read measurement locations
