@@ -65,7 +65,7 @@ def plot(ax,
     yticks = grids.yticks(model_name,dat,let)
 
     # Load variable array
-    var = np.load(pm.py_output_filename(fa.tag,varname,spec,"npy"))
+    var = np.load(pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),"npy"))
 
     if varname == 'v':
         var = var[:,:,v_component]
@@ -81,7 +81,7 @@ def plot(ax,
         var = np.ma.array(var,mask = np.logical_or(var<maskvalue-0.5,var>maskvalue+0.5))
 
     # Axis position
-    ax.set_position([0.1,0.1,0.6,0.8])
+    ax.set_position(position)
 
     # Create image
     im = mpl.image.NonUniformImage(ax,interpolation='nearest',
