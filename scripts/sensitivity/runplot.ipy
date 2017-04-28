@@ -117,6 +117,26 @@ if is_nmix:
     np.save(numsense_labels_name,numsense_labels)
     print('Saved as ' + numsense_labels_name)
 
+# NPlot
+if is_nplot:
+
+    # Figure
+    fig = plt.figure(1,[8,4], dpi=200, facecolor = 'white')
+    ax = fig.add_subplot(111)
+
+    ax, pic_name = spl.nplot(ax,sc.model_name,sc.dat,sc.lets[0])
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
 # Backup
 if is_backup:
     pm.py_script_backup(sa.tag,"runplot","ipy",sc.model_name,sc.dat,sc.lets[0])
