@@ -26,11 +26,16 @@ def plot(ax,
          is_ownticks = True,
          varname = 'uindex',                        #'head','v','temp','kz', 'uindex'
          v_component = 1,                           #0,1,2
+         position = [0.1,0.1,0.6,0.8],
          xlims = [0.0,0.8032],
          ylims = [0.0,0.8032],
          alpha = 1.0,
          maskvalue = 7,
          loc_inds = range(16),
+         markersize=50,
+         markercolor='red',
+         xlabelfontsize=40,
+         ylabelfontsize=40,
          xownticks = [0.1+i*0.1 for i in range(9)],
          yownticks = [0.1+i*0.1 for i in range(9)],
          num_cbar = 7,
@@ -116,20 +121,19 @@ def plot(ax,
         ax.scatter(x[locs[loc_inds[i]][0]-1],
                    y[locs[loc_inds[i]][1]-1],
                    marker='o',
-                   c='black',
-                   s=50)
+                   c=markercolor,
+                   edgecolors=markercolor,
+                   s=markersize)
 
     # Title
     # ax.set_title('Temperature field')
 
     # Labels
-    if is_labels:
-        ax.set_xlabel('[m]',fontsize=40)
-        ax.set_ylabel('[m]',fontsize=40)
-        ax.tick_params(labelsize = 20)
-    else:
-        ax.set_yticklabels('')
-        ax.set_xticklabels('')
+    ax.set_xlabel('[m]',fontsize=xlabelfontsize, visible=is_labels)
+    ax.set_ylabel('[m]',fontsize=ylabelfontsize, visible=is_labels)
+    ax.tick_params(length = 20 if is_labels else 0)
+    ax.set_yticklabels(ax.get_yticklabels(),visible=is_labels)
+    ax.set_xticklabels(ax.get_xticklabels(),visible=is_labels)
 
     # Axis Limits
     ax.set_xlim(xlims[0],xlims[1])
