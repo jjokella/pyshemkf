@@ -40,11 +40,17 @@ sa.senselets = [rm.get_let_num(int(i+rm.get_num_let(let))) for i in np.round(np.
 # Read
 if is_read:
     for il, let in enumerate(sa.senselets):
+
         if let == sa.senselets[0]:
             t, t_name = sr.read(sc.model_name,sc.dat,let,varname ="t")
+
+            # Save
             np.save(t_name,t)
             print('Saved as ' + t_name)
+
         temp, temp_name = sr.read(sc.model_name,sc.dat,let,varname ="temp")
+
+        # Save
         np.save(temp_name,temp)
         print('Saved as ' + temp_name)
         
