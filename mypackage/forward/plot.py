@@ -28,6 +28,7 @@ def plot(ax,
          v_component = 1,                           #0,1,2
          xlims = [0.0,0.8032],
          ylims = [0.0,0.8032],
+         alpha = 1.0,
          maskvalue = 7,
          loc_inds = range(16),
          xownticks = [0.1+i*0.1 for i in range(9)],
@@ -81,7 +82,7 @@ def plot(ax,
         var = np.ma.array(var,mask = np.logical_or(var<maskvalue-0.5,var>maskvalue+0.5))
 
     # Axis position
-    ax.set_position(position)
+    ax.set_position([0.1,0.1,0.6,0.8])
 
     # Create image
     im = mpl.image.NonUniformImage(ax,interpolation='nearest',
@@ -90,6 +91,7 @@ def plot(ax,
                                                                    vmax=high_cbar,
                                                                    clip=False))
     im.set_data(x,y,var)
+    im.set_alpha(alpha)
     ax.images.append(im)
 
     # Ticks
