@@ -107,6 +107,16 @@ if is_dplot:
     else:
         plt.clf()
 
+# NMix
+if is_nmix:
+    numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix()
+
+    # Save
+    np.save(numsense_name,numsense)
+    print('Saved as ' + numsense_name)
+    np.save(numsense_labels_name,numsense_labels)
+    print('Saved as ' + numsense_labels_name)
+
 # Backup
 if is_backup:
     pm.py_script_backup(sa.tag,"runplot","ipy",sc.model_name,sc.dat,sc.lets[0])
