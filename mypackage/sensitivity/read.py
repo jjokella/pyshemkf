@@ -1,7 +1,3 @@
-###############################################################################
-#                        Read data for sensitivity analysis                   #
-###############################################################################
-
 import os
 import numpy as np
 import exceptions
@@ -10,6 +6,9 @@ from mypackage.plot import specs as sc
 from mypackage.run import runmodule as rm
 from mypackage.run import pythonmodule as pm
 
+###############################################################################
+#                        Read data for sensitivity analysis                   #
+###############################################################################
 
 def read(model_name,dat,let,varname="temp"):
     """
@@ -70,7 +69,9 @@ def read(model_name,dat,let,varname="temp"):
 
     return var, array_name
 
-
+###############################################################################
+#                              Sensitivity arrays                             #
+###############################################################################
 
 def mix(model_name,dat,lets,is_diff = False):
     """
