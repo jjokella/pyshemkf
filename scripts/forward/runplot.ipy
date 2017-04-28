@@ -41,17 +41,18 @@ if is_plot:
 
     # Figure
     fig = plt.figure(1,figsize=[15,10])
-    ax = fig.add_subplot(111)
-    cb_ax = fig.add_subplot(1,25,1)
     
     # Run plot function
-    ax, pic_name = fp.plot(ax,
-                           cb_ax,
+    ax, pic_name = fp.plot(fig.add_subplot(1,1,1),
                            sc.model_name,
                            sc.dat,
                            sc.lets[0],
                            varname = 'uindex'
                        )
+
+    # Colorbar
+    cb_ax = fp.cb(fig.add_subplot(1,2,1),
+                  ax)
 
     # Save
     if is_save:
