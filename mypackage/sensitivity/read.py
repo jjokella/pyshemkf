@@ -12,7 +12,34 @@ from mypackage.run import pythonmodule as pm
 
 
 def read(model_name,dat,let,varname="temp"):
+    """
+    Reading time and temperature arrays from output files.
 
+    Parameters
+    ----------
+    model_name : string
+        String of model name.
+
+    dat : string
+        String with date of model run.
+
+    let : string
+        String of letter of model run.
+
+    varname : string
+        String containing the name of the variable to be read in.
+        Possibilities:
+        - "t"
+        - "temp"
+
+    Returns
+    -------
+    var : array
+        Containing variable time series.
+
+    array_name : string
+        Containing proposed saving location for var.
+    """
     # Name of monitoring file
     monitor_file = rm.make_file_dir_names(sc.model_name)[16]
 
