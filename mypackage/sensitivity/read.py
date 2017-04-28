@@ -66,7 +66,7 @@ def read(model_name,dat,let,varname="temp"):
         var = var.reshape(len(var)/num_mons, num_mons)
 
     # Array name
-    array_name = pm.py_output_filename(sa.tag,"truet",sc.specl(model_name,dat,let),"npy")
+    array_name = pm.py_output_filename(sa.tag,"true"+varname,sc.specl(model_name,dat,let),"npy")
 
     return var, array_name
 
