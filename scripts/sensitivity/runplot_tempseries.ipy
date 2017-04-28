@@ -84,5 +84,5 @@ for imons in [0,8,9]:         # [0,1,8,9]
 
 # Backup
 if is_backup:
-    pm.py_script_backup(sa.tag,"runplot_2","ipy",sc.model_name,sc.dat,sc.lets[0])
+    pm.py_script_backup(sa.tag,"runplot_tempseries","ipy",sc.model_name,sc.dat,sc.lets[0])
 
