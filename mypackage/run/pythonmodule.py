@@ -108,5 +108,6 @@ def py_script_backup(tag,filename,ending,model_name,dat,let):
         raise exceptions.RuntimeError("Backup-File " + py_script_backup_file_name + " already exists!!")
     else:
         shutil.copyfile(py_script_file_name,py_script_backup_file_name)
+        print('Backup as '+py_script_backup_file_name)
 
 
