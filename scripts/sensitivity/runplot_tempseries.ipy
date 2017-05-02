@@ -10,10 +10,10 @@ import mypackage.run.pythonmodule as pm
 
 
 # Switches
-is_plot = 0
-is_save = 0
+is_plot = 1
+is_save = 1
 is_show = 0
-is_backup = 0
+is_backup = 1
 
 for imons in [0,8,9]:         # [0,1,8,9]
     for ispec in [
@@ -58,8 +58,7 @@ for imons in [0,8,9]:         # [0,1,8,9]
                                        "2017_02_08",
                                        "aln",
                                        varname = 'uindex',
-                                       position = [0.35,0.55,0.15*1.5,0.2*1.5] if imons >7 else
-                                       [0.15,0.15,0.15*1.5,0.2*1.5],
+                                       position = [0.40,0.55,0.18,0.32] if imons >7 else [0.15,0.15,0.18,0.32],
                                        alpha = 0.5,
                                        loc_inds = [imons],
                                        markersize = 2.0,
