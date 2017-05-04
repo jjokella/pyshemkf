@@ -11,6 +11,28 @@ from mypackage.forward import arrays as fa
 def read(model_name,dat,let,
          varname = 'uindex',
 ):
+    """
+    Reading variable arrays from SHEMAT-Suite.
+
+    Parameters
+    ----------
+    model_name : string
+        String of model name.
+
+    dat : string
+        String with date of model run.
+
+    let : string
+        String of letter of model run.
+
+    Returns
+    -------
+    numpy_array : array
+        Array containing the variable array
+
+    numpy_array_name : string
+        Containing proposed saving location for Array.
+    """
          # varnames = ['uindex','temp','head'], #'head','temp','kz', 'v'
 
     # Dirs

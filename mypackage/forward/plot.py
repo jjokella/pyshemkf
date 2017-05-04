@@ -16,6 +16,10 @@ from mypackage.plot import specs as sc
 
 import arrays as fa
 
+###############################################################################
+#               Plot Nonuniform Image of Variable array                       #
+###############################################################################
+
 def plot(ax,
          model_name,
          dat,
@@ -52,9 +56,6 @@ def plot(ax,
     ax : Axes
         The axes to draw to.
 
-    cb_ax : Axes
-        The axes for the colorbar.
-
     model_name : string
         String of model name.
 
@@ -63,6 +64,14 @@ def plot(ax,
 
     let : string
         String of letter of model run.
+
+    Returns
+    -------
+    ax : Axes
+        Axes containing image of variable array.
+
+    pic_name : string
+        Containing proposed saving location for Figure. 
     """
     # Read grid arrays from mypackage/plot/grids.py
     x = grids.x(model_name,dat,let)
@@ -150,6 +159,10 @@ def plot(ax,
     return ax, pic_name
 
 
+###############################################################################
+#                    Add colorbar to figure with image                        #
+###############################################################################
+
 def cb(cb_ax,
        ax,
        varname = "uindex",
@@ -159,6 +172,22 @@ def cb(cb_ax,
        cb_ax_position = [0.8,0.1,0.03,0.8],
        labelsize = 20,
 ):
+    """
+    Add colorbar to figure.
+
+    Parameters
+    ----------
+    cb_ax : Axes
+        Empty colorbar-Axes instance.
+
+    ax : Axes
+        The axes holding the colored image.
+
+    Returns
+    -------
+    cb_ax : Axes
+        Colobar-Axes instance including the colorbar.
+    """
 
     im = ax.images[0]
 

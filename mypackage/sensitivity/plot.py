@@ -21,6 +21,32 @@ def plot(ax,
          xlims = [10,30*24*3600],
          ylims = [11,20],
      ):
+    """
+    A plotting function for temperature curves in order to study
+    sensitivity to different parameters.
+
+    Parameters
+    ----------
+    ax : Axes
+        The axes to draw to.
+
+    model_name : string
+        String of model name.
+
+    dat : string
+        String with date of model run.
+
+    let : string
+        String of letter of model run.
+
+    Returns
+    -------
+    ax : Axes
+        Axes instance with plots.
+
+    pic_name : string
+        Containing proposed saving location for Figure.
+    """
 
     sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.specl(model_name,dat,let),"npy"))
     t = np.load(pm.py_output_filename(sa.tag,"truet",sc.specl(model_name,dat,let),"npy"))
