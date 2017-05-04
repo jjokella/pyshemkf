@@ -131,6 +131,7 @@ def dplot(ax,
               dat,
               let,
               imons = [1,9],
+              title = 'Default',
               position = [0.1,0.1,0.9,0.9],
               pic_format = 'pdf',              # png, eps, pdf
               xlims = [10,30*24*3600],
@@ -174,12 +175,17 @@ def dplot(ax,
     deftemp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
 
 
-    ax.set_title('Sensitivity of Temperature-Difference at '+str(imons[0]) +' minus '
-                 + str(imons[1]) +': '
-                 +sa.sensitivity_varnames[sc.specl(model_name,dat,let)]
-                 +' Unit: '+str(sa.unit_numbers[sc.specl(model_name,dat,let)])
-                 +' ('+sa.unit_names[sa.unit_numbers[sc.specl(model_name,dat,let)]]+')',
-                 size = 8)
+    # Title
+    if not title=="Default":
+        ax.set_title(title,
+                     size = 12)
+    else:
+        ax.set_title('Sensitivity of Temperature-Difference at '+str(imons[0]) +' minus '
+                    + str(imons[1]) +': '
+                    +sa.sensitivity_varnames[sc.specl(model_name,dat,let)]
+                    +' Unit: '+str(sa.unit_numbers[sc.specl(model_name,dat,let)])
+                    +' ('+sa.unit_names[sa.unit_numbers[sc.specl(model_name,dat,let)]]+')',
+                    size = 8)
 
     # Axis position
     ax.set_position(position)
