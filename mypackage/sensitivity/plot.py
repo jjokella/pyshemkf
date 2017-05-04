@@ -12,15 +12,15 @@ import mypackage.sensitivity.arrays as sa
 ###############################################################################
 
 def plot(ax,
-         model_name,
-         dat,
-         let,
-         imons = 9,
-         title = 'Default',
-         position = [0.1,0.1,0.9,0.9],
-         pic_format = 'pdf',              # png, eps, pdf
-         xlims = [10,30*24*3600],
-         ylims = [11,20],
+             model_name,
+             dat,
+             let,
+             imons = 9,
+             title = 'Default',
+             position = [0.1,0.1,0.9,0.9],
+             pic_format = 'pdf',              # png, eps, pdf
+             xlims = [10,30*24*3600],
+             ylims = [11,20],
      ):
     """
     A plotting function for temperature curves in order to study
