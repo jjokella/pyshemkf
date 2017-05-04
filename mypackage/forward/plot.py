@@ -124,12 +124,11 @@ def plot(ax,
     # Monitoring Points
 
     # Read
-    locs = sc.locs(model_name,dat,let)
+    locs = np.array(sc.locs(model_name,dat,let))
 
     # Scatterplot
-    for i in range(len(np.array(locs)[loc_inds])):
-        ax.scatter(x[locs[loc_inds[i]][0]-1],
-                   y[locs[loc_inds[i]][1]-1],
+    ax.scatter(x[locs[loc_inds][:,0]-1],
+                   y[locs[loc_inds][:,1]-1],
                    marker=marker,
                    c=markercolor,
                    edgecolors=markercolor,
