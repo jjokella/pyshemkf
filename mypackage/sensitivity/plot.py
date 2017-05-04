@@ -209,7 +209,7 @@ def dplot(ax,
     ax.set_ylim(ylims[0],ylims[1])
 
     ax.text(0.95,0.95,
-            "White->Black: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
+            "Range: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
             fontsize=10,
             verticalalignment='top',
             horizontalalignment='right',
@@ -222,19 +222,19 @@ def dplot(ax,
             horizontalalignment='right',
             transform=ax.transAxes)
 
-    ax.text(0.95,0.75,
-            "Measurement 1: "+sa.obs_longlabels[imons[0]],
-            fontsize=10,
-            verticalalignment='top',
-            horizontalalignment='right',
-            transform=ax.transAxes)
+    # ax.text(0.95,0.75,
+    #         "Measurement 1: "+sa.obs_longlabels[imons[0]],
+    #         fontsize=10,
+    #         verticalalignment='top',
+    #         horizontalalignment='right',
+    #         transform=ax.transAxes)
 
-    ax.text(0.95,0.65,
-            "Measurement 2: "+sa.obs_longlabels[imons[1]],
-            fontsize=10,
-            verticalalignment='top',
-            horizontalalignment='right',
-            transform=ax.transAxes)
+    # ax.text(0.95,0.65,
+    #         "Measurement 2: "+sa.obs_longlabels[imons[1]],
+    #         fontsize=10,
+    #         verticalalignment='top',
+    #         horizontalalignment='right',
+    #         transform=ax.transAxes)
     
 
     pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
