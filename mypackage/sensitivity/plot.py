@@ -16,6 +16,7 @@ def plot(ax,
          dat,
          let,
          imons = 9,
+         position = [0.1,0.1,0.9,0.9],
          pic_format = 'pdf',              # png, eps, pdf
          xlims = [10,30*24*3600],
          ylims = [11,20],
@@ -37,6 +38,9 @@ def plot(ax,
                  +' Unit: '+str(sa.unit_numbers[sc.specl(model_name,dat,let)])
                  +' ('+sa.unit_names[sa.unit_numbers[sc.specl(model_name,dat,let)]]+')',
                  size = 12)
+
+    # Axis position
+    ax.set_position(position)
 
     # Plot 
     for i in range(sense.shape[2]):
