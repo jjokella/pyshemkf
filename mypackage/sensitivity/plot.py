@@ -89,7 +89,7 @@ def plot(ax,
 
     # Text
     ax.text(0.95,0.95,
-            "White->Black: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
+            "Range: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
             fontsize=10,
             verticalalignment='top',
             horizontalalignment='right',
@@ -102,12 +102,12 @@ def plot(ax,
             horizontalalignment='right',
             transform=ax.transAxes)
 
-    ax.text(0.95,0.75,
-            "Measurement: "+sa.obs_longlabels[imons],
-            fontsize=10,
-            verticalalignment='top',
-            horizontalalignment='right',
-            transform=ax.transAxes)
+    # ax.text(0.95,0.75,
+    #         "Measurement: "+sa.obs_longlabels[imons],
+    #         fontsize=10,
+    #         verticalalignment='top',
+    #         horizontalalignment='right',
+    #         transform=ax.transAxes)
 
     # Picture name
     pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
