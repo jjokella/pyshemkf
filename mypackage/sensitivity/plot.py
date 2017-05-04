@@ -17,6 +17,8 @@ def plot(ax,
              let,
              imons = 9,
              title = 'Default',
+             titlefont = 12,
+             textfont = 10,
              position = [0.1,0.1,0.9,0.9],
              pic_format = 'pdf',              # png, eps, pdf
              xlims = [10,30*24*3600],
@@ -63,12 +65,12 @@ def plot(ax,
     # Title
     if not title=="Default":
         ax.set_title(title,
-                     size = 12)
+                     size = titlefont)
     else:
         ax.set_title('Sensitivity: '+sa.sensitivity_varnames[sc.specl(model_name,dat,let)]
                      +' Unit: '+str(sa.unit_numbers[sc.specl(model_name,dat,let)])
                      +' ('+sa.unit_names[sa.unit_numbers[sc.specl(model_name,dat,let)]]+')',
-                     size = 12)
+                     size = titlefont)
 
     # Axis position
     ax.set_position(position)
@@ -95,14 +97,14 @@ def plot(ax,
     # Text
     ax.text(0.95,0.95,
             "Range: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
-            fontsize=10,
+            fontsize=textfont,
             verticalalignment='top',
             horizontalalignment='right',
             transform=ax.transAxes)
     
     ax.text(0.95,0.85,
             "Default: "+sa.default_strings[sc.specl(model_name,dat,let)],
-            fontsize=10,
+            fontsize=textfont,
             verticalalignment='top',
             horizontalalignment='right',
             transform=ax.transAxes)
