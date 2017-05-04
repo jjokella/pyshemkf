@@ -127,14 +127,40 @@ def plot(ax,
 ###############################################################################
 
 def dplot(ax,
-          model_name,
-          dat,
-          let,
-          imons = [1,9],
-          pic_format = 'pdf',              # png, eps, pdf
-          xlims = [10,30*24*3600],
-          ylims = [0,10],
-      ):
+              model_name,
+              dat,
+              let,
+              imons = [1,9],
+              pic_format = 'pdf',              # png, eps, pdf
+              xlims = [10,30*24*3600],
+              ylims = [0,10],
+              ):
+    """
+    A plotting function for temperature differences in order to study
+    sensitivity to different parameters.
+
+    Parameters
+    ----------
+    ax : Axes
+        The axes to draw to.
+
+    model_name : string
+        String of model name.
+
+    dat : string
+        String with date of model run.
+
+    let : string
+        String of letter of model run.
+
+    Returns
+    -------
+    ax : Axes
+        Axes instance with difference plots.
+
+    pic_name : string
+        Containing proposed saving location for Figure.
+    """
 
     pic_name_start = 'sense_'+str(imons[0]).zfill(2)+'_'+str(imons[1]).zfill(2)
     sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.specl(model_name,dat,let),"npy"))
