@@ -73,7 +73,13 @@ def read(model_name,dat,let,varname="temp"):
 #                              Sensitivity arrays                             #
 ###############################################################################
 
-def mix(model_name,dat,lets,is_diff = False):
+def mix(
+        model_name,
+        dat,
+        let,
+        length = 10,
+        is_diff = False
+        ):
     """
     Generating sensitivity array holding temperature (difference)
     profiles for varying parameter values.
@@ -86,8 +92,8 @@ def mix(model_name,dat,lets,is_diff = False):
     dat : string
         String with date of model run.
 
-    lets : string-array
-        Letters of model run.
+    let : string
+        String of letter of model run.
 
     is_diff : logical
         If yes, create an array of temperature differences.
@@ -108,21 +114,23 @@ def mix(model_name,dat,lets,is_diff = False):
     """
 
     # Read model parameters
-    num_mons = sc.num_mons(model_name,dat,lets[0])
-    nt = sc.nt(model_name,dat,lets[0])
+    num_mons = sc.num_mons(model_name,dat,let)
+    nt = sc.nt(model_name,dat,let)
+
+    # Sensitivy Letters
+    slets = sr.senselets(model_name,dat,let,length=length)
 
     # Empty sensitivity arrays
     if not is_diff:
-        sense = np.zeros([nt,num_mons,len(lets)])
+        sense = np.zeros([nt,num_mons,length])
     else:
-        sense = np.zeros([nt,num_mons/2,len(lets)])
-
+        sense = np.zeros([nt,num_mons/2,length])
 
     # Loop for letters/parameter values
-    for il,let in enumerate(lets):
+    for il,slet in enumerate(slets):
 
         # Load temperature array
-        temp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(model_name,dat,let),"npy"))
+        temp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(model_name,dat,slet),"npy"))
 
         if not is_diff:
             # Fill sense with temperature data
@@ -135,9 +143,9 @@ def mix(model_name,dat,lets,is_diff = False):
 
     # Name
     if not is_diff:
-        sense_name = pm.py_output_filename(sa.tag,"sense",sc.spec(),"npy")
+        sense_name = pm.py_output_filename(sa.tag,"sense",sc.specl(model_name,dat,let),"npy")
     else:
-        sense_name = pm.py_output_filename(sa.tag,"sensedt",sc.spec(),"npy")
+        sense_name = pm.py_output_filename(sa.tag,"sensedt",sc.specl(model_name,dat,let),"npy")
 
     return sense, sense_name
 
