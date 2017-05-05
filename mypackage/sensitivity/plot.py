@@ -75,7 +75,7 @@ def plot(ax,
     # Axis position
     ax.set_position(position)
 
-    # Plot 
+    # Plot
     for i in range(sense.shape[2]):
         ax.semilogx(t,sense[:,imons,i], 'o',
                     color = [1.0-i/float(sense.shape[2]),
@@ -101,7 +101,7 @@ def plot(ax,
             verticalalignment='top',
             horizontalalignment='right',
             transform=ax.transAxes)
-    
+
     ax.text(0.95,0.85,
             "Default: "+sa.default_strings[sc.specl(model_name,dat,let)],
             fontsize=textfont,
@@ -118,7 +118,7 @@ def plot(ax,
 
     # Picture name
     pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
-    
+
     return ax, pic_name
 
 
@@ -235,10 +235,10 @@ def dplot(ax,
     #         verticalalignment='top',
     #         horizontalalignment='right',
     #         transform=ax.transAxes)
-    
+
 
     pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
-    
+
     return ax, pic_name
 
 ###############################################################################
