@@ -5,6 +5,7 @@
 ###############################################################################
 
 import numpy as np
+from mypackage.run import runmodule as rm
 
 tag = "sensitivity"
 
@@ -19,6 +20,15 @@ runs = [
     ['cubey','2017_01_30',range(2001,3001)],
     # ['cubey','2017_01_30',range(3001,4001)],
     ]
+
+lets = {
+    'cubey_2017_01_15_a': [rm.get_let_num(i) for i in range(1000)],
+    'cubey_2017_01_31_a': [rm.get_let_num(i) for i in range(1000)],
+    'cubey_2017_01_31_aln': [rm.get_let_num(i) for i in range(1001,2001)],
+    'cubey_2017_01_30_a': [rm.get_let_num(i) for i in range(1000)],
+    'cubey_2017_01_30_aln': [rm.get_let_num(i) for i in range(1001,2001)],
+    'cubey_2017_01_30_bxz': [rm.get_let_num(i) for i in range(2001,3001)],
+        }
 
 varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
              'cubey_2017_01_31_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
