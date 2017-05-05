@@ -180,9 +180,32 @@ def nmix(
     return numsense, numsense_name, numsense_label, numsense_label_name
 
 
+###############################################################################
+#                              Sensitivity Letters                            #
+###############################################################################
 
+def senselets(
+        model_name,
+        dat,
+        let,
+        length = 10,
+        ):
 
+    # Full variable range
+    frange = sa.varranges[sc.specl(model_name,dat,let)]
 
+    # Sensitivity range
+    vrange = sa.varranges_sense[sc.specl(model_name,dat,let)]
 
+    # Find indices inside letters
+    first=rm.get_num_let(let)
+    beg = np.searchsorted(frange,vrange[0])
+    end = np.searchsorted(frange,vrange[1])-1
 
+    # Index array with stepsize
+    irange = np.linspace(beg,end,length,dtype=int)
 
+    # Letter array
+    senselets = [rm.get_let_num(first+i) for i in irange]
+
+    return senselets
