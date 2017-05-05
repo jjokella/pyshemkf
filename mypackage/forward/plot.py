@@ -41,6 +41,7 @@ def plot(ax,
          marker = 'o',
          markersize=50,
          markercolor='red',
+         markeralpha = 1.0,
          xlabelfontsize=40,
          ylabelfontsize=40,
          xownticks = [0.1+i*0.1 for i in range(9)],
@@ -137,6 +138,7 @@ def plot(ax,
                    marker=marker,
                    c=markercolor,
                    edgecolors=markercolor,
+                   alpha = markeralpha,
                    s=markersize)
 
     # Title
