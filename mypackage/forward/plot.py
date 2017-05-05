@@ -72,7 +72,7 @@ def plot(ax,
         Axes containing image of variable array.
 
     pic_name : string
-        Containing proposed saving location for Figure. 
+        Containing proposed saving location for Figure.
     """
     # Read grid arrays from mypackage/plot/grids.py
     x = grids.x(model_name,dat,let)
@@ -155,7 +155,7 @@ def plot(ax,
         varname = varname+'_'+str(maskvalue).zfill(2)
 
     pic_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),pic_format)
-    
+
     return ax, pic_name
 
 
