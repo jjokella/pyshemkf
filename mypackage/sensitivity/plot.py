@@ -255,13 +255,13 @@ def nplot(ax,model_name,dat,let,
           is_legend = True,
       ):
 
-    pic_names = ['numsense_'+str(imons).zfill(2)]
     numsense = np.load(pm.py_simple_output_filename("numsense_"+str(imons).zfill(2),
                                                     sa.tag,
                                                     "npy"))
     numsense_labels = np.load(pm.py_simple_output_filename("numsense_labels_"+str(imons).zfill(2),
                                                     sa.tag,
                                                     "npy"))
+    pic_name_start = 'numsense_'+str(imons).zfill(2)
     t = np.load(pm.py_output_filename(sa.tag,
                                       "truet",
                                       sc.specl(sc.model_name,sc.dat,sc.lets[0]),
