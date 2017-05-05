@@ -267,12 +267,12 @@ def nplot(ax,model_name,dat,let,
 
     t = np.load(pm.py_output_filename(sa.tag,
                                       "truet",
-                                      sc.specl(sc.model_name,sc.dat,sc.lets[0]),
+                                      sc.specl(model_name,dat,let),
                                       "npy"))
 
-    ax.set_title('Sensitivity numbers at '+sa.obs_longlabels[imons],# +sa.sensitivity_varnames[sc.spec()]
-                 # +' Unit: '+str(sa.unit_numbers[sc.spec()])
-                 # +' ('+sa.unit_names[sa.unit_numbers[sc.s,pec()]]+')',
+    ax.set_title('Sensitivity numbers at '+sa.obs_longlabels[imons],# +sa.sensitivity_varnames[sc.specl(model_name,dat,let)]
+                 # +' Unit: '+str(sa.unit_numbers[sc.specl(model_name,dat,let)])
+                 # +' ('+sa.unit_names[sa.unit_numbers[sc.specl(model_name,dat,let)]]+')',
                  size = 20)
 
     # Plot
