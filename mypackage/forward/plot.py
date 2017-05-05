@@ -35,6 +35,8 @@ def plot(ax,
          ylims = [0.0,0.8032],
          alpha = 1.0,
          maskvalue = 7,
+         is_ownlocs = False,
+         ownlocs = [[1,1,1]],
          loc_inds = range(16),
          marker = 'o',
          markersize=50,
@@ -124,7 +126,10 @@ def plot(ax,
     # Monitoring Points
 
     # Read
-    locs = np.array(sc.locs(model_name,dat,let))
+    if not is_ownlocs:
+        locs = np.array(sc.locs(model_name,dat,let))
+    else:
+        locs = np.array(ownlocs)
 
     # Scatterplot
     ax.scatter(x[locs[loc_inds][:,0]-1],
