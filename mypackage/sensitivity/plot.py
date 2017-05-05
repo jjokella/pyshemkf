@@ -251,6 +251,7 @@ def nplot(ax,model_name,dat,let,
           xlims = [10,30*24*3600],
           ylims = [-0.01,0.15],
           is_labels = True,
+          is_legend = True,
       ):
 
     pic_names = ['numsense_'+str(imons).zfill(2)]
@@ -289,12 +290,12 @@ def nplot(ax,model_name,dat,let,
         ax.set_xlim(xlims[0],xlims[1])
         ax.set_ylim(ylims[0],ylims[1])
 
+    if is_legend:
+        ax.legend(markerscale=2.0,
+                  loc = 'upper left',
+                  fontsize=6,
+                  ncol=3)
 
-    ax.legend(markerscale=2.0,
-              loc = 'upper left',
-              fontsize=6,
-              ncol=3)
-          
-    pic_name = pm.py_output_filename(sa.tag,pic_names[0],sc.specl(model_name,dat,let),pic_format)
-          
+    pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
+
     return ax, pic_name
