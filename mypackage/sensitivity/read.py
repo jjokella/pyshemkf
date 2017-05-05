@@ -86,8 +86,8 @@ def mix(model_name,dat,lets,is_diff = False):
     dat : string
         String with date of model run.
 
-    let : string
-        String of letter of model run.
+    lets : string-array
+        Letters of model run.
 
     is_diff : logical
         If yes, create an array of temperature differences.
