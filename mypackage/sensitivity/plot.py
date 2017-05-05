@@ -250,6 +250,7 @@ def nplot(ax,model_name,dat,let,
           pic_format = 'pdf',              # png, eps, pdf
           xlims = [10,30*24*3600],
           ylims = [-0.01,0.15],
+          color = 'black',
           is_labels = True,
           is_legend = True,
       ):
@@ -274,8 +275,7 @@ def nplot(ax,model_name,dat,let,
     # Plot
     for i in range(numsense.shape[1]):
         ax.semilogx(t,numsense[:,i], 'o',
-                    color = [i*0.3,i*0.3,i*0.3], # White to black
-                    # color = 'black',
+                    color = color, # White to black
                     linestyle = '--',
                     label=numsense_labels[i],
                     markersize = 0.0,
