@@ -250,6 +250,7 @@ def nplot(ax,model_name,dat,let,
           pic_format = 'pdf',              # png, eps, pdf
           xlims = [10,30*24*3600],
           ylims = [-0.01,0.15],
+          is_labels = True,
       ):
 
     pic_names = ['numsense_'+str(imons).zfill(2)]
@@ -279,13 +280,15 @@ def nplot(ax,model_name,dat,let,
                     markersize = 0.0,
                     markeredgewidth = 0.1)
 
-    ax.axhline(0,c='k',linestyle=':',linewidth=0.3)
-    ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
-    ax.set_ylabel(r'Temperature difference [$ ^{\circ} C$]',fontsize = 14)
-    ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
-    ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
-    ax.set_xlim(xlims[0],xlims[1])
-    ax.set_ylim(ylims[0],ylims[1])
+    if is_labels:
+        ax.axhline(0,c='k',linestyle=':',linewidth=0.3)
+        ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
+        ax.set_ylabel(r'Temperature difference [$ ^{\circ} C$]',fontsize = 14)
+        ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
+        ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+        ax.set_xlim(xlims[0],xlims[1])
+        ax.set_ylim(ylims[0],ylims[1])
+
 
     ax.legend(markerscale=2.0,
               loc = 'upper left',
