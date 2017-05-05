@@ -2,6 +2,7 @@ import shutil
 import matplotlib.pyplot as plt
 
 from mypackage.plot import specs as sc
+from mypackage.run import runmodule as rm
 import mypackage.sensitivity.arrays as sa
 import mypackage.sensitivity.plot as spl
 import mypackage.sensitivity.read as sr
@@ -26,32 +27,25 @@ is_backup = 0
 # 'cubey_2017_01_30_bxz'
 
 # Specs
-sc.model_name = 'cubey'
+model_name = 'cubey'
+dat = '2017_01_30'
+let = 'bxz'
 
-sc.dat = '2017_01_15'
-let = 'a'
-nl = 1000
-ns = rm.get_num_let(let)
-sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl)]
-
-nstep = 10
-sa.senselets = [rm.get_let_num(int(i+rm.get_num_let(let))) for i in np.round(np.linspace(np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][0]),
-                                                                     np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][1])-1,
-
-                                                                                         nstep))]
+# Letters of wanted range
+senselets = sr.senselets(model_name,dat,let,length=10)
 
 # Read
 if is_read:
-    for il, let in enumerate(sa.senselets):
+    for il, let in enumerate(senselets):
 
-        if let == sa.senselets[0]:
-            t, t_name = sr.read(sc.model_name,sc.dat,let,varname ="t")
+        if let == senselets[0]:
+            t, t_name = sr.read(model_name,dat,let,varname ="t")
 
             # Save
             np.save(t_name,t)
             print('Saved as ' + t_name)
 
-        temp, temp_name = sr.read(sc.model_name,sc.dat,let,varname ="temp")
+        temp, temp_name = sr.read(model_name,dat,let,varname ="temp")
 
         # Save
         np.save(temp_name,temp)
@@ -59,7 +53,7 @@ if is_read:
 
 # Mix
 if is_mix:
-    sense, sense_name = sr.mix(sc.model_name,sc.dat,sa.senselets)
+    sense, sense_name = sr.mix(model_name,dat,let)
 
     # Save
     np.save(sense_name,sense)
@@ -72,7 +66,7 @@ if is_plot:
     fig = plt.figure(1,figsize=[8,4], dpi=200, facecolor = 'white')
 
     # Run plot function
-    ax, pic_name = spl.plot(fig.add_subplot(111),sc.model_name,sc.dat,sc.lets[0])
+    ax, pic_name = spl.plot(fig.add_subplot(111),model_name,dat,let)
 
     # Save
     if is_save:
@@ -92,7 +86,7 @@ if is_dplot:
     fig = plt.figure(1,[8,4], dpi=200, facecolor = 'white')
 
     # Run dplot function
-    ax, pic_name = spl.dplot(fig.add_subplot(111),sc.model_name,sc.dat,sc.lets[0])
+    ax, pic_name = spl.dplot(fig.add_subplot(111),model_name,dat,let)
 
     # Save
     if is_save:
@@ -107,7 +101,8 @@ if is_dplot:
 
 # NMix
 if is_nmix:
-    numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix()
+    numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix(model_name,dat,let,
+                                                                                 imons = 8)
 
     # Save
     np.save(numsense_name,numsense)
@@ -122,7 +117,7 @@ if is_nplot:
     fig = plt.figure(1,[8,4], dpi=200, facecolor = 'white')
 
     # Run nplot function
-    ax, pic_name = spl.nplot(fig.add_subplot(111),sc.model_name,sc.dat,sc.lets[0])
+    ax, pic_name = spl.nplot(fig.add_subplot(111),model_name,dat,let)
 
     # Save
     if is_save:
@@ -137,4 +132,4 @@ if is_nplot:
 
 # Backup
 if is_backup:
-    pm.py_script_backup(sa.tag,"runplot","ipy",sc.model_name,sc.dat,sc.lets[0])
+    pm.py_script_backup(sa.tag,"runplot","ipy",model_name,dat,let)
