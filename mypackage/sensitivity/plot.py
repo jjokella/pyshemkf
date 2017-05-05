@@ -248,7 +248,7 @@ def dplot(ax,
 def nplot(ax,model_name,dat,let,
           imons = 9,
           pic_format = 'pdf',              # png, eps, pdf
-          xlims = [100,30*24*3600],
+          xlims = [10,30*24*3600],
           ylims = [-0.01,0.15],
       ):
 
