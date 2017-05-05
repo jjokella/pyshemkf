@@ -276,12 +276,11 @@ def nplot(ax,model_name,dat,let,
                  size = 20)
 
     # Plot
-    for i in range(numsense.shape[1]):
-        ax.semilogx(t,numsense[:,i], 'o',
+    ax.semilogx(t,numsense, 'o',
                     color = color, # White to black
                     linestyle = '--',
-                    label=numsense_labels[i],
-                    markersize = 0.0,
+                    label=numsense_label,
+                    markersize = 1.0,
                     markeredgewidth = 0.1)
 
     if is_labels:
