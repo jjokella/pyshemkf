@@ -249,6 +249,7 @@ def nplot(ax,model_name,dat,let,
           imons = 9,
           pic_format = 'pdf',              # png, eps, pdf
           title = "Default",
+          position = [0.1,0.1,0.9,0.9],
           xlims = [10,30*24*3600],
           ylims = [-0.01,0.15],
           color = 'black',
@@ -280,6 +281,9 @@ def nplot(ax,model_name,dat,let,
                          # +' Unit: '+str(sa.unit_numbers[sc.specl(model_name,dat,let)])
                          # +' ('+sa.unit_names[sa.unit_numbers[sc.specl(model_name,dat,let)]]+')',
                          size = 20)
+
+    # Axis position
+    ax.set_position(position)
 
     # Plot
     ax.semilogx(t,numsense, 'o',
