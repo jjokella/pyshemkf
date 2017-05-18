@@ -61,11 +61,11 @@ varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
              'cubey_2017_02_08_cd':np.arange(0.5*10**6,3.5*10**6,0.3*10**6),
          }
 
-varranges_sense = {'cubey_2017_01_15_a':np.array([1.22*10**6,1.49*10**6]),
-                   'cubey_2017_01_31_a':np.array([1.22*10**6,1.49*10**6]),
+varranges_sense = {'cubey_2017_01_15_a':np.array([2.85*10**6,3.10*10**6]),
+                   'cubey_2017_01_31_a':np.array([2.85*10**6,3.10*10**6]),
                    'cubey_2017_01_31_aln':np.array([1.2*10**6,2.2*10**6]),
-                   'cubey_2017_01_30_a':np.array([2.4,3.1]),
-                   'cubey_2017_01_30_aln':np.array([2.4,3.1]),
+                   'cubey_2017_01_30_a':np.array([2.3,3.1]),
+                   'cubey_2017_01_30_aln':np.array([2.3,3.1]),
                    'cubey_2017_01_30_bxz':np.array([1.5,2.5]),
 }
 
@@ -197,8 +197,8 @@ sensitivity_ranges = {'cubey_2016_12_13_a':r'1.5-3.0 $\frac{W}{mK}$ deprecated',
 
 
 # Sensitivity analysis: Default numbers #######################################
-default_values = {'cubey_2017_01_15_a':1.36*10**6,
-                  'cubey_2017_01_31_a':1.36*10**6,
+default_values = {'cubey_2017_01_15_a':2.98*10**6,
+                  'cubey_2017_01_31_a':2.98*10**6,
                   'cubey_2017_01_31_aln':1.7*10**6,
                   'cubey_2017_01_31_bxz':1.0*10**6,
                   'cubey_2017_01_30_a':2.7,
@@ -228,8 +228,8 @@ default_values = {'cubey_2017_01_15_a':1.36*10**6,
                   'cubey_2017_02_08_cd':1.0*10**6,
 }
 
-default_strings = {'cubey_2017_01_15_a':r'1.36 $10^6 \frac{J}{Km^3}$',
-                   'cubey_2017_01_31_a':r'1.36 $10^6 \frac{J}{Km^3}$',
+default_strings = {'cubey_2017_01_15_a':r'2.98 $10^6 \frac{J}{Km^3}$',
+                   'cubey_2017_01_31_a':r'2.98 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_01_31_aln':r'1.7 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_01_31_bxz':r'1.0 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_01_30_a':r'2.7 $\frac{W}{mK}$',
