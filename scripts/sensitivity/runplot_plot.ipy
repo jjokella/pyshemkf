@@ -48,7 +48,7 @@ for ipl2, imons in enumerate([
 
         # Plot
         if is_plot:
-            # Run plot function
+            # Temperature time series
             ax, pic_name = spl.plot(fig.add_subplot(1,20*ipl2+2*ipl+1,1),
                                     sc.model_name,
                                     sc.dat,
@@ -61,7 +61,7 @@ for ipl2, imons in enumerate([
                                     ylims = [11,20] if imons > 7 else [13,20]
             )
 
-            # Uindex plot function
+            # Uindex image
             ax2, pic_name_2  = fp.plot(fig.add_subplot(1,20*ipl2+2*ipl+2,1),
                                        sc.model_name,
                                        "2017_02_08",
