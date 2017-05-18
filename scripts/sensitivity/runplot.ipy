@@ -10,7 +10,7 @@ import mypackage.run.pythonmodule as pm
 
 # Switches
 is_read = 0
-is_mix = 0
+is_mix = 1
 is_plot = 0
 is_dplot = 0
 is_save = 0
@@ -53,7 +53,8 @@ if is_read:
 
 # Mix
 if is_mix:
-    sense, sense_name = sr.mix(model_name,dat,let)
+    sense, sense_name = sr.mix(model_name,dat,let,
+                                   is_diff = True)
 
     # Save
     np.save(sense_name,sense)
