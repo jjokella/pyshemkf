@@ -11,7 +11,7 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_dplot = 1
 is_save = 1
-is_show = 0
+is_show = 1
 is_backup = 1
 
 # 'cubey_2017_01_15_a'
@@ -39,47 +39,41 @@ for ipl2, imons in enumerate([
     ]):
 
         # Specs
-        sc.model_name = ispec[0]
-        sc.dat = ispec[1]
+        model_name = ispec[0]
+        dat = ispec[1]
         let = ispec[2]
-        nl = 1000
-        ns = rm.get_num_let(let)
-        sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl)]
 
-        nstep = 10
-        sa.senselets = [rm.get_let_num(int(i+rm.get_num_let(let))) for i in np.round(np.linspace(np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][0]),
-                                                                                                     np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][1])-1,
-
-                                                                                                 nstep))]
         # DPlot
         if is_dplot:
 
             # Run dplot function
-            ax, pic_name = spl.dplot(fig.add_subplot(1,20*ipl2+2*ipl+1,1),
-                                         sc.model_name,
-                                         sc.dat,
-                                         sc.lets[0],
-                                         title = 'Sensitivity: '+sa.sensitivity_varnames[sc.specl(sc.model_name,sc.dat,sc.lets[0])] if ipl==0 else '',
-                                         position = [0.1*0.5+ipl2*0.5,0.1*0.3333+1-(ipl+1)*0.3333,0.8*0.5,0.8*0.3333],
-                                         imons = imons)
+            ax, pic_name = spl.dplot(
+                fig.add_subplot(1,20*ipl2+2*ipl+1,1),
+                model_name,
+                dat,
+                let,
+                title = 'Sensitivity: '+sa.sensitivity_varnames[sc.specl(model_name,dat,let)] if ipl==0 else '',
+                position = [0.1*0.5+ipl2*0.5,0.1*0.3333+1-(ipl+1)*0.3333,0.8*0.5,0.8*0.3333],
+                imons = imons)
 
             # Uindex plot function
-            ax2, pic_name_2  = fp.plot(fig.add_subplot(1,20*ipl2+2*ipl+2,1),
-                                       sc.model_name,
-                                       "2017_02_08",
-                                       "aln",
-                                       varname = 'uindex',
-                                       position = [0.40*0.5+ipl2*0.5,0.55*0.3333+1-(ipl+1)*0.3333,0.18*0.5,0.32*0.333],
-                                       alpha = 0.5,
-                                       loc_inds = imons,
-                                       marker = 'o',
-                                       markersize = 4.0,
-                                       markercolor = ['black','red'],
-                                       is_labels=False,
-                                       is_mask = True,
-                                       is_grid = False,
-                                       maskvalue=sa.unit_numbers[sc.specl(sc.model_name,sc.dat,sc.lets[0])]
-                                   )
+            ax2, pic_name_2  = fp.plot(
+                fig.add_subplot(1,20*ipl2+2*ipl+2,1),
+                model_name,
+                "2017_02_08",
+                "aln",
+                varname = 'uindex',
+                position = [0.40*0.5+ipl2*0.5,0.55*0.3333+1-(ipl+1)*0.3333,0.18*0.5,0.32*0.333],
+                alpha = 0.5,
+                loc_inds = imons,
+                marker = 'o',
+                markersize = 4.0,
+                markercolor = ['black','red'],
+                is_labels=False,
+                is_mask = True,
+                is_grid = False,
+                maskvalue=sa.unit_numbers[sc.specl(model_name,dat,let)]
+                )
 # Save
 if is_save:
     plt.savefig(pic_name)
@@ -93,4 +87,4 @@ else:
 
 # Backup
 if is_backup:
-    pm.py_script_backup(sa.tag,"runplot_dplot","ipy",sc.model_name,sc.dat,sc.lets[0])
+    pm.py_script_backup(sa.tag,"runplot_dplot","ipy",model_name,dat,let)
