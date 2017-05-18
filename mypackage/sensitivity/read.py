@@ -118,7 +118,7 @@ def mix(
     nt = sc.nt(model_name,dat,let)
 
     # Sensitivy Letters
-    slets = sr.senselets(model_name,dat,let,length=length)
+    slets = senselets(model_name,dat,let,length=length)
 
     # Empty sensitivity arrays
     if not is_diff:
