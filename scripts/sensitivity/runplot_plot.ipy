@@ -34,27 +34,19 @@ for ipl2, imons in enumerate([
     ]):
 
         # Specs
-        sc.model_name = ispec[0]
-        sc.dat = ispec[1]
+        model_name = ispec[0]
+        dat = ispec[1]
         let = ispec[2]
-        nl = 1000
-
-        ns = rm.get_num_let(let)
-        sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl)]
-        nstep = 10
-        sa.senselets = [rm.get_let_num(int(i+rm.get_num_let(let))) for i in np.round(np.linspace(np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][0]),
-                                                                             np.searchsorted(sa.varranges[sc.spec()],sa.varranges_sense[sc.spec()][1])-1,
-                                                                                                 nstep))]
 
         # Plot
         if is_plot:
             # Temperature time series
             ax, pic_name = spl.plot(fig.add_subplot(1,20*ipl2+2*ipl+1,1),
-                                    sc.model_name,
-                                    sc.dat,
-                                    sc.lets[0],
+                                    model_name,
+                                    dat,
+                                    let,
                                     imons = imons,
-                                    title = 'Sensitivity: '+sa.sensitivity_varnames[sc.specl(sc.model_name,sc.dat,sc.lets[0])] if ipl==0 else '',
+                                    title = 'Sensitivity: '+sa.sensitivity_varnames[sc.specl(model_name,dat,let)] if ipl==0 else '',
                                     titlefont = 20,
                                     textfont = 12,
                                     position = [0.1*0.3333+ipl2*0.3333,0.1*0.3333+1-(ipl+1)*0.3333,0.8*0.3333,0.8*0.3333],
@@ -63,7 +55,7 @@ for ipl2, imons in enumerate([
 
             # Uindex image
             ax2, pic_name_2  = fp.plot(fig.add_subplot(1,20*ipl2+2*ipl+2,1),
-                                       sc.model_name,
+                                       model_name,
                                        "2017_02_08",
                                        "aln",
                                        varname = 'uindex',
@@ -75,7 +67,7 @@ for ipl2, imons in enumerate([
                                        is_labels=False,
                                        is_mask = True,
                                        is_grid = False,
-                                       maskvalue=sa.unit_numbers[sc.specl(sc.model_name,sc.dat,sc.lets[0])]
+                                       maskvalue=sa.unit_numbers[sc.specl(model_name,dat,let)]
                                    )
 
 # Save
@@ -92,4 +84,4 @@ else:
 
 # Backup
 if is_backup:
-    pm.py_script_backup(sa.tag,"runplot_plot","ipy",sc.model_name,sc.dat,sc.lets[0])
+    pm.py_script_backup(sa.tag,"runplot_plot","ipy",model_name,dat,let)
