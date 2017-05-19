@@ -10,12 +10,12 @@ import mypackage.run.pythonmodule as pm
 
 # Switches
 is_read = 0
-is_mix = 1
+is_mix = 0
 is_plot = 0
 is_dplot = 0
 is_save = 0
 is_show = 0
-is_nmix = 0
+is_nmix = 1
 is_nplot = 0
 is_backup = 0
 
@@ -28,8 +28,8 @@ is_backup = 0
 
 # Specs
 model_name = 'cubey'
-dat = '2017_01_30'
-let = 'bxz'
+dat = '2017_01_15'
+let = 'a'
 
 # Letters of wanted range
 senselets = sr.senselets(model_name,dat,let,length=10)
@@ -54,7 +54,7 @@ if is_read:
 # Mix
 if is_mix:
     sense, sense_name = sr.mix(model_name,dat,let,
-                                   is_diff = True)
+                                   is_diff = False)
 
     # Save
     np.save(sense_name,sense)
@@ -103,7 +103,7 @@ if is_dplot:
 # NMix
 if is_nmix:
     numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix(model_name,dat,let,
-                                                                                 imons = 8)
+                                                                                 imons = 9)
 
     # Save
     np.save(numsense_name,numsense)

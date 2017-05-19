@@ -12,7 +12,7 @@ import mypackage.run.pythonmodule as pm
 is_dplot = 1
 is_save = 1
 is_show = 1
-is_backup = 0
+is_backup = 1
 
 # 'cubey_2017_01_15_a'
 # 'cubey_2017_01_31_a'
@@ -30,12 +30,12 @@ for ipl2, imons in enumerate([
     ]):
 
     for ipl, ispec in enumerate([
-            # ['cubey','2017_01_15','a'],
-            # ['cubey','2017_01_31','a'],
-            # ['cubey','2017_01_31','aln'],
-            ['cubey','2017_01_30','a'],
-            ['cubey','2017_01_30','aln'],
-            ['cubey','2017_01_30','bxz']
+            ['cubey','2017_01_15','a'],
+            ['cubey','2017_01_31','a'],
+            ['cubey','2017_01_31','aln'],
+            # ['cubey','2017_01_30','a'],
+            # ['cubey','2017_01_30','aln'],
+            # ['cubey','2017_01_30','bxz']
     ]):
 
         # Specs
