@@ -12,7 +12,7 @@ import mypackage.run.pythonmodule as pm
 is_dplot = 1
 is_save = 1
 is_show = 1
-is_backup = 1
+is_backup = 0
 
 # 'cubey_2017_01_15_a'
 # 'cubey_2017_01_31_a'

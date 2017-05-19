@@ -12,8 +12,8 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_plot = 1
 is_save = 1
-is_show = 1
-is_backup = 1
+is_show = 0
+is_backup = 0
 
 # Figure
 fig = plt.figure(1,figsize=[24,12], facecolor = 'white')
@@ -25,12 +25,12 @@ for ipl2, imons in enumerate([
         ]):         # [0,1,8,9]
 
     for ipl, ispec in enumerate([
-            ['cubey','2017_01_15','a'],
-            ['cubey','2017_01_31','a'],
-            ['cubey','2017_01_31','aln'],
-            # ['cubey','2017_01_30','a'],
-            # ['cubey','2017_01_30','aln'],
-            # ['cubey','2017_01_30','bxz']
+            # ['cubey','2017_01_15','a'],
+            # ['cubey','2017_01_31','a'],
+            # ['cubey','2017_01_31','aln'],
+            ['cubey','2017_01_30','a'],
+            ['cubey','2017_01_30','aln'],
+            ['cubey','2017_01_30','bxz']
     ]):
 
         # Specs
