@@ -105,9 +105,10 @@ def py_script_backup(tag,filename,ending,model_name,dat,let):
 
     # Exception if file already exists
     if os.path.isfile(py_script_backup_file_name):
-        raise exceptions.RuntimeError("Backup-File " + py_script_backup_file_name + " already exists!!")
-    else:
-        shutil.copyfile(py_script_file_name,py_script_backup_file_name)
-        print('Backup as '+py_script_backup_file_name)
+        os.remove(py_script_backup_file_name)
+        print('Removed old file: '+py_script_backup_file_name)
+
+    shutil.copyfile(py_script_file_name,py_script_backup_file_name)
+    print('Backup as '+py_script_backup_file_name)
 
 
