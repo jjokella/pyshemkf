@@ -255,6 +255,7 @@ def nplot(ax,model_name,dat,let,
           color = 'black',
           is_labels = True,
           is_legend = True,
+          is_fourier = False,
       ):
 
     pic_name_start = 'numsense_'+str(imons).zfill(2)
@@ -307,6 +308,9 @@ def nplot(ax,model_name,dat,let,
                   loc = 'upper left',
                   fontsize=6,
                   ncol=3)
+
+    if is_fourier:
+        ax.vlines(41780,ylims[0],ylims[1],linestyles='dashed')
 
     pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
