@@ -16,10 +16,10 @@ from mypackage.plot import specs as sc
 #                               python_dirs                                   #
 ###############################################################################
 python_dir = os.environ['HOME']+'/PythonDir'
-python_scripts_dir = os.environ['HOME']+'/PythonDir/scripts'
-python_input_dir = os.environ['HOME']+'/PythonDir/input'
-python_output_dir = os.environ['HOME']+'/PythonDir/output'
-
+python_scripts_dir = python_dir+'/scripts'
+python_input_dir = python_dir+'/input'
+python_output_dir = python_dir+'/output'
+python_exec_dir = python_dir+'/exec'
 
 ###############################################################################
 #                            python_output_dir                                #
