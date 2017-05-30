@@ -78,37 +78,37 @@ def py_simple_output_filename(filename,tag,ending):
     return py_simple_output_filename
 
 ###############################################################################
-#                            python_script_backup                             #
+#                            python_backup                                    #
 ###############################################################################
 
-def py_script_backup(tag,filename,ending,model_name,dat,let):
+def py_backup(python_sub_dir,tag,filename,ending,model_name,dat,let):
     """
     Copy a python script to backup directory and add specifier
     """
     # Script Name
-    py_script_file_name = python_scripts_dir + "/" \
-                          + tag + "/" \
-                          + filename + "." \
-                          + ending
+    py_file_name = python_sub_dir + "/" \
+                   + tag + "/" \
+                   + filename + "." \
+                   + ending
 
     # Possibly create backup directory
-    if not os.path.exists(python_scripts_dir+"/"+tag+"/backup"):
-        os.mkdir(python_scripts_dir+"/"+tag+"/backup")
+    if not os.path.exists(python_sub_dir+"/"+tag+"/backup"):
+        os.mkdir(python_sub_dir+"/"+tag+"/backup")
 
     # Backup Script Name
-    py_script_backup_file_name = python_scripts_dir + "/" \
-                                 + tag + "/" \
-                                 + "backup/" \
-                                 + filename + "_" + sc.specl(model_name,dat,let)+"." \
-                                 + ending
+    py_backup_file_name = python_sub_dir + "/" \
+                          + tag + "/" \
+                          + "backup/" \
+                          + filename + "_" + sc.specl(model_name,dat,let)+"." \
+                          + ending
 
 
     # Exception if file already exists
-    if os.path.isfile(py_script_backup_file_name):
-        os.remove(py_script_backup_file_name)
-        print('Removed old file: '+py_script_backup_file_name)
+    if os.path.isfile(py_backup_file_name):
+        os.remove(py_backup_file_name)
+        print('Removed old file: '+py_backup_file_name)
 
-    shutil.copyfile(py_script_file_name,py_script_backup_file_name)
-    print('Backup as '+py_script_backup_file_name)
+    shutil.copyfile(py_file_name,py_backup_file_name)
+    print('Backup as '+py_backup_file_name)
 
 
