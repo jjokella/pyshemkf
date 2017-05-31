@@ -102,14 +102,15 @@ if is_dplot:
 
 # NMix
 if is_nmix:
-    numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix(model_name,dat,let,
-                                                                                 imons = 9)
+    for imons in [0,8,9]:
+        numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix(model_name,dat,let,
+                                                                                 imons = imons)
 
-    # Save
-    np.save(numsense_name,numsense)
-    print('Saved as ' + numsense_name)
-    np.save(numsense_labels_name,numsense_labels)
-    print('Saved as ' + numsense_labels_name)
+        # Save
+        np.save(numsense_name,numsense)
+        print('Saved as ' + numsense_name)
+        np.save(numsense_labels_name,numsense_labels)
+        print('Saved as ' + numsense_labels_name)
 
 # NPlot
 if is_nplot:
