@@ -19,6 +19,9 @@ runs = [
     ['cubey','2017_01_30',range(1001,2001)],
     ['cubey','2017_01_30',range(2001,3001)],
     # ['cubey','2017_01_30',range(3001,4001)],
+    ['cubey','2017_05_30',range(1,101)],
+    ['cubey','2017_05_30',range(1001,1101)],
+    ['cubey','2017_05_30',range(2001,2101)],
     ]
 
 lets = {
@@ -28,6 +31,9 @@ lets = {
     'cubey_2017_01_30_a': [rm.get_let_num(i) for i in range(1000)],
     'cubey_2017_01_30_aln': [rm.get_let_num(i) for i in range(1001,2001)],
     'cubey_2017_01_30_bxz': [rm.get_let_num(i) for i in range(2001,3001)],
+    'cubey_2017_05_30_b': [rm.get_let_num(i) for i in range(1,100)],
+    'cubey_2017_05_30_aln': [rm.get_let_num(i) for i in range(1001,1101)],
+    'cubey_2017_05_30_bxz': [rm.get_let_num(i) for i in range(2001,2101)],
         }
 
 varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
@@ -59,6 +65,9 @@ varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
              'cubey_2017_02_08_bj':np.arange(0.5*10**6,3.5*10**6,0.3*10**6),
              'cubey_2017_02_08_bt':np.arange(0.5*10**6,3.5*10**6,0.3*10**6),
              'cubey_2017_02_08_cd':np.arange(0.5*10**6,3.5*10**6,0.3*10**6),
+             'cubey_2017_05_30_b':np.arange(0.1,5.1,0.05),
+             'cubey_2017_05_30_aln':np.arange(0.1,5.1,0.05),
+             'cubey_2017_05_30_bxz':np.arange(0.1,5.1,0.05),
          }
 
 varranges_sense = {'cubey_2017_01_15_a':np.array([2.69*10**6,2.96*10**6]),
@@ -67,6 +76,9 @@ varranges_sense = {'cubey_2017_01_15_a':np.array([2.69*10**6,2.96*10**6]),
                    'cubey_2017_01_30_a':np.array([2.3,3.1]),
                    'cubey_2017_01_30_aln':np.array([2.3,3.1]),
                    'cubey_2017_01_30_bxz':np.array([1.5,2.5]),
+                   'cubey_2017_05_30_b':np.array([2.3,3.7]),
+                   'cubey_2017_05_30_aln':np.array([2.3,3.7]),
+                   'cubey_2017_05_30_bxz':np.array([1.5,2.5]),
 }
 
 
@@ -107,6 +119,9 @@ sensitivity_varnames = {'cubey_2016_12_13_a':'Thermal conductivity deprecated',
                         'cubey_2017_02_08_bj':'Volumetric heat capacity v= 10**-5',
                         'cubey_2017_02_08_bt':'Volumetric heat capacity v= 10**-5',
                         'cubey_2017_02_08_cd':'Volumetric heat capacity v= 10**-5',
+                        'cubey_2017_05_30_b':'Thermal conductivity',
+                        'cubey_2017_05_30_aln':'Thermal conductivity',
+                        'cubey_2017_05_30_bxz':'Thermal conductivity',
 }
 
 # Cubey: Unit numbers #########################################################
@@ -146,6 +161,9 @@ unit_numbers = {'cubey_2016_12_13_a': 1,
                 'cubey_2017_02_08_bj':1,
                 'cubey_2017_02_08_bt':2,
                 'cubey_2017_02_08_cd':7,
+                'cubey_2017_05_30_b':1,
+                'cubey_2017_05_30_aln':2,
+                'cubey_2017_05_30_bxz':7,
 }
 
 # Cubey: Unit names ###########################################################
@@ -193,6 +211,9 @@ sensitivity_ranges = {'cubey_2016_12_13_a':r'1.5-3.0 $\frac{W}{mK}$ deprecated',
                       'cubey_2017_02_08_bj':r'0.5-3.5 $10^6 \frac{J}{Km^3}$',
                       'cubey_2017_02_08_bt':r'0.5-3.5 $10^6 \frac{J}{Km^3}$',
                       'cubey_2017_02_08_cd':r'0.5-3.5 $10^6 \frac{J}{Km^3}$',
+                      'cubey_2017_05_30_b':r'2.3-3.7 $\frac{W}{mK}$',
+                      'cubey_2017_05_30_aln':r'2.3-3.7 $\frac{W}{mK}$',
+                      'cubey_2017_05_30_bxz':r'1.5-2.5 $\frac{W}{mK}$',
 }
 
 
@@ -226,6 +247,9 @@ default_values = {'cubey_2017_01_15_a':2.82*10**6,
                   'cubey_2017_02_08_bj':0.8*10**6,
                   'cubey_2017_02_08_bt':0.8*10**6,
                   'cubey_2017_02_08_cd':1.0*10**6,
+                  'cubey_2017_05_30_b':2.7,
+                  'cubey_2017_05_30_aln':2.7,
+                  'cubey_2017_05_30_bxz':2.0,
 }
 
 default_strings = {'cubey_2017_01_15_a':r'2.82 $10^6 \frac{J}{Km^3}$',
@@ -257,6 +281,9 @@ default_strings = {'cubey_2017_01_15_a':r'2.82 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_02_08_bj':r'0.8 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_02_08_bt':r'0.8 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_02_08_cd':r'1.0 $10^6 \frac{J}{Km^3}$',
+                   'cubey_2017_05_30_b':r'2.7 $\frac{W}{mK}$',
+                   'cubey_2017_05_30_aln':r'2.7 $\frac{W}{mK}$',
+                   'cubey_2017_05_30_bxz':r'2.0 $\frac{W}{mK}$',
 }
 
 
