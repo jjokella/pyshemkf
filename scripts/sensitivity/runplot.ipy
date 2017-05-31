@@ -32,20 +32,20 @@ dat = '2017_01_15'
 let = 'a'
 
 # Letters of wanted range
-senselets = sr.senselets(model_name,dat,let,length=10)
+lets = sa.lets[sc.specl(model_name,dat,let)]
 
 # Read
 if is_read:
-    for il, let in enumerate(senselets):
+    for il, ilet in enumerate(lets):
 
-        if let == senselets[0]:
-            t, t_name = sr.read(model_name,dat,let,varname ="t")
+        if ilet == lets[0]:
+            t, t_name = sr.read(model_name,dat,ilet,varname ="t")
 
             # Save
             np.save(t_name,t)
             print('Saved as ' + t_name)
 
-        temp, temp_name = sr.read(model_name,dat,let,varname ="temp")
+        temp, temp_name = sr.read(model_name,dat,ilet,varname ="temp")
 
         # Save
         np.save(temp_name,temp)
