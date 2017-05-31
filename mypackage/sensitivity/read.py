@@ -40,7 +40,7 @@ def read(model_name,dat,let,varname="temp"):
         Containing proposed saving location for var.
     """
     # Name of monitoring file
-    monitor_file = rm.make_file_dir_names(sc.model_name)[16]
+    monitor_file = rm.make_file_dir_names(model_name)[16]
 
     # Read number monitoring points
     num_mons = sc.num_mons(model_name,dat,let)
