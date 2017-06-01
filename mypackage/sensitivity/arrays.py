@@ -22,6 +22,12 @@ runs = [
     ['cubey','2017_05_30',range(1,101)],
     ['cubey','2017_05_30',range(1001,1101)],
     ['cubey','2017_05_30',range(2001,2101)],
+    ['cubey','2017_05_31',range(1,101)],
+    ['cubey','2017_05_31',range(1001,1101)],
+    ['cubey','2017_05_31',range(2001,2101)],
+    ['cubey','2017_05_31',range(3001,3101)],
+    ['cubey','2017_05_31',range(4001,4101)],
+    ['cubey','2017_05_31',range(5001,5101)],
     ]
 
 lets = {
@@ -34,6 +40,12 @@ lets = {
     'cubey_2017_05_30_b': [rm.get_let_num(i) for i in range(1,100)],
     'cubey_2017_05_30_aln': [rm.get_let_num(i) for i in range(1001,1101)],
     'cubey_2017_05_30_bxz': [rm.get_let_num(i) for i in range(2001,2101)],
+    'cubey_2017_05_31_b': [rm.get_let_num(i) for i in range(1,100)],
+    'cubey_2017_05_31_aln': [rm.get_let_num(i) for i in range(1001,1101)],
+    'cubey_2017_05_31_bxz': [rm.get_let_num(i) for i in range(2001,2101)],
+    'cubey_2017_05_31_dkl': [rm.get_let_num(i) for i in range(3001,3100)],
+    'cubey_2017_05_31_ewx': [rm.get_let_num(i) for i in range(4001,4101)],
+    'cubey_2017_05_31_gjj': [rm.get_let_num(i) for i in range(5001,5101)],
         }
 
 varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
@@ -68,6 +80,12 @@ varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
              'cubey_2017_05_30_b':np.arange(0.1,5.1,0.05),
              'cubey_2017_05_30_aln':np.arange(0.1,5.1,0.05),
              'cubey_2017_05_30_bxz':np.arange(0.1,5.1,0.05),
+             'cubey_2017_05_31_b':np.arange(0.1,5.1,0.05),
+             'cubey_2017_05_31_aln':np.arange(0.1,5.1,0.05),
+             'cubey_2017_05_31_bxz':np.arange(0.1,5.1,0.05),
+             'cubey_2017_05_31_dkl':np.arange(1.0*10**6,4.0*10**6,0.03*10**6),
+             'cubey_2017_05_31_ewx':np.arange(1.0*10**6,4.0*10**6,0.03*10**6),
+             'cubey_2017_05_31_gjj':np.arange(1.0*10**6,4.0*10**6,0.03*10**6),
          }
 
 varranges_sense = {'cubey_2017_01_15_a':np.array([2.69*10**6,2.96*10**6]),
@@ -79,6 +97,12 @@ varranges_sense = {'cubey_2017_01_15_a':np.array([2.69*10**6,2.96*10**6]),
                    'cubey_2017_05_30_b':np.array([2.3,3.7]),
                    'cubey_2017_05_30_aln':np.array([2.3,3.7]),
                    'cubey_2017_05_30_bxz':np.array([1.5,2.5]),
+                   'cubey_2017_05_31_b':np.array([2.3,3.7]),
+                   'cubey_2017_05_31_aln':np.array([2.3,3.7]),
+                   'cubey_2017_05_31_bxz':np.array([1.5,2.5]),
+                   'cubey_2017_05_31_dkl':np.array([2.52*10**6,2.96*10**6]),
+                   'cubey_2017_05_31_ewx':np.array([2.52*10**6,2.96*10**6]),
+                   'cubey_2017_05_31_gjj':np.array([1.2*10**6,2.2*10**6]),
 }
 
 
@@ -122,6 +146,12 @@ sensitivity_varnames = {'cubey_2016_12_13_a':'Thermal conductivity deprecated',
                         'cubey_2017_05_30_b':'Thermal conductivity',
                         'cubey_2017_05_30_aln':'Thermal conductivity',
                         'cubey_2017_05_30_bxz':'Thermal conductivity',
+                        'cubey_2017_05_31_b':'Thermal conductivity',
+                        'cubey_2017_05_31_aln':'Thermal conductivity',
+                        'cubey_2017_05_31_bxz':'Thermal conductivity',
+                        'cubey_2017_05_31_dkl':'Volumetric heat capacity',
+                        'cubey_2017_05_31_ewx':'Volumetric heat capacity',
+                        'cubey_2017_05_31_gjj':'Volumetric heat capacity',
 }
 
 # Cubey: Unit numbers #########################################################
@@ -164,6 +194,12 @@ unit_numbers = {'cubey_2016_12_13_a': 1,
                 'cubey_2017_05_30_b':1,
                 'cubey_2017_05_30_aln':2,
                 'cubey_2017_05_30_bxz':7,
+                'cubey_2017_05_31_b':1,
+                'cubey_2017_05_31_aln':2,
+                'cubey_2017_05_31_bxz':7,
+                'cubey_2017_05_31_dkl':1,
+                'cubey_2017_05_31_ewx':2,
+                'cubey_2017_05_31_gjj':7,
 }
 
 # Cubey: Unit names ###########################################################
@@ -214,6 +250,12 @@ sensitivity_ranges = {'cubey_2016_12_13_a':r'1.5-3.0 $\frac{W}{mK}$ deprecated',
                       'cubey_2017_05_30_b':r'2.3-3.7 $\frac{W}{mK}$',
                       'cubey_2017_05_30_aln':r'2.3-3.7 $\frac{W}{mK}$',
                       'cubey_2017_05_30_bxz':r'1.5-2.5 $\frac{W}{mK}$',
+                      'cubey_2017_05_31_b':r'2.3-3.7 $\frac{W}{mK}$',
+                      'cubey_2017_05_31_aln':r'2.3-3.7 $\frac{W}{mK}$',
+                      'cubey_2017_05_31_bxz':r'1.5-2.5 $\frac{W}{mK}$',
+                      'cubey_2017_05_31_dkl':r'2.52-2.96 $10^6 \frac{J}{Km^3}$',
+                      'cubey_2017_05_31_ewx':r'2.52-2.96 $10^6 \frac{J}{Km^3}$',
+                      'cubey_2017_05_31_gjj':r'1.20-2.20 $10^6 \frac{J}{Km^3}$',
 }
 
 
@@ -250,6 +292,12 @@ default_values = {'cubey_2017_01_15_a':2.82*10**6,
                   'cubey_2017_05_30_b':2.7,
                   'cubey_2017_05_30_aln':2.7,
                   'cubey_2017_05_30_bxz':2.0,
+                  'cubey_2017_05_31_b':2.7,
+                  'cubey_2017_05_31_aln':2.7,
+                  'cubey_2017_05_31_bxz':2.0,
+                  'cubey_2017_05_31_dkl':2.82*10**6,
+                  'cubey_2017_05_31_ewx':2.82*10**6,
+                  'cubey_2017_05_31_gjj':1.70*10**6,
 }
 
 default_strings = {'cubey_2017_01_15_a':r'2.82 $10^6 \frac{J}{Km^3}$',
@@ -284,6 +332,12 @@ default_strings = {'cubey_2017_01_15_a':r'2.82 $10^6 \frac{J}{Km^3}$',
                    'cubey_2017_05_30_b':r'2.7 $\frac{W}{mK}$',
                    'cubey_2017_05_30_aln':r'2.7 $\frac{W}{mK}$',
                    'cubey_2017_05_30_bxz':r'2.0 $\frac{W}{mK}$',
+                   'cubey_2017_05_31_b':r'2.7 $\frac{W}{mK}$',
+                   'cubey_2017_05_31_aln':r'2.7 $\frac{W}{mK}$',
+                   'cubey_2017_05_31_bxz':r'2.0 $\frac{W}{mK}$',
+                   'cubey_2017_05_31_dkl':r'2.82 $10^6 \frac{J}{Km^3}$',
+                   'cubey_2017_05_31_ewx':r'2.82 $10^6 \frac{J}{Km^3}$',
+                   'cubey_2017_05_31_gjj':r'1.70 $10^6 \frac{J}{Km^3}$',
 }
 
 
