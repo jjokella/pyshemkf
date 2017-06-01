@@ -40,9 +40,9 @@ if is_nplot:
         ]):                               #[0,1,8,9]
 
         for i,[dat,let] in enumerate([
-            ['2017_05_30','b'],
-            ['2017_05_30','aln'],
-            ['2017_05_30','bxz']
+            ['2017_05_31','b'],
+            ['2017_05_31','aln'],
+            ['2017_05_31','bxz']
             ]):
 
             # Run nplot function
@@ -52,7 +52,7 @@ if is_nplot:
                 dat,
                 let,
                 title = "Sensitivity Scores: Thermal Conductivity" if j == 0 else "",
-                ylims= [-0.9,0.9],
+                ylims= [-0.65,0.65],
                 color = colors[i],
                 is_legend = False,
                 imons = imons,
@@ -66,9 +66,9 @@ if is_nplot:
                 )
 
         for i,[dat,let] in enumerate([
-            ['2017_01_15','a'],
-            ['2017_01_31','a'],
-            ['2017_01_31','aln'],
+            ['2017_05_31','dkl'],
+            ['2017_05_31','ewx'],
+            ['2017_05_31','gjj'],
             ]):
 
             # Run nplot function
@@ -78,7 +78,7 @@ if is_nplot:
                 dat,
                 let,
                 title = "Sensitivity Scores: Volumetric Heat Capacity" if j == 0 else "",
-                ylims= [-0.0,0.9],
+                ylims= [-0.0,0.65],
                 color = colors[i],
                 is_legend = False,
                 imons = imons,
