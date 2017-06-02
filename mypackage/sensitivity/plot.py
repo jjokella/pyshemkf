@@ -136,6 +136,8 @@ def dplot(ax,
               pic_format = 'pdf',              # png, eps, pdf
               xlims = [10,30*24*3600],
               ylims = [0,10],
+              is_text_ran = True,
+              is_text_def = True,
               ):
     """
     A plotting function for temperature differences in order to study
@@ -208,19 +210,21 @@ def dplot(ax,
     ax.set_xlim(xlims[0],xlims[1])
     ax.set_ylim(ylims[0],ylims[1])
 
-    ax.text(0.95,0.95,
-            "Range: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
-            fontsize=10,
-            verticalalignment='top',
-            horizontalalignment='right',
-            transform=ax.transAxes)
+    if is_text_ran:
+        ax.text(0.95,0.95,
+                "Range: "+sa.sensitivity_ranges[sc.specl(model_name,dat,let)],
+                fontsize=10,
+                verticalalignment='top',
+                horizontalalignment='right',
+                transform=ax.transAxes)
 
-    ax.text(0.95,0.85,
-            "Default: "+sa.default_strings[sc.specl(model_name,dat,let)],
-            fontsize=10,
-            verticalalignment='top',
-            horizontalalignment='right',
-            transform=ax.transAxes)
+    if is_text_def:
+        ax.text(0.95,0.85,
+                "Default: "+sa.default_strings[sc.specl(model_name,dat,let)],
+                fontsize=10,
+                verticalalignment='top',
+                horizontalalignment='right',
+                transform=ax.transAxes)
 
     # ax.text(0.95,0.75,
     #         "Measurement 1: "+sa.obs_longlabels[imons[0]],
