@@ -202,7 +202,7 @@ def dplot(ax,
                 color = 'black')
 
     ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
-    ax.set_ylabel(r'Temperature Difference [$ ^{\circ} C$]',fontsize = 14)
+    ax.set_ylabel(r'Temperature Difference [$K$]',fontsize = 14)
     ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
     ax.set_xlim(xlims[0],xlims[1])
