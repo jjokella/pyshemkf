@@ -132,7 +132,7 @@ def dplot(ax,
               let,
               imons = [1,9],
               title = 'Default',
-              position = [0.1,0.1,0.9,0.9],
+              position = [0.1,0.1,0.8,0.8],
               pic_format = 'pdf',              # png, eps, pdf
               xlims = [10,30*24*3600],
               ylims = [0,10],
