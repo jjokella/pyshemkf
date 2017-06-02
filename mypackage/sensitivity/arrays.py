@@ -9,27 +9,7 @@ from mypackage.run import runmodule as rm
 
 tag = "sensitivity"
 
-# Different runs ##############################################################
-runs = [
-    ['cubey','2017_01_15',range(1000)],
-    ['cubey','2017_01_31',range(1000)],
-    ['cubey','2017_01_31',range(1001,2001)],
-    # ['cubey','2017_01_31',range(2001,3001)],
-    ['cubey','2017_01_30',range(1000)],
-    ['cubey','2017_01_30',range(1001,2001)],
-    ['cubey','2017_01_30',range(2001,3001)],
-    # ['cubey','2017_01_30',range(3001,4001)],
-    ['cubey','2017_05_30',range(1,101)],
-    ['cubey','2017_05_30',range(1001,1101)],
-    ['cubey','2017_05_30',range(2001,2101)],
-    ['cubey','2017_05_31',range(1,101)],
-    ['cubey','2017_05_31',range(1001,1101)],
-    ['cubey','2017_05_31',range(2001,2101)],
-    ['cubey','2017_05_31',range(3001,3101)],
-    ['cubey','2017_05_31',range(4001,4101)],
-    ['cubey','2017_05_31',range(5001,5101)],
-    ]
-
+# Full letters
 lets = {
     'cubey_2017_01_15_a': [rm.get_let_num(i) for i in range(1000)],
     'cubey_2017_01_31_a': [rm.get_let_num(i) for i in range(1000)],
@@ -48,6 +28,7 @@ lets = {
     'cubey_2017_05_31_gjj': [rm.get_let_num(i) for i in range(5001,5101)],
         }
 
+# Full variable ranges
 varranges = {'cubey_2017_01_15_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
              'cubey_2017_01_31_a':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
              'cubey_2017_01_31_aln':np.arange(0.5*10**6,3.5*10**6,0.003*10**6),
