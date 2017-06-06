@@ -19,7 +19,7 @@ def plot(ax,
              title = 'Default',
              titlefont = 12,
              textfont = 10,
-             position = [0.1,0.1,0.9,0.9],
+             position = [0.1,0.1,0.8,0.8],
              pic_format = 'pdf',              # png, eps, pdf
              xlims = [10,30*24*3600],
              ylims = [11,20],
