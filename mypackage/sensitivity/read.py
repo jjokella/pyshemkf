@@ -78,6 +78,7 @@ def mix(
         dat,
         let,
         length = 10,
+        logspacing = False,
         is_diff = False
         ):
     """
@@ -118,7 +119,7 @@ def mix(
     nt = sc.nt(model_name,dat,let)
 
     # Sensitivy Letters
-    slets = senselets(model_name,dat,let,length=length)
+    slets = senselets(model_name,dat,let,length=length,logspacing=logspacing)
 
     # Empty sensitivity arrays
     if not is_diff:
@@ -189,6 +190,7 @@ def senselets(
         dat,
         let,
         length = 10,
+        logspacing = False,
         ):
 
     # Full variable range
@@ -203,7 +205,10 @@ def senselets(
     end = np.searchsorted(frange,vrange[1])-1
 
     # Index array with stepsize
-    irange = np.linspace(beg,end,length,dtype=int)
+    if not logspacing:
+        irange = np.linspace(beg,end,length,dtype=int)
+    else:
+        irange = np.logspace(np.log10(beg),np.log10(end),length,dtype=int)
 
     # Letter array
     senselets = [rm.get_let_num(first+i) for i in irange]
