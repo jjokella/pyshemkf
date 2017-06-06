@@ -55,6 +55,8 @@ if is_read:
 # Mix
 if is_mix:
     sense, sense_name = sr.mix(model_name,dat,let,
+                                   length = 10,
+                                   logspacing = False,
                                    is_diff = False)
 
     # Save
