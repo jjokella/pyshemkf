@@ -17,8 +17,8 @@ is_backup = 1
 
 # Specs
 model_name = 'cubey'
-dat = '2017_02_02'
-let = 'dr'
+dat = '2017_06_02'
+let = 'b'
 
 # DPlot
 if is_dplot:
