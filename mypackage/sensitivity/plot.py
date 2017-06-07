@@ -319,3 +319,73 @@ def nplot(ax,model_name,dat,let,
     pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
     return ax, pic_name
+
+###############################################################################
+#                            Plot diffusivity curve                           #
+###############################################################################
+
+def aplot(
+        ax,
+        phi,
+        a,
+        title = 'Default',
+        titlefont = 12,
+        textfont = 10,
+        position = [0.1,0.1,0.8,0.8],
+        ls = '-',
+        pic_format = 'pdf',              # png, eps, pdf
+        xlims = [0,1],
+        ylims = [0,4],
+     ):
+    """
+    A plotting function for diffusivity curve vs porosity
+
+    Parameters
+    ----------
+    ax : Axes
+        The axes to draw to.
+
+    phi : array
+        Array of Porosity values.
+
+    a : array
+        Array of diffusivity values.
+
+    Returns
+    -------
+    ax : Axes
+        Axes instance with plots.
+
+    """
+
+    # Title
+    if not title=="Default":
+        ax.set_title(title,
+                     size = titlefont)
+    else:
+        ax.set_title('Diffusivity of wet sand')
+
+    # Axis position
+    ax.set_position(position)
+
+    # Plot
+    ax.plot(phi,a,ls,
+                color = 'black')
+
+    # Labels
+    ax.set_xlabel(r'Porosity',fontsize = 14, labelpad=0)
+    ax.set_ylabel(r'Diffusivity [$10^{-6} \frac{m^{2}}{s}$]',fontsize = 14)
+    # ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
+    # ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
+    ax.set_xlim(xlims[0],xlims[1])
+    ax.set_ylim(ylims[0],ylims[1])
+
+    # Text
+    ax.text(0.95,0.95,
+            "Diffusivity",
+            fontsize=textfont,
+            verticalalignment='top',
+            horizontalalignment='right',
+            transform=ax.transAxes)
+
+    return ax
