@@ -18,7 +18,7 @@ is_nmix = 0
 is_nplot = 0
 
 is_save = 0
-is_show = 1
+is_show = 0
 is_backup = 0
 
 # 'cubey_2017_01_15_a'
@@ -30,7 +30,7 @@ is_backup = 0
 
 # Specs
 model_name = 'cubey'
-dat = '2017_06_02'
+dat = '2017_06_07'
 let = 'b'
 
 # Letters of wanted range
@@ -55,10 +55,12 @@ if is_read:
 
 # Mix
 if is_mix:
-    sense, sense_name = sr.mix(model_name,dat,let,
-                                   length = 10,
-                                   logspacing = False,
-                                   is_diff = False)
+    sense, sense_name = sr.mix(
+        model_name,dat,let,
+        length = 10,
+        logspacing = False,
+        is_diff = False,
+        )
 
     # Save
     np.save(sense_name,sense)
