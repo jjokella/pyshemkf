@@ -179,9 +179,15 @@ def dplot(ax,
     t = np.load(pm.py_output_filename(sv.tag,"truet",sc.specl(model_name,dat,let),"npy"))
 
     # Default behavior
-    deflet = rm.get_let_num(rm.get_num_let(let)
-                            + np.searchsorted(sa.varranges[sc.specl(model_name,dat,let)],
-                                              sa.default_values[sc.specl(model_name,dat,let)]))
+    deflet = rm.get_let_num(
+        rm.get_num_let(let)
+        + np.argmin(
+            np.abs(
+                sa.varranges[sc.specl(model_name,dat,let)]-
+                sa.default_values[sc.specl(model_name,dat,let)]
+                )
+            )
+        )
     deftemp = np.load(pm.py_output_filename(sv.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
 
 
