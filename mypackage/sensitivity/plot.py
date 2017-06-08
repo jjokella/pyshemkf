@@ -6,6 +6,7 @@ from mypackage.run import runmodule as rm
 from mypackage.run import pythonmodule as pm
 from mypackage.plot import specs as sc
 import mypackage.sensitivity.arrays as sa
+import mypackage.sensitivity.variables as sv
 
 ###############################################################################
 #               Plot temperature curves for different parameters              #
@@ -51,15 +52,15 @@ def plot(ax,
         Containing proposed saving location for Figure.
     """
 
-    sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.specl(model_name,dat,let),"npy"))
-    t = np.load(pm.py_output_filename(sa.tag,"truet",sc.specl(model_name,dat,let),"npy"))
+    sense = np.load(pm.py_output_filename(sv.tag,"sense",sc.specl(model_name,dat,let),"npy"))
+    t = np.load(pm.py_output_filename(sv.tag,"truet",sc.specl(model_name,dat,let),"npy"))
 
     pic_name_start = 'sense_'+str(imons).zfill(2)
 
     # Default behavior
     deflet = rm.get_let_num(rm.get_num_let(let) + np.searchsorted(sa.varranges[sc.specl(model_name,dat,let)],
                                                                          sa.default_values[sc.specl(model_name,dat,let)]))
-    deftemp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
+    deftemp = np.load(pm.py_output_filename(sv.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
 
 
     # Title
@@ -117,7 +118,7 @@ def plot(ax,
     #         transform=ax.transAxes)
 
     # Picture name
-    pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
+    pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
     return ax, pic_name
 
@@ -167,14 +168,14 @@ def dplot(ax,
     """
 
     pic_name_start = 'sense_'+str(imons[0]).zfill(2)+'_'+str(imons[1]).zfill(2)
-    sense = np.load(pm.py_output_filename(sa.tag,"sense",sc.specl(model_name,dat,let),"npy"))
-    t = np.load(pm.py_output_filename(sa.tag,"truet",sc.specl(model_name,dat,let),"npy"))
+    sense = np.load(pm.py_output_filename(sv.tag,"sense",sc.specl(model_name,dat,let),"npy"))
+    t = np.load(pm.py_output_filename(sv.tag,"truet",sc.specl(model_name,dat,let),"npy"))
 
     # Default behavior
     deflet = rm.get_let_num(rm.get_num_let(let)
                             + np.searchsorted(sa.varranges[sc.specl(model_name,dat,let)],
                                               sa.default_values[sc.specl(model_name,dat,let)]))
-    deftemp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
+    deftemp = np.load(pm.py_output_filename(sv.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
 
 
     # Title
@@ -241,7 +242,7 @@ def dplot(ax,
     #         transform=ax.transAxes)
 
 
-    pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
+    pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
     return ax, pic_name
 
@@ -263,16 +264,16 @@ def nplot(ax,model_name,dat,let,
       ):
 
     pic_name_start = 'numsense_'+str(imons).zfill(2)
-    numsense = np.load(pm.py_output_filename(sa.tag,
+    numsense = np.load(pm.py_output_filename(sv.tag,
                                                  "numsense_"+str(imons).zfill(2),
                                                  sc.specl(model_name,dat,let),
                                                  "npy"))
-    numsense_label = np.load(pm.py_output_filename(sa.tag,
+    numsense_label = np.load(pm.py_output_filename(sv.tag,
                                                        "numsense_label_"+str(imons).zfill(2),
                                                        sc.specl(model_name,dat,let),
                                                        "npy"))
 
-    t = np.load(pm.py_output_filename(sa.tag,
+    t = np.load(pm.py_output_filename(sv.tag,
                                       "truet",
                                       sc.specl(model_name,dat,let),
                                       "npy"))
@@ -316,7 +317,7 @@ def nplot(ax,model_name,dat,let,
     if is_fourier:
         ax.vlines(41780,ylims[0],ylims[1],linestyles='dashed')
 
-    pic_name = pm.py_output_filename(sa.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
+    pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
     return ax, pic_name
 

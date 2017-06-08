@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import exceptions
+import mypackage.sensitivity.variables as sv
 import mypackage.sensitivity.arrays as sa
 from mypackage.plot import specs as sc
 from mypackage.run import runmodule as rm
@@ -65,7 +66,7 @@ def read(model_name,dat,let,varname="temp"):
         var = var.reshape(len(var)/num_mons, num_mons)
 
     # Array name
-    array_name = pm.py_output_filename(sa.tag,"true"+varname,sc.specl(model_name,dat,let),"npy")
+    array_name = pm.py_output_filename(sv.tag,"true"+varname,sc.specl(model_name,dat,let),"npy")
 
     return var, array_name
 
@@ -131,7 +132,7 @@ def mix(
     for il,slet in enumerate(slets):
 
         # Load temperature array
-        temp = np.load(pm.py_output_filename(sa.tag,"truetemp",sc.specl(model_name,dat,slet),"npy"))
+        temp = np.load(pm.py_output_filename(sv.tag,"truetemp",sc.specl(model_name,dat,slet),"npy"))
 
         if not is_diff:
             # Fill sense with temperature data
@@ -144,9 +145,9 @@ def mix(
 
     # Name
     if not is_diff:
-        sense_name = pm.py_output_filename(sa.tag,"sense",sc.specl(model_name,dat,let),"npy")
+        sense_name = pm.py_output_filename(sv.tag,"sense",sc.specl(model_name,dat,let),"npy")
     else:
-        sense_name = pm.py_output_filename(sa.tag,"sensedt",sc.specl(model_name,dat,let),"npy")
+        sense_name = pm.py_output_filename(sv.tag,"sensedt",sc.specl(model_name,dat,let),"npy")
 
     return sense, sense_name
 
@@ -165,7 +166,7 @@ def nmix(
     spec = sc.specl(model_name,dat,let)
 
     # Load array
-    sense = np.load(pm.py_output_filename(sa.tag,
+    sense = np.load(pm.py_output_filename(sv.tag,
                                           "sense",
                                           spec,
                                           "npy"))
@@ -175,8 +176,8 @@ def nmix(
     numsense_label = sa.sensitivity_varnames[spec] \
       + ", Unit:"+ str(sa.unit_numbers[spec])
 
-    numsense_name = pm.py_output_filename(sa.tag,"numsense_"+str(imons).zfill(2),spec,"npy")
-    numsense_label_name = pm.py_output_filename(sa.tag,"numsense_label_"+str(imons).zfill(2),spec,"npy")
+    numsense_name = pm.py_output_filename(sv.tag,"numsense_"+str(imons).zfill(2),spec,"npy")
+    numsense_label_name = pm.py_output_filename(sv.tag,"numsense_label_"+str(imons).zfill(2),spec,"npy")
 
     return numsense, numsense_name, numsense_label, numsense_label_name
 

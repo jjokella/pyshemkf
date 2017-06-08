@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
 ###############################################################################
-#                      Variables for Sensitivity Analysis                     #
+#                        Arrays for Sensitivity Analysis                      #
 ###############################################################################
 
 import numpy as np
 from mypackage.run import runmodule as rm
-
-tag = "sensitivity"
+import mypackage.sensitivity.variables as sv
 
 # Full letters
 lets = {
