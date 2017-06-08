@@ -4,21 +4,15 @@ import matplotlib.pyplot as plt
 from mypackage.plot import specs as sc
 from mypackage.run import runmodule as rm
 import mypackage.sensitivity.arrays as sa
+import mypackage.sensitivity.variables as sv
 import mypackage.sensitivity.plot as spl
 import mypackage.sensitivity.read as sr
 import mypackage.run.pythonmodule as pm
 
-# Porosity array
-phi = np.linspace(0,1,1001)
-
-# Thermal conductivity
-lam = 7.0**(1-phi) * 0.59**(phi)
-
-# Volumetric heat capacity
-rc = 1.97*(1-phi)+4.186*phi
 
 # Thermal diffusivity
-a = lam/rc
+phi = np.linspace(1.0/1000,1,1000)
+a = sv.alpha(1,length = 1000)
 
 # Plot
 fig = plt.figure(1,figsize=[8,4], dpi = 200, facecolor = 'white')
@@ -27,14 +21,9 @@ spl.aplot(
     fig.add_subplot(111),
     phi,
     a,
-    ylims = [0,4],
+    ylims = [0,4*10**-6],
     )
 
 plt.show()
 
-
-
-# Cement
-amin  = 1.5/2.2
-amax = 2.5/1.2
 
