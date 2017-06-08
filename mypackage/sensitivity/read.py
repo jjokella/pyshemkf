@@ -80,7 +80,7 @@ def mix(
         let,
         length = 10,
         logspacing = False,
-        is_diff = False
+        is_diff = False,
         ):
     """
     Generating sensitivity array holding temperature (difference)
@@ -200,10 +200,10 @@ def senselets(
     # Sensitivity range
     vrange = sa.varranges_sense[sc.specl(model_name,dat,let)]
 
-    # Find indices inside letters
+    # Important indices inside all letters
     first=rm.get_num_let(let)
-    beg = np.searchsorted(frange,vrange[0])
-    end = np.searchsorted(frange,vrange[1])-1
+    beg = np.argmin(np.abs(frange-vrange[0]))
+    end = np.argmin(np.abs(frange-vrange[1]))
 
     # Index array with stepsize
     if not logspacing:

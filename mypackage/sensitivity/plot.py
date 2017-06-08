@@ -58,8 +58,15 @@ def plot(ax,
     pic_name_start = 'sense_'+str(imons).zfill(2)
 
     # Default behavior
-    deflet = rm.get_let_num(rm.get_num_let(let) + np.searchsorted(sa.varranges[sc.specl(model_name,dat,let)],
-                                                                         sa.default_values[sc.specl(model_name,dat,let)]))
+    deflet = rm.get_let_num(
+        rm.get_num_let(let)
+        + np.argmin(
+            np.abs(
+                sa.varranges[sc.specl(model_name,dat,let)]-
+                sa.default_values[sc.specl(model_name,dat,let)]
+                )
+            )
+        )
     deftemp = np.load(pm.py_output_filename(sv.tag,"truetemp",sc.specl(model_name,dat,deflet),"npy"))
 
 
