@@ -31,9 +31,12 @@ for ipl2, imons in enumerate([
     ]):
 
     for ipl, ispec in enumerate([
-            ['cubey','2017_05_31','dkl'],
-            ['cubey','2017_05_31','ewx'],
-            ['cubey','2017_05_31','gjj']
+            ['cubey','2017_06_07','b'],
+            ['cubey','2017_06_07','aln'],
+            ['cubey','2017_06_07','bxz'],
+            # ['cubey','2017_05_31','dkl'],
+            # ['cubey','2017_05_31','ewx'],
+            # ['cubey','2017_05_31','gjj']
             # ['cubey','2017_05_31','b'],
             # ['cubey','2017_05_31','aln'],
             # ['cubey','2017_05_31','bxz']
