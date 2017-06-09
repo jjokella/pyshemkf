@@ -80,7 +80,6 @@ def mix(
         let,
         length = 10,
         logspacing = False,
-        is_diff = False,
         ):
     """
     Generating sensitivity array holding temperature (difference)
@@ -97,9 +96,6 @@ def mix(
     let : string
         String of letter of model run.
 
-    is_diff : logical
-        If yes, create an array of temperature differences.
-
     Returns
     -------
     sense : array
@@ -107,9 +103,6 @@ def mix(
 
         sense(it,imons,ilet): Transient Temperature profiles (at locations,
         for different parameter values)
-
-        sensedt(it,imons,ilet): Transient Temperature difference profiles
-        (at locations, for different parameter values)
 
     sense_name : string
         String containing a proposed saving location for sense.
@@ -123,10 +116,7 @@ def mix(
     slets = senselets(model_name,dat,let,length=length,logspacing=logspacing)
 
     # Empty sensitivity arrays
-    if not is_diff:
-        sense = np.zeros([nt,num_mons,length])
-    else:
-        sense = np.zeros([nt,num_mons/2,length])
+    sense = np.zeros([nt,num_mons,length])
 
     # Loop for letters/parameter values
     for il,slet in enumerate(slets):
@@ -134,20 +124,11 @@ def mix(
         # Load temperature array
         temp = np.load(pm.py_output_filename(sv.tag,"truetemp",sc.specl(model_name,dat,slet),"npy"))
 
-        if not is_diff:
-            # Fill sense with temperature data
-            sense[:,:,il] = temp[:,:]
-        else:
-            # Fill sense with temperature difference data
-            for j in range(num_mons/2):
-                sense[:,j,il] = temp[:,j] - temp[:,j+4]
-
+        # Fill sense with temperature data
+        sense[:,:,il] = temp[:,:]
 
     # Name
-    if not is_diff:
-        sense_name = pm.py_output_filename(sv.tag,"sense",sc.specl(model_name,dat,let),"npy")
-    else:
-        sense_name = pm.py_output_filename(sv.tag,"sensedt",sc.specl(model_name,dat,let),"npy")
+    sense_name = pm.py_output_filename(sv.tag,"sense",sc.specl(model_name,dat,let),"npy")
 
     return sense, sense_name
 
