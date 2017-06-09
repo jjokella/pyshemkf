@@ -264,17 +264,17 @@ def dplot(ax,
 ###############################################################################
 
 def nplot(ax,model_name,dat,let,
-          imons = 9,
-          pic_format = 'pdf',              # png, eps, pdf
-          title = "Default",
-          position = [0.1,0.1,0.9,0.9],
-          xlims = [10,30*24*3600],
-          ylims = [-0.01,0.15],
-          color = 'black',
-          is_labels = True,
-          is_legend = True,
-          is_fourier = False,
-      ):
+              imons = 9,
+              pic_format = 'pdf',              # png, eps, pdf
+              title = "Default",
+              position = [0.1,0.1,0.8,0.8],
+              xlims = [10,30*24*3600],
+              ylims = [-0.01,0.15],
+              color = 'black',
+              is_labels = True,
+              is_legend = True,
+              is_fourier = False,
+              ):
 
     pic_name_start = 'numsense_'+str(imons).zfill(2)
     numsense = np.load(pm.py_output_filename(sv.tag,
