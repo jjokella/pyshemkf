@@ -15,13 +15,6 @@ is_save = 1
 is_show = 1
 is_backup = 1
 
-# 'cubey_2017_01_15_a'
-# 'cubey_2017_01_31_a'
-# 'cubey_2017_01_31_aln'
-# 'cubey_2017_05_30_b'
-# 'cubey_2017_05_30_aln'
-# 'cubey_2017_05_30_bxz'
-
 # Specs
 model_name = 'cubey'
 

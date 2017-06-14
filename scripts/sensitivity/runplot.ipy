@@ -14,9 +14,9 @@ is_read = 0
 is_mix = 0
 is_plot = 0
 is_dplot = 0
-is_nmix = 0
+is_nmix = 1
 is_nplot = 0
-is_dnplot = 1
+is_dnplot = 0
 
 is_save = 0
 is_show = 1
@@ -32,7 +32,7 @@ is_backup = 0
 # Specs
 model_name = 'cubey'
 dat = '2017_05_31'
-let = 'b'
+let = 'gjj'
 
 # Letters of wanted range
 lets = sa.lets[sc.specl(model_name,dat,let)]
@@ -108,7 +108,7 @@ if is_dplot:
 
 # NMix
 if is_nmix:
-    for imons in [0,1,4,8,9,12]:
+    for imons in [0,1,2,4,8,9,10,12]:
         numsense, numsense_name, numsense_labels, numsense_labels_name = sr.nmix(
             model_name,dat,let,
             imons = imons,
