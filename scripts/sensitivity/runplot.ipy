@@ -156,7 +156,6 @@ if is_dnplot:
         fig.add_subplot(111),
         model_name,dat,let,
         imons = [4,12],
-        is_diff=False,
         ylims = [0.0,0.4],
         )
 
