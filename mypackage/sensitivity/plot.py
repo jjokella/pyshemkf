@@ -376,35 +376,31 @@ def dnplot(ax,model_name,dat,let,
         Containing proposed saving location for Figure.
     """
 
-    fname_body = 'sense'
+    fname_body = 'numsense'
 
-    pic_name_start = 'num'+fname_body+'dt_'+str(imons[0]).zfill(2)+'_'+str(imons[1]).zfill(2)
+    pic_name_start = fname_body+'_'+str(imons[0]).zfill(2)+'_'+str(imons[1]).zfill(2)
     numsense = np.load(
         pm.py_output_filename(
             sv.tag,
-            "num"+fname_body+"_"+str(imons[0]).zfill(2),
+            fname_body+"_"+str(imons[0]).zfill(2),
             sc.specl(model_name,dat,let),
             "npy"
             )
         )-np.load(
             pm.py_output_filename(
                 sv.tag,
-                "num"+fname_body+"_"+str(imons[1]).zfill(2),
+                fname_body+"_"+str(imons[1]).zfill(2),
                 sc.specl(model_name,dat,let),
                 "npy"
                 )
             )
-    numsense_label = np.core.defchararray.add(
-        np.load(pm.py_output_filename(
+    numsense_label = np.load(
+        pm.py_output_filename(
             sv.tag,
-            "num"+fname_body+"_label_"+str(imons[0]).zfill(2),
+            fname_body+"_label_"+str(imons[0]).zfill(2),
             sc.specl(model_name,dat,let),
-            "npy")),
-        np.load(pm.py_output_filename(
-            sv.tag,
-            "num"+fname_body+"_label_"+str(imons[1]).zfill(2),
-            sc.specl(model_name,dat,let),
-            "npy")),
+            "npy"
+            )
         )
 
     t = np.load(pm.py_output_filename(sv.tag,
