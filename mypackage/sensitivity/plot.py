@@ -328,7 +328,7 @@ def nplot(ax,model_name,dat,let,
                   ncol=3)
 
     if is_fourier:
-        ax.vlines(41780,ylims[0],ylims[1],linestyles='dashed')
+        ax.vlines(7064,ylims[0],ylims[1],linestyles='dashed')
 
     pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
@@ -445,7 +445,7 @@ def dnplot(ax,model_name,dat,let,
                   ncol=3)
 
     if is_fourier:
-        ax.vlines(41780,ylims[0],ylims[1],linestyles='dashed')
+        ax.vlines(7064,ylims[0],ylims[1],linestyles='dashed')
 
     pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
