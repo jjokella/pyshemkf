@@ -13,7 +13,7 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_dplot = 1
 is_save = 1
-is_show = 0
+is_show = 1
 is_backup = 1
 
 # Specs

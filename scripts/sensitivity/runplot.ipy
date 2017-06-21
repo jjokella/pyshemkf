@@ -31,8 +31,8 @@ is_backup = 0
 
 # Specs
 model_name = 'cubey'
-dat = '2017_05_31'
-let = 'gjj'
+dat = '2017_06_07'
+let = 'bxz'
 
 # Letters of wanted range
 lets = sa.lets[sc.specl(model_name,dat,let)]
