@@ -52,6 +52,7 @@ for ipl2, imons in enumerate([
                                     imons = imons,
                                     title = 'Sensitivity: '+sa.sensitivity_varnames[sc.specl(model_name,dat,let)] if ipl==0 else '',
                                     titlefont = 20,
+                                    pic_format = 'png',
                                     textfont = 12,
                                     position = [0.1*0.3333+ipl2*0.3333,0.1*0.3333+1-(ipl+1)*0.3333,0.8*0.3333,0.8*0.3333],
                                     ylims = [11,20] if imons > 7 else [13,20]
@@ -68,6 +69,7 @@ for ipl2, imons in enumerate([
                                        loc_inds = [imons],
                                        markersize = 2.0,
                                        markercolor = 'black',
+                                       pic_format = 'png',
                                        is_labels=False,
                                        is_mask = True,
                                        is_grid = False,

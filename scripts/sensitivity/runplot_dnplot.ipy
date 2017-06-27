@@ -50,6 +50,7 @@ if is_dnplot:
                 is_legend = False,
                 imons = imons,
                 # is_fourier = True,
+                pic_format = 'png',
                 position = [
                         0.1*0.4,
                         1-(j+1)*0.5000+0.1*0.5000,   # Top - # of thirds + margin

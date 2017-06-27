@@ -51,6 +51,7 @@ if is_nplot:
                 is_legend = False,
                 imons = imons,
                 is_fourier = True,
+                pic_format = 'jpg',
                 position = [
                         0.1*0.4,
                         1-(j+1)*0.3333+0.1*0.3333,   # Top - # of thirds + margin
