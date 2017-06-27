@@ -273,6 +273,7 @@ def nplot(ax,model_name,dat,let,
               xlims = [10,30*24*3600],
               ylims = [-0.01,0.15],
               color = 'black',
+              textfont = 10,
               labelfontsize = 14,
               is_labels = True,
               is_legend = True,
@@ -332,6 +333,12 @@ def nplot(ax,model_name,dat,let,
 
     if is_fourier:
         ax.vlines(7064,ylims[0],ylims[1],linestyles='dashed')
+        ax.text(7064+1000,0.9*ylims[1]+0.1*ylims[0],
+                "Fo = 1",
+                fontsize=textfont,
+                verticalalignment='top',
+                horizontalalignment='left')
+
 
     pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
@@ -346,6 +353,7 @@ def dnplot(ax,model_name,dat,let,
                pic_format = 'pdf',              # png, eps, pdf
                title = "Default",
                position = [0.1,0.1,0.8,0.8],
+               textfont = 10,
                labelfontsize = 14,
                xlims = [10,30*24*3600],
                ylims = [-0.01,0.15],
@@ -450,6 +458,11 @@ def dnplot(ax,model_name,dat,let,
 
     if is_fourier:
         ax.vlines(7064,ylims[0],ylims[1],linestyles='dashed')
+        ax.text(7064+1000,0.9*ylims[1]+0.1*ylims[0],
+                "Fo = 1",
+                fontsize=textfont,
+                verticalalignment='top',
+                horizontalalignment='left')
 
     pic_name = pm.py_output_filename(sv.tag,pic_name_start,sc.specl(model_name,dat,let),pic_format)
 
