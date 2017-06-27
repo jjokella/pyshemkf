@@ -20,6 +20,7 @@ def plot(ax,
              title = 'Default',
              titlefont = 12,
              textfont = 10,
+             labelfontsize = 14,
              position = [0.1,0.1,0.8,0.8],
              pic_format = 'pdf',              # png, eps, pdf
              xlims = [10,30*24*3600],
@@ -95,8 +96,8 @@ def plot(ax,
                 color = 'black')
 
     # Labels
-    ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
-    ax.set_ylabel(r'Temperature [$ ^{\circ} C$]',fontsize = 14)
+    ax.set_xlabel(r'Time',fontsize = labelfontsize, labelpad=0)
+    ax.set_ylabel(r'Temperature [$ ^{\circ} C$]',fontsize = labelfontsize)
     ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
     ax.set_xlim(xlims[0],xlims[1])
@@ -140,6 +141,7 @@ def dplot(ax,
               let,
               imons = [1,9],
               title = 'Default',
+              labelfontsize = 14,
               position = [0.1,0.1,0.8,0.8],
               pic_format = 'pdf',              # png, eps, pdf
               xlims = [10,30*24*3600],
@@ -217,8 +219,8 @@ def dplot(ax,
     ax.semilogx(t,deftemp[:,imons[0]]-deftemp[:,imons[1]], '-',
                 color = 'black')
 
-    ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
-    ax.set_ylabel(r'Temperature Difference [$K$]',fontsize = 14)
+    ax.set_xlabel(r'Time',fontsize = labelfontsize, labelpad=0)
+    ax.set_ylabel(r'Temperature Difference [$K$]',fontsize = labelfontsize)
     ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
     ax.set_xlim(xlims[0],xlims[1])
@@ -271,6 +273,7 @@ def nplot(ax,model_name,dat,let,
               xlims = [10,30*24*3600],
               ylims = [-0.01,0.15],
               color = 'black',
+              labelfontsize = 14,
               is_labels = True,
               is_legend = True,
               is_fourier = False,
@@ -314,8 +317,8 @@ def nplot(ax,model_name,dat,let,
 
     if is_labels:
         ax.axhline(0,c='k',linestyle=':',linewidth=0.3)
-        ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
-        ax.set_ylabel(r'Temperature difference [$K$]',fontsize = 14)
+        ax.set_xlabel(r'Time',fontsize = labelfontsize, labelpad=0)
+        ax.set_ylabel(r'Temperature difference [$K$]',fontsize = labelfontsize)
         ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
         ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
         ax.set_xlim(xlims[0],xlims[1])
@@ -343,6 +346,7 @@ def dnplot(ax,model_name,dat,let,
                pic_format = 'pdf',              # png, eps, pdf
                title = "Default",
                position = [0.1,0.1,0.8,0.8],
+               labelfontsize = 14,
                xlims = [10,30*24*3600],
                ylims = [-0.01,0.15],
                color = 'black',
@@ -431,8 +435,8 @@ def dnplot(ax,model_name,dat,let,
 
     if is_labels:
         ax.axhline(0,c='k',linestyle=':',linewidth=0.3)
-        ax.set_xlabel(r'Time',fontsize = 14, labelpad=0)
-        ax.set_ylabel(r'Temperature difference [$K$]',fontsize = 14)
+        ax.set_xlabel(r'Time',fontsize = labelfontsize, labelpad=0)
+        ax.set_ylabel(r'Temperature difference [$K$]',fontsize = labelfontsize)
         ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
         ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
         ax.set_xlim(xlims[0],xlims[1])
@@ -462,6 +466,7 @@ def aplot(
         title = 'Default',
         titlefont = 12,
         textfont = 10,
+        labelfontsize = 14,
         position = [0.1,0.1,0.8,0.8],
         ls = '-',
         pic_format = 'pdf',              # png, eps, pdf
@@ -504,8 +509,8 @@ def aplot(
                 color = 'black')
 
     # Labels
-    ax.set_xlabel(r'Porosity',fontsize = 14, labelpad=0)
-    ax.set_ylabel(r'Diffusivity [$10^{-6} \frac{m^{2}}{s}$]',fontsize = 14)
+    ax.set_xlabel(r'Porosity',fontsize = labelfontsize, labelpad=0)
+    ax.set_ylabel(r'Diffusivity [$10^{-6} \frac{m^{2}}{s}$]',fontsize = labelfontsize)
     # ax.xaxis.set_ticks([10,60,600,3600,24*3600,10*24*3600])
     # ax.xaxis.set_ticklabels(['10s','1min','10min','1h','1d','10d'])
     ax.set_xlim(xlims[0],xlims[1])
