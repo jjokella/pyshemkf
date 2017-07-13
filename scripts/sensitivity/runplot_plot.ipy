@@ -14,7 +14,7 @@ import mypackage.run.pythonmodule as pm
 is_plot = 1
 is_save = 1
 is_show = 1
-is_backup = 0
+is_backup = 1
 
 # Figure
 fig = plt.figure(1,figsize=[24,12], facecolor = 'white')
@@ -29,9 +29,6 @@ for ipl2, imons in enumerate([
             ['cubey','2017_06_07','b'],
             ['cubey','2017_06_07','aln'],
             ['cubey','2017_06_07','bxz'],
-            # ['cubey','2017_05_31','dkl'],
-            # ['cubey','2017_05_31','ewx'],
-            # ['cubey','2017_05_31','gjj']
             # ['cubey','2017_05_31','b'],
             # ['cubey','2017_05_31','aln'],
             # ['cubey','2017_05_31','bxz']

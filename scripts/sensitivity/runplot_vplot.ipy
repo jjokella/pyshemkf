@@ -47,6 +47,7 @@ if is_dplot:
             imons = imons,
             ylims = [-0.1,2.5],
             title = '',
+            pic_format = 'png',
             position = [
                 0.1*0.5+(ipl/4)*0.5,
                 0.1*0.25+1-(np.mod(ipl,4)+1)*0.25,
@@ -70,6 +71,7 @@ if is_dplot:
                 0.384*0.25],
             alpha = 0.5,
             loc_inds = imons,
+            pic_format = 'png',
             marker = 'o',
             markersize = 4.0,
             markercolor = ['black','red'],
