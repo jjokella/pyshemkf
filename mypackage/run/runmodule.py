@@ -457,6 +457,8 @@ def make_file_dir_names(model_name, nt = 0):
     15 - true_chem_file
     16 - monitor_file
     17 - time_out_file
+    18 - assim_out_file_bef
+    19 - assim_out_file_aft
     """
     model_name_big = model_name.upper()
     model_dir = os.environ['HOME']+"/shematModelsDir/" + model_name + "_model"
@@ -476,7 +478,9 @@ def make_file_dir_names(model_name, nt = 0):
     true_chem_file = "True" + model_name_big + "_chem.plt"
     monitor_file = model_name_big + '_E0_monitor_1.dat'
     time_out_file = model_name_big + '_E0_time_out_' + str(nt).zfill(4) + '.vtk'
-    
+    assim_out_file_bef = 'assim_variables_E1_bef_' + str(nt).zfill(4) + '.vtk'
+    assim_out_file_aft = 'assim_variables_E1_aft_' + str(nt).zfill(4) + '.vtk'
+
     return model_name_big, \
         model_dir, \
         input_file, \
@@ -494,7 +498,9 @@ def make_file_dir_names(model_name, nt = 0):
         true_file, \
         true_chem_file,\
         monitor_file,\
-        time_out_file
+        time_out_file,\
+        assim_out_file_bef,\
+        assim_out_file_aft
 
 
 def make_model_dir_tmp(model_name,letter,today):
