@@ -15,21 +15,21 @@ is_show = 1
 is_backup = 1
 
 # Specs
-sc.model_name = 'cubey'
-sc.dat = '2017_02_08'
+model_name = 'cubey'
+dat = '2017_02_08'
 
 let = 'aln'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
-sc.lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
 # Read
 if is_read:
     for varname in ['uindex','head','temp']:
-        numpy_array, numpy_array_name = fr.read(sc.model_name,
-                                                sc.dat,
-                                                sc.lets[0],
+        numpy_array, numpy_array_name = fr.read(model_name,
+                                                dat,
+                                                lets[0],
                                                 varname = varname)
         np.save(numpy_array_name,numpy_array)
         print('Saved as ' + numpy_array_name)
@@ -44,9 +44,9 @@ if is_plot:
     
     # Run plot function
     ax, pic_name = fp.plot(fig.add_subplot(1,1,1),
-                           sc.model_name,
-                           sc.dat,
-                           sc.lets[0],
+                           model_name,
+                           dat,
+                           lets[0],
                            markercolor = 'black',
                            pic_format = 'png',
                            varname = 'uindex'
@@ -69,4 +69,4 @@ if is_plot:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,fa.tag,"runplot","ipy",sc.model_name,sc.dat,sc.lets[0])
+    pm.py_backup(pm.python_scripts_dir,fa.tag,"runplot","ipy",model_name,dat,lets[0])
