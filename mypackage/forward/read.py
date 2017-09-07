@@ -25,6 +25,10 @@ def read(model_name,dat,let,
     let : string
         String of letter of model run.
 
+    varname : string
+        Variable name for array to be read.
+        Possibilities: 'uindex' 'head','temp','kz', 'v'
+
     Returns
     -------
     numpy_array : array
@@ -33,7 +37,6 @@ def read(model_name,dat,let,
     numpy_array_name : string
         Containing proposed saving location for Array.
     """
-         # varnames = ['uindex','temp','head'], #'head','temp','kz', 'v'
 
     # Dirs
     fdir = rm.make_output_dirs(model_name,dat,let)[1] # samples_output_dir
