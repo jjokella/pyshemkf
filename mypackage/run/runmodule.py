@@ -4,7 +4,7 @@ import sys                      # System variables (PYTHONPATH as list sys.path)
 import subprocess  		# To execute shell command (subprocess.Popen)
 import os			# Operating system (os.chdir, os.path)
 import exceptions  		# Raising exception (raise exceptions.RuntimeError)
-import shlex      		# Structure system commands(shlex.split) 
+import shlex      		# Structure system commands(shlex.split)
 import string     		# Load alphabet (string.alphabet())
 import time       		# Timing the execution (time.time(), time.clock())
 import shutil
@@ -34,7 +34,7 @@ def replace_string(file_name_input, old_str, new_str):
         print('to be replaced was not found in')
         print(file_name_input)
         sys.exit()
-        
+
     return
 
 #############################################################
@@ -75,7 +75,7 @@ def get_num_let(let):
     if len(let) == 1:
         return alphabet.index(let)
     if len(let) == 2:
-        return 26*(alphabet.index(let[0])) + alphabet.index(let[1]) + 26 
+        return 26*(alphabet.index(let[0])) + alphabet.index(let[1]) + 26
     if len(let) == 3:
         return 26*26*(alphabet.index(let[0])) + 26*(alphabet.index(let[1])) + alphabet.index(let[2]) + 26*26 + 26
     else:
@@ -90,11 +90,11 @@ def get_let_num(num):
     """
     Returns the letter of the alphabet corresponding to the input integer.
 
-    The form of the number is (ii are the indices of the letters in 
+    The form of the number is (ii are the indices of the letters in
     string.lowercase, 0<= ii <=25):
 
     Length1: i0
-    Length2: 26*i0 + i1 + 26 
+    Length2: 26*i0 + i1 + 26
     Length3: 26^2*i0 + 26*i1 + i2 + 26^2 + 26
     """
     alphabet = string.lowercase
@@ -123,7 +123,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
         proc = subprocess.Popen(name,stdin=subprocess.PIPE)
     else:
         proc = subprocess.Popen(name,stdin=subprocess.PIPE, stdout=outfile)
-    
+
     if instr:
         subprocess.Popen.communicate(proc,input = instr)
 
@@ -134,7 +134,7 @@ def run_script(path,name,outfile = None,instr = None,wait = None,errout = None):
         if(proc.returncode):
             os.chdir(os.environ['HOME']+'/PythonDir')
             raise exceptions.RuntimeError("Problems in " + str(name))
-    
+
 
 
 
@@ -168,12 +168,12 @@ def change_hashtag_input(file_name, hashtag_line, new_input, delete_lines = None
     if hashstr_not_exist:
         raise exceptions.RuntimeError('Hashtag-catchphrase not found.'
                                       + '\n\nThe catchphrase  '
-                                      + hashtag_line 
+                                      + hashtag_line
                                       + '  was found '
                                       + str(1-hashstr_not_exist)
                                       + ' times in'
                                       + file_name)
-        
+
     return
 
 #############################################################
@@ -202,7 +202,7 @@ def read_hashtag_input(file_name,hashtag_line,nl):
     if hashstr_not_exist:
         raise exceptions.RuntimeError('Hashtag-catchphrase not found.'
                                       + '\n\nThe catchphrase  '
-                                      + hashtag_line 
+                                      + hashtag_line
                                       + '  was found '
                                       + str(1-hashstr_not_exist)
                                       + ' times in'
@@ -244,7 +244,7 @@ def read_records_input(file_name,hashtag_line):
     if hashstr_not_exist:
         raise exceptions.RuntimeError('Hashtag-catchphrase not found.'
                                       + '\n\nThe catchphrase  '
-                                      + hashtag_line 
+                                      + hashtag_line
                                       + '  was found '
                                       + str(1-hashstr_not_exist)
                                       + ' times in'
@@ -268,7 +268,7 @@ def read_records_input(file_name,hashtag_line):
     if records_not_exist_check == 1:
         os.chdir(os.environ['HOME']+'/PythonDir')
         raise exceptions.RuntimeError('No records in Hashtag-Input: '+hashtag_line)
-                
+
     return num_records
 
 #############################################################
@@ -276,12 +276,12 @@ def read_records_input(file_name,hashtag_line):
 #############################################################
 def compilequick(model_dir, vtk_var = 1, omp_var = 1, fw_var = 0):
     """
-    This function is a wrapper organizing different inputs 
+    This function is a wrapper organizing different inputs
     given to py_compilequick.sh, which is called via
     the function rm.run_script.
     """
 
-    # Forward or Simulate 
+    # Forward or Simulate
     if fw_var:
         shem_type = "fw"
         shem_type_name = "fw"
@@ -356,7 +356,7 @@ def change_matlab( mfile_name,
                    output_path,
                    filename,
                    use_dists,
-                   means, 
+                   means,
                    standard_deviations,
                    sgsim_switch ):
     "This function changes the Matlab file"
@@ -377,15 +377,15 @@ def change_matlab( mfile_name,
                 ###print('Here')
                 mfile_tmp.write("output_path = '" + output_path + "';\n")
             elif(filename_exist_check == 0):
-                mfile_tmp.write("filename = '" + filename + "';\n")                
+                mfile_tmp.write("filename = '" + filename + "';\n")
             elif(use_dists_exist_check == 0):
-                mfile_tmp.write("use_dists = " + use_dists + ";\n") 
+                mfile_tmp.write("use_dists = " + use_dists + ";\n")
             elif(means_exist_check == 0):
-                mfile_tmp.write("means = " + means + ";\n") 
+                mfile_tmp.write("means = " + means + ";\n")
             elif(standard_deviations_exist_check == 0):
-                mfile_tmp.write("standard_deviations = " + standard_deviations + ";\n") 
+                mfile_tmp.write("standard_deviations = " + standard_deviations + ";\n")
             elif(sgsim_switch_exist_check == 0):
-                mfile_tmp.write("sgsim_switch = " + sgsim_switch + ";\n") 
+                mfile_tmp.write("sgsim_switch = " + sgsim_switch + ";\n")
             else:
                 mfile_tmp.write(line)
         mfile_input.close()
@@ -424,7 +424,7 @@ def make_output_dirs(model_name,dat,let):
     enkf_output_dir = os.environ['HOME']+"/shematOutputDir/" \
                       + model_name +"_output/" + dat + "/" \
                       + dat + "_" + let + "/enkf_output"
-    
+
     return output_dir, \
         samples_output_dir, \
         enkf_output_dir
@@ -556,7 +556,7 @@ def make_model_dir_tmp(model_name,letter,today):
     os.chmod('veryclean.sh',128+256+64)
 
     return new_model_dir
-    
+
 def delete_model_dir_tmp(model_dir):
     # Delete the temporal directory
     shutil.rmtree(model_dir)
