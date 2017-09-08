@@ -19,5 +19,10 @@ output/sensitivity/png
 output/sensitivity/eps
 output/sensitivity/pdf
 output/sensitivity/jpg
+output/analysis/npy
+output/analysis/png
+output/analysis/jpg
+output/analysis/pdf
+output/analysis/eps
 lib/
 notebook/
