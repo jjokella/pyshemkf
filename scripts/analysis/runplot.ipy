@@ -21,7 +21,7 @@ dat = '2017_09_07'
 let = 'a'
 
 # Letters of wanted range
-lets = aa.lets[sc.specl(model_name,dat,let)]
+lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
 
 # Read
 if is_read:
