@@ -10,6 +10,8 @@ from mypackage.analysis import variables as av
 
 def read(model_name,dat,let,
          varname = 'kz_mean',
+         fdir = None,
+         fname = None,
          nt = 10,
 ):
     """
@@ -31,7 +33,13 @@ def read(model_name,dat,let,
         Possibilities: 'kz_mean' 'kz_std','head_mean','lz_mean', 'temp_mean'
 
     nt : integer
-        Number inside file name
+        Number inside file name.
+
+    fdir : string
+        Full directory of vtk file.
+
+    fname : string
+        Full name of vtk file.
         
     Returns
     -------
@@ -42,9 +50,10 @@ def read(model_name,dat,let,
         Containing proposed saving location for Array.
     """
 
-    # Dirs
-    fdir = rm.make_output_dirs(model_name,dat,let)[2] # enkf_output_dir
-    fname = rm.make_file_dir_names(model_name,nt)[18] # assim_out_file_aft
+    # Automatic file name generation
+    if (not fdir and not fname):
+        fdir = rm.make_output_dirs(model_name,dat,let)[2] # enkf_output_dir
+        fname = rm.make_file_dir_names(model_name,nt)[18] # assim_out_file_aft
 
     # Get vtk_reader ##########################################################
     vtk_reader = pf.my_vtk(fdir,fname,varname)

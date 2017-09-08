@@ -26,6 +26,7 @@ def plot(ax,
          dat,
          let,
          nt = 10,
+         numpy_array_name = None,
          is_grid = True,
          is_mask = False,
          is_labels= True,
@@ -74,6 +75,12 @@ def plot(ax,
     let : string
         String of letter of model run.
 
+    nt : integer
+        Number inside file name.
+
+    numpy_array_name : string
+        Full file name of numpy array including ending .npy
+
     Returns
     -------
     ax : Axes
@@ -89,7 +96,10 @@ def plot(ax,
     yticks = grids.yticks(model_name,dat,let)[::diff_ticks]
 
     # Load variable array
-    var = np.load(pm.py_output_filename(av.tag,varname+'_'+str(nt).zfill(4),sc.specl(model_name,dat,let),"npy"))
+    if not numpy_array_name:
+        var = np.load(pm.py_output_filename(av.tag,varname+'_'+str(nt).zfill(4),sc.specl(model_name,dat,let),"npy"))
+    else
+        var = np.load(numpy_array_name)
 
     if varname == 'v':
         var = var[:,:,v_component]
