@@ -10,6 +10,7 @@ from mypackage.analysis import variables as av
 
 def read(model_name,dat,let,
          varname = 'kz_mean',
+         befaft = 'aft',
          fdir = None,
          fname = None,
          nt = 10,
@@ -53,7 +54,10 @@ def read(model_name,dat,let,
     # Automatic file name generation
     if (not fdir and not fname):
         fdir = rm.make_output_dirs(model_name,dat,let)[2] # enkf_output_dir
-        fname = rm.make_file_dir_names(model_name,nt)[18] # assim_out_file_aft
+        if befaft == 'aft':
+            fname = rm.make_file_dir_names(model_name,nt)[19] # assim_out_file_aft
+        elif befaft == 'bef':
+            fname = rm.make_file_dir_names(model_name,nt)[18] # assim_out_file_bef
 
     # Get vtk_reader ##########################################################
     vtk_reader = pf.my_vtk(fdir,fname,varname)
