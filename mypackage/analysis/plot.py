@@ -98,7 +98,7 @@ def plot(ax,
     # Load variable array
     if not numpy_array_name:
         var = np.load(pm.py_output_filename(av.tag,varname+'_'+str(nt).zfill(4),sc.specl(model_name,dat,let),"npy"))
-    else
+    else:
         var = np.load(numpy_array_name)
 
     if varname == 'v':
