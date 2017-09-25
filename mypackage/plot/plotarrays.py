@@ -9,7 +9,7 @@ python_dir = os.environ['HOME']+'/PythonDir'
 num_methods = 7
 num_jobs = num_methods*3
 
-num_methods1000 = 7
+num_methods1000 = 8
 num_jobs1000 = num_methods1000*4
 
 # Names
@@ -20,14 +20,16 @@ names_methods = ['EnKF',
                      'DualEnKF',
                      'Hyb-EnKF',
                      'LEnKF',
-                     'IEnKF']
+                     'IEnKF',
+                     'PP-EnKF']
 longnames_methods = ['EnKF',
                          'Damped EnKF',
                          'Normal Score EnKF',
                          'Dual EnKF',
                          'Hybrid EnKF',
                          'Local EnKF',
-                         'Iterative EnKF']
+                         'Iterative EnKF',
+                         'Pilot-Point EnKF']
 
 
 # Methods
@@ -195,7 +197,11 @@ iterative1000_wavebc_lets = ['b','aln','b','b']
 iterative1000_wavebc_nums = [1000,1000,1000,1000]
 iterative1000_wavebc_obss = [5050 for i in range(4)]
 
-
+# Pilot Point
+pilot1000_wavebc_dats = ['2017_09_22','2017_09_22','2017_09_22','2017_09_22']
+pilot1000_wavebc_lets = ['b','aln','bxz','dkl']
+pilot1000_wavebc_nums = [1000,1000,1000,1000]
+pilot1000_wavebc_obss = [100 for i in range(4)]
 
 # Collecting information
 dats = np.array([normal_dats, damping01_dats, normalscoreverynew_dats, dual_dats, hybrid_dats, 
@@ -228,13 +234,16 @@ nums_wavebc = [normal_wavebc_nums,damping_wavebc_nums,
 
 dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,
                        normalscore1000_wavebc_dats,dual1000_wavebc_dats,
-                       hybrid1000_wavebc_dats,localisation1000_wavebc_dats, iterative1000_wavebc_dats]
+                       hybrid1000_wavebc_dats,localisation1000_wavebc_dats, iterative1000_wavebc_dats,
+                       pilot1000_wavebc_dats]
 lets1000_wavebc = [normal1000_wavebc_lets,damping1000_wavebc_lets,
                        normalscore1000_wavebc_lets,dual1000_wavebc_lets,
-                       hybrid1000_wavebc_lets,localisation1000_wavebc_lets, iterative1000_wavebc_lets]
+                       hybrid1000_wavebc_lets,localisation1000_wavebc_lets, iterative1000_wavebc_lets,
+                       pilot1000_wavebc_lets]
 nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,
                        normalscore1000_wavebc_nums,dual1000_wavebc_nums,
-                       hybrid1000_wavebc_nums,localisation1000_wavebc_nums, iterative1000_wavebc_nums]
+                       hybrid1000_wavebc_nums,localisation1000_wavebc_nums, iterative1000_wavebc_nums,
+                       pilot1000_wavebc_nums]
 
 # Flat arrays
 dates = np.concatenate(dats)    
