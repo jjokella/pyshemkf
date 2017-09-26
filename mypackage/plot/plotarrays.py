@@ -6,7 +6,7 @@ import numpy as np
 # Paths
 python_dir = os.environ['HOME']+'/PythonDir'
 
-num_methods = 7
+num_methods = 8
 num_jobs = num_methods*3
 
 num_methods1000 = 8
@@ -198,6 +198,11 @@ iterative1000_wavebc_nums = [1000,1000,1000,1000]
 iterative1000_wavebc_obss = [5050 for i in range(4)]
 
 # Pilot Point
+pilot_wavebc_dats = ['2017_09_22','2017_09_22','2017_09_22']
+pilot_wavebc_lets = ['ewx','gjj','hvv']
+pilot_wavebc_nums = [100,100,100]
+pilot_wavebc_obss = [100 for i in range(3)]
+
 pilot1000_wavebc_dats = ['2017_09_22','2017_09_22','2017_09_22','2017_09_22']
 pilot1000_wavebc_lets = ['b','aln','bxz','dkl']
 pilot1000_wavebc_nums = [1000,1000,1000,1000]
@@ -223,14 +228,17 @@ num_obss1000 = [normal1000_obss,damping1000_obss,normalscore1000_obss,dual1000_o
                     localisation1000_obss,iterative1000_obss]
 
 dats_wavebc = [normal_wavebc_dats,damping_wavebc_dats,
-                       normalscore_wavebc_dats,dual_wavebc_dats,
-                       hybrid_wavebc_dats,localisation_wavebc_dats, iterative_wavebc_dats]
+                   normalscore_wavebc_dats,dual_wavebc_dats,
+                   hybrid_wavebc_dats,localisation_wavebc_dats, iterative_wavebc_dats,
+                   pilot_wavebc_dats]
 lets_wavebc = [normal_wavebc_lets,damping_wavebc_lets,
-                       normalscore_wavebc_lets,dual_wavebc_lets,
-                       hybrid_wavebc_lets,localisation_wavebc_lets, iterative_wavebc_lets]
+                   normalscore_wavebc_lets,dual_wavebc_lets,
+                   hybrid_wavebc_lets,localisation_wavebc_lets, iterative_wavebc_lets,
+                   pilot_wavebc_lets]
 nums_wavebc = [normal_wavebc_nums,damping_wavebc_nums,
-                       normalscore_wavebc_nums,dual_wavebc_nums,
-                       hybrid_wavebc_nums,localisation_wavebc_nums, iterative_wavebc_nums]
+                   normalscore_wavebc_nums,dual_wavebc_nums,
+                   hybrid_wavebc_nums,localisation_wavebc_nums, iterative_wavebc_nums,
+                   pilot_wavebc_nums]
 
 dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,
                        normalscore1000_wavebc_dats,dual1000_wavebc_dats,
