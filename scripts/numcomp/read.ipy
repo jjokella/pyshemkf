@@ -76,7 +76,7 @@ for n_syn in ns_syn_studies:
     # Final residuals
     res = np.zeros([num_setups,1000]) if is_1000 else np.zeros([num_setups,100])
     for i in range(num_setups):
-        res[i,0:sizes[i]] = np.load('output/dists/endres_'+dates[i]+'_'+letters[i]+'.npy')  
+        res[i,0:sizes[i]] = np.load('output/dists/npy/endres_'+dates[i]+'_'+letters[i]+'.npy')
 
 
     # Iterate over ensemble sizes

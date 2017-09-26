@@ -38,7 +38,7 @@ for imethod in imethods:
         let = lets[imethod][ienssize]
 
         # The array with the final residuals
-        endres = np.load('output/dists/endres_'+dat+'_'+let+'.npy')
+        endres = np.load('output/dists/npy/endres_'+dat+'_'+let+'.npy')
 
         # The number of final residuals bigger than 0.6
         higher_array = [1 if endres[i]>0.6 else 0 for i in range(num)]

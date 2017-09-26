@@ -27,7 +27,7 @@ coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
 # because I messed up the 10 difference
 endres = np.zeros([7,10])
 for ilet,let in enumerate(lets):
-    endres[ilet,:] = np.load('output/dists/endres_'+date+'_'+let+'.npy')
+    endres[ilet,:] = np.load('output/dists/npy/endres_'+date+'_'+let+'.npy')
 
 x = np.arange(10)
 fig, ax = plt.subplots(figsize = [18,20])
