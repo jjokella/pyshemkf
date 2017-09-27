@@ -63,9 +63,9 @@ for i_kind, j_kind in enumerate(which_methods):
         num = nums[j_kind][j]
 
         # Load the residual arrays produced in endresread.ipy
-        begres = np.load(os.environ['HOME']+'/PythonDir/output/dists/begres_'
+        begres = np.load(os.environ['HOME']+'/PythonDir/output/dists/npy/begres_'
                          +dat+'_'+let+'.npy')
-        endres = np.load(os.environ['HOME']+'/PythonDir/output/dists/endres_'
+        endres = np.load(os.environ['HOME']+'/PythonDir/output/dists/npy/endres_'
                          +dat+'_'+let+'.npy')
  
         # Calculate different statistics
