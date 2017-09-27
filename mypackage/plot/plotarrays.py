@@ -3,6 +3,16 @@
 import os
 import numpy as np
 
+# Number for calling different methods
+# 0: Classical EnKF
+# 1: Damped EnKF
+# 2: Normal Score EnKF
+# 3: Dual EnKF
+# 4: Hybrid EnKF
+# 5: Local EnKF
+# 6: Iterative EnKF
+# 7: Pilot Point EnKF
+
 # Paths
 python_dir = os.environ['HOME']+'/PythonDir'
 
@@ -29,7 +39,7 @@ longnames_methods = ['EnKF',
                          'Hybrid EnKF',
                          'Local EnKF',
                          'Iterative EnKF',
-                         'Pilot-Point EnKF']
+                         'Pilot Point EnKF']
 
 
 # Methods

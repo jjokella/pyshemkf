@@ -27,7 +27,7 @@ python_exec_dir = python_dir+'/exec'
 
 def py_output_dir(tag,ending):
     """
-    Generate Python output director according to
+    Generate Python output directory according to
     - tag: The name of the subdirectory of scripts or output
     - ending: Mostly png,eps,npy
     """
