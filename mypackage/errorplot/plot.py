@@ -26,6 +26,7 @@ def plot(ax,
          is_1000 = True,                         # 1000er or 100er job
          is_wavebc = True,
          is_std = 0,                         # Show std?
+         std_method = 'std',
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
          ylims = [0.28,0.82],
          yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
@@ -76,7 +77,7 @@ def plot(ax,
 
     # Standard deviation
     if is_std:
-        std = np.load(pm.py_output_filename('errorplot',which_res,'std'+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+        std = np.load(pm.py_output_filename('errorplot',which_res,std_method+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
         
 
     ax.set_prop_cycle("color",['k'])
@@ -88,6 +89,7 @@ def plot(ax,
                     np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
 
         varplot = var[:,ienssize]
+        stdplot = std[:,ienssize]
         
         # Plot
         puntos = []                            #Contains plotted points
@@ -105,18 +107,13 @@ def plot(ax,
                              verticalalignment='center',
                              horizontalalignment='left',
                              size = 20)
+            # Error
             if is_std:
-                if is_median:
-                    ax.errorbar(x[iplot],varplot[iplot],yerr = [[std[iplot,0]],
-                                                                     [std[iplot,1]]],
-                                 fmt = formatsos[iplot], lw = 2, ms = markersize, label = 'this',
-                                 mfc = coleros[iplot],mec=coleros[iplot], mew = markeredgesize)
-                else:
-                    ax.errorbar(x[iplot],varplot[iplot],yerr = std[iplot],
-                                 fmt = formatsos[iplot], lw = 2, ms = markersize, label = 'this',
-                                 mfc = coleros[iplot],
-                                 mew = markeredgesize,
-                                 mec = 'black')
+                ax.errorbar(x[iplot],varplot[iplot],yerr = stdplot[iplot],
+                            fmt = formatsos[iplot], lw = 2, ms = markersize, label = 'this',
+                                mfc = coleros[iplot],
+                                mew = markeredgesize,
+                                mec = 'black')
 
         # Legend
         num_inleg = num_pack
@@ -156,7 +153,6 @@ def plot(ax,
 
 
     # Style
-    # plt.title('Ensemble size = '+str(ensemble_size), y = 1.03, fontsize = fonttit)
     ax.set_xlim([0,num_legs*(num_pack+1)])
     ax.set_ylabel(r'RMSE [$\log(\frac{1}{m^2})$]',fontsize = fontlab, labelpad = 10)
     ax.tick_params(direction = 'in', length = 6,
