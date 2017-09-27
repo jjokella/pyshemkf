@@ -30,11 +30,14 @@ def read(which_methods,
         from module plotarrays.
 
     is_1000 : boolean
-        If true, use Jobs, for which 1000 runs exist, typically
-        the smaller ensemble sizes 50, 70, 100, 250.
+        True - Jobs/Ensemble Sizes for which 1000 runs exist
+               typically, 50, 70, 100, 250
+        False - Jobs/Ensemble Sizezs for which 100 runs exist
+               typically, 500, 1000, 2000
 
     is_wavebc : boolean
-        If true, use model wavebc, otherwise old wave.
+        True - Model wavebc
+        False - Model wave
 
     which_res : string
         'endres' - use residuals after EnKF run

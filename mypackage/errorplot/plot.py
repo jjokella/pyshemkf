@@ -28,6 +28,7 @@ def plot(ax,
          is_std = 0,                         # Show std?
          std_method = 'std',
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
+         figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
          ylims = [0.28,0.82],
          yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
          num_pack = 4,                     # Number of methods in pack
@@ -40,7 +41,6 @@ def plot(ax,
          fonttit = 40,
          fontlab = 40,
          fonttic = 30,
-         figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange         
              ):
     """
     A plotting function for statistics of residual distributions.
@@ -49,6 +49,54 @@ def plot(ax,
     ----------
     ax : Axes
         The axes to draw to.
+
+    which_methods : array of ints
+        The methods to be printed, in this order.
+
+    which_res : string
+        'endres' - use residuals after EnKF run
+        'begres' - use residuals before EnKF run
+
+    stat_method : string
+        'mean' - Means
+        'std' - Standard deviation
+        'stdm' - Standard deviation of the mean
+        'median' - Median or 50 Percentile
+        'q25' - 25 Percentile
+        'q75' - 75 Percentile
+
+    is_1000 : boolean
+        True - Jobs/Ensemble Sizes for which 1000 runs exist
+               typically, 50, 70, 100, 250
+        False - Jobs/Ensemble Sizezs for which 100 runs exist
+               typically, 500, 1000, 2000
+
+    is_wavebc : boolean
+        True - Model wavebc
+        False - Model wave
+
+    is_std : boolean
+        True - Show errorbars of standard deviation
+        False - No errorbars
+
+    std_method : string
+        Standard deviation to use
+        'std' - Standard deviation
+        'stdm' - Standard deviation of mean
+
+    pic_format : string
+        Format of the picture
+        'pdf' - pdf-format
+        'eps' - eps-format
+        'png' - png-format
+        'jpg' - jpg-format
+        'svg' - svg-format
+
+    figpos : array of floats
+        Four numbers
+        xbeg, ybeg, xrange, yrange
+
+    More input specifying plot parameters.
 
     Returns
     -------
@@ -64,7 +112,7 @@ def plot(ax,
                           ([500,1000,2000] if is_wavebc else [50,70,100,250,500,1000,2000]))
 
     num_methods = np.array(which_methods).size
-        
+
     # Legend
     legend_input = pa.longnames_methods
     legend_input = np.array([legend_input[i].ljust(18) for i in range(len(legend_input))])
@@ -78,19 +126,19 @@ def plot(ax,
     # Standard deviation
     if is_std:
         std = np.load(pm.py_output_filename('errorplot',which_res,std_method+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
-        
+
 
     ax.set_prop_cycle("color",['k'])
     ax.set_position(figpos)
-        
+
     for ienssize,ensemble_size in enumerate(which_enssize):
         # x positions, up to 15 methods
-        x = np.delete(np.arange(0,16),                               
+        x = np.delete(np.arange(0,16),
                     np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
 
         varplot = var[:,ienssize]
         stdplot = std[:,ienssize]
-        
+
         # Plot
         puntos = []                            #Contains plotted points
         ax.plot(x[:len(varplot)],varplot,'k-',label=3)
@@ -117,12 +165,12 @@ def plot(ax,
 
         # Legend
         num_inleg = num_pack
-        num_legs = num_methods/num_inleg + int(bool(np.mod(num_methods,num_inleg))) 
+        num_legs = num_methods/num_inleg + int(bool(np.mod(num_methods,num_inleg)))
         num_inlastleg = np.mod(num_methods,num_inleg) if np.mod(num_methods,num_inleg) else num_inleg
-        leginds = [num_inleg-1+i*num_inleg if i<num_legs-1 else num_inleg-1+(i-1)*num_inleg+num_inlastleg 
+        leginds = [num_inleg-1+i*num_inleg if i<num_legs-1 else num_inleg-1+(i-1)*num_inleg+num_inlastleg
                    for i in range(num_legs)] #last indices of a group of indices
-        legranges = [num_inleg if i<num_legs-1 else num_inlastleg 
-                     for i in range(num_legs)] 
+        legranges = [num_inleg if i<num_legs-1 else num_inlastleg
+                     for i in range(num_legs)]
 
         for ileg in range(len(leginds)):
             xleg = 0.15 + ileg*0.8/num_legs
