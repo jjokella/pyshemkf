@@ -137,7 +137,8 @@ def plot(ax,
                     np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
 
         varplot = var[:,ienssize]
-        stdplot = std[:,ienssize]
+        if is_std:
+            stdplot = std[:,ienssize]
 
         # Plot
         puntos = []                            #Contains plotted points

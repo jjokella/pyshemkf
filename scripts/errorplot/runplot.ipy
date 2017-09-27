@@ -13,7 +13,7 @@ is_read = 0
 is_backup = 0
 is_sort = 0
 is_plot = 1
-is_save = 0
+is_save = 1
 is_show = 1
 
 which_methods = [0,1,2,3,4,5,6]
@@ -55,6 +55,7 @@ if is_plot:
     ax, pic_name = ep.plot(fig.add_subplot(1,1,1),
                            which_methods = sorted_which_methods,
                            stat_method = stat_method,
+                           pic_format = 'pdf',
                            is_std = False,
                            std_method = 'stdm',
                        )
