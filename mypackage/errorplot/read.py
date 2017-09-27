@@ -43,6 +43,7 @@ def read(which_methods,
     stat_method : string
         'mean' - Calculate means
         'std' - Standard deviation
+        'stdm' - Standard deviation of the mean
         'median' - Median or 50 Percentile
         'q25' - 25 Percentile
         'q75' - 75 Percentile
@@ -59,7 +60,7 @@ def read(which_methods,
     # Input check
     if not which_res in ['endres','begres']:
         raise exceptions.RuntimeError("which_res has to be 'endres' or 'begres'")
-    if not stat_method in ['mean','std','median','q25','q75']:
+    if not stat_method in ['mean','std','stdm','median','q25','q75']:
         raise exceptsion.RuntimeError("stat_method wrong")
 
     # Nunber of methods
@@ -73,6 +74,8 @@ def read(which_methods,
                 if is_wavebc else (pa.dats1000 if is_1000 else pa.dats))
     lets = ((pa.lets1000_wavebc if is_1000 else pa.lets_wavebc)
                 if is_wavebc else (pa.lets1000 if is_1000 else pa.lets))
+    nums = ((pa.nums1000_wavebc if is_1000 else pa.nums_wavebc)
+                if is_wavebc else (pa.nums1000 if is_1000 else pa.nums))
 
     # Initialize stat_array
     stat_array = np.zeros([num_methods,num_ensemble_sizes])
@@ -85,6 +88,7 @@ def read(which_methods,
             # Get date and time
             dat = dats[j_kind][j]
             let = lets[j_kind][j]
+            num = nums[j_kind][j]
             
             # Read residuals
             res = np.load(pm.py_output_filename('dists',which_res,dat+'_'+let,'npy'))
@@ -94,6 +98,8 @@ def read(which_methods,
                 stat_array[i_kind,j] = np.mean(res)
             elif stat_method == 'std':
                 stat_array[i_kind,j] = np.std(res)
+            elif stat_method == 'stdm':
+                stat_array[i_kind,j] = np.std(res)/np.sqrt(num)
             elif stat_method == 'median':
                 stat_array[i_kind,j] = np.percentile(res,50)
             elif stat_method == 'q25':
