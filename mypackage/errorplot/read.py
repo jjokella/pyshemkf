@@ -37,7 +37,7 @@ def read(which_methods,
     which_res : string
         'endres' - use residuals after EnKF run
         'begres' - use residuals before EnKF run
-        
+
     stat_method : string
         'mean' - Calculate means
         'std' - Standard deviation
@@ -64,31 +64,26 @@ def read(which_methods,
         raise exceptions.RuntimeError('n_runs wrong')
     if not model in ['wavebc','wave']:
         raise exceptions.RuntimeError('model wrong')
-    
+
     # Nunber of methods
     num_methods = len(which_methods)
-    
-    # Number of ensemble sizes
-    num_ensemble_sizes = ((4 if n_runs==1000 else 3) if model=='wavebc' else (4 if n_runs==1000 else 7))
 
-    # Initialize plotarrays arrays
-    dats = pa.dats_dic[model][n_runs]
-    lets = pa.lets_dic[model][n_runs]
-    nums = pa.nums_dic[model][n_runs]
+    # Ensemble sizes
+    ensemble_sizes = (([50,70,100,250] if n_runs==1000 else [500,1000,2000]) if model=='wavebc' else ([50,70,100,250] if n_runs==1000 else [50,70,100,250,500,1000,2000]))
 
     # Initialize stat_array
-    stat_array = np.zeros([num_methods,num_ensemble_sizes])
+    stat_array = np.zeros([num_methods,len(ensemble_sizes)])
 
     # i_kind: counter
     # j_kind: method-index
     for i_kind, j_kind in enumerate(which_methods):
-        for j in range(num_ensemble_sizes):
+        for j, enssize in enumerate(ensemble_sizes):
 
             # Get date and time
-            dat = dats[j_kind][j]
-            let = lets[j_kind][j]
-            num = nums[j_kind][j]
-            
+            dat = pa.dats_dic[model][n_runs][j_kind][enssize]
+            let = pa.lets_dic[model][n_runs][j_kind][enssize]
+            num = pa.nums_dic[model][n_runs][j_kind][enssize]
+
             # Read residuals
             res = np.load(pm.py_output_filename('dists',which_res,dat+'_'+let,'npy'))
 
@@ -105,12 +100,10 @@ def read(which_methods,
                 stat_array[i_kind,j] = np.percentile(res,25)
             elif stat_method == 'q75':
                 stat_array[i_kind,j] = np.percentile(res,75)
-                
+
 
     # Name of the array
     stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy')
 
 
     return stat_array, stat_array_name
-
-

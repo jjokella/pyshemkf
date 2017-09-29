@@ -16,11 +16,14 @@ import numpy as np
 # Paths
 python_dir = os.environ['HOME']+'/PythonDir'
 
-num_methods = 8
-num_jobs = num_methods*3
-
-num_methods1000 = 8
-num_jobs1000 = num_methods1000*4
+num_methods = {
+    1000:8,
+    100:8,
+    }
+num_jobs = {
+    1000:num_methods[1000]*4,
+    100:num_methods[100]*3,
+    }
 
 # Names
 # --------------------------------------------------------------------
@@ -52,171 +55,171 @@ longnames_methods = ['EnKF',
 # method*_wavebc_*: Jobs with WAVEBC no-flow boundary condition
 
 # Classical EnKF
-normal_dats = ['2015_06_10','2015_12_17','2015_06_11',
-               '2015_06_11','2015_06_16','2015_06_16','2015_06_17']
-normal_lets = ['b','dkl','b','cx','cx','gt','b']
-normal_nums = [100,100,100,100,100,100,100]
-normal_obss = [100 for i in range(6)]
+normal_dats = {50:'2015_06_10',70:'2015_12_17',100:'2015_06_11',
+               250:'2015_06_11',500:'2015_06_16',1000:'2015_06_16',2000:'2015_06_17'}
+normal_lets = {50:'b',70:'dkl',100:'b',250:'cx',500:'cx',1000:'gt',2000:'b'}
+normal_nums = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
+normal_obss = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
 
-normal1000_dats = ['2015_11_26','2015_12_17','2015_11_26','2015_11_26']
-normal1000_lets = ['b','mhf','aln','bxz']
-normal1000_nums = [1000,1000,1000,1000]
-normal1000_obss = [100 for i in range(4)]
+normal1000_dats = {50:'2015_11_26',70:'2015_12_17',100:'2015_11_26',250:'2015_11_26'}
+normal1000_lets = {50:'b',70:'mhf',100:'aln',250:'bxz'}
+normal1000_nums = {50:1000,70:1000,100:1000,250:1000}
+normal1000_obss = {50:100,70:100,100:100,250:100}
 
 # 500, 1000, 2000
-normal_wavebc_dats = ['2016_07_22','2016_07_22','2016_07_22']
-normal_wavebc_lets = ['b','aln','bxz']
-normal_wavebc_nums = [100,100,100]
-normal_wavebc_obss = [100 for i in range(3)]
+normal_wavebc_dats = {500:'2016_07_22',1000:'2016_07_22',2000:'2016_07_22'}
+normal_wavebc_lets = {500:'b',1000:'aln',2000:'bxz'}
+normal_wavebc_nums = {500:100,1000:100,2000:100}
+normal_wavebc_obss = {500:100,1000:100,2000:100}
 
 # 50, 70, 100, 250
-normal1000_wavebc_dats = ['2016_03_24','2016_03_24','2016_03_24','2016_03_24']
-normal1000_wavebc_lets = ['b','aln','bxz','dkl']
-normal1000_wavebc_nums = [1000,1000,1000,1000]
-normal1000_wavebc_obss = [100 for i in range(4)]
+normal1000_wavebc_dats = {50:'2016_03_24',70:'2016_03_24',100:'2016_03_24',250:'2016_03_24'}
+normal1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+normal1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+normal1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Damping
-damping01_dats = ['2015_07_16','2015_12_17','2015_07_16',
-                  '2015_07_16','2015_07_17','2015_07_17','2015_07_17']
-damping01_lets = ['kp','ewx','ol','sh','kp','ol','sh']
-damping01_nums = [100,100,100,100,100,100,100]
-damping01_obss = [100 for i in range(6)]
+damping01_dats = {50:'2015_07_16',70:'2015_12_17',100:'2015_07_16',
+                  250:'2015_07_16',500:'2015_07_17',1000:'2015_07_17',2000:'2015_07_17'}
+damping01_lets = {50:'kp',70:'ewx',100:'ol',250:'sh',500:'kp',1000:'ol',2000:'sh'}
+damping01_nums = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
+damping01_obss = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
 
-damping1000_dats = ['2015_11_27','2015_12_17','2015_11_27','2015_11_27']
-damping1000_lets = ['b','ntr','aln','bxz']
-damping1000_nums = [1000,1000,1000,1000]
-damping1000_obss = [100 for i in range(4)]
+damping1000_dats = {50:'2015_11_27',70:'2015_12_17',100:'2015_11_27',250:'2015_11_27'}
+damping1000_lets = {50:'b',70:'ntr',100:'aln',250:'bxz'}
+damping1000_nums = {50:1000,70:1000,100:1000,250:1000}
+damping1000_obss = {50:100,70:100,100:100,250:100}
 
-damping_wavebc_dats = ['2016_07_22','2016_07_22','2016_07_22']
-damping_wavebc_lets = ['ewx','gjj','hvv']
-damping_wavebc_nums = [100,100,100]
-damping_wavebc_obss = [100 for i in range(3)]
+damping_wavebc_dats = {500:'2016_07_22',1000:'2016_07_22',2000:'2016_07_22'}
+damping_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+damping_wavebc_nums = {500:100,1000:100,2000:100}
+damping_wavebc_obss = {500:100,1000:100,2000:100}
 
-damping1000_wavebc_dats = ['2016_04_01','2016_04_01','2016_04_01','2016_04_01']
-damping1000_wavebc_lets = ['b','aln','bxz','dkl']
-damping1000_wavebc_nums = [1000,1000,1000,1000]
-damping1000_wavebc_obss = [100 for i in range(4)]
+damping1000_wavebc_dats = {50:'2016_04_01',70:'2016_04_01',100:'2016_04_01',250:'2016_04_01'}
+damping1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+damping1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+damping1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Normal Score
-normalscoreverynew_dats = ['2015_10_01','2015_12_17','2015_10_01',
-                           '2015_10_01','2015_10_01','2015_10_01','2015_10_01']
-normalscoreverynew_lets = ['b','gjj','cx','gt','kp','ol','sh']
-normalscoreverynew_nums = [100,100,100,100,100,100,34]
-normalscoreverynew_obss = [100 for i in range(6)]
+normalscoreverynew_dats = {50:'2015_10_01',70:'2015_12_17',100:'2015_10_01',
+                           250:'2015_10_01',500:'2015_10_01',1000:'2015_10_01',2000:'2015_10_01'}
+normalscoreverynew_lets = {50:'b',70:'gjj',100:'cx',250:'gt',500:'kp',1000:'ol',2000:'sh'}
+normalscoreverynew_nums = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:34}
+normalscoreverynew_obss = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
 
-normalscore1000_dats = ['2015_12_05','2015_12_17','2015_12_05','2015_12_05']
-normalscore1000_lets = ['b','pgd','aln','bxz']
-normalscore1000_nums = [1000,1000,1000,1000]
-normalscore1000_obss = [100 for i in range(4)]
+normalscore1000_dats = {50:'2015_12_05',70:'2015_12_17',100:'2015_12_05',250:'2015_12_05'}
+normalscore1000_lets = {50:'b',70:'pgd',100:'aln',250:'bxz'}
+normalscore1000_nums = {50:1000,70:1000,100:1000,250:1000}
+normalscore1000_obss = {50:100,70:100,100:100,250:100}
 
-normalscore_wavebc_dats = ['2016_07_22','2016_07_22','2016_07_22']
-normalscore_wavebc_lets = ['kut','mhf','ntr']
-normalscore_wavebc_nums = [100,100,100]
-normalscore_wavebc_obss = [100 for i in range(3)]
+normalscore_wavebc_dats = {500:'2016_07_22',1000:'2016_07_22',2000:'2016_07_22'}
+normalscore_wavebc_lets = {500:'kut',1000:'mhf',2000:'ntr'}
+normalscore_wavebc_nums = {500:100,1000:100,2000:100}
+normalscore_wavebc_obss = {500:100,1000:100,2000:100}
 
-normalscore1000_wavebc_dats = ['2016_06_15','2016_06_15','2016_06_15','2016_06_15']
-normalscore1000_wavebc_lets = ['b','aln','bxz','dkl']
-normalscore1000_wavebc_nums = [1000,1000,1000,1000]
-normalscore1000_wavebc_obss = [100 for i in range(4)]
+normalscore1000_wavebc_dats = {50:'2016_06_15',70:'2016_06_15',100:'2016_06_15',250:'2016_06_15'}
+normalscore1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+normalscore1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+normalscore1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Dual
-dual_dats = ['2015_07_15','2015_12_17','2015_07_15',
-             '2015_07_15','2015_07_15','2015_07_15','2015_07_15']
-dual_lets = ['b','hvv','cx','gt','kp','ol','sh']
-dual_nums = [100,100,100,100,100,100,100]
-dual_obss = [100 for i in range(6)]
+dual_dats = {50:'2015_07_15',70:'2015_12_17',100:'2015_07_15',
+             250:'2015_07_15',500:'2015_07_15',1000:'2015_07_15',2000:'2015_07_15'}
+dual_lets = {50:'b',70:'hvv',100:'cx',250:'gt',500:'kp',1000:'ol',2000:'sh'}
+dual_nums = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
+dual_obss = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
 
-dual1000_dats = ['2015_12_05','2015_12_17','2015_12_05','2015_12_05']
-dual1000_lets = ['dkl','qsp','ewx','gjj']
-dual1000_nums = [1000,1000,1000,1000]
-dual1000_obss = [100 for i in range(4)]
+dual1000_dats = {50:'2015_12_05',70:'2015_12_17',100:'2015_12_05',250:'2015_12_05'}
+dual1000_lets = {50:'dkl',70:'qsp',100:'ewx',250:'gjj'}
+dual1000_nums = {50:1000,70:1000,100:1000,250:1000}
+dual1000_obss = {50:100,70:100,100:100,250:100}
 
-dual_wavebc_dats = ['2016_07_21','2016_07_21','2016_07_21']
-dual_wavebc_lets = ['b','aln','bxz']
-dual_wavebc_nums = [100,100,100]
-dual_wavebc_obss = [100 for i in range(3)]
+dual_wavebc_dats = {500:'2016_07_21',1000:'2016_07_21',2000:'2016_07_21'}
+dual_wavebc_lets = {500:'b',1000:'aln',2000:'bxz'}
+dual_wavebc_nums = {500:100,1000:100,2000:100}
+dual_wavebc_obss = {500:100,1000:100,2000:100}
 
-dual1000_wavebc_dats = ['2016_07_06','2016_07_06','2016_07_06','2016_07_06']
-dual1000_wavebc_lets = ['b','aln','bxz','dkl']
-dual1000_wavebc_nums = [1000,1000,1000,1000]
-dual1000_wavebc_obss = [100 for i in range(4)]
+dual1000_wavebc_dats = {50:'2016_07_06',70:'2016_07_06',100:'2016_07_06',250:'2016_07_06'}
+dual1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+dual1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+dual1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Hybrid
-hybrid_dats = ['2015_10_02','2015_12_17','2015_10_02',
-               '2015_10_02','2015_10_02','2015_10_02','2015_10_02']
-hybrid_lets = ['b','jih','cx','gt','kp','ol','sh']
-hybrid_nums = [100,100,100,100,100,100,100]
-hybrid_obss = [100 for i in range(6)]
+hybrid_dats = {50:'2015_10_02',70:'2015_12_17',100:'2015_10_02',
+               250:'2015_10_02',500:'2015_10_02',1000:'2015_10_02',2000:'2015_10_02'}
+hybrid_lets = {50:'b',70:'jih',100:'cx',250:'gt',500:'kp',1000:'ol',2000:'sh'}
+hybrid_nums = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
+hybrid_obss = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
 
-hybrid1000_dats = ['2015_12_15','2015_12_17','2015_12_15','2015_12_15']
-hybrid1000_lets = ['b','sfb','aln','bxz']
-hybrid1000_nums = [1000,1000,1000,1000]
-hybrid1000_obss = [100 for i in range(4)]
+hybrid1000_dats = {50:'2015_12_15',70:'2015_12_17',100:'2015_12_15',250:'2015_12_15'}
+hybrid1000_lets = {50:'b',70:'sfb',100:'aln',250:'bxz'}
+hybrid1000_nums = {50:1000,70:1000,100:1000,250:1000}
+hybrid1000_obss = {50:100,70:100,100:100,250:100}
 
-hybrid_wavebc_dats = ['2016_07_21','2016_07_21','2016_07_21']
-hybrid_wavebc_lets = ['ewx','gjj','hvv']
-hybrid_wavebc_nums = [100,100,100]
-hybrid_wavebc_obss = [100 for i in range(3)]
+hybrid_wavebc_dats = {500:'2016_07_21',1000:'2016_07_21',2000:'2016_07_21'}
+hybrid_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hybrid_wavebc_nums = {500:100,1000:100,2000:100}
+hybrid_wavebc_obss = {500:100,1000:100,2000:100}
 
-hybrid1000_wavebc_dats = ['2016_07_06','2016_07_06','2016_07_06','2016_07_06']
-hybrid1000_wavebc_lets = ['ewx','gjj','hvv','jih']
-hybrid1000_wavebc_nums = [1000,1000,1000,1000]
-hybrid1000_wavebc_obss = [100 for i in range(4)]
+hybrid1000_wavebc_dats = {50:'2016_07_06',70:'2016_07_06',100:'2016_07_06',250:'2016_07_06'}
+hybrid1000_wavebc_lets = {50:'ewx',70:'gjj',100:'hvv',250:'jih'}
+hybrid1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+hybrid1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Localisation
-localisation_dats = ['2015_06_23','2015_12_17','2015_06_23',
-                     '2015_06_23','2015_06_24','2015_06_24','2015_06_24']
-localisation_lets = ['b','kut','cx','gt','b','cx','gt']
-localisation_nums = [100,100,100,100,100,100,100]
-localisation_obss = [100 for i in range(6)]
+localisation_dats = {50:'2015_06_23',70:'2015_12_17',100:'2015_06_23',
+                     250:'2015_06_23',500:'2015_06_24',1000:'2015_06_24',2000:'2015_06_24'}
+localisation_lets = {50:'b',70:'kut',100:'cx',250:'gt',500:'b',1000:'cx',2000:'gt'}
+localisation_nums = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
+localisation_obss = {50:100,70:100,100:100,250:100,500:100,1000:100,2000:100}
 
-localisation1000_dats = ['2015_12_18','2015_12_17','2015_12_18','2015_12_18']
-localisation1000_lets = ['b','trn','aln','bxz']
-localisation1000_nums = [1000,1000,1000,1000]
-localisation1000_obss = [100 for i in range(4)]
+localisation1000_dats = {50:'2015_12_18',70:'2015_12_17',100:'2015_12_18',250:'2015_12_18'}
+localisation1000_lets = {50:'b',70:'trn',100:'aln',250:'bxz'}
+localisation1000_nums = {50:1000,70:1000,100:1000,250:1000}
+localisation1000_obss = {50:100,70:100,100:100,250:100}
 
-localisation_wavebc_dats = ['2016_07_21','2016_07_21','2016_07_21']
-localisation_wavebc_lets = ['kut','mhf','ntr']
-localisation_wavebc_nums = [100,100,100]
-localisation_wavebc_obss = [100 for i in range(3)]
+localisation_wavebc_dats = {500:'2016_07_21',1000:'2016_07_21',2000:'2016_07_21'}
+localisation_wavebc_lets = {500:'kut',1000:'mhf',2000:'ntr'}
+localisation_wavebc_nums = {500:100,1000:100,2000:100}
+localisation_wavebc_obss = {500:100,1000:100,2000:100}
 
-localisation1000_wavebc_dats = ['2016_07_07','2016_07_07','2016_07_07','2016_07_07']
-localisation1000_wavebc_lets = ['kut','mhf','ntr','pgd']
-localisation1000_wavebc_nums = [1000,1000,1000,1000]
-localisation1000_wavebc_obss = [100 for i in range(4)]
+localisation1000_wavebc_dats = {50:'2016_07_07',70:'2016_07_07',100:'2016_07_07',250:'2016_07_07'}
+localisation1000_wavebc_lets = {50:'kut',70:'mhf',100:'ntr',250:'pgd'}
+localisation1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+localisation1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Iterative
-newiterative4_dats = ['2015_12_11','2016_02_09','2015_12_11',
-                      '2015_12_11','2015_12_11','2015_12_11','2015_12_11']
-newiterative4_lets = ['b','b','aln','bxz','dkl','ewx','gjj']
-newiterative4_nums = [99,100,88,22,16,8,4]
-newiterative4_obss = [5050 for i in range(6)]
+newiterative4_dats = {50:'2015_12_11',70:'2016_02_09',100:'2015_12_11',
+                      250:'2015_12_11',500:'2015_12_11',1000:'2015_12_11',2000:'2015_12_11'}
+newiterative4_lets = {50:'b',70:'b',100:'aln',250:'bxz',500:'dkl',1000:'ewx',2000:'gjj'}
+newiterative4_nums = {50:99,70:100,100:88,250:22,500:16,1000:8,2000:4}
+newiterative4_obss = {50:5050,70:5050,100:5050,250:5050,500:5050,1000:5050,2000:5050}
 
-iterative1000_dats = ['2016_01_07','2016_01_14','2016_01_21','2016_01_28']
-iterative1000_lets = ['b','b','b','b']
-iterative1000_nums = [1000,1000,1000,1000]
-iterative1000_obss = [5050 for i in range(4)]
+iterative1000_dats = {50:'2016_01_07',70:'2016_01_14',100:'2016_01_21',250:'2016_01_28'}
+iterative1000_lets = {50:'b',70:'b',100:'b',250:'b'}
+iterative1000_nums = {50:1000,70:1000,100:1000,250:1000}
+iterative1000_obss = {50:5050,70:5050,100:5050,250:5050}
 
-iterative_wavebc_dats = ['2016_08_12','2016_08_15','2016_08_15']
-iterative_wavebc_lets = ['b','b','cx']
-iterative_wavebc_nums = [100,100,100]
-iterative_wavebc_obss = [5050 for i in range(3)]
+iterative_wavebc_dats = {500:'2016_08_12',1000:'2016_08_15',2000:'2016_08_15'}
+iterative_wavebc_lets = {500:'b',1000:'b',2000:'cx'}
+iterative_wavebc_nums = {500:100,1000:100,2000:100}
+iterative_wavebc_obss = {500:5050,1000:5050,2000:5050}
 
-iterative1000_wavebc_dats = ['2016_07_27','2016_07_27','2016_07_28','2016_07_29']
-iterative1000_wavebc_lets = ['b','aln','b','b']
-iterative1000_wavebc_nums = [1000,1000,1000,1000]
-iterative1000_wavebc_obss = [5050 for i in range(4)]
+iterative1000_wavebc_dats = {50:'2016_07_27',70:'2016_07_27',100:'2016_07_28',250:'2016_07_29'}
+iterative1000_wavebc_lets = {50:'b',70:'aln',100:'b',250:'b'}
+iterative1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+iterative1000_wavebc_obss = {50:5050,70:100,100:100,250:100}
 
 # Pilot Point
-pilot_wavebc_dats = ['2017_09_22','2017_09_22','2017_09_22']
-pilot_wavebc_lets = ['ewx','gjj','hvv']
-pilot_wavebc_nums = [100,100,100]
-pilot_wavebc_obss = [100 for i in range(3)]
+pilot_wavebc_dats = {500:'2017_09_22',1000:'2017_09_22',2000:'2017_09_22'}
+pilot_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+pilot_wavebc_nums = {500:100,1000:100,2000:100}
+pilot_wavebc_obss = {500:100,1000:100,2000:100}
 
-pilot1000_wavebc_dats = ['2017_09_22','2017_09_22','2017_09_22','2017_09_22']
-pilot1000_wavebc_lets = ['b','aln','bxz','dkl']
-pilot1000_wavebc_nums = [1000,1000,1000,1000]
-pilot1000_wavebc_obss = [100 for i in range(4)]
+pilot1000_wavebc_dats = {50:'2017_09_22',70:'2017_09_22',100:'2017_09_22',250:'2017_09_22'}
+pilot1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+pilot1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+pilot1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 # Collecting information
 dats = np.array([normal_dats, damping01_dats, normalscoreverynew_dats, dual_dats, hybrid_dats,
@@ -295,54 +298,54 @@ nums_dic = {
         }
     }
 
-# Flat arrays
-dates = np.concatenate(dats)
-letters = np.concatenate(lets)
-sizes = np.concatenate(nums)
+# # Flat arrays
+# dates = np.concatenate(dats)
+# letters = np.concatenate(lets)
+# sizes = np.concatenate(nums)
 
-dates_wavebc = np.concatenate(dats_wavebc)
-letters_wavebc = np.concatenate(lets_wavebc)
-sizes_wavebc = np.concatenate(nums_wavebc)
+# dates_wavebc = np.concatenate(dats_wavebc)
+# letters_wavebc = np.concatenate(lets_wavebc)
+# sizes_wavebc = np.concatenate(nums_wavebc)
 
-dates1000 = np.concatenate(dats1000)
-letters1000 = np.concatenate(lets1000)
-sizes1000 = np.concatenate(nums1000)
+# dates1000 = np.concatenate(dats1000)
+# letters1000 = np.concatenate(lets1000)
+# sizes1000 = np.concatenate(nums1000)
 
-dates1000_wavebc = np.concatenate(dats1000_wavebc)
-letters1000_wavebc = np.concatenate(lets1000_wavebc)
-sizes1000_wavebc = np.concatenate(nums1000_wavebc)
+# dates1000_wavebc = np.concatenate(dats1000_wavebc)
+# letters1000_wavebc = np.concatenate(lets1000_wavebc)
+# sizes1000_wavebc = np.concatenate(nums1000_wavebc)
 
-# Flat dictionary
-dates_dic = {
-    'wavebc': {
-        1000: dates1000_wavebc,
-        100: dates_wavebc,
-        },
-    'wave': {
-        1000: dates1000,
-        100: dates,
-        }
-    }
-letters_dic = {
-    'wavebc': {
-        1000: letters1000_wavebc,
-        100: letters_wavebc,
-        },
-    'wave': {
-        1000: letters1000,
-        100: letters,
-        }
-    }
-sizes_dic = {
-    'wavebc': {
-        1000: sizes1000_wavebc,
-        100: sizes_wavebc,
-        },
-    'wave': {
-        1000: sizes1000,
-        100: sizes,
-        }
-    }
+# # Flat dictionary
+# dates_dic = {
+#     'wavebc': {
+#         1000: dates1000_wavebc,
+#         100: dates_wavebc,
+#         },
+#     'wave': {
+#         1000: dates1000,
+#         100: dates,
+#         }
+#     }
+# letters_dic = {
+#     'wavebc': {
+#         1000: letters1000_wavebc,
+#         100: letters_wavebc,
+#         },
+#     'wave': {
+#         1000: letters1000,
+#         100: letters,
+#         }
+#     }
+# sizes_dic = {
+#     'wavebc': {
+#         1000: sizes1000_wavebc,
+#         100: sizes_wavebc,
+#         },
+#     'wave': {
+#         1000: sizes1000,
+#         100: sizes,
+#         }
+#     }
 
 
 # Other methods
