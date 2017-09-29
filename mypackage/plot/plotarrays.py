@@ -119,7 +119,7 @@ normalscore1000_wavebc_lets = ['b','aln','bxz','dkl']
 normalscore1000_wavebc_nums = [1000,1000,1000,1000]
 normalscore1000_wavebc_obss = [100 for i in range(4)]
 
-# Dual 
+# Dual
 dual_dats = ['2015_07_15','2015_12_17','2015_07_15',
              '2015_07_15','2015_07_15','2015_07_15','2015_07_15']
 dual_lets = ['b','hvv','cx','gt','kp','ol','sh']
@@ -219,11 +219,11 @@ pilot1000_wavebc_nums = [1000,1000,1000,1000]
 pilot1000_wavebc_obss = [100 for i in range(4)]
 
 # Collecting information
-dats = np.array([normal_dats, damping01_dats, normalscoreverynew_dats, dual_dats, hybrid_dats, 
+dats = np.array([normal_dats, damping01_dats, normalscoreverynew_dats, dual_dats, hybrid_dats,
                      localisation_dats,newiterative4_dats])
-lets = np.array([normal_lets, damping01_lets, normalscoreverynew_lets, dual_lets, hybrid_lets, 
+lets = np.array([normal_lets, damping01_lets, normalscoreverynew_lets, dual_lets, hybrid_lets,
                      localisation_lets,newiterative4_lets])
-nums = np.array([normal_nums, damping01_nums, normalscoreverynew_nums, dual_nums, hybrid_nums, 
+nums = np.array([normal_nums, damping01_nums, normalscoreverynew_nums, dual_nums, hybrid_nums,
                      localisation_nums,newiterative4_nums])
 num_obss = np.array([normal_obss,damping01_obss,normalscoreverynew_obss, dual_obss, hybrid_obss,
                          localisation_obss,newiterative4_obss])
@@ -263,14 +263,46 @@ nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,
                        hybrid1000_wavebc_nums,localisation1000_wavebc_nums, iterative1000_wavebc_nums,
                        pilot1000_wavebc_nums]
 
-# Flat arrays
-dates = np.concatenate(dats)    
-letters = np.concatenate(lets)  
-sizes = np.concatenate(nums)    
+# Dictionary
+dats_dic = {
+    'wavebc': {
+        1000: dats1000_wavebc,
+        100: dats_wavebc,
+        },
+    'wave': {
+        1000: dats1000,
+        100: dats,
+        }
+    }
+lets_dic = {
+    'wavebc': {
+        1000: lets1000_wavebc,
+        100: lets_wavebc,
+        },
+    'wave': {
+        1000: lets1000,
+        100: lets,
+        }
+    }
+nums_dic = {
+    'wavebc': {
+        1000: nums1000_wavebc,
+        100: nums_wavebc,
+        },
+    'wave': {
+        1000: nums1000,
+        100: nums,
+        }
+    }
 
-dates_wavebc = np.concatenate(dats_wavebc)    
-letters_wavebc = np.concatenate(lets_wavebc)  
-sizes_wavebc = np.concatenate(nums_wavebc)    
+# Flat arrays
+dates = np.concatenate(dats)
+letters = np.concatenate(lets)
+sizes = np.concatenate(nums)
+
+dates_wavebc = np.concatenate(dats_wavebc)
+letters_wavebc = np.concatenate(lets_wavebc)
+sizes_wavebc = np.concatenate(nums_wavebc)
 
 dates1000 = np.concatenate(dats1000)
 letters1000 = np.concatenate(lets1000)
@@ -280,6 +312,37 @@ dates1000_wavebc = np.concatenate(dats1000_wavebc)
 letters1000_wavebc = np.concatenate(lets1000_wavebc)
 sizes1000_wavebc = np.concatenate(nums1000_wavebc)
 
+# Flat dictionary
+dates_dic = {
+    'wavebc': {
+        1000: dates1000_wavebc,
+        100: dates_wavebc,
+        },
+    'wave': {
+        1000: dates1000,
+        100: dates,
+        }
+    }
+letters_dic = {
+    'wavebc': {
+        1000: letters1000_wavebc,
+        100: letters_wavebc,
+        },
+    'wave': {
+        1000: letters1000,
+        100: letters,
+        }
+    }
+sizes_dic = {
+    'wavebc': {
+        1000: sizes1000_wavebc,
+        100: sizes_wavebc,
+        },
+    'wave': {
+        1000: sizes1000,
+        100: sizes,
+        }
+    }
 
 
 # Other methods
@@ -310,7 +373,7 @@ newiterative3_lets = ['b','aln','bxz','dkl','ewx','gjj']
 obs_10_normal_lets = ['b','cx','gt','kp','ol','sh']
 obs_200_normal_lets = ['b','cx','gt','kp','ol','sh']
 lowobsvar_lets = ['b','cx','gt','kp','ol','sh']
-normalscore_nums = [100,100,100,70,48,28]  
+normalscore_nums = [100,100,100,70,48,28]
 damping_nums = [100,100,100,100,100,100]
 damping03_nums = [100,100,100,100,100,100]
 normalscorenew_nums = [100,100,100,40,97,34]
@@ -323,4 +386,3 @@ newiterative3_nums = [99,100,100,100,100,64]
 obs_10_normal_nums = [100,100,100,100,100,100]
 obs_200_normal_nums = [100,100,100,100,100,100]
 lowobsvar_nums = [100,100,100,100,100,100]
-

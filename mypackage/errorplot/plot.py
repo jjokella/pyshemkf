@@ -23,8 +23,8 @@ def plot(ax,
          which_methods = [0,1,2,3,4,5,6],
          which_res = 'endres',
          stat_method = 'mean',
-         is_1000 = True,                         # 1000er or 100er job
-         is_wavebc = True,
+         n_runs = 1000,
+         model = 'wavebc',
          is_std = 0,                         # Show std?
          std_method = 'std',
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
@@ -65,15 +65,13 @@ def plot(ax,
         'q25' - 25 Percentile
         'q75' - 75 Percentile
 
-    is_1000 : boolean
-        True - Jobs/Ensemble Sizes for which 1000 runs exist
-               typically, 50, 70, 100, 250
-        False - Jobs/Ensemble Sizezs for which 100 runs exist
-               typically, 500, 1000, 2000
+    n_runs : integer
+        1000 - typically exist for ensemble sizes 50, 70, 100, 250
+        100 - typically exist for ensemble sizes 500, 1000, 2000
 
-    is_wavebc : boolean
-        True - Model wavebc
-        False - Model wave
+    model : string
+        'wavebc' - Model wavebc
+        'wave' - Model wave
 
     is_std : boolean
         True - Show errorbars of standard deviation
@@ -108,8 +106,8 @@ def plot(ax,
     """
 
     # Ensemble sizes (could be read in from array maybe)
-    which_enssize =  ([50,70,100,250] if is_1000 else
-                          ([500,1000,2000] if is_wavebc else [50,70,100,250,500,1000,2000]))
+    which_enssize =  ([50,70,100,250] if n_runs==1000 else
+                          ([500,1000,2000] if model=='wavebc' else [50,70,100,250,500,1000,2000]))
 
     num_methods = np.array(which_methods).size
 
@@ -119,13 +117,11 @@ def plot(ax,
     legend_input = legend_input[which_methods]
 
     # Load array
-    str_1000 = '1000' if is_1000 else ''
-    str_wavebc = 'wavebc' if is_wavebc else ''
-    var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+    var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     # Standard deviation
     if is_std:
-        std = np.load(pm.py_output_filename('errorplot',which_res,std_method+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+        std = np.load(pm.py_output_filename('errorplot',which_res,std_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
 
     ax.set_prop_cycle("color",['k'])
@@ -214,7 +210,7 @@ def plot(ax,
     ax.set_ylim(ylims)
 
     # Name to save
-    pic_name = pm.py_output_filename(ea.tag,which_res,stat_method+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
+    pic_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
 
     return ax, pic_name

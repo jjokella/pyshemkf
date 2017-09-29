@@ -2,19 +2,16 @@
 
 import os
 import numpy as np
-from mypackage.plot import specs as sc
 
-from mypackage.plot import plotfunctions as pf
 from mypackage.plot import plotarrays as pa
-from mypackage.run import runmodule as rm
 from mypackage.run import pythonmodule as pm
 from mypackage.errorplot import arrays as ea
 
 import exceptions
 
 def read(which_methods,
-         is_1000 = True,
-         is_wavebc = True,
+         n_runs = 1000,
+         model = 'wavebc',
          which_res = 'endres',
          stat_method = 'mean',
 ):
@@ -29,15 +26,13 @@ def read(which_methods,
         Array of integers containing the method specifiers
         from module plotarrays.
 
-    is_1000 : boolean
-        True - Jobs/Ensemble Sizes for which 1000 runs exist
-               typically, 50, 70, 100, 250
-        False - Jobs/Ensemble Sizezs for which 100 runs exist
-               typically, 500, 1000, 2000
+    n_runs : integer
+        1000 - typically exist for ensemble sizes 50, 70, 100, 250
+        100 - typically exist for ensemble sizes 500, 1000, 2000
 
-    is_wavebc : boolean
-        True - Model wavebc
-        False - Model wave
+    model : string
+        'wavebc' - Model wavebc
+        'wave' - Model wave
 
     which_res : string
         'endres' - use residuals after EnKF run
@@ -64,21 +59,22 @@ def read(which_methods,
     if not which_res in ['endres','begres']:
         raise exceptions.RuntimeError("which_res has to be 'endres' or 'begres'")
     if not stat_method in ['mean','std','stdm','median','q25','q75']:
-        raise exceptsion.RuntimeError("stat_method wrong")
-
+        raise exceptions.RuntimeError('stat_method wrong')
+    if not n_runs in [100,1000]:
+        raise exceptions.RuntimeError('n_runs wrong')
+    if not model in ['wavebc','wave']:
+        raise exceptions.RuntimeError('model wrong')
+    
     # Nunber of methods
     num_methods = len(which_methods)
     
     # Number of ensemble sizes
-    num_ensemble_sizes = ((4 if is_1000 else 3) if is_wavebc else (4 if is_1000 else 7))
+    num_ensemble_sizes = ((4 if n_runs==1000 else 3) if model=='wavebc' else (4 if n_runs==1000 else 7))
 
     # Initialize plotarrays arrays
-    dats = ((pa.dats1000_wavebc if is_1000 else pa.dats_wavebc)
-                if is_wavebc else (pa.dats1000 if is_1000 else pa.dats))
-    lets = ((pa.lets1000_wavebc if is_1000 else pa.lets_wavebc)
-                if is_wavebc else (pa.lets1000 if is_1000 else pa.lets))
-    nums = ((pa.nums1000_wavebc if is_1000 else pa.nums_wavebc)
-                if is_wavebc else (pa.nums1000 if is_1000 else pa.nums))
+    dats = pa.dats_dic[model][n_runs]
+    lets = pa.lets_dic[model][n_runs]
+    nums = pa.nums_dic[model][n_runs]
 
     # Initialize stat_array
     stat_array = np.zeros([num_methods,num_ensemble_sizes])
@@ -112,9 +108,7 @@ def read(which_methods,
                 
 
     # Name of the array
-    str_1000 = '1000' if is_1000 else ''
-    str_wavebc = 'wavebc' if is_wavebc else ''
-    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+str_1000+'_'+str_wavebc+'_'+'_'.join([str(i) for i in which_methods]),'npy')
+    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy')
 
 
     return stat_array, stat_array_name
