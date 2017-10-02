@@ -119,7 +119,7 @@ def plot(ax,
     # Load array
     var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
-    # Standard deviation
+    # Load standard deviation
     if is_std:
         std = np.load(pm.py_output_filename('errorplot',which_res,std_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
@@ -209,7 +209,7 @@ def plot(ax,
     ax.get_xaxis().set_visible('off')
     ax.set_ylim(ylims)
 
-    # Name to save
+    # Saving location
     pic_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
 
