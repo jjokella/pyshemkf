@@ -21,11 +21,7 @@ def read(which_methods,
          pval = 0.05,
 ):
 
-    # Names of methods used in the comparison
-    names_methods = [pa.names_methods[which_methods[i]]
-                         for i in range(len(which_methods))]
-
-    # Check statistical methods
+    # Checks
     if not n_runs in [100,1000]:
         raise exceptions.RuntimeError('n_runs wrong')
     if not model in ['wavebc','wave']:
@@ -33,7 +29,6 @@ def read(which_methods,
     if not method in ['ttest','gauss']:
         raise exceptions.RuntimeError('method wrong')
 
-    #  Check enssize, n_syn
     if n_runs==1000:
         if not enssize in [50,70,100,250]:
             raise exceptions.RuntimeError('enssize wrong')
