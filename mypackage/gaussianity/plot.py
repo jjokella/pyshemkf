@@ -92,7 +92,7 @@ def hist(ax,
     arr = np.load(pm.py_output_filename(ga.tag,'meanarray_'+which_res,model+'_'+str(n_runs)+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+str(which_method),'npy'))
 
     # Histogram
-    ax.hist(arr,n_bins)
+    ax.hist(arr,n_bins,color = 'grey')
 
     # Saving location
     pic_name = pm.py_output_filename(ga.tag,'meanarray_'+which_res,model+'_'+str(n_runs)+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+str(which_method),pic_format)
