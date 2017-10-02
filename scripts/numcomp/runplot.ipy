@@ -9,13 +9,24 @@ import mypackage.numcomp.read as nr
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 1
+is_read = 0
+is_backup = 1
+
+which_methods = [0,1,2,3,4,5,6,7]
+model = 'wavebc'
 
 # Read
 if is_read:
     probs_array, probs_array_name = nr.read(
-        which_methods = [0,1,2,3,4,5,6],
+        which_methods = which_methods,
+        model = model,
         )
 
     np.save(probs_array_name,probs_array)
     print('Saved as ' + probs_array_name)
+
+
+
+# Backup
+if is_backup:
+    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_02')
