@@ -1,0 +1,21 @@
+import shutil
+import numpy as np
+import matplotlib.pyplot as plt
+
+import mypackage.numcomp.arrays as na
+# import mypackage.numcomp.plot as npl
+import mypackage.numcomp.read as nr
+# import mypackage.numcomp.sort as ns
+import mypackage.run.pythonmodule as pm
+
+# Switches
+is_read = 1
+
+# Read
+if is_read:
+    probs_array, probs_array_name = nr.read(
+        which_methods = [0,1,2,3,4,5,6],
+        )
+
+    np.save(probs_array_name,probs_array)
+    print('Saved as ' + probs_array_name)
