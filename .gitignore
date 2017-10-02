@@ -24,5 +24,10 @@ output/analysis/png
 output/analysis/jpg
 output/analysis/pdf
 output/analysis/eps
+output/gaussianity/npy
+output/gaussianity/png
+output/gaussianity/jpg
+output/gaussianity/pdf
+output/gaussianity/eps
 lib/
 notebook/
