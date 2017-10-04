@@ -37,21 +37,21 @@ which_methods_right = [4,6,0,3,2,5,3,5]       #Space in which_methods
 show_methods = [which_methods_left,
                 which_methods_right]
 # Number of bars 
-num_comparisons = len(show_methods[0])
+num_bars = len(show_methods[0])
 # Number of patches (3 per bar)
-num_patches = 3*num_comparisons
+num_patches = 3*num_bars
 
 # Ticks (names)
 names = pa.longnames_methods
-ytick1 = [names[show_methods[0][i]] for i in range(num_comparisons)]
-ytick2 = [names[show_methods[1][i]] for i in range(num_comparisons)]
+ytick1 = [names[show_methods[0][i]] for i in range(num_bars)]
+ytick2 = [names[show_methods[1][i]] for i in range(num_bars)]
 
 # Colors of the bar
-basic_colors = ['black','white','grey']
-# basic_colors = [cm.viridis(0),'white',cm.viridis(255)]
+bar_colors = ['black','white','grey']
+# bar_colors = [cm.viridis(0),'white',cm.viridis(255)]
 
 for n_syn in ns_syn_studies:
-    for ensemble_size in which_enssize:
+    for enssize in which_enssize:
 
         # Figure title
         if n_syn==1:
@@ -64,52 +64,52 @@ for n_syn in ns_syn_studies:
             if is_1000:
                 probs = np.load('output/numcomp/npy/single/probs1000_'
                                 +str(n_syn).zfill(4)+'_'
-                                +str(ensemble_size).zfill(4)+'.npy')
+                                +str(enssize).zfill(4)+'.npy')
             else:
                 probs = np.load('output/numcomp/npy/single/probs_'
                                 +str(n_syn).zfill(4)+'_'
-                                +str(ensemble_size).zfill(4)+'.npy')
+                                +str(enssize).zfill(4)+'.npy')
         elif method=="ttest":
             if is_1000:
                 probs = np.load('output/numcomp/npy/ttest/probs1000_'
                                 +str(n_syn).zfill(4)+'_'
-                                +str(ensemble_size).zfill(4)+'.npy')
+                                +str(enssize).zfill(4)+'.npy')
             else:
                 probs = np.load('output/numcomp/npy/ttest/probs_'
                                 +str(n_syn).zfill(4)+'_'
-                                +str(ensemble_size).zfill(4)+'.npy')
+                                +str(enssize).zfill(4)+'.npy')
         elif method=="gauss":
             if is_1000:
                 probs = np.load('output/numcomp/npy/gaussian/probs1000_'
                                 +str(n_syn).zfill(4)+'_'
-                                +str(ensemble_size).zfill(4)+'.npy')
+                                +str(enssize).zfill(4)+'.npy')
             else:
                 probs = np.load('output/numcomp/npy/gaussian/probs_'
                                 +str(n_syn).zfill(4)+'_'
-                                +str(ensemble_size).zfill(4)+'.npy')
+                                +str(enssize).zfill(4)+'.npy')
 
         # Load probabilities for bold labels
         if method=="ttest":
             if is_1000:
                     probs_bold =np.load('output/numcomp/npy/ttest/probs1000_'
                                         +str(n_syn_bold).zfill(4)+'_'
-                                        +str(ensemble_size).zfill(4)+'.npy')
+                                        +str(enssize).zfill(4)+'.npy')
             else:
                     probs_bold =np.load('output/numcomp/npy/ttest/probs_'
                                         +str(n_syn_bold).zfill(4)+'_'
-                                        +str(ensemble_size).zfill(4)+'.npy')
+                                        +str(enssize).zfill(4)+'.npy')
         elif method=="gauss":
             if is_1000:
                 probs_bold =np.load('output/numcomp/npy/gaussian/probs1000_'
                                     +str(n_syn_bold).zfill(4)+'_'
-                                    +str(ensemble_size).zfill(4)+'.npy')
+                                    +str(enssize).zfill(4)+'.npy')
             else:
                 probs_bold =np.load('output/numcomp/npy/gaussian/probs_'
                                     +str(n_syn_bold).zfill(4)+'_'
-                                    +str(ensemble_size).zfill(4)+'.npy')
+                                    +str(enssize).zfill(4)+'.npy')
             
         # Figure and first axis
-        plt.figure(figsize = [12,num_comparisons/1.0])
+        plt.figure(figsize = [12,num_bars/1.0])
         plt.title(fig_title,fontsize=30, y = 1.08)
         ax1 = plt.gca()
         ax1.set_position([0.3,0.05,0.4,0.75])
@@ -122,13 +122,13 @@ for n_syn in ns_syn_studies:
         in_left = np.zeros(num_patches)
         in_color = ['' for i in range(num_patches)]
         for i in range(num_patches):
-            in_bottom[i] = num_comparisons-i/3
+            in_bottom[i] = num_bars-i/3
             in_height[i] = 0.8
             in_width[i] = probs[show_methods[0][i/3],
                                 show_methods[1][i/3]][np.mod(i,3)]
             in_left[i] = np.sum(probs[show_methods[0][i/3],
                                       show_methods[1][i/3]][0:np.mod(i,3)])
-            in_color[i] = basic_colors[np.mod(i,3)]
+            in_color[i] = bar_colors[np.mod(i,3)]
 
         # Plot bars
         plt.barh(bottom = in_bottom,
@@ -140,7 +140,7 @@ for n_syn in ns_syn_studies:
 
         # H_0 labels inside bar
         if method == "ttest":
-            for i in range(1,num_comparisons+1):
+            for i in range(1,num_bars+1):
                 if in_left[3*i-1]-in_left[3*i-2] > 0.15:
                     plt.text(in_left[3*i-2]   +0.4*(in_left[3*i-1]-in_left[3*i-2]),
                              in_bottom[3*i-2] +0.3,
@@ -154,9 +154,9 @@ for n_syn in ns_syn_studies:
                        labelright = 'off',
                        pad = 8)
         ax1.set_xlim([-0.01,1.01])
-        ax1.set_ylim([0.9,num_comparisons+0.8])
+        ax1.set_ylim([0.9,num_bars+0.8])
         ax1.set_xticks([])
-        ax1.set_yticks([num_comparisons-i +0.4 for i in range(num_comparisons)])
+        ax1.set_yticks([num_bars-i +0.4 for i in range(num_bars)])
         ax1.set_yticklabels(ytick1)
 
         # Twin Axis 2
@@ -170,14 +170,14 @@ for n_syn in ns_syn_studies:
                        labelcolor = 'black',
                        pad = 8)
         ax2.set_xlim([-0.01,1.01])
-        ax2.set_ylim([0.9,num_comparisons+0.8])
+        ax2.set_ylim([0.9,num_bars+0.8])
         ax2.set_xticks([])
-        ax2.set_yticks([num_comparisons-i +0.4 for i in range(num_comparisons)])
+        ax2.set_yticks([num_bars-i +0.4 for i in range(num_bars)])
         ax2.set_yticklabels(ytick2)
 
 
         # Boldness of axislabels
-        for i in range(num_comparisons):
+        for i in range(num_bars):
             if(probs_bold[show_methods[0][i],show_methods[1][i]][0] == 1):
                 ax1.yaxis.get_majorticklabels()[i].set_weight('bold')
             elif(probs_bold[show_methods[0][i],show_methods[1][i]][2] == 1):
@@ -190,17 +190,17 @@ for n_syn in ns_syn_studies:
         if is_save:
             pic_name_plot=['numcomp_'+str(n_syn).zfill(4)\
               +'_'+str(n_syn_bold).zfill(4)\
-              +'_'+str(ensemble_size).zfill(4)+ '.'+ pic_name_end[0],
+              +'_'+str(enssize).zfill(4)+ '.'+ pic_name_end[0],
               'numcomp_'+str(n_syn).zfill(4)\
               +'_'+str(n_syn_bold).zfill(4)\
-              +'_'+str(ensemble_size).zfill(4)+ '.'+ pic_name_end[1]]
+              +'_'+str(enssize).zfill(4)+ '.'+ pic_name_end[1]]
             if method=="ttest":
                 pic_name_plot=['numcomp_'+str(n_syn).zfill(4)\
                   +'_'+str(n_syn_bold).zfill(4)\
-                  +'_'+str(ensemble_size).zfill(4)+'_ttest'+ '.'+ pic_name_end[0],
+                  +'_'+str(enssize).zfill(4)+'_ttest'+ '.'+ pic_name_end[0],
                   'numcomp_'+str(n_syn).zfill(4)\
                   +'_'+str(n_syn_bold).zfill(4)\
-                  +'_'+str(ensemble_size).zfill(4)+'_ttest'+ '.'+ pic_name_end[1]]
+                  +'_'+str(enssize).zfill(4)+'_ttest'+ '.'+ pic_name_end[1]]
 
             for i in range(len(pic_name_plot)):
                 plt.savefig(pic_dir[i] + pic_name_plot[i])

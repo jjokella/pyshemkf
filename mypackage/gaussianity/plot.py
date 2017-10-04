@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Plot routine for forward pics
+# Plot routine for gaussianity pics
 
 import matplotlib as mpl
 from matplotlib import cm            # Colormap commands (cm.get_cmap())
