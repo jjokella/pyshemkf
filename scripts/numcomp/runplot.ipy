@@ -12,7 +12,7 @@ import mypackage.run.pythonmodule as pm
 is_read = 0
 is_backup = 1
 
-which_methods = [0,1,2,3,4,5,6,7]
+which_methods = [0,1,2,3,4,5,6]
 model = 'wavebc'
 
 # Read
@@ -29,4 +29,4 @@ if is_read:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_02')
+    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_04')

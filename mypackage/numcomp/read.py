@@ -40,14 +40,15 @@ def read(which_methods,
         if n_syn>100:
             raise exceptions.RuntimeError('n_syn wrong')
 
-    # Load final residuals for all methods and the ensemblesize
-    dats = pa.dats_dic[model][n_runs]
-    lets = pa.lets_dic[model][n_runs]
-    nums = pa.nums_dic[model][n_runs]
-
+    # Load final residuals
     res = np.zeros([len(which_methods),n_runs])
     for i,i_method in enumerate(which_methods):
-        res[i,0:nums[i_method][enssize]] = np.load(pm.py_output_filename('dists',which_res,dats[i_method][enssize]+'_'+lets[i_method][enssize],'npy'))
+        res_name = pm.py_output_filename(
+            'dists',
+            which_res,
+            pa.dats[model][n_runs][i_method][enssize]+'_'+pa.lets[model][n_runs][i_method][enssize],
+            'npy')
+        res[i,0:pa.nums[model][n_runs][i_method][enssize]] = np.load(res_name)
 
     # Initialize probs array
     probs = np.zeros([len(which_methods),len(which_methods),3])
@@ -65,10 +66,10 @@ def read(which_methods,
                 continue
 
             # Residual arrays for each method
-            resi = res[ii,0:nums[ri][enssize]]
-            resj = res[ij,0:nums[rj][enssize]]
+            resi = res[ii,0:pa.nums[model][n_runs][ri][enssize]]
+            resj = res[ij,0:pa.nums[model][n_runs][rj][enssize]]
 
-            if [n_syn,n_syn] >= [nums[ri][enssize],nums[rj][enssize]]:
+            if [n_syn,n_syn] >= [pa.nums[model][n_runs][ri][enssize],pa.nums[model][n_runs][rj][enssize]]:
                 if not n_comparisons == 1:
                     raise exceptions.RuntimeError('Set n_comparisons to 1 if n_syn equal to full number of available studies')
 
@@ -80,11 +81,11 @@ def read(which_methods,
             # Iterate number of comparisons
             for i in range(n_comparisons):
 
-                # Random order
-                intsi = np.random.permutation(np.arange(nums[ri][enssize]))[0:n_syn]
-                intsj = np.random.permutation(np.arange(nums[rj][enssize]))[0:n_syn]
-                resmixi = resi[intsi]
-                resmixj = resj[intsj]
+                # Subset of random order
+                isi = np.random.permutation(np.arange(pa.nums[model][n_runs][ri][enssize]))[0:n_syn]
+                isj = np.random.permutation(np.arange(pa.nums[model][n_runs][rj][enssize]))[0:n_syn]
+                resmixi = resi[isi]
+                resmixj = resj[isj]
 
                 # Single run
                 if n_syn == 1:
