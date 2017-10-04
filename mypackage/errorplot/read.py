@@ -80,9 +80,9 @@ def read(which_methods,
         for j, enssize in enumerate(ensemble_sizes):
 
             # Get date and time
-            dat = pa.dats_dic[model][n_runs][j_kind][enssize]
-            let = pa.lets_dic[model][n_runs][j_kind][enssize]
-            num = pa.nums_dic[model][n_runs][j_kind][enssize]
+            dat = pa.dats[model][n_runs][j_kind][enssize]
+            let = pa.lets[model][n_runs][j_kind][enssize]
+            num = pa.nums[model][n_runs][j_kind][enssize]
 
             # Read residuals
             res = np.load(pm.py_output_filename('dists',which_res,dat+'_'+let,'npy'))

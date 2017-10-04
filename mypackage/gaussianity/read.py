@@ -75,9 +75,9 @@ def read(which_method,
 
 
     # Load final residuals for all methods and the ensemblesize
-    dats = pa.dats_dic[model][n_runs]
-    lets = pa.lets_dic[model][n_runs]
-    nums = pa.nums_dic[model][n_runs]
+    dats = pa.dats[model][n_runs]
+    lets = pa.lets[model][n_runs]
+    nums = pa.nums[model][n_runs]
 
     res = np.load(pm.py_output_filename('dists',which_res,dats[which_method][enssize]+'_'+lets[which_method][enssize],'npy'))
 
