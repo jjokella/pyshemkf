@@ -221,132 +221,184 @@ pilot1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 pilot1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 pilot1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
-# Collecting information
-dats = np.array([normal_dats, damping01_dats, normalscoreverynew_dats, dual_dats, hybrid_dats,
-                     localisation_dats,newiterative4_dats])
-lets = np.array([normal_lets, damping01_lets, normalscoreverynew_lets, dual_lets, hybrid_lets,
-                     localisation_lets,newiterative4_lets])
-nums = np.array([normal_nums, damping01_nums, normalscoreverynew_nums, dual_nums, hybrid_nums,
-                     localisation_nums,newiterative4_nums])
-num_obss = np.array([normal_obss,damping01_obss,normalscoreverynew_obss, dual_obss, hybrid_obss,
-                         localisation_obss,newiterative4_obss])
-
-dats1000 = [normal1000_dats,damping1000_dats,normalscore1000_dats,dual1000_dats,hybrid1000_dats,
-            localisation1000_dats, iterative1000_dats]
-lets1000 = [normal1000_lets,damping1000_lets,normalscore1000_lets,dual1000_lets,hybrid1000_lets,
-            localisation1000_lets, iterative1000_lets]
-nums1000 = [normal1000_nums,damping1000_nums,normalscore1000_nums,dual1000_nums,hybrid1000_nums,
-            localisation1000_nums, iterative1000_nums]
-num_obss1000 = [normal1000_obss,damping1000_obss,normalscore1000_obss,dual1000_obss,hybrid1000_obss,
-                    localisation1000_obss,iterative1000_obss]
-
-dats_wavebc = [normal_wavebc_dats,damping_wavebc_dats,
-                   normalscore_wavebc_dats,dual_wavebc_dats,
-                   hybrid_wavebc_dats,localisation_wavebc_dats, iterative_wavebc_dats,
-                   pilot_wavebc_dats]
-lets_wavebc = [normal_wavebc_lets,damping_wavebc_lets,
-                   normalscore_wavebc_lets,dual_wavebc_lets,
-                   hybrid_wavebc_lets,localisation_wavebc_lets, iterative_wavebc_lets,
-                   pilot_wavebc_lets]
-nums_wavebc = [normal_wavebc_nums,damping_wavebc_nums,
-                   normalscore_wavebc_nums,dual_wavebc_nums,
-                   hybrid_wavebc_nums,localisation_wavebc_nums, iterative_wavebc_nums,
-                   pilot_wavebc_nums]
-
-dats1000_wavebc = [normal1000_wavebc_dats,damping1000_wavebc_dats,
-                       normalscore1000_wavebc_dats,dual1000_wavebc_dats,
-                       hybrid1000_wavebc_dats,localisation1000_wavebc_dats, iterative1000_wavebc_dats,
-                       pilot1000_wavebc_dats]
-lets1000_wavebc = [normal1000_wavebc_lets,damping1000_wavebc_lets,
-                       normalscore1000_wavebc_lets,dual1000_wavebc_lets,
-                       hybrid1000_wavebc_lets,localisation1000_wavebc_lets, iterative1000_wavebc_lets,
-                       pilot1000_wavebc_lets]
-nums1000_wavebc = [normal1000_wavebc_nums,damping1000_wavebc_nums,
-                       normalscore1000_wavebc_nums,dual1000_wavebc_nums,
-                       hybrid1000_wavebc_nums,localisation1000_wavebc_nums, iterative1000_wavebc_nums,
-                       pilot1000_wavebc_nums]
-
-# Dictionary
-dats_dic = {
+# Dictionaries
+dats = {
     'wavebc': {
-        1000: dats1000_wavebc,
-        100: dats_wavebc,
+        1000: [
+            normal1000_wavebc_dats,
+            damping1000_wavebc_dats,
+            normalscore1000_wavebc_dats,
+            dual1000_wavebc_dats,
+            hybrid1000_wavebc_dats,
+            localisation1000_wavebc_dats,
+            iterative1000_wavebc_dats,
+            pilot1000_wavebc_dats
+            ],
+        100: [
+            normal_wavebc_dats,
+            damping_wavebc_dats,
+            normalscore_wavebc_dats,
+            dual_wavebc_dats,
+            hybrid_wavebc_dats,
+            localisation_wavebc_dats,
+            iterative_wavebc_dats,
+            pilot_wavebc_dats
+            ],
         },
     'wave': {
-        1000: dats1000,
-        100: dats,
+        1000: [
+            normal1000_dats,
+            damping1000_dats,
+            normalscore1000_dats,
+            dual1000_dats,
+            hybrid1000_dats,
+            localisation1000_dats,
+            iterative1000_dats
+            ],
+        100: [
+            normal_dats,
+            damping01_dats,
+            normalscoreverynew_dats,
+            dual_dats,
+            hybrid_dats,
+            localisation_dats,
+            newiterative4_dats
+            ],
         }
     }
-lets_dic = {
+lets = {
     'wavebc': {
-        1000: lets1000_wavebc,
-        100: lets_wavebc,
+        1000: [
+            normal1000_wavebc_lets,
+            damping1000_wavebc_lets,
+            normalscore1000_wavebc_lets,
+            dual1000_wavebc_lets,
+            hybrid1000_wavebc_lets,
+            localisation1000_wavebc_lets,
+            iterative1000_wavebc_lets,
+            pilot1000_wavebc_lets
+            ],
+        100: [
+            normal_wavebc_lets,
+            damping_wavebc_lets,
+            normalscore_wavebc_lets,
+            dual_wavebc_lets,
+            hybrid_wavebc_lets,
+            localisation_wavebc_lets,
+            iterative_wavebc_lets,
+            pilot_wavebc_lets
+            ],
         },
     'wave': {
-        1000: lets1000,
-        100: lets,
+        1000: [
+            normal1000_lets,
+            damping1000_lets,
+            normalscore1000_lets,
+            dual1000_lets,
+            hybrid1000_lets,
+            localisation1000_lets,
+            iterative1000_lets
+            ],
+        100: [
+            normal_lets,
+            damping01_lets,
+            normalscoreverynew_lets,
+            dual_lets,
+            hybrid_lets,
+            localisation_lets,
+            newiterative4_lets
+            ],
         }
     }
-nums_dic = {
+nums = {
     'wavebc': {
-        1000: nums1000_wavebc,
-        100: nums_wavebc,
+        1000: [
+            normal1000_wavebc_nums,
+            damping1000_wavebc_nums,
+            normalscore1000_wavebc_nums,
+            dual1000_wavebc_nums,
+            hybrid1000_wavebc_nums,
+            localisation1000_wavebc_nums,
+            iterative1000_wavebc_nums,
+            pilot1000_wavebc_nums
+            ],
+        100: [
+            normal_wavebc_nums,
+            damping_wavebc_nums,
+            normalscore_wavebc_nums,
+            dual_wavebc_nums,
+            hybrid_wavebc_nums,
+            localisation_wavebc_nums,
+            iterative_wavebc_nums,
+            pilot_wavebc_nums
+            ],
         },
     'wave': {
-        1000: nums1000,
-        100: nums,
+        1000: [
+            normal1000_nums,
+            damping1000_nums,
+            normalscore1000_nums,
+            dual1000_nums,
+            hybrid1000_nums,
+            localisation1000_nums,
+            iterative1000_nums
+            ],
+        100: [
+            normal_nums,
+            damping01_nums,
+            normalscoreverynew_nums,
+            dual_nums,
+            hybrid_nums,
+            localisation_nums,
+            newiterative4_nums
+            ],
         }
     }
 
-# # Flat arrays
-# dates = np.concatenate(dats)
-# letters = np.concatenate(lets)
-# sizes = np.concatenate(nums)
-
-# dates_wavebc = np.concatenate(dats_wavebc)
-# letters_wavebc = np.concatenate(lets_wavebc)
-# sizes_wavebc = np.concatenate(nums_wavebc)
-
-# dates1000 = np.concatenate(dats1000)
-# letters1000 = np.concatenate(lets1000)
-# sizes1000 = np.concatenate(nums1000)
-
-# dates1000_wavebc = np.concatenate(dats1000_wavebc)
-# letters1000_wavebc = np.concatenate(lets1000_wavebc)
-# sizes1000_wavebc = np.concatenate(nums1000_wavebc)
-
-# # Flat dictionary
-# dates_dic = {
-#     'wavebc': {
-#         1000: dates1000_wavebc,
-#         100: dates_wavebc,
-#         },
-#     'wave': {
-#         1000: dates1000,
-#         100: dates,
-#         }
-#     }
-# letters_dic = {
-#     'wavebc': {
-#         1000: letters1000_wavebc,
-#         100: letters_wavebc,
-#         },
-#     'wave': {
-#         1000: letters1000,
-#         100: letters,
-#         }
-#     }
-# sizes_dic = {
-#     'wavebc': {
-#         1000: sizes1000_wavebc,
-#         100: sizes_wavebc,
-#         },
-#     'wave': {
-#         1000: sizes1000,
-#         100: sizes,
-#         }
-#     }
-
+num_obss = {
+    'wavebc': {
+        1000: [
+            normal1000_wavebc_obss,
+            damping1000_wavebc_obss,
+            normalscore1000_wavebc_obss,
+            dual1000_wavebc_obss,
+            hybrid1000_wavebc_obss,
+            localisation1000_wavebc_obss,
+            iterative1000_wavebc_obss,
+            pilot1000_wavebc_obss
+            ],
+        100: [
+            normal_wavebc_obss,
+            damping_wavebc_obss,
+            normalscore_wavebc_obss,
+            dual_wavebc_obss,
+            hybrid_wavebc_obss,
+            localisation_wavebc_obss,
+            iterative_wavebc_obss,
+            pilot_wavebc_obss
+            ],
+        },
+    'wave': {
+        1000: [
+            normal1000_obss,
+            damping1000_obss,
+            normalscore1000_obss,
+            dual1000_obss,
+            hybrid1000_obss,
+            localisation1000_obss,
+            iterative1000_obss
+            ],
+        100: [
+            normal_obss,
+            damping01_obss,
+            normalscoreverynew_obss,
+            dual_obss,
+            hybrid_obss,
+            localisation_obss,
+            newiterative4_obss
+            ],
+        }
+    }
 
 # Other methods
 # --------------------------------------------------------------------
