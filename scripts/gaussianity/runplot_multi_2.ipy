@@ -1,0 +1,71 @@
+import shutil
+import numpy as np
+import matplotlib.pyplot as plt
+
+import mypackage.gaussianity.arrays as ga
+import mypackage.gaussianity.plot as gp
+import mypackage.gaussianity.read as gr
+import mypackage.run.pythonmodule as pm
+import mypackage.plot.plotarrays as pa
+
+# Switches
+is_read = 0
+is_backup = 1
+is_hist = 1
+is_save = 1
+is_show = 1
+
+model = 'wavebc'
+
+which_method = 0
+n_syn = 10
+enssizes = [50,70,100,250]
+
+# Read
+if is_read:
+    for enssize in enssizes:
+        gauss_array, gauss_array_name = gr.read(
+            which_method = which_method,
+            n_syn = n_syn,
+            n_comparisons = 10000,
+            enssize = enssize,
+            )
+
+        np.save(gauss_array_name,gauss_array)
+        print('Saved as ' + gauss_array_name)
+
+
+# Histogram
+if is_hist:
+
+    # Figure
+    fig = plt.figure('Gaussianity',figsize=[15,10])
+    fig.suptitle("Mean distributions for varying number ensemble size, Method: "+pa.longnames_methods[which_method])
+    
+    # Run plot function
+    for i in range(4):
+        ax, pic_name = gp.hist(fig.add_subplot(2,2,i+1),
+                            n_syn = n_syn,
+                            enssize = enssizes[i],
+                            which_method = which_method,
+                            n_comparisons = 10000,
+                            xlims = [0.2,1.2],
+                            n_bins = 300,
+                            histlims = [0,3],
+                            title = "Ensemble Size: "+str(enssizes[i]),
+                            is_plot = True,
+                        )
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(pm.python_scripts_dir,ga.tag,"runplot_multi","ipy",model,str(which_method),'2017_10_03')
