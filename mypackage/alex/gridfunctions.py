@@ -6,7 +6,6 @@ import scipy as sp
 import numpy as np
 import numpy.core.defchararray as npstr
 # from mypackage.plot import plotfunctions as pf
-# from mypackage.plot import plotarrays as pa
 # from mypackage.run import runmodule as rm
 import pandas as pd
 

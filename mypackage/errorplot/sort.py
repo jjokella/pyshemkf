@@ -5,7 +5,6 @@ import numpy as np
 from mypackage.plot import specs as sc
 
 from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 from mypackage.run import pythonmodule as pm
 from mypackage.errorplot import arrays as ea

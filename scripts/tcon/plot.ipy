@@ -4,7 +4,6 @@ import os
 import matplotlib as mpl
 import numpy as np
 from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 import pandas as pd
 

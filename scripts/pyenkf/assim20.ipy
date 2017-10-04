@@ -5,7 +5,6 @@ import matplotlib as mpl
 import numpy as np
 import exceptions
 from mypackage.plot import plotfunctions as pf
-from mypackage.plot import plotarrays as pa
 from mypackage.run import runmodule as rm
 from matplotlib import cm		# Colormap commands (cm.get_cmap())
 from mypackage.plot import mycolors
