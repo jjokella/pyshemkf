@@ -6,6 +6,8 @@ import matplotlib as mpl
 from matplotlib import cm            # Colormap commands (cm.get_cmap())
 from matplotlib import colors
 from matplotlib import pyplot as plt # ?
+from matplotlib import mlab
+
 import numpy as np
 import exceptions               # ?
 
@@ -32,6 +34,10 @@ def hist(ax,
          # std_method = 'std',
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
          # figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
+         xlims = None,
+         histlims = None,
+         title = None,
+         is_plot = False,
          # ylims = [0.28,0.82],
          # yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
          # num_pack = 4,                     # Number of methods in pack
@@ -92,10 +98,20 @@ def hist(ax,
     arr = np.load(pm.py_output_filename(ga.tag,'meanarray_'+which_res,model+'_'+str(n_runs)+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+str(which_method),'npy'))
 
     # Histogram
-    ax.hist(arr,n_bins,color = 'grey')
+    n, bins, patches = ax.hist(arr,n_bins,color = 'grey',range=histlims, normed = 1)
+
+    if xlims:
+        ax.set_xlim(xlims)
+
+    if title:
+        ax.set_title(title)
+
+    if is_plot:
+        # add a 'best fit' line
+        y = mlab.normpdf(bins, np.mean(arr), np.std(arr))
+        ax.plot(bins, y, '--', lw=1, color = "k")
 
     # Saving location
     pic_name = pm.py_output_filename(ga.tag,'meanarray_'+which_res,model+'_'+str(n_runs)+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+str(which_method),pic_format)
 
     return ax, pic_name
-    
