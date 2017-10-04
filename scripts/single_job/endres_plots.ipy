@@ -9,17 +9,18 @@ from mypackage.run import runmodule as rm
 import pandas as pd
 
 
+model = 'wavebc'
 is_1000 = True
+n_runs = 1000 if is_1000 else 100
 
 is_show = 1
 is_save = 1
 
 imethods = [0,1]                                #see plotarrays.py
-ienssizes = [0,1,2,3]                               #0: 50, 1:70, 2:100, 3: 250
-which_enssize = [50,70,100,250]
+enssizes = [50,70,100,250]
 
-dats = pa.dats1000 if is_1000 else pa.dats
-lets = pa.lets1000 if is_1000 else pa.lets
+dats = pa.dats[model][n_runs]
+lets = pa.lets[model][n_runs]
 names = pa.names_methods
 
 
@@ -32,10 +33,10 @@ ylims = [0,135]
 
 
 for imethod in imethods:
-    for ienssize in ienssizes:
+    for enssize in enssizes:
 
-        dat = dats[imethod][ienssize]
-        let = lets[imethod][ienssize]
+        dat = dats[imethod][enssize]
+        let = lets[imethod][enssize]
 
         # The array with the final residuals
         endres = np.load('output/dists/npy/endres_'+dat+'_'+let+'.npy')
@@ -57,9 +58,9 @@ for imethod in imethods:
         # Data Frame (pandas-module)
         df = pd.DataFrame(endres)
 
-        figtitle = 'Realizations: ' + str(which_enssize[ienssize])
-        png_name_hist = 'hist_' + str(imethod) + '_' + str(which_enssize[ienssize]).zfill(4) + '.eps' 
-        png_name_plot = 'plot_' + str(imethod) + '_' + str(which_enssize[ienssize]).zfill(4) + '.png'
+        figtitle = 'Realizations: ' + str(enssize)
+        png_name_hist = 'hist_' + str(imethod) + '_' + str(enssize).zfill(4) + '.eps'
+        png_name_plot = 'plot_' + str(imethod) + '_' + str(enssize).zfill(4) + '.png'
 
         # plt.figure(1,[18,5])
         # plt.axes([0.05,0.1,0.9,0.8])
