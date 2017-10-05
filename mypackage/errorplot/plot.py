@@ -17,8 +17,6 @@ from mypackage.plot import specs as sc
 
 import arrays as ea
 
-
-
 def plot(ax,
          which_methods = [0,1,2,3,4,5,6],
          which_res = 'endres',
