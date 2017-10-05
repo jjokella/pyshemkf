@@ -214,3 +214,196 @@ def plot(ax,
     pic_name = pm.py_output_filename(na.tag,'bars_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+str(n_comparisons)+'_'+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
     return ax, pic_name
+
+def matrix(ax,
+         which_methods = [0,1,2,3,4,5,6],
+         indsorts = [1,6,5,4,3,2,0] ,
+         which_res = 'endres',
+         method = 'ttest',
+         n_runs = 1000,
+         model = 'wavebc',
+         enssize = 50,
+         n_syn = 1,                       #number of synthetic studies
+         n_comparisons = 10000,
+         pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
+         # figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
+         # ylims = [0.28,0.82],
+         ticksize = 20,
+         xtick_y = 0.0,
+         # num_pack = 4,                     # Number of methods in pack
+         # formatsos = ['o','v','s','p','o','v','s','p'],
+         # coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+         #                (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0)],
+         # markersize = 10,
+         # markeredgesize = 1.5,
+         # fontleg = 30,                              #18
+         # fonttit = 40,
+         # fontlab = 40,
+         # fonttic = 30,
+             ):
+    """
+    A plotting function for statistics of residual distributions.
+
+    Parameters
+    ----------
+    ax : Axes
+        The axes to draw to.
+
+    which_methods : array of ints
+        The methods to be loaded in ascending order.
+
+    indsorts : array of ints
+        The methods to included in own this order.
+
+    which_res : string
+        'endres' - use residuals after EnKF run
+        'begres' - use residuals before EnKF run
+
+    method : string
+        Which method to use for statistical comparison
+        of the subset. If n_syn == 1, the comparison
+        always defaults to comparing the residuals.
+        'ttest' - Use the T-Test, testing if the
+                  two samples belong to the same
+                  Gaussian distribution.
+        'gauss' - Calculate Gaussian distribution
+                  of the difference and calculate
+                  its probability to be larger
+                  than zero.
+
+    n_runs : integer
+        1000 - typically exist for ensemble sizes 50, 70, 100, 250
+        100 - typically exist for ensemble sizes 500, 1000, 2000
+
+    model : string
+        'wavebc' - Model wavebc
+        'wave' - Model wave
+
+    enssize : integer
+        Ensemble size of the job. Possibilities: 50,
+        70, 100, 250, 500, 1000, 2000
+
+    n_syn : integer
+        Number of synthetic studies in subset.
+
+    n_comparisons : integer
+        Number of comparisons calculated.
+
+    pic_format : string
+        Format of the picture
+        'pdf' - pdf-format
+        'eps' - eps-format
+        'png' - png-format
+        'jpg' - jpg-format
+        'svg' - svg-format
+
+    Returns
+    -------
+    ax : Axes
+        Axes containing plot.
+
+    pic_name : string
+        Containing proposed saving location for Figure.
+    """
+
+    # Check
+    for imethod in indsorts:
+        if not imethod in which_methods:
+            raise exceptions.RuntimeError('Wrong methods in indsorts')
+
+    # Number of compared methods
+    num_methods = len(indsorts)
+
+    # Load probs
+    probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+
+    # Sort probs
+    probs = probs[indsorts,:,:]
+    probs = probs[:,indsorts,:]
+
+    ax.set_position([0.32,0.2,0.6,0.8])
+
+    # Rectangles in upper right half: Fraction of Undecided
+    undecided = probs[:,:,1]
+    for ipm in range(num_methods):
+        for jpm in range(num_methods):
+            if ipm > jpm:
+                # Lower left half white
+                undecided[ipm,jpm] = None
+            if ipm == jpm:
+                # Diagonal black
+                undecided[ipm,jpm] = 1.0
+            if ipm < jpm:
+                # Single comparisons white
+                if n_syn == 1:
+                    undecided[ipm,jpm] = None
+                # One comparison white
+                if n_syn == 1000:
+                    undecided[ipm,jpm] = None
+
+
+    ax.imshow(undecided,interpolation='nearest',cmap='Greys',
+              norm = colors.Normalize(vmin=0,vmax=1,clip=False))
+
+    # Triangles: Grid
+    X,Y = np.meshgrid(np.arange(8),np.arange(8))
+    X = X.flatten()-0.5
+    Y = Y.flatten()-0.5
+
+    # Triangles: Indices
+    triangles = np.array([[j*8,1+j*8,8+j*8] for j in range(1,num_methods)]
+                             +[[1+j*8, 2+j*8, 9+j*8] for j in range(2,num_methods)]
+                             +[[2+j*8, 3+j*8,10+j*8] for j in range(3,num_methods)]
+                             +[[3+j*8, 4+j*8,11+j*8] for j in range(4,num_methods)]
+                             +[[4+j*8, 5+j*8,12+j*8] for j in range(5,num_methods)]
+                             +[[5+j*8, 6+j*8,13+j*8] for j in range(6,num_methods)]
+                             +[[1+j*8, 8+j*8, 9+j*8] for j in range(1,num_methods)]
+                             +[[2+j*8, 9+j*8,10+j*8] for j in range(2,num_methods)]
+                             +[[3+j*8,10+j*8,11+j*8] for j in range(3,num_methods)]
+                             +[[4+j*8,11+j*8,12+j*8] for j in range(4,num_methods)]
+                             +[[5+j*8,12+j*8,13+j*8] for j in range(5,num_methods)]
+                             +[[6+j*8,13+j*8,14+j*8] for j in range(6,num_methods)])
+
+    # Triangles: Triangulation instance
+    tria = mpl.tri.Triangulation(X,Y,triangles)
+
+    # Triangles: Colors
+    coleros = np.array([[probs[i,j,0] for i in range(j+1,num_methods)] for j in range(6)]
+                           +[[probs[i,j,2] for i in range(j+1,num_methods)] for j in range(6)])
+    coleros = np.hstack(coleros)
+
+    # Triangles: Plot with facecolor
+    plt.tripcolor(tria,facecolors=coleros,
+                    cmap=mpl.cm.Greys,
+                    norm = colors.Normalize(vmin=0,vmax=1,clip=False),
+                    edgecolor='k')
+
+    # Plot: Mostly ticks
+    ax.set_xticks([i for i in range(num_methods)])
+    ax.set_xticklabels([pa.names_methods[indsorts[i]] for i in range(num_methods)], fontsize=ticksize,
+                       rotation=90,y=xtick_y)
+    ax.set_yticks([i for i in range(num_methods)])
+    ax.set_yticklabels([pa.names_methods[indsorts[i]] for i in range(num_methods)], fontsize=ticksize)
+    ax.tick_params(length=0)
+    ax.set_frame_on(False)
+
+    # Text: Upper triangles
+    for i in range(3):
+        for itext in range(num_methods):
+            for jtext in range(num_methods):
+                if itext<jtext:
+                    ntext = 100*probs[jtext,itext,i] if i!=1 else 100*probs[itext,jtext,i]
+                    ttext = str(ntext)[0:4] if ntext<100 else str(ntext)[0:3]
+                    px = itext-0.35 if i==0 else (jtext-0.125 if i==1 else itext-0.05)
+                    py = jtext-0.15 if i==0 else (itext+0.05  if i==1 else jtext+0.3 )
+                    colero = 'white' if ntext>50 else 'black'
+
+                    if i!=1 or n_syn!=1000:
+                        ax.text(px,py,ttext,color = colero,fontsize = 10)
+
+
+
+    # Saving location
+    pic_name = pm.py_output_filename(na.tag,'matrix_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
+
+    return ax, pic_name
