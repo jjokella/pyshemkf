@@ -210,5 +210,141 @@ def plot(ax,
     # Saving location
     pic_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
+    return ax, pic_name
+
+
+
+def quots(ax,
+          which_methods = [0,1,2,3,4,5,6],
+          which_res = 'endres',
+          stat_method = 'mean',
+          n_runs = 1000,
+          model = 'wavebc',
+          enssize = 50,
+          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
+          # figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
+          # ylims = [0.28,0.82],
+          # yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
+          ticksize = 20,
+          # num_pack = 4,                     # Number of methods in pack
+          # formatsos = ['o','v','s','p','o','v','s','p'],
+          # coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+          #            (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0)],
+          # markersize = 10,
+          # markeredgesize = 1.5,
+          # fontleg = 30,                              #18
+          # fonttit = 40,
+          # fontlab = 40,
+          # fonttic = 30,
+              ):
+    """
+    A plotting function for statistics of residual distributions.
+
+    Parameters
+    ----------
+    ax : Axes
+        The axes to draw to.
+
+    which_methods : array of ints
+        The methods to be printed, in this order.
+
+    which_res : string
+        'endres' - use residuals after EnKF run
+        'begres' - use residuals before EnKF run
+
+    stat_method : string
+        'mean' - Means
+        'std' - Standard deviation
+        'stdm' - Standard deviation of the mean
+        'median' - Median or 50 Percentile
+        'q25' - 25 Percentile
+        'q75' - 75 Percentile
+
+    n_runs : integer
+        1000 - typically exist for ensemble sizes 50, 70, 100, 250
+        100 - typically exist for ensemble sizes 500, 1000, 2000
+
+    model : string
+        'wavebc' - Model wavebc
+        'wave' - Model wave
+
+    pic_format : string
+        Format of the picture
+        'pdf' - pdf-format
+        'eps' - eps-format
+        'png' - png-format
+        'jpg' - jpg-format
+        'svg' - svg-format
+
+    figpos : array of floats
+        Four numbers
+        xbeg, ybeg, xrange, yrange
+
+    More input specifying plot parameters.
+
+    Returns
+    -------
+    ax : Axes
+        Axes containing plot.
+
+    pic_name : string
+        Containing proposed saving location for Figure.
+    """
+
+    # Number of compared methods
+    num_methods = len(which_methods)
+
+    # Ensemble size translated to index
+    iens = {50:0,
+            70:1,
+            100:2,
+            250:3}
+
+    # Load endres
+    var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+
+    # Calculate and sort quots
+    quots = np.array([[var[i1,iens[enssize]]/var[i2,iens[enssize]] for i1 in range(num_methods)] for i2 in range(num_methods)])
+
+    ax.set_position([0.32,0.2,0.6,0.8])
+
+    # White Rectangles
+    for ipm in range(num_methods):
+        for jpm in range(num_methods):
+            # Diagonal black
+            if ipm == jpm:
+                quots[ipm,jpm] = 0.0
+            # Upper triangle white
+            if ipm < jpm:
+                quots[ipm,jpm] = None
+
+                    
+    ax.imshow(quots,interpolation='nearest',cmap='Greys_r',
+              norm = colors.Normalize(vmin=0.8,vmax=1.0,clip=False))
+
+    # Plot: Mostly ticks
+    ax.set_xticks([i for i in range(num_methods)])
+    ax.set_xticklabels([pa.names_methods[which_methods[i]] for i in range(len(which_methods))], fontsize=ticksize, rotation=90)
+    ax.set_yticks([i for i in range(num_methods)])
+    ax.set_yticklabels([pa.names_methods[which_methods[i]] for i in range(len(which_methods))], fontsize=ticksize)
+    ax.tick_params(length=0)
+    ax.set_frame_on(False)
+
+    
+    # Text
+    for itext in range(num_methods):
+        for jtext in range(num_methods):
+            if itext<jtext:
+                ntext = quots[jtext,itext]
+                ttext = str(ntext)[0:4]
+                px = itext-0.35 
+                py = jtext+0.15
+                colero = 'white' if ntext<0.9 else 'black'
+            
+                ax.text(px,py,ttext,color = colero,fontsize = 20)
+
+    # Saving location
+    pic_name = pm.py_output_filename(ea.tag,'quots_'+which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
     return ax, pic_name
+                
