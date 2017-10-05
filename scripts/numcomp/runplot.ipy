@@ -33,15 +33,15 @@ if is_plot:
 
     # Figure
     fig = plt.figure('numcomp',figsize=[12,6])
-    fig.suptitle("Comparisons",fontsize=30)
+    fig.suptitle("Comparisons",fontsize=30,y=0.95)
 
     # Run plot function
     ax, pic_name = npl.plot(fig.add_subplot(1,1,1),
                             which_methods = which_methods,
-                            which_methods_left = [1,4,6,0,3,2,6,6],
-                            which_methods_right = [4,6,0,3,2,5,3,5],
+                            which_methods_left = [1,4,6,0,3,2],
+                            which_methods_right = [4,6,0,3,2,5],
                             )
-                            
+
     # Save
     if is_save:
         plt.savefig(pic_name)
