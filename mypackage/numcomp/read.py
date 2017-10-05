@@ -2,6 +2,9 @@
 
 import os
 import numpy as np
+import scipy as sp
+from scipy import special
+from scipy import stats
 
 from mypackage.plot import plotarrays as pa
 from mypackage.run import pythonmodule as pm
