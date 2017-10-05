@@ -33,32 +33,29 @@ indsorts = {50:  [1,6,5,4,3,2,0],
 num_methods = len(indsorts[50])
 
 # Output 
-pic_name_end = ['pdf','png']
+pic_format = ['pdf','png']
 pic_dirs = {pic_end :
             os.environ['HOME']+'/PythonDir/output/numcomp/matrix/'+pic_end+'/'
-            for pic_end in pic_name_end}
-pic_names = {n_ens: 'matrixquotients_'+str(n_ens).zfill(4)
-             for n_ens in enssizes}
+            for pic_end in pic_format}
+pic_names = {enssize: 'matrixquotients_'+str(enssize).zfill(4)
+             for enssize in enssizes}
 
-# Ticks (names)
-names = np.array(pa.names_methods) #if is_1000 else pa.names_methods
-yticks = {n_ens : names[indsorts[n_ens]] for n_ens in enssizes}
 ticksize = 20
 
 load_dir = 'output/errorplot/npy/'
 
-for n_ens in enssizes:
+for enssize in enssizes:
 
     endres_mean = np.load(load_dir+'endres_mean1000_wavebc.npy')   # A(methods, ensemble sizes)
     # Sort probs
-    quots = np.array([[endres_mean[imod1,iens[n_ens]]/endres_mean[imod2,iens[n_ens]] for imod1 in range(num_methods)] for imod2 in range(num_methods)])
+    quots = np.array([[endres_mean[imod1,iens[enssize]]/endres_mean[imod2,iens[enssize]] for imod1 in range(num_methods)] for imod2 in range(num_methods)])
 
-    quots = quots[indsorts[n_ens],:]
-    quots = quots[:,indsorts[n_ens]]
+    quots = quots[indsorts[enssize],:]
+    quots = quots[:,indsorts[enssize]]
     
     # Plot: Figure size and title
     plt.figure(1,figsize=[10,10])
-    # plt.suptitle("N = "+ str(n_ens)+"  Quotients",
+    # plt.suptitle("N = "+ str(enssize)+"  Quotients",
     #                  fontsize = 30)
     # Plot: Axis position and ticks
     ax = plt.subplot(111)
@@ -84,9 +81,9 @@ for n_ens in enssizes:
     # Plot: Mostly ticks
     plt.xticks(rotation=90)
     ax.set_xticks([i for i in range(num_methods)])
-    ax.set_xticklabels(yticks[n_ens], fontsize=ticksize)
+    ax.set_xticklabels([pa.names_methods[indsorts[enssize][i]] for i in range(len(indsorts))], fontsize=ticksize)
     ax.set_yticks([i for i in range(num_methods)])
-    ax.set_yticklabels(yticks[n_ens], fontsize=ticksize)
+    ax.set_yticklabels([pa.names_methods[indsorts[enssize][i]] for i in range(len(indsorts))], fontsize=ticksize)
     ax.tick_params(length=0)
     ax.set_frame_on(False)
 
@@ -105,9 +102,9 @@ for n_ens in enssizes:
                 
     # Save/Show
     if is_save:
-        for pic_end in pic_name_end:
-            plt.savefig(pic_dirs[pic_end] + pic_names[n_ens]+'.'+pic_end)
-            print('Saved as ' + pic_dirs[pic_end] + pic_names[n_ens]+'.'+pic_end)
+        for pic_end in pic_format:
+            plt.savefig(pic_dirs[pic_end] + pic_names[enssize]+'.'+pic_end)
+            print('Saved as ' + pic_dirs[pic_end] + pic_names[enssize]+'.'+pic_end)
 
     if is_show:
         plt.show()
