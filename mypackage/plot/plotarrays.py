@@ -27,23 +27,26 @@ num_jobs = {
 
 # Names
 # --------------------------------------------------------------------
-names_methods = ['EnKF',
-                     'Damped',
-                     'NS-EnKF',
-                     'DualEnKF',
-                     'Hyb-EnKF',
-                     'LEnKF',
-                     'IEnKF',
-                     'PP-EnKF']
-longnames_methods = ['EnKF',
-                         'Damped EnKF',
-                         'Normal Score EnKF',
-                         'Dual EnKF',
-                         'Hybrid EnKF',
-                         'Local EnKF',
-                         'Iterative EnKF',
-                         'Pilot Point EnKF']
-
+names_methods = {
+    0:'EnKF',
+    1:'Damped',
+    2:'NS-EnKF',
+    3:'DualEnKF',
+    4:'Hyb-EnKF',
+    5:'LEnKF',
+    6:'IEnKF',
+    7:'PP-EnKF',
+    }
+longnames_methods = {
+    0:'EnKF',
+    1:'Damped EnKF',
+    2:'Normal Score EnKF',
+    3:'Dual EnKF',
+    4:'Hybrid EnKF',
+    5:'Local EnKF',
+    6:'Iterative EnKF',
+    7:'Pilot Point EnKF'
+    }
 
 # Methods
 # --------------------------------------------------------------------
@@ -224,179 +227,179 @@ pilot1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 # Dictionaries
 dats = {
     'wavebc': {
-        1000: [
-            normal1000_wavebc_dats,
-            damping1000_wavebc_dats,
-            normalscore1000_wavebc_dats,
-            dual1000_wavebc_dats,
-            hybrid1000_wavebc_dats,
-            localisation1000_wavebc_dats,
-            iterative1000_wavebc_dats,
-            pilot1000_wavebc_dats
-            ],
-        100: [
-            normal_wavebc_dats,
-            damping_wavebc_dats,
-            normalscore_wavebc_dats,
-            dual_wavebc_dats,
-            hybrid_wavebc_dats,
-            localisation_wavebc_dats,
-            iterative_wavebc_dats,
-            pilot_wavebc_dats
-            ],
+        1000: {
+            0:normal1000_wavebc_dats,
+            1:damping1000_wavebc_dats,
+            2:normalscore1000_wavebc_dats,
+            3:dual1000_wavebc_dats,
+            4:hybrid1000_wavebc_dats,
+            5:localisation1000_wavebc_dats,
+            6:iterative1000_wavebc_dats,
+            7:pilot1000_wavebc_dats,
+            },
+        100: {
+            0:normal_wavebc_dats,
+            1:damping_wavebc_dats,
+            2:normalscore_wavebc_dats,
+            3:dual_wavebc_dats,
+            4:hybrid_wavebc_dats,
+            5:localisation_wavebc_dats,
+            6:iterative_wavebc_dats,
+            7:pilot_wavebc_dats,
+            },
         },
     'wave': {
-        1000: [
-            normal1000_dats,
-            damping1000_dats,
-            normalscore1000_dats,
-            dual1000_dats,
-            hybrid1000_dats,
-            localisation1000_dats,
-            iterative1000_dats
-            ],
-        100: [
-            normal_dats,
-            damping01_dats,
-            normalscoreverynew_dats,
-            dual_dats,
-            hybrid_dats,
-            localisation_dats,
-            newiterative4_dats
-            ],
+        1000: {
+            0:normal1000_dats,
+            1:damping1000_dats,
+            2:normalscore1000_dats,
+            3:dual1000_dats,
+            4:hybrid1000_dats,
+            5:localisation1000_dats,
+            6:iterative1000_dats,
+            },
+        100: {
+            0:normal_dats,
+            1:damping01_dats,
+            2:normalscoreverynew_dats,
+            3:dual_dats,
+            4:hybrid_dats,
+            5:localisation_dats,
+            6:newiterative4_dats,
+            },
         }
     }
 lets = {
     'wavebc': {
-        1000: [
-            normal1000_wavebc_lets,
-            damping1000_wavebc_lets,
-            normalscore1000_wavebc_lets,
-            dual1000_wavebc_lets,
-            hybrid1000_wavebc_lets,
-            localisation1000_wavebc_lets,
-            iterative1000_wavebc_lets,
-            pilot1000_wavebc_lets
-            ],
-        100: [
-            normal_wavebc_lets,
-            damping_wavebc_lets,
-            normalscore_wavebc_lets,
-            dual_wavebc_lets,
-            hybrid_wavebc_lets,
-            localisation_wavebc_lets,
-            iterative_wavebc_lets,
-            pilot_wavebc_lets
-            ],
+        1000: {
+            0:normal1000_wavebc_lets,
+            1:damping1000_wavebc_lets,
+            2:normalscore1000_wavebc_lets,
+            3:dual1000_wavebc_lets,
+            4:hybrid1000_wavebc_lets,
+            5:localisation1000_wavebc_lets,
+            6:iterative1000_wavebc_lets,
+            7:pilot1000_wavebc_lets,
+            },
+        100: {
+            0:normal_wavebc_lets,
+            1:damping_wavebc_lets,
+            2:normalscore_wavebc_lets,
+            3:dual_wavebc_lets,
+            4:hybrid_wavebc_lets,
+            5:localisation_wavebc_lets,
+            6:iterative_wavebc_lets,
+            7:pilot_wavebc_lets,
+            },
         },
     'wave': {
-        1000: [
-            normal1000_lets,
-            damping1000_lets,
-            normalscore1000_lets,
-            dual1000_lets,
-            hybrid1000_lets,
-            localisation1000_lets,
-            iterative1000_lets
-            ],
-        100: [
-            normal_lets,
-            damping01_lets,
-            normalscoreverynew_lets,
-            dual_lets,
-            hybrid_lets,
-            localisation_lets,
-            newiterative4_lets
-            ],
+        1000: {
+            0:normal1000_lets,
+            1:damping1000_lets,
+            2:normalscore1000_lets,
+            3:dual1000_lets,
+            4:hybrid1000_lets,
+            5:localisation1000_lets,
+            6:iterative1000_lets,
+            },
+        100: {
+            0:normal_lets,
+            1:damping01_lets,
+            2:normalscoreverynew_lets,
+            3:dual_lets,
+            4:hybrid_lets,
+            5:localisation_lets,
+            6:newiterative4_lets,
+            },
         }
     }
 nums = {
     'wavebc': {
-        1000: [
-            normal1000_wavebc_nums,
-            damping1000_wavebc_nums,
-            normalscore1000_wavebc_nums,
-            dual1000_wavebc_nums,
-            hybrid1000_wavebc_nums,
-            localisation1000_wavebc_nums,
-            iterative1000_wavebc_nums,
-            pilot1000_wavebc_nums
-            ],
-        100: [
-            normal_wavebc_nums,
-            damping_wavebc_nums,
-            normalscore_wavebc_nums,
-            dual_wavebc_nums,
-            hybrid_wavebc_nums,
-            localisation_wavebc_nums,
-            iterative_wavebc_nums,
-            pilot_wavebc_nums
-            ],
+        1000: {
+            0:normal1000_wavebc_nums,
+            1:damping1000_wavebc_nums,
+            2:normalscore1000_wavebc_nums,
+            3:dual1000_wavebc_nums,
+            4:hybrid1000_wavebc_nums,
+            5:localisation1000_wavebc_nums,
+            6:witerative1000_wavebc_nums,
+            7:pilot1000_wavebc_nums,
+            },
+        100: {
+            0:normal_wavebc_nums,
+            1:damping_wavebc_nums,
+            2:normalscore_wavebc_nums,
+            3:dual_wavebc_nums,
+            4:hybrid_wavebc_nums,
+            5:localisation_wavebc_nums,
+            6:iterative_wavebc_nums,
+            7:pilot_wavebc_nums,
+            },
         },
     'wave': {
-        1000: [
-            normal1000_nums,
-            damping1000_nums,
-            normalscore1000_nums,
-            dual1000_nums,
-            hybrid1000_nums,
-            localisation1000_nums,
-            iterative1000_nums
-            ],
-        100: [
-            normal_nums,
-            damping01_nums,
-            normalscoreverynew_nums,
-            dual_nums,
-            hybrid_nums,
-            localisation_nums,
-            newiterative4_nums
-            ],
+        1000: {
+            0:normal1000_nums,
+            1:damping1000_nums,
+            2:normalscore1000_nums,
+            3:dual1000_nums,
+            4:hybrid1000_nums,
+            5:localisation1000_nums,
+            6:iterative1000_nums,
+            },
+        100: {
+            0:normal_nums,
+            1:damping01_nums,
+            2:normalscoreverynew_nums,
+            3:dual_nums,
+            4:hybrid_nums,
+            5:localisation_nums,
+            6:newiterative4_nums,
+            },
         }
     }
 
 num_obss = {
     'wavebc': {
-        1000: [
-            normal1000_wavebc_obss,
-            damping1000_wavebc_obss,
-            normalscore1000_wavebc_obss,
-            dual1000_wavebc_obss,
-            hybrid1000_wavebc_obss,
-            localisation1000_wavebc_obss,
-            iterative1000_wavebc_obss,
-            pilot1000_wavebc_obss
-            ],
-        100: [
-            normal_wavebc_obss,
-            damping_wavebc_obss,
-            normalscore_wavebc_obss,
-            dual_wavebc_obss,
-            hybrid_wavebc_obss,
-            localisation_wavebc_obss,
-            iterative_wavebc_obss,
-            pilot_wavebc_obss
-            ],
+        1000: {
+            0:normal1000_wavebc_obss,
+            1:damping1000_wavebc_obss,
+            2:normalscore1000_wavebc_obss,
+            3:dual1000_wavebc_obss,
+            4:hybrid1000_wavebc_obss,
+            5:localisation1000_wavebc_obss,
+            6:iterative1000_wavebc_obss,
+            7:pilot1000_wavebc_obss,
+            },
+        100: {
+            0:normal_wavebc_obss,
+            1:damping_wavebc_obss,
+            2:normalscore_wavebc_obss,
+            3:dual_wavebc_obss,
+            4:hybrid_wavebc_obss,
+            5:localisation_wavebc_obss,
+            6:iterative_wavebc_obss,
+            7:pilot_wavebc_obss,
+            },
         },
     'wave': {
-        1000: [
-            normal1000_obss,
-            damping1000_obss,
-            normalscore1000_obss,
-            dual1000_obss,
-            hybrid1000_obss,
-            localisation1000_obss,
-            iterative1000_obss
-            ],
-        100: [
-            normal_obss,
-            damping01_obss,
-            normalscoreverynew_obss,
-            dual_obss,
-            hybrid_obss,
-            localisation_obss,
-            newiterative4_obss
-            ],
+        1000: {
+            0:normal1000_obss,
+            1:damping1000_obss,
+            2:normalscore1000_obss,
+            3:dual1000_obss,
+            4:hybrid1000_obss,
+            5:localisation1000_obss,
+            6:iterative1000_obss,
+            },
+        100: {
+            0:normal_obss,
+            1:damping01_obss,
+            2:normalscoreverynew_obss,
+            3:dual_obss,
+            4:hybrid_obss,
+            5:localisation_obss,
+            6:newiterative4_obss,
+            },
         }
     }
 
