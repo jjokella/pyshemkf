@@ -48,6 +48,25 @@ longnames_methods = {
     7:'Pilot Point EnKF'
     }
 
+# Sorted indices
+# --------------------------------------------------------------------
+indsorts = {
+    'wavebc':{
+        1000:{
+            50:  [1,6,5,4,3,2,0],
+            70:  [1,4,6,5,3,0,2],
+            100: [1,4,6,0,3,5,2],
+            250: [1,4,3,0,6,2,5],
+            },
+        100:{
+            500: [1,4,6,0,3,2,5],
+            1000:[1,4,6,0,3,2,5],
+            2000:[1,4,6,0,3,2,5],
+            }
+        }
+    }
+
+
 # Methods
 # --------------------------------------------------------------------
 # method_dats: Date of the output directory
@@ -322,7 +341,7 @@ nums = {
             3:dual1000_wavebc_nums,
             4:hybrid1000_wavebc_nums,
             5:localisation1000_wavebc_nums,
-            6:witerative1000_wavebc_nums,
+            6:iterative1000_wavebc_nums,
             7:pilot1000_wavebc_nums,
             },
         100: {
