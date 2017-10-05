@@ -211,6 +211,6 @@ def read(which_methods,
             probs[ij,ii,1] = pe
             probs[ij,ii,2] = pi
 
-    probs_name = pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+'_'.join([str(i) for i in which_methods]),'npy')
+    probs_name = pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),'npy')
 
     return probs, probs_name

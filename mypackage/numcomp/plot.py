@@ -131,10 +131,10 @@ def plot(ax,
     num_bars = len(show_methods[0])
     num_patches = 3*num_bars
 
-    # Load probabilities
-    probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+    # Load probs
+    probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+str(n_comparisons)+'_'+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
-    # Load probabilities for bold labels
+    # Load probs for bold labels
     probs_bold = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn_bold)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     ax.set_position([0.3,0.05,0.4,0.75])
@@ -211,6 +211,6 @@ def plot(ax,
             ax2.yaxis.get_majorticklabels()[i].set_style('italic')
 
     # Saving location
-    pic_name = pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
+    pic_name = pm.py_output_filename(na.tag,'bars_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+str(n_comparisons)+'_'+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
     return ax, pic_name
