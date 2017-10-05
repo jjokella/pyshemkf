@@ -103,7 +103,7 @@ def read(which_methods,
 
 
     # Name of the array
-    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy')
+    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy')
 
 
     return stat_array, stat_array_name

@@ -114,12 +114,12 @@ def plot(ax,
     legend_input = np.array([legend_input[i].ljust(18) for i in range(len(legend_input))])
     legend_input = legend_input[which_methods]
 
-    # Load array
-    var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+    # Load endres
+    var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     # Load standard deviation
     if is_std:
-        std = np.load(pm.py_output_filename('errorplot',which_res,std_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+        std = np.load(pm.py_output_filename('errorplot',which_res,std_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
 
     ax.set_prop_cycle("color",['k'])

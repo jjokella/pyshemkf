@@ -97,19 +97,19 @@ def sort(which_methods,
 
     if not indsort:
         # Load template array for sorting (only one ensemble size)
-        template_array_name = pm.py_output_filename(ea.tag,template_which_res,template_stat_method+str(template_n_runs)+'_'+template_model+'_'+'_'.join([str(i) for i in template_which_methods]),'npy')
+        template_array_name = pm.py_output_filename(ea.tag,template_which_res,template_stat_method+'_'+str(template_n_runs)+'_'+template_model+'_'+'_'.join([str(i) for i in template_which_methods]),'npy')
         template_array = np.load(template_array_name)[:,template_enssize]
         # Indices for sorting order
         indsort = np.argsort(template_array)
 
     # Load to be sorted array
-    stat_array = np.load(pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+    stat_array = np.load(pm.py_output_filename(ea.tag,which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     # Sort array
     for i in range(stat_array.shape[1]):
         stat_array[:,i] = np.array(stat_array)[:,i][indsort]
 
     # Save name for sorted array
-    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in indsort]),'npy')
+    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in indsort]),'npy')
 
     return stat_array, stat_array_name, indsort
