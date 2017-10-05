@@ -30,7 +30,8 @@ def read(which_method,
         from module plotarrays.
 
     n_syn : integer
-        Number of synthetic studies in mean calculation.
+        Number of synthetic studies in subset for mean
+        calculation.
 
     n_comparisons : integer
         Number of means calculated.
@@ -46,6 +47,10 @@ def read(which_method,
     which_res : string
         'endres' - use residuals after EnKF run
         'begres' - use residuals before EnKF run
+
+    enssize : integer
+        Ensemble size of the job. Possibilities: 50,
+        70, 100, 250, 500, 1000, 2000
 
     Returns
     -------
@@ -87,5 +92,3 @@ def read(which_method,
     gauss_array_name = pm.py_output_filename(ga.tag,'meanarray_'+which_res,model+'_'+str(n_runs)+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+str(which_method),'npy')
 
     return gauss_array, gauss_array_name
-
-    

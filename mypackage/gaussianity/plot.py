@@ -59,6 +59,9 @@ def hist(ax,
     ax : Axes
         The axes to draw to.
 
+    n_syn : integer
+        Number of synthetic studies in subset.
+
     which_method : int
         Integer containing the method specifier
         from module plotarrays.
@@ -80,6 +83,10 @@ def hist(ax,
     which_res : string
         'endres' - use residuals after EnKF run
         'begres' - use residuals before EnKF run
+
+    enssize : integer
+        Ensemble size of the job. Possibilities: 50,
+        70, 100, 250, 500, 1000, 2000
 
     n_bins : integer
         Number of bins of histogram

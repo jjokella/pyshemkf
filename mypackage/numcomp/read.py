@@ -15,11 +15,79 @@ def read(which_methods,
          n_runs = 1000,
          method = 'ttest',
          enssize = 50,
-         n_syn = 1,                       #number of synthetic studies
+         n_syn = 1,
          n_comparisons = 10000,
          cl = 0.95,
          pval = 0.05,
 ):
+    """
+    Reads residual arrays at beginning (begres) or
+    end (endres) of the EnKF run and calculates
+    probability arrays which method is better,
+    worse, or if they are even.
+
+    Parameters
+    ----------
+    which_methods : array int
+        Array of integers containing the method specifiers
+        from module plotarrays.
+
+    which_res : string
+        'endres' - use residuals after EnKF run
+        'begres' - use residuals before EnKF run
+
+    model : string
+        'wavebc' - Model wavebc
+        'wave' - Model wave
+
+    n_runs : integer
+        1000 - typically exist for ensemble sizes 50, 70, 100, 250
+        100 - typically exist for ensemble sizes 500, 1000, 2000
+
+    method : string
+        Which method to use for statistical comparison
+        of the subset. If n_syn == 1, the comparison
+        always defaults to comparing the residuals.
+        'ttest' - Use the T-Test, testing if the
+                  two samples belong to the same
+                  Gaussian distribution.
+        'gauss' - Calculate Gaussian distribution
+                  of the difference and calculate
+                  its probability to be larger
+                  than zero.
+
+    enssize : integer
+        Ensemble size of the job. Possibilities: 50,
+        70, 100, 250, 500, 1000, 2000
+
+    n_syn : integer
+        Number of synthetic studies in subset.
+
+    n_comparisons : integer
+        Number of comparisons calculated.
+
+    cl : float
+        Confidence level for 'gauss'. If the probability
+        weight of the distribution of the difference between
+        two methods is larger than cl on one side of zero,
+        then the method with the smaller RMSE is considered
+        to have performed better.
+
+    pval : float
+        If the p-value from the T-Test is smaller than pval
+        the Test is considered to be negative, thus a
+        significant difference between the distributions is
+        assumed, making the method with the smaller RMSE
+        performing significantly better.
+
+    Returns
+    -------
+    probs : array
+        Array containing the probabilities.
+
+    probs_name : string
+        Containing proposed saving location for array.
+    """
 
     # Checks
     if not n_runs in [100,1000]:

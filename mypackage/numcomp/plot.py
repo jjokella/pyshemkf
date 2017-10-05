@@ -35,6 +35,87 @@ def plot(ax,
          bar_colors = ['black','white','grey'],
 ):
 
+    """
+    Reads probability arrays which method is better,
+    worse, or if they are even. Then plots those
+    three possibilities in bars comparing the methods
+    given in which_methods_left and which_methods_right.
+
+    Parameters
+    ----------
+    ax : Axes
+        The axes to draw to.
+
+    which_methods : array int
+        Array of integers containing the method specifiers
+        from module plotarrays.
+
+    which_methods_left : array int
+        Array of integers containing the method specifiers
+        for the left side of the comparisons.
+
+    which_methods_right : array int
+        Array of integers containing the method specifiers
+        for the right side of the comparisons.
+
+    which_res : string
+        'endres' - use residuals after EnKF run
+        'begres' - use residuals before EnKF run
+
+    model : string
+        'wavebc' - Model wavebc
+        'wave' - Model wave
+
+    n_runs : integer
+        1000 - typically exist for ensemble sizes 50, 70, 100, 250
+        100 - typically exist for ensemble sizes 500, 1000, 2000
+
+    method : string
+        Which method to use for statistical comparison
+        of the subset. If n_syn == 1, the comparison
+        always defaults to comparing the residuals.
+        'ttest' - Use the T-Test, testing if the
+                  two samples belong to the same
+                  Gaussian distribution.
+        'gauss' - Calculate Gaussian distribution
+                  of the difference and calculate
+                  its probability to be larger
+                  than zero.
+
+    enssize : integer
+        Ensemble size of the job. Possibilities: 50,
+        70, 100, 250, 500, 1000, 2000
+
+    n_syn : integer
+        Number of synthetic studies in subset.
+
+    n_syn_bold : integer
+        Number of synthetic studies in subset used for
+        the bold ticklabels.
+
+    n_comparisons : integer
+        Number of comparisons calculated.
+
+    pic_format : string
+        Format of the picture
+        'pdf' - pdf-format
+        'eps' - eps-format
+        'png' - png-format
+        'jpg' - jpg-format
+        'svg' - svg-format
+
+    bar_colors : array of strings
+        Three colors for the three patches of one bar.
+
+    Returns
+    -------
+    ax : array
+        Axes containing plot.
+
+    pic_name : string
+        Containing proposed saving location for Figure.
+    """
+
     # Check
     for imethod in which_methods_left:
         if not imethod in which_methods:
@@ -50,10 +131,6 @@ def plot(ax,
     num_bars = len(show_methods[0])
     num_patches = 3*num_bars
 
-    # Ticklabels (names)
-    ytick1 = [pa.longnames_methods[show_methods[0][i]] for i in range(num_bars)]
-    ytick2 = [pa.longnames_methods[show_methods[1][i]] for i in range(num_bars)]
-    
     # Load probabilities
     probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
@@ -63,7 +140,7 @@ def plot(ax,
     ax.set_position([0.3,0.05,0.4,0.75])
     ax.set_frame_on(False)
 
-    # Patch arrays for plt.barh()
+    # Patch arrays for ax.barh()
     in_bottom = np.zeros(num_patches)
     in_height = np.zeros(num_patches)
     in_width = np.zeros(num_patches)
@@ -105,7 +182,7 @@ def plot(ax,
     ax.set_ylim([0.9,num_bars+0.8])
     ax.set_xticks([])
     ax.set_yticks([num_bars-i +0.4 for i in range(num_bars)])
-    ax.set_yticklabels(ytick1)
+    ax.set_yticklabels([pa.longnames_methods[show_methods[0][i]] for i in range(num_bars)])
 
     # Twin Axis 2
     ax2 = ax.twinx()
@@ -121,7 +198,7 @@ def plot(ax,
     ax2.set_ylim([0.9,num_bars+0.8])
     ax2.set_xticks([])
     ax2.set_yticks([num_bars-i +0.4 for i in range(num_bars)])
-    ax2.set_yticklabels(ytick2)
+    ax2.set_yticklabels([pa.longnames_methods[show_methods[1][i]] for i in range(num_bars)])
 
     # Boldness of axislabels
     for i in range(num_bars):
@@ -135,5 +212,5 @@ def plot(ax,
 
     # Saving location
     pic_name = pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
-    
+
     return ax, pic_name
