@@ -124,6 +124,17 @@ def plot(ax,
         if not imethod in which_methods:
             raise exceptions.RuntimeError('Wrong methods in wrong_methods_right')
 
+    if n_runs==1000:
+        if not enssize in [50,70,100,250]:
+            raise exceptions.RuntimeError('enssize wrong')
+        if n_syn>1000:
+            raise exceptions.RuntimeError('n_syn wrong')
+    else:
+        if not enssize in [500,1000,2000]:
+            raise exceptions.RuntimeError('enssize wrong')
+        if n_syn>100:
+            raise exceptions.RuntimeError('n_syn wrong')
+
     # Both methods in one array
     show_methods = [which_methods_left,
                         which_methods_right]
@@ -310,6 +321,17 @@ def matrix(ax,
     for imethod in indsorts:
         if not imethod in which_methods:
             raise exceptions.RuntimeError('Wrong methods in indsorts')
+
+    if n_runs==1000:
+        if not enssize in [50,70,100,250]:
+            raise exceptions.RuntimeError('enssize wrong')
+        if n_syn>1000:
+            raise exceptions.RuntimeError('n_syn wrong')
+    else:
+        if not enssize in [500,1000,2000]:
+            raise exceptions.RuntimeError('enssize wrong')
+        if n_syn>100:
+            raise exceptions.RuntimeError('n_syn wrong')
 
     # Number of compared methods
     num_methods = len(indsorts)
