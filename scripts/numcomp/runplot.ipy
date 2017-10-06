@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import mypackage.numcomp.arrays as na
 import mypackage.numcomp.plot as npl
 import mypackage.numcomp.read as nr
-# import mypackage.numcomp.sort as ns
 import mypackage.run.pythonmodule as pm
 
 # Switches
@@ -13,8 +12,8 @@ is_read = 0
 is_backup = 0
 is_plot = 0
 is_matrix = 1
-is_show = 1
 is_save = 0
+is_show = 1
 
 which_methods = [0,1,2,3,4,5,6]
 model = 'wavebc'
@@ -24,8 +23,9 @@ if is_read:
     probs_array, probs_array_name = nr.read(
         which_methods = which_methods,
         model = model,
-        n_syn = 100,
-        n_comparisons = 1000,
+        enssize = 250,
+        n_syn = 10,
+        n_comparisons = 10000,
         method = 'ttest',
         )
 
@@ -61,8 +61,8 @@ if is_plot:
 # Matrix
 if is_matrix:
 
-    enssize = 50
-    n_syn = 100
+    enssize = 250
+    n_syn = 10
 
     # Figure
     fig = plt.figure('numcomp',figsize=[10,10])
@@ -72,10 +72,10 @@ if is_matrix:
     # Run plot function
     ax, pic_name = npl.matrix(fig.add_subplot(1,1,1),
                             which_methods = which_methods,
-                            indsorts = [1,6,5,4,3,2,0],
+                            indsorts = [1,4,3,0,6,2,5],
                             enssize = enssize,
                             n_syn = n_syn,
-                            n_comparisons = 1000,
+                            n_comparisons = 10000,
                             xtick_y = 0.0,
                             )
 
@@ -92,4 +92,4 @@ if is_matrix:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_04')
+    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_06_p1_fig9')
