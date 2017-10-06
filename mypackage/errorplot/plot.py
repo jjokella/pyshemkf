@@ -22,6 +22,7 @@ def plot(ax,
          which_res = 'endres',
          stat_method = 'mean',
          n_runs = 1000,
+         which_enssize = [50,70,100,250],
          model = 'wavebc',
          is_std = 0,                         # Show std?
          std_method = 'std',
@@ -67,6 +68,10 @@ def plot(ax,
         1000 - typically exist for ensemble sizes 50, 70, 100, 250
         100 - typically exist for ensemble sizes 500, 1000, 2000
 
+    which_enssize : array of integers
+        [50,70,100,250] - possible for 1000 synthetic studies
+        [500,1000,2000] - possible for 100 synthetic studies
+
     model : string
         'wavebc' - Model wavebc
         'wave' - Model wave
@@ -103,11 +108,20 @@ def plot(ax,
         Containing proposed saving location for Figure.
     """
 
-    # Ensemble sizes (could be read in from array maybe)
-    which_enssize =  ([50,70,100,250] if n_runs==1000 else
-                          ([500,1000,2000] if model=='wavebc' else [50,70,100,250,500,1000,2000]))
+    # Check
+    if n_runs==1000:
+        for enssize in which_enssize:
+            if not enssize in [50,70,100,250]:
+                raise exceptions.RuntimeError('n_runs==1000: Wrong enssize in which_enssize.')
+    elif n_runs== 100:
+        for enssize in which_enssize:
+            if not enssize in [500,1000,2000]:
+                raise exceptions.RuntimeError('n_runs==100: Wrong enssize in which_enssize.')
+    else:
+        raise exceptions.RuntimeError('Wrong n_runs.')
 
-    num_methods = np.array(which_methods).size
+    # Number of methods
+    num_methods = len(which_methods)
 
     # Legend
     legend_input = pa.longnames_methods
@@ -125,14 +139,14 @@ def plot(ax,
     ax.set_prop_cycle("color",['k'])
     ax.set_position(figpos)
 
-    for ienssize,ensemble_size in enumerate(which_enssize):
+    for iens,enssize in enumerate(which_enssize):
         # x positions, up to 15 methods
         x = np.delete(np.arange(0,16),
                     np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
 
-        varplot = var[:,ienssize]
+        varplot = var[:,iens]
         if is_std:
-            stdplot = std[:,ienssize]
+            stdplot = std[:,iens]
 
         # Plot
         puntos = []                            #Contains plotted points
@@ -145,8 +159,8 @@ def plot(ax,
             # Text
             if iplot == range(num_methods)[-1]:
                 ax.text(x[iplot]+0.5,
-                             varplot[iplot]-0.005 if ensemble_size == 2000 else varplot[iplot],
-                             r'$n_{e}$ = '+str(ensemble_size),
+                             varplot[iplot]-0.005 if enssize == 2000 else varplot[iplot],
+                             r'$n_{e}$ = '+str(enssize),
                              verticalalignment='center',
                              horizontalalignment='left',
                              size = 20)
@@ -222,7 +236,7 @@ def quots(ax,
           model = 'wavebc',
           enssize = 50,
           pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
-          # figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
+          figpos = [0.32,0.2,0.6,0.8],
           # ylims = [0.28,0.82],
           # yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
           ticksize = 20,
@@ -238,7 +252,8 @@ def quots(ax,
           # fonttic = 30,
               ):
     """
-    A plotting function for statistics of residual distributions.
+    A function plotting a grid of quotients of
+    statistical measures.
 
     Parameters
     ----------
@@ -268,6 +283,10 @@ def quots(ax,
         'wavebc' - Model wavebc
         'wave' - Model wave
 
+    enssize : integer
+        Ensemble size of the job. Possibilities: 50,
+        70, 100, 250, 500, 1000, 2000
+
     pic_format : string
         Format of the picture
         'pdf' - pdf-format
@@ -285,28 +304,35 @@ def quots(ax,
     Returns
     -------
     ax : Axes
-        Axes containing plot.
+        Axes containing quotient matrix.
 
     pic_name : string
         Containing proposed saving location for Figure.
     """
 
+    # Check
+    if n_runs==1000:
+        if not enssize in [50,70,100,250]:
+            raise exceptions.RuntimeError('enssize wrong')
+    else:
+        if not enssize in [500,1000,2000]:
+            raise exceptions.RuntimeError('enssize wrong')
+
     # Number of compared methods
     num_methods = len(which_methods)
 
     # Ensemble size translated to index
-    iens = {50:0,
-            70:1,
-            100:2,
-            250:3}
+    iens = pa.indens[model][n_runs][enssize]
 
     # Load endres
     var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     # Calculate and sort quots
-    quots = np.array([[var[i1,iens[enssize]]/var[i2,iens[enssize]] for i1 in range(num_methods)] for i2 in range(num_methods)])
+    quots = np.array(
+        [[var[i1,iens]/var[i2,iens] for i1 in range(num_methods)] for i2 in range(num_methods)]
+        )
 
-    ax.set_position([0.32,0.2,0.6,0.8])
+    ax.set_position(figpos)
 
     # White Rectangles
     for ipm in range(num_methods):
@@ -318,7 +344,7 @@ def quots(ax,
             if ipm < jpm:
                 quots[ipm,jpm] = None
 
-                    
+
     ax.imshow(quots,interpolation='nearest',cmap='Greys_r',
               norm = colors.Normalize(vmin=0.8,vmax=1.0,clip=False))
 
@@ -330,21 +356,20 @@ def quots(ax,
     ax.tick_params(length=0)
     ax.set_frame_on(False)
 
-    
+
     # Text
     for itext in range(num_methods):
         for jtext in range(num_methods):
             if itext<jtext:
                 ntext = quots[jtext,itext]
                 ttext = str(ntext)[0:4]
-                px = itext-0.35 
+                px = itext-0.35
                 py = jtext+0.15
                 colero = 'white' if ntext<0.9 else 'black'
-            
+
                 ax.text(px,py,ttext,color = colero,fontsize = 20)
 
     # Saving location
     pic_name = pm.py_output_filename(ea.tag,'quots_'+which_res,stat_method+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),pic_format)
 
     return ax, pic_name
-                

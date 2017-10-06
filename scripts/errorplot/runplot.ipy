@@ -10,11 +10,11 @@ import mypackage.run.pythonmodule as pm
 
 # Switches
 is_read = 1
-is_backup = 0
+is_backup = 1
 is_sort = 1
 is_plot = 0
 is_quot = 1
-is_save = 0
+is_save = 1
 is_show = 1
 
 which_methods = [0,1,2,3,4,5,6]
@@ -35,7 +35,9 @@ if is_read:
 if is_sort:
     stat_array, stat_array_name, sorted_which_methods = es.sort(
         which_methods = which_methods,
+        n_runs = 1000,
         template_which_methods = which_methods,
+        template_enssize = 250,
         stat_method = stat_method,
         which_res = 'endres',
         )
@@ -59,6 +61,10 @@ if is_plot:
                            pic_format = 'pdf',
                            is_std = False,
                            std_method = 'stdm',
+                           # n_runs = 100,
+                           # which_enssize = [500,1000,2000],
+                           # ylims = [0.29,0.43],
+                           # yticks = [0.30,0.32,0.34,0.36,0.38,0.40,0.42],
                        )
     # Save
     if is_save:
@@ -82,6 +88,7 @@ if is_quot:
                             which_methods = sorted_which_methods,
                             stat_method = stat_method,
                             pic_format = 'pdf',
+                            enssize = 250,
                        )
     # Save
     if is_save:
@@ -97,4 +104,4 @@ if is_quot:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,ea.tag,"runplot","ipy",'wavebc','_'.join([str(i) for i in sorted_which_methods])[:],'2017_09_26')
+    pm.py_backup(pm.python_scripts_dir,ea.tag,"runplot","ipy",'wavebc','_'.join([str(i) for i in sorted_which_methods])[:],'2017_10_06')
