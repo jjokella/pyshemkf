@@ -10,6 +10,7 @@ from mypackage.forward import arrays as fa
 
 def read(model_name,dat,let,
          varname = 'uindex',
+         nt = 1,
 ):
     """
     Reading variable arrays from SHEMAT-Suite.
@@ -29,6 +30,9 @@ def read(model_name,dat,let,
         Variable name for array to be read.
         Possibilities: 'uindex' 'head','temp','kz', 'v'
 
+    nt : string
+        Number of time step output.
+
     Returns
     -------
     numpy_array : array
@@ -40,7 +44,7 @@ def read(model_name,dat,let,
 
     # Dirs
     fdir = rm.make_output_dirs(model_name,dat,let)[1] # samples_output_dir
-    fname = rm.make_file_dir_names(model_name,1)[17] # time_out_file
+    fname = rm.make_file_dir_names(model_name,nt)[17] # time_out_file
 
     # Get vtk_reader ##########################################################
     vtk_reader = pf.my_vtk(fdir,fname,varname)
@@ -57,7 +61,7 @@ def read(model_name,dat,let,
     numpy_array = pf.my_vtk_to_numpy(vtk_reader)
 
     # Numpy Array Name ########################################################
-    numpy_array_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),"npy")
+    numpy_array_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let)+'_'+str(nt),"npy")
     
     return numpy_array, numpy_array_name
     
