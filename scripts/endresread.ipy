@@ -14,7 +14,7 @@ num_ensemble_sizes = 3
 two_iterations = False                    # True: residual_E2.vtk
 # method = 16
 
-dats = ['2017_09_22' for i in range(num_ensemble_sizes)]
+dats = ['2017_11_01' for i in range(num_ensemble_sizes)]
 lets = ['ewx','gjj','hvv','dkl','pgd','ao','ay','bi','dkl','ewx','gjj']
 #      ['b','aln','bxz','dkl','ewx','gjj','hvv','jih','kut','mhf','ntr','pgd']
 nums = [100,100,100,1000,10,10,10]#[1000 for i in range(num_ensemble_sizes)]
