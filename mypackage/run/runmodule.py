@@ -503,6 +503,9 @@ def make_file_dir_names(model_name, nt = 0):
         assim_out_file_aft
 
 
+#############################################################
+#               MAKE TMP MODEL DIR
+#############################################################
 def make_model_dir_tmp(model_name,letter,today):
     os.chdir(os.environ['HOME']+"/shematModelsDir")
     # Copy everything to temporal directory
@@ -542,6 +545,8 @@ def make_model_dir_tmp(model_name,letter,today):
                    '/'+model_name+'_model_' + today  + '_' + letter)
     replace_string('py_move_output.sh','/'+model_name+'_model',
                    '/'+model_name+'_model_' + today  + '_' + letter)
+    replace_string('py_move_less_output.sh','/'+model_name+'_model',
+                   '/'+model_name+'_model_' + today  + '_' + letter)
     replace_string('py_compilequick.sh','/'+model_name+'_model',
                    '/'+model_name+'_model_' + today  + '_' + letter)
     os.chmod('clean_output.sh',128+256+64)
@@ -552,6 +557,7 @@ def make_model_dir_tmp(model_name,letter,today):
     os.chmod('generatetecmon.sh',128+256+64)
     os.chmod('move_output.sh',128+256+64)
     os.chmod('py_move_output.sh',128+256+64)
+    os.chmod('py_move_less_output.sh',128+256+64)
     os.chmod('py_compilequick.sh',128+256+64)
     os.chmod('veryclean.sh',128+256+64)
 
