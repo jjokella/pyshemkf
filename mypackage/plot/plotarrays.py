@@ -48,8 +48,8 @@ longnames_methods = {
     5:'Local EnKF',
     6:'Iterative EnKF',
     7:'Pilot Point EnKF',
-    101:'EnKF: Low measurement noise'
-    102:'EnKF: High measurement noise'
+    101:'EnKF: Low measurement noise',
+    102:'EnKF: High measurement noise',
     }
 
 # Indices RMSE-sorted, low to high
