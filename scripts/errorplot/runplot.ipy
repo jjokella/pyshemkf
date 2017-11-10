@@ -9,15 +9,15 @@ import mypackage.errorplot.sort as es
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 1
-is_backup = 1
+is_read = 0
 is_sort = 1
-is_plot = 0
-is_quot = 1
-is_save = 1
+is_plot = 1
+is_quot = 0
+is_save = 0
 is_show = 1
+is_backup = 0
 
-which_methods = [0,1,2,3,4,5,6]
+which_methods = [0,101,102]
 stat_method = 'mean'
 
 # Read
