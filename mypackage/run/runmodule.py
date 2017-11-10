@@ -477,7 +477,7 @@ def make_file_dir_names(model_name, nt = 0):
     true_file = "True" + model_name_big + ".plt"
     true_chem_file = "True" + model_name_big + "_chem.plt"
     monitor_file = model_name_big + '_E0_monitor_1.dat'
-    time_out_file = model_name_big + '_E0_time_out_' + str(nt).zfill(4) + '.vtk'
+    time_out_file = model_name_big + '_E0_time_out_' + str(nt) + '.vtk'
     assim_out_file_bef = 'assim_variables_E1_bef_' + str(nt).zfill(4) + '.vtk'
     assim_out_file_aft = 'assim_variables_E1_aft_' + str(nt).zfill(4) + '.vtk'
 
