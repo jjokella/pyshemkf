@@ -101,7 +101,7 @@ def sort(which_methods,
 
 
     if not indsort:
-        # Load template array for sorting (only one ensemble size)
+        # Load template array for sorting (single ensemble size)
         template_array_name = pm.py_output_filename(ea.tag,template_which_res,template_stat_method+'_'+str(template_n_runs)+'_'+template_model+'_'+'_'.join([str(i) for i in template_which_methods]),'npy')
         template_ienssize = pa.indens[template_model][template_n_runs][template_enssize]
         template_array = np.load(template_array_name)[:,template_ienssize]
@@ -115,7 +115,12 @@ def sort(which_methods,
     for i in range(stat_array.shape[1]):
         stat_array[:,i] = np.array(stat_array)[:,i][indsort]
 
-    # Save name for sorted array
-    stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in indsort]),'npy')
+    # Sort which_methods
+    which_methods_sorted = np.zeros(np.shape(which_methods),dtype=np.int8)
+    for i in range(len(which_methods)):
+        which_methods_sorted[i] = which_methods[indsort[i]]
 
-    return stat_array, stat_array_name, indsort
+    # Save name for sorted array
+        stat_array_name = pm.py_output_filename(ea.tag,which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods_sorted]),'npy')
+
+    return stat_array, stat_array_name, which_methods_sorted

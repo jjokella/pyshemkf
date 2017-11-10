@@ -125,8 +125,7 @@ def plot(ax,
 
     # Legend
     legend_input = pa.longnames_methods
-    legend_input = np.array([legend_input[i].ljust(18) for i in range(len(legend_input))])
-    legend_input = legend_input[which_methods]
+    legend_input = np.array([legend_input[i].ljust(18) for i in which_methods])
 
     # Load endres
     var = np.load(pm.py_output_filename('errorplot',which_res,stat_method+'_'+str(n_runs)+'_'+model+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
