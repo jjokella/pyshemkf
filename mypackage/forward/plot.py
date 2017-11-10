@@ -24,6 +24,7 @@ def plot(ax,
          model_name,
          dat,
          let,
+         nt = 1,
          is_grid = True,
          is_mask = False,
          is_labels= True,
@@ -84,7 +85,7 @@ def plot(ax,
     yticks = grids.yticks(model_name,dat,let)
 
     # Load variable array
-    var = np.load(pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),"npy"))
+    var = np.load(pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let)+'_'+str(nt),"npy"))
 
     if varname == 'v':
         var = var[:,:,v_component]
@@ -161,7 +162,7 @@ def plot(ax,
     if is_mask:
         varname = varname+'_'+str(maskvalue).zfill(2)
 
-    pic_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let),pic_format)
+    pic_name = pm.py_output_filename(fa.tag,varname,sc.specl(model_name,dat,let)+'_'+str(nt),pic_format)
 
     return ax, pic_name
 
@@ -175,7 +176,8 @@ def cb(cb_ax,
        varname = "uindex",
        varlabels = {'temp':'Temperature [deg]',
                     'head':'Hydraulic Head [m] - 10m',
-                    'uindex':'Unit Index'},
+                    'uindex':'Unit Index',
+                    'kz':'log(permeability[m2])'},
        cb_ax_position = [0.8,0.1,0.03,0.8],
        labelsize = 20,
 ):

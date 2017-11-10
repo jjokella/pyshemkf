@@ -9,6 +9,8 @@ from mypackage.run import pythonmodule as pm
 from mypackage.forward import arrays as fa
 
 def read(model_name,dat,let,
+         fdir = None,
+         fname = None,
          varname = 'uindex',
          nt = 1,
 ):
@@ -43,8 +45,10 @@ def read(model_name,dat,let,
     """
 
     # Dirs
-    fdir = rm.make_output_dirs(model_name,dat,let)[1] # samples_output_dir
-    fname = rm.make_file_dir_names(model_name,nt)[17] # time_out_file
+    if fdir == None:
+        fdir = rm.make_output_dirs(model_name,dat,let)[1] # samples_output_dir
+    if fname == None:
+        fname = rm.make_file_dir_names(model_name,nt)[17] # time_out_file
 
     # Get vtk_reader ##########################################################
     vtk_reader = pf.my_vtk(fdir,fname,varname)
