@@ -1,0 +1,84 @@
+import shutil
+import matplotlib.pyplot as plt
+
+from mypackage.plot import specs as sc
+import mypackage.forward.arrays as fa
+import mypackage.forward.plot as fp
+import mypackage.forward.read as fr
+import mypackage.run.pythonmodule as pm
+
+# Switches
+is_read = 1
+is_plot = 1
+is_save = 1
+is_show = 1
+is_backup = 0
+
+# Specs
+model_name = 'wavehead'
+dat = '2017_11_02'
+
+let = 'a'
+nl = 1
+ns = rm.get_num_let(let)
+nstep = 1
+lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+
+nt = 1
+plotvarname = 'head'
+
+# Read
+if is_read:
+    for varname in ['uindex','head','kz']:
+        numpy_array, numpy_array_name = fr.read(model_name,
+                                                dat,
+                                                lets[0],
+                                                varname = varname,
+                                                fname = 'WAVEHEAD_TRUE_E0_time_out_10.vtk',
+                                                nt = nt,
+                                                    )
+        np.save(numpy_array_name,numpy_array)
+        print('Saved as ' + numpy_array_name)
+
+
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure(1,figsize=[15,10])
+
+    # Run plot function
+    ax, pic_name = fp.plot(fig.add_subplot(1,1,1),
+                           model_name,
+                           dat,
+                           lets[0],
+                           markercolor = 'black',
+                           pic_format = 'png',
+                           varname = plotvarname,
+                           xlims = [0.0,620.0],
+                           ylims = [0.0,620.0],
+                           nt = nt,
+                       )
+
+    # Colorbar
+    cb_ax = fp.cb(fig.add_subplot(1,2,1),
+                  ax,
+                  varname = plotvarname,
+                  labelsize = 10,
+                      )
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(pm.python_scripts_dir,fa.tag,"runplot","ipy",model_name,dat,lets[0])
