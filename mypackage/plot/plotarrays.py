@@ -37,6 +37,7 @@ names_methods = {
     6:'IEnKF',
     7:'PP-EnKF',
     101:'EnKF',
+    102:'EnKF',
     }
 longnames_methods = {
     0:'EnKF',
@@ -48,6 +49,7 @@ longnames_methods = {
     6:'Iterative EnKF',
     7:'Pilot Point EnKF',
     101:'EnKF: Low measurement noise'
+    102:'EnKF: High measurement noise'
     }
 
 # Indices RMSE-sorted, low to high
@@ -286,6 +288,17 @@ lowmeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 lowmeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 lowmeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# High Measuement Nois
+highmeasnoise_wavebc_dats = {500:'2017_11_02',1000:'2017_11_02',2000:'2017_11_02'}
+highmeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+highmeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
+highmeasnoise_wavebc_obss = {500:100,1000:100,2000:100}
+
+highmeasnoise1000_wavebc_dats = {50:'2017_11_02',70:'2017_11_02',100:'2017_11_02',250:'2017_11_02'}
+highmeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+highmeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+highmeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
 
 # Dictionaries
 dats = {
@@ -300,6 +313,7 @@ dats = {
             6:iterative1000_wavebc_dats,
             7:pilot1000_wavebc_dats,
             101:lowmeasnoise1000_wavebc_dats,
+            102:highmeasnoise1000_wavebc_dats,
             },
         100: {
             0:normal_wavebc_dats,
@@ -311,6 +325,7 @@ dats = {
             6:iterative_wavebc_dats,
             7:pilot_wavebc_dats,
             101:lowmeasnoise_wavebc_dats,
+            102:highmeasnoise_wavebc_dats,
             },
         },
     'wave': {
@@ -346,6 +361,7 @@ lets = {
             6:iterative1000_wavebc_lets,
             7:pilot1000_wavebc_lets,
             101:lowmeasnoise1000_wavebc_lets,
+            102:highmeasnoise1000_wavebc_lets,
             },
         100: {
             0:normal_wavebc_lets,
@@ -357,6 +373,7 @@ lets = {
             6:iterative_wavebc_lets,
             7:pilot_wavebc_lets,
             101:lowmeasnoise_wavebc_lets,
+            102:highmeasnoise_wavebc_lets,
             },
         },
     'wave': {
@@ -392,6 +409,7 @@ nums = {
             6:iterative1000_wavebc_nums,
             7:pilot1000_wavebc_nums,
             101:lowmeasnoise1000_wavebc_nums,
+            102:highmeasnoise1000_wavebc_nums,
             },
         100: {
             0:normal_wavebc_nums,
@@ -403,6 +421,7 @@ nums = {
             6:iterative_wavebc_nums,
             7:pilot_wavebc_nums,
             101:lowmeasnoise_wavebc_nums,
+            102:highmeasnoise_wavebc_nums,
             },
         },
     'wave': {
@@ -439,6 +458,7 @@ num_obss = {
             6:iterative1000_wavebc_obss,
             7:pilot1000_wavebc_obss,
             101:lowmeasnoise1000_wavebc_obss,
+            102:highmeasnoise1000_wavebc_obss,
             },
         100: {
             0:normal_wavebc_obss,
@@ -450,6 +470,7 @@ num_obss = {
             6:iterative_wavebc_obss,
             7:pilot_wavebc_obss,
             101:lowmeasnoise_wavebc_obss,
+            102:highmeasnoise_wavebc_obss,
             },
         },
     'wave': {
