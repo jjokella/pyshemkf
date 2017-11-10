@@ -9,16 +9,16 @@ import mypackage.run.pythonmodule as pm
 
 # Switches
 is_read = 0
-is_plot = 1
-is_save = 1
-is_show = 1
-is_backup = 1
+is_plot = 0
+is_save = 0
+is_show = 0
+is_backup = 0
 
 # Specs
-model_name = 'cubey'
-dat = '2017_02_08'
+model_name = 'wavehead'
+dat = '2017_11_02'
 
-let = 'aln'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
