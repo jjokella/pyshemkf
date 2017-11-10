@@ -30,7 +30,9 @@ if is_read:
         numpy_array, numpy_array_name = fr.read(model_name,
                                                 dat,
                                                 lets[0],
-                                                varname = varname)
+                                                varname = varname,
+                                                nt = 10,
+                                                    )
         np.save(numpy_array_name,numpy_array)
         print('Saved as ' + numpy_array_name)
 
