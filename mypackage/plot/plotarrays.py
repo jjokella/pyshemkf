@@ -38,6 +38,7 @@ names_methods = {
     7:'PP-EnKF',
     101:'EnKF',
     102:'EnKF',
+    103:'EnKF',
     }
 longnames_methods = {
     0:'EnKF',
@@ -50,6 +51,7 @@ longnames_methods = {
     7:'Pilot Point EnKF',
     101:'EnKF: Low measurement noise',
     102:'EnKF: High measurement noise',
+    103:'EnKF: Huge measurement noise',
     }
 
 # Indices RMSE-sorted, low to high
@@ -277,7 +279,7 @@ pilot1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 pilot1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 pilot1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
-# Low Measuement Nois
+# Low Measuement Noise
 lowmeasnoise_wavebc_dats = {500:'2017_11_01',1000:'2017_11_01',2000:'2017_11_01'}
 lowmeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
 lowmeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
@@ -288,7 +290,7 @@ lowmeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 lowmeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 lowmeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
-# High Measuement Nois
+# High Measuement Noise
 highmeasnoise_wavebc_dats = {500:'2017_11_02',1000:'2017_11_02',2000:'2017_11_02'}
 highmeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
 highmeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
@@ -298,6 +300,17 @@ highmeasnoise1000_wavebc_dats = {50:'2017_11_02',70:'2017_11_02',100:'2017_11_02
 highmeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 highmeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 highmeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
+# Huge Measuement Noise
+hugemeasnoise_wavebc_dats = {500:'2017_11_03',1000:'2017_11_03',2000:'2017_11_03'}
+hugemeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hugemeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
+hugemeasnoise_wavebc_obss = {500:100,1000:100,2000:100}
+
+hugemeasnoise1000_wavebc_dats = {50:'2017_11_03',70:'2017_11_03',100:'2017_11_03',250:'2017_11_03'}
+hugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+hugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
 
 # Dictionaries
@@ -314,6 +327,7 @@ dats = {
             7:pilot1000_wavebc_dats,
             101:lowmeasnoise1000_wavebc_dats,
             102:highmeasnoise1000_wavebc_dats,
+            103:hugemeasnoise1000_wavebc_dats,
             },
         100: {
             0:normal_wavebc_dats,
@@ -326,6 +340,7 @@ dats = {
             7:pilot_wavebc_dats,
             101:lowmeasnoise_wavebc_dats,
             102:highmeasnoise_wavebc_dats,
+            103:hugemeasnoise_wavebc_dats,
             },
         },
     'wave': {
@@ -362,6 +377,7 @@ lets = {
             7:pilot1000_wavebc_lets,
             101:lowmeasnoise1000_wavebc_lets,
             102:highmeasnoise1000_wavebc_lets,
+            103:hugemeasnoise1000_wavebc_lets,
             },
         100: {
             0:normal_wavebc_lets,
@@ -374,6 +390,7 @@ lets = {
             7:pilot_wavebc_lets,
             101:lowmeasnoise_wavebc_lets,
             102:highmeasnoise_wavebc_lets,
+            103:hugemeasnoise_wavebc_lets,
             },
         },
     'wave': {
@@ -410,6 +427,7 @@ nums = {
             7:pilot1000_wavebc_nums,
             101:lowmeasnoise1000_wavebc_nums,
             102:highmeasnoise1000_wavebc_nums,
+            103:hugemeasnoise1000_wavebc_nums,
             },
         100: {
             0:normal_wavebc_nums,
@@ -422,6 +440,7 @@ nums = {
             7:pilot_wavebc_nums,
             101:lowmeasnoise_wavebc_nums,
             102:highmeasnoise_wavebc_nums,
+            103:hugemeasnoise_wavebc_nums,
             },
         },
     'wave': {
@@ -459,6 +478,7 @@ num_obss = {
             7:pilot1000_wavebc_obss,
             101:lowmeasnoise1000_wavebc_obss,
             102:highmeasnoise1000_wavebc_obss,
+            103:hugemeasnoise1000_wavebc_obss,
             },
         100: {
             0:normal_wavebc_obss,
@@ -471,6 +491,7 @@ num_obss = {
             7:pilot_wavebc_obss,
             101:lowmeasnoise_wavebc_obss,
             102:highmeasnoise_wavebc_obss,
+            103:hugemeasnoise_wavebc_obss,
             },
         },
     'wave': {
