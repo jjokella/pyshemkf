@@ -41,6 +41,7 @@ names_methods = {
     103:'EnKF',
     104:'EnKF',
     105:'EnKF',
+    106:'EnKF',
     }
 longnames_methods = {
     0:'EnKF',
@@ -56,6 +57,7 @@ longnames_methods = {
     103:'EnKF: Huge measurement noise',
     104:'EnKF: Mega measurement noise',
     105:'EnKF: Giga measurement noise',
+    106:'EnKF: Exa measurement noise',
     }
 
 # Indices RMSE-sorted, low to high
@@ -338,6 +340,17 @@ gigameasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 gigameasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 gigameasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# Exa Measuement Noise
+exameasnoise_wavebc_dats = {500:'2017_11_06',1000:'2017_11_06',2000:'2017_11_06'}
+exameasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+exameasnoise_wavebc_nums = {500:100,1000:100,2000:100}
+exameasnoise_wavebc_obss = {500:100,1000:100,2000:100}
+
+exameasnoise1000_wavebc_dats = {50:'2017_11_06',70:'2017_11_06',100:'2017_11_06',250:'2017_11_06'}
+exameasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+exameasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+exameasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
 
 # Dictionaries
 dats = {
@@ -356,6 +369,7 @@ dats = {
             103:hugemeasnoise1000_wavebc_dats,
             104:megameasnoise1000_wavebc_dats,
             105:gigameasnoise1000_wavebc_dats,
+            106:exameasnoise1000_wavebc_dats,
             },
         100: {
             0:normal_wavebc_dats,
@@ -371,6 +385,7 @@ dats = {
             103:hugemeasnoise_wavebc_dats,
             104:megameasnoise_wavebc_dats,
             105:gigameasnoise_wavebc_dats,
+            106:exameasnoise_wavebc_dats,
             },
         },
     'wave': {
@@ -410,6 +425,7 @@ lets = {
             103:hugemeasnoise1000_wavebc_lets,
             104:megameasnoise1000_wavebc_lets,
             105:gigameasnoise1000_wavebc_lets,
+            106:exameasnoise1000_wavebc_lets,
             },
         100: {
             0:normal_wavebc_lets,
@@ -425,6 +441,7 @@ lets = {
             103:hugemeasnoise_wavebc_lets,
             104:megameasnoise_wavebc_lets,
             105:gigameasnoise_wavebc_lets,
+            106:exameasnoise_wavebc_lets,
             },
         },
     'wave': {
@@ -464,6 +481,7 @@ nums = {
             103:hugemeasnoise1000_wavebc_nums,
             104:megameasnoise1000_wavebc_nums,
             105:gigameasnoise1000_wavebc_nums,
+            106:exameasnoise1000_wavebc_nums,
             },
         100: {
             0:normal_wavebc_nums,
@@ -479,6 +497,7 @@ nums = {
             103:hugemeasnoise_wavebc_nums,
             104:megameasnoise_wavebc_nums,
             105:gigameasnoise_wavebc_nums,
+            106:exameasnoise_wavebc_nums,
             },
         },
     'wave': {
@@ -519,6 +538,7 @@ num_obss = {
             103:hugemeasnoise1000_wavebc_obss,
             104:megameasnoise1000_wavebc_obss,
             105:gigameasnoise1000_wavebc_obss,
+            106:exameasnoise1000_wavebc_obss,
             },
         100: {
             0:normal_wavebc_obss,
@@ -533,6 +553,7 @@ num_obss = {
             102:highmeasnoise_wavebc_obss,
             103:hugemeasnoise_wavebc_obss,
             105:gigameasnoise_wavebc_obss,
+            106:exameasnoise_wavebc_obss,
             },
         },
     'wave': {
