@@ -9,7 +9,7 @@ import mypackage.errorplot.sort as es
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 0
+is_read = 1
 is_sort = 1
 is_plot = 1
 is_quot = 0
@@ -17,7 +17,7 @@ is_save = 0
 is_show = 1
 is_backup = 0
 
-which_methods = [0,101,102,103]
+which_methods = [0,101,102,103,104]
 stat_method = 'mean'
 
 # Read
@@ -37,7 +37,7 @@ if is_sort:
         which_methods = which_methods,
         n_runs = 1000,
         template_which_methods = which_methods,
-        template_enssize = 250,
+        template_enssize = 50,
         stat_method = stat_method,
         which_res = 'endres',
         )
