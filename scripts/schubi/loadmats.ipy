@@ -6,9 +6,15 @@ pt100_min = sc.io.loadmat('/home/jk125262/schubi/pt100_min.mat')['pt100_min']
 temp_min = sc.io.loadmat('/home/jk125262/schubi/temp_min.mat')['temp_min']
 temp_min_div = sc.io.loadmat('/home/jk125262/schubi/temp_min_div.mat')['temp_min_div']
 
-
-
 # Time differences in seconds
-pt100_t_sec = (pt100_min[:,0]-pt100_min[0,0])*24.0*60.0*60.0
-temp_t_sec = (temp_min[:,0]-temp_min[0,0])*24.0*60.0*60.0
-temp_div_t_sec = (temp_min_div[:,0]-temp_min_div[0,0])*24.0*60.0*60.0
+pt100_sec = np.zeros(pt100_min.shape)
+pt100_sec[:,0] = (pt100_min[:,0]-pt100_min[0,0])*24.0*60.0*60.0
+pt100_sec[:,1:] = pt100_min[:,1:]
+temp_sec = np.zeros(temp_min.shape)
+temp_sec[:,0] = (temp_min[:,0]-temp_min[0,0])*24.0*60.0*60.0
+temp_sec[:,1:] = temp_min[:,1:]
+temp_sec_div = np.zeros(temp_min_div.shape)
+temp_sec_div[:,0] = (temp_min_div[:,0]-temp_min_div[0,0])*24.0*60.0*60.0
+temp_sec_div[:,1:] = temp_min_div[:,1:]
+
+
