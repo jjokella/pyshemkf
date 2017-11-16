@@ -1,0 +1,74 @@
+import shutil
+import matplotlib.pyplot as plt
+
+from mypackage.plot import specs as sc
+import mypackage.monitor.arrays as ma
+import mypackage.monitor.plot as mp
+import mypackage.monitor.read as mr
+import mypackage.run.pythonmodule as pm
+
+# Switches
+is_read = 0
+is_plot = 1
+is_save = 0
+is_show = 1
+is_backup = 0
+
+# Specs
+model_name = 'schubi'
+dat = '2017_11_15'
+
+let = 'a'
+nl = 1
+ns = rm.get_num_let(let)
+nstep = 1
+lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+
+# Read
+if is_read:
+    for varname in ['time','uindex','head','temp']:
+        numpy_array, numpy_array_name = mr.read(model_name,
+                                                dat,
+                                                lets[0],
+                                                fname = 'SCHUBI_TRUE_E0_monitor_1.dat',
+                                                varname = varname,
+                                                num_mon = 1,   # from 1 til num-mons
+                                                    )
+        np.save(numpy_array_name,numpy_array)
+        print('Saved as ' + numpy_array_name)
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure(1,figsize=[15,10])
+    
+    # Run plot function
+    ax, pic_name = mp.plot(fig.add_subplot(1,1,1),
+                           model_name,
+                           dat,
+                           lets[0],
+                           is_labels=  True,
+                           is_ownticks = True,
+                           xownticks = [0.0+i*5000.0 for i in range(9)],
+                           yownticks = [15.0+i*1.0 for i in range(9)],
+                           # markercolor = 'black',
+                           pic_format = 'png',
+                           varname = 'temp'
+                       )
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(pm.python_scripts_dir,ma.tag,"runplot","ipy",model_name,dat,lets[0])
+

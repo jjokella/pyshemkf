@@ -14,6 +14,10 @@ output/forward/eps
 output/forward/npy
 output/forward/png
 output/forward/pdf
+output/monitor/eps
+output/monitor/npy
+output/monitor/png
+output/monitor/pdf
 output/sensitivity/npy
 output/sensitivity/png
 output/sensitivity/eps
