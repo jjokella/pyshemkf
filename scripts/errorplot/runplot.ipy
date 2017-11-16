@@ -17,7 +17,7 @@ is_save = 0
 is_show = 1
 is_backup = 0
 
-which_methods = [101,0,102,103,104,105,106]
+which_methods = [101,0,102,103,104,105,106,107]
 stat_method = 'mean'
 
 # Read
@@ -64,8 +64,8 @@ if is_plot:
                            std_method = 'stdm',
                            # n_runs = 100,
                            # which_enssize = [500,1000,2000],
-                           # ylims = [0.29,0.43],
-                           # yticks = [0.30,0.32,0.34,0.36,0.38,0.40,0.42],
+                           # ylims = [0.29,0.63],
+                           # yticks = [0.30,0.34,0.38,0.42,0.46,0.50,0.54,0.58],
                        )
     # Save
     if is_save:
