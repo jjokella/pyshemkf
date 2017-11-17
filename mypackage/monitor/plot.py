@@ -43,7 +43,7 @@ def plot(ax,
          pic_format = 'pdf',                        # 'png','eps','pdf'
 ):
     """
-    A plotting function for variable arrays in a NonUniformGrid.
+    A plotting function for monitoring time series.
 
     Parameters
     ----------

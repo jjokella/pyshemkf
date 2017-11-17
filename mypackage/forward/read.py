@@ -1,4 +1,4 @@
-# Read routine for forward pictures
+# Read routine for forward arrays
 
 import numpy as np
 from mypackage.plot import specs as sc
