@@ -31,6 +31,7 @@ def plot(ax,
          is_ownticks = True,
          varname = 'uindex',                        #'head','v','temp','kz', 'uindex'
          v_component = 1,                           #0,1,2
+         is_position = True,
          position = [0.1,0.1,0.6,0.8],
          xlims = [0.0,0.8032],
          ylims = [0.0,0.8032],
@@ -101,7 +102,8 @@ def plot(ax,
         var = np.ma.array(var,mask = np.logical_or(var<maskvalue-0.5,var>maskvalue+0.5))
 
     # Axis position
-    ax.set_position(position)
+    if is_position:
+        ax.set_position(position)
 
     # Create image
     im = mpl.image.NonUniformImage(ax,interpolation='nearest',
