@@ -17,7 +17,7 @@ from mypackage.plot import specs as sc
 import arrays as ma
 
 ###############################################################################
-#               Plot Nonuniform Image of Variable array                       #
+#               Plot of Variable array                                        #
 ###############################################################################
 
 def plot(ax,
@@ -25,7 +25,6 @@ def plot(ax,
          dat,
          let,
          num_mon = 1,
-         is_grid = True,
          is_labels= True,
          is_ownticks = True,
          varname = 'temp',                        #'head','v','temp','kz', 'uindex'
@@ -36,6 +35,9 @@ def plot(ax,
          # markersize=50,
          # markercolor='red',
          # markeralpha = 1.0,
+         legend_label = 'default',
+         xlabel = '[m]',
+         ylabel = '[m]',
          xlabelfontsize=40,
          ylabelfontsize=40,
          xownticks = [0.1+i*0.1 for i in range(9)],
@@ -72,7 +74,7 @@ def plot(ax,
     time = np.load(pm.py_output_filename(ma.tag,'time',sc.specl(model_name,dat,let)+'_'+str(num_mon),"npy"))
     var = np.load(pm.py_output_filename(ma.tag,varname,sc.specl(model_name,dat,let)+'_'+str(num_mon),"npy"))
 
-    ax.plot(time,var)
+    ax.plot(time,var,label=legend_label)
 
     # Axis position
     ax.set_position(position)
@@ -82,19 +84,13 @@ def plot(ax,
         ax.xaxis.set_ticks(xownticks)
         ax.yaxis.set_ticks(yownticks)
 
-    # Grid
-    if is_grid:
-        ax.grid()
-
     # Title
     # ax.set_title('Temperature field')
 
     # Labels
-    ax.set_xlabel('[m]',fontsize=xlabelfontsize, visible=is_labels)
-    ax.set_ylabel('[m]',fontsize=ylabelfontsize, visible=is_labels)
+    ax.set_xlabel(xlabel,fontsize=xlabelfontsize, visible=is_labels)
+    ax.set_ylabel(ylabel,fontsize=ylabelfontsize, visible=is_labels)
     ax.tick_params(length = 20 if is_labels else 0)
-    # ax.set_yticklabels(ax.get_yticklabels(),visible=is_labels)
-    # ax.set_xticklabels(ax.get_xticklabels(),visible=is_labels)
 
     # Axis Limits
     ax.set_xlim(xlims[0],xlims[1])
