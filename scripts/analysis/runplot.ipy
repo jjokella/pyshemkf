@@ -11,24 +11,26 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_read = 1
 is_plot = 1
-is_save = 1
+is_save = 0
 is_show = 1
-is_backup = 1
+is_backup = 0
 
 # Specs
-model_name = 'wavebc'
-dat = '2017_09_20'
-let = 'b'
+model_name = 'wavehead'
+dat = '2017_11_21'
+let = 'dc'
 
 # Letters of wanted range
 lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
+
+nt = 110
 
 # Read
 if is_read:
     for varname in ['kz_mean']:
         numpy_array, numpy_array_name = ar.read(model_name,dat,lets[0],
                                                 varname = varname,
-                                                nt = 2,
+                                                nt = nt,
                                                 befaft = 'aft'
                                                     )
         np.save(numpy_array_name,numpy_array)
@@ -45,7 +47,7 @@ if is_plot:
                            model_name,
                            dat,
                            lets[0],
-                           nt = 2,
+                           nt = nt,
                            diff_ticks = 2,
                            num_cbar = 15,
                            pic_format = 'png',
