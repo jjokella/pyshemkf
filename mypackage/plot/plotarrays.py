@@ -47,6 +47,7 @@ names_methods = {
     123:'NS-EnKF',
     133:'DualEnKF',
     143:'Hyb-EnKF',
+    153:'LEnKF',
     }
 longnames_methods = {
     0:'EnKF',
@@ -68,6 +69,7 @@ longnames_methods = {
     123:'NS-EnKF: Huge obsvar',
     133:'DualEnKF: Huge obsvar',
     143:'Hyb-EnKF: Huge obsvar',
+    153:'LEnKF: Huge obsvar',
     }
 
 # Indices RMSE-sorted, low to high
@@ -416,6 +418,17 @@ hybridhugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 hybridhugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 hybridhugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# localisationhuge Measurement Noise
+localisationhugemeasnoise_wavebc_dats = {500:'2017_11_12',1000:'2017_11_12',2000:'2017_11_12'}
+localisationhugemeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+localisationhugemeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
+localisationhugemeasnoise_wavebc_obss = {500:100,1000:100,2000:100}
+
+localisationhugemeasnoise1000_wavebc_dats = {50:'2017_11_12',70:'2017_11_12',100:'2017_11_12',250:'2017_11_12'}
+localisationhugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+localisationhugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+localisationhugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
 
 # Dictionaries
 dats = {
@@ -440,6 +453,7 @@ dats = {
             123:normalscorehugemeasnoise1000_wavebc_dats,
             133:dualhugemeasnoise1000_wavebc_dats,
             143:hybridhugemeasnoise1000_wavebc_dats,
+            153:localisationhugemeasnoise1000_wavebc_dats,
             },
         100: {
             0:normal_wavebc_dats,
@@ -461,6 +475,7 @@ dats = {
             123:normalscorehugemeasnoise_wavebc_dats,
             133:dualhugemeasnoise_wavebc_dats,
             143:hybridhugemeasnoise_wavebc_dats,
+            153:localisationhugemeasnoise_wavebc_dats,
             },
         },
     'wave': {
@@ -506,6 +521,7 @@ lets = {
             123:normalscorehugemeasnoise1000_wavebc_lets,
             133:dualhugemeasnoise1000_wavebc_lets,
             143:hybridhugemeasnoise1000_wavebc_lets,
+            153:localisationhugemeasnoise1000_wavebc_lets,
             },
         100: {
             0:normal_wavebc_lets,
@@ -527,6 +543,7 @@ lets = {
             123:normalscorehugemeasnoise_wavebc_lets,
             133:dualhugemeasnoise_wavebc_lets,
             143:hybridhugemeasnoise_wavebc_lets,
+            153:localisationhugemeasnoise_wavebc_lets,
             },
         },
     'wave': {
@@ -572,6 +589,7 @@ nums = {
             123:normalscorehugemeasnoise1000_wavebc_nums,
             133:dualhugemeasnoise1000_wavebc_nums,
             143:hybridhugemeasnoise1000_wavebc_nums,
+            153:localisationhugemeasnoise1000_wavebc_nums,
             },
         100: {
             0:normal_wavebc_nums,
@@ -593,6 +611,7 @@ nums = {
             123:normalscorehugemeasnoise_wavebc_nums,
             133:dualhugemeasnoise_wavebc_nums,
             143:hybridhugemeasnoise_wavebc_nums,
+            153:localisationhugemeasnoise_wavebc_nums,
             },
         },
     'wave': {
@@ -639,6 +658,7 @@ num_obss = {
             123:normalscorehugemeasnoise1000_wavebc_obss,
             133:dualhugemeasnoise1000_wavebc_obss,
             143:hybridhugemeasnoise1000_wavebc_obss,
+            153:localisationhugemeasnoise1000_wavebc_obss,
             },
         100: {
             0:normal_wavebc_obss,
@@ -659,6 +679,7 @@ num_obss = {
             123:normalscorehugemeasnoise_wavebc_obss,
             133:dualhugemeasnoise_wavebc_obss,
             143:hybridhugemeasnoise_wavebc_obss,
+            153:localisationhugemeasnoise_wavebc_obss,
             },
         },
     'wave': {
