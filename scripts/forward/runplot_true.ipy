@@ -2,6 +2,7 @@ import shutil
 import matplotlib.pyplot as plt
 
 from mypackage.plot import specs as sc
+from mypackage.run import runmodule as rm
 import mypackage.forward.arrays as fa
 import mypackage.forward.plot as fp
 import mypackage.forward.read as fr
