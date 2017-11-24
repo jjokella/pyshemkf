@@ -17,9 +17,9 @@ is_backup = 0
 
 # Specs
 model_name = 'wavehead'
-dat = '2017_11_20'
+dat = '2017_11_23'
 
-let = 'aa'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
@@ -59,6 +59,7 @@ if is_plot:
                            varname = plotvarname,
                            xlims = [0.0,620.0],
                            ylims = [0.0,620.0],
+                           loc_inds = range(49),
                            nt = nt,
                        )
 
