@@ -33,6 +33,7 @@ def plot(ax,
          is_ownticks = False,
          varname = 'kz_mean',                        #'head','v','temp','kz', 'uindex'
          v_component = 1,                           #0,1,2
+         is_position = True,
          position = [0.1,0.1,0.6,0.8],
          is_ownlims = False,
          xlims = [0.0,620.0],
@@ -113,7 +114,8 @@ def plot(ax,
         var = np.ma.array(var,mask = np.logical_or(var<maskvalue-0.5,var>maskvalue+0.5))
 
     # Axis position
-    ax.set_position(position)
+    if is_position:
+        ax.set_position(position)
 
     # Create image
     im = mpl.image.NonUniformImage(ax,interpolation='nearest',
