@@ -1,0 +1,79 @@
+import shutil
+import matplotlib.pyplot as plt
+
+from mypackage.plot import specs as sc
+import mypackage.analysis.arrays as aa
+import mypackage.analysis.variables as av
+import mypackage.analysis.plot as ap
+import mypackage.analysis.read as ar
+import mypackage.run.pythonmodule as pm
+
+# Switches
+is_read = 1
+is_plot = 1
+is_save = 0
+is_show = 1
+is_backup = 0
+
+# Specs
+model_name = 'wavehead'
+dat = '2017_11_22'
+let = 'b'
+
+# Letters of wanted range
+lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
+
+nts = [10,20,30,40,50,60,70,80,90]
+
+# Read
+if is_read:
+    for nt in nts:
+        for varname in ['kz_mean']:
+            numpy_array, numpy_array_name = ar.read(model_name,dat,lets[0],
+                                                    varname = varname,
+                                                    nt = nt,
+                                                    befaft = 'aft'
+                                                        )
+            np.save(numpy_array_name,numpy_array)
+            print('Saved as ' + numpy_array_name)
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure(1,figsize=[15,15])
+
+    for it,nt in enumerate(nts):
+        # Run plot function
+        ax, pic_name = ap.plot(fig.add_subplot(3,3,it+1),
+                               model_name,
+                               dat,
+                               lets[0],
+                               nt = nt,
+                               diff_ticks = 2,
+                               num_cbar = 15,
+                               is_position = False,
+                               pic_format = 'png',
+                               varname = 'kz_mean'
+                           )
+
+    # # Colorbar
+    # cb_ax = ap.cb(fig.add_subplot(1,2,1),
+    #               ax)
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(pm.python_scripts_dir,av.tag,"runplot","ipy",model_name,dat,lets[0])
+    
+
