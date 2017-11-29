@@ -15,16 +15,16 @@ is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavehead'
-dat = '2017_11_20'
+model_name = 'wavewell'
+dat = '2017_11_27'
 
-let = 'a'
+let = 'b'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
-nts = [1,4,6,8,10,12,14,17,19]
+nts = [2,4,6,8,10,12,14,17,19]
 plotvarname = 'head'
 
 # Read
@@ -35,7 +35,7 @@ if is_read:
                                                     dat,
                                                     lets[0],
                                                     varname = varname,
-                                                    fname = 'WAVEHEAD_TRUE_E0_time_out_'+str(nt)+'.vtk',
+                                                    fname = 'WAVEWELL_TRUE_E0_time_out_'+str(nt)+'.vtk',
                                                     nt = nt,
                                                         )
             np.save(numpy_array_name,numpy_array)
@@ -63,7 +63,9 @@ if is_plot:
                                ylims = [0.0,620.0],
                                nt = nt,
                                is_position = False,
-                           )
+                               loc_inds = range(48),
+                               num_cbar = 11,
+                                   )
 
     # Colorbar
     # cb_ax = fp.cb(fig.add_subplot(1,2,1),

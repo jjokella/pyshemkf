@@ -11,14 +11,14 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_read = 1
 is_plot = 1
-is_save = 0
+is_save = 1
 is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavehead'
-dat = '2017_11_22'
-let = 'b'
+model_name = 'wavewell'
+dat = '2017_11_27'
+let = 'c'
 
 # Letters of wanted range
 lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
