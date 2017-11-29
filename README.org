@@ -260,4 +260,10 @@
      The two kinds of files loaded: 'av', 'sc' possible
 **** s_sc_cell_vars
      The two Variables: 3 for conc, 4 for kz
-     
+** Python commands
+*** Rename files                                                   :shutil:
+- shutil.move
+*** List files in directory                                            :os:
+- os.listdir('.')
+*** Find string in string                                             :str:
+- str.find(bigstr,partstr)
