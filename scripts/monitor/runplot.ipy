@@ -33,7 +33,7 @@ if is_read:
             numpy_array, numpy_array_name = mr.read(model_name,
                                                     dat,
                                                         lets[0],
-                                                        fname = 'WAVEHEAD_TRUE_E0_monitor_1.dat',
+                                                        fname = model_name.upper()+'_TRUE_E0_monitor_1.dat',
                                                         varname = varname,
                                                         num_mon = num_mon,   # from 1 til num-mons
                                                         )

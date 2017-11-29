@@ -35,7 +35,7 @@ if is_read:
                                                     dat,
                                                     lets[0],
                                                     varname = varname,
-                                                    fname = 'WAVEWELL_TRUE_E0_time_out_'+str(nt)+'.vtk',
+                                                    fname = model_name.upper()+'_TRUE_E0_time_out_'+str(nt)+'.vtk',
                                                     nt = nt,
                                                         )
             np.save(numpy_array_name,numpy_array)
