@@ -44,6 +44,7 @@ names_methods = {
     105:'EnKF',
     106:'EnKF',
     107:'EnKF',
+    108:'EnKF',
     113:'Damped',
     123:'NS-EnKF',
     133:'DualEnKF',
@@ -67,6 +68,7 @@ longnames_methods = {
     105:'EnKF: Giga obsvar',
     106:'EnKF: Exa obsvar',
     107:'EnKF: Peta obsvar',
+    108:'EnKF: Huge obsvar, no init',
     113:'Damped: Huge obsvar',
     123:'NS-EnKF: Huge obsvar',
     133:'DualEnKF: Huge obsvar',
@@ -343,6 +345,17 @@ hugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 hugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 hugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# Huge Measurement Noise, no initial boundary condition perturbation
+hugemeasnoisenoinit_wavebc_dats = {500:'2017_11_15',1000:'2017_11_15',2000:'2017_11_15'}
+hugemeasnoisenoinit_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hugemeasnoisenoinit_wavebc_nums = {500:100,1000:100,2000:100}
+hugemeasnoisenoinit_wavebc_obss = {500:100,1000:100,2000:100}
+
+hugemeasnoisenoinit1000_wavebc_dats = {50:'2017_11_15',70:'2017_11_15',100:'2017_11_15',250:'2017_11_15'}
+hugemeasnoisenoinit1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hugemeasnoisenoinit1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+hugemeasnoisenoinit1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
 # Mega Measurement Noise
 megameasnoise_wavebc_dats = {500:'2017_11_04',1000:'2017_11_04',2000:'2017_11_04'}
 megameasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
@@ -463,6 +476,7 @@ dats = {
             105:gigameasnoise1000_wavebc_dats,
             106:exameasnoise1000_wavebc_dats,
             107:petameasnoise1000_wavebc_dats,
+            108:hugemeasnoisenoinit1000_wavebc_dats,
             113:dampinghugemeasnoise1000_wavebc_dats,
             123:normalscorehugemeasnoise1000_wavebc_dats,
             133:dualhugemeasnoise1000_wavebc_dats,
@@ -486,6 +500,7 @@ dats = {
             105:gigameasnoise_wavebc_dats,
             106:exameasnoise_wavebc_dats,
             107:petameasnoise_wavebc_dats,
+            108:hugemeasnoisenoinit_wavebc_dats,
             113:dampinghugemeasnoise_wavebc_dats,
             123:normalscorehugemeasnoise_wavebc_dats,
             133:dualhugemeasnoise_wavebc_dats,
@@ -533,6 +548,7 @@ lets = {
             105:gigameasnoise1000_wavebc_lets,
             106:exameasnoise1000_wavebc_lets,
             107:petameasnoise1000_wavebc_lets,
+            108:hugemeasnoisenoinit1000_wavebc_lets,
             113:dampinghugemeasnoise1000_wavebc_lets,
             123:normalscorehugemeasnoise1000_wavebc_lets,
             133:dualhugemeasnoise1000_wavebc_lets,
@@ -556,6 +572,7 @@ lets = {
             105:gigameasnoise_wavebc_lets,
             106:exameasnoise_wavebc_lets,
             107:petameasnoise_wavebc_lets,
+            108:hugemeasnoisenoinit_wavebc_lets,
             113:dampinghugemeasnoise_wavebc_lets,
             123:normalscorehugemeasnoise_wavebc_lets,
             133:dualhugemeasnoise_wavebc_lets,
@@ -603,6 +620,7 @@ nums = {
             105:gigameasnoise1000_wavebc_nums,
             106:exameasnoise1000_wavebc_nums,
             107:petameasnoise1000_wavebc_nums,
+            108:hugemeasnoisenoinit1000_wavebc_nums,
             113:dampinghugemeasnoise1000_wavebc_nums,
             123:normalscorehugemeasnoise1000_wavebc_nums,
             133:dualhugemeasnoise1000_wavebc_nums,
@@ -626,6 +644,7 @@ nums = {
             105:gigameasnoise_wavebc_nums,
             106:exameasnoise_wavebc_nums,
             107:petameasnoise_wavebc_nums,
+            108:hugemeasnoisenoinit_wavebc_nums,
             113:dampinghugemeasnoise_wavebc_nums,
             123:normalscorehugemeasnoise_wavebc_nums,
             133:dualhugemeasnoise_wavebc_nums,
@@ -674,6 +693,7 @@ num_obss = {
             105:gigameasnoise1000_wavebc_obss,
             106:exameasnoise1000_wavebc_obss,
             107:petameasnoise1000_wavebc_obss,
+            108:hugemeasnoisenoinit1000_wavebc_obss,
             113:dampinghugemeasnoise1000_wavebc_obss,
             123:normalscorehugemeasnoise1000_wavebc_obss,
             133:dualhugemeasnoise1000_wavebc_obss,
@@ -696,6 +716,7 @@ num_obss = {
             105:gigameasnoise_wavebc_obss,
             106:exameasnoise_wavebc_obss,
             107:petameasnoise_wavebc_obss,
+            108:hugemeasnoisenoinit_wavebc_obss,
             113:dampinghugemeasnoise_wavebc_obss,
             123:normalscorehugemeasnoise_wavebc_obss,
             133:dualhugemeasnoise_wavebc_obss,
