@@ -8,7 +8,7 @@ import mypackage.monitor.read as mr
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 0
+is_read = 1
 is_plot = 1
 is_save = 0
 is_show = 1
@@ -16,9 +16,9 @@ is_backup = 0
 
 # Specs
 model_name = 'wavewell'
-dat = '2017_11_27'
+dat = '2017_12_01'
 
-let = 'b'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1

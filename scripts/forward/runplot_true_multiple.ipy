@@ -16,9 +16,9 @@ is_backup = 0
 
 # Specs
 model_name = 'wavewell'
-dat = '2017_11_27'
+dat = '2017_12_04'
 
-let = 'b'
+let = 'c'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1

@@ -17,7 +17,7 @@ is_backup = 0
 
 # Specs
 model_name = 'wavewell'
-dat = '2017_11_27'
+dat = '2017_12_01'
 
 let = 'a'
 nl = 1
@@ -26,7 +26,7 @@ nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
 nt = 2
-plotvarname = 'head'
+plotvarname = 'kz'
 
 # Read
 if is_read:
