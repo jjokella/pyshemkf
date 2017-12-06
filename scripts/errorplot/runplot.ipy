@@ -17,7 +17,7 @@ is_save = 1
 is_show = 1
 is_backup = 0
 
-which_methods = [5,151,153]
+which_methods = [5,151,152,153]
 # which_methods = [113,103,123,133,143,153]
 # which_methods = [1,0,2,3,4,5]
 stat_method = 'mean'
