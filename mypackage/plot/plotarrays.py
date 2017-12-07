@@ -51,6 +51,7 @@ names_methods = {
     141:'Hyb-EnKF',
     142:'Hyb-EnKF',
     143:'Hyb-EnKF',
+    144:'Hyb-EnKF',
     151:'LEnKF',
     152:'LEnKF',
     153:'LEnKF',
@@ -81,6 +82,7 @@ longnames_methods = {
     141:'Hyb-EnKF: 0.25',
     142:'Hyb-EnKF: 0.75',
     143:'Hyb-EnKF: Huge obsvar',
+    144:'Hyb-EnKF: 0.25 Huge obsvar',
     151:'LEnKF: 75m',
     152:'LEnKF: 300m',
     153:'LEnKF: Huge obsvar',
@@ -476,6 +478,17 @@ hybridhugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 hybridhugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 hybridhugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# hybridhuge Measurement Noise, small coefficient
+hybridsmallhugemeasnoise_wavebc_dats = {500:'2017_11_20',1000:'2017_11_20',2000:'2017_11_20'}
+hybridsmallhugemeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hybridsmallhugemeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
+hybridsmallhugemeasnoise_wavebc_obss = {500:100,1000:100,2000:100}
+
+hybridsmallhugemeasnoise1000_wavebc_dats = {50:'2017_11_20',70:'2017_11_20',100:'2017_11_20',250:'2017_11_20'}
+hybridsmallhugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hybridsmallhugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+hybridsmallhugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
 # localisationhuge Measurement Noise
 localisationhugemeasnoise_wavebc_dats = {500:'2017_11_12',1000:'2017_11_12',2000:'2017_11_12'}
 localisationhugemeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
@@ -559,6 +572,7 @@ dats = {
             141:hybridsmall1000_wavebc_dats,
             142:hybridlarge1000_wavebc_dats,
             143:hybridhugemeasnoise1000_wavebc_dats,
+            144:hybridsmallhugemeasnoise1000_wavebc_dats,
             151:localisationsmallcorrlen1000_wavebc_dats,
             152:localisationlargecorrlen1000_wavebc_dats,
             153:localisationhugemeasnoise1000_wavebc_dats,
@@ -589,6 +603,7 @@ dats = {
             141:hybridsmall_wavebc_dats,
             142:hybridlarge_wavebc_dats,
             143:hybridhugemeasnoise_wavebc_dats,
+            144:hybridsmallhugemeasnoise_wavebc_dats,
             151:localisationsmallcorrlen_wavebc_dats,
             152:localisationlargecorrlen_wavebc_dats,
             153:localisationhugemeasnoise_wavebc_dats,
@@ -643,6 +658,7 @@ lets = {
             141:hybridsmall1000_wavebc_lets,
             142:hybridlarge1000_wavebc_lets,
             143:hybridhugemeasnoise1000_wavebc_lets,
+            144:hybridsmallhugemeasnoise1000_wavebc_lets,
             151:localisationsmallcorrlen1000_wavebc_lets,
             152:localisationlargecorrlen1000_wavebc_lets,
             153:localisationhugemeasnoise1000_wavebc_lets,
@@ -673,6 +689,7 @@ lets = {
             141:hybridsmall_wavebc_lets,
             142:hybridlarge_wavebc_lets,
             143:hybridhugemeasnoise_wavebc_lets,
+            144:hybridsmallhugemeasnoise_wavebc_lets,
             151:localisationsmallcorrlen_wavebc_lets,
             152:localisationlargecorrlen_wavebc_lets,
             153:localisationhugemeasnoise_wavebc_lets,
@@ -727,6 +744,7 @@ nums = {
             141:hybridsmall1000_wavebc_nums,
             142:hybridlarge1000_wavebc_nums,
             143:hybridhugemeasnoise1000_wavebc_nums,
+            144:hybridsmallhugemeasnoise1000_wavebc_nums,
             151:localisationsmallcorrlen1000_wavebc_nums,
             152:localisationlargecorrlen1000_wavebc_nums,
             153:localisationhugemeasnoise1000_wavebc_nums,
@@ -757,6 +775,7 @@ nums = {
             141:hybridsmall_wavebc_nums,
             142:hybridlarge_wavebc_nums,
             143:hybridhugemeasnoise_wavebc_nums,
+            144:hybridsmallhugemeasnoise_wavebc_nums,
             151:localisationsmallcorrlen_wavebc_nums,
             152:localisationlargecorrlen_wavebc_nums,
             153:localisationhugemeasnoise_wavebc_nums,
@@ -812,6 +831,7 @@ num_obss = {
             141:hybridsmall1000_wavebc_obss,
             142:hybridlarge1000_wavebc_obss,
             143:hybridhugemeasnoise1000_wavebc_obss,
+            144:hybridsmallhugemeasnoise1000_wavebc_obss,
             151:localisationsmallcorrlen1000_wavebc_obss,
             152:localisationlargecorrlen1000_wavebc_obss,
             153:localisationhugemeasnoise1000_wavebc_obss,
@@ -841,6 +861,7 @@ num_obss = {
             141:hybridsmall_wavebc_obss,
             142:hybridlarge_wavebc_obss,
             143:hybridhugemeasnoise_wavebc_obss,
+            144:hybridsmallhugemeasnoise_wavebc_obss,
             151:localisationsmallcorrlen_wavebc_obss,
             152:localisationlargecorrlen_wavebc_obss,
             153:localisationhugemeasnoise_wavebc_obss,
