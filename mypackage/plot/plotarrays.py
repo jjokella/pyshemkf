@@ -48,6 +48,7 @@ names_methods = {
     113:'Damped',
     123:'NS-EnKF',
     133:'DualEnKF',
+    142:'Hyb-EnKF',
     143:'Hyb-EnKF',
     151:'LEnKF',
     152:'LEnKF',
@@ -76,6 +77,7 @@ longnames_methods = {
     113:'Damped: Huge obsvar',
     123:'NS-EnKF: Huge obsvar',
     133:'DualEnKF: Huge obsvar',
+    142:'Hyb-EnKF: 0.75',
     143:'Hyb-EnKF: Huge obsvar',
     151:'LEnKF: 75m',
     152:'LEnKF: 300m',
@@ -439,6 +441,17 @@ dualhugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 dualhugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 dualhugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# hybrid large coefficient
+hybridlarge_wavebc_dats = {500:'2017_12_02',1000:'2017_12_02',2000:'2017_12_02'}
+hybridlarge_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hybridlarge_wavebc_nums = {500:100,1000:100,2000:100}
+hybridlarge_wavebc_obss = {500:100,1000:100,2000:100}
+
+hybridlarge1000_wavebc_dats = {50:'2017_12_02',70:'2017_12_02',100:'2017_12_02',250:'2017_12_02'}
+hybridlarge1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hybridlarge1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+hybridlarge1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
 # hybridhuge Measurement Noise
 hybridhugemeasnoise_wavebc_dats = {500:'2017_11_11',1000:'2017_11_11',2000:'2017_11_11'}
 hybridhugemeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
@@ -530,6 +543,7 @@ dats = {
             113:dampinghugemeasnoise1000_wavebc_dats,
             123:normalscorehugemeasnoise1000_wavebc_dats,
             133:dualhugemeasnoise1000_wavebc_dats,
+            142:hybridlarge1000_wavebc_dats,
             143:hybridhugemeasnoise1000_wavebc_dats,
             151:localisationsmallcorrlen1000_wavebc_dats,
             152:localisationlargecorrlen1000_wavebc_dats,
@@ -558,6 +572,7 @@ dats = {
             113:dampinghugemeasnoise_wavebc_dats,
             123:normalscorehugemeasnoise_wavebc_dats,
             133:dualhugemeasnoise_wavebc_dats,
+            142:hybridlarge_wavebc_dats,
             143:hybridhugemeasnoise_wavebc_dats,
             151:localisationsmallcorrlen_wavebc_dats,
             152:localisationlargecorrlen_wavebc_dats,
@@ -610,6 +625,7 @@ lets = {
             113:dampinghugemeasnoise1000_wavebc_lets,
             123:normalscorehugemeasnoise1000_wavebc_lets,
             133:dualhugemeasnoise1000_wavebc_lets,
+            142:hybridlarge1000_wavebc_lets,
             143:hybridhugemeasnoise1000_wavebc_lets,
             151:localisationsmallcorrlen1000_wavebc_lets,
             152:localisationlargecorrlen1000_wavebc_lets,
@@ -638,6 +654,7 @@ lets = {
             113:dampinghugemeasnoise_wavebc_lets,
             123:normalscorehugemeasnoise_wavebc_lets,
             133:dualhugemeasnoise_wavebc_lets,
+            142:hybridlarge_wavebc_lets,
             143:hybridhugemeasnoise_wavebc_lets,
             151:localisationsmallcorrlen_wavebc_lets,
             152:localisationlargecorrlen_wavebc_lets,
@@ -690,6 +707,7 @@ nums = {
             113:dampinghugemeasnoise1000_wavebc_nums,
             123:normalscorehugemeasnoise1000_wavebc_nums,
             133:dualhugemeasnoise1000_wavebc_nums,
+            142:hybridlarge1000_wavebc_nums,
             143:hybridhugemeasnoise1000_wavebc_nums,
             151:localisationsmallcorrlen1000_wavebc_nums,
             152:localisationlargecorrlen1000_wavebc_nums,
@@ -718,6 +736,7 @@ nums = {
             113:dampinghugemeasnoise_wavebc_nums,
             123:normalscorehugemeasnoise_wavebc_nums,
             133:dualhugemeasnoise_wavebc_nums,
+            142:hybridlarge_wavebc_nums,
             143:hybridhugemeasnoise_wavebc_nums,
             151:localisationsmallcorrlen_wavebc_nums,
             152:localisationlargecorrlen_wavebc_nums,
@@ -771,6 +790,7 @@ num_obss = {
             113:dampinghugemeasnoise1000_wavebc_obss,
             123:normalscorehugemeasnoise1000_wavebc_obss,
             133:dualhugemeasnoise1000_wavebc_obss,
+            142:hybridlarge1000_wavebc_obss,
             143:hybridhugemeasnoise1000_wavebc_obss,
             151:localisationsmallcorrlen1000_wavebc_obss,
             152:localisationlargecorrlen1000_wavebc_obss,
@@ -798,6 +818,7 @@ num_obss = {
             113:dampinghugemeasnoise_wavebc_obss,
             123:normalscorehugemeasnoise_wavebc_obss,
             133:dualhugemeasnoise_wavebc_obss,
+            142:hybridlarge_wavebc_obss,
             143:hybridhugemeasnoise_wavebc_obss,
             151:localisationsmallcorrlen_wavebc_obss,
             152:localisationlargecorrlen_wavebc_obss,
