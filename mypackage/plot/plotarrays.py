@@ -58,6 +58,7 @@ names_methods = {
     153:'LEnKF',
     154:'LEnKF',
     155:'LEnKF',
+    163:'IEnKF',
     }
 longnames_methods = {
     0:'EnKF',
@@ -90,6 +91,7 @@ longnames_methods = {
     153:'LEnKF: Huge obsvar',
     154:'LEnKF: 75m Huge obsvar',
     155:'LEnKF: 300m Huge obsvar',
+    163:'IEnKF: Huge obsvar',
     }
 
 # Indices RMSE-sorted, low to high
@@ -557,6 +559,18 @@ localisationlargecorrhugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',
 localisationlargecorrhugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 localisationlargecorrhugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+# iterativehuge Measurement Noise
+iterativehugemeasnoise_wavebc_dats = {500:'2017_11_13',1000:'2017_11_13',2000:'2017_11_13'}
+iterativehugemeasnoise_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+iterativehugemeasnoise_wavebc_nums = {500:100,1000:100,2000:100}
+iterativehugemeasnoise_wavebc_obss = {500:100,1000:100,2000:100}
+
+iterativehugemeasnoise1000_wavebc_dats = {50:'2017_11_13',70:'2017_11_13',100:'2017_11_13',250:'2017_11_13'}
+iterativehugemeasnoise1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+iterativehugemeasnoise1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
+iterativehugemeasnoise1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
+
 
 # Dictionaries
 dats = {
@@ -592,6 +606,7 @@ dats = {
             153:localisationhugemeasnoise1000_wavebc_dats,
             154:localisationsmallcorrhugemeasnoise1000_wavebc_dats,
             155:localisationlargecorrhugemeasnoise1000_wavebc_dats,
+            163:iterativehugemeasnoise1000_wavebc_dats,
             },
         100: {
             0:normal_wavebc_dats,
@@ -624,6 +639,7 @@ dats = {
             153:localisationhugemeasnoise_wavebc_dats,
             154:localisationsmallcorrhugemeasnoise_wavebc_dats,
             155:localisationlargecorrhugemeasnoise_wavebc_dats,
+            163:iterativehugemeasnoise_wavebc_dats,
             },
         },
     'wave': {
@@ -680,6 +696,7 @@ lets = {
             153:localisationhugemeasnoise1000_wavebc_lets,
             154:localisationsmallcorrhugemeasnoise1000_wavebc_lets,
             155:localisationlargecorrhugemeasnoise1000_wavebc_lets,
+            163:iterativehugemeasnoise1000_wavebc_lets,
             },
         100: {
             0:normal_wavebc_lets,
@@ -712,6 +729,7 @@ lets = {
             153:localisationhugemeasnoise_wavebc_lets,
             154:localisationsmallcorrhugemeasnoise_wavebc_lets,
             155:localisationlargecorrhugemeasnoise_wavebc_lets,
+            163:iterativehugemeasnoise_wavebc_lets,
             },
         },
     'wave': {
@@ -768,6 +786,7 @@ nums = {
             153:localisationhugemeasnoise1000_wavebc_nums,
             154:localisationsmallcorrhugemeasnoise1000_wavebc_nums,
             155:localisationlargecorrhugemeasnoise1000_wavebc_nums,
+            163:iterativehugemeasnoise1000_wavebc_nums,
             },
         100: {
             0:normal_wavebc_nums,
@@ -800,6 +819,7 @@ nums = {
             153:localisationhugemeasnoise_wavebc_nums,
             154:localisationsmallcorrhugemeasnoise_wavebc_nums,
             155:localisationlargecorrhugemeasnoise_wavebc_nums,
+            163:iterativehugemeasnoise_wavebc_nums,
             },
         },
     'wave': {
@@ -857,6 +877,7 @@ num_obss = {
             153:localisationhugemeasnoise1000_wavebc_obss,
             154:localisationsmallcorrhugemeasnoise1000_wavebc_obss,
             155:localisationlargecorrhugemeasnoise1000_wavebc_obss,
+            163:iterativehugemeasnoise1000_wavebc_obss,
             },
         100: {
             0:normal_wavebc_obss,
@@ -888,6 +909,7 @@ num_obss = {
             153:localisationhugemeasnoise_wavebc_obss,
             154:localisationsmallcorrhugemeasnoise_wavebc_obss,
             155:localisationlargecorrhugemeasnoise_wavebc_obss,
+            163:iterativehugemeasnoise_wavebc_obss,
             },
         },
     'wave': {
