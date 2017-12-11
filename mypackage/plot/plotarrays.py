@@ -232,6 +232,16 @@ damping1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 damping1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 damping1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+damping_wavewell_dats = {500:'2017_12_09',1000:'2017_12_09',2000:'2017_12_09'}
+damping_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+damping_wavewell_nums = {500:100,1000:100,2000:100}
+damping_wavewell_obss = {500:100,1000:100,2000:100}
+
+damping1000_wavewell_dats = {50:'2017_12_09',70:'2017_12_09',100:'2017_12_09',250:'2017_12_09'}
+damping1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+damping1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+damping1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
 # Normal Score
 normalscoreverynew_dats = {50:'2015_10_01',70:'2015_12_17',100:'2015_10_01',
                            250:'2015_10_01',500:'2015_10_01',1000:'2015_10_01',2000:'2015_10_01'}
@@ -701,9 +711,11 @@ dats = {
     'wavewell':{
         1000: {
             0:normal1000_wavewell_dats,
+            1:damping1000_wavewell_dats,
             },
         100: {
             0:normal_wavewell_dats,
+            1:damping_wavewell_dats,
             },
         },
     }
@@ -799,9 +811,11 @@ lets = {
     'wavewell':{
         1000: {
             0:normal1000_wavewell_lets,
+            1:damping1000_wavewell_lets,
             },
         100: {
             0:normal_wavewell_lets,
+            1:damping_wavewell_lets,
             },
         },
     }
@@ -897,9 +911,11 @@ nums = {
     'wavewell':{
         1000: {
             0:normal1000_wavewell_nums,
+            1:damping1000_wavewell_nums,
             },
         100: {
             0:normal_wavewell_nums,
+            1:damping_wavewell_nums,
             },
         },
     }
@@ -995,9 +1011,11 @@ num_obss = {
     'wavewell':{
         1000: {
             0:normal1000_wavewell_obss,
+            1:damping1000_wavewell_obss,
             },
         100: {
             0:normal_wavewell_obss,
+            1:damping_wavewell_obss,
             },
         },
     }
