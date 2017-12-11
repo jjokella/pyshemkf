@@ -8,17 +8,17 @@ from mypackage.run import pythonmodule as pm
 from mypackage.run import runmodule as rm
 import pandas as pd
 
-model_name = 'wavebc'
+model_name = 'wavewell'
 
 num_ensemble_sizes = 7
 two_iterations = False                    # True: residual_E2.vtk
 # method = 16
 
-dats = ['2017_11_13' for i in range(num_ensemble_sizes)]
+dats = ['2017_12_10' for i in range(num_ensemble_sizes)]
 lets = ['b','aln','bxz','dkl','ewx','gjj','hvv']
 #      ['b','aln','bxz','dkl','ewx','gjj','hvv','jih','kut','mhf','ntr','pgd']
 nums = [1000,1000,1000,1000,100,100,100]#[1000 for i in range(num_ensemble_sizes)]
-num_obss = [100 for i in range(num_ensemble_sizes)]
+num_obss = [60 for i in range(num_ensemble_sizes)]
 
 for j in range(num_ensemble_sizes):
     # Read in specific date, letter, ensemble size and number of observations
