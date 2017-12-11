@@ -16,15 +16,15 @@ is_backup = 0
 
 # Specs
 model_name = 'wavewell'
-dat = '2017_12_04'
+dat = '2017_12_11'
 
-let = 'c'
+let = 'g'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
-nts = [2,4,6,8,10,12,14,17,19]
+nts = [2,4,6,8,10,12,14,17,18]
 plotvarname = 'head'
 
 # Read

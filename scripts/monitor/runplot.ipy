@@ -8,7 +8,7 @@ import mypackage.monitor.read as mr
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 1
+is_read = 0
 is_plot = 1
 is_save = 0
 is_show = 1
@@ -16,15 +16,15 @@ is_backup = 0
 
 # Specs
 model_name = 'wavewell'
-dat = '2017_12_01'
+dat = '2017_12_11'
 
-let = 'a'
+let = 'g'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
-mons = range(31,39)
+mons = range(1,49)
 
 # Read
 if is_read:
@@ -55,9 +55,9 @@ if is_plot:
                                    is_labels=  True,
                                    is_ownticks = False,
                                    # markercolor = 'black',
-                                   xlims = [0.0,180.0],
-                                   ylims = [10.0,10.10],
-                                   xlabel = 't [min]',
+                                   xlims = [0.0,20.0],
+                                   ylims = [10.0,10.40],
+                                   xlabel = 't [days]',
                                    ylabel = 'h [m]',
                                    pic_format = 'png',
                                    varname = 'head',

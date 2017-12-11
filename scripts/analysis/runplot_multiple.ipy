@@ -17,13 +17,13 @@ is_backup = 0
 
 # Specs
 model_name = 'wavewell'
-dat = '2017_12_01'
-let = 'b'
+dat = '2017_12_11'
+let = 'ad'
 
 # Letters of wanted range
 lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
 
-nts = [10,20,30,40,50,60,70,80,90]
+nts = [15,20,25,30,35,40,45,50,55]
 
 # Read
 if is_read:
