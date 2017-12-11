@@ -62,14 +62,14 @@ def read(which_methods,
         raise exceptions.RuntimeError('stat_method wrong')
     if not n_runs in [100,1000]:
         raise exceptions.RuntimeError('n_runs wrong')
-    if not model in ['wavebc','wave']:
+    if not model in ['wavebc','wave','wavewell']:
         raise exceptions.RuntimeError('model wrong')
 
     # Nunber of methods
     num_methods = len(which_methods)
 
     # Ensemble sizes
-    ensemble_sizes = (([50,70,100,250] if n_runs==1000 else [500,1000,2000]) if model=='wavebc' else ([50,70,100,250] if n_runs==1000 else [50,70,100,250,500,1000,2000]))
+    ensemble_sizes = ([50,70,100,250] if n_runs==1000 else [500,1000,2000])
 
     # Initialize stat_array
     stat_array = np.zeros([num_methods,len(ensemble_sizes)])
