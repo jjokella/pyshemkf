@@ -25,6 +25,7 @@ def plot(ax,
          which_enssize = [50,70,100,250],
          model = 'wavebc',
          is_std = 0,                         # Show std?
+         lineyval = 0.62,
          std_method = 'std',
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
          figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
@@ -205,7 +206,7 @@ def plot(ax,
         for yline in yticks:
             ax.hlines(yline,0,20,linestyles = 'dotted')
 
-        ax.hlines(0.62,0,20,linestyles = 'dashed')
+        ax.hlines(lineyval,0,20,linestyles = 'dashed')
 
 
     # Style
