@@ -49,6 +49,10 @@ def plot(ax,
          ylabelfontsize=40,
          xownticks = [0.1+i*0.1 for i in range(9)],
          yownticks = [0.1+i*0.1 for i in range(9)],
+         xticklabels = [0.1+i*0.1 for i in range(9)],
+         yticklabels = [0.1+i*0.1 for i in range(9)],
+         xticklabelfontsize = 20,
+         yticklabelfontsize = 20,
          num_cbar = 7,
          low_cbar =  10.0285,
          high_cbar = 10.0304,
@@ -152,8 +156,8 @@ def plot(ax,
     ax.set_xlabel('[m]',fontsize=xlabelfontsize, visible=is_labels)
     ax.set_ylabel('[m]',fontsize=ylabelfontsize, visible=is_labels)
     ax.tick_params(length = 20 if is_labels else 0)
-    ax.set_yticklabels(ax.get_yticklabels(),visible=is_labels)
-    ax.set_xticklabels(ax.get_xticklabels(),visible=is_labels)
+    ax.set_yticklabels(yticklabels,visible=is_labels,fontsize=xticklabelfontsize)
+    ax.set_xticklabels(xticklabels,visible=is_labels,fontsize=yticklabelfontsize)
 
     # Axis Limits
     ax.set_xlim(xlims[0],xlims[1])
