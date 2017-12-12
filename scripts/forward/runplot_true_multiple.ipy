@@ -52,7 +52,7 @@ if is_plot:
 
     # Run plot function
     for it,nt in enumerate(nts):
-        ax, pic_name = fp.plot(fig.add_subplot(3,3,it+1),
+        ax, pic_name = fp.plot(fig.add_subplot(3,4,it+1+(it)/3),
                                model_name,
                                dat,
                                lets[0],
@@ -64,15 +64,16 @@ if is_plot:
                                nt = nt,
                                is_position = False,
                                loc_inds = range(48),
-                               num_cbar = 11,
+                               num_cbar = 15,
                                    )
 
     # Colorbar
-    # cb_ax = fp.cb(fig.add_subplot(1,2,1),
-    #               ax,
-    #               varname = plotvarname,
-    #               labelsize = 10,
-    #                   )
+    cb_ax = fp.cb(fig.add_subplot(4,4,10),
+                  ax,
+                  varname = plotvarname,
+                  labelsize = 20,
+                  cb_ax_position = [0.8,0.1,0.03,0.8],
+                      )
 
     # Save
     if is_save:

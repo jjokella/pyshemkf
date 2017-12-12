@@ -62,12 +62,14 @@ if is_plot:
                            loc_inds = range(48),
                            nt = nt,
                            num_cbar = 11,
+                           is_ownticks = True,
                        )
 
     # Colorbar
     cb_ax = fp.cb(fig.add_subplot(1,2,1),
                   ax,
                   varname = plotvarname,
+                  varlabels = {plotvarname:'log(k[m2])'},
                   labelsize = 10,
                       )
 

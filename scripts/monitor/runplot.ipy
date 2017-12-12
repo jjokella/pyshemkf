@@ -10,7 +10,7 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_read = 0
 is_plot = 1
-is_save = 0
+is_save = 1
 is_show = 1
 is_backup = 0
 
@@ -24,7 +24,7 @@ ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
-mons = range(1,49)
+mons = [1,7,42,48,18,24,25,31]
 
 # Read
 if is_read:
@@ -54,18 +54,19 @@ if is_plot:
                                    lets[0],
                                    is_labels=  True,
                                    is_ownticks = False,
-                                   # markercolor = 'black',
                                    xlims = [0.0,20.0],
-                                   ylims = [10.0,10.40],
+                                   ylims = [10.0,10.35],
                                    xlabel = 't [days]',
                                    ylabel = 'h [m]',
-                                   pic_format = 'png',
+                                   pic_format = 'pdf',
                                    varname = 'head',
                                    num_mon = num_mon,
-                                   legend_label = str(num_mon),
+                                   linewidth = 2,
+                                   markercolor =  'black' if num_mon in [1,7,42,48] else 'red',
+                                   legend_label = 'Corner' if num_mon in [1,7,42,48] else 'Center',
                                    )
     # Legend
-    plt.legend()
+    plt.legend(fontsize = 20)
 
     # Save
     if is_save:
