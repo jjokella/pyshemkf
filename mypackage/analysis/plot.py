@@ -31,6 +31,7 @@ def plot(ax,
          is_mask = False,
          is_labels= True,
          is_ownticks = False,
+         axistitle='',
          varname = 'kz_mean',                        #'head','v','temp','kz', 'uindex'
          v_component = 1,                           #0,1,2
          is_position = True,
@@ -157,7 +158,7 @@ def plot(ax,
                        s=markersize)
 
     # Title
-    # ax.set_title('Temperature field')
+    ax.set_title(axistitle)
 
     # Labels
     ax.set_xlabel('[m]',fontsize=xlabelfontsize, visible=is_labels)
