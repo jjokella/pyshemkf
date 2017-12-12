@@ -117,7 +117,7 @@ def read(which_methods,
         res_name = pm.py_output_filename(
             'dists',
             which_res,
-            pa.dats[model][n_runs][i_method][enssize]+'_'+pa.lets[model][n_runs][i_method][enssize],
+            model+'_'+pa.dats[model][n_runs][i_method][enssize]+'_'+pa.lets[model][n_runs][i_method][enssize],
             'npy')
         res[i,0:pa.nums[model][n_runs][i_method][enssize]] = np.load(res_name)
 

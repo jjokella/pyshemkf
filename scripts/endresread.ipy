@@ -32,7 +32,7 @@ for j in range(num_ensemble_sizes):
                                 'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
                                 'rms_kz_aft'))[0][0]   #Beg
               for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
-    np.save(pm.py_output_filename('dists','begres',dat+'_'+let,'npy'),begres)
+    np.save(pm.py_output_filename('dists','begres',model_name+'_'+dat+'_'+let,'npy'),begres)
     begres = None
 
     # Read in the endres-distribution
@@ -40,5 +40,5 @@ for j in range(num_ensemble_sizes):
                                 'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
                                 'rms_kz_aft'))[num_obs-1][0]   #End
               for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
-    np.save(pm.py_output_filename('dists','endres',dat+'_'+let,'npy'),endres)
+    np.save(pm.py_output_filename('dists','endres',model_name+'_'+dat+'_'+let,'npy'),endres)
     endres = None

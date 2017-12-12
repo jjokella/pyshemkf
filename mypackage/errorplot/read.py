@@ -85,7 +85,7 @@ def read(which_methods,
             num = pa.nums[model][n_runs][j_kind][enssize]
 
             # Read residuals
-            res = np.load(pm.py_output_filename('dists',which_res,dat+'_'+let,'npy'))
+            res = np.load(pm.py_output_filename('dists',which_res,model+'_'+dat+'_'+let,'npy'))
 
             # Calculate statistical quantitiy
             if stat_method == 'mean':

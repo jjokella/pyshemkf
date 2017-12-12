@@ -84,7 +84,7 @@ def read(which_method,
     lets = pa.lets[model][n_runs]
     nums = pa.nums[model][n_runs]
 
-    res = np.load(pm.py_output_filename('dists',which_res,dats[which_method][enssize]+'_'+lets[which_method][enssize],'npy'))
+    res = np.load(pm.py_output_filename('dists',which_res,model+'_'+dats[which_method][enssize]+'_'+lets[which_method][enssize],'npy'))
 
     # Calculate mean array
     gauss_array = [np.mean(res[np.random.permutation(np.arange(nums[which_method][enssize]))[0:n_syn]]) for i in range(n_comparisons)]

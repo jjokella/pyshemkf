@@ -12,6 +12,7 @@ from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 is_save = 1
 is_show = 1
 
+model = 'wavebc'
 date = '2016_06_06'
 lets = ['a','k','u','ae','ao','ay','bi']
 names = ['EnKF','Damped EnKF','Localisation','Hybrid','Dual','Normal Score','Iterative']
@@ -27,7 +28,7 @@ coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
 # because I messed up the 10 difference
 endres = np.zeros([7,10])
 for ilet,let in enumerate(lets):
-    endres[ilet,:] = np.load('output/dists/npy/endres_'+date+'_'+let+'.npy')
+    endres[ilet,:] = np.load('output/dists/npy/endres_'model+'_'+date+'_'+let+'.npy')
 
 x = np.arange(10)
 fig, ax = plt.subplots(figsize = [18,20])
