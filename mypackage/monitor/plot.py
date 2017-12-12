@@ -32,14 +32,15 @@ def plot(ax,
          xlims = [0.0,26000.0],
          ylims = [15.0,22.0],
          # marker = 'o',
-         # markersize=50,
-         # markercolor='red',
+         linewidth=5,
+         markercolor='black',
          # markeralpha = 1.0,
          legend_label = 'default',
          xlabel = '[m]',
          ylabel = '[m]',
          xlabelfontsize=40,
          ylabelfontsize=40,
+         ticklabelfontsize=20,
          xownticks = [0.1+i*0.1 for i in range(9)],
          yownticks = [0.1+i*0.1 for i in range(9)],
          pic_format = 'pdf',                        # 'png','eps','pdf'
@@ -74,7 +75,7 @@ def plot(ax,
     time = np.load(pm.py_output_filename(ma.tag,'time',sc.specl(model_name,dat,let)+'_'+str(num_mon),"npy"))
     var = np.load(pm.py_output_filename(ma.tag,varname,sc.specl(model_name,dat,let)+'_'+str(num_mon),"npy"))
 
-    ax.plot(time,var,label=legend_label)
+    ax.plot(time,var,label=legend_label,color=markercolor,lw=linewidth)
 
     # Axis position
     ax.set_position(position)
@@ -90,7 +91,7 @@ def plot(ax,
     # Labels
     ax.set_xlabel(xlabel,fontsize=xlabelfontsize, visible=is_labels)
     ax.set_ylabel(ylabel,fontsize=ylabelfontsize, visible=is_labels)
-    ax.tick_params(length = 20 if is_labels else 0)
+    ax.tick_params(length = 20 if is_labels else 0,labelsize=ticklabelfontsize)
 
     # Axis Limits
     ax.set_xlim(xlims[0],xlims[1])
