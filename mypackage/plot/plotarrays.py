@@ -264,6 +264,16 @@ normalscore1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 normalscore1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 normalscore1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+normalscore_wavewell_dats = {500:'2017_12_08',1000:'2017_12_08',2000:'2017_12_08'}
+normalscore_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+normalscore_wavewell_nums = {500:100,1000:100,2000:100}
+normalscore_wavewell_obss = {500:100,1000:100,2000:100}
+
+normalscore1000_wavewell_dats = {50:'2017_12_08',70:'2017_12_08',100:'2017_12_08',250:'2017_12_08'}
+normalscore1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+normalscore1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+normalscore1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
 # Dual
 dual_dats = {50:'2015_07_15',70:'2015_12_17',100:'2015_07_15',
              250:'2015_07_15',500:'2015_07_15',1000:'2015_07_15',2000:'2015_07_15'}
@@ -285,6 +295,16 @@ dual1000_wavebc_dats = {50:'2016_07_06',70:'2016_07_06',100:'2016_07_06',250:'20
 dual1000_wavebc_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 dual1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 dual1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
+dual_wavewell_dats = {500:'2017_12_06',1000:'2017_12_06',2000:'2017_12_06'}
+dual_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+dual_wavewell_nums = {500:100,1000:100,2000:100}
+dual_wavewell_obss = {500:100,1000:100,2000:100}
+
+dual1000_wavewell_dats = {50:'2017_12_06',70:'2017_12_06',100:'2017_12_06',250:'2017_12_06'}
+dual1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+dual1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+dual1000_wavewell_obss = {50:100,70:100,100:100,250:100}
 
 # Hybrid
 hybrid_dats = {50:'2015_10_02',70:'2015_12_17',100:'2015_10_02',
@@ -308,6 +328,16 @@ hybrid1000_wavebc_lets = {50:'ewx',70:'gjj',100:'hvv',250:'jih'}
 hybrid1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 hybrid1000_wavebc_obss = {50:100,70:100,100:100,250:100}
 
+hybrid_wavewell_dats = {500:'2017_12_05',1000:'2017_12_05',2000:'2017_12_05'}
+hybrid_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hybrid_wavewell_nums = {500:100,1000:100,2000:100}
+hybrid_wavewell_obss = {500:100,1000:100,2000:100}
+
+hybrid1000_wavewell_dats = {50:'2017_12_05',70:'2017_12_05',100:'2017_12_05',250:'2017_12_05'}
+hybrid1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hybrid1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+hybrid1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
 # Localisation
 localisation_dats = {50:'2015_06_23',70:'2015_12_17',100:'2015_06_23',
                      250:'2015_06_23',500:'2015_06_24',1000:'2015_06_24',2000:'2015_06_24'}
@@ -329,6 +359,16 @@ localisation1000_wavebc_dats = {50:'2016_07_07',70:'2016_07_07',100:'2016_07_07'
 localisation1000_wavebc_lets = {50:'kut',70:'mhf',100:'ntr',250:'pgd'}
 localisation1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 localisation1000_wavebc_obss = {50:100,70:100,100:100,250:100}
+
+localisation_wavewell_dats = {500:'2017_12_07',1000:'2017_12_07',2000:'2017_12_07'}
+localisation_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+localisation_wavewell_nums = {500:100,1000:100,2000:100}
+localisation_wavewell_obss = {500:100,1000:100,2000:100}
+
+localisation1000_wavewell_dats = {50:'2017_12_07',70:'2017_12_07',100:'2017_12_07',250:'2017_12_07'}
+localisation1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+localisation1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+localisation1000_wavewell_obss = {50:100,70:100,100:100,250:100}
 
 # Iterative
 newiterative4_dats = {50:'2015_12_11',70:'2016_02_09',100:'2015_12_11',
@@ -712,10 +752,18 @@ dats = {
         1000: {
             0:normal1000_wavewell_dats,
             1:damping1000_wavewell_dats,
+            2:normalscore1000_wavewell_dats,
+            3:dual1000_wavewell_dats,
+            4:hybrid1000_wavewell_dats,
+            5:localisation1000_wavewell_dats,
             },
         100: {
             0:normal_wavewell_dats,
             1:damping_wavewell_dats,
+            2:normalscore_wavewell_dats,
+            3:dual_wavewell_dats,
+            4:hybrid_wavewell_dats,
+            5:localisation_wavewell_dats,
             },
         },
     }
@@ -812,10 +860,18 @@ lets = {
         1000: {
             0:normal1000_wavewell_lets,
             1:damping1000_wavewell_lets,
+            2:normalscore1000_wavewell_lets,
+            3:dual1000_wavewell_lets,
+            4:hybrid1000_wavewell_lets,
+            5:localisation1000_wavewell_lets,
             },
         100: {
             0:normal_wavewell_lets,
             1:damping_wavewell_lets,
+            2:normalscore_wavewell_lets,
+            3:dual_wavewell_lets,
+            4:hybrid_wavewell_lets,
+            5:localisation_wavewell_lets,
             },
         },
     }
@@ -912,10 +968,18 @@ nums = {
         1000: {
             0:normal1000_wavewell_nums,
             1:damping1000_wavewell_nums,
+            2:normalscore1000_wavewell_nums,
+            3:dual1000_wavewell_nums,
+            4:hybrid1000_wavewell_nums,
+            5:localisation1000_wavewell_nums,
             },
         100: {
             0:normal_wavewell_nums,
             1:damping_wavewell_nums,
+            2:normalscore_wavewell_nums,
+            3:dual_wavewell_nums,
+            4:hybrid_wavewell_nums,
+            5:localisation_wavewell_nums,
             },
         },
     }
@@ -1012,10 +1076,18 @@ num_obss = {
         1000: {
             0:normal1000_wavewell_obss,
             1:damping1000_wavewell_obss,
+            2:normalscore1000_wavewell_obss,
+            3:dual1000_wavewell_obss,
+            4:hybrid1000_wavewell_obss,
+            5:localisation1000_wavewell_obss,
             },
         100: {
             0:normal_wavewell_obss,
             1:damping_wavewell_obss,
+            2:normalscore_wavewell_obss,
+            3:dual_wavewell_obss,
+            4:hybrid_wavewell_obss,
+            5:localisation_wavewell_obss,
             },
         },
     }
