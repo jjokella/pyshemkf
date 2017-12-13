@@ -45,6 +45,7 @@ names_methods = {
     106:'EnKF',
     107:'EnKF',
     108:'EnKF',
+    112:'Damped',
     113:'Damped',
     123:'NS-EnKF',
     133:'DualEnKF',
@@ -78,6 +79,7 @@ longnames_methods = {
     106:'EnKF: Exa obsvar',
     107:'EnKF: Peta obsvar',
     108:'EnKF: Huge obsvar, no init',
+    112:'Damped: 0.5',
     113:'Damped: Huge obsvar',
     123:'NS-EnKF: Huge obsvar',
     133:'DualEnKF: Huge obsvar',
@@ -241,6 +243,16 @@ damping1000_wavewell_dats = {50:'2017_12_09',70:'2017_12_09',100:'2017_12_09',25
 damping1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 damping1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
 damping1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
+dampinghalf_wavewell_dats = {500:'2017_12_12',1000:'2017_12_12',2000:'2017_12_12'}
+dampinghalf_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+dampinghalf_wavewell_nums = {500:100,1000:100,2000:100}
+dampinghalf_wavewell_obss = {500:100,1000:100,2000:100}
+
+dampinghalf1000_wavewell_dats = {50:'2017_12_12',70:'2017_12_12',100:'2017_12_12',250:'2017_12_12'}
+dampinghalf1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+dampinghalf1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+dampinghalf1000_wavewell_obss = {50:100,70:100,100:100,250:100}
 
 # Normal Score
 normalscoreverynew_dats = {50:'2015_10_01',70:'2015_12_17',100:'2015_10_01',
@@ -756,6 +768,7 @@ dats = {
             3:dual1000_wavewell_dats,
             4:hybrid1000_wavewell_dats,
             5:localisation1000_wavewell_dats,
+            112:dampinghalf1000_wavewell_dats,
             },
         100: {
             0:normal_wavewell_dats,
@@ -764,6 +777,7 @@ dats = {
             3:dual_wavewell_dats,
             4:hybrid_wavewell_dats,
             5:localisation_wavewell_dats,
+            112:dampinghalf_wavewell_dats,
             },
         },
     }
@@ -864,6 +878,7 @@ lets = {
             3:dual1000_wavewell_lets,
             4:hybrid1000_wavewell_lets,
             5:localisation1000_wavewell_lets,
+            112:dampinghalf1000_wavewell_lets,
             },
         100: {
             0:normal_wavewell_lets,
@@ -872,6 +887,7 @@ lets = {
             3:dual_wavewell_lets,
             4:hybrid_wavewell_lets,
             5:localisation_wavewell_lets,
+            112:dampinghalf_wavewell_lets,
             },
         },
     }
@@ -972,6 +988,7 @@ nums = {
             3:dual1000_wavewell_nums,
             4:hybrid1000_wavewell_nums,
             5:localisation1000_wavewell_nums,
+            112:dampinghalf1000_wavewell_nums,
             },
         100: {
             0:normal_wavewell_nums,
@@ -980,6 +997,7 @@ nums = {
             3:dual_wavewell_nums,
             4:hybrid_wavewell_nums,
             5:localisation_wavewell_nums,
+            112:dampinghalf_wavewell_nums,
             },
         },
     }
@@ -1080,6 +1098,7 @@ num_obss = {
             3:dual1000_wavewell_obss,
             4:hybrid1000_wavewell_obss,
             5:localisation1000_wavewell_obss,
+            112:dampinghalf1000_wavewell_obss,
             },
         100: {
             0:normal_wavewell_obss,
@@ -1088,6 +1107,7 @@ num_obss = {
             3:dual_wavewell_obss,
             4:hybrid_wavewell_obss,
             5:localisation_wavewell_obss,
+            112:dampinghalf_wavewell_obss,
             },
         },
     }
