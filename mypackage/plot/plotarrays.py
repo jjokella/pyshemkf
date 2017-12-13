@@ -392,6 +392,16 @@ localisation1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 localisation1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
 localisation1000_wavewell_obss = {50:100,70:100,100:100,250:100}
 
+localisationlargecorrlen_wavewell_dats = {500:'2017_12_01',1000:'2017_12_01',2000:'2017_12_01'}
+localisationlargecorrlen_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+localisationlargecorrlen_wavewell_nums = {500:100,1000:100,2000:100}
+localisationlargecorrlen_wavewell_obss = {500:100,1000:100,2000:100}
+
+localisationlargecorrlen1000_wavewell_dats = {50:'2017_12_01',70:'2017_12_01',100:'2017_12_01',250:'2017_12_01'}
+localisationlargecorrlen1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+localisationlargecorrlen1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
+localisationlargecorrlen1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
 # Iterative
 newiterative4_dats = {50:'2015_12_11',70:'2016_02_09',100:'2015_12_11',
                       250:'2015_12_11',500:'2015_12_11',1000:'2015_12_11',2000:'2015_12_11'}
@@ -780,6 +790,7 @@ dats = {
             5:localisation1000_wavewell_dats,
             112:dampinghalf1000_wavewell_dats,
             142:hybridlarge1000_wavewell_dats,
+            152:localisationlargecorrlen1000_wavewell_dats,
             },
         100: {
             0:normal_wavewell_dats,
@@ -790,6 +801,7 @@ dats = {
             5:localisation_wavewell_dats,
             112:dampinghalf_wavewell_dats,
             142:hybridlarge_wavewell_dats,
+            152:localisationlargecorrlen_wavewell_dats,
             },
         },
     }
@@ -892,6 +904,7 @@ lets = {
             5:localisation1000_wavewell_lets,
             112:dampinghalf1000_wavewell_lets,
             142:hybridlarge1000_wavewell_lets,
+            152:localisationlargecorrlen1000_wavewell_lets,
             },
         100: {
             0:normal_wavewell_lets,
@@ -902,6 +915,7 @@ lets = {
             5:localisation_wavewell_lets,
             112:dampinghalf_wavewell_lets,
             142:hybridlarge_wavewell_lets,
+            152:localisationlargecorrlen_wavewell_lets,
             },
         },
     }
@@ -1004,6 +1018,7 @@ nums = {
             5:localisation1000_wavewell_nums,
             112:dampinghalf1000_wavewell_nums,
             142:hybridlarge1000_wavewell_nums,
+            152:localisationlargecorrlen1000_wavewell_nums,
             },
         100: {
             0:normal_wavewell_nums,
@@ -1014,6 +1029,7 @@ nums = {
             5:localisation_wavewell_nums,
             112:dampinghalf_wavewell_nums,
             142:hybridlarge_wavewell_nums,
+            152:localisationlargecorrlen_wavewell_nums,
             },
         },
     }
@@ -1116,6 +1132,7 @@ num_obss = {
             5:localisation1000_wavewell_obss,
             112:dampinghalf1000_wavewell_obss,
             142:hybridlarge1000_wavewell_obss,
+            152:localisationlargecorrlen1000_wavewell_obss,
             },
         100: {
             0:normal_wavewell_obss,
@@ -1126,6 +1143,7 @@ num_obss = {
             5:localisation_wavewell_obss,
             112:dampinghalf_wavewell_obss,
             142:hybridlarge_wavewell_obss,
+            152:localisationlargecorrlen_wavewell_obss,
             },
         },
     }
