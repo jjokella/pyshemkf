@@ -50,3 +50,4 @@ scripts/pyenkf/backup/
 scripts/schubi/backup/
 scripts/single_job/backup/
 scripts/tcon/backup/
+exec/shemat/backup/
