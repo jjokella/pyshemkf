@@ -116,7 +116,7 @@ def sort(which_methods,
         stat_array[:,i] = np.array(stat_array)[:,i][indsort]
 
     # Sort which_methods
-    which_methods_sorted = np.zeros(np.shape(which_methods),dtype=np.int8)
+    which_methods_sorted = np.zeros(np.shape(which_methods),dtype=np.int64)
     for i in range(len(which_methods)):
         which_methods_sorted[i] = which_methods[indsort[i]]
 
