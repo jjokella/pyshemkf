@@ -32,8 +32,14 @@ def plot(ax,
          ylims = [0.28,0.82],
          yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
          num_pack = 4,                     # Number of methods in pack
-         formatsos = ['o','v','s','p','o','v','s','p'],
+         formatsos = ['o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p'],
          coleros = [(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+                        (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),
+                        (0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+                        (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),
+                        (0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
+                        (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),
+                        (0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),(0.0,0.0,0.0),
                         (1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0),(1.0,1.0,1.0)],
          markersize = 10,
          markeredgesize = 1.5,
@@ -124,7 +130,7 @@ def plot(ax,
     # Number of methods
     num_methods = len(which_methods)
 
-    # Legend
+    # Legend input
     legend_input = pa.longnames_methods
     legend_input = np.array([legend_input[i].ljust(18) for i in which_methods])
 
@@ -141,8 +147,8 @@ def plot(ax,
 
     for iens,enssize in enumerate(which_enssize):
         # x positions, up to 15 methods
-        x = np.delete(np.arange(0,16),
-                    np.arange(0,16,num_pack+1)) #Skip every (num_pack+1)-th
+        x = np.delete(np.arange(0,100),
+                    np.arange(0,100,num_pack+1)) #Skip every (num_pack+1)-th
 
         varplot = var[:,iens]
         if is_std:
@@ -200,13 +206,13 @@ def plot(ax,
 
 
         # Lines
-        for xline in range(0,16,num_pack+1):
+        for xline in range(0,100,num_pack+1):
             ax.vlines(xline,0.0,1.0, linestyles = 'dotted')
 
         for yline in yticks:
-            ax.hlines(yline,0,20,linestyles = 'dotted')
+            ax.hlines(yline,0,100,linestyles = 'dotted')
 
-        ax.hlines(lineyval,0,20,linestyles = 'dashed')
+        ax.hlines(lineyval,0,100,linestyles = 'dashed')
 
 
     # Style
