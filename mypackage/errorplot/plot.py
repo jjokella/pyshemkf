@@ -188,12 +188,12 @@ def plot(ax,
                      for i in range(num_legs)]
 
         for ileg in range(len(leginds)):
-            xleg = 0.15 + ileg*0.8/num_legs
+            xleg = figpos[0] + ileg*figpos[2]/num_legs
             first_legend = ax.legend(handles = [puntos[i] for i in range(leginds[ileg]-legranges[ileg]+1,
                                                                          leginds[ileg]+1)],
                                       bbox_to_anchor = [xleg,
                                                         0.00,
-                                                        0.8/num_legs,
+                                                        figpos[2]/num_legs,
                                                         0.3],
                                       bbox_transform=plt.gcf().transFigure,
                                       # loc = [0.0,1.0],
