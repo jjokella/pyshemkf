@@ -17,7 +17,7 @@ is_save = 1
 is_show = 1
 is_backup = 0
 
-which_methods = [0]
+which_methods = [1,112,113,114]
 # which_methods = [4,143,141,142,144,145]
 # which_methods = [113,103,123,133,143,153,163,6]
 # which_methods = [1,0,2,3,4,5]
@@ -29,7 +29,7 @@ if is_read:
         which_methods = which_methods,
         stat_method = stat_method,
         which_res = 'endres',
-        n_runs = 100,
+        # n_runs = 100,
         )
 
     np.save(stat_array_name,stat_array)
@@ -65,10 +65,11 @@ if is_plot:
                            pic_format = 'pdf',
                            is_std = False,
                            std_method = 'stdm',
-                           n_runs = 100,
-                           which_enssize = [500,1000,2000],
-                           ylims = [0.29,1.1],
+                           # n_runs = 100,
+                           # which_enssize = [500,1000,2000],
+                           ylims = [0.29,1.0],
                            yticks = np.arange(0.3,1.2,0.1),
+                           fontleg = 15,
                        )
     # Save
     if is_save:
