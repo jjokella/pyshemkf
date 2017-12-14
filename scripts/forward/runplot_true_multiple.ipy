@@ -15,22 +15,22 @@ is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavewell'
-dat = '2017_12_11'
+model_name = 'wavereal'
+dat = '2017_12_13'
 
-let = 'g'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
 nts = [2,4,6,8,10,12,14,17,18]
-plotvarname = 'head'
+plotvarname = 'tracer1'
 
 # Read
 if is_read:
     for nt in nts:
-        for varname in ['uindex','head','kz']:
+        for varname in ['uindex','head','kz','tracer1']:
             numpy_array, numpy_array_name = fr.read(model_name,
                                                     dat,
                                                     lets[0],
@@ -63,7 +63,7 @@ if is_plot:
                                ylims = [0.0,620.0],
                                nt = nt,
                                is_position = False,
-                               loc_inds = range(48),
+                               loc_inds = range(2),
                                num_cbar = 15,
                                    )
 

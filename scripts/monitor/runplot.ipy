@@ -8,28 +8,28 @@ import mypackage.monitor.read as mr
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 0
+is_read = 1
 is_plot = 1
 is_save = 1
 is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavewell'
-dat = '2017_12_11'
+model_name = 'wavereal'
+dat = '2017_12_13'
 
-let = 'g'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
 
-mons = [1,7,42,48,18,24,25,31]
+mons = [0,1]
 
 # Read
 if is_read:
     for num_mon in mons:
-        for varname in ['time','head']:
+        for varname in ['time','head','conc0001']:
             numpy_array, numpy_array_name = mr.read(model_name,
                                                     dat,
                                                         lets[0],
@@ -55,11 +55,11 @@ if is_plot:
                                    is_labels=  True,
                                    is_ownticks = False,
                                    xlims = [0.0,20.0],
-                                   ylims = [10.0,10.35],
+                                   ylims = [0.06,0.065],
                                    xlabel = 't [days]',
                                    ylabel = 'h [m]',
                                    pic_format = 'pdf',
-                                   varname = 'head',
+                                   varname = 'conc0001',
                                    num_mon = num_mon,
                                    linewidth = 2,
                                    markercolor =  'black' if num_mon in [1,7,42,48] else 'red',
