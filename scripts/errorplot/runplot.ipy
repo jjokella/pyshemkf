@@ -10,14 +10,14 @@ import mypackage.run.pythonmodule as pm
 
 # Switches
 is_read = 1
-is_sort = 0
+is_sort = 1
 is_plot = 1
 is_quot = 0
 is_save = 1
 is_show = 1
-is_backup = 0
+is_backup = 1
 
-which_methods = [1,112,113,114]
+which_methods = [0,1,2,3,4,5,6,103,112,113,114,123,133,141,142,143,144,145,151,152,153,154,155,163]
 # which_methods = [4,143,141,142,144,145]
 # which_methods = [113,103,123,133,143,153,163,6]
 # which_methods = [1,0,2,3,4,5]
@@ -56,7 +56,7 @@ else:
 if is_plot:
 
     # Figure
-    fig = plt.figure('Errorplot',figsize=[18,10])
+    fig = plt.figure('Errorplot',figsize=[25,10])
 
     # Run plot function
     ax, pic_name = ep.plot(fig.add_subplot(1,1,1),
@@ -65,11 +65,12 @@ if is_plot:
                            pic_format = 'pdf',
                            is_std = False,
                            std_method = 'stdm',
+                           figpos = [0.1,0.3,0.85,0.6],
                            # n_runs = 100,
                            # which_enssize = [500,1000,2000],
-                           ylims = [0.29,1.0],
+                           ylims = [0.29,0.8],
                            yticks = np.arange(0.3,1.2,0.1),
-                           fontleg = 15,
+                           fontleg = 12,
                        )
     # Save
     if is_save:

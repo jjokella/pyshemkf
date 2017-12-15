@@ -10,7 +10,7 @@ import mypackage.run.pythonmodule as pm
 
 # Switches
 is_read = 1
-is_sort = 0
+is_sort = 1
 is_plot = 1
 is_quot = 0
 is_save = 1
@@ -18,7 +18,7 @@ is_show = 1
 is_backup = 0
 
 model = 'wavewell'
-which_methods = [0,1,151,152,5,112,142,141]
+which_methods = [0,1,2,3,4,5,112,141,142,151,152]
 # which_methods = [4,143,141,142,144,145]
 # which_methods = [113,103,123,133,143,153,163,6]
 # which_methods = [1,0,2,3,4,5]
@@ -43,6 +43,7 @@ if is_sort:
         model = model,
         which_methods = which_methods,
         n_runs = 1000,
+        template_model = model,
         template_which_methods = which_methods,
         template_enssize = 50,
         stat_method = stat_method,
@@ -74,6 +75,7 @@ if is_plot:
                            lineyval = 0.7,
                            ylims = [0.5,0.8],
                            yticks = np.arange(0.3,1.2,0.1),
+                           fontleg = 20,
                        )
     # Save
     if is_save:
