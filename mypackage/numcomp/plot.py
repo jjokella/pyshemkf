@@ -143,10 +143,10 @@ def plot(ax,
     num_patches = 3*num_bars
 
     # Load probs
-    probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+str(n_comparisons)+'_'+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+    probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     # Load probs for bold labels
-    probs_bold = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn_bold)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+    probs_bold = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn_bold)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     ax.set_position([0.3,0.05,0.4,0.75])
     ax.set_frame_on(False)
@@ -338,6 +338,9 @@ def matrix(ax,
 
     # Load probs
     probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
+
+    # Indsorts: From model index to probs index
+    indsorts = [np.where(np.array(which_methods)==imod)[0][0] for imod in indsorts]
 
     # Sort probs
     probs = probs[indsorts,:,:]
