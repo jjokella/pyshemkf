@@ -95,7 +95,7 @@ def read(which_methods,
     # Checks
     if not n_runs in [100,1000]:
         raise exceptions.RuntimeError('n_runs wrong')
-    if not model in ['wavebc','wave']:
+    if not model in ['wavebc','wave','wavewell']:
         raise exceptions.RuntimeError('model wrong')
     if not method in ['ttest','gauss']:
         raise exceptions.RuntimeError('method wrong')
