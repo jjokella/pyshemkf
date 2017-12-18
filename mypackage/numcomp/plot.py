@@ -373,7 +373,7 @@ def matrix(ax,
               norm = colors.Normalize(vmin=0,vmax=1,clip=False))
 
     # Triangles: Grid
-    X,Y = np.meshgrid(np.arange(8),np.arange(8))
+    X,Y = np.meshgrid(np.arange(num_methods+1),np.arange(num_methods+1))
     X = X.flatten()-0.5
     Y = Y.flatten()-0.5
 
