@@ -378,18 +378,19 @@ def matrix(ax,
     Y = Y.flatten()-0.5
 
     # Triangles: Indices
-    triangles = np.array([[j*8,1+j*8,8+j*8] for j in range(1,num_methods)]
-                             +[[1+j*8, 2+j*8, 9+j*8] for j in range(2,num_methods)]
-                             +[[2+j*8, 3+j*8,10+j*8] for j in range(3,num_methods)]
-                             +[[3+j*8, 4+j*8,11+j*8] for j in range(4,num_methods)]
-                             +[[4+j*8, 5+j*8,12+j*8] for j in range(5,num_methods)]
-                             +[[5+j*8, 6+j*8,13+j*8] for j in range(6,num_methods)]
-                             +[[1+j*8, 8+j*8, 9+j*8] for j in range(1,num_methods)]
-                             +[[2+j*8, 9+j*8,10+j*8] for j in range(2,num_methods)]
-                             +[[3+j*8,10+j*8,11+j*8] for j in range(3,num_methods)]
-                             +[[4+j*8,11+j*8,12+j*8] for j in range(4,num_methods)]
-                             +[[5+j*8,12+j*8,13+j*8] for j in range(5,num_methods)]
-                             +[[6+j*8,13+j*8,14+j*8] for j in range(6,num_methods)])
+    triangles = np.zeros([2*np.sum(range(1,num_methods)),3])
+
+    ix = 0
+    # Upper triangles
+    for i in range(1,num_methods):
+        for j in range(i,num_methods):
+            triangles[ix,:] = [(i-1)+j*(num_methods+1),i+j*(num_methods+1),i+num_methods+j*(num_methods+1)]
+            ix = ix+1
+    # Lower triangles
+    for i in range(1,num_methods):
+        for j in range(i,num_methods):
+            triangles[ix,:] = [i+j*(num_methods+1),i+num_methods+j*(num_methods+1),i+num_methods+1+j*(num_methods+1)]
+            ix = ix+1
 
     # Triangles: Triangulation instance
     tria = mpl.tri.Triangulation(X,Y,triangles)
