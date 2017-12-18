@@ -394,8 +394,8 @@ def matrix(ax,
     tria = mpl.tri.Triangulation(X,Y,triangles)
 
     # Triangles: Colors
-    coleros = np.array([[probs[i,j,0] for i in range(j+1,num_methods)] for j in range(6)]
-                           +[[probs[i,j,2] for i in range(j+1,num_methods)] for j in range(6)])
+    coleros = np.array([[probs[i,j,0] for i in range(j+1,num_methods)] for j in range(num_methods-1)]
+                           +[[probs[i,j,2] for i in range(j+1,num_methods)] for j in range(num_methods-1)])
     coleros = np.hstack(coleros)
 
     # Triangles: Plot with facecolor
