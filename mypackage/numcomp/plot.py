@@ -239,7 +239,8 @@ def matrix(ax,
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
          figpos = [0.32,0.2,0.6,0.8],               #xbeg, ybeg, xrange, yrange
          # ylims = [0.28,0.82],
-         ticksize = 20,
+         is_longnames = True,
+         ticklabelfontsize = 20,
          xtick_y = 0.0,
          # num_pack = 4,                     # Number of methods in pack
          # formatsos = ['o','v','s','p','o','v','s','p'],
@@ -404,11 +405,13 @@ def matrix(ax,
                     edgecolor='k')
 
     # Plot: Mostly ticks
+    ticklabelinput = [pa.longnames_methods[which_methods[indsorts][i]] for i in range(num_methods)] if is_longnames else
+        [pa.names_methods[which_methods[indsorts][i]] for i in range(num_methods)]
     ax.set_xticks([i for i in range(num_methods)])
-    ax.set_xticklabels([pa.names_methods[indsorts[i]] for i in range(num_methods)], fontsize=ticksize,
+    ax.set_xticklabels(ticklabelinput, fontsize=ticklabelfontsize,
                        rotation=90,y=xtick_y)
     ax.set_yticks([i for i in range(num_methods)])
-    ax.set_yticklabels([pa.names_methods[indsorts[i]] for i in range(num_methods)], fontsize=ticksize)
+    ax.set_yticklabels(ticklabelinput, fontsize=ticklabelfontsize)
     ax.tick_params(length=0)
     ax.set_frame_on(False)
 
