@@ -341,7 +341,8 @@ def matrix(ax,
     probs = np.load(pm.py_output_filename(na.tag,'probs_'+which_res,model+'_'+str(n_runs)+'_'+method+'_'+str(enssize)+'_'+str(n_syn)+'_'+str(n_comparisons)+'_'+'_'.join([str(i) for i in which_methods]),'npy'))
 
     # Indsorts: From model index to probs index
-    indsorts = [np.where(np.array(which_methods)==imod)[0][0] for imod in indsorts]
+    which_methods = np.array(which_methods)
+    indsorts = [np.where(which_methods==imod)[0][0] for imod in indsorts]
 
     # Sort probs
     probs = probs[indsorts,:,:]
