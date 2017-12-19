@@ -427,7 +427,7 @@ def matrix(ax,
                     py = jtext-0.15 if i==0 else (itext+0.05  if i==1 else jtext+0.3 )
                     colero = 'white' if ntext>50 else 'black'
 
-                    if i!=1 or n_syn!=1000:
+                    if i!=1 or (n_syn!=1000 and n_syn!=1):
                         ax.text(px,py,ttext,color = colero,fontsize = 10)
 
 
