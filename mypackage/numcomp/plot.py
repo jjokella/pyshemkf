@@ -407,8 +407,7 @@ def matrix(ax,
                     edgecolor='k')
 
     # Plot: Mostly ticks
-    ticklabelinput = [pa.longnames_methods[which_methods[indsorts][i]] for i in range(num_methods)] if is_longnames else
-        [pa.names_methods[which_methods[indsorts][i]] for i in range(num_methods)]
+    ticklabelinput = [pa.longnames_methods[which_methods[indsorts][i]] for i in range(num_methods)] if is_longnames else [pa.names_methods[which_methods[indsorts][i]] for i in range(num_methods)]
     ax.set_xticks([i for i in range(num_methods)])
     ax.set_xticklabels(ticklabelinput, fontsize=ticklabelfontsize,
                        rotation=90,y=xtick_y)
