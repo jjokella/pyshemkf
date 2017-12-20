@@ -16,10 +16,10 @@ is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavewell'
-dat = '2017_12_11'
+model_name = 'wavereal'
+dat = '2017_12_19'
 
-let = 'g'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
@@ -57,9 +57,9 @@ if is_plot:
                            markercolor = 'black',
                            pic_format = 'png',
                            varname = plotvarname,
-                           xlims = [0.0,620.0],
-                           ylims = [0.0,620.0],
-                           loc_inds = range(48),
+                           xlims = [0.0,62.0],
+                           ylims = [0.0,62.0],
+                           loc_inds = range(2),
                            nt = nt,
                            num_cbar = 11,
                            is_ownticks = True,
