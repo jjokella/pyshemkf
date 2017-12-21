@@ -127,6 +127,19 @@ indsorts = {
             2000:[1,0],
             },
         },
+    'wavereal':{
+        1000:{
+            50:  [1,0,2],
+            70:  [1,0,2],
+            100: [1,0,2],
+            250: [1,0,2],
+            },
+        100:{
+            500: [1,0,2],
+            1000:[1,0,2],
+            2000:[1,0,2],
+            },
+        },
     }
 
 # Indices of ensemble sizes
@@ -159,6 +172,19 @@ indens = {
             },
         },
     'wavewell':{
+        1000:{
+            50:0,
+            70:1,
+            100:2,
+            250:3,
+            },
+        100:{
+            500:0,
+            1000:1,
+            2000:2,
+            },
+        },
+    'wavereal':{
         1000:{
             50:0,
             70:1,
@@ -213,6 +239,16 @@ normal1000_wavewell_dats = {50:'2017_12_10',70:'2017_12_10',100:'2017_12_10',250
 normal1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 normal1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
 normal1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
+normal_wavereal_dats = {500:'2017_12_01',1000:'2017_12_01',2000:'2017_12_01'}
+normal_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+normal_wavereal_nums = {500:100,1000:100,2000:100}
+normal_wavereal_obss = {500:100,1000:100,2000:100}
+
+normal1000_wavereal_dats = {50:'2017_12_01',70:'2017_12_01',100:'2017_12_01',250:'2017_12_01'}
+normal1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+normal1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+normal1000_wavereal_obss = {50:100,70:100,100:100,250:100}
 
 # Damping
 damping01_dats = {50:'2015_07_16',70:'2015_12_17',100:'2015_07_16',
@@ -276,6 +312,16 @@ dampinghalf1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 dampinghalf1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
 dampinghalf1000_wavewell_obss = {50:100,70:100,100:100,250:100}
 
+damping_wavereal_dats = {500:'2017_12_02',1000:'2017_12_02',2000:'2017_12_02'}
+damping_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+damping_wavereal_nums = {500:100,1000:100,2000:100}
+damping_wavereal_obss = {500:100,1000:100,2000:100}
+
+damping1000_wavereal_dats = {50:'2017_12_02',70:'2017_12_02',100:'2017_12_02',250:'2017_12_02'}
+damping1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+damping1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+damping1000_wavereal_obss = {50:100,70:100,100:100,250:100}
+
 # Normal Score
 normalscoreverynew_dats = {50:'2015_10_01',70:'2015_12_17',100:'2015_10_01',
                            250:'2015_10_01',500:'2015_10_01',1000:'2015_10_01',2000:'2015_10_01'}
@@ -307,6 +353,16 @@ normalscore1000_wavewell_dats = {50:'2017_12_08',70:'2017_12_08',100:'2017_12_08
 normalscore1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 normalscore1000_wavewell_nums = {50:1000,70:1000,100:1000,250:1000}
 normalscore1000_wavewell_obss = {50:100,70:100,100:100,250:100}
+
+normalscore_wavereal_dats = {500:'2017_12_03',1000:'2017_12_03',2000:'2017_12_03'}
+normalscore_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+normalscore_wavereal_nums = {500:100,1000:100,2000:100}
+normalscore_wavereal_obss = {500:100,1000:100,2000:100}
+
+normalscore1000_wavereal_dats = {50:'2017_12_03',70:'2017_12_03',100:'2017_12_03',250:'2017_12_03'}
+normalscore1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+normalscore1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+normalscore1000_wavereal_obss = {50:100,70:100,100:100,250:100}
 
 # Dual
 dual_dats = {50:'2015_07_15',70:'2015_12_17',100:'2015_07_15',
@@ -854,6 +910,18 @@ dats = {
             152:localisationlargecorrlen_wavewell_dats,
             },
         },
+    'wavereal':{
+        1000: {
+            0:normal1000_wavereal_dats,
+            1:damping1000_wavereal_dats,
+            2:normalscore1000_wavereal_dats,
+            },
+        100: {
+            0:normal_wavereal_dats,
+            1:damping_wavereal_dats,
+            2:normalscore_wavereal_dats,
+            },
+        },
     }
 lets = {
     'wavebc': {
@@ -974,6 +1042,18 @@ lets = {
             142:hybridlarge_wavewell_lets,
             151:localisationsmallcorrlen_wavewell_lets,
             152:localisationlargecorrlen_wavewell_lets,
+            },
+        },
+    'wavereal':{
+        1000: {
+            0:normal1000_wavereal_lets,
+            1:damping1000_wavereal_lets,
+            2:normalscore1000_wavereal_lets,
+            },
+        100: {
+            0:normal_wavereal_lets,
+            1:damping_wavereal_lets,
+            2:normalscore_wavereal_lets,
             },
         },
     }
@@ -1098,6 +1178,18 @@ nums = {
             152:localisationlargecorrlen_wavewell_nums,
             },
         },
+    'wavereal':{
+        1000: {
+            0:normal1000_wavereal_nums,
+            1:damping1000_wavereal_nums,
+            2:normalscore1000_wavereal_nums,
+            },
+        100: {
+            0:normal_wavereal_nums,
+            1:damping_wavereal_nums,
+            2:normalscore_wavereal_nums,
+            },
+        },
     }
 
 num_obss = {
@@ -1218,6 +1310,18 @@ num_obss = {
             142:hybridlarge_wavewell_obss,
             151:localisationsmallcorrlen_wavewell_obss,
             152:localisationlargecorrlen_wavewell_obss,
+            },
+        },
+    'wavereal':{
+        1000: {
+            0:normal1000_wavereal_obss,
+            1:damping1000_wavereal_obss,
+            2:normalscore1000_wavereal_obss,
+            },
+        100: {
+            0:normal_wavereal_obss,
+            1:damping_wavereal_obss,
+            2:normalscore_wavereal_obss,
             },
         },
     }

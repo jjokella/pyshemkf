@@ -62,7 +62,7 @@ def read(which_methods,
         raise exceptions.RuntimeError('stat_method wrong')
     if not n_runs in [100,1000]:
         raise exceptions.RuntimeError('n_runs wrong')
-    if not model in ['wavebc','wave','wavewell']:
+    if not model in ['wavebc','wave','wavewell','wavereal']:
         raise exceptions.RuntimeError('model wrong')
 
     # Nunber of methods
