@@ -116,4 +116,4 @@ if is_quot:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,ea.tag,"runplot_wavewell","ipy",str(model),'_'.join([str(i) for i in which_methods_sorted])[:],'2017_10_06')
+    pm.py_backup(pm.python_scripts_dir,ea.tag,"runplot","ipy",str(model),'_'.join([str(i) for i in which_methods_sorted])[:],'2017_10_06')
