@@ -18,7 +18,7 @@ is_show = 1
 is_backup = 0
 
 model = 'wavereal'
-which_methods = [0,1,2]
+which_methods = [0,1,2,3,4,5]
 stat_method = 'mean'
 
 # Read
@@ -70,8 +70,8 @@ if is_plot:
                            figpos = [0.1,0.3,0.85,0.6],
                            # n_runs = 100,
                            # which_enssize = [500,1000,2000],
-                           ylims = [0.29,0.8],
-                           yticks = np.arange(0.3,1.2,0.1),
+                           ylims = [0.29,0.4],
+                           yticks = np.arange(0.3,0.5,0.02),
                            fontleg = 12,
                        )
     # Save

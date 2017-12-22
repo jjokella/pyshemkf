@@ -9,16 +9,16 @@ import mypackage.errorplot.sort as es
 import mypackage.run.pythonmodule as pm
 
 # Switches
-is_read = 0
+is_read = 1
 is_sort = 1
-is_plot = 0
+is_plot = 1
 is_quot = 0
 is_save = 0
-is_show = 0
+is_show = 1
 is_backup = 0
 
 model = 'wavewell'
-which_methods = [0,1,2,3,4,5,112,141,142,151,152]
+which_methods = [0,1,2,3,4,5]#,112,141,142,151,152]
 # which_methods = [4,143,141,142,144,145]
 # which_methods = [113,103,123,133,143,153,163,6]
 # which_methods = [1,0,2,3,4,5]
