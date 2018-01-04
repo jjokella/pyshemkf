@@ -322,6 +322,16 @@ damping1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 damping1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
 damping1000_wavereal_obss = {50:100,70:100,100:100,250:100}
 
+dampinghalf_wavereal_dats = {500:'2017_12_22',1000:'2017_12_22',2000:'2017_12_22'}
+dampinghalf_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+dampinghalf_wavereal_nums = {500:100,1000:100,2000:100}
+dampinghalf_wavereal_obss = {500:100,1000:100,2000:100}
+
+dampinghalf1000_wavereal_dats = {50:'2017_12_22',70:'2017_12_22',100:'2017_12_22',250:'2017_12_22'}
+dampinghalf1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+dampinghalf1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+dampinghalf1000_wavereal_obss = {50:100,70:100,100:100,250:100}
+
 # Normal Score
 normalscoreverynew_dats = {50:'2015_10_01',70:'2015_12_17',100:'2015_10_01',
                            250:'2015_10_01',500:'2015_10_01',1000:'2015_10_01',2000:'2015_10_01'}
@@ -468,6 +478,26 @@ hybrid1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 hybrid1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
 hybrid1000_wavereal_obss = {50:100,70:100,100:100,250:100}
 
+hybridsmall_wavereal_dats = {500:'2017_12_23',1000:'2017_12_23',2000:'2017_12_23'}
+hybridsmall_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hybridsmall_wavereal_nums = {500:100,1000:100,2000:100}
+hybridsmall_wavereal_obss = {500:100,1000:100,2000:100}
+
+hybridsmall1000_wavereal_dats = {50:'2017_12_23',70:'2017_12_23',100:'2017_12_23',250:'2017_12_23'}
+hybridsmall1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hybridsmall1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+hybridsmall1000_wavereal_obss = {50:100,70:100,100:100,250:100}
+
+hybridlarge_wavereal_dats = {500:'2017_12_24',1000:'2017_12_24',2000:'2017_12_24'}
+hybridlarge_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+hybridlarge_wavereal_nums = {500:100,1000:100,2000:100}
+hybridlarge_wavereal_obss = {500:100,1000:100,2000:100}
+
+hybridlarge1000_wavereal_dats = {50:'2017_12_24',70:'2017_12_24',100:'2017_12_24',250:'2017_12_24'}
+hybridlarge1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+hybridlarge1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+hybridlarge1000_wavereal_obss = {50:100,70:100,100:100,250:100}
+
 # Localisation
 localisation_dats = {50:'2015_06_23',70:'2015_12_17',100:'2015_06_23',
                      250:'2015_06_23',500:'2015_06_24',1000:'2015_06_24',2000:'2015_06_24'}
@@ -529,6 +559,26 @@ localisation1000_wavereal_dats = {50:'2017_12_09',70:'2017_12_09',100:'2017_12_0
 localisation1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
 localisation1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
 localisation1000_wavereal_obss = {50:100,70:100,100:100,250:100}
+
+localisationsmallcorrlen_wavereal_dats = {500:'2017_12_20',1000:'2017_12_20',2000:'2017_12_20'}
+localisationsmallcorrlen_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+localisationsmallcorrlen_wavereal_nums = {500:100,1000:100,2000:100}
+localisationsmallcorrlen_wavereal_obss = {500:100,1000:100,2000:100}
+
+localisationsmallcorrlen1000_wavereal_dats = {50:'2017_12_20',70:'2017_12_20',100:'2017_12_20',250:'2017_12_20'}
+localisationsmallcorrlen1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+localisationsmallcorrlen1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+localisationsmallcorrlen1000_wavereal_obss = {50:100,70:100,100:100,250:100}
+
+localisationlargecorrlen_wavereal_dats = {500:'2017_12_21',1000:'2017_12_21',2000:'2017_12_21'}
+localisationlargecorrlen_wavereal_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+localisationlargecorrlen_wavereal_nums = {500:100,1000:100,2000:100}
+localisationlargecorrlen_wavereal_obss = {500:100,1000:100,2000:100}
+
+localisationlargecorrlen1000_wavereal_dats = {50:'2017_12_21',70:'2017_12_21',100:'2017_12_21',250:'2017_12_21'}
+localisationlargecorrlen1000_wavereal_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+localisationlargecorrlen1000_wavereal_nums = {50:1000,70:1000,100:1000,250:1000}
+localisationlargecorrlen1000_wavereal_obss = {50:100,70:100,100:100,250:100}
 
 # Iterative
 newiterative4_dats = {50:'2015_12_11',70:'2016_02_09',100:'2015_12_11',
@@ -948,6 +998,11 @@ dats = {
             3:dual1000_wavereal_dats,
             4:hybrid1000_wavereal_dats,
             5:localisation1000_wavereal_dats,
+            112:dampinghalf1000_wavereal_dats,
+            141:hybridsmall1000_wavereal_dats,
+            142:hybridlarge1000_wavereal_dats,
+            151:localisationsmallcorrlen1000_wavereal_dats,
+            152:localisationlargecorrlen1000_wavereal_dats,
             },
         100: {
             0:normal_wavereal_dats,
@@ -956,6 +1011,11 @@ dats = {
             3:dual_wavereal_dats,
             4:hybrid_wavereal_dats,
             5:localisation_wavereal_dats,
+            112:dampinghalf_wavereal_dats,
+            141:hybridsmall_wavereal_dats,
+            142:hybridlarge_wavereal_dats,
+            151:localisationsmallcorrlen_wavereal_dats,
+            152:localisationlargecorrlen_wavereal_dats,
             },
         },
     }
@@ -1088,6 +1148,11 @@ lets = {
             3:dual1000_wavereal_lets,
             4:hybrid1000_wavereal_lets,
             5:localisation1000_wavereal_lets,
+            112:dampinghalf1000_wavereal_lets,
+            141:hybridsmall1000_wavereal_lets,
+            142:hybridlarge1000_wavereal_lets,
+            151:localisationsmallcorrlen1000_wavereal_lets,
+            152:localisationlargecorrlen1000_wavereal_lets,
             },
         100: {
             0:normal_wavereal_lets,
@@ -1096,6 +1161,11 @@ lets = {
             3:dual_wavereal_lets,
             4:hybrid_wavereal_lets,
             5:localisation_wavereal_lets,
+            112:dampinghalf_wavereal_lets,
+            141:hybridsmall_wavereal_lets,
+            142:hybridlarge_wavereal_lets,
+            151:localisationsmallcorrlen_wavereal_lets,
+            152:localisationlargecorrlen_wavereal_lets,
             },
         },
     }
@@ -1228,6 +1298,11 @@ nums = {
             3:dual1000_wavereal_nums,
             4:hybrid1000_wavereal_nums,
             5:localisation1000_wavereal_nums,
+            112:dampinghalf1000_wavereal_nums,
+            141:hybridsmall1000_wavereal_nums,
+            142:hybridlarge1000_wavereal_nums,
+            151:localisationsmallcorrlen1000_wavereal_nums,
+            152:localisationlargecorrlen1000_wavereal_nums,
             },
         100: {
             0:normal_wavereal_nums,
@@ -1236,6 +1311,11 @@ nums = {
             3:dual_wavereal_nums,
             4:hybrid_wavereal_nums,
             5:localisation_wavereal_nums,
+            112:dampinghalf_wavereal_nums,
+            141:hybridsmall_wavereal_nums,
+            142:hybridlarge_wavereal_nums,
+            151:localisationsmallcorrlen_wavereal_nums,
+            152:localisationlargecorrlen_wavereal_nums,
             },
         },
     }
@@ -1368,6 +1448,11 @@ num_obss = {
             3:dual1000_wavereal_obss,
             4:hybrid1000_wavereal_obss,
             5:localisation1000_wavereal_obss,
+            112:dampinghalf1000_wavereal_obss,
+            141:hybridsmall1000_wavereal_obss,
+            142:hybridlarge1000_wavereal_obss,
+            151:localisationsmallcorrlen1000_wavereal_obss,
+            152:localisationlargecorrlen1000_wavereal_obss,
             },
         100: {
             0:normal_wavereal_obss,
@@ -1376,6 +1461,11 @@ num_obss = {
             3:dual_wavereal_obss,
             4:hybrid_wavereal_obss,
             5:localisation_wavereal_obss,
+            112:dampinghalf_wavereal_obss,
+            141:hybridsmall_wavereal_obss,
+            142:hybridlarge_wavereal_obss,
+            151:localisationsmallcorrlen_wavereal_obss,
+            152:localisationlargecorrlen_wavereal_obss,
             },
         },
     }
