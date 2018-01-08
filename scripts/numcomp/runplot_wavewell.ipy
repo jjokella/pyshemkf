@@ -99,4 +99,4 @@ if is_matrix:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot_wavewell","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_06_p1_fig9')
+    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_06_p1_fig9')
