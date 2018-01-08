@@ -600,7 +600,7 @@ iterative_wavebc_obss = {500:5050,1000:5050,2000:5050}
 iterative1000_wavebc_dats = {50:'2016_07_27',70:'2016_07_27',100:'2016_07_28',250:'2016_07_29'}
 iterative1000_wavebc_lets = {50:'b',70:'aln',100:'b',250:'b'}
 iterative1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
-iterative1000_wavebc_obss = {50:5050,70:100,100:100,250:100}
+iterative1000_wavebc_obss = {50:5050,70:5050,100:5050,250:5050}
 
 iterative_wavewell_dats = {500:'2018_01_04',1000:'2018_01_04',2000:'2018_01_04'}
 iterative_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
