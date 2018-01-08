@@ -602,6 +602,16 @@ iterative1000_wavebc_lets = {50:'b',70:'aln',100:'b',250:'b'}
 iterative1000_wavebc_nums = {50:1000,70:1000,100:1000,250:1000}
 iterative1000_wavebc_obss = {50:5050,70:100,100:100,250:100}
 
+iterative_wavewell_dats = {500:'2018_01_04',1000:'2018_01_04',2000:'2018_01_04'}
+iterative_wavewell_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
+iterative_wavewell_nums = {500:100,1000:100,2000:100}
+iterative_wavewell_obss = {500:5050,1000:5050,2000:5050}
+
+iterative1000_wavewell_dats = {50:'2018_01_04',70:'2018_01_04',100:'2018_01_04',250:'2018_01_04'}
+iterative1000_wavewell_lets = {50:'b',70:'aln',100:'bxz',250:'dkl'}
+iterative1000_wavewell_nums = {50:1000,70:1000,100:1000,250:100}
+iterative1000_wavewell_obss = {50:5050,70:5050,100:5050,250:5050}
+
 # Pilot Point
 pilot_wavebc_dats = {500:'2017_09_22',1000:'2017_09_22',2000:'2017_09_22'}
 pilot_wavebc_lets = {500:'ewx',1000:'gjj',2000:'hvv'}
@@ -970,6 +980,7 @@ dats = {
             3:dual1000_wavewell_dats,
             4:hybrid1000_wavewell_dats,
             5:localisation1000_wavewell_dats,
+            6:iterative1000_wavewell_dats,
             112:dampinghalf1000_wavewell_dats,
             141:hybridsmall1000_wavewell_dats,
             142:hybridlarge1000_wavewell_dats,
@@ -983,6 +994,7 @@ dats = {
             3:dual_wavewell_dats,
             4:hybrid_wavewell_dats,
             5:localisation_wavewell_dats,
+            6:iterative_wavewell_dats,
             112:dampinghalf_wavewell_dats,
             141:hybridsmall_wavewell_dats,
             142:hybridlarge_wavewell_dats,
@@ -1120,6 +1132,7 @@ lets = {
             3:dual1000_wavewell_lets,
             4:hybrid1000_wavewell_lets,
             5:localisation1000_wavewell_lets,
+            6:iterative1000_wavewell_lets,
             112:dampinghalf1000_wavewell_lets,
             141:hybridsmall1000_wavewell_lets,
             142:hybridlarge1000_wavewell_lets,
@@ -1133,6 +1146,7 @@ lets = {
             3:dual_wavewell_lets,
             4:hybrid_wavewell_lets,
             5:localisation_wavewell_lets,
+            6:iterative_wavewell_lets,
             112:dampinghalf_wavewell_lets,
             141:hybridsmall_wavewell_lets,
             142:hybridlarge_wavewell_lets,
@@ -1270,6 +1284,7 @@ nums = {
             3:dual1000_wavewell_nums,
             4:hybrid1000_wavewell_nums,
             5:localisation1000_wavewell_nums,
+            6:iterative1000_wavewell_nums,
             112:dampinghalf1000_wavewell_nums,
             141:hybridsmall1000_wavewell_nums,
             142:hybridlarge1000_wavewell_nums,
@@ -1283,6 +1298,7 @@ nums = {
             3:dual_wavewell_nums,
             4:hybrid_wavewell_nums,
             5:localisation_wavewell_nums,
+            6:iterative_wavewell_nums,
             112:dampinghalf_wavewell_nums,
             141:hybridsmall_wavewell_nums,
             142:hybridlarge_wavewell_nums,
@@ -1420,6 +1436,7 @@ num_obss = {
             3:dual1000_wavewell_obss,
             4:hybrid1000_wavewell_obss,
             5:localisation1000_wavewell_obss,
+            6:iterative1000_wavewell_obss,
             112:dampinghalf1000_wavewell_obss,
             141:hybridsmall1000_wavewell_obss,
             142:hybridlarge1000_wavewell_obss,
@@ -1433,6 +1450,7 @@ num_obss = {
             3:dual_wavewell_obss,
             4:hybrid_wavewell_obss,
             5:localisation_wavewell_obss,
+            6:iterative_wavewell_obss,
             112:dampinghalf_wavewell_obss,
             141:hybridsmall_wavewell_obss,
             142:hybridlarge_wavewell_obss,
