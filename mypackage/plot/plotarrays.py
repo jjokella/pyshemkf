@@ -13,6 +13,8 @@ import numpy as np
 # 6: Iterative EnKF
 # 7: Pilot Point EnKF
 
+# ho: huge obsvar of 10e-6
+
 # Paths
 python_dir = os.environ['HOME']+'/PythonDir'
 
@@ -81,21 +83,21 @@ longnames_methods = {
     107:'EnKF: Peta obsvar',
     108:'EnKF: Huge obsvar, no init',
     112:'Damped: 0.5',
-    113:'Damped: Huge obsvar',
-    114:'Damped: 0.5 Huge obsvar',
-    123:'NS-EnKF: Huge obsvar',
-    133:'DualEnKF: Huge obsvar',
+    113:'Damped: ho',
+    114:'Damped: 0.5 ho',
+    123:'NS-EnKF: ho',
+    133:'DualEnKF: ho',
     141:'Hyb-EnKF: 0.25',
     142:'Hyb-EnKF: 0.75',
-    143:'Hyb-EnKF: Huge obsvar',
-    144:'Hyb-EnKF: 0.25 Huge obsvar',
-    145:'Hyb-EnKF: 0.75 Huge obsvar',
+    143:'Hyb-EnKF: ho',
+    144:'Hyb-EnKF: 0.25 ho',
+    145:'Hyb-EnKF: 0.75 ho',
     151:'LEnKF: 75m',
     152:'LEnKF: 300m',
-    153:'LEnKF: Huge obsvar',
-    154:'LEnKF: 75m Huge obsvar',
-    155:'LEnKF: 300m Huge obsvar',
-    163:'IEnKF: Huge obsvar',
+    153:'LEnKF: ho',
+    154:'LEnKF: 75m ho',
+    155:'LEnKF: 300m ho',
+    163:'IEnKF: ho',
     }
 
 # Indices RMSE-sorted, low to high
