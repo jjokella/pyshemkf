@@ -15,7 +15,9 @@ is_save = 1
 is_show = 1
 is_backup = 0
 
-which_methods = [0,1,2,3,4,5,6,103,112,113,114,123,133,141,142,143,144,145,151,152,153,154,155,163]
+# which_methods = [0,1,2,3,4,5,6,103,112,113,114,123,133,141,142,143,144,145,151,152,153,154,155,163]
+which_methods = [145,114,155,103,133,123,163]
+# which_methods = [1,6,142,5,3,2,0]
 model = 'wavebc'
 
 # Read
@@ -61,11 +63,11 @@ if is_plot:
 # Matrix
 if is_matrix:
 
-    enssize = 50
-    n_syn = 1
+    enssize = 250
+    n_syn = 100
 
     # Figure
-    fig = plt.figure('numcomp',figsize=[30,30])
+    fig = plt.figure('numcomp',figsize=[10,10])
     plt.suptitle("N = "+ str(enssize)+"  Distribution: "+str(n_syn),
                  fontsize = 30)
 
@@ -80,13 +82,14 @@ if is_matrix:
     ax, pic_name = npl.matrix(fig.add_subplot(1,1,1),
                             which_methods = which_methods,
                             model = model,
-                            indsorts = which_methods_sorted[enssize],
+                            indsorts = which_methods,
                             enssize = enssize,
                             n_syn = n_syn,
                             n_comparisons = 1000,
                             xtick_y = 0.0,
                             ticklabelfontsize = 10,
-                            figpos = [0.12,0.1,0.8,0.8],
+                            is_longnames = True,
+                            figpos = [0.14,0.14,0.8,0.8],
                             )
 
     # Save
@@ -102,4 +105,4 @@ if is_matrix:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2017_10_06_p1_fig9')
+    pm.py_backup(pm.python_scripts_dir,na.tag,"runplot_wavebc","ipy",model,'_'.join([str(i) for i in which_methods])[:],'2018_01_08')

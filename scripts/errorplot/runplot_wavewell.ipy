@@ -13,15 +13,13 @@ is_read = 1
 is_sort = 1
 is_plot = 1
 is_quot = 0
-is_save = 0
+is_save = 1
 is_show = 1
-is_backup = 0
+is_backup = 1
 
 model = 'wavewell'
-which_methods = [0,1,2,3,4,5,6]#,112,141,142,151,152]
-# which_methods = [4,143,141,142,144,145]
-# which_methods = [113,103,123,133,143,153,163,6]
-# which_methods = [1,0,2,3,4,5]
+# which_methods = [0,1,2,3,4,5,6,112,141,142,151,152]
+which_methods = [5,4,1,2,6,0,3]
 stat_method = 'mean'
 
 # Read
@@ -74,7 +72,7 @@ if is_plot:
                            # which_enssize = [500,1000,2000],
                            lineyval = 0.7,
                            ylims = [0.5,0.8],
-                           yticks = np.arange(0.3,1.2,0.1),
+                           yticks = np.arange(0.3,1.2,0.05),
                            fontleg = 20,
                        )
     # Save
@@ -116,4 +114,4 @@ if is_quot:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,ea.tag,"runplot","ipy",str(model),'_'.join([str(i) for i in which_methods_sorted])[:],'2017_10_06')
+    pm.py_backup(pm.python_scripts_dir,ea.tag,"runplot_wavewell","ipy",str(model),'_'.join([str(i) for i in which_methods_sorted])[:],'2017_10_06')
