@@ -30,6 +30,8 @@ def plot(ax,
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
          figpos = [0.15,0.3,0.8,0.6],               #xbeg, ybeg, xrange, yrange
          ylims = [0.28,0.82],
+         is_textpos_auto = True,
+         textpos = [0.7,0.6,0.5,0.4],
          yticks = [0.3,0.4,0.5,0.6,0.7,0.8],
          num_pack = 4,                     # Number of methods in pack
          formatsos = ['o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p','o','v','s','p'],
@@ -165,7 +167,7 @@ def plot(ax,
             # Text
             if iplot == range(num_methods)[-1]:
                 ax.text(x[iplot]+0.5,
-                             varplot[iplot]-0.005 if enssize == 2000 else varplot[iplot],
+                             varplot[iplot] if is_textpos_auto else textpos[iens],
                              r'$n_{e}$ = '+str(enssize),
                              verticalalignment='center',
                              horizontalalignment='left',
