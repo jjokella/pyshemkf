@@ -237,7 +237,7 @@ def matrix(ax,
          n_syn = 1,                       #number of synthetic studies
          n_comparisons = 10000,
          pic_format = 'pdf',      #'png' or 'eps' or 'svg' or 'pdf'
-         figpos = [0.32,0.2,0.6,0.8],               #xbeg, ybeg, xrange, yrange
+         figpos = [0.32,0.1,0.6,0.8],               #xbeg, ybeg, xrange, yrange
          # ylims = [0.28,0.82],
          is_longnames = True,
          ticklabelfontsize = 20,
