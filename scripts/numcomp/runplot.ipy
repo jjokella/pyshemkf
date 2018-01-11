@@ -66,9 +66,9 @@ if is_matrix:
     n_syn = 1
 
     # Figure
-    fig = plt.figure('numcomp',figsize=[30, 30])
-    plt.suptitle("N = "+ str(enssize)+"  Distribution: "+str(n_syn),
-                 fontsize = 30)
+    fig = plt.figure('numcomp', figsize=[30, 30])
+    plt.suptitle("N = "+str(enssize)+"  Distribution: "+str(n_syn),
+                 fontsize=30)
 
     which_methods_sorted = {
         250: [1, 143, 144, 142, 103, 145, 155, 114,   4, 123, 141, 112,   3,

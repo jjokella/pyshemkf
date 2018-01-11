@@ -1,12 +1,12 @@
 # Plot of Endres means for different Ensemble sizes
 
-import os
-import matplotlib as mpl
+# import os
+# import matplotlib as mpl
 import numpy as np
 from mypackage.plot import plotfunctions as pf
 from mypackage.run import pythonmodule as pm
 from mypackage.run import runmodule as rm
-import pandas as pd
+# import pandas as pd
 
 model_name = 'wavewell'
 
@@ -15,9 +15,11 @@ two_iterations = False                    # True: residual_E2.vtk
 # method = 16
 
 dats = ['2018_01_04' for i in range(num_ensemble_sizes)]
-lets = ['b','aln','bxz','dkl','ewx','gjj','hvv']
-#      ['b','aln','bxz','dkl','ewx','gjj','hvv','jih','kut','mhf','ntr','pgd']
-nums = [1000,1000,1000,100,100,100,100]#[1000 for i in range(num_ensemble_sizes)]
+lets = ['b', 'aln', 'bxz', 'dkl', 'ewx', 'gjj', 'hvv']
+#      ['b', 'aln', 'bxz', 'dkl', 'ewx', 'gjj', 'hvv',
+#       'jih', 'kut', 'mhf', 'ntr', 'pgd']
+nums = [1000, 1000, 1000, 100, 100, 100, 100]
+# [1000 for i in range(num_ensemble_sizes)]
 num_obss = [100 for i in range(num_ensemble_sizes)]
 
 for j in range(num_ensemble_sizes):
@@ -26,19 +28,29 @@ for j in range(num_ensemble_sizes):
     let = lets[j]
     num = nums[j]
     num_obs = num_obss[j]
-    
+
     # Read in the begres-distribution
-    begres = [pf.my_vtk_to_numpy(pf.my_vtk(rm.make_output_dirs(model_name,dat,rm.get_let_num(i))[2],
-                                'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
-                                'rms_kz_aft'))[0][0]   #Beg
-              for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
-    np.save(pm.py_output_filename('dists','begres',model_name+'_'+dat+'_'+let,'npy'),begres)
+    begres = [pf.my_vtk_to_numpy(pf.my_vtk(
+        rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
+        'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
+        'rms_kz_aft'))[0][0]   # Beg
+              for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
+    np.save(pm.py_output_filename('dists',
+                                  'begres',
+                                  model_name+'_'+dat+'_'+let,
+                                  'npy'),
+            begres)
     begres = None
 
     # Read in the endres-distribution
-    endres = [pf.my_vtk_to_numpy(pf.my_vtk(rm.make_output_dirs(model_name,dat,rm.get_let_num(i))[2],
-                                'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
-                                'rms_kz_aft'))[num_obs-1][0]   #End
-              for i in range(rm.get_num_let(let),rm.get_num_let(let)+num)]
-    np.save(pm.py_output_filename('dists','endres',model_name+'_'+dat+'_'+let,'npy'),endres)
+    endres = [pf.my_vtk_to_numpy(pf.my_vtk(
+        rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
+        'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
+        'rms_kz_aft'))[num_obs-1][0]   # End
+              for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
+    np.save(pm.py_output_filename('dists',
+                                  'endres',
+                                  model_name+'_'+dat+'_'+let,
+                                  'npy'),
+            endres)
     endres = None
