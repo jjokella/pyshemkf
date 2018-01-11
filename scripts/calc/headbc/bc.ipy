@@ -5,7 +5,7 @@
 import numpy as np
 import exceptions
 # from mypackage.plot import plotfunctions as pf
-from mypackage.plot import grids
+from mypackage.plot import specs
 # from mypackage.run import runmodule as rm
 # import pandas as pd
 # from matplotlib import colors	        # Normalize colors (colors.Normalize())
@@ -21,9 +21,9 @@ v = np.array([1*10**-5, 1*10**-5])          # Darcy velocity [m/s =m3/m2*s]
 
 # Cell numbers and distances
 nx = 247
-delx = grids.delx('headbctest')
+delx = specs.delx('headbctest')
 ny = 247
-dely = grids.delx('headbctest')
+dely = specs.delx('headbctest')
 
 # Head in front, left corner
 h0 = 10                                   # [m]

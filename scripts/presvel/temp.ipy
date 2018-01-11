@@ -4,7 +4,7 @@ import os
 import matplotlib as mpl
 import numpy as np
 from mypackage.plot import plotfunctions as pf
-from mypackage.plot import grids
+from mypackage.plot import specs
 from matplotlib import cm		# Colormap commands (cm.get_cmap())
 from matplotlib import colors	        # Normalize colors (colors.Normalize())
 from mypackage.run import runmodule as rm
@@ -27,10 +27,10 @@ ax_high_cbar = 10.0
 pic_format = 'eps'
 
 # Set grid pixel centers
-x = grids.x(model_name)
-xticks = grids.xticks(model_name)
-y = grids.y(model_name)
-yticks = grids.yticks(model_name)
+x = specs.x(model_name)
+xticks = specs.xticks(model_name)
+y = specs.y(model_name)
+yticks = specs.yticks(model_name)
 
 for assim_num in assim_nums:
     # Read temp array
