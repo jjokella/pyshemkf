@@ -7,7 +7,6 @@ import numpy as np
 # from mypackage.plot import plotfunctions as pf
 # from mypackage.run import runmodule as rm
 # from matplotlib import cm		# Colormap commands (cm.get_cmap())
-# from mypackage.plot import mycolors
 # import pandas as pd
 
 # Var mit 20, cov mit 19

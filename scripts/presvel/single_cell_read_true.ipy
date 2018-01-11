@@ -12,12 +12,12 @@ if is_true:
     let = sc.truelet
 else:
     let = sc.lets[0]
-    
+
 output_dir = 'samples_output'
 
-obs_num = 9 # Column Number in observations file
+obs_num = 9  # Column Number in observations file
 
-num_mons = sc.num_mons(model_name,dat,let)
+num_mons = sc.num_mons(model_name, dat, let)
 
 os.chdir(os.environ['HOME']+"/shematOutputDir/" + model_name +"_output/" + dat + "/" \
              + dat + "_" + let + "/" + output_dir)
