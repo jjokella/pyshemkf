@@ -1,23 +1,23 @@
 # Head boundary condition from velocity input
 
-import os
-import matplotlib as mpl
+# import os
+# import matplotlib as mpl
 import numpy as np
 import exceptions
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import grids 
-from mypackage.run import runmodule as rm
-import pandas as pd
-from matplotlib import colors	        # Normalize colors (colors.Normalize())
+# from mypackage.plot import plotfunctions as pf
+from mypackage.plot import grids
+# from mypackage.run import runmodule as rm
+# import pandas as pd
+# from matplotlib import colors	        # Normalize colors (colors.Normalize())
 
 # Parameters
-k   = 10**(-10)                             # Permeability [m2]
+k = 10**(-10)                             # Permeability [m2]
 rho = 999.7                                 # Fluid density [kg/m3]
-g   = 9.81                                  # Gravity [m/s2]
-mu  = 1.308*10**-3                          # Fluid Viscosity [kg/m*s]
+g = 9.81                                  # Gravity [m/s2]
+mu = 1.308*10**-3                          # Fluid Viscosity [kg/m*s]
 
 # Velocity
-v = np.array([1*10**-5,1*10**-5])          # Darcy velocity [m/s =m3/m2*s]
+v = np.array([1*10**-5, 1*10**-5])          # Darcy velocity [m/s =m3/m2*s]
 
 # Cell numbers and distances
 nx = 247
@@ -29,8 +29,8 @@ dely = grids.delx('headbctest')
 h0 = 10                                   # [m]
 
 # ----------------------------------------------------------------------------
-# delhx = - mu/(k*rho*g) * v[0] * delx =: a[0] * delx 
-# delhy = - mu/(k*rho*g) * v[1] * dely =: a[1] * dely 
+# delhx = - mu/(k*rho*g) * v[0] * delx =: a[0] * delx
+# delhy = - mu/(k*rho*g) * v[1] * dely =: a[1] * dely
 
 # Calculate parameters - mu/(k*rho*g) * v
 a = -mu/(k*rho*g)*v
@@ -43,22 +43,22 @@ hright = np.zeros(ny)
 
 # Front
 hfront[0] = h0
-for i in range(1,nx):
+for i in range(1, nx):
     hfront[i] = hfront[i-1]+a[0]*0.5*(delx[i-1]+delx[i])
-    
+
 # Left
 hleft[0] = h0
-for i in range(1,ny):
+for i in range(1, ny):
     hleft[i] = hleft[i-1]+a[1]*0.5*(dely[i-1]+dely[i])
 
 # Back
 hback[0] = hleft[-1]
-for i in range(1,nx):
+for i in range(1, nx):
     hback[i] = hback[i-1]+a[0]*0.5*(delx[i-1]+delx[i])
 
 # Right
 hright[0] = hfront[-1]
-for i in range(1,ny):
+for i in range(1, ny):
     hright[i] = hright[i-1]+a[1]*0.5*(dely[i-1]+dely[i])
 
 # Test for right back corner.
@@ -66,15 +66,13 @@ if hright[-1] != hback[-1]:
     raise exceptions.RuntimeError("Something wrong at right back corner.")
 
 # Output file
-f = open('/home/jk125262/PythonDir/scripts/headbc/headbc.txt','w')
-for i in range(1,nx+1):
+f = open('/home/jk125262/PythonDir/scripts/headbc/headbc.txt', 'w')
+for i in range(1, nx+1):
     f.write(str(i)+' 1 1 '+str(hfront[i-1])[:]+'d0 0'+'\n')
-for i in range(2,ny+1):
+for i in range(2, ny+1):
     f.write('1 '+str(i)+' 1 '+str(hleft[i-1])[:]+'d0 0'+'\n')
-for i in range(2,nx+1):
+for i in range(2, nx+1):
     f.write(str(i)+' '+str(ny)+' 1 '+str(hback[i-1])[:]+'d0 0'+'\n')
-for i in range(2,ny):
+for i in range(2, ny):
     f.write(str(nx)+' '+str(i)+' 1 '+str(hright[i-1])[:]+'d0 0'+'\n')
 f.close()
-
-
