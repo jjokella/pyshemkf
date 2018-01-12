@@ -1,7 +1,7 @@
-import shutil
 import numpy as np
 import matplotlib.pyplot as plt
 
+from mypackage.plot import specs as sc
 import mypackage.gaussianity.arrays as ga
 import mypackage.gaussianity.plot as gp
 import mypackage.gaussianity.read as gr
@@ -17,20 +17,20 @@ is_show = 1
 model = 'wavebc'
 
 which_method = 0
-n_syns = [1,10,50,100]
+n_syns = [1, 10, 50, 100]
 enssize = 50
 
 # Read
 if is_read:
     for n_syn in n_syns:
         gauss_array, gauss_array_name = gr.read(
-            which_method = which_method,
-            n_syn = n_syn,
-            n_comparisons = 10000,
-            enssize = enssize,
+            which_method=which_method,
+            n_syn=n_syn,
+            n_comparisons=10000,
+            enssize=enssize,
             )
 
-        np.save(gauss_array_name,gauss_array)
+        np.save(gauss_array_name, gauss_array)
         print('Saved as ' + gauss_array_name)
 
 
@@ -38,22 +38,23 @@ if is_read:
 if is_hist:
 
     # Figure
-    fig = plt.figure('Gaussianity',figsize=[15,10])
+    fig = plt.figure('Gaussianity', figsize=[15, 10])
     fig.suptitle("Mean distributions for varying number of synthetic studies")
-    
+
     # Run plot function
     for i in range(4):
-        ax, pic_name = gp.hist(fig.add_subplot(2,2,i+1),
-                            n_syn = n_syns[i],
-                            which_method = which_method,
-                            n_comparisons = 10000,
-                            xlims = [0.2,1.2],
-                            n_bins = 300,
-                            histlims = [0,3],
-                            title = "Synthetic Studies: "+str(n_syns[i]),
-                            is_plot = True,
-                            enssize = enssize,
-                        )
+        ax, pic_name = gp.hist(
+            fig.add_subplot(2, 2, i+1),
+            n_syn=n_syns[i],
+            which_method=which_method,
+            n_comparisons=10000,
+            xlims=[0.2, 1.2],
+            n_bins=300,
+            histlims=[0, 3],
+            title="Synthetic Studies: "+str(n_syns[i]),
+            is_plot=True,
+            enssize=enssize,
+        )
     # Save
     if is_save:
         plt.savefig(pic_name)
@@ -67,4 +68,12 @@ if is_hist:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,ga.tag,"runplot_multi","ipy",model,str(which_method),'2017_10_03')
+    pm.py_backup(
+        pm.python_scripts_dir,
+        ga.tag,
+        "runplot_multi",
+        "ipy",
+        sc.specl(model,
+                 str(which_method),
+                 '2017_10_03')
+    )

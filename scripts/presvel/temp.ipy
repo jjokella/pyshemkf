@@ -5,10 +5,9 @@ import matplotlib as mpl
 import numpy as np
 from mypackage.plot import plotfunctions as pf
 from mypackage.plot import specs
+import matplotlib.pyplot as plt
 from matplotlib import cm		# Colormap commands (cm.get_cmap())
 from matplotlib import colors	        # Normalize colors (colors.Normalize())
-from mypackage.run import runmodule as rm
-import pandas as pd
 
 is_show = True
 is_save = True
@@ -16,8 +15,8 @@ is_save = True
 # Input file specification
 model_name = 'cubey'
 dat = '2016_11_10'
-let = 'f'                                 #'b', 'f'
-assim_nums = [110,120,130,140]
+let = 'f'                                 # 'b', 'f'
+assim_nums = [110, 120, 130, 140]
 
 
 m_num_cbar = 15
@@ -34,42 +33,47 @@ yticks = specs.yticks(model_name)
 
 for assim_num in assim_nums:
     # Read temp array
-    temp = pf.my_vtk_to_numpy(os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/'
-                                  +dat+'/'+dat+'_'+let
-                                  +'/enkf_output',
-                                  'assim_variables_E1_aft_'+str(assim_num).zfill(4)+'.vtk',
-                                  'temp_mean')
+    temp = pf.my_vtk_to_numpy(os.environ['HOME']+'/shematOutputDir/'
+                              + model_name+'_output/'
+                              + dat+'/'+dat+'_'+let
+                              + '/enkf_output',
+                              'assim_variables_E1_aft_'
+                              + str(assim_num).zfill(4)+'.vtk',
+                              'temp_mean')
     os.chdir(os.environ['HOME']+'/PythonDir')
 
     # Figure
-    fig = plt.figure(1,figsize=[11,11])
+    fig = plt.figure(1, figsize=[11, 11])
     ax = fig.add_subplot(111)
-    im = mpl.image.NonUniformImage(ax,interpolation='nearest',
-                                       cmap=pf.cmap_discretize(cm.viridis,m_num_cbar),
-                                       norm = colors.Normalize(vmin=ax_low_cbar,
-                                                                   vmax=ax_high_cbar,
-                                                                   clip=False))
-    im.set_data(x,y,temp)
+    im = mpl.image.NonUniformImage(ax,
+                                   interpolation='nearest',
+                                   cmap=pf.cmap_discretize(cm.viridis,
+                                                           m_num_cbar),
+                                   norm=colors.Normalize(vmin=ax_low_cbar,
+                                                         vmax=ax_high_cbar,
+                                                         clip=False))
+    im.set_data(x, y, temp)
     ax.images.append(im)
-    # xticks = np.append(xticks[:8],xticks[240:])
-    # yticks = np.append(yticks[:8],yticks[240:])
-    xticks = np.append(np.linspace(0,8,9),np.linspace(8.1,9.3,40))
-    xticks = np.append(xticks,np.linspace(10,17,8))
-    yticks = np.append(np.linspace(0,8,9),np.linspace(8.1,9.3,40))
-    yticks = np.append(yticks,np.linspace(10,17,8))
+    # xticks = np.append(xticks[:8], xticks[240:])
+    # yticks = np.append(yticks[:8], yticks[240:])
+    xticks = np.append(np.linspace(0, 8, 9), np.linspace(8.1, 9.3, 40))
+    xticks = np.append(xticks, np.linspace(10, 17, 8))
+    yticks = np.append(np.linspace(0, 8, 9), np.linspace(8.1, 9.3, 40))
+    yticks = np.append(yticks, np.linspace(10, 17, 8))
     ax.xaxis.set_ticks(xticks)
     ax.yaxis.set_ticks(yticks)
     ax.grid()
     ax.set_title('Temperature field')
-    ax.set_xlim(8.2,9.14)
-    ax.set_ylim(8.2,9.14)
+    ax.set_xlim(8.2, 9.14)
+    ax.set_ylim(8.2, 9.14)
 
     ax.legend()
 
     if is_save:
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
-                        +'assim_variables_'+str(assim_num).zfill(4)
-                        +'_'+dat+'_'+let+'.'+pic_format)
+        plt.savefig(os.environ['HOME']
+                    + '/PythonDir/output/presvel/'+pic_format+'/'
+                    + 'assim_variables_'+str(assim_num).zfill(4)
+                    + '_'+dat+'_'+let+'.'+pic_format)
     if is_show:
         plt.show()
     else:

@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from mypackage.plot import specs as sc
 import mypackage.gaussianity.arrays as ga
 import mypackage.gaussianity.plot as gp
 import mypackage.gaussianity.read as gr
@@ -58,10 +59,12 @@ if is_hist:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,
-                 ga.tag,
-                 "runplot",
-                 "ipy",
-                 model,
+    pm.py_backup(
+        pm.python_scripts_dir,
+        ga.tag,
+        "runplot",
+        "ipy",
+        sc.specl(model,
                  str(which_method),
                  '2017_10_02')
+    )

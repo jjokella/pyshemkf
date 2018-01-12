@@ -86,4 +86,12 @@ if is_plot:
 
 # Backup
 if is_backup:
-    pm.py_backup(pm.python_scripts_dir,fa.tag,"runplot_true","ipy",model_name,dat,lets[0])
+    pm.py_backup(
+        pm.python_scripts_dir,
+        fa.tag,
+        "runplot_true",
+        "ipy",
+        sc.specl(model_name,
+                 dat,
+                 lets[0])
+    )

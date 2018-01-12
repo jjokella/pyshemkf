@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from mypackage.plot import specs as sc
 import mypackage.numcomp.arrays as na
 import mypackage.numcomp.plot as npl
 import mypackage.numcomp.read as nr
@@ -112,7 +113,7 @@ if is_backup:
         na.tag,
         "runplot_wavebc",
         "ipy",
-        model,
-        '_'.join([str(i) for i in which_methods])[:],
-        '2018_01_08',
+        sc.specl(model,
+                 '_'.join([str(i) for i in which_methods])[:],
+                 '2018_01_08')
     )
