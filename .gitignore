@@ -1,9 +1,11 @@
 *.pyc
 bin/
-input/debug/
+input/
 output/errorplot/
 output/now/
+output/tmp/
 output/numcomp/
+output/presvel/png/
 output/presvel/eps/
 output/presvel/npy/
 output/sameseed/
