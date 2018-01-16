@@ -11,8 +11,8 @@ import mypackage.run.pythonmodule as pm
 import mypackage.plot.plotfunctions as pf
 
 # Switches
-is_read = 1
-is_plot = 0
+is_read = 0
+is_plot = 1
 is_save = 0
 is_show = 1
 is_backup = 0
@@ -59,8 +59,8 @@ if is_plot:
         markercolor='black',
         pic_format='png',
         varname=plotvarname,
-        xlims=[0.0, 620.0],
-        ylims=[0.0, 620.0],
+        xlims=[0.0, 0.8],
+        ylims=[0.0, 0.8],
         nt=nt,
     )
 
