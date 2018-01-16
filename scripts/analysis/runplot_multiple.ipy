@@ -7,6 +7,7 @@ import mypackage.analysis.variables as av
 import mypackage.analysis.plot as ap
 import mypackage.analysis.read as ar
 import mypackage.run.pythonmodule as pm
+import mypackage.plot.plotfunctions as pf
 
 # Switches
 is_read = 1
@@ -58,7 +59,7 @@ if is_plot:
                            )
 
     # # Colorbar
-    # cb_ax = ap.cb(fig.add_subplot(1,2,1),
+    # cb_ax = pf.cb(fig.add_subplot(1,2,1),
     #               ax)
 
     # Save

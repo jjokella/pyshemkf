@@ -1,11 +1,14 @@
-import shutil
 import matplotlib.pyplot as plt
+
+import numpy as np
 
 from mypackage.plot import specs as sc
 import mypackage.forward.arrays as fa
 import mypackage.forward.plot as fp
 import mypackage.forward.read as fr
 import mypackage.run.pythonmodule as pm
+import mypackage.run.runmodule as rm
+import mypackage.plot.plotfunctions as pf
 
 # Switches
 is_read = 1
@@ -22,58 +25,58 @@ let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
-lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+lets = [rm.get_let_num(i) for i in range(ns, ns+nl, nstep)]
 
-nts = [2,4,6,8,10,12,14,17,18]
+nts = [2, 4, 6, 8, 10, 12, 14, 17, 18]
 plotvarname = 'tracer1'
 
 # Read
 if is_read:
     for nt in nts:
-        for varname in ['uindex','head','kz','tracer1']:
-            numpy_array, numpy_array_name = fr.read(model_name,
-                                                    dat,
-                                                    lets[0],
-                                                    varname = varname,
-                                                    fname = model_name.upper()+'_TRUE_E0_time_out_'+str(nt)+'.vtk',
-                                                    nt = nt,
-                                                        )
-            np.save(numpy_array_name,numpy_array)
+        for varname in ['uindex', 'head', 'kz', 'tracer1']:
+            numpy_array, numpy_array_name = fr.read(
+                model_name,
+                dat,
+                lets[0],
+                varname=varname,
+                fname=model_name.upper()+'_TRUE_E0_time_out_'+str(nt)+'.vtk',
+                nt=nt,
+            )
+            np.save(numpy_array_name, numpy_array)
             print('Saved as ' + numpy_array_name)
-
-
 
 # Plot
 if is_plot:
 
     # Figure
-    fig = plt.figure(1,figsize=[15,10])
-
+    fig = plt.figure(1, figsize=[15, 10])
 
     # Run plot function
-    for it,nt in enumerate(nts):
-        ax, pic_name = fp.plot(fig.add_subplot(3,4,it+1+(it)/3),
-                               model_name,
-                               dat,
-                               lets[0],
-                               markercolor = 'black',
-                               pic_format = 'png',
-                               varname = plotvarname,
-                               xlims = [0.0,620.0],
-                               ylims = [0.0,620.0],
-                               nt = nt,
-                               is_position = False,
-                               loc_inds = range(2),
-                               num_cbar = 15,
-                                   )
+    for it, nt in enumerate(nts):
+        ax, pic_name = fp.plot(
+            fig.add_subplot(3, 4, it+1+(it)/3),
+            model_name,
+            dat,
+            lets[0],
+            markercolor='black',
+            pic_format='png',
+            varname=plotvarname,
+            xlims=[0.0, 620.0],
+            ylims=[0.0, 620.0],
+            nt=nt,
+            is_position=False,
+            loc_inds=range(2),
+            num_cbar=15,
+        )
 
     # Colorbar
-    cb_ax = fp.cb(fig.add_subplot(4,4,10),
-                  ax,
-                  varname = plotvarname,
-                  labelsize = 20,
-                  cb_ax_position = [0.8,0.1,0.03,0.8],
-                      )
+    cb_ax = pf.cb(
+        fig.add_subplot(4, 4, 10),
+        ax,
+        varname=plotvarname,
+        labelsize=20,
+        cb_ax_position=[0.8, 0.1, 0.03, 0.8],
+    )
 
     # Save
     if is_save:

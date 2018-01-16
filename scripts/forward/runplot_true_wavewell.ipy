@@ -7,6 +7,7 @@ import mypackage.forward.arrays as fa
 import mypackage.forward.plot as fp
 import mypackage.forward.read as fr
 import mypackage.run.pythonmodule as pm
+import mypackage.plot.plotfunctions as pf
 
 # Switches
 is_read = 1
@@ -76,7 +77,7 @@ if is_plot:
                        )
 
     # Colorbar
-    cb_ax = fp.cb(fig.add_subplot(1,2,1),
+    cb_ax = pf.cb(fig.add_subplot(1,2,1),
                   ax,
                   varname = plotvarname,
                   varlabels = {plotvarname:'log(k[m2])'},

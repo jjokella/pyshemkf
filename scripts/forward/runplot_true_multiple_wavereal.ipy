@@ -6,6 +6,7 @@ import mypackage.forward.arrays as fa
 import mypackage.forward.plot as fp
 import mypackage.forward.read as fr
 import mypackage.run.pythonmodule as pm
+import mypackage.plot.plotfunctions as pf
 
 # Switches
 is_read = 1
@@ -76,12 +77,13 @@ if is_plot:
                                    )
 
     # Colorbar
-    cb_ax = fp.cb(fig.add_subplot(4,4,10),
-                  ax,
-                  varname = plotvarname,
-                  labelsize = 20,
-                  cb_ax_position = [0.8,0.1,0.03,0.8],
-                      )
+    cb_ax = pf.cb(
+        fig.add_subplot(4, 4, 10),
+        ax,
+        varname=plotvarname,
+        labelsize=20,
+        cb_ax_position=[0.8, 0.1, 0.03, 0.8],
+    )
 
     # Save
     if is_save:
