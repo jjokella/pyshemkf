@@ -67,7 +67,7 @@ if is_matrix:
     n_syn = 1
 
     # Figure
-    fig = plt.figure('numcomp', figsize=[30, 30])
+    fig = plt.figure('numcomp', figsize=[10, 10])
     plt.suptitle("N = "+str(enssize)+"  Distribution: "+str(n_syn),
                  fontsize=30)
 
@@ -89,7 +89,8 @@ if is_matrix:
         n_comparisons=1000,
         xtick_y=0.0,
         ticklabelfontsize=10,
-        figpos=[0.12, 0.1, 0.8, 0.8],
+        is_longnames=True,
+        figpos=[0.14, 0.14, 0.8, 0.8],
     )
 
     # Save
@@ -112,5 +113,5 @@ if is_backup:
         "ipy",
         sc.specl(model,
                  '_'.join([str(i) for i in which_methods])[:],
-                 '2017_10_06_p1_fig9')
+                 '2018_01_08')
     )
