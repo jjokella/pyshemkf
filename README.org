@@ -9,261 +9,84 @@
    IPython scripts, where the actual daily work is done.
 * General Documentation
 ** Python Modules
-*** General Modules (sys, os ...)
-**** Commands
-     import sys
-     import os
-     import subprocess
-     import exceptions
-     import atexit 
-**** Documentation
-     |------------+-------------------------------------------------------------------|
-     | NAME       | DOCUMENTATION                                                     |
-     |------------+-------------------------------------------------------------------|
-     |------------+-------------------------------------------------------------------|
-     | sys        | Used for system variables. sys.exit() finishes the executiont.    |
-     |            | sys.path gives PYTHONPATH as list of paths (in PYTHONPATH, python |
-     |            | will look for modules)                                            |
-     |------------+-------------------------------------------------------------------|
-     | os         | Operating system commands like os.chdir('path'), os.path,         |
-     |            | os.mkdir('path'), os.getcwd()                                     |
-     |------------+-------------------------------------------------------------------|
-     | subprocess | To execute shell command (subprocess.Popen)                       |
-     |------------+-------------------------------------------------------------------|
-     | exceptions | Raising exception (raise exceptions.RuntimeError)                 |
-     |------------+-------------------------------------------------------------------|
-     | atexit     | Executing command at exit of execution                            |
-     |------------+-------------------------------------------------------------------|
+*** General Modules (f.e. sys, os)
+|------------+-------------------------------------------------------------------|
+| NAME       | DOCUMENTATION                                                     |
+|------------+-------------------------------------------------------------------|
+|------------+-------------------------------------------------------------------|
+| sys        | Used for system variables. sys.exit() finishes the executiont.    |
+|            | sys.path gives PYTHONPATH as list of paths (in PYTHONPATH, python |
+|            | will look for modules)                                            |
+|------------+-------------------------------------------------------------------|
+| os         | Operating system commands like os.chdir('path'), os.path,         |
+|            | os.mkdir('path'), os.getcwd()                                     |
+|------------+-------------------------------------------------------------------|
+| subprocess | To execute shell command (subprocess.Popen)                       |
+|------------+-------------------------------------------------------------------|
+| exceptions | Raising exception (raise exceptions.RuntimeError)                 |
+|------------+-------------------------------------------------------------------|
+| atexit     | Executing command at exit of execution                            |
+|------------+-------------------------------------------------------------------|
      
 *** String modules
-**** Commands  
-     import string
-     import re
-     import shlex 
-**** Documentation
-     |--------+----------------------------------------|
-     | NAME   | DOCUMENTATION                          |
-     |--------+----------------------------------------|
-     |--------+----------------------------------------|
-     | re     | Regular expressions support            |
-     |--------+----------------------------------------|
-     | string | Load alphabet (string.alphabet())      |
-     |--------+----------------------------------------|
-     | shlex  | Structure system commands(shlex.split) |
-     |--------+----------------------------------------|
+|--------+----------------------------------------|
+| NAME   | DOCUMENTATION                          |
+|--------+----------------------------------------|
+|--------+----------------------------------------|
+| re     | Regular expressions support            |
+|--------+----------------------------------------|
+| string | Load alphabet (string.alphabet())      |
+|--------+----------------------------------------|
+| shlex  | Structure system commands(shlex.split) |
+|--------+----------------------------------------|
 
 *** Time modules
-**** Commands
-     import time
-     import datetime
-**** Documentation
-     |----------+--------------------------------------------------|
-     | NAME     | DOCUMENTATION                                    |
-     |----------+--------------------------------------------------|
-     |----------+--------------------------------------------------|
-     | time     | Timing the execution (time.time(), time.clock()) |
-     |----------+--------------------------------------------------|
-     | datetime | Date and time functions                          |
-     |----------+--------------------------------------------------|
+|----------+--------------------------------------------------|
+| NAME     | DOCUMENTATION                                    |
+|----------+--------------------------------------------------|
+|----------+--------------------------------------------------|
+| time     | Timing the execution (time.time(), time.clock()) |
+|----------+--------------------------------------------------|
+| datetime | Date and time functions                          |
+|----------+--------------------------------------------------|
   
-*** Drawing (Matplotlib,Pylab,vtk,...)
-**** Commands
-     import matplotlib as mpl           	# Matplotlib
-     from matplotlib import pyplot as plt	# Plot commands (plt.show(), plt.close())
-     from matplotlib import cm		# Colormap commands (cm.get_cmap())
-     from matplotlib import mlab		#
-     from matplotlib import ticker		#
-     from matplotlib import colors	        # Normalize colors (colors.Normalize())
-     import mpl_toolkits			#  axes (mpl_toolkits.axes_grid.make_axes_locatable)
-     import pylab				# Axes (pylab.axis())
-     import vtk	  		# Adapt vtk to NumPy (vtk.util.numpy_support.vtk_to_numpy)
-**** Documentation    
-     |--------------+---------------|
-     | NAME         | DOCUMENTATION |
-     |--------------+---------------|
-     |--------------+---------------|
-     | matplotlib   |               |
-     |--------------+---------------|
-     | pyplot       |               |
-     |--------------+---------------|
-     | cm           |               |
-     |--------------+---------------|
-     | mlab         |               |
-     |--------------+---------------|
-     | ticker       |               |
-     |--------------+---------------|
-     | colors       |               |
-     |--------------+---------------|
-     | mpl_toolkits |               |
-     |--------------+---------------|
-     | pylab        |               |
-     |--------------+---------------|
-     | vtk          |               |
-     |--------------+---------------|
+*** Drawing (f.e. Matplotlib,Pylab,vtk)
+|--------------+--------------------------------------------------------------------|
+| NAME         | DOCUMENTATION                                                      |
+|--------------+--------------------------------------------------------------------|
+|--------------+--------------------------------------------------------------------|
+| matplotlib   | Matplotlib drawing library (usually loaded as mpl)                 |
+|--------------+--------------------------------------------------------------------|
+| mpl.pyplot   | Most of the plotting commands. For example plt.show(), plt.close() |
+|--------------+--------------------------------------------------------------------|
+| mpl.cm       | Colormap commands: cm.get_cmap(0                                   |
+|--------------+--------------------------------------------------------------------|
+| mpl.mlab     |                                                                    |
+|--------------+--------------------------------------------------------------------|
+| mpl.ticker   |                                                                    |
+|--------------+--------------------------------------------------------------------|
+| mpl.colors   | Normalize colors: colors.Normalize()                               |
+|--------------+--------------------------------------------------------------------|
+| mpl_toolkits | mpl_toolkits.axes_grid.make_axes_locatable                         |
+|--------------+--------------------------------------------------------------------|
+| pylab        | Not used so much anymore                                           |
+|--------------+--------------------------------------------------------------------|
+| vtk          | Mainly used for method vtk.util.numpy_support.vtk_to_numpy, which  |
+|              | reads vtk-files and outputs numpy-arrays.                          |
+|--------------+--------------------------------------------------------------------|
 
-*** Calculations (Math, NumPy, SciPy, ...)
-**** Commands
-     import math
-     import random
-     import numpy as np
-     from numpy import random as rnd
-     import scipy as sp
-     import vtk
-**** Documentation
-     |-----------+----------------------------------------------------------|
-     | NAME      | DOCUMENTATION                                            |
-     |-----------+----------------------------------------------------------|
-     |-----------+----------------------------------------------------------|
-     | math      | Mathematical Functions (math.pi, math.sqrt())            |
-     |-----------+----------------------------------------------------------|
-     | random    | Random integer (random.randint())                        |
-     |-----------+----------------------------------------------------------|
-     | numpy/np  | Numerical Python                                         |
-     |-----------+----------------------------------------------------------|
-     | np.random | Numerical Pythons random number generator                |
-     |-----------+----------------------------------------------------------|
-     | scipy/sp  | Scientific Python (sp.mean(), sp.cov())                  |
-     |-----------+----------------------------------------------------------|
-     | vtk       | Adapt vtk to NumPy (vtk.util.numpy_support.vtk_to_numpy) |
-     |-----------+----------------------------------------------------------|
-** mypackage: Plot commands
-*** Commands
-*** Video from png command
-     ffmpeg -qscale 5 -r 2 -b 9600 -i plot_h_l_%02d.png plot_h_l.mp4
-     
-     This is a command to make an mp4 movie out of png files. The flags
-     have the following meaning:
-
-     -qscale: quality - 1 for high 31 for low
-
-     -r: Number of png files shown per second
-
-     -b: Bitsize something...
-
-     -i: input files. %02d stands for number from 1 to some number with
-     two digits and leading zeros filled in.
-
-     plot_h_l.mp4 is the name of the outputfile in this example
-     
-*** Sizes
-    |--------------------+--------+-------------+------------|
-    | File               | Number | Size single | Size total |
-    |--------------------+--------+-------------+------------|
-    |--------------------+--------+-------------+------------|
-    | plot_f_..._ens.png |      4 | ca. 500kB   | 2133kB     |
-    | plot_f_....png     |      2 | ca. 100kB   | 216kB      |
-    |--------------------+--------+-------------+------------|
-    | plot_f2            |      4 | ca.  95kB   | 376kB      |
-    |--------------------+--------+-------------+------------|
-    | plot_h_1_10...png  |      3 | ca. 70kB    | 217kB      |
-    | plot_h...png       |    150 | ca. 30kB    | ca. 5250kB |
-    |--------------------+--------+-------------+------------|
-    | plot_m many png    |      8 | ca. 100kB   | ca. 800kB  |
-    | plot_m....png      |    100 | ca. 65kB    | ca.6500kB  |
-    |--------------------+--------+-------------+------------|
-    | plot_pc..._std.png |      1 | 100kB       | 100kB      |
-    | plot_pc..._res.png |      1 | 200kB       | 200kB      |
-    |--------------------+--------+-------------+------------|
-    | plot_s...png       |     50 | 50-80kB     | 3750kB     |
-    |--------------------+--------+-------------+------------|
-    |--------------------+--------+-------------+------------|
-    | TOTAL              |    323 | -           | 19542kB    |
-    |--------------------+--------+-------------+------------|
-    Done with the scripts in the Python directory.
-
-*** plot compare (pc)
-**** Output file
-    plot_pc_[letter/pc_let]_[nl/pc_nl]_[pc_output].png
-***** letter
-      Letter given to output.
-***** pc_let
-      First letter of pc letters if given.
-***** nl
-      Number of letters
-***** pc_nl
-      Number of pc letter if given
-***** pc_output
-      'res' or 'std' depending on which variable is output.
-*** plot field (m)
-**** Description
-     Plot fields of a certain variable.
-**** Script
-     scripts/m_plots.ipy
-**** Graphics file naming convention
-     plot_m_[letter]_[m_first]_[m_diff]_[m_infiles].png
-***** letter
-      The letter given to the output.
-***** m_first
-      First observation time/realisation shown.
-***** m_diff
-      Difference between observation times/realisation shown.
-***** m_infiles
-      Small string signifiying which output is produced:
-      - 'av': Normal assim_variables output (kz_mean, std, res)
-      - 'cor': Correlations
-      - 'init': prior realisations
-      - 'end': posterior realisations
-       	
-*** plot residual function (f)
-    plot_f_[letter]_[f_res_std]_[f_res_std]_[f_res_std]_[f_res_std]_[ens].png
-**** letter
-     Letter given to output
-**** f_res_std
-     Four element array containing zeros or ones:
-     - First 1: Show residual
-      - Second 1: Show standard deviation
-      - Third 1: Show Mean of ensemble member residuals
-      - Fourth 1: Show Stats measure
-**** ens
-     This appears if ensemble members for residuals are shown.
-
-*** plot update functions (f2)
-    plot_f2_[letter]_[f2_num_arrays]_[f2_corr_num_arrays]_[f2_mons_num_mons]_[f2_assimstp_num_show].png
-**** letter
-     Letter given to output of run
-**** f2_num_arrays
-     Number of assimvariables arrays shown.
-**** f2_corr_num_arrays
-     Number of correlation arrays shown.
-**** f2_mons_num_mons
-     Number of monitoring arrays shwon.
-**** f2_assimstp_num_show
-     Number of assimstp arrays shown.
-*** plot single cell (sc)   
-    not yet done
-*** plot histogram (h)
-    plot_h_[letter]_[h_obstimes]_[h_obstimes]_[h_file_type]_[h_sc_cell_vars].png
-**** Examples
-***** many plots
-      plot_h_b_01_10_av_3.png
-***** single plot
-      plot_h_b_01_av_4.png
-**** letter
-     Letter given to output of run.
-**** h_obstimes
-     - The first entry of h_obstimes (first obstime visualized)
-     - ONLY IF len(h_obstimes) > 1: h_obstimes[ 1 ] - h_obstimes[ 0 ]
-**** h_file_type
-     'sc' or 'av'
-**** h_sc_cell_vars
-     3 for conc or 4 for kz
-     for 'av', this is always 3!!!
-*** plot scatter (s)
-    plot_s_[letter]_[s_obstime]_[s_file_types]_[s_file_types]_[s_sc_cell_vars]_[s_sc_cell_vars].png
-**** Examples
-     plot_s_b_01_sc_sc_04_03.png
-**** letter
-     Letter given to output of run.
-**** s_obstime
-     Observation times of the FIRST variabl
-**** s_file_types
-     The two kinds of files loaded: 'av', 'sc' possible
-**** s_sc_cell_vars
-     The two Variables: 3 for conc, 4 for kz
-** Python commands
-*** Rename files                                                   :shutil:
-- shutil.move
-*** List files in directory                                            :os:
-- os.listdir('.')
-*** Find string in string                                             :str:
-- str.find(bigstr,partstr)
+*** Calculations (f.e. Math, NumPy, SciPy)
+|-----------+---------------------------------------------------------------|
+| NAME      | DOCUMENTATION                                                 |
+|-----------+---------------------------------------------------------------|
+|-----------+---------------------------------------------------------------|
+| math      | Mathematical Functions (math.pi, math.sqrt())                 |
+|-----------+---------------------------------------------------------------|
+| random    | Random integer (random.randint())                             |
+|-----------+---------------------------------------------------------------|
+| numpy     | Numerical Python (usually loaded as np)                       |
+|-----------+---------------------------------------------------------------|
+| np.random | Numerical Pythons random number generator                     |
+|-----------+---------------------------------------------------------------|
+| scipy     | Scientific Python (usually loaded as sp, sp.mean(), sp.cov()) |
+|-----------+---------------------------------------------------------------|
