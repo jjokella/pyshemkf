@@ -1,7 +1,7 @@
 * Directories
 ** input
    Input from other programs (usually txt or vtk)
-** mypackage
+** site-packages/mypackage
    Module with background functions to be used in IPython scripts.
 ** output
    Directory for output, *.npy arrays or *.eps / *.png / *.jpg plots.
