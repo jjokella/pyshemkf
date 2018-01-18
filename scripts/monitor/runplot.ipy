@@ -1,6 +1,7 @@
-import shutil
+import numpy as np
 import matplotlib.pyplot as plt
 
+from mypackage.run import runmodule as rm
 from mypackage.plot import specs as sc
 import mypackage.monitor.arrays as ma
 import mypackage.monitor.plot as mp
@@ -22,51 +23,54 @@ let = 'b'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
-lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+lets = [rm.get_let_num(i) for i in range(ns, ns+nl, nstep)]
 
-mons = [0,1]
+mons = [0, 1]
 
 # Read
 if is_read:
     for num_mon in mons:
-        for varname in ['time','head','conc0001']:
-            numpy_array, numpy_array_name = mr.read(model_name,
-                                                    dat,
-                                                        lets[0],
-                                                        fname = model_name.upper()+'_TRUE_E0_monitor_1.dat',
-                                                        varname = varname,
-                                                        num_mon = num_mon,   # from 1 til num-mons
-                                                        )
-            np.save(numpy_array_name,numpy_array)
+        for varname in ['time', 'head', 'conc0001']:
+            numpy_array, numpy_array_name = mr.read(
+                model_name,
+                dat,
+                lets[0],
+                fname=model_name.upper()+'_TRUE_E0_monitor_1.dat',
+                varname=varname,
+                num_mon=num_mon,   # from 1 til num-mons
+            )
+            np.save(numpy_array_name, numpy_array)
             print('Saved as ' + numpy_array_name)
 
 # Plot
 if is_plot:
 
     # Figure
-    fig = plt.figure(1,figsize=[15,10])
+    fig = plt.figure(1, figsize=[15, 10])
 
     # Run plot function
     for num_mon in mons:
-        ax, pic_name = mp.plot(fig.add_subplot(1,1,1),
-                               model_name,
-                               dat,
-                                   lets[0],
-                                   is_labels=  True,
-                                   is_ownticks = False,
-                                   xlims = [0.0,20.0],
-                                   ylims = [0.06,0.085],
-                                   xlabel = 't [60 days]',
-                                   ylabel = 'h [m]',
-                                   pic_format = 'pdf',
-                                   varname = 'conc0001',
-                                   num_mon = num_mon,
-                                   linewidth = 2,
-                                   markercolor =  'black' if num_mon in [1,7,42,48] else 'red',
-                                   legend_label = 'Corner' if num_mon in [1,7,42,48] else 'Center',
-                                   )
+        ax, pic_name = mp.plot(
+            fig.add_subplot(1, 1, 1),
+            model_name,
+            dat,
+            lets[0],
+            is_labels=True,
+            is_ownticks=False,
+            xlims=[0.0, 20.0],
+            ylims=[0.06, 0.085],
+            xlabel='t [60 days]',
+            ylabel='h [m]',
+            pic_format='pdf',
+            varname='conc0001',
+            num_mon=num_mon,
+            linewidth=2,
+            markercolor='black' if num_mon in [1, 7, 42, 48] else 'red',
+            legend_label='Corner' if num_mon in [1, 7, 42, 48] else 'Center',
+        )
+
     # Legend
-    plt.legend(fontsize = 20)
+    plt.legend(fontsize=20)
 
     # Save
     if is_save:
