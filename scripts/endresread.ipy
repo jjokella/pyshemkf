@@ -18,7 +18,7 @@ dats = ['2018_01_04' for i in range(num_ensemble_sizes)]
 lets = ['b', 'aln', 'bxz', 'dkl', 'ewx', 'gjj', 'hvv']
 #      ['b', 'aln', 'bxz', 'dkl', 'ewx', 'gjj', 'hvv',
 #       'jih', 'kut', 'mhf', 'ntr', 'pgd']
-nums = [1000, 1000, 1000, 100, 100, 100, 100]
+nums = [1000, 1000, 1000, 1000, 100, 100, 100]
 # [1000 for i in range(num_ensemble_sizes)]
 num_obss = [100 for i in range(num_ensemble_sizes)]
 
