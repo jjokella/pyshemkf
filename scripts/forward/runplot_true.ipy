@@ -13,32 +13,32 @@ import mypackage.plot.plotfunctions as pf
 # Switches
 is_read = 1
 is_plot = 1
-is_save = 1
+is_save = 0
 is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavereal'
-dat = '2017_12_19'
+model_name = 'cable'
+dat = '2018_01_19'
 
-let = 'a'
+let = 'b'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
 lets = [rm.get_let_num(i) for i in range(ns, ns+nl, nstep)]
 
 nt = 2
-plotvarname = 'kz'
+plotvarname = 'temp'
 
 # Read
 if is_read:
-    for varname in ['uindex', 'head', 'kz']:
+    for varname in ['temp']:
         numpy_array, numpy_array_name = fr.read(
             model_name,
             dat,
             lets[0],
             varname=varname,
-            fname=model_name.upper()+'_TRUE_E0_time_out_'+str(nt)+'.vtk',
+            fname=model_name.upper()+'_final.vtk',
             nt=nt,
         )
 
@@ -66,6 +66,7 @@ if is_plot:
         nt=nt,
         num_cbar=11,
         is_ownticks=True,
+        is_xz = True,
     )
 
     # Colorbar
