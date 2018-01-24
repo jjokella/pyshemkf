@@ -11,29 +11,22 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_read = 0
 is_sort = 0
-is_plot = 1
+is_plot = 0
 is_quot = 0
 is_save = 0
-is_show = 1
+is_show = 0
 is_backup = 0
 
-model_name = 'wavebc'
-which_methods = [0, 1, 2, 3, 4, 5, 6,
-                 103, 112, 113, 114, 123, 133, 141, 142, 143, 144, 145,
-                 151, 152, 153, 154, 155, 163]
-# which_methods = [4, 143, 141, 142, 144, 145]
-# which_methods = [113, 103, 123, 133, 143, 153, 163, 6]
-# which_methods = [1, 0, 2, 3, 4, 5]
-stat_method = 'mean'
+model_name = 'model'
+which_methods = [0, 1, 2, 3, 4, 5, 6]
+n_runs = 1000
 
 # Read
 if is_read:
     stat_array, stat_array_name = er.read(
         model=model_name,
         which_methods=which_methods,
-        stat_method=stat_method,
-        which_res='endres',
-        # n_runs=100,
+        n_runs=n_runs,
         )
 
     np.save(stat_array_name, stat_array)
@@ -44,12 +37,11 @@ if is_sort:
     stat_array, stat_array_name, which_methods_sorted = es.sort(
         model=model_name,
         which_methods=which_methods,
-        n_runs=1000,
+        n_runs=n_runs,
         template_model=model_name,
         template_which_methods=which_methods,
         template_enssize=50,
-        stat_method=stat_method,
-        which_res='endres',
+        template_n_runs=1000,
         )
 
     np.save(stat_array_name, stat_array)
@@ -62,23 +54,14 @@ else:
 if is_plot:
 
     # Figure
-    fig = plt.figure('Errorplot', figsize=[25, 10])
+    fig = plt.figure('Errorplot', figsize=[18, 10])
 
     # Run plot function
     ax, pic_name = ep.plot(
         fig.add_subplot(1, 1, 1),
         model=model_name,
         which_methods=which_methods_sorted,
-        stat_method=stat_method,
-        pic_format='pdf',
-        is_std=False,
-        std_method='stdm',
-        figpos=[0.1, 0.3, 0.85, 0.6],
-        # n_runs=100,
-        # which_enssize=[500, 1000, 2000],
-        ylims=[0.29, 0.8],
-        yticks=np.arange(0.3, 1.2, 0.1),
-        fontleg=12,
+        n_runs=n_runs,
     )
 
     # Save
@@ -103,9 +86,6 @@ if is_quot:
         fig.add_subplot(1, 1, 1),
         model=model_name,
         which_methods=which_methods_sorted,
-        stat_method=stat_method,
-        pic_format='pdf',
-        enssize=250,
     )
 
     # Save
@@ -129,5 +109,5 @@ if is_backup:
         "ipy",
         sc.specl(model_name,
                  '_'.join([str(i) for i in which_methods_sorted])[:],
-                 '2017_10_06')
+                 '2010_01_30')
     )
