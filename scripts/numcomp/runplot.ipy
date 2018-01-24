@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from mypackage.plot import specs as sc
+from mypackage.plot import plotfunctions as pf
 import mypackage.numcomp.arrays as na
 import mypackage.numcomp.plot as npl
 import mypackage.numcomp.read as nr
@@ -10,24 +11,25 @@ import mypackage.run.pythonmodule as pm
 # Switches
 is_read = 0
 is_plot = 0
-is_matrix = 1
-is_save = 1
-is_show = 1
+is_matrix = 0
+is_save = 0
+is_show = 0
 is_backup = 0
 
-which_methods = [0, 1, 2, 3, 4, 5, 6, 103, 112, 113, 114, 123, 133,
-                 141, 142, 143, 144, 145, 151, 152, 153, 154, 155, 163]
-model = 'wavebc'
+model_name = 'model'
+which_methods = [0, 1, 2, 3, 4, 5, 6]
+enssize = 50
+n_syn = 1
+n_comparisons = 1000
 
 # Read
 if is_read:
     probs_array, probs_array_name = nr.read(
         which_methods=which_methods,
-        model=model,
-        enssize=50,
-        n_syn=1,
-        n_comparisons=1000,
-        method='ttest',
+        model=model_name,
+        enssize=enssize,
+        n_syn=n_syn,
+        n_comparisons=n_comparisons,
     )
 
     np.save(probs_array_name, probs_array)
@@ -46,7 +48,7 @@ if is_plot:
         which_methods=which_methods,
         which_methods_left=[1, 4, 6, 0, 3, 2],
         which_methods_right=[4, 6, 0, 3, 2, 5],
-        n_comparisons=1000,
+        n_comparisons=n_comparisons,
     )
 
     # Save
@@ -63,34 +65,21 @@ if is_plot:
 # Matrix
 if is_matrix:
 
-    enssize = 50
-    n_syn = 1
-
     # Figure
     fig = plt.figure('numcomp', figsize=[10, 10])
     plt.suptitle("N = "+str(enssize)+"  Distribution: "+str(n_syn),
                  fontsize=30)
 
-    which_methods_sorted = {
-        250: [1, 143, 144, 142, 103, 145, 155, 114,   4, 123, 141, 112,   3,
-              0, 152,   6, 113, 133, 153,   2,   5, 151, 154, 163],
-        50: [145, 143, 114,   1, 144, 113, 155, 153, 103,   6, 133, 123, 142,
-             154,   5, 163, 112,   4, 151, 152,   3,   2, 141,   0],
-        }
-
     # Run plot function
     ax, pic_name = npl.matrix(
         fig.add_subplot(1, 1, 1),
         which_methods=which_methods,
-        model=model,
-        indsorts=which_methods_sorted[enssize],
+        model=model_name,
+        indsorts=pf.indsort(which_methods, model_name=model_name,
+                            enssize=enssize),
         enssize=enssize,
         n_syn=n_syn,
-        n_comparisons=1000,
-        xtick_y=0.0,
-        ticklabelfontsize=10,
-        is_longnames=True,
-        figpos=[0.14, 0.14, 0.8, 0.8],
+        n_comparisons=n_comparisons,
     )
 
     # Save
@@ -111,7 +100,7 @@ if is_backup:
         na.tag,
         "runplot",
         "ipy",
-        sc.specl(model,
+        sc.specl(model_name,
                  '_'.join([str(i) for i in which_methods])[:],
                  '2018_01_08')
     )
