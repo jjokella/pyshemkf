@@ -6,7 +6,6 @@ import mypackage.forward.arrays as fa
 import mypackage.forward.plot as fp
 import mypackage.forward.read as fr
 import mypackage.run.pythonmodule as pm
-import mypackage.run.runmodule as rm
 import mypackage.plot.plotfunctions as pf
 
 # Switches
@@ -48,7 +47,6 @@ if is_plot:
         dat,
         let,
         varname=varname,
-        nt = 2,
     )
 
     # Monitoring points
@@ -61,8 +59,9 @@ if is_plot:
 
     # Colorbar
     cb_ax = pf.cb(
-        fig.add_subplot(1,  2,  1),
+        fig.add_subplot(1, 2, 1),
         ax,
+        varname=varname,
     )
 
     # Save
