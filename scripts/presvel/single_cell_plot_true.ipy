@@ -3,7 +3,7 @@
 
 import os
 import numpy as np
-from mypackage.plot import specs as sc
+from mypackage.tools.plot import specs as sc
 
 model_name = sc.model_name
 dat = sc.dat

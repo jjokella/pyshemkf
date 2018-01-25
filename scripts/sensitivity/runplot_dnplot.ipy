@@ -1,13 +1,13 @@
 import shutil
 import matplotlib.pyplot as plt
 
-from mypackage.plot import specs as sc
-import mypackage.sensitivity.arrays as sa
-import mypackage.sensitivity.variables as sv
-import mypackage.sensitivity.plot as spl
-import mypackage.sensitivity.read as sr
-import mypackage.forward.plot as fp
-import mypackage.run.pythonmodule as pm
+from mypackage.tools.plot import specs as sc
+import mypackage.scripts.sensitivity.arrays as sa
+import mypackage.scripts.sensitivity.variables as sv
+import mypackage.scripts.sensitivity.plot as spl
+import mypackage.scripts.sensitivity.read as sr
+import mypackage.scripts.forward.plot as fp
+import mypackage.tools.run.pythonmodule as pm
 
 # Switches
 is_dnplot = 1

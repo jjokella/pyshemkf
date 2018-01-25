@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.plot import specs as sc
-import mypackage.errorplot.arrays as ea
-import mypackage.errorplot.plot as ep
-import mypackage.errorplot.read as er
-import mypackage.errorplot.sort as es
-import mypackage.run.pythonmodule as pm
+from mypackage.tools.plot import specs as sc
+import mypackage.scripts.errorplot.arrays as ea
+import mypackage.scripts.errorplot.plot as ep
+import mypackage.scripts.errorplot.read as er
+import mypackage.scripts.errorplot.sort as es
+import mypackage.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0

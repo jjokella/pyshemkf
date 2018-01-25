@@ -1,4 +1,4 @@
-from mypackage.plot import specs as sc
+from mypackage.tools.plot import specs as sc
 
 sc.model_name = 'cubey'
 

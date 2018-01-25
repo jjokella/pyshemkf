@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.plot import specs as sc
-from mypackage.plot import plotfunctions as pf
-import mypackage.numcomp.arrays as na
-import mypackage.numcomp.plot as npl
-import mypackage.numcomp.read as nr
-import mypackage.run.pythonmodule as pm
+from mypackage.tools.plot import specs as sc
+from mypackage.tools.plot import plotfunctions as pf
+import mypackage.scripts.numcomp.arrays as na
+import mypackage.scripts.numcomp.plot as npl
+import mypackage.scripts.numcomp.read as nr
+import mypackage.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0

@@ -3,8 +3,8 @@
 import os
 import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.plot import specs
+from mypackage.tools.plot import plotfunctions as pf
+from mypackage.tools.plot import specs
 import matplotlib.pyplot as plt
 from matplotlib import cm		# Colormap commands (cm.get_cmap())
 from matplotlib import colors	        # Normalize colors (colors.Normalize())

@@ -3,9 +3,9 @@
 # import os
 # import matplotlib as mpl
 import numpy as np
-from mypackage.plot import plotfunctions as pf
-from mypackage.run import pythonmodule as pm
-from mypackage.run import runmodule as rm
+from mypackage.tools.plot import plotfunctions as pf
+from mypackage.tools.run import pythonmodule as pm
+from mypackage.tools.run import runmodule as rm
 # import pandas as pd
 
 model_name = 'model'

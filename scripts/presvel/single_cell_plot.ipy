@@ -3,7 +3,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from mypackage.plot import specs as sc
+from mypackage.tools.plot import specs as sc
 
 is_show = [True,True,True]
 is_save = [True,True,True]

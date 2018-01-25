@@ -2,11 +2,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.plot import specs as sc
-import mypackage.gaussianity.arrays as ga
-import mypackage.gaussianity.plot as gp
-import mypackage.gaussianity.read as gr
-import mypackage.run.pythonmodule as pm
+from mypackage.tools.plot import specs as sc
+import mypackage.scripts.gaussianity.arrays as ga
+import mypackage.scripts.gaussianity.plot as gp
+import mypackage.scripts.gaussianity.read as gr
+import mypackage.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0

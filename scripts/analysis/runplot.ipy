@@ -1,12 +1,12 @@
 import shutil
 import matplotlib.pyplot as plt
 
-from mypackage.plot import specs as sc
-import mypackage.analysis.arrays as aa
-import mypackage.analysis.plot as ap
-import mypackage.analysis.read as ar
-import mypackage.run.pythonmodule as pm
-import mypackage.plot.plotfunctions as pf
+from mypackage.tools.plot import specs as sc
+import mypackage.scripts.analysis.arrays as aa
+import mypackage.scripts.analysis.plot as ap
+import mypackage.scripts.analysis.read as ar
+import mypackage.tools.run.pythonmodule as pm
+import mypackage.tools.plot.plotfunctions as pf
 
 # Switches
 is_read = 1
