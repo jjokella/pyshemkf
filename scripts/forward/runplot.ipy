@@ -49,6 +49,15 @@ if is_plot:
         dat,
         let,
         varname=varname,
+        nt = 2,
+    )
+
+    # Monitoring points
+    ax = pf.scatter(
+        ax,
+        model_name,
+        dat,
+        let,
     )
 
     # Colorbar

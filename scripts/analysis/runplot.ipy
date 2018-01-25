@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 
 from mypackage.plot import specs as sc
 import mypackage.analysis.arrays as aa
-import mypackage.analysis.variables as av
 import mypackage.analysis.plot as ap
 import mypackage.analysis.read as ar
 import mypackage.run.pythonmodule as pm
@@ -58,6 +57,14 @@ if is_plot:
     # Colorbar
     cb_ax = pf.cb(fig.add_subplot(1,2,1),
                   ax)
+
+    # Monitoring points
+    ax = pf.scatter(
+        ax,
+        model_name,
+        dat,
+        let,
+    )
 
     # Save
     if is_save:
