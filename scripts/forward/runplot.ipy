@@ -1,4 +1,4 @@
-import shutil
+import numpy as np
 import matplotlib.pyplot as plt
 
 from mypackage.plot import specs as sc
@@ -6,6 +6,7 @@ import mypackage.forward.arrays as fa
 import mypackage.forward.plot as fp
 import mypackage.forward.read as fr
 import mypackage.run.pythonmodule as pm
+import mypackage.run.runmodule as rm
 import mypackage.plot.plotfunctions as pf
 
 # Switches
@@ -16,50 +17,44 @@ is_show = 0
 is_backup = 0
 
 # Specs
-model_name = 'wavehead'
-dat = '2017_11_02'
+model_name = 'model'
+dat = '2010_01_30'
 
 let = 'a'
-nl = 1
-ns = rm.get_num_let(let)
-nstep = 1
-lets = [rm.get_let_num(i) for i in range(ns,ns+nl,nstep)]
+varname = 'uindex'
 
 # Read
 if is_read:
-    for varname in ['uindex','head','temp']:
-        numpy_array, numpy_array_name = fr.read(model_name,
-                                                dat,
-                                                lets[0],
-                                                varname = varname,
-                                                nt = 10,
-                                                    )
-        np.save(numpy_array_name,numpy_array)
-        print('Saved as ' + numpy_array_name)
+    numpy_array, numpy_array_name = fr.read(
+        model_name,
+        dat,
+        let,
+        varname=varname,
+        nt=10,
+    )
 
-
+    np.save(numpy_array_name, numpy_array)
+    print('Saved as ' + numpy_array_name)
 
 # Plot
 if is_plot:
 
     # Figure
-    fig = plt.figure(1,figsize=[15,10])
-    
+    fig = plt.figure(1, figsize=[15, 10])
+
     # Run plot function
-    ax, pic_name = fp.plot(fig.add_subplot(1,1,1),
-                           model_name,
-                           dat,
-                           lets[0],
-                           markercolor = 'black',
-                           pic_format = 'png',
-                           varname = 'uindex'
-                       )
+    ax, pic_name = fp.plot(
+        fig.add_subplot(1, 1, 1),
+        model_name,
+        dat,
+        let,
+        varname=varname,
+    )
 
     # Colorbar
     cb_ax = pf.cb(
+        fig.add_subplot(1,  2,  1),
         ax,
-        fig.add_subplot(1, 2, 1),
-        cb_ax_position=[0.72, 0.1, 0.03, 0.8],
     )
 
     # Save
@@ -82,5 +77,5 @@ if is_backup:
         "ipy",
         sc.specl(model_name,
                  dat,
-                 lets[0])
+                 let)
     )
