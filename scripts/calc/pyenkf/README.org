@@ -1,2 +1,0 @@
-The scripts in this directory are an attempt to recreate the Ensemble
-Kalman Filter update step in Python.
