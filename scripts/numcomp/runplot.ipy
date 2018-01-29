@@ -67,7 +67,7 @@ if is_matrix:
 
     # Figure
     fig = plt.figure('numcomp', figsize=[10, 10])
-    plt.suptitle("N = "+str(enssize)+"  Distribution: "+str(n_syn),
+    plt.suptitle(model_name.upper()+", N = "+str(enssize)+"  Distribution: "+str(n_syn),
                  fontsize=30)
 
     # Run plot function
