@@ -38,7 +38,7 @@ if is_sort:
         model_name=model_name,
         which_methods=which_methods,
         n_runs=n_runs,
-        template_model=model_name,
+        template_model_name=model_name,
         template_enssize=50,
         template_n_runs=1000,
         )
