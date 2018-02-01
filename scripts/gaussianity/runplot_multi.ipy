@@ -9,26 +9,29 @@ import mypackage.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0
-is_backup = 1
-is_hist = 1
-is_save = 1
-is_show = 1
+is_backup = 0
+is_hist = 0
+is_save = 0
+is_show = 0
 
-model = 'wavebc'
-
-which_method = 0
+model_name = 'model'
+which_methods = [0, 0, 0, 0]
 n_syns = [1, 10, 50, 100]
-enssize = 50
+enssizes = [50, 50, 50, 50]
+n_comparisons = 1000
+
+nplots = len(which_methods)
 
 # Read
 if is_read:
-    for n_syn in n_syns:
+    for i in range(nplots):
         gauss_array, gauss_array_name = gr.read(
-            which_method=which_method,
-            n_syn=n_syn,
-            n_comparisons=10000,
-            enssize=enssize,
-            )
+            model_name=model_name,
+            which_method=which_methods[i],
+            enssize=enssizes[i],
+            n_syn=n_syns[i],
+            n_comparisons=n_comparisons,
+        )
 
         np.save(gauss_array_name, gauss_array)
         print('Saved as ' + gauss_array_name)
@@ -39,21 +42,20 @@ if is_hist:
 
     # Figure
     fig = plt.figure('Gaussianity', figsize=[15, 10])
-    fig.suptitle("Mean distributions for varying number of synthetic studies")
+    fig.suptitle("Mean distributions for "+model_name, fontsize=30)
 
     # Run plot function
-    for i in range(4):
+    for i in range(nplots):
         ax, pic_name = gp.hist(
-            fig.add_subplot(2, 2, i+1),
+            fig.add_subplot(np.ceil(np.sqrt(nplots)), np.ceil(np.sqrt(nplots)), i+1),
+            model_name=model_name,
+            which_method=which_methods[i],
+            enssize=enssizes[i],
             n_syn=n_syns[i],
-            which_method=which_method,
-            n_comparisons=10000,
-            xlims=[0.2, 1.2],
-            n_bins=300,
-            histlims=[0, 3],
-            title="Synthetic Studies: "+str(n_syns[i]),
-            is_plot=True,
-            enssize=enssize,
+            n_comparisons=n_comparisons,
+            title=("Synthetic Studies: "+str(n_syns[i])
+                   + ", enssize: "+str(enssizes[i])
+                   + ", which_methods: "+str(which_methods[i])),
         )
     # Save
     if is_save:
@@ -71,9 +73,9 @@ if is_backup:
     pm.py_backup(
         pm.python_scripts_dir,
         ga.tag,
-        "runplot_multi",
+        "runplot_multiple",
         "ipy",
-        sc.specl(model,
+        sc.specl(model_name,
                  str(which_method),
-                 '2017_10_03')
+                 '2010_01_31')
     )
