@@ -16,7 +16,7 @@ is_show = 0
 
 model_name = 'model'
 which_method = 0
-enssize = 250
+ensemble_size = 250
 n_syn = 100
 n_comparisons = 1000
 
@@ -25,7 +25,7 @@ if is_read:
     gauss_array, gauss_array_name = gr.read(
         model_name=model_name,
         which_method=which_method,
-        enssize=enssize,
+        ensemble_size=ensemble_size,
         n_syn=n_syn,
         n_comparisons=n_comparisons,
         )
@@ -45,7 +45,7 @@ if is_hist:
         fig.add_subplot(1, 1, 1),
         model_name=model_name,
         which_method=which_method,
-        enssize=enssize,
+        ensemble_size=ensemble_size,
         n_syn=n_syn,
         n_comparisons=n_comparisons,
     )

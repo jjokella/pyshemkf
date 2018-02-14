@@ -18,7 +18,7 @@ is_show = 0
 is_backup = 0
 
 model_name = 'model'
-n_runs = 1000
+ensemble_sizes = [50, 70, 100, 250]
 
 for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                       [0, 1, 2],
@@ -28,7 +28,7 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
         stat_array, stat_array_name = er.read(
             model=model_name,
             which_methods=which_methods,
-            n_runs=n_runs,
+            ensemble_sizes=ensemble_sizes,
             )
 
         np.save(stat_array_name, stat_array)
@@ -39,10 +39,10 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
         stat_array, stat_array_name, which_methods_sorted = es.sort(
             model_name=model_name,
             which_methods=which_methods,
-            n_runs=n_runs,
+            ensemble_sizes=ensemble_sizes,
             template_model_name=model_name,
             template_enssize=50,
-            template_n_runs=1000,
+            template_ensemble_sizes=[50, 70, 100, 250],
             )
 
         np.save(stat_array_name, stat_array)
@@ -62,7 +62,7 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
             fig.add_subplot(1, 1, 1),
             model=model_name,
             which_methods=which_methods_sorted,
-            n_runs=n_runs,
+            ensemble_sizes=ensemble_sizes,
         )
 
         # Save

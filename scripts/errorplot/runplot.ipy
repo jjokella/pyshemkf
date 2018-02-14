@@ -12,21 +12,22 @@ import mypackage.tools.run.pythonmodule as pm
 is_read = 0
 is_sort = 0
 is_plot = 0
-is_quot = 0
+is_quot = 1
 is_save = 0
-is_show = 0
+is_show = 1
 is_backup = 0
 
-model_name = 'model'
-which_methods = [0, 1, 2, 3, 4, 5, 6]
-n_runs = 1000
+model_name = 'wavewell'
+which_methods = [5, 4, 1, 2, 6, 0, 3]
+# which_methods = [0, 1, 2, 3, 4, 5, 6]
+ensemble_sizes = [50, 70, 100, 250]
 
 # Read
 if is_read:
     stat_array, stat_array_name = er.read(
         model=model_name,
         which_methods=which_methods,
-        n_runs=n_runs,
+        ensemble_sizes=ensemble_sizes,
         )
 
     np.save(stat_array_name, stat_array)
@@ -37,10 +38,10 @@ if is_sort:
     stat_array, stat_array_name, which_methods_sorted = es.sort(
         model_name=model_name,
         which_methods=which_methods,
-        n_runs=n_runs,
+        ensemble_sizes=ensemble_sizes,
         template_model_name=model_name,
         template_enssize=50,
-        template_n_runs=1000,
+        template_ensemble_sizes=[50, 70, 100, 250],
         )
 
     np.save(stat_array_name, stat_array)
@@ -60,7 +61,7 @@ if is_plot:
         fig.add_subplot(1, 1, 1),
         model=model_name,
         which_methods=which_methods_sorted,
-        n_runs=n_runs,
+        ensemble_sizes=ensemble_sizes,
     )
 
     # Save

@@ -22,7 +22,7 @@ n_comparisons = 1000
 for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                       [0, 1, 2],
                       [3, 4, 5]]:
-    for enssize in [50, 250]:
+    for ensemble_size in [50, 250]:
         for n_syn in [1, 10, 100]:
 
             # Read
@@ -30,7 +30,7 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                 probs_array, probs_array_name = nr.read(
                     which_methods=which_methods,
                     model=model_name,
-                    enssize=enssize,
+                    ensemble_size=ensemble_size,
                     n_syn=n_syn,
                     n_comparisons=n_comparisons,
                 )
@@ -70,7 +70,7 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
 
                 # Figure
                 fig = plt.figure('numcomp', figsize=[10, 10])
-                plt.suptitle(model_name.upper()+", N = "+str(enssize)+"  Distribution: "+str(n_syn),
+                plt.suptitle(model_name.upper()+", N = "+str(ensemble_size)+"  Distribution: "+str(n_syn),
                              fontsize=30)
 
                 # Run plot function
@@ -79,8 +79,8 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                     which_methods=which_methods,
                     model=model_name,
                     indsorts=pf.indsort(which_methods, model_name=model_name,
-                                        enssize=enssize),
-                    enssize=enssize,
+                                        ensemble_size=ensemble_size),
+                    ensemble_size=ensemble_size,
                     n_syn=n_syn,
                     n_comparisons=n_comparisons,
                 )
