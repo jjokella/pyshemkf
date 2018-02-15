@@ -87,6 +87,7 @@ if is_quot:
         model=model_name,
         which_methods=which_methods_sorted,
         ensemble_size=ensemble_size,
+        axistitle=model_name.upper()+r', $N_{e}$: '+str(ensemble_size),
     )
 
     # Save
