@@ -42,7 +42,7 @@ if is_hist:
 
     # Figure
     fig = plt.figure('Gaussianity', figsize=[15, 10])
-    fig.suptitle("Mean distributions for "+model_name, fontsize=30)
+    fig.suptitle("RMSE-Mean distributions for "+model_name.upper(), fontsize=30)
 
     # Run plot function
     for i in range(nplots):
