@@ -24,6 +24,15 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                       [0, 1, 2],
                       [3, 4, 5]]:
     for ensemble_size in [50, 250]:
+
+        # Sort which_methods
+        indsorts = pf.indsort(np.sort(which_methods),
+                              model_name=model_name,
+                              ensemble_size=ensemble_size
+        )
+        which_methods = [which_methods[indsorts[i]]
+                         for i in range(len(which_methods))]
+
         for n_syn in [1, 10, 100]:
 
             # Read
@@ -80,8 +89,6 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                     fig.add_subplot(1, 1, 1),
                     which_methods=which_methods,
                     model=model_name,
-                    indsorts=pf.indsort(which_methods, model_name=model_name,
-                                        ensemble_size=ensemble_size),
                     ensemble_size=ensemble_size,
                     n_syn=n_syn,
                     n_comparisons=n_comparisons,
