@@ -81,7 +81,8 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
 
                 # Figure
                 fig = plt.figure('numcomp', figsize=[10, 10])
-                plt.suptitle(model_name.upper()+", N = "+str(ensemble_size)+"  Distribution: "+str(n_syn),
+                plt.suptitle(model_name.upper()+", N = "+str(ensemble_size)
+                             + "  Distribution: "+str(n_syn),
                              fontsize=30)
 
                 # Run plot function
