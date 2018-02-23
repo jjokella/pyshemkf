@@ -30,15 +30,15 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                               model_name=model_name,
                               ensemble_size=ensemble_size
         )
-        which_methods = [which_methods[indsorts[i]]
-                         for i in range(len(which_methods))]
+        which_methods_sorted = [which_methods[indsorts[i]]
+                                for i in range(len(which_methods))]
 
         for n_syn in [1, 10, 100]:
 
             # Read
             if is_read:
                 probs_array, probs_array_name = nr.read(
-                    which_methods=which_methods,
+                    which_methods=which_methods_sorted,
                     model=model_name,
                     ensemble_size=ensemble_size,
                     n_syn=n_syn,
@@ -88,7 +88,7 @@ for which_methods in [[0, 1, 2, 3, 4, 5, 6],
                 # Run plot function
                 ax, pic_name = npl.matrix(
                     fig.add_subplot(1, 1, 1),
-                    which_methods=which_methods,
+                    which_methods=which_methods_sorted,
                     model=model_name,
                     ensemble_size=ensemble_size,
                     n_syn=n_syn,
