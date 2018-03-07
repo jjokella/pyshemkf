@@ -3,6 +3,7 @@
 import os
 import numpy as np
 from mypackage.tools.plot import specs as sc
+import mypackage.tools.run.pythonmodule as pm
 
 # Input file specification
 model_name = sc.model_name
@@ -35,6 +36,6 @@ for iloc,loc in enumerate(locs):
                                     +str(loc[2]).zfill(4)+'_'
                                     +str(variable).zfill(4)+'_aft'+'.plt',
                                     skiprows=5)
-os.chdir(os.environ['HOME']+'/PythonDir')
+os.chdir(pm.python_dir)
 
 np.save('output/presvel/npy/temp_'+model_name+'_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy',temp)

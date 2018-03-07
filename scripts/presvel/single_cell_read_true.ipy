@@ -3,6 +3,7 @@
 import os
 import numpy as np
 from mypackage.tools.plot import specs as sc
+import mypackage.tools.run.pythonmodule as pm
 
 is_true = False
 
@@ -46,7 +47,7 @@ else:
 t = t.reshape(len(t)/num_mons, num_mons)[:,0]
 temp = temp.reshape(len(temp)/num_mons, num_mons)
 
-os.chdir(os.environ['HOME']+'/PythonDir/')
+os.chdir(pm.python_dir)
 
 np.save('output/presvel/npy/truet_'+model_name+'_'+dat+'_'+let+'_'+str(num_mons).zfill(4)+'.npy',t)
 np.save('output/presvel/npy/truetemp_'+model_name+'_'+dat+'_'+let+'_'+str(num_mons).zfill(4)+'.npy',temp)

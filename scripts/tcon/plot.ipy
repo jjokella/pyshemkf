@@ -5,6 +5,7 @@ import matplotlib as mpl
 import numpy as np
 from mypackage.tools.plot import plotfunctions as pf
 from mypackage.tools.run import runmodule as rm
+import mypackage.tools.run.pythonmodule as pm
 import pandas as pd
 
 is_show = True
@@ -63,7 +64,7 @@ for let in lets:
     # plt.legend()
 
     if is_save:
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/tcon/'+pic_format+'/'
+        plt.savefig(pm.python_dir+'/output/tcon/'+pic_format+'/'
                         +pic_names[0]+'.'+pic_format)
     if is_show:
         plt.show()
@@ -85,7 +86,7 @@ for let in lets:
     # plt.legend()
 
     if is_save:
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/tcon/'+pic_format+'/'
+        plt.savefig(pm.python_dir+'/output/tcon/'+pic_format+'/'
                         +pic_names[1]+'.'+pic_format)
     if is_show:
         plt.show()

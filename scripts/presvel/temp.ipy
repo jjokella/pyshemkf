@@ -5,6 +5,7 @@ import matplotlib as mpl
 import numpy as np
 from mypackage.tools.plot import plotfunctions as pf
 from mypackage.tools.plot import specs
+import mypackage.tools.run.pythonmodule as pm
 import matplotlib.pyplot as plt
 from matplotlib import cm		# Colormap commands (cm.get_cmap())
 from matplotlib import colors	        # Normalize colors (colors.Normalize())
@@ -40,7 +41,7 @@ for assim_num in assim_nums:
                               'assim_variables_E1_aft_'
                               + str(assim_num).zfill(4)+'.vtk',
                               'temp_mean')
-    os.chdir(os.environ['HOME']+'/PythonDir')
+    os.chdir(pm.python_dir)
 
     # Figure
     fig = plt.figure(1, figsize=[11, 11])
@@ -70,8 +71,8 @@ for assim_num in assim_nums:
     ax.legend()
 
     if is_save:
-        plt.savefig(os.environ['HOME']
-                    + '/PythonDir/output/presvel/'+pic_format+'/'
+        plt.savefig(pm.python_dir
+                    + '/output/presvel/'+pic_format+'/'
                     + 'assim_variables_'+str(assim_num).zfill(4)
                     + '_'+dat+'_'+let+'.'+pic_format)
     if is_show:

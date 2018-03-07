@@ -3,6 +3,7 @@
 import os
 import numpy as np
 from mypackage.tools.plot import specs as sc
+import mypackage.tools.run.pythonmodule as pm
 
 # Specs general input
 model_name = sc.model_name
@@ -105,7 +106,7 @@ for let in lets:
     plt.xlim(xlims[0],xlims[1])
     
     if is_save[0]:
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+        plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
                         +pic_names[0]+'.'+pic_format)
     if is_show[0]:
         plt.show()
@@ -124,7 +125,7 @@ for let in lets:
     plt.xlim(xlims[0],xlims[1])
     
     if is_save[1]:
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+        plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
                         +pic_names[1]+'.'+pic_format)
     if is_show[1]:
         plt.show()
@@ -164,7 +165,7 @@ for let in lets:
     plt.legend(loc=2,scatterpoints=1,prop={'size':10})
     
     if is_save[2]:
-        plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+        plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
                         +pic_names[2]+'.'+pic_format)
     if is_show[2]:
         plt.show()

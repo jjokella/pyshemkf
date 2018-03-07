@@ -4,6 +4,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from mypackage.tools.plot import specs as sc
+import mypackage.tools.run.pythonmodule as pm
 
 is_show = [True,True,True]
 is_save = [True,True,True]
@@ -85,7 +86,7 @@ plt.xlim(xlims[0],xlims[1])
 
 # Save, show, close
 if is_save[0]:
-    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+    plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
                     +pic_names[0]+'.'+pic_format)
 if is_show[0]:
     plt.show()
@@ -113,7 +114,7 @@ plt.xlim(xlims[0],xlims[1])
 
 # Save, show, close
 if is_save[1]:
-    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+    plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
                     +pic_names[1]+'.'+pic_format)
 if is_show[1]:
     plt.show()
@@ -141,7 +142,7 @@ plt.xlim(xlims[0],xlims[1])
 
 #Save, show, close
 if is_save[2]:
-    plt.savefig(os.environ['HOME']+'/PythonDir/output/presvel/'+pic_format+'/'
+    plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
                     +pic_names[2]+'.'+pic_format)
 if is_show[2]:
     plt.show()
