@@ -25,18 +25,6 @@ for j in range(num_ensemble_sizes):
     num = nums[j]
     num_obs = num_obss[j]
 
-    # Read in the begres-distribution
-    begres = [pf.my_vtk_to_numpy(pf.my_vtk(
-        rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
-        residual_file_name,
-        'rms_kz_aft'))[0][0]   # Beg
-              for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
-    np.save(pm.py_output_filename('dists',
-                                  'begres',
-                                  model_name+'_'+dat+'_'+let,
-                                  'npy'),
-            begres)
-    begres = None
 
     # Read in the endres-distribution
     endres = [pf.my_vtk_to_numpy(pf.my_vtk(
