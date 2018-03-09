@@ -11,7 +11,7 @@ from mypackage.tools.run import runmodule as rm
 model_name = 'model'
 
 num_ensemble_sizes = 7
-two_iterations = False                    # True: residual_E2.vtk
+residual_file_name = 'residual_E1.vtk'
 # method = 16
 
 dats = ['2010_01_30' for i in range(num_ensemble_sizes)]
@@ -32,7 +32,7 @@ for j in range(num_ensemble_sizes):
     # Read in the begres-distribution
     begres = [pf.my_vtk_to_numpy(pf.my_vtk(
         rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
-        'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
+        residual_file_name,
         'rms_kz_aft'))[0][0]   # Beg
               for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
     np.save(pm.py_output_filename('dists',
@@ -45,7 +45,7 @@ for j in range(num_ensemble_sizes):
     # Read in the endres-distribution
     endres = [pf.my_vtk_to_numpy(pf.my_vtk(
         rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
-        'residual_E2.vtk' if two_iterations else 'residual_E1.vtk',
+        residual_file_name,
         'rms_kz_aft'))[num_obs-1][0]   # End
               for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
     np.save(pm.py_output_filename('dists',
