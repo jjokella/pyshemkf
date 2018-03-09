@@ -1,12 +1,9 @@
-# Plot of Endres means for different Ensemble sizes
+# Read residual arrays from SHEMAT-Suite vtk output
 
-# import os
-# import matplotlib as mpl
 import numpy as np
 from mypackage.tools.plot import plotfunctions as pf
 from mypackage.tools.run import pythonmodule as pm
 from mypackage.tools.run import runmodule as rm
-# import pandas as pd
 
 model_name = 'model'
 
@@ -20,7 +17,7 @@ nums = [1000, 1000, 1000, 1000, 100, 100, 100]
 num_obss = [100 for i in range(num_ensemble_sizes)]
 
 for j in range(num_ensemble_sizes):
-    # Read in specific date, letter, ensemble size and number of observations
+    # Read in specific date, letter, array-size and number of observations
     dat = dats[j]
     let = lets[j]
     num = nums[j]
@@ -29,12 +26,14 @@ for j in range(num_ensemble_sizes):
     # Time index
     nt = (num_obs-1 if which_res == 'endres' else 0)
 
-    # Read in the residual distribution
+    # Read residual array
     res = [pf.my_vtk_to_numpy(pf.my_vtk(
         rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
         residual_file_name,
         'rms_kz_aft'))[nt][0]
            for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
+
+    # Save residual array
     np.save(pm.py_output_filename('dists',
                                   which_res,
                                   model_name+'_'+dat+'_'+let,
