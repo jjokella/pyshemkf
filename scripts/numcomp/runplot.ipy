@@ -21,6 +21,7 @@ which_methods = [0, 1, 2, 3, 4, 5, 6]
 ensemble_size = 50
 n_syn = 1
 n_comparisons = 1000
+method = 'meanc'
 
 # Read
 if is_read:
@@ -30,6 +31,7 @@ if is_read:
         ensemble_size=ensemble_size,
         n_syn=n_syn,
         n_comparisons=n_comparisons,
+        method=method,
     )
 
     np.save(probs_array_name, probs_array)
@@ -80,6 +82,7 @@ if is_matrix:
         ensemble_size=ensemble_size,
         n_syn=n_syn,
         n_comparisons=n_comparisons,
+        method=method,
     )
 
     # Save
