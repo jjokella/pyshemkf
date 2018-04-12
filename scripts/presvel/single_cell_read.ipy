@@ -11,7 +11,7 @@ dat = sc.dat
 let = sc.lets[0]                                 #'b', 'f'
 
 # Single cell
-locs = sc.locs(model_name,dat,let)
+locs = sc.monitor_locs(model_name,dat,let)
 variable = sc.variable(model_name,dat,let)            
 
 # Different numbers
