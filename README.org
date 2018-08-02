@@ -1,92 +1,17 @@
-* Directories
-** input
-   Input from other programs (usually txt or vtk)
-** site-packages/mypackage
-   Module with background functions to be used in IPython scripts.
-** output
-   Directory for output, *.npy arrays or *.eps / *.png / *.jpg plots.
-** scripts
-   IPython scripts, where the actual daily work is done.
-* General Documentation
-** Python Modules
-*** General Modules (f.e. sys, os)
-|------------+-------------------------------------------------------------------|
-| NAME       | DOCUMENTATION                                                     |
-|------------+-------------------------------------------------------------------|
-|------------+-------------------------------------------------------------------|
-| sys        | Used for system variables. sys.exit() finishes the executiont.    |
-|            | sys.path gives PYTHONPATH as list of paths (in PYTHONPATH, python |
-|            | will look for modules)                                            |
-|------------+-------------------------------------------------------------------|
-| os         | Operating system commands like os.chdir('path'), os.path,         |
-|            | os.mkdir('path'), os.getcwd()                                     |
-|------------+-------------------------------------------------------------------|
-| subprocess | To execute shell command (subprocess.Popen)                       |
-|------------+-------------------------------------------------------------------|
-| exceptions | Raising exception (raise exceptions.RuntimeError)                 |
-|------------+-------------------------------------------------------------------|
-| atexit     | Executing command at exit of execution                            |
-|------------+-------------------------------------------------------------------|
-     
-*** String modules
-|--------+----------------------------------------|
-| NAME   | DOCUMENTATION                          |
-|--------+----------------------------------------|
-|--------+----------------------------------------|
-| re     | Regular expressions support            |
-|--------+----------------------------------------|
-| string | Load alphabet (string.alphabet())      |
-|--------+----------------------------------------|
-| shlex  | Structure system commands(shlex.split) |
-|--------+----------------------------------------|
+PythonDir
+---------
 
-*** Time modules
-|----------+--------------------------------------------------|
-| NAME     | DOCUMENTATION                                    |
-|----------+--------------------------------------------------|
-|----------+--------------------------------------------------|
-| time     | Timing the execution (time.time(), time.clock()) |
-|----------+--------------------------------------------------|
-| datetime | Date and time functions                          |
-|----------+--------------------------------------------------|
-  
-*** Drawing (f.e. Matplotlib,Pylab,vtk)
-|--------------+--------------------------------------------------------------------|
-| NAME         | DOCUMENTATION                                                      |
-|--------------+--------------------------------------------------------------------|
-|--------------+--------------------------------------------------------------------|
-| matplotlib   | Matplotlib drawing library (usually loaded as mpl)                 |
-|--------------+--------------------------------------------------------------------|
-| mpl.pyplot   | Most of the plotting commands. For example plt.show(), plt.close() |
-|--------------+--------------------------------------------------------------------|
-| mpl.cm       | Colormap commands: cm.get_cmap(0                                   |
-|--------------+--------------------------------------------------------------------|
-| mpl.mlab     |                                                                    |
-|--------------+--------------------------------------------------------------------|
-| mpl.ticker   |                                                                    |
-|--------------+--------------------------------------------------------------------|
-| mpl.colors   | Normalize colors: colors.Normalize()                               |
-|--------------+--------------------------------------------------------------------|
-| mpl_toolkits | mpl_toolkits.axes_grid.make_axes_locatable                         |
-|--------------+--------------------------------------------------------------------|
-| pylab        | Not used so much anymore                                           |
-|--------------+--------------------------------------------------------------------|
-| vtk          | Mainly used for method vtk.util.numpy_support.vtk_to_numpy, which  |
-|              | reads vtk-files and outputs numpy-arrays.                          |
-|--------------+--------------------------------------------------------------------|
-
-*** Calculations (f.e. Math, NumPy, SciPy)
-|-----------+---------------------------------------------------------------|
-| NAME      | DOCUMENTATION                                                 |
-|-----------+---------------------------------------------------------------|
-|-----------+---------------------------------------------------------------|
-| math      | Mathematical Functions (math.pi, math.sqrt())                 |
-|-----------+---------------------------------------------------------------|
-| random    | Random integer (random.randint())                             |
-|-----------+---------------------------------------------------------------|
-| numpy     | Numerical Python (usually loaded as np)                       |
-|-----------+---------------------------------------------------------------|
-| np.random | Numerical Pythons random number generator                     |
-|-----------+---------------------------------------------------------------|
-| scipy     | Scientific Python (usually loaded as sp, sp.mean(), sp.cov()) |
-|-----------+---------------------------------------------------------------|
+There are four general directories in PythonDir: One for input, one
+for output, one for the Python-scripts and one for the Python module
+mypackage.
+* input
+Input from other programs (usually txt or vtk). This directory is
+empty, can be filled with input for python scripts.
+* output
+Directory for output of all kind.
+* scripts
+IPython scripts.
+* site-packages/mypackage
+Module with functions ready for use in IPython scripts. For the module
+to be loaded by Python, the path has to be added to PYTHONPATH:
+- export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
