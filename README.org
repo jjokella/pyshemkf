@@ -45,9 +45,20 @@ git-repository and can be used for new, not-yet-presentable scripts.
 ** scripts
 The mypackage-functions under the scripts directory usually include
 three files:
-- =read.py=
-- =plot.py=
-- =arrays.py=
+- =read.py= (Example
+  [[/site-packages/mypackage/scripts/analysis/read.py]]) contains
+  functions for reading SHEMAT-Suite output and turning it into numpy
+  arrays.
+- =plot.py= (Example
+  [[/site-packages/mypackage/scripts/analysis/plot.py]]) contains
+  functions for plotting the numpy arrays read in =read.py=.
+- =arrays.py= (Example
+  [[/site-packages/mypackage/scripts/analysis/arrays.py]]) contains useful
+  variables and arrays, for example the tag variable, which denotes
+  the output and script subdirectories, in the case of analysis:
+#+BEGIN_SRC python
+  tag = "analysis"
+#+END_SRC
 ** tools
 *** plot
 **** plotarrays
