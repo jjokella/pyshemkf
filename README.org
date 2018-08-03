@@ -2,7 +2,7 @@
 #+AUTHOR: Johannes Keller
 
 =PythonDir= is my python environment for post-processing of
-=SHEMAT-Suite= ([[README.org#Rath, 2006][Rath, 2006]]) output, including 2D-figures of variables
+=SHEMAT-Suite= ([[*Rath, 2006][Rath, 2006]]) output, including 2D-figures of variables
 and parameters, and, most notably, the evaluation and visualization of
 RMSE distributions from a number of Ensemble Kalman Filter (EnKF)
 synthetic experiments.
