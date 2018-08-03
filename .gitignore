@@ -1,5 +1,4 @@
 *.pyc
-input/
-output/
+output/*/*/**
 **/backup/
 **/templates/
