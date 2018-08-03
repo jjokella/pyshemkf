@@ -29,4 +29,4 @@ Rath, V., Wolf, A., & Bücker, H. M., Joint three-dimensional inversion
 of coupled groundwater flow and heat transfer based on automatic
 differentiation: sensitivity calculation, verification, and synthetic
 examples, Geophysical Journal International, 167(1), 453–466 (2006).
-http://dx.doi.org/10.1111/j.1365-246x.2006.03074.x
+[[http://dx.doi.org/10.1111/j.1365-246x.2006.03074.x]]
