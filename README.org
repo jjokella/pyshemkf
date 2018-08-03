@@ -1,12 +1,8 @@
 PythonDir
 ---------
 
-There are four general directories in PythonDir: One for input, one
-for output, one for the Python-scripts and one for the Python module
-mypackage.
-* input
-Input from other programs (usually txt or vtk). This directory is
-empty, can be filled with input for python scripts.
+There are three general directories in PythonDir: One for output, one
+for the Python-scripts and one for the Python module mypackage.
 * output
 Directory for output of all kind.
 * scripts
