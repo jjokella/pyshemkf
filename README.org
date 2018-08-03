@@ -44,7 +44,7 @@ a SHEMAT-Suite directory, for example
 - true input file =MODELNAME_TRUE=
 - EnKF input file =MODELNAME.enkf=
 - SGSim input fiels =sgsim_k_modelname_true.par=,
-  =sgsim_k_modelname_.par=
+  =sgsim_k_modelname.par=
 Output directories
 - =samples_output=
 - =enkf_output=
