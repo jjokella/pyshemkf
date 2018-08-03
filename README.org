@@ -1,13 +1,14 @@
-PythonDir
----------
-
+* PythonDir
+** Directory structure
 There are three general directories in PythonDir: One for output, one
 for the Python-scripts and one for the Python module mypackage.
-* output
+*** output
 Directory for output of all kind.
-* scripts
+*** scripts
 IPython scripts.
-* site-packages/mypackage
+*** site-packages/mypackage
 Module with functions ready for use in IPython scripts. For the module
 to be loaded by Python, the path has to be added to PYTHONPATH:
-- export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
+#+BEGIN_SRC sh
+  export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
+#+END_SRC
