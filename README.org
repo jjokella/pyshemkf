@@ -9,11 +9,19 @@ synthetic experiments.
 
 -----
 * General idea
+Explanation of the general idea behind the PythonDir structure and the
+structure of the SHEMAT-Suite output directory =shematOutputDir/=
+needed for combatibility with the scripts of PythonDir..
 ** PythonDir structure
 There are three general directories in =PythonDir=: One for output,
 one for the Python-scripts and one for the Python module mypackage.
-*** =/output=
-=/output= Directory for output of all kind.
+*** =output/=
+Directory for output of all tags. There is one subdirectory for each
+tag. Each of these subdirectories contains subdirectories of the form
+=npy/=, =png/=, =pdf/= and =npy/= to save the corresponding
+files. Additionally, the directories =dists= ([[output/dists/]] for RMSE
+distributions) and =specs= ([[output/specs/]] for specifier function
+related output) contain only numpy arrays in =npy/=.
 *** =/scripts=
 IPython scripts for reading and plotting SHEMAT-Suite output sorted by
 a tag that signifies the specific use.
