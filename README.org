@@ -8,7 +8,7 @@ RMSE distributions from a number of Ensemble Kalman Filter (EnKF)
 synthetic experiments.
 
 -----
-* General idea
+* General structure
 Explanation of the general idea behind the PythonDir structure and the
 structure of the SHEMAT-Suite output directory =shematOutputDir/=
 needed for combatibility with the scripts of PythonDir..
@@ -49,20 +49,6 @@ Output directories
 - =samples_output=
 - =enkf_output=
 - =single_cell_output=
-* Scripts
-** endresread.ipy
-The script =endresread.ipy= ([[scripts/endresread.ipy]]) is not part of
-one of the scripting tags for historical reasons and because it has
-the basic preliminary task of reading RMSEs from =SHEMAT-Suite=
-output.
-** tag-scripts
-For each tag, there is a runplot.ipy general script that calls the
-read and plot functions from =mypackage=. If wanted, numpy arrays and
-figures are saved, figures are shown and the script is backuped in the
-corresponding =backup= directory.
-** templates
-A =/scripts/templates= directory will not be part of the
-git-repository and can be used for new, not-yet-presentable scripts.
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
@@ -98,6 +84,20 @@ tag documentation
 tag documentation
 ** uindex
 tag documentation
+* Scripts
+** endresread.ipy
+The script =endresread.ipy= ([[scripts/endresread.ipy]]) is not part of
+one of the scripting tags for historical reasons and because it has
+the basic preliminary task of reading RMSEs from =SHEMAT-Suite=
+output.
+** tag-scripts
+For each tag, there is a runplot.ipy general script that calls the
+read and plot functions from =mypackage=. If wanted, numpy arrays and
+figures are saved, figures are shown and the script is backuped in the
+corresponding =backup= directory.
+** templates
+A =/scripts/templates= directory will not be part of the
+git-repository and can be used for new, not-yet-presentable scripts.
 * mypackage
 ** scripts
 The functions in the =scripts= directory
