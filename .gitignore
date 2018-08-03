@@ -1,4 +1,7 @@
 *.pyc
-output/*/*/**
+output/**/eps/*.eps
+output/**/pdf/*.pdf
+output/**/npy/*.npy
+output/**/png/*.png
 **/backup/
 **/templates/
