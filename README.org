@@ -24,10 +24,10 @@ to be loaded by Python, the path has to be added to PYTHONPATH:
 #+END_SRC
 * Scripts
 ** endresread.ipy
-The script =endresread.ipy= ([[scripts/endresread.ipy]]) ([[/scripts/]])
-([[scripts/]]) ([[/site-packages/mypackage/scripts/]])is not part of one of
-the scripting tags for historical reasons and because it has the basic
-preliminary task of reading RMSEs from =SHEMAT-Suite= output.
+The script =endresread.ipy= ([[scripts/endresread.ipy][=endresread.ipy=]]) ([[/scripts/]]) ([[scripts/]])
+([[/site-packages/mypackage/scripts/]])is not part of one of the scripting
+tags for historical reasons and because it has the basic preliminary
+task of reading RMSEs from =SHEMAT-Suite= output.
 ** analysis
 ** errorplot
 ** forward
