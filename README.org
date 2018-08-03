@@ -8,66 +8,137 @@ RMSE distributions from a number of Ensemble Kalman Filter (EnKF)
 synthetic experiments.
 
 -----
-
-* Directory structure
+* General idea
+** PythonDir structure
 There are three general directories in =PythonDir=: One for output,
 one for the Python-scripts and one for the Python module mypackage.
-** =/output=
+*** =/output=
 =/output= Directory for output of all kind.
-** =/scripts=
-IPython scripts.
-** =/site-packages/mypackage=
-Module with functions ready for use in IPython scripts. For the module
-to be loaded by Python, the path has to be added to PYTHONPATH:
+*** =/scripts=
+IPython scripts for reading and plotting SHEMAT-Suite output sorted by
+a tag that signifies the specific use.
+*** =/site-packages/mypackage=
+Module containing functions specific certain IPython scripts and
+general functions used in all IPython scripts. For the module to be
+loaded by Python, the path has to be added to PYTHONPATH:
 #+BEGIN_SRC sh
   export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
 #+END_SRC
+** shematOutputDir structure
+The Python-Scripts are looking for a certain output directory
+structure for SHEMAT-Suite output files. It needs to be of the form:
+#+BEGIN_SRC sh
+  /path/to/shematOutputDir/modelname_output/2010_01_30/2010_01_30_abc
+#+END_SRC
+Inside one of these directories, there are the typical output files of
+a SHEMAT-Suite directory, for example
+- input file =MODELNAME=
+- true input file =MODELNAME_TRUE=
+- EnKF input file =MODELNAME.enkf=
+- SGSim input fiels =sgsim_k_modelname+true.par=,
+  =sgsim_k_modelname+.par=
+Output directories
+- =samples_output=
+- =enkf_output=
+- =single_cell_output=
 * Scripts
 ** endresread.ipy
 The script =endresread.ipy= ([[scripts/endresread.ipy]]) is not part of
 one of the scripting tags for historical reasons and because it has
 the basic preliminary task of reading RMSEs from =SHEMAT-Suite=
 output.
-** analysis
-** errorplot
-** forward
-** gaussianity
-** monitor
-** numcomp
-** presvel
-** sensitivity
-** tcon
-** uindex
+** tag-scripts
+For each tag, there is a runplot.ipy general script that calls the
+read and plot functions from =mypackage=. If wanted, numpy arrays and
+figures are saved, figures are shown and the script is backuped in the
+corresponding =backup= directory.
 ** templates
 A =/scripts/templates= directory will not be part of the
 git-repository and can be used for new, not-yet-presentable scripts.
+* Tags
+Tags are used to organize different groups of read and plot
+routines. They determine the output-path, the script-path and the path
+of to the function definitions of =mypackage=. The following tags
+exist in PythonDir:
+- =analysis=
+- =errorplot=
+- =forward=
+- =gaussianity=
+- =monitor=
+- =numcomp=
+- =presvel=
+- =sensitivity=
+- =tcon=
+- =uindex=
+** analysis
+tag documentation
+** errorplot
+tag documentation
+** forward
+tag documentation
+** gaussianity
+tag documentation
+** monitor
+tag documentation
+** numcomp
+tag documentation
+** presvel
+tag documentation
+** sensitivity
+tag documentation
+** tcon
+tag documentation
+** uindex
+tag documentation
 * mypackage
 ** scripts
-The mypackage-functions under the scripts directory usually include
-three files:
+The functions in the =scripts= directory
+([[/site-packages/mypackage/scripts/]]) are tag-specifig, i.e. they are
+meant to be used by the =runplot.ipy= scripts under a certain tag (for
+example =analysis=). There exist three typical files containg
+functions for reading, plotting and general variables:
 - =read.py= (Example
   [[/site-packages/mypackage/scripts/analysis/read.py]]) contains
-  functions for reading SHEMAT-Suite output and turning it into numpy
-  arrays.
+  functions for reading the specific SHEMAT-Suite output needed under
+  a tag and turning the output into numpy arrays.
 - =plot.py= (Example
   [[/site-packages/mypackage/scripts/analysis/plot.py]]) contains
-  functions for plotting the numpy arrays read in =read.py=.
-- =arrays.py= (Example
-  [[/site-packages/mypackage/scripts/analysis/arrays.py]]) contains useful
-  variables and arrays, for example the tag variable, which denotes
-  the output and script subdirectories, in the case of analysis:
-#+BEGIN_SRC python
-  tag = "analysis"
-#+END_SRC
+  functions for plotting the numpy arrays read in under =read.py=.
+- =arrays.py= or =variables.py= (Example
+  [[/site-packages/mypackage/scripts/analysis/arrays.py]]) contain useful
+  tag-specific variables and arrays, for example the tag name itself,
+  which denotes the output and script subdirectories.
 ** tools
+The =tools= directory ([[/site-packages/mypackage/tools/]]) contains
+general functions, which could be used in all scripts.
 *** plot
+General variables and functions related to plotting.
 **** plotarrays
+Important collection of dates, letters, number of runs and number of
+observations for different EnKF runs. According to this information,
+specifiers for the different output are defined and standardized.
 **** plotfunctions
+Plotting functions for handling vtk-input, grid properties, colormaps,
+colorbars, scatterplots, hdf (not yet fully tested).
 **** specs
-*** pp
+Utility functions for reading grid properties from SHEMAT-Suite output
+files in SHEMAT-Suite output directories. Important functions defining
+the specifiers used to standardize output of the IPython scripts.
 *** run
 **** pythonmodule
+Python-related directory variables
+- =python_dir=
+- =python_scripts_dir=
+- =python_output_dir=
+Python-related functions for generating specific directories,
+filenames for saving and backups.
 **** runmodule
+General utility functions for replacing strings, make temporal files,
+handling letter endings of specifiers, running shell scripts, reading
+and manipulating SHEMAT-Suite input files, compiling SHEMAT, running
+matlab, generating lists of SHEMAT-Suite specific files and
+directories. Some of these functions are used in scripts to run
+SHEMAT-Suite that are not part of the =PythonDir= repository.
 * References
 ** Rath, 2006
 Rath, V., Wolf, A., & Bücker, H. M., Joint three-dimensional inversion
