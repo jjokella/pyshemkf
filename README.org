@@ -1,14 +1,29 @@
-* PythonDir
-** Directory structure
+#+TITLE: PythonDir
+#+AUTHOR: Johannes Keller
+
+=PythonDir= is my python environment for post-processing of
+=SHEMAT-Suite= ([[*Rath, 2006][Rath, 2006]]) output, including 2D-figures of variables
+and parameters, and, most notably, the evaluation and visualization of
+RMSE distributions from a number of Ensemble Kalman Filter synthetic
+experiments.
+
+* Directory structure
 There are three general directories in PythonDir: One for output, one
 for the Python-scripts and one for the Python module mypackage.
-*** output
+** =/output=
 Directory for output of all kind.
-*** scripts
+** =/scripts=
 IPython scripts.
-*** site-packages/mypackage
+** =/site-packages/mypackage=
 Module with functions ready for use in IPython scripts. For the module
 to be loaded by Python, the path has to be added to PYTHONPATH:
 #+BEGIN_SRC sh
   export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
 #+END_SRC
+
+* References
+** Rath, 2006
+:PROPERTIES:
+:ID:       18d02379-32b1-4ab8-baae-58c998245ad2
+:END:
+[[10.1111/j.1365-246x.2006.03074.x]]
