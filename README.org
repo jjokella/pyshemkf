@@ -10,10 +10,10 @@ synthetic experiments.
 -----
 
 * Directory structure
-There are three general directories in PythonDir: One for output, one
-for the Python-scripts and one for the Python module mypackage.
+There are three general directories in =PythonDir=: One for output,
+one for the Python-scripts and one for the Python module mypackage.
 ** =/output=
-Directory for output of all kind.
+=/output= Directory for output of all kind.
 ** =/scripts=
 IPython scripts.
 ** =/site-packages/mypackage=
@@ -22,7 +22,40 @@ to be loaded by Python, the path has to be added to PYTHONPATH:
 #+BEGIN_SRC sh
   export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
 #+END_SRC
-
+* Scripts
+** endresread.ipy
+The script =endresread.ipy= is not part of one of the scripting tags
+for historical reasons and because it has the basic preliminary task
+of reading RMSEs from =SHEMAT-Suite= output.
+** analysis
+** errorplot
+** forward
+** gaussianity
+** monitor
+** numcomp
+** presvel
+** sensitivity
+** tcon
+** uindex
+** templates
+A =/scripts/templates= directory will not be part of the
+git-repository and can be used for new, not-yet-presentable scripts.
+* mypackage
+** scripts
+The mypackage-functions under the scripts directory usually include
+three files:
+- =read.py=
+- =plot.py=
+- =arrays.py=
+** tools
+*** plot
+**** plotarrays
+**** plotfunctions
+**** specs
+*** pp
+*** run
+**** pythonmodule
+**** runmodule
 * References
 ** Rath, 2006
 Rath, V., Wolf, A., & Bücker, H. M., Joint three-dimensional inversion
