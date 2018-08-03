@@ -3,5 +3,6 @@ output/**/eps/*.eps
 output/**/pdf/*.pdf
 output/**/npy/*.npy
 output/**/png/*.png
-**/backup/
-**/templates/
+**/backup/**/*.ipy
+**/templates/**/*.txt
+**/templates/**/*.ipy
