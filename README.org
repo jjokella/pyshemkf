@@ -6,8 +6,8 @@ of en =kf= simulations) is a python environment for post-processing
 SHEMAT-Suite ([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures of
 variables and parameters. Most notably, =pyshemkf= contains scripts
 and functions for the evaluation and visualization of RMSE
-distributions from Ensemble Kalman Filter (EnKF) synthetic experiments
-computed with SHEMAT-Suite.
+distributions from Ensemble Kalman Filter (EnKF, [[*Evensen 2003][Evensen 2003]])
+synthetic experiments computed with SHEMAT-Suite.
 
 -----
 * General structure
@@ -156,3 +156,7 @@ of coupled groundwater flow and heat transfer based on automatic
 differentiation: sensitivity calculation, verification, and synthetic
 examples, Geophysical Journal International, 167(1), 453–466 (2006).
 [[http://dx.doi.org/10.1111/j.1365-246x.2006.03074.x]]
+** Evensen 2003
+Evensen, G., The ensemble kalman filter: theoretical formulation and
+practical implementation, Ocean Dynamics, 53(4), 343–367 (2003).
+http://dx.doi.org/10.1007/s10236-003-0036-9
