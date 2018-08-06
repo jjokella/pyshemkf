@@ -1,13 +1,13 @@
 import shutil
 import matplotlib.pyplot as plt
 
-from mypackage.tools.plot import specs as sc
-from mypackage.tools.run import runmodule as rm
-import mypackage.scripts.sensitivity.arrays as sa
-import mypackage.scripts.sensitivity.variables as sv
-import mypackage.scripts.sensitivity.plot as spl
-import mypackage.scripts.sensitivity.read as sr
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.plot import specs as sc
+from pskf.tools.run import runmodule as rm
+import pskf.scripts.sensitivity.arrays as sa
+import pskf.scripts.sensitivity.variables as sv
+import pskf.scripts.sensitivity.plot as spl
+import pskf.scripts.sensitivity.read as sr
+import pskf.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0

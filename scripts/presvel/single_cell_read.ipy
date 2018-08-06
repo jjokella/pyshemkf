@@ -2,8 +2,8 @@
 
 import os
 import numpy as np
-from mypackage.tools.plot import specs as sc
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.plot import specs as sc
+import pskf.tools.run.pythonmodule as pm
 
 # Input file specification
 model_name = sc.model_name

@@ -1,9 +1,9 @@
 # Read residual arrays from SHEMAT-Suite vtk output
 
 import numpy as np
-from mypackage.tools.plot import plotfunctions as pf
-from mypackage.tools.run import pythonmodule as pm
-from mypackage.tools.run import runmodule as rm
+from pskf.tools.plot import plotfunctions as pf
+from pskf.tools.run import pythonmodule as pm
+from pskf.tools.run import runmodule as rm
 
 model_name = 'model'
 

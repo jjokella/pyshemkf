@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.tools.plot import specs as sc
-import mypackage.scripts.uindex.arrays as ua
-import mypackage.scripts.uindex.plot as up
-import mypackage.scripts.uindex.read as ur
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.plot import specs as sc
+import pskf.scripts.uindex.arrays as ua
+import pskf.scripts.uindex.plot as up
+import pskf.scripts.uindex.read as ur
+import pskf.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0

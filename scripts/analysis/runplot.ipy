@@ -1,12 +1,12 @@
 # import shutil
 import matplotlib.pyplot as plt
 
-from mypackage.tools.plot import specs as sc
-import mypackage.scripts.analysis.arrays as aa
-import mypackage.scripts.analysis.plot as ap
-import mypackage.scripts.analysis.read as ar
-import mypackage.tools.run.pythonmodule as pm
-import mypackage.tools.plot.plotfunctions as pf
+from pskf.tools.plot import specs as sc
+import pskf.scripts.analysis.arrays as aa
+import pskf.scripts.analysis.plot as ap
+import pskf.scripts.analysis.read as ar
+import pskf.tools.run.pythonmodule as pm
+import pskf.tools.plot.plotfunctions as pf
 
 import numpy as np
 

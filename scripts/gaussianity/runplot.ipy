@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.tools.plot import specs as sc
-import mypackage.scripts.gaussianity.arrays as ga
-import mypackage.scripts.gaussianity.plot as gp
-import mypackage.scripts.gaussianity.read as gr
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.plot import specs as sc
+import pskf.scripts.gaussianity.arrays as ga
+import pskf.scripts.gaussianity.plot as gp
+import pskf.scripts.gaussianity.read as gr
+import pskf.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 0

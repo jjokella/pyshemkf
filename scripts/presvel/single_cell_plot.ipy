@@ -3,8 +3,8 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from mypackage.tools.plot import specs as sc
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.plot import specs as sc
+import pskf.tools.run.pythonmodule as pm
 
 is_show = [True,True,True]
 is_save = [True,True,True]

@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.tools.plot import specs as sc
-import mypackage.scripts.forward.arrays as fa
-import mypackage.scripts.forward.plot as fp
-import mypackage.scripts.forward.read as fr
-import mypackage.tools.run.pythonmodule as pm
-import mypackage.tools.plot.plotfunctions as pf
+from pskf.tools.plot import specs as sc
+import pskf.scripts.forward.arrays as fa
+import pskf.scripts.forward.plot as fp
+import pskf.scripts.forward.read as fr
+import pskf.tools.run.pythonmodule as pm
+import pskf.tools.plot.plotfunctions as pf
 
 # Switches
 is_read = 0

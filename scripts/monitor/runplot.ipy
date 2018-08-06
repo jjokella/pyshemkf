@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mypackage.tools.run import runmodule as rm
-from mypackage.tools.plot import specs as sc
-import mypackage.scripts.monitor.arrays as ma
-import mypackage.scripts.monitor.plot as mp
-import mypackage.scripts.monitor.read as mr
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.run import runmodule as rm
+from pskf.tools.plot import specs as sc
+import pskf.scripts.monitor.arrays as ma
+import pskf.scripts.monitor.plot as mp
+import pskf.scripts.monitor.read as mr
+import pskf.tools.run.pythonmodule as pm
 
 # Switches
 is_read = 1

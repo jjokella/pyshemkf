@@ -3,9 +3,9 @@
 import os
 import matplotlib as mpl
 import numpy as np
-from mypackage.tools.plot import plotfunctions as pf
-from mypackage.tools.run import runmodule as rm
-import mypackage.tools.run.pythonmodule as pm
+from pskf.tools.plot import plotfunctions as pf
+from pskf.tools.run import runmodule as rm
+import pskf.tools.run.pythonmodule as pm
 import pandas as pd
 
 is_show = True
