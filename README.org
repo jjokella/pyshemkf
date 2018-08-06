@@ -1,4 +1,4 @@
-#+TITLE: pyshemkf: Python environment for handling SHEMAT-Suite output of EnKF simulations
+#+TITLE: pyshemkf: =Py=thon environment for handling SHEMAT-Suite output of EnKF simulations
 #+AUTHOR: Johannes Keller
 
 =pyshemkf= is a python environment for post-processing =SHEMAT-Suite=
