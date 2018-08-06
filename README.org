@@ -16,7 +16,7 @@ the structure of the SHEMAT-Suite output directory =shematOutputDir/=
 needed for compatibility with the scripts of =pyshemkf=.
 ** pyshemkf structure
 There are three general directories in =pyshemkf=: One for output, one
-for the Python-scripts and one for the Python module mypackage.
+for the Python-scripts and one for the Python module pskf.
 *** =output/=
 Directory for output of all tags. There is one subdirectory for each
 tag. Each of these subdirectories contains subdirectories of the form
@@ -27,7 +27,7 @@ related output) contain only numpy arrays in =npy/=.
 *** =/scripts=
 IPython scripts for reading and plotting SHEMAT-Suite output sorted by
 a tag that signifies the specific use.
-*** =/site-packages/mypackage=
+*** =/site-packages/pskf=
 Module containing functions specific certain IPython scripts and
 general functions used in all IPython scripts. For the module to be
 loaded by Python, the path has to be added to PYTHONPATH:
@@ -54,7 +54,7 @@ Output directories
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
-of to the function definitions of =mypackage=. The following tags
+of to the function definitions of =pskf=. The following tags
 exist in =pyshemkf=:
 - =analysis=
 - =errorplot=
@@ -94,32 +94,32 @@ the basic preliminary task of reading RMSEs from =SHEMAT-Suite=
 output.
 ** tag-scripts
 For each tag, there is a runplot.ipy general script that calls the
-read and plot functions from =mypackage=. If wanted, numpy arrays and
+read and plot functions from =pskf=. If wanted, numpy arrays and
 figures are saved, figures are shown and the script is backuped in the
 corresponding =backup= directory.
 ** templates
 A =/scripts/templates= directory will not be part of the
 git-repository and can be used for new, not-yet-presentable scripts.
-* mypackage
+* Module =pskf=
 ** scripts
 The functions in the =scripts= directory
-([[/site-packages/mypackage/scripts/]]) are tag-specifig, i.e. they are
+([[/site-packages/pskf/scripts/]]) are tag-specifig, i.e. they are
 meant to be used by the =runplot.ipy= scripts under a certain tag (for
 example =analysis=). There exist three typical files containg
 functions for reading, plotting and general variables:
 - =read.py= (Example
-  [[/site-packages/mypackage/scripts/analysis/read.py]]) contains
+  [[/site-packages/pskf/scripts/analysis/read.py]]) contains
   functions for reading the specific SHEMAT-Suite output needed under
   a tag and turning the output into numpy arrays.
 - =plot.py= (Example
-  [[/site-packages/mypackage/scripts/analysis/plot.py]]) contains
+  [[/site-packages/pskf/scripts/analysis/plot.py]]) contains
   functions for plotting the numpy arrays read in under =read.py=.
 - =arrays.py= or =variables.py= (Example
-  [[/site-packages/mypackage/scripts/analysis/arrays.py]]) contain useful
+  [[/site-packages/pskf/scripts/analysis/arrays.py]]) contain useful
   tag-specific variables and arrays, for example the tag name itself,
   which denotes the output and script subdirectories.
 ** tools
-The =tools= directory ([[/site-packages/mypackage/tools/]]) contains
+The =tools= directory ([[/site-packages/pskf/tools/]]) contains
 general functions, which could be used in all scripts.
 *** plot
 General variables and functions related to plotting.
