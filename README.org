@@ -1,5 +1,8 @@
-#+TITLE: pyshemkf: =Py=thon environment for handling SHEMAT-Suite output of EnKF simulations
+#+TITLE: pyshemkf: Python environment for handling SHEMAT-Suite output of EnKF simulations
 #+AUTHOR: Johannes Keller
+
+=pyshemkf=: *PY*thon environment for handling SHEMat-suite output of
+enKF simulations
 
 =pyshemkf= is a python environment for post-processing =SHEMAT-Suite=
 ([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures of variables
