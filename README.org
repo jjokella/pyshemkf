@@ -103,10 +103,10 @@ git-repository and can be used for new, not-yet-presentable scripts.
 * Module =pskf=
 ** scripts
 The functions in the =scripts= directory
-([[/site-packages/pskf/scripts/]]) are tag-specifig, i.e. they are
-meant to be used by the =runplot.ipy= scripts under a certain tag (for
-example =analysis=). There exist three typical files containg
-functions for reading, plotting and general variables:
+([[/site-packages/pskf/scripts/]]) are tag-specific, i.e. they are meant
+to be used by the =runplot.ipy= scripts under a certain tag (for
+example =analysis=). Three typical file types exist in one tag
+directory:
 - =read.py= (Example
   [[/site-packages/pskf/scripts/analysis/read.py]]) contains
   functions for reading the specific SHEMAT-Suite output needed under
@@ -116,11 +116,11 @@ functions for reading, plotting and general variables:
   functions for plotting the numpy arrays read in under =read.py=.
 - =arrays.py= or =variables.py= (Example
   [[/site-packages/pskf/scripts/analysis/arrays.py]]) contain useful
-  tag-specific variables and arrays, for example the tag name itself,
-  which denotes the output and script subdirectories.
+  tag-specific variables and arrays. One example is the tag name
+  itself.
 ** tools
-The =tools= directory ([[/site-packages/pskf/tools/]]) contains
-general functions, which could be used in all scripts.
+The =tools= directory ([[/site-packages/pskf/tools/]]) contains general
+functions (opposed to the tag-specific functions in =scripts=).
 *** plot
 General variables and functions related to plotting.
 **** plotarrays
@@ -159,4 +159,4 @@ examples, Geophysical Journal International, 167(1), 453–466 (2006).
 ** Evensen 2003
 Evensen, G., The ensemble kalman filter: theoretical formulation and
 practical implementation, Ocean Dynamics, 53(4), 343–367 (2003).
-http://dx.doi.org/10.1007/s10236-003-0036-9
+[[http://dx.doi.org/10.1007/s10236-003-0036-9]]
