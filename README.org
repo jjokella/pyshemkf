@@ -2,7 +2,7 @@
 #+AUTHOR: Johannes Keller
 
 =PythonDir= is my python environment for post-processing of
-=SHEMAT-Suite= ([[#Rath, 2006][Rath, 2006]]) output, including 2D-figures of variables
+=SHEMAT-Suite= ([[#rath-2006][Rath 2006]]) output, including 2D-figures of variables
 and parameters, and, most notably, the evaluation and visualization of
 RMSE distributions from a number of Ensemble Kalman Filter (EnKF)
 synthetic experiments.
@@ -148,7 +148,7 @@ matlab, generating lists of SHEMAT-Suite specific files and
 directories. Some of these functions are used in scripts to run
 SHEMAT-Suite that are not part of the =PythonDir= repository.
 * References
-** Rath, 2006
+** Rath 2006
 Rath, V., Wolf, A., & Bücker, H. M., Joint three-dimensional inversion
 of coupled groundwater flow and heat transfer based on automatic
 differentiation: sensitivity calculation, verification, and synthetic
