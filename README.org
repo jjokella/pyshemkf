@@ -1,15 +1,13 @@
 #+TITLE: pyshemkf: Python environment for handling SHEMAT-Suite output of EnKF simulations
 #+AUTHOR: Johannes Keller
 
-=pyshemkf=: =py= thon environment for handling =shem= at-suite output of
-en =kf= simulations
-
-=pyshemkf= is a python environment for post-processing =SHEMAT-Suite=
-([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures of variables
-and parameters. Most notably, =pyshemkf= contains scripts and
-functions for the evaluation and visualization of RMSE distributions
-from Ensemble Kalman Filter (EnKF) synthetic experiments computed with
-=SHEMAT-Suite=.
+=pyshemkf= (=py= thon environment for handling =shem= at-suite output
+of en =kf= simulations) is a python environment for post-processing
+=SHEMAT-Suite= ([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures
+of variables and parameters. Most notably, =pyshemkf= contains scripts
+and functions for the evaluation and visualization of RMSE
+distributions from Ensemble Kalman Filter (EnKF) synthetic experiments
+computed with =SHEMAT-Suite=.
 
 -----
 * General structure
