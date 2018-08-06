@@ -1,22 +1,22 @@
-#+TITLE: PythonDir: Post-Processing SHEMAT-Suite EnKF-Output
+#+TITLE: pyshemkf: Python environment for handling SHEMAT-Suite output of EnKF simulations
 #+AUTHOR: Johannes Keller
 
-=PythonDir= is a python environment for post-processing =SHEMAT-Suite=
+=pyshemkf= is a python environment for post-processing =SHEMAT-Suite=
 ([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures of variables
-and parameters. Most notably, =PythonDir= contains scripts and
+and parameters. Most notably, =pyshemkf= contains scripts and
 functions for the evaluation and visualization of RMSE distributions
 from Ensemble Kalman Filter (EnKF) synthetic experiments computed with
 =SHEMAT-Suite=.
 
 -----
 * General structure
-Explanation of the general idea behind the =PythonDir= structure and
+Explanation of the general idea behind the =pyshemkf= structure and
 the structure of the =SHEMAT-Suite= output directory
 =shematOutputDir/= needed for compatibility with the scripts of
-=PythonDir=.
-** PythonDir structure
-There are three general directories in =PythonDir=: One for output,
-one for the Python-scripts and one for the Python module mypackage.
+=pyshemkf=.
+** pyshemkf structure
+There are three general directories in =pyshemkf=: One for output, one
+for the Python-scripts and one for the Python module mypackage.
 *** =output/=
 Directory for output of all tags. There is one subdirectory for each
 tag. Each of these subdirectories contains subdirectories of the form
@@ -32,7 +32,7 @@ Module containing functions specific certain IPython scripts and
 general functions used in all IPython scripts. For the module to be
 loaded by Python, the path has to be added to PYTHONPATH:
 #+BEGIN_SRC sh
-  export PYTHONPATH=${PYTHONPATH}:/path/to/PythonDir/site-packages
+  export PYTHONPATH=${PYTHONPATH}:/path/to/pyshemkf/site-packages
 #+END_SRC
 ** shematOutputDir structure
 The Python-Scripts are looking for a certain output directory
@@ -55,7 +55,7 @@ Output directories
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
 of to the function definitions of =mypackage=. The following tags
-exist in PythonDir:
+exist in =pyshemkf=:
 - =analysis=
 - =errorplot=
 - =forward=
@@ -148,7 +148,7 @@ handling letter endings of specifiers, running shell scripts, reading
 and manipulating SHEMAT-Suite input files, compiling SHEMAT, running
 matlab, generating lists of SHEMAT-Suite specific files and
 directories. Some of these functions are used in scripts to run
-SHEMAT-Suite that are not part of the =PythonDir= repository.
+SHEMAT-Suite that are not part of the =pyshemkf= repository.
 * References
 ** Rath 2006
 Rath, V., Wolf, A., & Bücker, H. M., Joint three-dimensional inversion
