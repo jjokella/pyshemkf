@@ -3,18 +3,17 @@
 
 =pyshemkf= (=py= thon environment for handling =shem= at-suite output
 of en =kf= simulations) is a python environment for post-processing
-=SHEMAT-Suite= ([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures
-of variables and parameters. Most notably, =pyshemkf= contains scripts
+SHEMAT-Suite ([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures of
+variables and parameters. Most notably, =pyshemkf= contains scripts
 and functions for the evaluation and visualization of RMSE
 distributions from Ensemble Kalman Filter (EnKF) synthetic experiments
-computed with =SHEMAT-Suite=.
+computed with SHEMAT-Suite.
 
 -----
 * General structure
 Explanation of the general idea behind the =pyshemkf= structure and
-the structure of the =SHEMAT-Suite= output directory
-=shematOutputDir/= needed for compatibility with the scripts of
-=pyshemkf=.
+the structure of the SHEMAT-Suite output directory =shematOutputDir/=
+needed for compatibility with the scripts of =pyshemkf=.
 ** pyshemkf structure
 There are three general directories in =pyshemkf=: One for output, one
 for the Python-scripts and one for the Python module mypackage.
