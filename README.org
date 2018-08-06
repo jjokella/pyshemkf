@@ -1,17 +1,19 @@
 #+TITLE: PythonDir: Post-Processing SHEMAT-Suite EnKF-Output
 #+AUTHOR: Johannes Keller
 
-=PythonDir= is my python environment for post-processing of
-=SHEMAT-Suite= ([[*Rath 2006][Rath 2006]]) output, including 2D-figures of variables
-and parameters, and, most notably, the evaluation and visualization of
-RMSE distributions from a number of Ensemble Kalman Filter (EnKF)
-synthetic experiments.
+=PythonDir= is a python environment for post-processing =SHEMAT-Suite=
+([[*Rath 2006][Rath 2006]]) output. It can help to generate 2D-figures of variables
+and parameters. Most notably, =PythonDir= contains scripts and
+functions for the evaluation and visualization of RMSE distributions
+from Ensemble Kalman Filter (EnKF) synthetic experiments computed with
+=SHEMAT-Suite=.
 
 -----
 * General structure
-Explanation of the general idea behind the PythonDir structure and the
-structure of the SHEMAT-Suite output directory =shematOutputDir/=
-needed for combatibility with the scripts of PythonDir..
+Explanation of the general idea behind the =PythonDir= structure and
+the structure of the =SHEMAT-Suite= output directory
+=shematOutputDir/= needed for compatibility with the scripts of
+=PythonDir=.
 ** PythonDir structure
 There are three general directories in =PythonDir=: One for output,
 one for the Python-scripts and one for the Python module mypackage.
