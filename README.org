@@ -46,19 +46,28 @@ loaded by Python, the path has to be added to PYTHONPATH:
 #+BEGIN_SRC sh
   export PYTHONPATH=${PYTHONPATH}:/path/to/pyshemkf/site-packages
 #+END_SRC
-** shematOutputDir structure
-The Python-Scripts are looking for a certain output directory
-structure for SHEMAT-Suite output files. It needs to be of the form:
+** SHEMAT-Suite output directory structure
+The Python-Scripts need a certain SHEMAT-Suite output directory
+structure to be able to read output files. A single output directory
+should look as follows:
 #+BEGIN_SRC sh
-  /path/to/shematOutputDir/modelname_output/2010_01_30/2010_01_30_abc
+  $HOME/shematOutputDir/<model_name>_output/<dat>/<dat>_<letter>
 #+END_SRC
-Inside one of these directories, there are the typical output files of
-a SHEMAT-Suite directory, for example
-- input file =MODELNAME=
-- true input file =MODELNAME_TRUE=
-- EnKF input file =MODELNAME.enkf=
-- SGSim input fiels =sgsim_k_modelname_true.par=,
-  =sgsim_k_modelname.par=
+An example with =<model_name>=wavereal=, =<dat>=2010_01_30=,
+=<let>=a=:
+#+BEGIN_SRC sh
+  $HOME/shematOutputDir/wavereal_output/2010_01_30/2010_01_30_a
+#+END_SRC
+Inside one of the SHEMAT-Suite output directories, input files are
+saved alongside output directories.
+
+Input files
+- general input file =MODELNAME= (=WAVEREAL=)
+- true input file =MODELNAME_TRUE= (=WAVEREAL_TRUE=)
+- EnKF input file =MODELNAME.enkf= (=WAVEREAL.enkf=)
+- SGSim input fiels =sgsim_k_modelname_true.par=
+  (=sgsim_k_wavereal_true=), =sgsim_k_modelname.par=
+  (=sgsim_k_wavereal=)
 Output directories
 - =samples_output=
 - =enkf_output=
