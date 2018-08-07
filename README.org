@@ -10,6 +10,18 @@ distributions from Ensemble Kalman Filter (EnKF, [[*Evensen 2003][Evensen 2003]]
 synthetic experiments computed with SHEMAT-Suite.
 
 -----
+* Prerequisites
+The scripts are written for =python2.7.12=. They make use of the
+following Python modules:
+- =matplotlib=, =matplotlib.pyplot=, =matplotlib.cm=,
+  =matplotlib.colors=, =matplotlib.mlab= are used for plotting
+- =numpy=, =scipy=, =scipy.stats= provide numerical and matrix
+  functions
+- =shutil=, =os=, =subprocess=, =shlex= are used to run commands on
+  the operating system
+- =string= provides string manipulation utilities
+- =exceptions= is used for exception handling
+- =vtk= and =h5py= provide functions to read vkt and hdf files.
 * General structure
 Explanation of the general idea behind the =pyshemkf= structure and
 the structure of the SHEMAT-Suite output directory =shematOutputDir/=
