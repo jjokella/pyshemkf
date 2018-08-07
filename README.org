@@ -47,31 +47,30 @@ loaded by Python, the path has to be added to PYTHONPATH:
   export PYTHONPATH=${PYTHONPATH}:/path/to/pyshemkf/site-packages
 #+END_SRC
 ** SHEMAT-Suite output directory structure
-The Python-Scripts need a certain SHEMAT-Suite output directory
-structure to be able to read output files. A single output directory
-should look as follows:
+=pyshemkf= needs a specific naming convention of SHEMAT-Suite output
+directories. A single output directory should be named as follows:
 #+BEGIN_SRC sh
-  $HOME/shematOutputDir/<model_name>_output/<dat>/<dat>_<letter>
+  $HOME/shematOutputDir/<model_name>_output/<dat>/<dat>_<let>
 #+END_SRC
 An example with =<model_name>=wavereal=, =<dat>=2010_01_30=,
 =<let>=a=:
 #+BEGIN_SRC sh
   $HOME/shematOutputDir/wavereal_output/2010_01_30/2010_01_30_a
 #+END_SRC
-Inside one of the SHEMAT-Suite output directories, input files are
-saved alongside output directories.
+Inside the SHEMAT-Suite output directories, input files are saved
+alongside output directories.
 
-Input files
-- general input file =MODELNAME= (=WAVEREAL=)
-- true input file =MODELNAME_TRUE= (=WAVEREAL_TRUE=)
-- EnKF input file =MODELNAME.enkf= (=WAVEREAL.enkf=)
-- SGSim input fiels =sgsim_k_modelname_true.par=
-  (=sgsim_k_wavereal_true=), =sgsim_k_modelname.par=
-  (=sgsim_k_wavereal=)
-Output directories
-- =samples_output=
-- =enkf_output=
-- =single_cell_output=
+- Input files
+  - general input file =<MODEL_NAME>= (=WAVEREAL=)
+  - true input file =<MODEL_NAME>_TRUE= (=WAVEREAL_TRUE=)
+  - EnKF input file =<MODEL_NAME>.enkf= (=WAVEREAL.enkf=)
+  - SGSim input fiels =sgsim_k_<modelname>_true.par=
+    (=sgsim_k_wavereal_true=), =sgsim_k_<modelname>.par=
+    (=sgsim_k_wavereal=)
+- Output directories
+  - =samples_output=: forward output
+  - =enkf_output=: EnKF output
+  - =single_cell_output=: output at single cells
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
