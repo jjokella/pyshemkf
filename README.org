@@ -37,19 +37,28 @@ required for compatibility with =pyshemkf=.
 There are three general directories in =pyshemkf=: One for output, one
 for Python-scripts and one for the Python module pskf.
 *** =output/=
-Directory for output of all tags. There is one subdirectory for each
-tag. Each of these subdirectories contains subdirectories of the form
-=npy/=, =png/=, =pdf/= and =npy/= to save the corresponding
-files. Additionally, the directories =dists= ([[output/dists/]] for RMSE
-distributions) and =specs= ([[output/specs/]] for specifier function
-related output) contain only numpy arrays in =npy/=.
+Directory for output of all tags (see [[*Tags][Tags]]). =output= has one
+subdirectory for each tag. Each of these tag-subdirectories contains
+subdirectories, whose names are file endings: =npy/=, =png/=, =pdf/=
+and =eps/=. to save the corresponding files. In each of these
+directories, output files of the corresponding file type are
+save. Example:
+#+BEGIN_SRC sh
+  $HOME/pyshemkf/output/pdf/example_output.pdf
+#+END_SRC
+
+The directories =dists= ([[output/dists/]]) and =specs= ([[output/specs/]])
+contain only numpy arrays in =npy/=. =dists= contains RMSE
+distributions, =specs= contains specifications of the simulated model
+(for example the discretization).
 *** =/scripts=
 IPython scripts for reading and plotting SHEMAT-Suite output sorted by
-a tag that signifies the specific use.
+tags (see [[*Tags][Tags]]).
 *** =/site-packages/pskf=
 Module containing functions used by the IPython scripts of =pyshemkf=.
-Some functions are meant to be specific to certain IPython scripts,
-others are general functions used throughout =pyshemkf=.
+Some functions (for reading and plotting) are meant to be used by
+specific IPython scripts in =/scripts=, others are general functions
+used throughout =pyshemkf=.
 
 For the module to be loaded by Python, its path has to be added to the
 environment variable =PYTHONPATH= (see [[*Prerequisites][Prerequisites]]).
@@ -77,7 +86,7 @@ alongside output directories.
 - Output directories
   - =samples_output=: forward output
   - =enkf_output=: EnKF output
-  - =single_cell_output=: output at single cells
+  - =single_cell_output=: output at single Cells
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
