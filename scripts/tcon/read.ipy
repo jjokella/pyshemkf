@@ -1,24 +1,21 @@
-# Read prescribed velocities
+# Read thermal conductivities
 
 import os
-import matplotlib as mpl
 import numpy as np
-from pskf.tools.plot import plotfunctions as pf
-from pskf.tools.run import runmodule as rm
-import pandas as pd
 
 model_name = 'alexdiff'
 dat = '2016_08_08'
-lets = ['b','c','d','e','f','g','h','i','j']
+lets = ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 
 nrobs = 300
 
 for let in lets:
-    # Load velocities
-    tcons = np.loadtxt(os.environ['HOME']+'/shematOutputDir/'+model_name+'_output/' 
-                           + dat + '/' + dat + '_'+ let
-                           +'/enkf_output/'
-                           +'tcon_aft.txt',
-                        skiprows = 1)
+    # Load thermal conductivities
+    tcons = np.loadtxt(os.environ['HOME']+'/shematOutputDir/'+model_name
+                       + '_output/'
+                       + dat + '/' + dat + '_' + let
+                       + '/enkf_output/'
+                       + 'tcon_aft.txt',
+                       skiprows=1)
 
-    np.save('output/tcon/npy/tcons_'+dat+'_'+let,tcons)
+    np.save('output/tcon/npy/tcons_'+dat+'_'+let, tcons)
