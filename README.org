@@ -22,13 +22,20 @@ following Python modules:
 - =string= provides string manipulation utilities
 - =exceptions= is used for exception handling
 - =vtk= and =h5py= provide functions to read vkt and hdf files.
-* General structure
-Explanation of the general idea behind the =pyshemkf= structure and
-the structure of the SHEMAT-Suite output directory =shematOutputDir/=
-needed for compatibility with the scripts of =pyshemkf=.
+
+For the included module =pskf= to be loaded Python, its path has to be
+added to the environment variable =PYTHONPATH=:
+#+BEGIN_SRC sh
+  export PYTHONPATH=${PYTHONPATH}:<path_to>/pyshemkf/site-packages
+#+END_SRC
+
+* General information
+Explanation of the =pyshemkf= directory structure followed by an
+account of the naming convention for SHEMAT-Suite output directories
+required for compatibility with =pyshemkf=.
 ** pyshemkf structure
 There are three general directories in =pyshemkf=: One for output, one
-for the Python-scripts and one for the Python module pskf.
+for Python-scripts and one for the Python module pskf.
 *** =output/=
 Directory for output of all tags. There is one subdirectory for each
 tag. Each of these subdirectories contains subdirectories of the form
@@ -40,13 +47,13 @@ related output) contain only numpy arrays in =npy/=.
 IPython scripts for reading and plotting SHEMAT-Suite output sorted by
 a tag that signifies the specific use.
 *** =/site-packages/pskf=
-Module containing functions specific certain IPython scripts and
-general functions used in all IPython scripts. For the module to be
-loaded by Python, the path has to be added to PYTHONPATH:
-#+BEGIN_SRC sh
-  export PYTHONPATH=${PYTHONPATH}:/path/to/pyshemkf/site-packages
-#+END_SRC
-** SHEMAT-Suite output directory structure
+Module containing functions used by the IPython scripts of =pyshemkf=.
+Some functions are meant to be specific to certain IPython scripts,
+others are general functions used throughout =pyshemkf=.
+
+For the module to be loaded by Python, its path has to be added to the
+environment variable =PYTHONPATH= (see [[*Prerequisites][Prerequisites]]).
+** SHEMAT-Suite output directory
 =pyshemkf= needs a specific naming convention of SHEMAT-Suite output
 directories. A single output directory should be named as follows:
 #+BEGIN_SRC sh
