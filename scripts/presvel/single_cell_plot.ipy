@@ -1,93 +1,101 @@
-# Read single cell output
+# Plot single cell output
 
-import os
 import numpy as np
 import matplotlib.pyplot as plt
 from pskf.tools.plot import specs as sc
 import pskf.tools.run.pythonmodule as pm
 
-is_show = [True,True,True]
-is_save = [True,True,True]
+is_show = [True, True, True]
+is_save = [True, True, True]
 
 # Input array specification
 model_name = sc.model_name
 dat = sc.dat
-let = sc.lets[0]                                 #'b', 'f'
+let = sc.lets[0]                                 # 'b', 'f'
 truedat = sc.truedat
 truelet = sc.truelet
 
 pic_format = 'png'
 pic_names = ['single_cell_raw_'+model_name+'_'+dat+'_'+let,
-                 'single_cell_mean_'+model_name+'_'+dat+'_'+let,
-                 'single_cell_diff_'+model_name+'_'+dat+'_'+let]
+             'single_cell_mean_'+model_name+'_'+dat+'_'+let,
+             'single_cell_diff_'+model_name+'_'+dat+'_'+let]
 
 # Properties
-num_locs = sc.num_mons(model_name,dat,let)
-nrobs_int = sc.nrobs_int(model_name,dat,let)
+num_locs = sc.num_mons(model_name, dat, let)
+nrobs_int = sc.nrobs_int(model_name, dat, let)
 
-ns = sc.ns(model_name,dat,let)
-nm = sc.nm(model_name,dat,let)
+ns = sc.ns(model_name, dat, let)
+nm = sc.nm(model_name, dat, let)
 
 # Observation points and pairs of observations points for differences
-points = [0,2,4,6]#,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
-pairs = [[0,4],[1,5],[2,6],[3,7]]#,[8,12],[9,13],[10,14],[11,15]]#[[0,4],[1,5],[2,6],[3,7]]
-#[[0,4],[1,5],[2,6],[3,7]]
-#[[8,12],[9,13],[10,14],[11,15]]
+points = [0, 2, 4, 6]  # ,8,9,10,11,12,13,14,15]#[0,1,2,3,4,5,6,7]
+pairs = [[0, 4], [1, 5], [2, 6], [3, 7]]  # ,[8,12],[9,13],[10,14],[11,15]]
+# [[0,4],[1,5],[2,6],[3,7]]
+# [[0,4],[1,5],[2,6],[3,7]]
+# [[8,12],[9,13],[10,14],[11,15]]
 
-xlims = [60,30*24*3600]
+xlims = [60, 30*24*3600]
 
 # Colors (4 blue-ish, 4 red-ish)
-coleros = ['b','g','lightblue','cyan','r','chocolate','magenta','orange','b','g','lightblue','cyan','r','chocolate','magenta','orange']
+coleros = ['b', 'g', 'lightblue', 'cyan', 'r', 'chocolate', 'magenta',
+           'orange',
+           'b', 'g', 'lightblue', 'cyan', 'r', 'chocolate', 'magenta',
+           'orange']
 
-labels = {0:'North',            # Outer ring
-          1:'Northwest',
-          2:'West',
-          3:'Southwest',
-          4:'South',
-          5:'Southeast',
-          6:'East',
-          7:'Northeast',
-          8:'North',            # Inner ring
-          9:'Northwest',
-          10:'West',
-          11:'Southwest',
-          12:'South',
-          13:'Southeast',
-          14:'East',
-          15:'Northeast'}
+labels = {0: 'North',            # Outer ring
+          1: 'Northwest',
+          2: 'West',
+          3: 'Southwest',
+          4: 'South',
+          5: 'Southeast',
+          6: 'East',
+          7: 'Northeast',
+          8: 'North',            # Inner ring
+          9: 'Northwest',
+          10: 'West',
+          11: 'Southwest',
+          12: 'South',
+          13: 'Southeast',
+          14: 'East',
+          15: 'Northeast'}
 
 # --------------------------------------------------------------------------------
 
 # Load temperature arrays
 temp = np.load('output/presvel/npy/'
-                   +'temp_'+model_name+'_'+dat+'_'+let+'_'+str(num_locs).zfill(4)+'.npy')
+               + 'temp_'+model_name+'_'+dat+'_'+let+'_'
+               + str(num_locs).zfill(4)+'.npy')
 
 truetemp = np.load('output/presvel/npy/'
-                    +'truetemp_'+model_name+'_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
+                   + 'truetemp_'+model_name+'_'+truedat+'_'+truelet+'_'
+                   + str(num_locs).zfill(4)+'.npy')
 
 # Load time array
 t = np.load('output/presvel/npy/'
-                    +'truet_'+model_name+'_'+truedat+'_'+truelet+'_'+str(num_locs).zfill(4)+'.npy')
+            + 'truet_'+model_name+'_'+truedat+'_'+truelet+'_'
+            + str(num_locs).zfill(4)+'.npy')
 
 # Plot mean values over all 16 measurement locations
-plt.figure(1,[8,4], dpi=200, facecolor = 'white')
-plt.title('Mean temperatures at observation points', size = 8)
-[plt.semilogx(t[ns::nm][:nrobs_int],np.mean(temp,axis=1)[:nrobs_int,i], 'o', markersize = 2, label = labels[i],c=coleros[ip])
-     for ip,i in enumerate(points)]
-[plt.semilogx(t,truetemp[:,i], '--', markersize = 2, label = labels[i],c=coleros[ip])
-     for ip,i in enumerate(points)]
-plt.legend(prop={'size':10,},markerscale = 2.5)
-plt.xlabel('Time',fontsize = 14, labelpad=0)
-plt.ylabel(r'T  [$^\circ C \,$]',fontsize = 14)
-plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,20*24*3600])
-plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','20d'])
-plt.xlim(xlims[0],xlims[1])
+plt.figure(1, [8, 4],  dpi=200, facecolor='white')
+plt.title('Mean temperatures at observation points', size=8)
+[plt.semilogx(t[ns::nm][:nrobs_int], np.mean(temp, axis=1)[:nrobs_int, i], 'o',
+              markersize=2, label=labels[i], c=coleros[ip])
+ for ip, i in enumerate(points)]
+[plt.semilogx(t, truetemp[:, i], '--', markersize=2, label=labels[i],
+              c=coleros[ip])
+ for ip, i in enumerate(points)]
+plt.legend(prop={'size': 10, }, markerscale=2.5)
+plt.xlabel('Time', fontsize=14, labelpad=0)
+plt.ylabel(r'T  [$^\circ C \,$]', fontsize=14)
+plt.gca().xaxis.set_ticks([10, 60, 600, 3600, 24*3600, 20*24*3600])
+plt.gca().xaxis.set_ticklabels(['10s', '1min', '10min', '1h', '1d', '20d'])
+plt.xlim(xlims[0], xlims[1])
 
 
 # Save, show, close
 if is_save[0]:
     plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
-                    +pic_names[0]+'.'+pic_format)
+                + pic_names[0]+'.'+pic_format)
 if is_show[0]:
     plt.show()
 else:
@@ -95,27 +103,31 @@ else:
 
 
 # Plot mean values with respect to mean of the monitoring points in the true
-meantemp = np.mean(truetemp[:,:8],axis=1)
+meantemp = np.mean(truetemp[:, :8], axis=1)
 
-plt.figure(1,[8,4], dpi=200, facecolor = 'white')
-plt.title('Mean temperatures at observation points relative to the true', size = 8)
-[plt.semilogx(t[ns::nm][:nrobs_int],np.mean(temp,axis=1)[:nrobs_int,i]-truetemp[ns::nm,i][:nrobs_int], 'o', markersize = 2, label = labels[i],c=coleros[ip])
-     for ip,i in enumerate(points)]
-# [plt.semilogx(t[:],truetemp[:,i]-meantemp, '--', markersize = 2, label = labels[i],c=coleros[ip])
+plt.figure(1, [8, 4], dpi=200, facecolor='white')
+plt.title('Mean temperatures at observation points relative to the true',
+          size=8)
+[plt.semilogx(t[ns::nm][:nrobs_int], np.mean(temp, axis=1)[:nrobs_int, i]
+              - truetemp[ns::nm, i][:nrobs_int], 'o', markersize=2,
+              label=labels[i], c=coleros[ip])
+ for ip, i in enumerate(points)]
+# [plt.semilogx(t[:],truetemp[:,i]-meantemp, '--', markersize = 2,
+#               label = labels[i],c=coleros[ip])
 #      for ip,i in enumerate(points)]
-plt.plot(t[ns::nm][:nrobs_int],[0.0 for i in range(nrobs_int)],'k--')
-plt.legend(prop={'size':10},markerscale = 2.5)
-plt.xlabel('Time',fontsize = 14, labelpad=0)
-plt.ylabel(r'T  [$^\circ C \,$]',fontsize = 14)
-plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,20*24*3600])
-plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','20d'])
-plt.xlim(xlims[0],xlims[1])
+plt.plot(t[ns::nm][:nrobs_int], [0.0 for i in range(nrobs_int)], 'k--')
+plt.legend(prop={'size': 10}, markerscale=2.5)
+plt.xlabel('Time', fontsize=14, labelpad=0)
+plt.ylabel(r'T  [$^\circ C \,$]', fontsize=14)
+plt.gca().xaxis.set_ticks([10, 60, 600, 3600, 24*3600, 20*24*3600])
+plt.gca().xaxis.set_ticklabels(['10s', '1min', '10min', '1h', '1d', '20d'])
+plt.xlim(xlims[0], xlims[1])
 
 
 # Save, show, close
 if is_save[1]:
     plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
-                    +pic_names[1]+'.'+pic_format)
+                + pic_names[1]+'.'+pic_format)
 if is_show[1]:
     plt.show()
 else:
@@ -123,29 +135,32 @@ else:
 
 
 # Plot mean differences over all 16 measurement locations
-plt.figure(1,[8,4], dpi=200, facecolor = 'white')
-plt.title('Mean Temperatures Differences and True Temperature Differences', size = 8)
-[plt.semilogx(t[ns::nm][:nrobs_int],np.mean(temp,axis=1)[:nrobs_int,pair[0]]-np.mean(temp,axis=1)[:nrobs_int,pair[1]],
-              'o', markersize = 2, label = labels[pair[0]]+' - '+labels[pair[1]],
-                  c = coleros[i])
-    for i,pair in enumerate(pairs)]
-[plt.semilogx(t[:],truetemp[:,pair[0]]-truetemp[:,pair[1]],
-              '--', markersize = 2,#label = 'True: ' + labels[pair[0]]+' '+labels[pair[1]],
-                  c = coleros[i])
-    for i,pair in enumerate(pairs)]
-plt.legend(loc=2,markerscale=2,numpoints=3,prop={'size':10})
-plt.xlabel('Time',fontsize = 14, labelpad=0)
-plt.ylabel(r'$\Delta$T  [$^\circ C \,$]',fontsize = 14)
-plt.gca().xaxis.set_ticks([10,60,600,3600,24*3600,30*24*3600])
-plt.gca().xaxis.set_ticklabels(['10s','1min','10min','1h','1d','30d'])
-plt.xlim(xlims[0],xlims[1])
+plt.figure(1, [8, 4], dpi=200, facecolor='white')
+plt.title('Mean Temperatures Differences and True Temperature Differences',
+          size=8)
+[plt.semilogx(t[ns::nm][:nrobs_int], np.mean(temp, axis=1)[:nrobs_int, pair[0]]
+              - np.mean(temp, axis=1)[:nrobs_int, pair[1]],
+              'o', markersize=2, label=labels[pair[0]]+' - '
+              + labels[pair[1]],
+              c=coleros[i])
+    for i, pair in enumerate(pairs)]
+[plt.semilogx(t[:], truetemp[:, pair[0]]-truetemp[:, pair[1]],
+              '--', markersize=2,
+              # label = 'True: ' + labels[pair[0]]+' '+labels[pair[1]],
+              c=coleros[i])
+    for i, pair in enumerate(pairs)]
+plt.legend(loc=2, markerscale=2, numpoints=3, prop={'size': 10})
+plt.xlabel('Time', fontsize=14, labelpad=0)
+plt.ylabel(r'$\Delta$T  [$^\circ C \,$]', fontsize=14)
+plt.gca().xaxis.set_ticks([10, 60, 600, 3600, 24*3600, 30*24*3600])
+plt.gca().xaxis.set_ticklabels(['10s', '1min', '10min', '1h', '1d', '30d'])
+plt.xlim(xlims[0], xlims[1])
 
-#Save, show, close
+# Save, show, close
 if is_save[2]:
     plt.savefig(pm.python_dir+'/output/presvel/'+pic_format+'/'
-                    +pic_names[2]+'.'+pic_format)
+                + pic_names[2]+'.'+pic_format)
 if is_show[2]:
     plt.show()
 else:
     plt.clf()
-    
