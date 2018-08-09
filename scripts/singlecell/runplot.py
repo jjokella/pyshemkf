@@ -1,17 +1,17 @@
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 from pskf.tools.plot import specs as sc
 import pskf.scripts.singlecell.arrays as sca
-# import pskf.scripts.forward.plot as fp
+import pskf.scripts.singlecell.plot as scp
 import pskf.scripts.singlecell.read as scr
 import pskf.tools.run.pythonmodule as pm
 
 # Switches
-is_read = 1
-is_plot = 0
+is_read = 0
+is_plot = 1
 is_save = 0
-is_show = 0
+is_show = 1
 is_backup = 0
 
 # Specs
@@ -32,29 +32,32 @@ if is_read:
     print('Saved as ' + numpy_array_name)
 
 # Plot
-# if is_plot:
+if is_plot:
 
-#     # Figure
-#     fig = plt.figure(1, figsize=[15, 10])
+    # Figure
+    fig = plt.figure(1, figsize=[15, 10], dpi=200, facecolor='white')
 
-#     # Run plot function
-#     ax, pic_name = fp.plot(
-#         fig.add_subplot(1, 1, 1),
-#         model_name,
-#         dat,
-#         let,
-#     )
+    # Run plot function
+    ax, pic_name = scp.plot(
+        fig.add_subplot(1, 1, 1),
+        model_name,
+        dat,
+        let,
+    )
 
-#     # Save
-#     if is_save:
-#         plt.savefig(pic_name)
-#         print('Saved as ' + pic_name)
+    # Legend
+    plt.legend(prop={'size': 10, }, markerscale=2.5)
 
-#     # Show
-#     if is_show:
-#         plt.show()
-#     else:
-#         plt.clf()
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
 
 # Backup
 if is_backup:
