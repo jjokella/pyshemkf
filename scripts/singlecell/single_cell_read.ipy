@@ -6,9 +6,9 @@ import pskf.tools.run.pythonmodule as pm
 import pskf.tools.run.runmodule as rm
 
 # Input file specification
-model_name = sc.model_name
-dat = sc.dat
-let = sc.lets[0]                                 # 'b', 'f'
+model_name = 'modelname'
+dat = '2010_01_30'
+let = 'a'                                # 'b', 'f'
 
 # Single cell
 locs = sc.monitor_locs(model_name, dat, let)

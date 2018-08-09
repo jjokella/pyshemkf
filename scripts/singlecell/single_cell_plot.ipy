@@ -9,9 +9,9 @@ is_show = [True, True, True]
 is_save = [True, True, True]
 
 # Input array specification
-model_name = sc.model_name
-dat = sc.dat
-let = sc.lets[0]                                 # 'b', 'f'
+model_name = 'modelname'
+dat = '2010_01_30'
+let = 'a'                                # 'b', 'f'
 truedat = sc.truedat
 truelet = sc.truelet
 
