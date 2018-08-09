@@ -15,8 +15,8 @@ is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavereal'
-dat = '2018_08_09'
+model_name = 'model'
+dat = '2010_01_30'
 
 let = 'a'
 

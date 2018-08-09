@@ -1,8 +1,8 @@
-import shutil
+import numpy as np
+
 import matplotlib.pyplot as plt
 
 from pskf.tools.plot import specs as sc
-import pskf.scripts.analysis.arrays as aa
 import pskf.scripts.analysis.variables as av
 import pskf.scripts.analysis.plot as ap
 import pskf.scripts.analysis.read as ar
@@ -17,58 +17,58 @@ is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavewell'
-dat = '2017_12_11'
-let = 'ad'
+model_name = 'model'
+dat = '2010_01_30'
+let = 'a'
 
 # Letters of wanted range
-lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
+lets = [let]  # aa.lets[sc.specl(model_name,dat,let)]
 
-nts = [5,10,15,20,25,30,40,50,60]
+nts = [5, 10, 15, 20, 25, 30, 40, 50, 60]
 
 # Read
 if is_read:
     for nt in nts:
         for varname in ['kz_mean']:
-            numpy_array, numpy_array_name = ar.read(model_name,dat,lets[0],
-                                                    varname = varname,
-                                                    nt = nt,
-                                                    befaft = 'aft'
-                                                        )
-            np.save(numpy_array_name,numpy_array)
+            numpy_array, numpy_array_name = ar.read(model_name, dat, lets[0],
+                                                    varname=varname,
+                                                    nt=nt,
+                                                    befaft='aft'
+                                                    )
+            np.save(numpy_array_name, numpy_array)
             print('Saved as ' + numpy_array_name)
 
 # Plot
 if is_plot:
 
     # Figure
-    fig = plt.figure(1,figsize=[20,15])
+    fig = plt.figure(1, figsize=[20, 15])
 
-    for it,nt in enumerate(nts):
+    for it, nt in enumerate(nts):
         # Run plot function
-        ax, pic_name = ap.plot(fig.add_subplot(3,4,it+1+it/3),
+        ax, pic_name = ap.plot(fig.add_subplot(3, 4, it+1+it/3),
                                model_name,
                                dat,
                                lets[0],
-                               nt = nt,
-                               diff_ticks = 2,
-                               num_cbar = 15,
-                               is_labels = False,
-                               is_position = False,
+                               nt=nt,
+                               diff_ticks=2,
+                               num_cbar=15,
+                               is_labels=False,
+                               is_position=False,
                                axistitle='Measurement '+str(nt),
-                               pic_format = 'pdf',
-                               varname = 'kz_mean',
-                               auto_cbar = False,
-                               low_cbar = -15.6,
-                               high_cbar = -10.6,
-                           )
+                               pic_format='pdf',
+                               varname='kz_mean',
+                               auto_cbar=False,
+                               low_cbar=-15.6,
+                               high_cbar=-10.6,
+                               )
 
     # Colorbar
-    cb_ax = pf.cb(fig.add_subplot(3,4,12),
+    cb_ax = pf.cb(fig.add_subplot(3, 4, 12),
                   ax,
-                  varname = 'kz_mean',
-                  varlabels = {'kz_mean':'log(k[m2])'},
-                  labelsize = 20,
+                  varname='kz_mean',
+                  varlabels={'kz_mean': 'log(k[m2])'},
+                  labelsize=20,
                   )
 
     # Save

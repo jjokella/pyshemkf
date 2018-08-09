@@ -16,10 +16,10 @@ is_show = 1
 is_backup = 0
 
 # Specs
-model_name = 'wavereal'
-dat = '2017_12_19'
+model_name = 'model'
+dat = '2010_01_30'
 
-let = 'b'
+let = 'a'
 nl = 1
 ns = rm.get_num_let(let)
 nstep = 1
