@@ -90,8 +90,8 @@ alongside output directories.
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
-of to the function definitions of =pskf=. The following tags
-exist in =pyshemkf=:
+of to the function definitions of =pskf=. The following tags exist in
+=pyshemkf=:
 - =analysis=
 - =errorplot=
 - =forward=
@@ -100,28 +100,29 @@ exist in =pyshemkf=:
 - =numcomp=
 - =presvel=
 - =sensitivity=
-- =tcon=
+- =singlecell=
 - =uindex=
 ** analysis
-tag documentation
+2D-Images of variable means and realisation from EnKF-simulations in
+SHEMAT-Suite.
 ** errorplot
-tag documentation
+Figures plotting RMSE mean vs EnKF-method.
 ** forward
-tag documentation
+2D-Images of variables in forward runs of SHEMAT-Suite.
 ** gaussianity
-tag documentation
+RMSE distrubutions from EnKF-simulations in SHEMAT-Suite.
 ** monitor
-tag documentation
+Visualizing monitoring point outpt from SHEMAT-Suite.
 ** numcomp
-tag documentation
+Matrix plots visualizing RMSE statistics.
 ** presvel
-tag documentation
+Visualizing prescribed velocity fields in SHEMAT-Suite.
 ** sensitivity
-tag documentation
-** tcon
-tag documentation
+Sensitivity study utilities.
+** singlecell
+Visualizing single cell output from SHEMAT-Suite.
 ** uindex
-tag documentation
+Visualizing variable values at different units.
 * Scripts
 ** endresread.ipy
 The script =endresread.ipy= ([[scripts/endresread.ipy]]) is not part of
