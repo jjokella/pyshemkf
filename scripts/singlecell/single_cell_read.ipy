@@ -11,12 +11,12 @@ dat = '2010_01_30'
 let = 'a'                                # 'b', 'f'
 
 # Single cell
-locs = sc.monitor_locs(model_name, dat, let)
-variable = sc.variable(model_name, dat, let)
+locs = sc.single_cell_locs(model_name, dat, let)
+variables = sc.single_cell_variables(model_name, dat, let)
 
 # Different numbers
 num_assim = sc.nrobs_int(model_name, dat, let)
-num_locs = sc.num_mons(model_name, dat, let)
+num_locs = sc.num_single_cell(model_name, dat, let)
 nrens = sc.nrens(model_name, dat, let)
 
 
@@ -32,7 +32,7 @@ for iloc, loc in enumerate(locs):
                                   + str(loc[0]).zfill(4)+'_'
                                   + str(loc[1]).zfill(4)+'_'
                                   + str(loc[2]).zfill(4)+'_'
-                                  + str(variable).zfill(4)+'_aft'+'.plt',
+                                  + str(variables[iloc]).zfill(4)+'_aft'+'.txt',
                                   skiprows=5)
 
 np.save(pm.py_output_filename('presvel',
