@@ -1,15 +1,16 @@
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
-from pskf.tools.plot import specs as sc
-import pskf.scripts.presvel.arrays as pva
+# import pskf.scripts.presvel.arrays as pva
 # import pskf.scripts.presvel.plot as pvp
 import pskf.scripts.presvel.read as pvr
-import pskf.tools.run.pythonmodule as pm
-import pskf.tools.plot.plotfunctions as pf
+# import pskf.tools.run.pythonmodule as pm
+# import pskf.tools.plot.plotfunctions as pf
 
 # Switches
 is_read = 0
+is_mean = 0
+is_rad_ang = 0
 # is_plot = 0
 # is_save = 0
 # is_show = 0
@@ -27,6 +28,30 @@ if is_read:
         model_name,
         dat,
         let,
+    )
+
+    np.save(numpy_array_name, numpy_array)
+    print('Saved as ' + numpy_array_name)
+
+# Mean
+if is_mean:
+    numpy_array, numpy_array_name = pvr.mean(
+        model_name,
+        dat,
+        let,
+        befaft='bef',
+    )
+
+    np.save(numpy_array_name, numpy_array)
+    print('Saved as ' + numpy_array_name)
+
+# rad_ang
+if is_rad_ang:
+    numpy_array, numpy_array_name = pvr.rad_ang(
+        model_name,
+        dat,
+        let,
+        befaft='bef',
     )
 
     np.save(numpy_array_name, numpy_array)
