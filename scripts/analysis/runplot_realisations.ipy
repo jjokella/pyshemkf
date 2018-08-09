@@ -1,8 +1,8 @@
-import shutil
+import numpy as np
 import matplotlib.pyplot as plt
 
 from pskf.tools.plot import specs as sc
-import pskf.scripts.analysis.arrays as aa
+# import pskf.scripts.analysis.arrays as aa
 import pskf.scripts.analysis.variables as av
 import pskf.scripts.analysis.plot as ap
 import pskf.scripts.analysis.read as ar
@@ -22,19 +22,20 @@ dat = '2010_01_30'
 let = 'a'
 
 # Letters of wanted range
-lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
+lets = [let]  # aa.lets[sc.specl(model_name,dat,let)]
 
-varnames = ['kz_03']#,'kz_02','kz_03','kz_04','kz_05','kz_06','kz_07','kz_08']
+varnames = ['kz_03']
+# ,'kz_02','kz_03','kz_04','kz_05','kz_06','kz_07','kz_08']
 
 # Read
 if is_read:
     for varname in varnames:
-        numpy_array, numpy_array_name = ar.read(model_name,dat,lets[0],
-                                                varname = varname,
-                                                nt = 1,
-                                                befaft = 'aft'
-                                                    )
-        np.save(numpy_array_name,numpy_array)
+        numpy_array, numpy_array_name = ar.read(model_name, dat, lets[0],
+                                                varname=varname,
+                                                nt=1,
+                                                befaft='aft'
+                                                )
+        np.save(numpy_array_name, numpy_array)
         print('Saved as ' + numpy_array_name)
 
 # Plot
@@ -42,25 +43,25 @@ if is_plot:
 
     for varname in varnames:
         # Figure
-        fig = plt.figure(1,figsize=[15,10])
+        fig = plt.figure(1, figsize=[15, 10])
 
         # Run plot function
-        ax, pic_name = ap.plot(fig.add_subplot(1,1,1),
+        ax, pic_name = ap.plot(fig.add_subplot(1, 1, 1),
                                model_name,
                                dat,
                                lets[0],
-                               nt = 1,
-                               diff_ticks = 2,
-                               auto_cbar = False,
-                               low_cbar = -11.5,
-                               high_cbar = -9.5,
-                               num_cbar = 15,
-                               pic_format = 'png',
-                               varname = varname
-                           )
+                               nt=1,
+                               diff_ticks=2,
+                               auto_cbar=False,
+                               low_cbar=-11.5,
+                               high_cbar=-9.5,
+                               num_cbar=15,
+                               pic_format='png',
+                               varname=varname
+                               )
 
         # Colorbar
-        cb_ax = pf.cb(fig.add_subplot(1,2,1),
+        cb_ax = pf.cb(fig.add_subplot(1, 2, 1),
                       ax)
 
         # Save
