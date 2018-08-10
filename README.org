@@ -94,50 +94,43 @@ alongside output directories.
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
-of to the function definitions of =pskf=. The following tags exist in
-=pyshemkf=:
-- =analysis=
-- =errorplot=
-- =forward=
-- =gaussianity=
-- =monitor=
-- =numcomp=
-- =presvel=
-- =sensitivity=
-- =singlecell=
-- =uindex=
-** analysis
-2D-Images of variable means and realisation from EnKF-simulations in
+of to the function definitions of =pskf=.
+
+There are two groups of tags in =pyshemkf=, corresponding roughly to
+the following functionalities: =analysis=, =forward=, =monitor= and
+=singlecell= are scripts reading general SHEMAT-Suite.  =errorplot=,
+=gaussianity= and =numcomp= provide visualization of RMSE
+distributions of large numbers of EnKF synthetic experiments.
+** =analysis=
+2D-Images of ensemble mean variable/parameter fields or single
+realization variable/parameter fields from EnKF-simulations in
 SHEMAT-Suite.
-** errorplot
-Figures plotting RMSE mean vs EnKF-method.
-** forward
-2D-Images of variables in forward runs of SHEMAT-Suite.
-** gaussianity
-RMSE distrubutions from EnKF-simulations in SHEMAT-Suite.
-** monitor
-Visualizing monitoring point outpt from SHEMAT-Suite.
-** numcomp
-Matrix plots visualizing RMSE statistics.
-** presvel
-Visualizing prescribed velocity fields in SHEMAT-Suite.
-** sensitivity
-Sensitivity study utilities.
-** singlecell
+** =errorplot=
+Figures showing RMSE means of different EnKF-methods.
+** =forward=
+2D-Images of variable/parameter fields in a single forward run of
+SHEMAT-Suite.
+** =gaussianity=
+RMSE distributions from a large number of EnKF synthetic experiments
+with SHEMAT-Suite.
+** =monitor=
+Visualizing monitoring point output from SHEMAT-Suite.
+** =numcomp=
+Matrix plots visualizing RMSE statistics from a large number of EnKF
+synthetic experiments with SHEMAT-Suite.
+** =singlecell=
 Visualizing single cell output from SHEMAT-Suite.
-** uindex
-Visualizing variable values at different units.
 * Scripts
 ** endresread.ipy
 The script =endresread.ipy= ([[scripts/endresread.ipy]]) is not part of
 one of the scripting tags for historical reasons and because it has
-the basic preliminary task of reading RMSEs from =SHEMAT-Suite=
-output.
+the basic preliminary task of reading RMSE distributions from
+=SHEMAT-Suite= output.
 ** tag-scripts
 For each tag, there is a runplot.ipy general script that calls the
 read and plot functions from =pskf=. If wanted, numpy arrays and
-figures are saved, figures are shown and the script is backuped in the
-corresponding =backup= directory.
+figures are saved, figures are shown and a backup of the script is
+generated in the corresponding =backup= directory.
 ** templates
 A =/scripts/templates= directory will not be part of the
 git-repository and can be used for new, not-yet-presentable scripts.
