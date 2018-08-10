@@ -134,8 +134,7 @@ output file the script is looking for and how the SHEMAT-Suite output
 directories should be structured.
 
 To find the right file we need to:
-1. Set up the correct SHEMAT-Suite output directories (see [[*SHEMAT-Suite output
-    directory][SHEMAT-Suite output directory]])
+1. Set up the correct [[*SHEMAT-Suite output directory][SHEMAT-Suite output directory]]
 2. Put the right specifications under =# Specs=.
 If the output files are still not found, the function =fr.read= offers
 the possibility to specify directory and name of a given vtk-output by
