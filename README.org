@@ -5,8 +5,8 @@
 of en =kf= simulations) is a python environment for post-processing
 SHEMAT-Suite ([[*Rath 2006][Rath 2006]]) output.
 
-=pyshemkf= generates graphs and 2D-figures of variables and parameters
-adapted to the typical output of SHEMAT-Suite.
+=pyshemkf= can generate graphs and 2D-figures of variables and
+parameters provided by typical output of SHEMAT-Suite.
 
 Additionally, =pyshemkf= contains scripts and functions for the
 evaluation and visualization of RMSE distributions from Ensemble
