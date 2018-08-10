@@ -69,7 +69,7 @@ At first, Python modules are loaded
   import pskf.tools.plot.plotfunctions as pf
 #+END_SRC
 The first lines load general modules, the later lines load modules
-from the included modules =pskf= (see [[#Module-=pskf=][Module =pskf=]]).
+from the included modules =pskf= (see [[#module-pskf][Module =pskf=]]).
 
 The next part of the script contains switches.
 #+BEGIN_SRC python
@@ -259,7 +259,7 @@ tags (see [[#tags][Tags]], [[#scripts][Scripts]]).
 Module containing functions used by the IPython scripts of =pyshemkf=.
 Some functions (for reading and plotting) are meant to be used by
 specific IPython scripts in =/scripts=, others are general functions
-used throughout =pyshemkf= (see [[#module-=pskf=][Module =pskf=]]).
+used throughout =pyshemkf= (see [[#module-pskf][Module =pskf=]]).
 
 For the module =pskf= to be loaded by Python, its path has to be added
 to the environment variable =PYTHONPATH= (see [[#prerequisites][Prerequisites]]).
@@ -324,7 +324,7 @@ one of the scripting tags. It has the preliminary task of reading RMSE
 distributions from =SHEMAT-Suite= output.
 ** tag-scripts
 For each tag, there is a runplot.ipy general script that calls the
-read and plot functions from =pskf= (see [[#module-=pskf=][Module =pskf=]]). If wanted,
+read and plot functions from =pskf= (see [[#module-pskf][Module =pskf=]]). If wanted,
 numpy arrays and figures are saved, figures are shown and a backup of
 the script is generated in the corresponding =backup= directory.
 ** templates
