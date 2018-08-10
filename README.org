@@ -13,6 +13,9 @@ evaluation and visualization of RMSE distributions from Ensemble
 Kalman Filter (EnKF, [[*Evensen 2003][Evensen 2003]]) synthetic experiments computed with
 SHEMAT-Suite.
 
+For Python scripts of the WRR manuscript of the author, see [[*Manuscript scripts][Manuscript
+scripts]].
+
 -----
 * Prerequisites
 The scripts are written for =python2.7.12=. They make use of the
@@ -328,6 +331,27 @@ the script is generated in the corresponding =backup= directory.
 A =/scripts/templates= directory will not be part of the
 git-repository and can for example be used for new scripts, before
 they are ready to be committed to the repository.
+** Manuscript scripts
+The following scripts are included, which generate the figures from
+the authors WRR manuscript:
+- [[/scripts/forward/runplot_figure_1_a.ipy]]
+- [[/scripts/forward/runplot_figure_1_b.ipy]]
+- [[/scripts/errorplot/runplot_figure_2_a.ipy]]
+- [[/scripts/errorplot/runplot_figure_2_b.ipy]]
+- [[/scripts/errorplot/runplot_figure_2_c.ipy]]
+- [[/scripts/numcomp/runplot_figure_3.ipy]]
+- [[/scripts/errorplot/runplot_figure_4_a.ipy]]
+- [[/scripts/errorplot/runplot_figure_4_b.ipy]]
+- [[/scripts/errorplot/runplot_figure_4_c.ipy]]
+- [[/scripts/numcomp/runplot_figure_5.ipy]]
+- [[/scripts/errorplot/runplot_figure_6_a.ipy]]
+- [[/scripts/errorplot/runplot_figure_6_b.ipy]]
+- [[/scripts/gaussianity/runplot_figure_7_a.ipy]]
+- [[/scripts/gaussianity/runplot_figure_7_b.ipy]]
+- [[/scripts/errorplot/runplot_figure_8_a.ipy]]
+- [[/scripts/errorplot/runplot_figure_8_b.ipy]]
+- [[/scripts/errorplot/runplot_figure_9_a.ipy]]
+- [[/scripts/errorplot/runplot_figure_9_b.ipy]]
 * Module =pskf=
 ** scripts
 The functions in the =scripts= directory
