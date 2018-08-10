@@ -33,6 +33,9 @@ be added to the environment variable =PYTHONPATH=:
   export PYTHONPATH=${PYTHONPATH}:<path_to>/pyshemkf/site-packages
 #+END_SRC
 
+Another important prerequisite of =pyshemkf= is the proper
+SHEMAT-Suite output directory structure (see [[*SHEMAT-Suite output directory][SHEMAT-Suite output
+directory]]).
 * General information
 First, the directory structure of =pyshemkf= is explained. Then, a
 naming convention for directories of SHEMAT-Suite output is
