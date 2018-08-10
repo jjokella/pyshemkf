@@ -10,10 +10,10 @@ parameters provided by typical output of SHEMAT-Suite.
 
 Additionally, =pyshemkf= contains scripts and functions for the
 evaluation and visualization of RMSE distributions from Ensemble
-Kalman Filter (EnKF, [[*Evensen 2003][Evensen 2003]]) synthetic experiments computed with
+Kalman Filter (EnKF, [[#evensen-2003][Evensen 2003]]) synthetic experiments computed with
 SHEMAT-Suite.
 
-For Python scripts of the WRR manuscript of the author, see [[*Manuscript scripts][Manuscript
+For Python scripts of the WRR manuscript of the author, see [[#manuscript-scripts][Manuscript
 scripts]].
 
 -----
@@ -37,7 +37,7 @@ be added to the environment variable =PYTHONPATH=:
 #+END_SRC
 
 Another important prerequisite of =pyshemkf= is the proper
-SHEMAT-Suite output directory structure (see [[*SHEMAT-Suite output directory][SHEMAT-Suite output
+SHEMAT-Suite output directory structure (see [[#shemat-suite-output-directory][SHEMAT-Suite output
 directory]]).
 * Tutorial
 Getting started with =pyshemkf=. This tutorial explains the usage of a
@@ -69,7 +69,7 @@ At first, Python modules are loaded
   import pskf.tools.plot.plotfunctions as pf
 #+END_SRC
 The first lines load general modules, the later lines load modules
-from the included modules =pskf= (see [[*Module =pskf=][Module =pskf=]]).
+from the included modules =pskf= (see [[#Module-=pskf=][Module =pskf=]]).
 
 The next part of the script contains switches.
 #+BEGIN_SRC python
@@ -111,8 +111,8 @@ should do one of the following two things:
 1. =ImportError= for =numpy= or =matplotlib=: Check your general
    Python setup.
 2. =ImportError= for =pskf=: Most probably, =PYTHONPATH= is not set to
-   include =pyshemkf= (see [[*Prerequisites][Prerequisites]])
-If no error message is shown, you can move forward to [[*Reading SHEMAT-Suite output][Reading
+   include =pyshemkf= (see [[#prerequisites][Prerequisites]])
+If no error message is shown, you can move forward to [[#reading-shemat-suite-output][Reading
 SHEMAT-Suite output]].
 ** Reading SHEMAT-Suite output
 If all Python modules are loaded correctly, the =is_read= switch can
@@ -137,7 +137,7 @@ output file the script is looking for and how the SHEMAT-Suite output
 directories should be structured.
 
 To find the right file we need to:
-1. Set up the correct [[*SHEMAT-Suite output directory][SHEMAT-Suite output directory]]
+1. Set up the correct [[#shemat-suite-output-directory][SHEMAT-Suite output directory]]
 2. Put the right specifications under =# Specs=.
 If the output files are still not found, the function =fr.read= offers
 the possibility to specify directory and name of a given vtk-output by
@@ -162,7 +162,7 @@ After successfully saving the python array, its name is printed.
   Saved as $HOME/pyshemkf/output/forward/npy/<varname>_<model_name>_<dat>_<let>_1.npy
 #+END_SRC
 If this message is displayed after executing =runplot.py=, you can
-move on to [[*Plotting][Plotting]].
+move on to [[#plotting][Plotting]].
 ** Plotting
 If the numpy array is saved, the switches of =runplot.py= can be
 changed as follows:
@@ -240,7 +240,7 @@ for output, one for IPython-scripts and one for the Python module
 =pskf=.
 *** =output/=
 Directory for all output. =output/= has one subdirectory for each tag
-(see [[*Tags][Tags]]). Each of these tag-subdirectories contains subdirectories,
+(see [[#tags][Tags]]). Each of these tag-subdirectories contains subdirectories,
 whose names correspond to file endings: =npy/=, =png/=, =pdf/= and
 =eps/=. The scripts of =pyshemkf= write output of a format to the
 directory with the corresponding name. Example:
@@ -254,15 +254,15 @@ RMSE distributions, =specs= contains specifications of the simulated
 model (for example the discretization).
 *** =/scripts=
 IPython scripts for reading and plotting SHEMAT-Suite output sorted by
-tags (see [[*Tags][Tags]], [[*Scripts][Scripts]]).
+tags (see [[#tags][Tags]], [[#scripts][Scripts]]).
 *** =/site-packages/pskf=
 Module containing functions used by the IPython scripts of =pyshemkf=.
 Some functions (for reading and plotting) are meant to be used by
 specific IPython scripts in =/scripts=, others are general functions
-used throughout =pyshemkf= (see [[*Module =pskf=][Module =pskf=]]).
+used throughout =pyshemkf= (see [[#module-=pskf=][Module =pskf=]]).
 
 For the module =pskf= to be loaded by Python, its path has to be added
-to the environment variable =PYTHONPATH= (see [[*Prerequisites][Prerequisites]]).
+to the environment variable =PYTHONPATH= (see [[#prerequisites][Prerequisites]]).
 ** SHEMAT-Suite output directory
 =pyshemkf= needs a specific naming convention of SHEMAT-Suite output
 directories. A single output directory should be named as follows:
@@ -324,7 +324,7 @@ one of the scripting tags. It has the preliminary task of reading RMSE
 distributions from =SHEMAT-Suite= output.
 ** tag-scripts
 For each tag, there is a runplot.ipy general script that calls the
-read and plot functions from =pskf= (see [[*Module =pskf=][Module =pskf=]]). If wanted,
+read and plot functions from =pskf= (see [[#module-=pskf=][Module =pskf=]]). If wanted,
 numpy arrays and figures are saved, figures are shown and a backup of
 the script is generated in the corresponding =backup= directory.
 ** templates
