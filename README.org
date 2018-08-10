@@ -27,45 +27,46 @@ following Python modules:
 - =exceptions= is used for exception handling
 - =vtk= and =h5py= provide functions to read vtk and hdf files.
 
-For the included module =pskf= to be loaded Python, its path has to be
-added to the environment variable =PYTHONPATH=:
+For the included module =pskf= to be loaded by Python, its path has to
+be added to the environment variable =PYTHONPATH=:
 #+BEGIN_SRC sh
   export PYTHONPATH=${PYTHONPATH}:<path_to>/pyshemkf/site-packages
 #+END_SRC
 
 * General information
-Explanation of the =pyshemkf= directory structure followed by an
-account of the naming convention for SHEMAT-Suite output directories
-required for compatibility with =pyshemkf=.
+First, the directory structure of =pyshemkf= is explained. Then, a
+naming convention for directories of SHEMAT-Suite output is
+introduced. This naming convention is required for compatibility with
+=pyshemkf=.
 ** pyshemkf structure
-There are three general directories in =pyshemkf=: One for output, one
-for Python-scripts and one for the Python module pskf.
+There are three directories in the root directory of =pyshemkf=: One
+for output, one for IPython-scripts and one for the Python module
+=pskf=.
 *** =output/=
-Directory for output of all tags (see [[*Tags][Tags]]). =output= has one
-subdirectory for each tag. Each of these tag-subdirectories contains
-subdirectories, whose names are file endings: =npy/=, =png/=, =pdf/=
-and =eps/=. to save the corresponding files. In each of these
-directories, output files of the corresponding file type are
-save. Example:
+Directory for all output. =output/= has one subdirectory for each tag
+(see [[*Tags][Tags]]). Each of these tag-subdirectories contains subdirectories,
+whose names correspond to file endings: =npy/=, =png/=, =pdf/= and
+=eps/=. The scripts of =pyshemkf= write output of a format to the
+directory with the corresponding name. Example:
 #+BEGIN_SRC sh
   $HOME/pyshemkf/output/pdf/example_output.pdf
 #+END_SRC
 
 The directories =dists= ([[output/dists/]]) and =specs= ([[output/specs/]])
-contain only numpy arrays in =npy/=. =dists= contains RMSE
-distributions, =specs= contains specifications of the simulated model
-(for example the discretization).
+contain only numpy arrays in the subdirectory =npy/=. =dists= contains
+RMSE distributions, =specs= contains specifications of the simulated
+model (for example the discretization).
 *** =/scripts=
 IPython scripts for reading and plotting SHEMAT-Suite output sorted by
-tags (see [[*Tags][Tags]]).
+tags (see [[*Tags][Tags]], [[*Scripts][Scripts]]).
 *** =/site-packages/pskf=
 Module containing functions used by the IPython scripts of =pyshemkf=.
 Some functions (for reading and plotting) are meant to be used by
 specific IPython scripts in =/scripts=, others are general functions
-used throughout =pyshemkf=.
+used throughout =pyshemkf= (see [[*Module =pskf=][Module =pskf=]]).
 
-For the module to be loaded by Python, its path has to be added to the
-environment variable =PYTHONPATH= (see [[*Prerequisites][Prerequisites]]).
+For the module =pskf= to be loaded by Python, its path has to be added
+to the environment variable =PYTHONPATH= (see [[*Prerequisites][Prerequisites]]).
 ** SHEMAT-Suite output directory
 =pyshemkf= needs a specific naming convention of SHEMAT-Suite output
 directories. A single output directory should be named as follows:
@@ -84,13 +85,13 @@ alongside output directories.
   - general input file =<MODEL_NAME>= (=WAVEREAL=)
   - true input file =<MODEL_NAME>_TRUE= (=WAVEREAL_TRUE=)
   - EnKF input file =<MODEL_NAME>.enkf= (=WAVEREAL.enkf=)
-  - SGSim input fields =sgsim_k_<modelname>_true.par=
+  - SGSim input files =sgsim_k_<modelname>_true.par=
     (=sgsim_k_wavereal_true=), =sgsim_k_<modelname>.par=
     (=sgsim_k_wavereal=)
 - Output directories
-  - =samples_output=: forward output
-  - =enkf_output=: EnKF output
-  - =single_cell_output=: output at single Cells
+  - =samples_output/=: forward output
+  - =enkf_output/=: EnKF output
+  - =single_cell_output/=: output at single cells
 * Tags
 Tags are used to organize different groups of read and plot
 routines. They determine the output-path, the script-path and the path
@@ -123,17 +124,17 @@ Visualizing single cell output from SHEMAT-Suite.
 * Scripts
 ** endresread.ipy
 The script =endresread.ipy= ([[scripts/endresread.ipy]]) is not part of
-one of the scripting tags for historical reasons and because it has
-the basic preliminary task of reading RMSE distributions from
-=SHEMAT-Suite= output.
+one of the scripting tags. It has the preliminary task of reading RMSE
+distributions from =SHEMAT-Suite= output.
 ** tag-scripts
 For each tag, there is a runplot.ipy general script that calls the
-read and plot functions from =pskf=. If wanted, numpy arrays and
-figures are saved, figures are shown and a backup of the script is
-generated in the corresponding =backup= directory.
+read and plot functions from =pskf= (see [[*Module =pskf=][Module =pskf=]]). If wanted,
+numpy arrays and figures are saved, figures are shown and a backup of
+the script is generated in the corresponding =backup= directory.
 ** templates
 A =/scripts/templates= directory will not be part of the
-git-repository and can be used for new, not-yet-presentable scripts.
+git-repository and can for example be used for new scripts, before
+they are ready to be committed to the repository.
 * Module =pskf=
 ** scripts
 The functions in the =scripts= directory
