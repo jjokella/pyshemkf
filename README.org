@@ -37,8 +37,8 @@ Another important prerequisite of =pyshemkf= is the proper
 SHEMAT-Suite output directory structure (see [[*SHEMAT-Suite output directory][SHEMAT-Suite output
 directory]]).
 * Tutorial
-Getting started with =pyshemkf=. This tutorial walks you through the
-usage of a typical script of =pyshemkf=.
+Getting started with =pyshemkf=. This tutorial explains the usage of a
+typical script of =pyshemkf=.
 ** Checking Python modules
 A good point to start is the script =runplot.py= in the =forward=
 directory:
@@ -53,7 +53,7 @@ three parts of the script.
 2. Setting switches
 3. Setting output specifications
 
-At first, some Python modules are loaded
+At first, Python modules are loaded
 #+BEGIN_SRC python
   import numpy as np
   import matplotlib.pyplot as plt
@@ -78,13 +78,14 @@ The next part of the script contains switches.
   is_backup = 0
 #+END_SRC
 These switches determine, whether following parts of the script are
-run or not.
+executed.
 
-After the switches, some output specifications are set. These
-specifications include the model name, the date and letter of the
-output directory and possibly specifications needed for the output at
-hand. In the case of =forward=, this is the name of the variable to be
-included in the figure.
+After the switches, output specifications are set. These
+specifications always include the model name, the date of the output
+directory and the letter of the output directory. Additionally,
+tag-specific specifications can be set. For the tag =forward=, the
+name of the variable to be included in the figure is saved under
+=varname=.
 #+BEGIN_SRC python
   # Specs
   model_name = 'model'
@@ -94,22 +95,25 @@ included in the figure.
   varname = 'uindex'
 #+END_SRC
 At this point, we have discussed the first part of a typical
-script. Now please run the IPython script
+script. 
+
+Now please run the IPython script
 #+BEGIN_SRC sh
   ipython $HOME/pyshemkf/scripts/forward/runplot.ipy
 #+END_SRC
-This should produce no output, since all switches are set to zero. It
-is rather a test if all Python modules are properly loaded. If you
-receive a =ImportError=, you should do one of the following two
-things:
+Since all switches are set to zero, this execution should have
+produced no output. Executing the script was rather to test whether
+all Python modules are loaded. If you receive an =ImportError=, you
+should do one of the following two things:
 1. =ImportError= for =numpy= or =matplotlib=: Check your general
    Python setup.
-2. =ImportError= for =pskf=: Most probably, =PYTHONPATH= is not set,
-   see [[*Prerequisites][Prerequisites]]
-If there is simply no output, you can move forward to the next step.
+2. =ImportError= for =pskf=: Most probably, =PYTHONPATH= is not set to
+   include =pyshemkf= (see [[*Prerequisites][Prerequisites]])
+If no error message is shown, you can move forward to [[*Reading SHEMAT-Suite output][Reading
+SHEMAT-Suite output]].
 ** Reading SHEMAT-Suite output
-If all Python modules are loaded correctly, we can start by setting
-the =is_read= switch to =1=.
+If all Python modules are loaded correctly, the =is_read= switch can
+be set to =1=.
 #+BEGIN_SRC python
   # Switches
   is_read = 1
@@ -118,22 +122,23 @@ the =is_read= switch to =1=.
   is_show = 0
   is_backup = 0
 #+END_SRC
-If you re-run the script now, this will yield the following error:
+If you re-run the script now, the execution will yield the following
+error:
 #+BEGIN_SRC sh
   IOError: [Errno 2] No such file or directory:
   '$HOME/shematOutputDir/model_output/2010_01_30/2010_01_30_a/samples_output/MODEL_EO_time_out_0.vtk'
 #+END_SRC
 The directory in the error message is generated from the
-specifications. Thus, the error tells us which output file the script
-is looking for and how the SHEMAT-Suite output directories should be
-structured.
+specifications under =# Specs=. The error message tells us which
+output file the script is looking for and how the SHEMAT-Suite output
+directories should be structured.
 
 To find the right file we need to:
 1. Set up the correct SHEMAT-Suite output directories (see [[*SHEMAT-Suite output
     directory][SHEMAT-Suite output directory]])
 2. Put the right specifications under =# Specs=.
-If this still does not work, the function =fr.read= offers the
-possibility to specify directory and name of a given vtk-output by
+If the output files are still not found, the function =fr.read= offers
+the possibility to specify directory and name of a given vtk-output by
 hand using the function parameters =fname= and =fdir=.
 #+BEGIN_SRC python
   # Read
@@ -150,15 +155,15 @@ hand using the function parameters =fname= and =fdir=.
       np.save(numpy_array_name, numpy_array)
       print('Saved as ' + numpy_array_name)
 #+END_SRC
-After successfully saving the python array, its name is printed
-according to the specifications.
+After successfully saving the python array, its name is printed.
 #+BEGIN_SRC sh
   Saved as $HOME/pyshemkf/output/forward/npy/<varname>_<model_name>_<dat>_<let>_1.npy
 #+END_SRC
-If this is ready, you can move on to plotting.
+If this message is displayed after executing =runplot.py=, you can
+move on to [[*Plotting][Plotting]].
 ** Plotting
 If the numpy array is saved, the switches of =runplot.py= can be
-changed to plotting:
+changed as follows:
 #+BEGIN_SRC python
   # Switches
   is_read = 0
@@ -167,9 +172,11 @@ changed to plotting:
   is_show = 1
   is_backup = 0
 #+END_SRC
-This should work with the same specifications that the output was read
-with. While calling the plotting routine, the appearance of the plot
-can be influenced through input parameters.
+The output specifications can (and should) be left the same as for
+reading the output files. 
+
+While calling the plotting routine, the appearance of the plot can be
+influenced through input parameters.
 #+BEGIN_SRC python
   # Plot
   if is_plot:
