@@ -25,7 +25,7 @@ following Python modules:
   the operating system
 - =string= provides string manipulation utilities
 - =exceptions= is used for exception handling
-- =vtk= and =h5py= provide functions to read vkt and hdf files.
+- =vtk= and =h5py= provide functions to read vtk and hdf files.
 
 For the included module =pskf= to be loaded Python, its path has to be
 added to the environment variable =PYTHONPATH=:
@@ -84,7 +84,7 @@ alongside output directories.
   - general input file =<MODEL_NAME>= (=WAVEREAL=)
   - true input file =<MODEL_NAME>_TRUE= (=WAVEREAL_TRUE=)
   - EnKF input file =<MODEL_NAME>.enkf= (=WAVEREAL.enkf=)
-  - SGSim input fiels =sgsim_k_<modelname>_true.par=
+  - SGSim input fields =sgsim_k_<modelname>_true.par=
     (=sgsim_k_wavereal_true=), =sgsim_k_<modelname>.par=
     (=sgsim_k_wavereal=)
 - Output directories
