@@ -3,7 +3,7 @@
 
 =pyshemkf= (=py= thon environment for handling =shem= at-suite output
 of en =kf= simulations) is a python environment for post-processing
-SHEMAT-Suite ([[*Rath 2006][Rath 2006]]) output.
+SHEMAT-Suite ([[#rath-2006][Rath 2006]]) output.
 
 =pyshemkf= can generate graphs and 2D-figures of variables and
 parameters provided by typical output of SHEMAT-Suite.
