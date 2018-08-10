@@ -1,0 +1,135 @@
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+
+from pskf.tools.plot import specs as sc
+import pskf.scripts.forward.arrays as fa
+import pskf.scripts.forward.plot as fp
+import pskf.scripts.forward.read as fr
+import pskf.tools.run.pythonmodule as pm
+import pskf.tools.plot.plotfunctions as pf
+
+# Switches
+is_read = 1
+is_plot = 1
+is_save = 0
+is_show = 1
+is_backup = 0
+is_text = 1
+
+# Specs
+model_name = 'wavereal'
+dat = '2018_03_08'
+
+let = 'a'
+varname = 'kz'
+nt = 1
+
+# Read
+if is_read:
+    numpy_array, numpy_array_name = fr.read(
+        model_name,
+        dat,
+        let,
+        varname=varname,
+        fname=model_name.upper()+'_TRUE_E0_time_out_'+str(nt)+'.vtk',
+        nt=nt,
+    )
+
+    np.save(numpy_array_name, numpy_array)
+    print('Saved as ' + numpy_array_name)
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure(1, figsize=[15, 10])
+
+    # Run plot function
+    ax, pic_name = fp.plot(
+        fig.add_subplot(1, 1, 1),
+        model_name,
+        dat,
+        let,
+        varname=varname,
+        nt=nt,
+        num_cbar=15,
+        auto_cbar=False,
+        low_cbar=-13.0,
+        high_cbar=-11.0,
+        is_ownticks=True,
+        is_ownticklabels=True,
+        xownticks=[10, 20, 30, 40, 50, 60],
+        xticklabels=[10, 20, 30, 40, 50, 60],
+        yownticks=[10, 20, 30, 40, 50, 60],
+        yticklabels=[10, 20, 30, 40, 50, 60],
+        xlabelfontsize=30,
+        ylabelfontsize=30,
+        xticklabelfontsize=20,
+        yticklabelfontsize=20,
+    )
+
+    # Monitoring points
+    ax = pf.scatter(
+        ax,
+        model_name,
+        dat,
+        let,
+        loc_inds=range(2),
+        markersize=400,
+    )
+
+    # Colorbar
+    cb_ax = pf.cb(
+        fig.add_subplot(1, 2, 1),
+        ax,
+        cb_ax_position=[0.73, 0.1, 0.015, 0.8],
+        varname=varname,
+        label_position='y',
+        labelsize=30,
+        labelpad=20.0,
+    )
+
+    # Quiver
+    pf.my_vtk_make_quiver(
+        pf.my_vtk(
+            os.environ['HOME']+'/shematOutputDir/'
+            + 'wavereal_output/2018_03_08/2018_03_08_a/samples_output',
+            'WAVEREAL_TRUE_E0_1.vtk',
+            'v'),
+        ax
+        )
+
+    # Text: n_syn and ensemble_size
+    if is_text:
+        model_spec = '  Tracer  ' if model_name == 'wavereal' else '   Well   '
+        ax.text(
+            2.0, 58.0,
+            model_spec,
+            linespacing=1.5,
+            fontsize=30,
+            bbox={'facecolor': (0.75, 0.75, 0.75), 'alpha': 1.0, 'pad': 10},
+        )
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(
+        pm.python_scripts_dir,
+        fa.tag,
+        "runplot_figure_1_a",
+        "ipy",
+        sc.specl(model_name,
+                 dat,
+                 let)
+    )

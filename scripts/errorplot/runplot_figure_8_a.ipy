@@ -1,0 +1,85 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+from pskf.tools.plot import specs as sc
+import pskf.scripts.errorplot.arrays as ea
+import pskf.scripts.errorplot.plot as ep
+import pskf.scripts.errorplot.read as er
+import pskf.tools.run.pythonmodule as pm
+
+# Switches
+is_read = 1
+is_plot = 1
+is_save = 0
+is_show = 1
+is_backup = 0
+
+model_name = 'wavereal'
+which_methods = [157, 151, 5, 152]
+ensemble_sizes = [50, 70, 100, 250]
+ensemble_size = 2000
+
+# Read
+if is_read:
+    stat_array, stat_array_name = er.read(
+        model=model_name,
+        which_methods=which_methods,
+        ensemble_sizes=ensemble_sizes,
+        )
+
+    np.save(stat_array_name, stat_array)
+    print('Saved as ' + stat_array_name)
+
+
+which_methods_sorted = which_methods
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure('Errorplot', figsize=[10, 8])
+
+    # Run plot function
+    ax, pic_name = ep.plot(
+        fig.add_subplot(1, 1, 1),
+        model=model_name,
+        which_methods=which_methods_sorted,
+        ensemble_sizes=ensemble_sizes,
+        axistitle='',
+        figpos=[0.20, 0.3, 0.75, 0.6],
+        ylims=[0.31, 0.40],
+        yticks=np.arange(0.3, 0.5, 0.02),
+        fontleg=20,
+        is_text=True,
+        text_x=1.0,
+        text_y=0.375,
+        legend_input=[r'Local EnKF $\lambda = 25$',
+                      r'Local EnKF $\lambda = 75$',
+                      r'Local EnKF $\lambda = 150$, default',
+                      r'Local EnKF $\lambda = 300$'],
+        xlim_min=0.8,
+        xdiff_nens=0.3,
+    )
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(
+        pm.python_scripts_dir,
+        ea.tag,
+        "runplot_figure_8_a",
+        "ipy",
+        sc.specl(model_name,
+                 '_'.join([str(i) for i in which_methods_sorted])[:],
+                 '2018_08_10')
+    )

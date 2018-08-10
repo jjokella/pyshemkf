@@ -1,0 +1,121 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+from pskf.tools.plot import specs as sc
+from pskf.tools.plot import plotarrays as pa
+import pskf.scripts.gaussianity.arrays as ga
+import pskf.scripts.gaussianity.plot as gp
+import pskf.scripts.gaussianity.read as gr
+import pskf.tools.run.pythonmodule as pm
+
+# Switches
+is_read = 0
+is_backup = 0
+is_hist = 1
+is_save = 0
+is_show = 1
+
+model_name = 'wavewell'
+which_methods = [
+    5, 5, 5, 5, 5, 5,
+    4, 4, 4, 4, 4, 4,
+    2, 2, 2, 2, 2, 2,
+    1, 1, 1, 1, 1, 1,
+    6, 6, 6, 6, 6, 6,
+    0, 0, 0, 0, 0, 0,
+    3, 3, 3, 3, 3, 3,
+]
+n_syns = [
+    1, 10, 100, 1, 10, 100,
+    1, 10, 100, 1, 10, 100,
+    1, 10, 100, 1, 10, 100,
+    1, 10, 100, 1, 10, 100,
+    1, 10, 100, 1, 10, 100,
+    1, 10, 100, 1, 10, 100,
+    1, 10, 100, 1, 10, 100,
+]
+ensemble_sizes = [
+    50, 50, 50, 250, 250, 250,
+    50, 50, 50, 250, 250, 250,
+    50, 50, 50, 250, 250, 250,
+    50, 50, 50, 250, 250, 250,
+    50, 50, 50, 250, 250, 250,
+    50, 50, 50, 250, 250, 250,
+    50, 50, 50, 250, 250, 250,
+]
+n_comparisons = 1000
+
+nplots = len(which_methods)
+
+# Read
+if is_read:
+    for i in range(nplots):
+        gauss_array, gauss_array_name = gr.read(
+            model_name=model_name,
+            which_method=which_methods[i],
+            ensemble_size=ensemble_sizes[i],
+            n_syn=n_syns[i],
+            n_comparisons=n_comparisons,
+        )
+
+        np.save(gauss_array_name, gauss_array)
+        print('Saved as ' + gauss_array_name)
+
+
+# Histogram
+if is_hist:
+
+    # Figure
+    fig = plt.figure('Gaussianity', figsize=[30, 15])
+    fig.suptitle("Well", fontsize=30,
+                 bbox={'facecolor': (0.8, 0.8, 0.8), 'alpha': 1.0, 'pad': 10})
+
+    # Run plot function
+    for i in range(nplots):
+        ax, pic_name = gp.hist(
+            fig.add_subplot(7,
+                            6,
+                            i+1),
+            model_name=model_name,
+            which_method=which_methods[i],
+            ensemble_size=ensemble_sizes[i],
+            n_syn=n_syns[i],
+            n_comparisons=n_comparisons,
+            title=(r"$n_{e}$: "+str(ensemble_sizes[i])
+                   + r", $n_{syn}$: "+str(n_syns[i]) if i in [0, 3] else
+                   (r"$n_{syn}$: "+str(n_syns[i]) if i in [1, 2, 4, 5] else
+                    "")),
+            xlabel=(None if i not in [nplots-2, nplots-5] else
+                    r'RMSE  $\log(K[m^2])$'),
+            ylabel=(pa.names_methods[which_methods[i]] if not np.mod(i, 6) else
+                    None),
+            is_xticks=(False if i < nplots - 6 else True),
+            is_yticks=(True if not np.mod(i, 6) else False),
+            itickhide=2,
+            xlims=[0.5, 1.3],
+            fontaxl=20,
+            fonttit=30,
+            fonttic=15,
+        )
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(
+        pm.python_scripts_dir,
+        ga.tag,
+        "runplot_figure_7_b",
+        "ipy",
+        sc.specl(model_name,
+                 str(which_methods[0]),
+                 '2010_01_31')
+    )
