@@ -17,6 +17,32 @@ For Python scripts of the WRR manuscript of the author, see [[#manuscript-script
 scripts]].
 
 -----
+* Table of Contents
+- [[#prerequisites][Prerequisites]]
+- [[#tutorial][Tutorial]]
+  - [[#checking-python-modules][Checking Python modules]]
+  - [[#reading-shemat-suite-output][Reading SHEMAT-Suite output]]
+  - [[#plotting][Plotting]]
+- [[#general-information][General information]]
+  - [[#pyshemkf-structure][pyshemkf structure]]
+  - [[#shemat-suite-output-directory][SHEMAT-Suite output directory]]
+- [[#tags][Tags]]
+  - [[#analysis][analysis]]
+  - [[#errorplot][errorplot]]
+  - [[#forward][forward]]
+  - [[#gaussianity][gaussianity]]
+  - [[#monitor][monitor]]
+  - [[#numcomp][numcomp]]
+  - [[#singlecell][singlecell]]
+- [[#scripts][Scripts]]
+  - [[#endresreadipy][endresread.ipy]]
+  - [[#tag-scripts][tag-scripts]]
+  - [[#templates][templates]]
+  - [[#manuscript-scripts][Manuscript scripts]]
+- [[#module-pskf][Module =pskf=]]
+  - [[#scripts-2][scripts]]
+  - [[#tools][tools]]
+- [[#references][References]]
 * Prerequisites
 The scripts are written for =python2.7.12=. They make use of the
 following Python modules:
