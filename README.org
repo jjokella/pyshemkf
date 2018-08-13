@@ -14,7 +14,10 @@ Kalman Filter (EnKF, [[#evensen-2003][Evensen 2003]]) synthetic experiments comp
 SHEMAT-Suite.
 
 For Python scripts of the WRR manuscript of the author, see [[#manuscript-scripts][Manuscript
-scripts]].
+scripts]]. The corresponding Python scripts have been saved under:
+
+[[https://zenodo.org/badge/latestdoi/144304364][https://zenodo.org/badge/144304364.svg]]
+
 
 -----
 * Table of Contents
