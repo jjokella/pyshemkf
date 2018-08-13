@@ -169,8 +169,8 @@ To find the right file we need to:
 1. Set up the correct [[#shemat-suite-output-directory][SHEMAT-Suite output directory]]
 2. Put the right specifications under =# Specs=.
 If the output files are still not found, the function =fr.read= offers
-the possibility to specify directory and name of a given vtk-output by
-hand using the function parameters =fname= and =fdir=.
+the possibility to explicitly specify directory and name of a given
+vtk-output using the function parameters =fname= and =fdir=.
 #+BEGIN_SRC python
   # Read
   if is_read:
@@ -361,8 +361,8 @@ A =/scripts/templates= directory will not be part of the
 git-repository and can for example be used for new scripts, before
 they are ready to be committed to the repository.
 ** Manuscript scripts
-The following scripts are included, which generate the figures from
-the authors WRR manuscript:
+The following scripts generate the figures of the WRR manuscript
+associated with this repository:
 - [[/scripts/forward/runplot_figure_1_a.ipy]]
 - [[/scripts/forward/runplot_figure_1_b.ipy]]
 - [[/scripts/errorplot/runplot_figure_2_a.ipy]]
