@@ -17,8 +17,11 @@ For Python scripts of the WRR manuscript of the author, see [[#manuscript-script
 scripts]]. The version of the Python scripts, which corresponds to the
 time of the work on the manuscript, has been saved under:
 
-[[https://zenodo.org/badge/latestdoi/144304364][https://zenodo.org/badge/144304364.svg]]
+[[https://doi.org/10.5281/zenodo.134337][https://zenodo.org/badge/DOI/10.5281/zenodo.1344337.svg]]
 
+The data used by the Python scripts is saved under:
+
+[[https://doi.org/10.5281/zenodo.1343571][https://zenodo.org/badge/DOI/10.5281/zenodo.1343571.svg]]
 
 -----
 * Table of Contents
