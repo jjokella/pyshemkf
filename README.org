@@ -21,7 +21,7 @@ time of the work on the manuscript, has been saved under:
 
 The data used by the Python scripts is saved under:
 
-[[https://zenodo.org/record/1343571][https://zenodo.org/badge/DOI/10.5281/zenodo.1343571.svg]]
+[[https://doi.org/10.5281/zenodo.1343571][https://zenodo.org/badge/DOI/10.5281/zenodo.1343571.svg]]
 
 -----
 * Table of Contents
