@@ -13,9 +13,10 @@ evaluation and visualization of RMSE distributions from Ensemble
 Kalman Filter (EnKF, [[#evensen-2003][Evensen 2003]]) synthetic experiments computed with
 SHEMAT-Suite.
 
-For Python scripts of the WRR manuscript of the author, see [[#manuscript-scripts][Manuscript
-scripts]]. The version of the Python scripts, which corresponds to the
-time of the work on the manuscript, has been saved under:
+For Python scripts used in the WRR paper [[#keller-2018][Keller 2018]] written by the
+author, see [[#manuscript-scripts][Manuscript scripts]]. The version of the Python scripts,
+which corresponds to the time of the work on the manuscript, has been
+saved under:
 
 [[https://doi.org/10.5281/zenodo.1344337][https://zenodo.org/badge/DOI/10.5281/zenodo.1344337.svg]]
 
@@ -445,3 +446,8 @@ examples, Geophysical Journal International, 167(1), 453–466 (2006).
 Evensen, G., The ensemble kalman filter: theoretical formulation and
 practical implementation, Ocean Dynamics, 53(4), 343–367 (2003).
 [[http://dx.doi.org/10.1007/s10236-003-0036-9]]
+** Keller 2018
+Keller, J., Hendricks Franssen, H.-J., & Marquart,
+G. (2018). Comparing seven variants of the ensemble Kalman filter: How
+many synthetic experiments are needed? Water Resources
+Research, 54. https://doi.org/10.1029/2018WR023374
