@@ -85,6 +85,7 @@ if is_plot:
         ax,
         cb_ax_position=[0.73, 0.1, 0.015, 0.8],
         varname=varname,
+        # varlabels={'kz':r'$\log(K/\mathrm{m}^2)$'},
         label_position='y',
         labelsize=30,
         labelpad=20.0,

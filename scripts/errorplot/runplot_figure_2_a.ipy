@@ -70,6 +70,7 @@ if is_plot:
         is_text=True,
         text_x=1.0,
         text_y=0.37,
+        # ylabel=r'RMSE  $\log(K/m^2)$'
     )
 
     # Save
