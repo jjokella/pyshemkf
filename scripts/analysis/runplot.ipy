@@ -25,18 +25,19 @@ let = 'a'
 # Letters of wanted range
 lets = [let]  # aa.lets[sc.specl(model_name, dat, let)]
 
+varname = 'kz_mean'
+
 nt = 10
 
 # Read
 if is_read:
-    for varname in ['kz_mean']:
-        numpy_array, numpy_array_name = ar.read(model_name, dat, lets[0],
-                                                varname=varname,
-                                                nt=nt,
-                                                befaft='aft'
-                                                )
-        np.save(numpy_array_name, numpy_array)
-        print('Saved as ' + numpy_array_name)
+    numpy_array, numpy_array_name = ar.read(model_name, dat, lets[0],
+                                            varname=varname,
+                                            nt=nt,
+                                            befaft='aft'
+                                            )
+    np.save(numpy_array_name, numpy_array)
+    print('Saved as ' + numpy_array_name)
 
 # Plot
 if is_plot:
@@ -53,7 +54,7 @@ if is_plot:
                            diff_ticks=2,
                            num_cbar=15,
                            pic_format='png',
-                           varname='kz_mean'
+                           varname=varname,
                            )
 
     # Colorbar
