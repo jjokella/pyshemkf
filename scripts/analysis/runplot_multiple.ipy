@@ -1,13 +1,14 @@
-import shutil
+# import shutil
+import numpy as np
 import matplotlib.pyplot as plt
 
 from pskf.tools.plot import specs as sc
 import pskf.scripts.analysis.arrays as aa
-import pskf.scripts.analysis.variables as av
+# import pskf.scripts.analysis.variables as av
 import pskf.scripts.analysis.plot as ap
 import pskf.scripts.analysis.read as ar
 import pskf.tools.run.pythonmodule as pm
-import pskf.tools.plot.plotfunctions as pf
+# import pskf.tools.plot.plotfunctions as pf
 
 # Switches
 is_read = 1
@@ -22,44 +23,45 @@ dat = '2010_01_30'
 let = 'a'
 
 # Letters of wanted range
-lets = [let] #aa.lets[sc.specl(model_name,dat,let)]
+lets = [let]  # aa.lets[sc.specl(model_name,dat,let)]
 
-nts = [15,20,25,30,35,40,45,50,55]
+varname = 'kz_mean'
+
+nts = [15, 20, 25, 30, 35, 40, 45, 50, 55]
 
 # Read
 if is_read:
     for nt in nts:
-        for varname in ['kz_mean']:
-            numpy_array, numpy_array_name = ar.read(model_name,dat,lets[0],
-                                                    varname = varname,
-                                                    nt = nt,
-                                                    befaft = 'aft'
-                                                        )
-            np.save(numpy_array_name,numpy_array)
-            print('Saved as ' + numpy_array_name)
+        numpy_array, numpy_array_name = ar.read(model_name, dat, lets[0],
+                                                varname=varname,
+                                                nt=nt,
+                                                befaft='aft'
+                                                )
+        np.save(numpy_array_name, numpy_array)
+        print('Saved as ' + numpy_array_name)
 
 # Plot
 if is_plot:
 
     # Figure
-    fig = plt.figure(1,figsize=[15,15])
+    fig = plt.figure(1, figsize=[15, 15])
 
-    for it,nt in enumerate(nts):
+    for it, nt in enumerate(nts):
         # Run plot function
-        ax, pic_name = ap.plot(fig.add_subplot(3,3,it+1),
+        ax, pic_name = ap.plot(fig.add_subplot(3, 3, it+1),
                                model_name,
                                dat,
                                lets[0],
-                               nt = nt,
-                               diff_ticks = 2,
-                               num_cbar = 15,
-                               is_position = False,
-                               pic_format = 'png',
-                               varname = 'kz_mean'
-                           )
+                               nt=nt,
+                               diff_ticks=2,
+                               num_cbar=15,
+                               is_position=False,
+                               pic_format='png',
+                               varname=varname
+                               )
 
     # # Colorbar
-    # cb_ax = pf.cb(fig.add_subplot(1,2,1),
+    # cb_ax = pf.cb(fig.add_subplot(1, 2, 1),
     #               ax)
 
     # Save
