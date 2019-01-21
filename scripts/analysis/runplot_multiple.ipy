@@ -77,7 +77,7 @@ if is_plot:
 if is_backup:
     pm.py_backup(
         pm.python_scripts_dir,
-        av.tag,
+        aa.tag,
         "runplot",
         "ipy",
         sc.specl(model_name,
