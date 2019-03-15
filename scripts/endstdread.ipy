@@ -30,7 +30,7 @@ for j in range(num_ensemble_sizes):
     std = [pf.my_vtk_to_numpy(pf.my_vtk(
         rm.make_output_dirs(model_name, dat, rm.get_let_num(i))[2],
         stddev_file_name,
-        'stds_kz_aft'))[nt][0]
+        'std_kz_aft'))[nt][0]
            for i in range(rm.get_num_let(let), rm.get_num_let(let)+num)]
 
     # Save stddev array
