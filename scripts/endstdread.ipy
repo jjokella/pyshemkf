@@ -40,3 +40,7 @@ for j in range(num_ensemble_sizes):
                                   'npy'),
             std)
     std = None
+
+print 'endstdread.ipy for ', model_name,
+print '\n', dats, '\n', lets, '\n', nums, '\n',
+print num_obss, '\n', 'Done'
