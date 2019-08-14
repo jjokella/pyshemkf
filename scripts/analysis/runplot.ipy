@@ -31,11 +31,8 @@ nt = 10
 
 # Read
 if is_read:
-    numpy_array, numpy_array_name = ar.read(model_name, dat, lets[0],
-                                            varname=varname,
-                                            nt=nt,
-                                            befaft='aft'
-                                            )
+    numpy_array, numpy_array_name = ar.read(
+        model_name, dat, lets[0], varname=varname, nt=nt, befaft='aft')
     np.save(numpy_array_name, numpy_array)
     print('Saved as ' + numpy_array_name)
 
@@ -46,20 +43,20 @@ if is_plot:
     fig = plt.figure(1, figsize=[15, 10])
 
     # Run plot function
-    ax, pic_name = ap.plot(fig.add_subplot(1, 1, 1),
-                           model_name,
-                           dat,
-                           lets[0],
-                           nt=nt,
-                           diff_ticks=2,
-                           num_cbar=15,
-                           pic_format='png',
-                           varname=varname,
-                           )
+    ax, pic_name = ap.plot(
+        fig.add_subplot(1, 1, 1),
+        model_name,
+        dat,
+        lets[0],
+        nt=nt,
+        diff_ticks=2,
+        num_cbar=15,
+        pic_format='png',
+        varname=varname,
+    )
 
     # Colorbar
-    cb_ax = pf.cb(fig.add_subplot(1, 2, 1),
-                  ax)
+    cb_ax = pf.cb(fig.add_subplot(1, 2, 1), ax)
 
     # Monitoring points
     ax = pf.scatter(
@@ -82,12 +79,5 @@ if is_plot:
 
 # Backup
 if is_backup:
-    pm.py_backup(
-        pm.python_scripts_dir,
-        aa.tag,
-        "runplot",
-        "ipy",
-        sc.specl(model_name,
-                 dat,
-                 lets[0])
-    )
+    pm.py_backup(pm.python_scripts_dir, aa.tag, "runplot", "ipy",
+                 sc.specl(model_name, dat, lets[0]))
