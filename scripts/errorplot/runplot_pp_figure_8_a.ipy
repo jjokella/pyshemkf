@@ -1,0 +1,145 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+from pskf.tools.plot import specs as sc
+import pskf.scripts.errorplot.arrays as ea
+import pskf.scripts.errorplot.plot as ep
+import pskf.scripts.errorplot.read as er
+import pskf.scripts.errorplot.sort as es
+import pskf.tools.run.pythonmodule as pm
+
+# Switches
+is_read = 1
+is_sort = 0
+is_plot = 1
+is_quot = 0
+is_save = 0
+is_show = 1
+is_backup = 0
+
+model_name = 'wavereal'
+
+# Correct corr
+which_methods = [1921, 1922, 8, 1923, 1924]
+
+ensemble_sizes = [50, 70, 100, 250]
+
+ensemble_size = 2000
+
+# Read
+if is_read:
+    stat_array, stat_array_name = er.read(
+        model=model_name,
+        which_methods=which_methods,
+        ensemble_sizes=ensemble_sizes,
+    )
+
+    np.save(stat_array_name, stat_array)
+    print('Saved as ' + stat_array_name)
+
+# Sort
+if is_sort:
+    stat_array, stat_array_name, which_methods_sorted = es.sort(
+        model_name=model_name,
+        which_methods=which_methods,
+        ensemble_sizes=ensemble_sizes,
+        template_model_name=model_name,
+        template_enssize=50,
+        template_ensemble_sizes=[50, 70, 100, 250],
+    )
+
+    np.save(stat_array_name, stat_array)
+    print('Saved as ' + stat_array_name)
+
+else:
+    which_methods_sorted = which_methods
+
+coleros = [(0.90, 0.90, 0.90), (0.90, 0.90, 0.90), (0.9, 0.9, 0.9),
+           (0.90, 0.90, 0.90), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0), (1.0, 1.0,
+                                                                  1.0),
+           (1.0, 1.0, 1.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0),
+           (0.0, 0.0, 0.0), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0),
+           (1.0, 1.0, 1.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0),
+           (0.0, 0.0, 0.0), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0),
+           (1.0, 1.0, 1.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0),
+           (0.0, 0.0, 0.0), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0), (1.0, 1.0, 1.0),
+           (1.0, 1.0, 1.0)]
+
+pp_find_array = [
+    x or y for (x, y) in zip(
+        np.array(which_methods_sorted) == 7,
+        np.array(which_methods_sorted) > 1700)
+]
+pp_index = np.where(pp_find_array)[0][0]
+coleros[pp_index] = (0.0, 0.0, 0.0)
+
+# Plot
+if is_plot:
+
+    # Figure
+    fig = plt.figure('Errorplot', figsize=[18, 10])
+
+    # Run plot function
+    ax, pic_name = ep.plot(
+        fig.add_subplot(1, 1, 1),
+        model=model_name,
+        which_methods=which_methods_sorted,
+        ensemble_sizes=ensemble_sizes,
+        axistitle=model_name.upper(),
+        ylims=[0.29, 0.42],
+        xlim_max=11,
+        yticks=np.arange(0.3, 0.5, 0.02),
+        fontleg=20,
+        legend_input=None,
+        is_text=True,
+        text_x=1.0,
+        text_y=0.39,
+        coleros=coleros,
+        markersize=[(10 if not i == 3 else 10) for i in range(32)])
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Quot
+if is_quot:
+
+    # Figure
+    fig = plt.figure('Quotients', figsize=[10, 10])
+
+    # Run plot function
+    ax, pic_name = ep.quots(
+        fig.add_subplot(1, 1, 1),
+        model=model_name,
+        which_methods=which_methods_sorted,
+        ensemble_sizes=ensemble_sizes,
+        ensemble_size=ensemble_size,
+        figpos=[0.14, 0.14, 0.8, 0.8],
+        # axistitle=model_name.upper()+r', $N_{e}$: '+str(ensemble_size),
+        is_text=True,
+    )
+
+    # Save
+    if is_save:
+        plt.savefig(pic_name)
+        print('Saved as ' + pic_name)
+
+    # Show
+    if is_show:
+        plt.show()
+    else:
+        plt.clf()
+
+# Backup
+if is_backup:
+    pm.py_backup(
+        pm.python_scripts_dir, ea.tag, "runplot_pp_figure_8_a", "ipy",
+        sc.specl(model_name, '_'.join(
+            [str(i) for i in which_methods_sorted])[:], '2018_02_06'))
