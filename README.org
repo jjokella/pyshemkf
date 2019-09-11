@@ -61,7 +61,6 @@ following Python modules:
 - =shutil=, =os=, =subprocess=, =shlex= are used to run commands on
   the operating system
 - =string= provides string manipulation utilities
-- =exceptions= is used for exception handling
 - =vtk= and =h5py= provide functions to read vtk and hdf files.
 
 For the included module =pskf= to be loaded by Python, its path has to
