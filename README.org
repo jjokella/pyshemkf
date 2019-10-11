@@ -52,7 +52,7 @@ The data used by the Python scripts is saved under:
   - [[#tools][tools]]
 - [[#references][References]]
 * Prerequisites
-The scripts are written for =python2.7.12=. They make use of the
+The scripts are written for =python3.7.3=. They make use of the
 following Python modules:
 - =matplotlib=, =matplotlib.pyplot=, =matplotlib.cm=,
   =matplotlib.colors=, =matplotlib.mlab= are used for plotting
@@ -63,8 +63,8 @@ following Python modules:
 - =string= provides string manipulation utilities
 - =vtk= and =h5py= provide functions to read vtk and hdf files.
 
-For the included module =pskf= to be loaded by Python, its path has to
-be added to the environment variable =PYTHONPATH=:
+The location of the included module =pskf= has to be added to the
+environment variable =PYTHONPATH=:
 #+BEGIN_SRC sh
   export PYTHONPATH=${PYTHONPATH}:<path_to>/pyshemkf/site-packages
 #+END_SRC
