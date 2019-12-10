@@ -7,4 +7,5 @@ output/**/png/*.png
 **/templates/**/*.txt
 **/templates/**/*.ipy
 **/templates/**/*.npy
+**/templates/**/*.pdf
 **/templates/**/*.py
