@@ -6,4 +6,5 @@ output/**/png/*.png
 **/backup/**/*.ipy
 **/templates/**/*.txt
 **/templates/**/*.ipy
+**/templates/**/*.npy
 **/templates/**/*.py
