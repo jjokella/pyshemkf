@@ -12,7 +12,7 @@ import pskf.tools.plot.plotfunctions as pf
 # Switches
 is_read = 1
 is_plot = 1
-is_save = 0
+is_save = 1
 is_show = 1
 is_backup = 0
 is_text = 1
@@ -32,10 +32,10 @@ if is_read:
         dat,
         let,
         varname=varname,
-        fname=model_name.upper()+'_TRUE_E0_time_out_'+str(nt)+'.vtk',
+        fname=model_name.upper()+'_TRUE_E0_1.vtk',
         nt=nt,
     )
-
+    numpy_array = numpy_array[::,::].T
     np.save(numpy_array_name, numpy_array)
     print('Saved as ' + numpy_array_name)
 
@@ -53,6 +53,7 @@ if is_plot:
         let,
         varname=varname,
         nt=nt,
+        position=[0.12, 0.12, 0.58, 0.78],
         num_cbar=15,
         auto_cbar=False,
         low_cbar=-13.0,
@@ -83,9 +84,9 @@ if is_plot:
     cb_ax = pf.cb(
         fig.add_subplot(1, 2, 1),
         ax,
-        cb_ax_position=[0.73, 0.1, 0.015, 0.8],
+        cb_ax_position=[0.72, 0.1, 0.015, 0.8],
         varname=varname,
-        # varlabels={'kz':r'$\log(K/\mathrm{m}^2)$'},
+        varlabels={'kz':r'$\log_{10}(K/\mathrm{m}^2)$'},
         label_position='y',
         labelsize=30,
         labelpad=20.0,
@@ -105,7 +106,7 @@ if is_plot:
     if is_text:
         model_spec = '  Tracer  ' if model_name == 'wavereal' else '   Well   '
         ax.text(
-            2.0, 58.0,
+            2.0, 57.0,
             model_spec,
             linespacing=1.5,
             fontsize=30,
