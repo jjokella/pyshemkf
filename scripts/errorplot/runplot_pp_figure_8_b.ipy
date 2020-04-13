@@ -20,7 +20,7 @@ is_backup = 0
 model_name = 'wavewell'
 
 # Correct corr
-which_methods = [8, 1925, 1926]
+which_methods = [19, 1925, 1926]
 
 ensemble_sizes = [50, 70, 100, 250]
 
@@ -67,8 +67,8 @@ coleros = [(0.90, 0.90, 0.90), (0.90, 0.90, 0.90), (0.9, 0.9, 0.9),
 
 pp_find_array = [
     x or y for (x, y) in zip(
-        np.array(which_methods_sorted) == 7,
-        np.array(which_methods_sorted) > 1700)
+        np.array(which_methods_sorted) == 19,
+        np.array(which_methods_sorted) > 2000)
 ]
 pp_index = np.where(pp_find_array)[0][0]
 coleros[pp_index] = (0.0, 0.0, 0.0)
@@ -87,8 +87,8 @@ if is_plot:
         ensemble_sizes=ensemble_sizes,
         axistitle=model_name.upper(),
         lineyval=0.76,
-        ylims=[0.53, 1.0],
-        xlim_max=11,
+        ylims=[0.53, 0.999],
+        xlim_max=6,
         yticks=np.arange(0.55, 1.05, 0.05),
         fontleg=20,
         legend_input=None,
