@@ -59,6 +59,8 @@ if is_plot:
                       r'Local EnKF $\lambda = 300$'],
         xlim_min=0.8,
         xdiff_nens=0.3,
+        ylabel=r'RMSE  $\log_{10}(K/\mathrm{m}^2)$'
+
     )
 
     # Save
