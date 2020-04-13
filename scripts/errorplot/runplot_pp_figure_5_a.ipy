@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -119,11 +120,11 @@ if is_plot:
         text_y=0.42,
         coleros=coleros,
         markersize=[(10 if not i == 3 else 10) for i in range(32)],
-        ylabel=r'STD  $\log(K[\mathrm{m}^2])$',
+        ylabel=r'RMSE  $\log_{10}(K/\mathrm{m}^2)$'
     )
 
     plt.hlines(
-        np.mean(np.load("/home/jk125262/pyshemkf/output/dists/npy/"
+        np.mean(np.load(os.environ["HOME"]+"/pyshemkf/output/dists/npy/"
                         + "endstd_"
                         + model_name
                         + "_2019_03_10_b.npy")),
