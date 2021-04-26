@@ -107,7 +107,7 @@ if is_plot:
         lineyval=0.76,
         ylims=[0.53, 1.0],
         xlim_max=11,
-        yticks=np.arange(0.55, 1.05, 0.05),
+        yticks=np.arange(0.55, 1.00, 0.05),
         fontleg=20,
         legend_input=(
             None if np.max(which_methods_sorted) < 1000 else

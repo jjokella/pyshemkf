@@ -106,7 +106,7 @@ if is_plot:
         axistitle=model_name.upper(),
         ylims=[0.29, 0.42],
         xlim_max=11,
-        yticks=np.arange(0.3, 0.5, 0.02),
+        yticks=np.arange(0.3, 0.42, 0.02),
         fontleg=20,
         legend_input=(
             None if np.max(which_methods_sorted) < 1000 else
