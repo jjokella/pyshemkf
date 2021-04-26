@@ -61,6 +61,9 @@ else:
     which_methods_sorted = which_methods
 
 
+formatsos = ['o', 's', 'p', 'v',
+             'o', 'v', 's', 'p']
+
 coleros = [(0.90, 0.90, 0.90), (0.90, 0.90, 0.90),
            (0.9, 0.9, 0.9), (0.90, 0.90, 0.90),
            (1.0, 1.0, 1.0), (1.0, 1.0, 1.0),
@@ -117,6 +120,7 @@ if is_plot:
         is_text=True,
         text_x=1.0,
         text_y=0.39,
+        formatsos=formatsos,
         coleros=coleros,
         markersize=[(10 if not i == 3 else 10) for i in range(32)]
     )

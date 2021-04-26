@@ -11,7 +11,7 @@ import pskf.tools.run.pythonmodule as pm
 from pskf.tools.plot import plotarrays as pa
 
 # Switches
-is_read = 1
+is_read = 0
 is_sort = 1
 is_plot = 1
 is_quot = 0
@@ -60,10 +60,12 @@ if is_sort:
 else:
     which_methods_sorted = which_methods
 
+formatsos = ['v', 'o', 'o', 's',
+             'p', 'v', 's', 'p']
 
-coleros = [(0.90, 0.90, 0.90), (0.90, 0.90, 0.90),
-           (0.9, 0.9, 0.9), (0.90, 0.90, 0.90),
-           (1.0, 1.0, 1.0), (1.0, 1.0, 1.0),
+coleros = [(1.0, 1.0, 1.0), (0.9, 0.9, 0.9),
+           (1.0, 1.0, 1.0), (0.9, 0.9, 0.9),
+           (1.0, 1.0, 1.0), (0.9, 0.9, 0.9),
            (1.0, 1.0, 1.0), (1.0, 1.0, 1.0),
            (0.0, 0.0, 0.0), (0.0, 0.0, 0.0),
            (0.0, 0.0, 0.0), (0.0, 0.0, 0.0),
@@ -119,6 +121,7 @@ if is_plot:
         is_text=True,
         text_x=1.0,
         text_y=0.891538461539,
+        formatsos=formatsos,
         coleros=coleros,
         markersize=[(10 if not i == 3 else 10) for i in range(32)]
     )
