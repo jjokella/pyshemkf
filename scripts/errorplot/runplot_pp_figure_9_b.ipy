@@ -1,3 +1,5 @@
+# REMOVED from paper
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -20,7 +22,7 @@ is_backup = 0
 model_name = 'wavewell'
 
 # Correct corr
-which_methods = [1911, 1, 8]
+which_methods = [1911, 1, 19]
 
 ensemble_sizes = [50, 70, 100, 250]
 

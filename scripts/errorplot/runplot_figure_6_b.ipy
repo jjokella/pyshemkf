@@ -72,6 +72,7 @@ if is_plot:
         text_x=1.0,
         text_y=0.65,
         n_syn=100,
+        ylabel=r'RMSE  $\log_{10}(K/\mathrm{m}^2)$'
     )
 
     # Save

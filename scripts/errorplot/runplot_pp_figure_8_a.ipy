@@ -20,7 +20,7 @@ is_backup = 0
 model_name = 'wavereal'
 
 # Correct corr
-which_methods = [1921, 1922, 8, 1923, 1924]
+which_methods = [1921, 1922, 19, 1923, 1924]
 
 ensemble_sizes = [50, 70, 100, 250]
 
@@ -67,8 +67,8 @@ coleros = [(0.90, 0.90, 0.90), (0.90, 0.90, 0.90), (0.9, 0.9, 0.9),
 
 pp_find_array = [
     x or y for (x, y) in zip(
-        np.array(which_methods_sorted) == 7,
-        np.array(which_methods_sorted) > 1700)
+        np.array(which_methods_sorted) == 19,
+        np.array(which_methods_sorted) > 2000)
 ]
 pp_index = np.where(pp_find_array)[0][0]
 coleros[pp_index] = (0.0, 0.0, 0.0)
@@ -86,8 +86,8 @@ if is_plot:
         which_methods=which_methods_sorted,
         ensemble_sizes=ensemble_sizes,
         axistitle=model_name.upper(),
-        ylims=[0.29, 0.42],
-        xlim_max=11,
+        ylims=[0.29, 0.41999],
+        xlim_max=8,
         yticks=np.arange(0.3, 0.5, 0.02),
         fontleg=20,
         legend_input=None,
@@ -95,7 +95,8 @@ if is_plot:
         text_x=1.0,
         text_y=0.39,
         coleros=coleros,
-        markersize=[(10 if not i == 3 else 10) for i in range(32)])
+        markersize=[(10 if not i == 3 else 10) for i in range(32)],
+        ylabel=r'RMSE  $\log_{10}(K/\mathrm{m}^2)$')
 
     # Save
     if is_save:

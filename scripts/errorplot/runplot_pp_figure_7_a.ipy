@@ -105,7 +105,7 @@ if is_plot:
         ensemble_sizes=ensemble_sizes,
         axistitle=model_name.upper(),
         lineyval=0.76,
-        ylims=[0.53, 1.0],
+        ylims=[0.53, 0.999],
         xlim_max=11,
         yticks=np.arange(0.55, 1.00, 0.05),
         fontleg=20,
@@ -124,7 +124,8 @@ if is_plot:
         text_y=0.891538461539,
         formatsos=formatsos,
         coleros=coleros,
-        markersize=[(10 if not i == 3 else 10) for i in range(32)]
+        markersize=[(10 if not i == 3 else 10) for i in range(32)],
+        ylabel=r'RMSE  $\log_{10}(K/\mathrm{m}^2)$'
     )
 
     # Save

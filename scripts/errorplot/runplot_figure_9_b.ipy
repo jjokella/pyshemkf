@@ -10,7 +10,7 @@ import pskf.tools.run.pythonmodule as pm
 # Switches
 is_read = 1
 is_plot = 1
-is_save = 1
+is_save = 0
 is_show = 1
 is_backup = 0
 
@@ -63,6 +63,7 @@ if is_plot:
         xlim_min=0.8,
         xlim_max=4.0,
         xdiff_nens=0.3,
+        ylabel=r'RMSE  $\log_{10}(K/\mathrm{m}^2)$'
     )
 
     # Save
